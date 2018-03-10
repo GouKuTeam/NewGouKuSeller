@@ -26,6 +26,7 @@
 }
 
 - (void)onCreate{
+    
     self.btn_addCladdification = [[UIButton alloc]init];
     [self.view addSubview:self.btn_addCladdification];
     [self.btn_addCladdification setBackgroundColor:[UIColor whiteColor]];

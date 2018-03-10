@@ -46,7 +46,7 @@
         [self.lab_CommodityName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.img_CommodityHeadPic.mas_right).offset(10);
             make.top.mas_equalTo(12);
-            make.width.equalTo(self.mas_right).offset(-10);
+            make.right.equalTo(self.mas_right).offset(-10);
         }];
         [self.lab_CommodityName setFont:[UIFont systemFontOfSize:16]];
         
@@ -61,9 +61,9 @@
         self.lab_CommoditySalesVolume = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_CommoditySalesVolume];
         [self.lab_CommoditySalesVolume mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_CommoditySalesVolume.mas_right).offset(13);
+            make.left.equalTo(self.lab_CommodityStock.mas_right).offset(13);
             make.top.equalTo(self.lab_CommodityStock);
-            make.right.equalTo(self.lab_CommodityName);
+            make.right.equalTo(self.mas_right).offset(-10);
         }];
         self.lab_CommoditySalesVolume.font = [UIFont systemFontOfSize:13];
         
@@ -89,7 +89,6 @@
             make.height.mas_equalTo(28);
         }];
         
-        
         self.btn_edit = [[UIButton alloc]init];
         [self.contentView addSubview: self.btn_edit];
         [self.btn_edit setTitle:@"编辑" forState:UIControlStateNormal];
@@ -100,8 +99,8 @@
         self.btn_edit.layer.cornerRadius = 3;
         self.btn_edit.layer.masksToBounds = YES;
         [self.btn_edit mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.height.equalTo(self.btn_edit);
-            make.right.equalTo(self.btn_edit.mas_left).offset(-15);
+            make.top.height.equalTo(self.btn_more);
+            make.right.equalTo(self.btn_more.mas_left).offset(-15);
             make.width.mas_equalTo(50);
         }];
         
@@ -111,15 +110,13 @@
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.top.equalTo(self.btn_edit.mas_bottom).offset(14);
-            make.width.mas_equalTo(SCREEN_WIDTH - 110);
+            make.right.equalTo(self.mas_right);
             make.height.mas_equalTo(1);
         }];
         
-        
         [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.mas_equalTo(0);
-            make.width.mas_equalTo(SCREEN_WIDTH - 100);
-            make.bottom.equalTo(self.img_line.mas_bottom).offset(1);
+            make.bottom.equalTo(self.img_line.mas_bottom);
         }];
     }
     return self;

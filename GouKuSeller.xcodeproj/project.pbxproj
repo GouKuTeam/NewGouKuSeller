@@ -218,6 +218,20 @@
 			path = ManagerClassification;
 			sourceTree = "<group>";
 		};
+		744ABA1F2053E75C00BBB26E /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
+		744ABA202053E76F00BBB26E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		74B4E7F9204BD352006AFB6C = {
 			isa = PBXGroup;
 			children = (
@@ -243,12 +257,12 @@
 		74B4E804204BD352006AFB6C /* GouKuSeller */ = {
 			isa = PBXGroup;
 			children = (
+				744ABA202053E76F00BBB26E /* Model */,
+				744ABA1F2053E75C00BBB26E /* Handler */,
 				74B4E837204BD3A5006AFB6C /* AppDelegate */,
 				74B4E83D204BD3EC006AFB6C /* Base */,
 				74B4E846204BD3EC006AFB6C /* Controllers */,
-				74B4E86E204BD3EC006AFB6C /* Handler */,
 				74B4E838204BD3EB006AFB6C /* Libs */,
-				74B4E85C204BD3EC006AFB6C /* Model */,
 				74B4E856204BD3EC006AFB6C /* Network */,
 				74B4E85D204BD3EC006AFB6C /* Utils */,
 				74B4E80B204BD353006AFB6C /* Main.storyboard */,
@@ -351,13 +365,6 @@
 			path = RTHttpClient;
 			sourceTree = "<group>";
 		};
-		74B4E85C204BD3EC006AFB6C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		74B4E85D204BD3EC006AFB6C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,13 +390,6 @@
 				74B4E86D204BD3EC006AFB6C /* NSString+Size.m */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		74B4E86E204BD3EC006AFB6C /* Handler */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Handler;
 			sourceTree = "<group>";
 		};
 		74B4E8C420512D6E006AFB6C /* commodity */ = {
