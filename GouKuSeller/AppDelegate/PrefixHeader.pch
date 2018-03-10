@@ -1,0 +1,38 @@
+//
+//  PrefixHeader.pch
+//  juliye-iphone
+//
+//  Created by SeanLiu on 15/1/13.
+//  Copyright (c) 2015年 zlycare. All rights reserved.
+//
+
+#ifndef juliye_iphone_PrefixHeader_pch
+#define juliye_iphone_PrefixHeader_pch
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+
+#define WS(weakSelf) __weak __typeof(&*self)weakSelf = self
+
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Masonry/Masonry.h>
+#import "GouKuDefines.h"
+#import "APIConfig.h"
+#import "UIColor+Util.h"
+#import "MBProgressHUD+JDragon.h"
+#import "AppUtils.h"
+#import "UIView+EasyExtend.h"
+
+#endif
+
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define SafeAreaTopHeight ([UIScreen mainScreen].bounds.size.height == 812.0 ? 88 : 64)
+#define SafeAreaBottomHeight ([UIScreen mainScreen].bounds.size.height == 812.0 ? 83 : 49)
+
+#endif
