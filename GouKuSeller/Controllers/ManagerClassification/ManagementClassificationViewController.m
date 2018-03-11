@@ -32,7 +32,7 @@
     [self.btn_addCladdification setBackgroundColor:[UIColor whiteColor]];
     [self.btn_addCladdification setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
     [self.btn_addCladdification mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(SCREEN_HEIGHT - 50);
+        make.top.mas_equalTo(SCREEN_HEIGHT - 50 - SafeAreaBottomHeight);
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(50);

@@ -12,6 +12,5 @@
 
 @property (nonatomic ,strong)UILabel         *lab_categoryName;
 @property (nonatomic ,strong)UIImageView     *img_shu;
-@property (nonatomic ,strong)UIImageView     *img_jiantou;
 
 @end
