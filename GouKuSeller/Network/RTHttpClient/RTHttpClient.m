@@ -15,6 +15,7 @@
 #import "AppUtils.h"
 #import "GetUUID.h"
 #import "MBProgressHUD+JDragon.h"
+#import "LoginStorage.h"
 
 #define JSONResponseSerializerWithDataKey @"JSONResponseSerializerWithDataKey"
 
@@ -65,13 +66,21 @@
     //请求的URL
     //判断网络状况（有链接：执行请求；无链接：弹出提示）
     NSString *idfa = [GetUUID getUUID];
-    [self.manager.requestSerializer setValue:idfa forHTTPHeaderField:@"x-docchat-application-device-mark"];
+    [self.manager.requestSerializer setValue:idfa forHTTPHeaderField:@"Gouku-Device-Id"];
     NSString *version = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    [self.manager.requestSerializer setValue:@"12" forHTTPHeaderField:@"Gouku-App-Origin"
+     ];
     [self.manager.requestSerializer setValue:version forHTTPHeaderField:@"x-docchat-app-version"];
+    //手机系统版本
+    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+    [self.manager.requestSerializer setValue:phoneVersion forHTTPHeaderField:@"Gouku-Device-Version"];
     
-    [self.manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"x-docchat-app-client"];
-    
-    //预处理
+    [self.manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"Gouku-OS-Version"];
+    if ([LoginStorage GetHTTPHeader] != nil) {
+        [self.manager.requestSerializer setValue:[LoginStorage GetHTTPHeader] forHTTPHeaderField:@"Gouku-Token"];
+    }
+    //    //预处理
     if (prepare) {
         prepare();
     }
@@ -133,7 +142,7 @@
         //发出网络异常通知广播
         [MBProgressHUD hideHUD];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"k_NOTI_NETWORK_ERROR" object:nil];
-
+        
     }
 }
 
@@ -156,3 +165,4 @@
 }
 
 @end
+

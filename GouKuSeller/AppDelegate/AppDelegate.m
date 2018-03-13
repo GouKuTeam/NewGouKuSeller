@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "LoginViewController.h"
 #import "CommodityViewController.h"
+#import "LoginStorage.h"
 
 @interface AppDelegate ()
 
@@ -21,10 +22,19 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    UIViewController *loginVC = [[CommodityViewController alloc]init];
+    UIViewController *v_com = [[CommodityViewController alloc]init];
+    UINavigationController *navCom = [[UINavigationController alloc] initWithRootViewController:v_com];
+    UIViewController *loginVC = [[LoginViewController alloc]init];
     UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    if ([LoginStorage isLogin] == YES) {
+        
+        self.window.rootViewController = navCom;
+    }else{
+        self.window.rootViewController = navLogin;
+    }
+    [self setNavigationBarAndStatusBar];
+    
   
-    self.window.rootViewController = navLogin;
     
     
 //    [self setNavigationBarAndStatusBar];

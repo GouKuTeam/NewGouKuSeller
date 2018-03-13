@@ -8,6 +8,7 @@
 
 #import "AddNewCommodityViewController.h"
 #import "NewCommodityView.h"
+#import "SelectCommodityCategoryViewController.h"
 
 @interface AddNewCommodityViewController ()
 
@@ -40,6 +41,19 @@
         make.top.mas_equalTo(SafeAreaTopHeight);
         make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight);
     }];
+    [self.v_commodityView.btn_addCatagory addTarget:self action:@selector(btn_addCatagoryAction) forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
+    [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
+    
+}
+
+-(void)shopClassification{
+    
+}
+
+-(void)btn_addCatagoryAction{
+    SelectCommodityCategoryViewController * vc = [[SelectCommodityCategoryViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)leftBarAction{

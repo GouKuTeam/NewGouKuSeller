@@ -46,23 +46,25 @@
         [self.lab_catagoryTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.centerY.equalTo(self.btn_addCatagory);
+            make.right.equalTo(self.mas_right).offset(-20);
         }];
         [self.lab_catagoryTitle setText:@"添加类目"];
         [self.lab_catagoryTitle setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
         [self.lab_catagoryTitle setFont:[UIFont systemFontOfSize:16]];
         
+        
         //
-        self.lab_catagory = [[UILabel alloc]init];
-        [self.btn_addCatagory addSubview:self.lab_catagory];
-        [self.lab_catagory mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_catagoryTitle.mas_right).offset(20);
-            make.top.height.mas_equalTo(self.lab_catagoryTitle);
-            make.right.equalTo(self.mas_right).offset(-20);
-            
-        }];
-        [self.lab_catagory setTextColor:[UIColor blackColor]];
-        [self.lab_catagory setFont:[UIFont systemFontOfSize:16]];
-        self.lab_catagory.textAlignment = NSTextAlignmentRight;
+//        self.lab_catagory = [[UILabel alloc]init];
+//        [self.btn_addCatagory addSubview:self.lab_catagory];
+//        [self.lab_catagory mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.lab_catagoryTitle.mas_right).offset(20);
+//            make.top.height.mas_equalTo(self.lab_catagoryTitle);
+//            make.right.equalTo(self.mas_right).offset(-20);
+//
+//        }];
+//        [self.lab_catagory setTextColor:[UIColor blackColor]];
+//        [self.lab_catagory setFont:[UIFont systemFontOfSize:16]];
+//        self.lab_catagory.textAlignment = NSTextAlignmentRight;
         
         //商品信息（名称  描述  图片  店内分类）
         self.v_commodityBack = [[UIView alloc]init];
@@ -212,5 +214,6 @@
     }
     return self;
 }
+
 
 @end

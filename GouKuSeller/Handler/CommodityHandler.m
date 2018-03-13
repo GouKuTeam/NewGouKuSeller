@@ -9,10 +9,15 @@
 #import "CommodityHandler.h"
 #import "ShopClassificationEntity.h"
 #import "CommodityInformationEntity.h"
+#import "CommodityCatagoryEntity.h"
 @implementation CommodityHandler
+
+// 获取店内分类列表数据
 + (void)getCommodityCategoryWithShopId:(NSString *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed
 {
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityCategory,shopId]];
+    
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_ShopCommodityCategory,shopId]];
+    NSString *str_url = @"http://47.97.174.40:9001/shop/ware/category/all/1";
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -21,6 +26,7 @@
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
                                                   NSArray *arr_data = [ShopClassificationEntity parseShopClassificationListWithJson:[responseObject objectForKey:@"data"]];
                                                   success(arr_data);
+                                                  
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
@@ -29,8 +35,8 @@
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
 }
-
-+ (void)getComdityInformationShopId:(long)shopId shopWareCategoryId:(int)shopWareCategoryId status:(int)status prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+//获取分类下店内商品列表
++ (void)getComdityInformationWithShopId:(long)shopId shopWareCategoryId:(int)shopWareCategoryId status:(int)status prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:API_GET_CommodityInformation];
     
     NSDictionary *dic = @{@"shopId":[NSNumber numberWithLong:shopId],
@@ -44,6 +50,27 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
                                                   NSArray *arr_data = [CommodityInformationEntity parseCommodityInformationListWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(arr_data);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//获取商品分类列表
++ (void)getCommodityWithPid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityCatahory,[NSNumber numberWithInt:pid]]];
+    
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  NSArray *arr_data = [CommodityCatagoryEntity parseCommodityCatagoryListWithJson:[responseObject objectForKey:@"data"]];
                                                   success(arr_data);
                                               }else{
                                                   [MBProgressHUD hideHUD];

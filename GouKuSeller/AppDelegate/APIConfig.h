@@ -33,9 +33,11 @@
 #endif
 
 //API VERSION
-#define API_VERSION @"/1"
+#define API_VERSION @""
 //店内分类列表
-#define API_GET_CommodityCategory @"/shop/ware/category/all?shopId=%@"
+#define API_GET_ShopCommodityCategory @"/shop/ware/category/all/%@"
 //分类下店内商品列表
 #define API_GET_CommodityInformation @"/shop/ware/item/list"
+//商品类目列表
+#define API_GET_CommodityCatahory @"/ware/category/list/%@"
 #endif

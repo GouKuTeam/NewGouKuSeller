@@ -12,7 +12,7 @@ static NSString * const ISLOGIN = @"isLogin";
 static NSString * const HttpHeader = @"httpHeader";
 static NSString * const PhoneNum = @"PhoneNum";
 static NSString * const YanZhengMa = @"YanZhengMa";
-static NSString * const OperId = @"OperId";
+static NSString * const ShopId = @"ShopId";
 
 @implementation LoginStorage
 
@@ -63,15 +63,15 @@ static NSString * const OperId = @"OperId";
 }
 
 /**
- *  存/取  登陆成功返回的 的 operId
+ *  存/取  登陆成功返回的 的 ShopId
  */
-+ (void)saveOperId:(NSString *)str{
-    [UserDefaultsUtils saveValue:str forKey:OperId];
++ (void)saveShopId:(NSString *)str{
+    [UserDefaultsUtils saveValue:str forKey:ShopId];
 }
 
-+ (NSString *)GetOperId
++ (NSString *)GetShopId
 {
-    return [UserDefaultsUtils valueWithKey:OperId];
+    return [UserDefaultsUtils valueWithKey:ShopId];
 }
 
 

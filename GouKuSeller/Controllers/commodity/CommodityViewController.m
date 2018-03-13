@@ -16,6 +16,7 @@
 #import "StoreCategoryTableViewCell.h"
 #import "CommodityTableViewCell.h"
 #import "AddNewCommodityViewController.h"
+#import "LoginStorage.h"
 
 #define NULLROW    999
 
@@ -156,7 +157,13 @@
 }
 
 - (void)loadData{
-//    [CommodityHandler getCommodityCategoryWithShopId:<#(NSString *)#> prepare:<#^(void)prepare#> success:<#^(id obj)success#> failed:<#^(NSInteger statusCode, id json)failed#>]
+//    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
+//        NSArray *arr_data = (NSArray *)obj;
+//        [self.arr_category addObjectsFromArray:arr_data];
+//        [self.tb_left reloadData];
+//    } failed:^(NSInteger statusCode, id json) {
+//
+//    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -189,8 +196,10 @@
         lab_categoryName.text = entity.name;
         if (self.selectedSection == section && self.selectedRow == NULLROW) {
             [img_shu setHidden:NO];
+            [lab_categoryName setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
         }else{
             [img_shu setHidden:YES];
+            [lab_categoryName setTextColor:[UIColor colorWithHexString:@"#616161"]];
         }
         
         if (self.selectedSection == section){
@@ -198,6 +207,7 @@
         }else{
             [v_header setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
         }
+        
         
         if (entity.isShow == YES) {
             [iv_arrow setImage:[UIImage imageNamed:@"up_icon"]];
@@ -270,9 +280,11 @@
         if (self.selectedRow == indexPath.row && self.selectedSection == indexPath.section) {
             [cell.img_shu setHidden:NO];
             cell.backgroundColor = [UIColor whiteColor];
+            [cell.lab_categoryName setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
         }else{
             [cell.img_shu setHidden:YES];
             cell.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
+            [cell.lab_categoryName setTextColor:[UIColor colorWithHexString:@"#616161"]];
         }
         return cell;
     }else if(self.tb_right == tableView){
