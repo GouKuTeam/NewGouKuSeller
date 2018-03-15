@@ -10,7 +10,7 @@
 
 @implementation ShopClassificationEntity
 
-+(NSDictionary *)replacedKeyFromPropertyName
++ (NSDictionary *)objectClassInArray
 {
     return @{
              @"childList":[ShopClassificationEntity class],

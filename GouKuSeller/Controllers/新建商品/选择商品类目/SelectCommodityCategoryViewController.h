@@ -7,7 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "CommodityCatagoryEntity.h"
+
+typedef void(^goBack)(CommodityCatagoryEntity *commodityCatagoryEntity);
 
 @interface SelectCommodityCategoryViewController : BaseViewController
+
+@property (nonatomic, copy) goBack  goBackCategory;
 
 @end

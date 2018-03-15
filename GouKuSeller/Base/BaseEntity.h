@@ -13,7 +13,7 @@
 
 @interface BaseEntity : NSObject
 
-@property (nonatomic,copy)      NSString    *_id;//ID
+@property (nonatomic,assign)    NSInteger   _id;//ID
 @property (nonatomic,assign)    NSInteger   status;//状态
 @property (nonatomic,copy)      NSString    *msg;//状态信息
 //@property (nonatomic)      BOOL     isDeleted;//记录是否被删除

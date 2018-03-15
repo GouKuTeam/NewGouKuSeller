@@ -40,4 +40,6 @@
 #define API_GET_CommodityInformation @"/shop/ware/item/list"
 //商品类目列表
 #define API_GET_CommodityCatahory @"/ware/category/list/%@"
+//通过商品分类获取商品规格值
+#define API_GET_Standard @"/ware/standard/list/%@"
 #endif

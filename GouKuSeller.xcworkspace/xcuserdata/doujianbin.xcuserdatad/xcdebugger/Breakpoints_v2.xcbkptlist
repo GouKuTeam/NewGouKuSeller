@@ -14,18 +14,28 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GouKuSeller/Controllers/login/LoginViewController.m"
-            timestampString = "542613516.244857"
+            filePath = "GouKuSeller/Handler/CommodityHandler.m"
+            timestampString = "542793231.072469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-btn_loginAction"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "+getStandardWithCategoryId:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +45,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GouKuSeller/Controllers/login/LoginViewController.m"
-            timestampString = "542613516.2449909"
+            filePath = "GouKuSeller/Controllers/&#x65b0;&#x5efa;&#x5546;&#x54c1;/&#x5546;&#x54c1;&#x89c4;&#x683c;/CommodityStandardViewController.m"
+            timestampString = "542793231.07254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-btn_loginAction"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "-loadData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[CommodityStandardViewController loadData]_block_invoke"
+                  moduleName = "GouKuSeller"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/doujianbin/GouKuSeller/GouKuSeller/Controllers/%E6%96%B0%E5%BB%BA%E5%95%86%E5%93%81/%E5%95%86%E5%93%81%E8%A7%84%E6%A0%BC/CommodityStandardViewController.m"
+                  timestampString = "542793231.148352"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[CommodityStandardViewController loadData]_block_invoke_2"
+                  moduleName = "GouKuSeller"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/doujianbin/GouKuSeller/GouKuSeller/Controllers/%E6%96%B0%E5%BB%BA%E5%95%86%E5%93%81/%E5%95%86%E5%93%81%E8%A7%84%E6%A0%BC/CommodityStandardViewController.m"
+                  timestampString = "542793231.1510741"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "59">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GouKuSeller/Handler/CommodityHandler.m"
+            timestampString = "542793231.072631"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "+getStandardWithCategoryId:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

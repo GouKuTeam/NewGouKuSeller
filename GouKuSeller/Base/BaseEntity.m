@@ -14,6 +14,13 @@
 
 @implementation BaseEntity
 
++ (NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{
+             @"_id" : @"id"
+             };
+}
+
 + (NSArray *)parseObjectArrayWithKeyValues:(id)json
 
 {
@@ -46,7 +53,6 @@
     }
     return result;
 }
-
 
 
 @end

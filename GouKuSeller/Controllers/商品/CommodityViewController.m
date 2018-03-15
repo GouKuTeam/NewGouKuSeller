@@ -17,6 +17,7 @@
 #import "CommodityTableViewCell.h"
 #import "AddNewCommodityViewController.h"
 #import "LoginStorage.h"
+#import "RTHttpClient.h"
 
 #define NULLROW    999
 
@@ -36,19 +37,15 @@
 @property (nonatomic ,assign)int               selectedSection;
 @property (nonatomic ,assign)int               selectedRow;
 
+@property (nonatomic ,strong)UIButton         *btn_navright_search;
+@property (nonatomic ,strong)UIButton         *btn_navright_more;
+
 @end
 
 @implementation CommodityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)onCreate{
-    self.selectedRow = NULLROW;
-    self.arr_category = [NSMutableArray array];
-    self.arr_commodity = [NSMutableArray array];
     
     self.navigationItem.leftBarButtonItem = nil;
     self.btn_top = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 2, 44)];
@@ -57,6 +54,32 @@
     [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
     [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
     self.navigationItem.titleView = self.btn_top;
+    
+
+    self.btn_navright_search = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [self.btn_navright_search setImage:[UIImage imageNamed:@"search_press"] forState:UIControlStateNormal];
+    [self.btn_navright_search addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.btn_navright_more = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [self.btn_navright_more setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+    [self.btn_navright_more addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.btn_navright_search.frame = CGRectMake(0, 0, 20, 20);
+    self.btn_navright_more.frame=CGRectMake(0, 0, 22, 6);
+    
+    UIBarButtonItem *pulish = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_search];
+    UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_more];
+    
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:save, pulish,nil]];
+}
+
+- (void)onCreate{
+    self.selectedRow = NULLROW;
+    self.arr_category = [NSMutableArray array];
+    self.arr_commodity = [NSMutableArray array];
+    
+   
     
     self.view_bottom = [[UIView alloc]init];
     [self.view addSubview:self.view_bottom];
@@ -124,25 +147,7 @@
     [self.view addSubview:self.tb_right];
     
     [self loadData];
-    
-    
-    for (int i = 0; i < 10; i++) {
-        ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
-        NSMutableArray *arr_data = [NSMutableArray array];
-        if (i == 0) {
-            entity.name = @"进口零食";
-        }else if (i == 1){
-            entity.name = @"酒水饮料";
-            ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
-            entity.name = @"可乐";
-            [arr_data addObject:entity];
-        }else if (i == 2){
-            entity.name = @"休闲零食";
-        }
-        entity.childList = arr_data;
-        [self.arr_category addObject:entity];
-    }
-    [self.tb_left reloadData];
+
 }
 
 - (void)btn_managementClassificationAction{
@@ -157,15 +162,15 @@
 }
 
 - (void)loadData{
-//    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
-//        NSArray *arr_data = (NSArray *)obj;
-//        [self.arr_category addObjectsFromArray:arr_data];
-//        [self.tb_left reloadData];
-//    } failed:^(NSInteger statusCode, id json) {
-//
-//    }];
-}
+        [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
+            NSArray *arr_data = (NSArray *)obj;
+            [self.arr_category addObjectsFromArray:arr_data];
+            [self.tb_left reloadData];
+        } failed:^(NSInteger statusCode, id json) {
 
+        }];
+}
+#pragma uitableview
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == self.tb_left) {
         return 55;
@@ -305,6 +310,8 @@
     [self.tb_left reloadData];
 }
 
+
+
 - (void)selectCategory:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
     self.selectedSection = (int)v_sender.tag;
@@ -313,6 +320,14 @@
     entity.isShow = !entity.isShow;
     [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
     [self.tb_left reloadData];
+}
+
+-(void)searchAction{
+    
+}
+
+-(void)moreAction{
+    
 }
 
 - (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation

@@ -10,7 +10,6 @@
 #import "CatagoryTableViewCell.h"
 #import "RTHttpClient.h"
 #import "CommodityHandler.h"
-#import "CommodityCatagoryEntity.h"
 
 @interface SelectCommodityCategoryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView        *tb_catagory;
@@ -69,7 +68,12 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CommodityCatagoryEntity *entity = [self.arr_catagory objectAtIndex:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.goBackCategory) {
+        self.goBackCategory(entity);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

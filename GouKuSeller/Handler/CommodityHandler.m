@@ -10,12 +10,12 @@
 #import "ShopClassificationEntity.h"
 #import "CommodityInformationEntity.h"
 #import "CommodityCatagoryEntity.h"
+#import "StandardEntity.h"
 @implementation CommodityHandler
 
 // 获取店内分类列表数据
 + (void)getCommodityCategoryWithShopId:(NSString *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed
 {
-    
 //    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_ShopCommodityCategory,shopId]];
     NSString *str_url = @"http://47.97.174.40:9001/shop/ware/category/all/1";
     [[RTHttpClient defaultClient] requestWithPath:str_url
@@ -25,6 +25,7 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
                                                   NSArray *arr_data = [ShopClassificationEntity parseShopClassificationListWithJson:[responseObject objectForKey:@"data"]];
+                                                  
                                                   success(arr_data);
                                                   
                                               }else{
@@ -80,5 +81,35 @@
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
 }
+
+//获取商品规格
++ (void)getStandardWithCategoryId:(int)categoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_Standard,[NSNumber numberWithInt:categoryId]]];
+//    NSString *str_url = @"http://47.97.174.40:9001/ware/standard/list/3";
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  NSArray *arr_data = [StandardEntity parseStandardListWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(arr_data);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+
+
+
+
+
+
+
+
 
 @end
