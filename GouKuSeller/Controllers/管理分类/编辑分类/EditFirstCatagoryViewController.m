@@ -7,6 +7,8 @@
 //
 
 #import "EditFirstCatagoryViewController.h"
+#import "CommodityHandler.h"
+#import "LoginStorage.h"
 
 @interface EditFirstCatagoryViewController ()
 
@@ -70,6 +72,15 @@
 
 - (void)rightBarAction{
     
+    
+    [CommodityHandler udpShopCatagoryWithName:self.tef_fenlei.text ownid:self.entity._id shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
+        if (self.updateCategory) {
+            [self.navigationController popViewControllerAnimated:YES];
+            self.updateCategory();
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

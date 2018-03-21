@@ -11,14 +11,16 @@
 #import "SelectCommodityCategoryViewController.h"
 #import "CommodityStandardViewController.h"
 #import "ShopClassificationViewController.h"
-
+#import "CommodityHandler.h"
+#import "CommodityFromCodeEntity.h"
 
 @interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
     UIImagePickerController *ipc;
 }
 
-@property (nonatomic,strong)NewCommodityView   *v_commodityView;
-@property (nonatomic,assign)int    int_categoryId;
+@property (nonatomic ,strong)NewCommodityView   *v_commodityView;
+@property (nonatomic ,assign)int    int_categoryId;
+@property (nonatomic ,strong)CommodityFromCodeEntity *entity;
 
 @end
 
@@ -35,7 +37,12 @@
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
-    
+    [CommodityHandler getCommodityInformationWithBarCode:23451342 prepare:nil success:^(id obj) {
+        self.entity = (CommodityFromCodeEntity *)obj;
+
+    } failed:^(NSInteger statusCode, id json) {
+
+    }];
 }
 
 - (void)onCreate{
@@ -70,7 +77,7 @@
     ShopClassificationViewController *vc = [[ShopClassificationViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBackShop = ^(ShopClassificationEntity *shopClassificationEntity) {
-        
+        [self.v_commodityView.v_shopClassification.tf_detail setText:shopClassificationEntity.name];
     };
 }
 
@@ -127,14 +134,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

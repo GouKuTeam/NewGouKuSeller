@@ -18,6 +18,10 @@
 #import "AddNewCommodityViewController.h"
 #import "LoginStorage.h"
 #import "RTHttpClient.h"
+#import "CommodityBottomView.h"
+#import "ManagerCommodityTableViewCell.h"
+#import "MoveCommodityView.h"
+#import "SearchCommodityViewController.h"
 
 #define NULLROW    999
 
@@ -39,6 +43,15 @@
 
 @property (nonatomic ,strong)UIButton         *btn_navright_search;
 @property (nonatomic ,strong)UIButton         *btn_navright_more;
+@property (nonatomic ,assign)int               showIndex;
+@property (nonatomic ,strong)UIButton         *btn_batchManager;
+
+@property (nonatomic ,strong)CommodityBottomView           *v_bottom_manager;
+@property (nonatomic ,assign)BOOL              editStatus;
+@property (nonatomic ,strong)NSMutableArray    *arr_selected;
+@property (nonatomic ,strong)UILabel           *lb_selectedNum;
+@property (nonatomic ,strong)UIView            *v_coverLeft;
+//@property (nonatomic ,strong)MoveCommodityView             *v_moveCommodity;
 
 @end
 
@@ -55,31 +68,59 @@
     [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
     self.navigationItem.titleView = self.btn_top;
     
+    UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(searchBarAction)];
+    [btn_right setImage:[UIImage imageNamed:@"home_search"]];
+    [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = btn_right;
 
+    /*****************************            批量管理注掉的
     self.btn_navright_search = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [self.btn_navright_search setImage:[UIImage imageNamed:@"search_press"] forState:UIControlStateNormal];
     [self.btn_navright_search addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
+
+//    self.btn_navright_more = [UIButton buttonWithType:(UIButtonTypeCustom)];
+//    [self.btn_navright_more setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+//    [self.btn_navright_more addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
     
+//    self.btn_navright_search.frame = CGRectMake(0, 0, 20, 20);
+//    self.btn_navright_more.frame=CGRectMake(0, 0, 22, 6);
     
-    self.btn_navright_more = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [self.btn_navright_more setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
-    [self.btn_navright_more addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+//    self.lb_selectedNum = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 44)];
+//    [self.lb_selectedNum setTextAlignment:NSTextAlignmentCenter];
+//    [self.lb_selectedNum setFont:[UIFont systemFontOfSize:18]];
+//    [self.lb_selectedNum setTextColor:[UIColor whiteColor]];
     
-    self.btn_navright_search.frame = CGRectMake(0, 0, 20, 20);
-    self.btn_navright_more.frame=CGRectMake(0, 0, 22, 6);
+//    self.v_coverLeft = [[UIView alloc]initWithFrame:self.tb_left.frame];
+//    [self.v_coverLeft setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:0.3]];
+//    [self.view addSubview:self.v_coverLeft];
+    [self setNavUI];
+     ***********/
     
-    UIBarButtonItem *pulish = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_search];
-    UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_more];
-    
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:save, pulish,nil]];
+}
+
+- (void)setNavUI{
+    if (self.editStatus == NO) {
+        self.navigationItem.titleView = self.btn_top;
+        UIBarButtonItem *pulish = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_search];
+        UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_more];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:save, pulish,nil]];
+        [self.v_coverLeft setHidden:YES];
+    }else{
+        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+        self.navigationItem.titleView = self.lb_selectedNum;
+        UIBarButtonItem *confirm = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(confirmAction)];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:confirm,nil]];
+        [self.v_coverLeft setHidden:NO];
+    }
 }
 
 - (void)onCreate{
     self.selectedRow = NULLROW;
+    self.showIndex = NULLROW;
+    
     self.arr_category = [NSMutableArray array];
     self.arr_commodity = [NSMutableArray array];
-    
-   
+    self.arr_selected = [NSMutableArray array];
     
     self.view_bottom = [[UIView alloc]init];
     [self.view addSubview:self.view_bottom];
@@ -144,9 +185,46 @@
     self.tb_right.dataSource = self;
     self.tb_right.delegate = self;
     self.tb_right.tableViewDelegate = self;
+    self.tb_right.separatorColor = [UIColor clearColor];
     [self.view addSubview:self.tb_right];
+    /****
+    self.btn_batchManager = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 136, SafeAreaTopHeight, 120, 44)];
+    [self.view addSubview:self.btn_batchManager];
+    [self.btn_batchManager setTitle:@"批量管理" forState:UIControlStateNormal];
+    self.btn_batchManager.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.btn_batchManager setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
+    [self.btn_batchManager setHidden:YES];
+    self.btn_batchManager.clipsToBounds = YES;
+    self.btn_batchManager.layer.cornerRadius = 3;
+    self.btn_batchManager.layer.masksToBounds = YES;
+    self.btn_batchManager.layer.borderColor = [[UIColor colorWithHexString:@"#d8d8d8"] CGColor];
+    self.btn_batchManager.layer.borderWidth = 0.5;
+    [self.btn_batchManager addTappedWithTarget:self action:@selector(btn_batchManagerAction)];
+    
+    self.v_bottom_manager = [[CommodityBottomView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 49, SCREEN_WIDTH, 49)];
+    [self.v_bottom_manager setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:self.v_bottom_manager];
+    [self.v_bottom_manager setHidden:YES];
+    [self.v_bottom_manager.btn_bottom_allSelect addTarget:self action:@selector(btn_bottom_allSelect) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottom_manager.btn_bottom_xiajia addTarget:self action:@selector(btn_bottom_xiajia) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottom_manager.btn_bottom_move addTarget:self action:@selector(btn_bottom_move) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottom_manager.btn_bottom_delete addTarget:self action:@selector(btn_bottom_delete) forControlEvents:UIControlEventTouchUpInside];
+    
+    //移动商品选择分类界面
+    self.v_moveCommodity = [[MoveCommodityView alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:self.v_moveCommodity];
+    [self.v_moveCommodity setHidden:YES];
+    [self.v_moveCommodity.btn_move addTarget:self action:@selector(moveVBtnAction) forControlEvents:UIControlEventTouchUpInside];
+     ****/
     
     [self loadData];
+    
+    CommodityInformationEntity *entity = [[CommodityInformationEntity alloc]init];
+    entity.price = 3.5;
+    entity.name = @"脉动橙子";
+    entity.stock = [NSNumber numberWithInt:100];
+    entity.saleAmountMonth = [NSNumber numberWithInt:90];
+    [self.arr_commodity addObject:entity];
 
 }
 
@@ -162,15 +240,18 @@
 }
 
 - (void)loadData{
-        [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
+        [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
             NSArray *arr_data = (NSArray *)obj;
             [self.arr_category addObjectsFromArray:arr_data];
             [self.tb_left reloadData];
+//            self.v_moveCommodity.arr_moveCatagary = self.arr_category;
         } failed:^(NSInteger statusCode, id json) {
 
         }];
 }
+
 #pragma uitableview
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == self.tb_left) {
         return 55;
@@ -245,7 +326,11 @@
     if (tableView == self.tb_left) {
         return 55;
     }else{
-        return 0.01;
+        if (self.editStatus == YES) {
+            return 97;
+        }else{
+            return 142;
+        }
     }
 }
 
@@ -293,24 +378,75 @@
         }
         return cell;
     }else if(self.tb_right == tableView){
-        static NSString *CellIdentifier = @"PotentialStoreTableViewCell";
-        CommodityTableViewCell *cell = (CommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell){
-            cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        if (self.editStatus == YES) {
+            static NSString *CellIdentifier = @"ManagerCommodityTableViewCell";
+            ManagerCommodityTableViewCell *cell = (ManagerCommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell){
+                cell = [[ManagerCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+            [cell contentCellWithCommodityInformationEntity:entity];
+            if ([self.arr_selected containsObject:[NSNumber numberWithInt:(int)indexPath.row]]) {
+                cell.btn_select.selected = YES;
+            }else{
+                cell.btn_select.selected = NO;
+            }
+            return cell;
+        }else{
+            static NSString *CellIdentifier = @"PotentialStoreTableViewCell";
+            CommodityTableViewCell *cell = (CommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell){
+                cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+            [cell contentCellWithCommodityInformationEntity:entity];
+            cell.btn_more.tag = indexPath.row;
+            [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+            cell.btn_delege.tag = indexPath.row;
+            [cell.btn_delege addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+            cell.btn_xiajia.tag = indexPath.row;
+            [cell.btn_xiajia addTarget:self action:@selector(xiaJiaAction:) forControlEvents:UIControlEventTouchUpInside];
+            if (self.showIndex == indexPath.row) {
+                [cell.v_back setHidden:NO];
+            }else{
+                [cell.v_back setHidden:YES];
+            }
+            return cell;
         }
-        return cell;
     }
     return NULL;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    self.selectedSection = (int)indexPath.section;
-    self.selectedRow = (int)indexPath.row;
-    [self.tb_left reloadData];
+    if (tableView == self.tb_left) {
+        self.selectedSection = (int)indexPath.section;
+        self.selectedRow = (int)indexPath.row;
+        [self.tb_left reloadData];
+        //加载右边数据
+    }else if (tableView == self.tb_right){
+        NSNumber *number = [NSNumber numberWithInt:(int)indexPath.row];
+        if ([self.arr_selected containsObject:number]) {
+            [self.arr_selected removeObject:number];
+        }else{
+            [self.arr_selected addObject:number];
+        }
+        [self.tb_right reloadData];
+        /**  -----注掉批量管理注掉的
+        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+         */
+    }
 }
 
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == self.tb_right) {
+        if (self.showIndex != NULLROW) {
+            self.showIndex = NULLROW;
+            [self.tb_right reloadData];
+        }
+    }
+}
 
 - (void)selectCategory:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
@@ -320,15 +456,102 @@
     entity.isShow = !entity.isShow;
     [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
     [self.tb_left reloadData];
-}
-
--(void)searchAction{
+    //加载右边数据
     
 }
+
+
+- (void)moreAction:(UIButton *)btn_sender{
+    if (btn_sender.tag == self.showIndex) {
+        self.showIndex = NULLROW;
+    }else{
+        self.showIndex = (int)btn_sender.tag;
+    }
+    [self.tb_right reloadData];
+}
+
+- (void)deleteAction:(UIButton *)btn_sender{
+    CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+
+}
+
+- (void)xiaJiaAction:(UIButton *)btn_sender{
+    CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+    
+}
+-(void)searchBarAction{
+    SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+/********注掉批量管理功能
+
+
 
 -(void)moreAction{
+    [self.btn_batchManager setHidden:!self.btn_batchManager.isHidden];
+}
+
+- (void)confirmAction{
+    [self btn_batchManagerAction];
+//    [self.v_moveCommodity setHidden:YES];
+}
+
+-(void)btn_batchManagerAction{
+    self.editStatus = !self.editStatus;
+    if (self.editStatus == YES) {
+        [self.v_bottom_manager setHidden:NO];
+    }else{
+        [self.v_bottom_manager setHidden:YES];
+    }
+    [self.btn_batchManager setHidden:YES];
+    [self.arr_selected removeAllObjects];
+    [self setNavUI];
+    [self.tb_right reloadData];
+}
+
+#pragma view_bottom mark
+- (void)btn_bottom_allSelect{
+    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
+    if (self.v_bottom_manager.btn_bottom_allSelect.isSelected == YES) {
+        [self.arr_selected removeAllObjects];
+        for (int i = 0; i < self.arr_category.count; i++) {
+            [self.arr_selected addObject:[NSNumber numberWithInt:i]];
+        }
+    }else{
+        [self.arr_selected removeAllObjects];
+    }
+    self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+    [self.tb_right reloadData];
+}
+
+- (void)btn_bottom_xiajia{
     
 }
+
+- (void)btn_bottom_move{
+    self.v_moveCommodity.lab_title.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+    [self.v_moveCommodity setHidden:NO];
+}
+
+- (void)btn_bottom_delete{
+
+}
+
+移动分类按钮方法
+- (void)moveVBtnAction{
+    if (self.v_moveCommodity.selectedSection == NULLROW) {
+        [MBProgressHUD showInfoMessage:@"请选择分类"];
+        return;
+    }
+    ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
+    entity = [self.v_moveCommodity.arr_moveCatagary objectAtIndex:self.v_moveCommodity.selectedSection];
+    if (self.v_moveCommodity.selectedRow != NULLROW) {
+        entity = [entity.childList objectAtIndex:self.v_moveCommodity.selectedRow];
+    }
+
+}
+ 
+ *****/
 
 - (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation
 {

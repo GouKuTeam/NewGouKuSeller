@@ -7,6 +7,7 @@
 //
 
 #import "AddSecondClassificationViewController.h"
+#import "SelectFisstCatagoryViewController.h"
 
 @interface AddSecondClassificationViewController ()
 
@@ -47,6 +48,7 @@
     [self.btn_1 setTitle:@"请选择" forState:UIControlStateNormal];
     [self.btn_1 setTitleColor:[UIColor colorWithHexString:@"#c3c3c3"] forState:UIControlStateNormal];
     self.btn_1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [self.btn_1 addTarget:self action:@selector(btn_1Action) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *img_jiantou = [[UIImageView alloc]init];
     [v_back addSubview:img_jiantou];
@@ -78,6 +80,17 @@
     [self.tef_erji setPlaceholder:@"填写分类名称"];
     self.tef_erji.font = [UIFont systemFontOfSize:16];
     self.tef_erji.textAlignment = NSTextAlignmentRight;
+}
+
+- (void)btn_1Action{
+    SelectFisstCatagoryViewController *vc = [[SelectFisstCatagoryViewController alloc]init]
+    ;
+    [self.navigationController pushViewController:vc animated:YES];
+    vc.goBackFirst = ^(CommodityCatagoryEntity *commodityCatagoryEntity) {
+        
+    };
+    
+    
 }
 
 - (void)rightBarAction{

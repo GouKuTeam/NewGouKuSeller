@@ -11,7 +11,6 @@
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
-		744ABA1120525C7E00BBB26E /* SearchCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA1020525C7E00BBB26E /* SearchCommodityTableViewCell.m */; };
 		744ABA142052729500BBB26E /* ManagementClassificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA132052729500BBB26E /* ManagementClassificationViewController.m */; };
 		744ABA17205295DF00BBB26E /* AddFirstClassificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA16205295DF00BBB26E /* AddFirstClassificationViewController.m */; };
 		744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA19205295F000BBB26E /* AddSecondClassificationViewController.m */; };
@@ -188,6 +187,33 @@
 		74F8E90D205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E90C205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m */; };
 		74F8E90E205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E90C205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m */; };
 		74F8E90F205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E90C205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m */; };
+		74F8E912205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E911205D452C000A17A5 /* ManagerCommodityTableViewCell.m */; };
+		74F8E913205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E911205D452C000A17A5 /* ManagerCommodityTableViewCell.m */; };
+		74F8E914205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E911205D452C000A17A5 /* ManagerCommodityTableViewCell.m */; };
+		74F8E917205D4732000A17A5 /* CommodityBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E916205D4732000A17A5 /* CommodityBottomView.m */; };
+		74F8E918205D4732000A17A5 /* CommodityBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E916205D4732000A17A5 /* CommodityBottomView.m */; };
+		74F8E919205D4732000A17A5 /* CommodityBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E916205D4732000A17A5 /* CommodityBottomView.m */; };
+		74F8E91C205F8C4E000A17A5 /* MoveCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E91B205F8C4E000A17A5 /* MoveCommodityView.m */; };
+		74F8E91D205F8C4E000A17A5 /* MoveCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E91B205F8C4E000A17A5 /* MoveCommodityView.m */; };
+		74F8E91E205F8C4E000A17A5 /* MoveCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E91B205F8C4E000A17A5 /* MoveCommodityView.m */; };
+		74F8E9272060DA60000A17A5 /* SearchCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9262060DA60000A17A5 /* SearchCommodityViewController.m */; };
+		74F8E9282060DA60000A17A5 /* SearchCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9262060DA60000A17A5 /* SearchCommodityViewController.m */; };
+		74F8E9292060DA60000A17A5 /* SearchCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9262060DA60000A17A5 /* SearchCommodityViewController.m */; };
+		74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E92F2060E0B5000A17A5 /* SearchWithNameTableViewCell.m */; };
+		74F8E9312060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E92F2060E0B5000A17A5 /* SearchWithNameTableViewCell.m */; };
+		74F8E9322060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E92F2060E0B5000A17A5 /* SearchWithNameTableViewCell.m */; };
+		74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9342060E0C9000A17A5 /* SearchWithCodeTableViewCell.m */; };
+		74F8E9362060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9342060E0C9000A17A5 /* SearchWithCodeTableViewCell.m */; };
+		74F8E9372060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9342060E0C9000A17A5 /* SearchWithCodeTableViewCell.m */; };
+		74F8E93A2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9392060FCEC000A17A5 /* CommodityFromCodeEntity.m */; };
+		74F8E93B2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9392060FCEC000A17A5 /* CommodityFromCodeEntity.m */; };
+		74F8E93C2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9392060FCEC000A17A5 /* CommodityFromCodeEntity.m */; };
+		74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9432060FF7C000A17A5 /* wareCategory.m */; };
+		74F8E9452060FF7C000A17A5 /* wareCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9432060FF7C000A17A5 /* wareCategory.m */; };
+		74F8E9462060FF7C000A17A5 /* wareCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E9432060FF7C000A17A5 /* wareCategory.m */; };
+		74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E94820614852000A17A5 /* SelectFisstCatagoryViewController.m */; };
+		74F8E94A20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E94820614852000A17A5 /* SelectFisstCatagoryViewController.m */; };
+		74F8E94B20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E94820614852000A17A5 /* SelectFisstCatagoryViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,8 +242,6 @@
 		744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityTableViewCell.m; sourceTree = "<group>"; };
 		744ABA0C205255DB00BBB26E /* StoreCategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreCategoryTableViewCell.h; sourceTree = "<group>"; };
 		744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreCategoryTableViewCell.m; sourceTree = "<group>"; };
-		744ABA0F20525C7E00BBB26E /* SearchCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCommodityTableViewCell.h; sourceTree = "<group>"; };
-		744ABA1020525C7E00BBB26E /* SearchCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCommodityTableViewCell.m; sourceTree = "<group>"; };
 		744ABA122052729500BBB26E /* ManagementClassificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagementClassificationViewController.h; sourceTree = "<group>"; };
 		744ABA132052729500BBB26E /* ManagementClassificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagementClassificationViewController.m; sourceTree = "<group>"; };
 		744ABA15205295DF00BBB26E /* AddFirstClassificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFirstClassificationViewController.h; sourceTree = "<group>"; };
@@ -357,6 +381,24 @@
 		74F8E907205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommoditySpecificationsTableViewCell.m; sourceTree = "<group>"; };
 		74F8E90B205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomCommoditySpecificationsTableViewCell.h; sourceTree = "<group>"; };
 		74F8E90C205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomCommoditySpecificationsTableViewCell.m; sourceTree = "<group>"; };
+		74F8E910205D452C000A17A5 /* ManagerCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerCommodityTableViewCell.h; sourceTree = "<group>"; };
+		74F8E911205D452C000A17A5 /* ManagerCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerCommodityTableViewCell.m; sourceTree = "<group>"; };
+		74F8E915205D4732000A17A5 /* CommodityBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityBottomView.h; sourceTree = "<group>"; };
+		74F8E916205D4732000A17A5 /* CommodityBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityBottomView.m; sourceTree = "<group>"; };
+		74F8E91A205F8C4E000A17A5 /* MoveCommodityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoveCommodityView.h; sourceTree = "<group>"; };
+		74F8E91B205F8C4E000A17A5 /* MoveCommodityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoveCommodityView.m; sourceTree = "<group>"; };
+		74F8E9252060DA60000A17A5 /* SearchCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCommodityViewController.h; sourceTree = "<group>"; };
+		74F8E9262060DA60000A17A5 /* SearchCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCommodityViewController.m; sourceTree = "<group>"; };
+		74F8E92E2060E0B5000A17A5 /* SearchWithNameTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchWithNameTableViewCell.h; sourceTree = "<group>"; };
+		74F8E92F2060E0B5000A17A5 /* SearchWithNameTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchWithNameTableViewCell.m; sourceTree = "<group>"; };
+		74F8E9332060E0C9000A17A5 /* SearchWithCodeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchWithCodeTableViewCell.h; sourceTree = "<group>"; };
+		74F8E9342060E0C9000A17A5 /* SearchWithCodeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchWithCodeTableViewCell.m; sourceTree = "<group>"; };
+		74F8E9382060FCEC000A17A5 /* CommodityFromCodeEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityFromCodeEntity.h; sourceTree = "<group>"; };
+		74F8E9392060FCEC000A17A5 /* CommodityFromCodeEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityFromCodeEntity.m; sourceTree = "<group>"; };
+		74F8E9422060FF7C000A17A5 /* wareCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wareCategory.h; sourceTree = "<group>"; };
+		74F8E9432060FF7C000A17A5 /* wareCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wareCategory.m; sourceTree = "<group>"; };
+		74F8E94720614852000A17A5 /* SelectFisstCatagoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectFisstCatagoryViewController.h; sourceTree = "<group>"; };
+		74F8E94820614852000A17A5 /* SelectFisstCatagoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectFisstCatagoryViewController.m; sourceTree = "<group>"; };
 		EFBE4BC1551AA2E5876302AC /* Pods-GouKuSeller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -429,6 +471,10 @@
 				74F8E8E020592074000A17A5 /* StandardEntity.m */,
 				74F8E8E9205925D7000A17A5 /* valueList.h */,
 				74F8E8EA205925D7000A17A5 /* valueList.m */,
+				74F8E9382060FCEC000A17A5 /* CommodityFromCodeEntity.h */,
+				74F8E9392060FCEC000A17A5 /* CommodityFromCodeEntity.m */,
+				74F8E9422060FF7C000A17A5 /* wareCategory.h */,
+				74F8E9432060FF7C000A17A5 /* wareCategory.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -578,13 +624,13 @@
 			isa = PBXGroup;
 			children = (
 				74B4E837204BD3A5006AFB6C /* AppDelegate */,
+				744ABA1F2053E75C00BBB26E /* Handler */,
 				74B4E83D204BD3EC006AFB6C /* Base */,
 				74B4E846204BD3EC006AFB6C /* Controllers */,
 				74B4E838204BD3EB006AFB6C /* Libs */,
 				74B4E856204BD3EC006AFB6C /* Network */,
 				74B4E85D204BD3EC006AFB6C /* Utils */,
 				744ABA202053E76F00BBB26E /* Model */,
-				744ABA1F2053E75C00BBB26E /* Handler */,
 				74B4E80B204BD353006AFB6C /* Main.storyboard */,
 				74B4E80E204BD353006AFB6C /* Assets.xcassets */,
 				74B4E810204BD353006AFB6C /* LaunchScreen.storyboard */,
@@ -730,10 +776,8 @@
 				744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */,
 				744ABA0C205255DB00BBB26E /* StoreCategoryTableViewCell.h */,
 				744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */,
-				744ABA0F20525C7E00BBB26E /* SearchCommodityTableViewCell.h */,
-				744ABA1020525C7E00BBB26E /* SearchCommodityTableViewCell.m */,
-				744ABA0620517C3600BBB26E /* BtnTop.h */,
-				744ABA0720517C3600BBB26E /* BtnTop.m */,
+				74F8E92C2060E023000A17A5 /* 批量管理 */,
+				74F8E91F2060DA33000A17A5 /* 搜索 */,
 			);
 			path = "商品";
 			sourceTree = "<group>";
@@ -745,6 +789,8 @@
 				744ABA16205295DF00BBB26E /* AddFirstClassificationViewController.m */,
 				744ABA18205295F000BBB26E /* AddSecondClassificationViewController.h */,
 				744ABA19205295F000BBB26E /* AddSecondClassificationViewController.m */,
+				74F8E94720614852000A17A5 /* SelectFisstCatagoryViewController.h */,
+				74F8E94820614852000A17A5 /* SelectFisstCatagoryViewController.m */,
 			);
 			path = "添加分类";
 			sourceTree = "<group>";
@@ -803,6 +849,34 @@
 				74F8E90C205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m */,
 			);
 			path = "自定义商品规格";
+			sourceTree = "<group>";
+		};
+		74F8E91F2060DA33000A17A5 /* 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				74F8E9252060DA60000A17A5 /* SearchCommodityViewController.h */,
+				74F8E9262060DA60000A17A5 /* SearchCommodityViewController.m */,
+				74F8E92E2060E0B5000A17A5 /* SearchWithNameTableViewCell.h */,
+				74F8E92F2060E0B5000A17A5 /* SearchWithNameTableViewCell.m */,
+				74F8E9332060E0C9000A17A5 /* SearchWithCodeTableViewCell.h */,
+				74F8E9342060E0C9000A17A5 /* SearchWithCodeTableViewCell.m */,
+			);
+			path = "搜索";
+			sourceTree = "<group>";
+		};
+		74F8E92C2060E023000A17A5 /* 批量管理 */ = {
+			isa = PBXGroup;
+			children = (
+				74F8E910205D452C000A17A5 /* ManagerCommodityTableViewCell.h */,
+				74F8E911205D452C000A17A5 /* ManagerCommodityTableViewCell.m */,
+				74F8E915205D4732000A17A5 /* CommodityBottomView.h */,
+				74F8E916205D4732000A17A5 /* CommodityBottomView.m */,
+				744ABA0620517C3600BBB26E /* BtnTop.h */,
+				744ABA0720517C3600BBB26E /* BtnTop.m */,
+				74F8E91A205F8C4E000A17A5 /* MoveCommodityView.h */,
+				74F8E91B205F8C4E000A17A5 /* MoveCommodityView.m */,
+			);
+			path = "批量管理";
 			sourceTree = "<group>";
 		};
 		BCD0B423BDDFAA3F3111BDC5 /* Pods */ = {
@@ -1010,11 +1084,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74F8E9272060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
 				74B4E893204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				74F8E8D2205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
 				744ABA81205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				74F8E90D205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				74F8E903205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
+				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				744ABA0820517C3600BBB26E /* BtnTop.m in Sources */,
 				744ABA8A205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				744ABA78205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
@@ -1023,23 +1099,26 @@
 				744ABA9B20556F7200BBB26E /* NewCommodityView.m in Sources */,
 				744ABA282054201B00BBB26E /* BaseHandler.m in Sources */,
 				744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */,
+				74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
 				744ABA9520556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				744ABA60205428AF00BBB26E /* IQTextView.m in Sources */,
 				74B4E878204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
 				74B4E815204BD353006AFB6C /* main.m in Sources */,
+				74F8E91C205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
 				744ABA7B205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
+				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,
 				744ABA6F205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
 				744ABA252054201B00BBB26E /* BaseEntity.m in Sources */,
 				74B4E875204BD3EC006AFB6C /* BaseViewController.m in Sources */,
 				744ABA69205428AF00BBB26E /* IQBarButtonItem.m in Sources */,
 				74B4E899204BD3EC006AFB6C /* AppUtils.m in Sources */,
-				744ABA1120525C7E00BBB26E /* SearchCommodityTableViewCell.m in Sources */,
 				744ABA66205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				74B4E87E204BD3EC006AFB6C /* MJRefreshAnimationStateHeader.m in Sources */,
 				74B4E872204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				74F8E8F220592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
+				74F8E93A2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
 				744ABAC92058C90100BBB26E /* ManagerCatagoryTableViewCell.m in Sources */,
 				744ABA6C205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABAA02055713200BBB26E /* EditInfoView.m in Sources */,
@@ -1048,6 +1127,7 @@
 				74B4E8C720512D7C006AFB6C /* CommodityViewController.m in Sources */,
 				74F8E8F8205935A0000A17A5 /* ShopClassificationViewController.m in Sources */,
 				744ABA7E205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
+				74F8E917205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E8C220512CD8006AFB6C /* UserDefaultsUtils.m in Sources */,
 				744ABAB5205652D300BBB26E /* LoginViewController.m in Sources */,
 				74B4E8AE204BD3EC006AFB6C /* NSString+Size.m in Sources */,
@@ -1067,10 +1147,12 @@
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
 				744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */,
 				744ABA17205295DF00BBB26E /* AddFirstClassificationViewController.m in Sources */,
+				74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */,
 				744ABA63205428AF00BBB26E /* IQToolbar.m in Sources */,
 				744ABA142052729500BBB26E /* ManagementClassificationViewController.m in Sources */,
 				744ABAAA205623D000BBB26E /* SelectCommodityCategoryViewController.m in Sources */,
 				74F8E8E120592074000A17A5 /* StandardEntity.m in Sources */,
+				74F8E912205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
 				744ABAAF205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				74B4E8C320512CD8006AFB6C /* LoginStorage.m in Sources */,
 				74B4E896204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
@@ -1084,6 +1166,7 @@
 			files = (
 				744ABA33205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				744ABA82205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
+				74F8E918205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E879204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
 				74F8E8F320592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74B4E81F204BD353006AFB6C /* GouKuSellerTests.m in Sources */,
@@ -1092,6 +1175,7 @@
 				74B4E89A204BD3EC006AFB6C /* AppUtils.m in Sources */,
 				74B4E876204BD3EC006AFB6C /* BaseViewController.m in Sources */,
 				74F8E909205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m in Sources */,
+				74F8E9452060FF7C000A17A5 /* wareCategory.m in Sources */,
 				744ABA79205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
 				744ABA902054321300BBB26E /* CommodityHandler.m in Sources */,
 				744ABA6A205428AF00BBB26E /* IQBarButtonItem.m in Sources */,
@@ -1100,18 +1184,21 @@
 				74F8E90E205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				744ABA76205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
 				744ABA70205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
+				74F8E94A20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				744ABAC0205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */,
 				744ABA88205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				744ABA262054201B00BBB26E /* BaseEntity.m in Sources */,
 				74F8E8FE2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				74B4E89D204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8B205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
+				74F8E93B2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
 				744ABA7F205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
 				744ABA61205428AF00BBB26E /* IQTextView.m in Sources */,
 				744ABA6D205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABA2E2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				74B4E87C204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				744ABA9620556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
+				74F8E9362060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74B4E873204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA67205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				74B4E8AF204BD3EC006AFB6C /* NSString+Size.m in Sources */,
@@ -1125,14 +1212,18 @@
 				74B4E8A6204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
 				744ABAB6205652D300BBB26E /* LoginViewController.m in Sources */,
 				744ABA85205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
+				74F8E913205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
+				74F8E91D205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
 				74B4E894204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				74F8E8E220592074000A17A5 /* StandardEntity.m in Sources */,
 				74B4E8A0204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,
 				744ABA292054201B00BBB26E /* BaseHandler.m in Sources */,
 				74B4E8A9204BD3EC006AFB6C /* KeyChainStore.m in Sources */,
 				744ABA7C205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
+				74F8E9312060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
 				74B4E8AC204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				744ABA64205428AF00BBB26E /* IQToolbar.m in Sources */,
+				74F8E9282060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
 				74F8E8DD205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				744ABAA12055713200BBB26E /* EditInfoView.m in Sources */,
 			);
@@ -1144,6 +1235,7 @@
 			files = (
 				744ABA34205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				744ABA83205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
+				74F8E919205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E87A204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
 				74F8E8F420592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74B4E82A204BD353006AFB6C /* GouKuSellerUITests.m in Sources */,
@@ -1152,6 +1244,7 @@
 				74B4E89B204BD3EC006AFB6C /* AppUtils.m in Sources */,
 				74B4E877204BD3EC006AFB6C /* BaseViewController.m in Sources */,
 				74F8E90A205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m in Sources */,
+				74F8E9462060FF7C000A17A5 /* wareCategory.m in Sources */,
 				744ABA7A205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
 				744ABA912054321300BBB26E /* CommodityHandler.m in Sources */,
 				744ABA6B205428AF00BBB26E /* IQBarButtonItem.m in Sources */,
@@ -1160,18 +1253,21 @@
 				74F8E90F205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				744ABA77205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
 				744ABA71205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
+				74F8E94B20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				744ABAC1205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */,
 				744ABA89205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				744ABA272054201B00BBB26E /* BaseEntity.m in Sources */,
 				74F8E8FF2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				74B4E89E204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8C205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
+				74F8E93C2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
 				744ABA80205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
 				744ABA62205428AF00BBB26E /* IQTextView.m in Sources */,
 				744ABA6E205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABA2F2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				74B4E87D204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				744ABA9720556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
+				74F8E9372060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74B4E874204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA68205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				74B4E8B0204BD3EC006AFB6C /* NSString+Size.m in Sources */,
@@ -1185,14 +1281,18 @@
 				74B4E8A7204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
 				744ABAB7205652D300BBB26E /* LoginViewController.m in Sources */,
 				744ABA86205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
+				74F8E914205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
+				74F8E91E205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
 				74B4E895204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				74F8E8E320592074000A17A5 /* StandardEntity.m in Sources */,
 				74B4E8A1204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,
 				744ABA2A2054201B00BBB26E /* BaseHandler.m in Sources */,
 				74B4E8AA204BD3EC006AFB6C /* KeyChainStore.m in Sources */,
 				744ABA7D205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
+				74F8E9322060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
 				74B4E8AD204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				744ABA65205428AF00BBB26E /* IQToolbar.m in Sources */,
+				74F8E9292060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
 				74F8E8DE205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				744ABAA22055713200BBB26E /* EditInfoView.m in Sources */,
 			);

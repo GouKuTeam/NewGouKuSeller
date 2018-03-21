@@ -4,7 +4,7 @@
 //
 //  Created by 窦建斌 on 2018/3/9.
 //  Copyright © 2018年 窦建斌. All rights reserved.
-//
+//CommodityHandler.h
 
 #import "ManagementClassificationViewController.h"
 #import "AddFirstClassificationViewController.h"
@@ -80,6 +80,11 @@
     UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"添加一级分类" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         AddFirstClassificationViewController *vc = [[AddFirstClassificationViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+        vc.addCateGory = ^{
+            //loadData
+            [self loadData];
+        };
+        
     }];
     UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"添加二级分类" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         AddSecondClassificationViewController * vc = [[AddSecondClassificationViewController alloc]init];
@@ -95,16 +100,13 @@
 }
 
 - (void)loadData{
-    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
+    [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
+        [self.arr_managerCatagory removeAllObjects];
         [self.arr_managerCatagory addObjectsFromArray:arr_data];
         [self.tb_managerCatagory reloadData];
-        
-        
     } failed:^(NSInteger statusCode, id json) {
-        
-        
-        
+     
     }];
 }
 
@@ -159,7 +161,9 @@
         [btn_edit setTitle:@"编辑" forState:UIControlStateNormal];
         [btn_edit setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
         btn_edit.titleLabel.font = [UIFont systemFontOfSize:16];
+        btn_edit.tag = section;
         [btn_edit addTarget:self action:@selector(btn_editAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         
         ShopClassificationEntity *entity = [self.arr_managerCatagory objectAtIndex:section];
         lab_categoryName.text = entity.name;
@@ -255,8 +259,6 @@
     
 }
 
-
-
 - (void)selectCategory:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
     self.selectedSection = (int)v_sender.tag;
@@ -277,6 +279,7 @@
     vc.entity = baentity;
     vc.sml_entity = baentity_small;
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)btn_editAction:(UIButton *)btn{
@@ -285,7 +288,9 @@
     EditFirstCatagoryViewController *vc = [[EditFirstCatagoryViewController alloc]init];
     vc.entity = baentity;
     [self.navigationController pushViewController:vc animated:YES];
-    
+    vc.updateCategory = ^{
+        [self loadData];
+    };
 }
 
 - (void)didReceiveMemoryWarning {

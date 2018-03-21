@@ -8,6 +8,8 @@
 
 #import "AddFirstClassificationViewController.h"
 #import "BaseTableView.h"
+#import "CommodityHandler.h"
+#import "LoginStorage.h"
 
 @interface AddFirstClassificationViewController ()
 
@@ -52,6 +54,16 @@
 
 
 - (void)rightBarAction{
+    NSString * cagatoryName = self.tef_fenlei.text;
+    
+    [CommodityHandler addShopCatagoryWithName:cagatoryName shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.addCateGory) {
+            self.addCateGory();
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
     
 }
 

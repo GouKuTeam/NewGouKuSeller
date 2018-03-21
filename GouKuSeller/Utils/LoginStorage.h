@@ -26,7 +26,7 @@
 + (void)saveHTTPHeader:(NSString *)str;
 + (NSString *)GetHTTPHeader;
 
-+ (void)saveShopId:(NSString *)str;
-+ (NSString *)GetShopId;
++ (void)saveShopId:(NSNumber *)str;
++ (NSNumber *)GetShopId;
 
 @end

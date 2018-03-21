@@ -42,4 +42,14 @@
 #define API_GET_CommodityCatahory @"/ware/category/list/%@"
 //通过商品分类获取商品规格值
 #define API_GET_Standard @"/ware/standard/list/%@"
+//通过条形码获取商品信息
+#define API_GET_CommodityInformationFromBarCode @"/ware/shop/barcode"
+//获取店内分类
+#define API_GET_ShopCatagory @"/shop/category/list"
+//添加店内分类
+#define API_GET_AddShopCatagory @"/shop/category/add"
+//删除店内分类
+#define API_GET_DelShopCatagory @"/shop/category/delete"
+//修改店内分类
+#define API_GET_UdpShopCatagory @"/shop/category/update"
 #endif

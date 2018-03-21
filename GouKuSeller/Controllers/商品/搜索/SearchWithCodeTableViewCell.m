@@ -1,20 +1,19 @@
 //
-//  CommodityTableViewCell.m
+//  SearchWithCodeTableViewCell.m
 //  GouKuSeller
 //
-//  Created by 窦建斌 on 2018/3/9.
+//  Created by 窦建斌 on 2018/3/20.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "CommodityTableViewCell.h"
+#import "SearchWithCodeTableViewCell.h"
 
-@implementation CommodityTableViewCell
+@implementation SearchWithCodeTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -31,18 +30,6 @@
         self.img_CommodityHeadPic.layer.cornerRadius = 3.0f;
         self.img_CommodityHeadPic.layer.masksToBounds = YES;
         
-        self.lab_CommodityStatus = [[UILabel alloc]init];
-        [self.img_CommodityHeadPic addSubview:self.lab_CommodityStatus];
-        [self.lab_CommodityStatus setBackgroundColor:[UIColor colorWithHexString:@"#000000" alpha:0.4]];
-        [self.lab_CommodityStatus setTextColor:[UIColor whiteColor]];
-        self.lab_CommodityStatus.font = [UIFont systemFontOfSize:12];
-        [self.lab_CommodityStatus mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(39);
-            make.left.mas_equalTo(0);
-            make.width.equalTo(self.img_CommodityHeadPic);
-            make.height.mas_equalTo(17);
-        }];
-        
         self.lab_CommodityName = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_CommodityName];
         [self.lab_CommodityName mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,11 +39,19 @@
         }];
         [self.lab_CommodityName setFont:[UIFont systemFontOfSize:16]];
         
+        self.lab_CommodityCode = [[UILabel alloc]init];
+        [self.contentView addSubview:self.lab_CommodityCode];
+        [self.lab_CommodityCode mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lab_CommodityName);
+            make.top.equalTo(self.lab_CommodityName.mas_bottom).offset(5);
+        }];
+        self.lab_CommodityCode.font = [UIFont systemFontOfSize:13];
+        
         self.lab_CommodityStock = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_CommodityStock];
         [self.lab_CommodityStock mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_CommodityName);
-            make.top.equalTo(self.lab_CommodityName.mas_bottom).offset(10);
+            make.top.equalTo(self.lab_CommodityCode.mas_bottom).offset(5);
         }];
         self.lab_CommodityStock.font = [UIFont systemFontOfSize:13];
         
@@ -69,11 +64,12 @@
         }];
         self.lab_CommoditySalesVolume.font = [UIFont systemFontOfSize:13];
         
+        
         self.lab_CommodityPrice = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_CommodityPrice];
         [self.lab_CommodityPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_CommodityName);
-            make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(10);
+            make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(5);
             make.right.equalTo(self.lab_CommodityName);
         }];
         self.lab_CommodityPrice.font = [UIFont systemFontOfSize:16];
@@ -89,7 +85,7 @@
         [self.btn_more mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.mas_right).offset(-15);
             make.width.mas_equalTo(50);
-            make.top.equalTo(self.lab_CommodityPrice.mas_bottom).offset(14);
+            make.top.equalTo(self.lab_CommodityPrice.mas_bottom).offset(11);
             make.height.mas_equalTo(28);
         }];
         
@@ -166,15 +162,9 @@
         [self.btn_delege setTitle:@"删除" forState:UIControlStateNormal];
         self.btn_delege.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.btn_delege setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
+        
     }
     return self;
-}
-
-- (void)contentCellWithCommodityInformationEntity:(CommodityInformationEntity *)commodityInformationEntity{
-    self.lab_CommodityName.text = commodityInformationEntity.name;
-    self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",commodityInformationEntity.stock];
-    self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",commodityInformationEntity.saleAmountMonth];
-    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",commodityInformationEntity.price];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

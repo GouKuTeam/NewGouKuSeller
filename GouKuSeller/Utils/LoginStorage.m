@@ -65,11 +65,11 @@ static NSString * const ShopId = @"ShopId";
 /**
  *  存/取  登陆成功返回的 的 ShopId
  */
-+ (void)saveShopId:(NSString *)str{
++ (void)saveShopId:(NSNumber *)str{
     [UserDefaultsUtils saveValue:str forKey:ShopId];
 }
 
-+ (NSString *)GetShopId
++ (NSNumber *)GetShopId
 {
     return [UserDefaultsUtils valueWithKey:ShopId];
 }

@@ -8,6 +8,10 @@
 
 #import "BaseViewController.h"
 
+typedef void(^addCategory)(void);
+
 @interface AddFirstClassificationViewController : BaseViewController
+
+@property (nonatomic, copy) addCategory  addCateGory;
 
 @end

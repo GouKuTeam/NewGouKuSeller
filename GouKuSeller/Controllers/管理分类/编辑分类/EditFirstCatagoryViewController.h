@@ -9,8 +9,10 @@
 #import "BaseViewController.h"
 #import "ShopClassificationEntity.h"
 
+typedef void(^updateCategory)(void);
 @interface EditFirstCatagoryViewController : BaseViewController
 
 @property (nonatomic ,strong)ShopClassificationEntity    *entity;
+@property (nonatomic, copy) updateCategory  updateCategory;
 
 @end
