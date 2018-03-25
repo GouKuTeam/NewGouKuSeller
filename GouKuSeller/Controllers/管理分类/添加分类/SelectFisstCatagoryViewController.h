@@ -7,9 +7,9 @@
 //
 
 #import "BaseViewController.h"
-#import "CommodityCatagoryEntity.h"
+#import "ShopClassificationEntity.h"
 
-typedef void(^goBackFirst)(CommodityCatagoryEntity *commodityCatagoryEntity);
+typedef void(^goBackFirst)(ShopClassificationEntity *commodityCatagoryEntity);
 
 @interface SelectFisstCatagoryViewController : BaseViewController
 

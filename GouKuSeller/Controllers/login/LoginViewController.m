@@ -102,14 +102,20 @@
     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
         
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        [LoginStorage saveShopId:[[responseObject objectForKey:@"data"] objectForKey:@"id"]];
-        NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
-        NSString *token = [[r allHeaderFields] objectForKey:@"Set-Cookie"];
-        NSString *tolen = [token substringFromIndex:12];
-        [LoginStorage saveHTTPHeader:tolen];
-        [LoginStorage saveIsLogin:YES];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[CommodityViewController alloc] init]];
-        [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+        if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+            
+            [LoginStorage saveShopId:[[responseObject objectForKey:@"data"] objectForKey:@"id"]];
+            NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
+            NSString *token = [[r allHeaderFields] objectForKey:@"Set-Cookie"];
+            NSString *tolen = [token substringFromIndex:12];
+            [LoginStorage saveHTTPHeader:tolen];
+            [LoginStorage saveIsLogin:YES];
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[CommodityViewController alloc] init]];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+        }
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error == %@",error);

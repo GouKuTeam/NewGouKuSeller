@@ -13,14 +13,18 @@
 #import "ShopClassificationViewController.h"
 #import "CommodityHandler.h"
 #import "CommodityFromCodeEntity.h"
+#import "LoginStorage.h"
 
-@interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
     UIImagePickerController *ipc;
 }
 
 @property (nonatomic ,strong)NewCommodityView   *v_commodityView;
 @property (nonatomic ,assign)int    int_categoryId;
 @property (nonatomic ,strong)CommodityFromCodeEntity *entity;
+@property (nonatomic ,strong)NSNumber      *shopCId;
+@property (nonatomic ,assign)int            shopStock;
+@property (nonatomic ,assign)double         Cprice;
 
 @end
 
@@ -37,12 +41,7 @@
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
-    [CommodityHandler getCommodityInformationWithBarCode:23451342 prepare:nil success:^(id obj) {
-        self.entity = (CommodityFromCodeEntity *)obj;
-
-    } failed:^(NSInteger statusCode, id json) {
-
-    }];
+    
 }
 
 - (void)onCreate{
@@ -60,17 +59,37 @@
         make.top.mas_equalTo(SafeAreaTopHeight);
         make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight);
     }];
-    [self.v_commodityView.btn_addCatagory addTarget:self action:@selector(btn_addCatagoryAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.v_commodityView.btn_addCatagory addTarget:self action:@selector(btn_addCatagoryAction) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
     
     UITapGestureRecognizer* imgTitle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
     [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitle];
     self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+    self.v_commodityView.v_price.tf_detail.delegate = self;
+    self.v_commodityView.v_stock.tf_detail.delegate = self;
     
-    UITapGestureRecognizer* tgr_commoditySpecifications = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_commoditySpecificationsAction)];
-    [self.v_commodityView.v_commoditySpecifications addGestureRecognizer:tgr_commoditySpecifications];
+//    UITapGestureRecognizer* tgr_commoditySpecifications = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_commoditySpecificationsAction)];
+//    [self.v_commodityView.v_commoditySpecifications addGestureRecognizer:tgr_commoditySpecifications];
+    
+    [self loadData];
 
+}
+
+- (void)loadData{
+    NSNumber *barcode = [NSNumber numberWithLong:6936952325];
+    [CommodityHandler getCommodityInformationWithBarCode:barcode prepare:nil success:^(id obj) {
+        self.entity = (CommodityFromCodeEntity *)obj;
+        [self.v_commodityView.lab_catagoryTitle setText:self.entity.categoryName];
+        [self.v_commodityView.v_commodityName.tf_detail setText:self.entity.name];
+        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entity.detail];
+        [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entity.standards];
+        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entity.barcode]];
+        [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entity.itemId]];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 //店内分类  手势点击方法
 - (void)shopClassification{
@@ -78,6 +97,9 @@
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBackShop = ^(ShopClassificationEntity *shopClassificationEntity) {
         [self.v_commodityView.v_shopClassification.tf_detail setText:shopClassificationEntity.name];
+        [self.v_commodityView.v_shopClassification.tf_detail setTextColor:[UIColor blackColor]];
+        self.shopCId = [NSNumber numberWithInt:(int)shopClassificationEntity._id];
+        
     };
 }
 
@@ -120,13 +142,52 @@
         
     };
 }
+#pragma UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField == self.v_commodityView.v_price.tf_detail) {
+        if (![textField.text isEqualToString:@""]) {
+            self.Cprice = [textField.text doubleValue];
+            [self.v_commodityView.v_price.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",[textField.text floatValue]]];
+            [self.v_commodityView.v_price.tf_detail setTextColor:[UIColor blackColor]];
+            
+            
+        }
+    }if (textField == self.v_commodityView.v_stock.tf_detail) {
+        self.shopStock = [textField.text intValue];
+        [self.v_commodityView.v_stock.tf_detail setTextColor:[UIColor blackColor]];
+        
+    }
+}
 
 - (void)leftBarAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightBarAction{
+    if ([self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]) {
+        [MBProgressHUD showInfoMessage:@"请选择店内分类"];
+        return;
+    }
+    if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
+        [MBProgressHUD showInfoMessage:@"请填写价格"];
+        return;
+        
+    }
+    if ([self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
+        [MBProgressHUD showInfoMessage:@"请填写库存"];
+        return;
+    }
+    if (![self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]  && ![self.v_commodityView.v_price.tf_detail.text isEqualToString:@""] && ![self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
+    }
+    //网络请求
     
+    [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:self.entity.name itemId:self.entity.itemId barcode:self.entity.barcode shopWareCategoryId:self.shopCId price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] pictures:self.entity.pictures standards:self.entity.standards prepare:^{
+        
+    } success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

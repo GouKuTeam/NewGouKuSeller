@@ -29,9 +29,9 @@
             make.top.height.equalTo(self.lab_title);
             make.width.mas_equalTo(SCREEN_WIDTH - 120);
         }];
-        self.tf_detail.textColor = [UIColor blackColor];
+        self.tf_detail.textColor = [UIColor colorWithHexString:@"#616161"];
         self.tf_detail.font = [UIFont systemFontOfSize:16];
-        [self.tf_detail setPlaceholder:@"请填写"];
+//        [self.tf_detail setPlaceholder:@"请填写"];
         
         self.img_line = [[UIImageView alloc]init];
         [self addSubview:self.img_line];

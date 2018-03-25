@@ -10,6 +10,10 @@
 #import "BaseTableView.h"
 #import "SearchWithNameTableViewCell.h"
 #import "SearchWithCodeTableViewCell.h"
+#import "CommodityHandler.h"
+#import "LoginStorage.h"
+#import "CommodityFromCodeEntity.h"
+#import "MoreEditView.h"
 
 #define NULLROW    999
 
@@ -18,8 +22,10 @@
 @property (nonatomic, strong) UITextField           *tf_search;
 @property (nonatomic, strong) BaseTableView         *tb_search;
 @property (nonatomic, strong) NSMutableArray        *arr_search;
+@property (nonatomic, strong) NSString              *str_search;
 
 @property (nonatomic ,assign)int               showIndex;
+@property (nonatomic ,strong)MoreEditView                  *v_moreEdit;
 
 @end
 
@@ -71,7 +77,7 @@
     
     self.navigationItem.titleView = v_header;
     
-    self.tb_search = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:NO hasFooterRefreshing:NO];
+    self.tb_search = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:NO hasFooterRefreshing:YES];
 
     [self.view addSubview:self.tb_search];
     self.tb_search.dataSource = self;
@@ -81,78 +87,155 @@
     self.tb_search.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tb_search setBackgroundColor:[UIColor whiteColor]];
     
+    self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 88)];
+    [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_moreEdit.btn_xiajia addTarget:self action:@selector(xiaJiaAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.v_moreEdit];
+    [self.v_moreEdit setHidden:YES];
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    self.str_search = toBeString;
+    [self.tb_search requestDataSource];
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    [CommodityHandler searchCommodityWithShopId:[LoginStorage GetShopId] keyword:self.str_search pageNum:(int)pageNum prepare:nil success:^(id obj) {
+        NSArray *arrdata = (NSArray *)obj;
+        if (arrdata.count == 0) {
+            
+            [self.arr_search removeAllObjects];
+        }
+        [self.arr_search addObjectsFromArray:arrdata];
+        [self.tb_search reloadData];
+        complete([(NSArray *)obj count]);
+        if (self.arr_search.count == 0) {
+            self.tb_search.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_search.frame withDefaultImage:nil withNoteTitle:@"未找到相关商品" withNoteDetail:nil withButtonAction:nil];
+        }
+        NSLog(@"arrcount == %ldx",self.arr_search.count);
+    } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.arr_search.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *CellIdentifier = @"SearchWithNameTableViewCell";
-    SearchWithCodeTableViewCell *cell = (SearchWithCodeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell){
-        cell = [[SearchWithCodeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:indexPath.row];
+    if (entity.hitType == 1 || entity.hitType == 2) {
+        
+        static NSString *CellIdentifier = @"SearchWithCodeTableViewCell";
+        SearchWithCodeTableViewCell *cell = (SearchWithCodeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell){
+            cell = [[SearchWithCodeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.btn_more.tag = indexPath.row;
+        [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell contentCellWithCommodityFromCodeEntity:entity];
+        
+        return cell;
+    }
+    if (entity.hitType == 3) {
+        static NSString *CellIdentifier = @"SearchWithNameTableViewCell";
+        SearchWithNameTableViewCell *cell = (SearchWithNameTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell){
+            cell = [[SearchWithNameTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        cell.btn_more.tag = indexPath.row;
+        [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell contentCellWithCommodityFromCodeEntity:entity];
+        
+        return cell;
     }
     
-    cell.btn_more.tag = indexPath.row;
-    [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-    cell.btn_delege.tag = indexPath.row;
-    [cell.btn_delege addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-    cell.btn_xiajia.tag = indexPath.row;
-    [cell.btn_xiajia addTarget:self action:@selector(xiaJiaAction:) forControlEvents:UIControlEventTouchUpInside];
-    if (self.showIndex == indexPath.row) {
-        [cell.v_back setHidden:NO];
-    }else{
-        [cell.v_back setHidden:YES];
-    }
-//    MerchantsEntity *entity = [self.arr_cooperationStore objectAtIndex:indexPath.section];
-//    [cell contentCellWithMerchantsEntity:entity];
-    [cell.lab_CommodityName setText:@"脉动"];
-    [cell.lab_CommodityCode setText:@"商品编码 00912019212121"];
-    [cell.lab_CommodityStock setText:@"库存 999999"];
-    [cell.lab_CommoditySalesVolume setText:@"销量 999999"];
-    [cell.lab_CommodityPrice setText:@"$4.4"];
-    return cell;
+    return NULL;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView == self.tb_search) {
-        if (self.showIndex != NULLROW) {
-            self.showIndex = NULLROW;
-            [self.tb_search reloadData];
-        }
-    }
+    self.showIndex = NULLROW;
+    [self.v_moreEdit setHidden:YES];
 }
 
 - (void)moreAction:(UIButton *)btn_sender{
-    if (btn_sender.tag == self.showIndex) {
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:btn_sender.tag];
+    if (entity.status == 1) {
+        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+    }else if (entity.status == 2) {
+        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+    }else if (entity.status == 3) {
+        [self.v_moreEdit.btn_xiajia setTitle:@"上架" forState:UIControlStateNormal];
+    }
+    if ((int)btn_sender.tag == self.showIndex) {
+        [self.v_moreEdit setHidden:YES];
         self.showIndex = NULLROW;
     }else{
+        [self.v_moreEdit setHidden:NO];
         self.showIndex = (int)btn_sender.tag;
     }
-    [self.tb_search reloadData];
+    UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
+    CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
+    
+    [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
 }
 
-- (void)deleteAction:(UIButton *)btn_sender{
-//    CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+- (void)deleteAction{
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
+    [CommodityHandler commoditydeleteWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+        
+    } success:^(id obj) {
+        [self.arr_search removeObjectAtIndex:self.showIndex];
+        [self.tb_search reloadData];
+        self.showIndex = NULLROW;
+        [self.v_moreEdit setHidden:YES];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
+}
+
+- (void)xiaJiaAction{
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
+    if (entity.status == 1 || entity.status == 2) {
+        //下架方法
+        [CommodityHandler commoditydownShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:nil success:^(id obj) {
+            entity.status = 3;
+            [self.arr_search replaceObjectAtIndex:self.showIndex withObject:entity];
+            [self.tb_search reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }else if (entity.status == 3){
+        //上架方法
+        [CommodityHandler commodityupShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+            
+        } success:^(id obj) {
+            entity.status = 1;
+            [self.arr_search replaceObjectAtIndex:self.showIndex withObject:entity];
+            [self.tb_search reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-
-- (void)textFieldWordChange:(UITextField *)textField {
-    NSString *str = [textField textInRange:textField.markedTextRange];
-    
-    if (![str isEqualToString:@""]) {
-        return;
-    }
-//    [self.tb_search requestDataSource];
-    
 }
 
 - (void)cancelAction{

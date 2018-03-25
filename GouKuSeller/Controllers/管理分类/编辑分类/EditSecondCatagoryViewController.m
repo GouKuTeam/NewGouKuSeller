@@ -7,6 +7,8 @@
 //
 
 #import "EditSecondCatagoryViewController.h"
+#import "CommodityHandler.h"
+#import "LoginStorage.h"
 
 @interface EditSecondCatagoryViewController ()
 
@@ -96,12 +98,28 @@
 }
 
 - (void)btn_deleteAction{
-    
+    //删除
+    [CommodityHandler delShopCatagoryWithOwnId:(int)self.sml_entity._id shopId:[LoginStorage GetShopId] pid:(int)self.entity._id prepare:nil success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.updateSecondCategory) {
+            self.updateSecondCategory();
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 
 - (void)rightBarAction{
-    
+    //修改
+    [CommodityHandler udpShopCatagoryWithName:self.tef_erji.text ownid:(int)self.sml_entity._id shopId:[LoginStorage GetShopId] pid:(int)self.entity._id prepare:nil success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.updateSecondCategory) {
+            self.updateSecondCategory();
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

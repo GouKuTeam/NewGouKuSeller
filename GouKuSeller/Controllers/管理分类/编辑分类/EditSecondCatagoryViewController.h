@@ -8,8 +8,14 @@
 
 #import "BaseViewController.h"
 #import "ShopClassificationEntity.h"
+
+typedef void(^updateSecondCategory)(void);
+
 @interface EditSecondCatagoryViewController : BaseViewController
 
 @property (nonatomic ,strong)ShopClassificationEntity    *entity;
 @property (nonatomic ,strong)ShopClassificationEntity    *sml_entity;
+
+@property (nonatomic, copy) updateSecondCategory updateSecondCategory;
+
 @end

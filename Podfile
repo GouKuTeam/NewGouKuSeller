@@ -7,5 +7,6 @@ target 'GouKuSeller' do
     pod 'JPush'
     pod 'MJExtension', '2.5.5'
     pod 'MBProgressHUD'
+    pod 'SDWebImage', '3.8.2'
 end
 inhibit_all_warnings!

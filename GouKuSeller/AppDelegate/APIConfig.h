@@ -43,13 +43,25 @@
 //通过商品分类获取商品规格值
 #define API_GET_Standard @"/ware/standard/list/%@"
 //通过条形码获取商品信息
-#define API_GET_CommodityInformationFromBarCode @"/ware/shop/barcode"
+#define API_GET_CommodityInformationFromBarCode @"/ware/%@"
 //获取店内分类
 #define API_GET_ShopCatagory @"/shop/category/list"
 //添加店内分类
-#define API_GET_AddShopCatagory @"/shop/category/add"
+#define API_GET_AddShopCatagory @"/shop/ware/category/add"
 //删除店内分类
-#define API_GET_DelShopCatagory @"/shop/category/delete"
+#define API_GET_DelShopCatagory @"/shop/ware/category/delete"
 //修改店内分类
-#define API_GET_UdpShopCatagory @"/shop/category/update"
+#define API_GET_UdpShopCatagory @"/shop/ware/category/update"
+//新增商品
+#define API_GET_AddCommodity @"/shop/ware/stock/add"
+//商品查询
+#define API_GET_CommodityList @"/shop/ware/stock/list"
+//搜索商品
+#define API_GET_SearchCommodity @"/shop/ware/stock/search"
+//门店商品下架
+#define API_GET_downshelf @"/shop/ware/stock/downshelf/%@"
+//门店商品上架
+#define API_GET_upshelf @"/shop/ware/stock/upshelf/%@"
+//门店商品删除
+#define API_GET_CommodityDelete @"/shop/ware/stock/delete/%@"
 #endif

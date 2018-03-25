@@ -34,6 +34,7 @@
         self.lab_CommodityStatus = [[UILabel alloc]init];
         [self.img_CommodityHeadPic addSubview:self.lab_CommodityStatus];
         [self.lab_CommodityStatus setBackgroundColor:[UIColor colorWithHexString:@"#000000" alpha:0.4]];
+        [self.lab_CommodityStatus setTextAlignment:NSTextAlignmentCenter];
         [self.lab_CommodityStatus setTextColor:[UIColor whiteColor]];
         self.lab_CommodityStatus.font = [UIFont systemFontOfSize:12];
         [self.lab_CommodityStatus mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,7 +81,7 @@
         [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
         
         self.btn_more = [[UIButton alloc]init];
-        [self.btn_more setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+        [self.btn_more setImage:[UIImage imageNamed:@"dian"] forState:UIControlStateNormal];
         [self.contentView addSubview: self.btn_more];
         self.btn_more.layer.borderWidth = 1;
         self.btn_more.layer.borderColor = [[UIColor colorWithHexString:@"#4167b2"] CGColor];
@@ -118,63 +119,37 @@
             make.height.mas_equalTo(0.5);
         }];
         
-        self.v_back = [[UIView alloc]init];
-        [self.v_back setHidden:YES];
-        self.v_back.clipsToBounds = YES;
-        self.v_back.layer.cornerRadius = 3;
-        self.v_back.layer.masksToBounds = YES;
-        self.v_back.layer.borderColor = [[UIColor colorWithHexString:@"#d8d8d8"] CGColor];
-        self.v_back.layer.borderWidth = 0.5;
-        [self.v_back setBackgroundColor:[UIColor whiteColor]];
-        [self.contentView addSubview:self.v_back];
-        [self.v_back mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.btn_edit.mas_left).offset(14);
-            make.top.equalTo(self.btn_edit.mas_bottom).offset(2);
-            make.width.mas_equalTo(120);
-            make.height.mas_equalTo(88);
-        }];
-        
-        self.img_mid_line = [[UIImageView alloc]init];
-        [self.v_back addSubview:self.img_mid_line];
-        [self.img_mid_line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.mas_equalTo(44);
-            make.width.equalTo(self.v_back);
-            make.height.mas_equalTo(0.5);
-        }];
-        [self.img_mid_line setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
-        
-        self.btn_xiajia = [[UIButton alloc]init];
-        [self.v_back addSubview:self.btn_xiajia];
-        [self.btn_xiajia mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.mas_equalTo(0);
-            make.width.equalTo(self.v_back);
-            make.height.mas_equalTo(44);
-        }];
-        [self.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
-        self.btn_xiajia.titleLabel.font = [UIFont systemFontOfSize:14];
-        [self.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
-        
-        self.btn_delege = [[UIButton alloc]init];
-        [self.v_back addSubview:self.btn_delege];
-        [self.btn_delege mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.mas_equalTo(44);
-            make.width.equalTo(self.v_back);
-            make.height.mas_equalTo(44);
-        }];
-        [self.btn_delege setTitle:@"删除" forState:UIControlStateNormal];
-        self.btn_delege.titleLabel.font = [UIFont systemFontOfSize:14];
-        [self.btn_delege setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
     }
     return self;
 }
 
-- (void)contentCellWithCommodityInformationEntity:(CommodityInformationEntity *)commodityInformationEntity{
+- (void)contentCellWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity{
+    [self.lab_CommoditySalesVolume setHidden:YES];
+    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:commodityInformationEntity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
     self.lab_CommodityName.text = commodityInformationEntity.name;
     self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",commodityInformationEntity.stock];
     self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",commodityInformationEntity.saleAmountMonth];
-    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",commodityInformationEntity.price];
+    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",[commodityInformationEntity.price doubleValue]];
+    if (commodityInformationEntity.status == 1) {
+        [self.lab_CommodityStatus setHidden:YES];
+        [self.lab_CommodityName setTextColor:[UIColor blackColor]];
+        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+    }
+    if (commodityInformationEntity.status == 2) {
+        [self.lab_CommodityStatus setHidden:NO];
+        [self.lab_CommodityStatus setText:@"已售罄"];
+        [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+    }
+    if (commodityInformationEntity.status == 3) {
+        [self.lab_CommodityStatus setHidden:NO];
+        [self.lab_CommodityStatus setText:@"已下架"];
+        [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

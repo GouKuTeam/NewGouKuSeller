@@ -92,11 +92,11 @@
     return self;
 }
 
-- (void)contentCellWithCommodityInformationEntity:(CommodityInformationEntity *)commodityInformationEntity{
+- (void)contentCellWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity{
     self.lab_CommodityName.text = commodityInformationEntity.name;
     self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",commodityInformationEntity.stock];
     self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",commodityInformationEntity.saleAmountMonth];
-    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",commodityInformationEntity.price];
+    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",[commodityInformationEntity.price doubleValue]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

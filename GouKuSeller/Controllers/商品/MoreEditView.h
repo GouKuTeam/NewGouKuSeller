@@ -10,4 +10,8 @@
 
 @interface MoreEditView : UIView
 
+@property (nonatomic ,strong)UIImageView     *img_mid_line;
+@property (nonatomic ,strong)UIButton        *btn_xiajia;
+@property (nonatomic ,strong)UIButton        *btn_delege;
+
 @end

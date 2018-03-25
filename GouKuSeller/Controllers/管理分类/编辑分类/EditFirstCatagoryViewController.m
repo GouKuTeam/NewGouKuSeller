@@ -67,15 +67,21 @@
 }
 
 - (void)btn_deleteAction{
-    
+    [CommodityHandler delShopCatagoryWithOwnId:(int)self.entity._id shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.updateCategory) {
+            self.updateCategory();
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)rightBarAction{
     
-    
-    [CommodityHandler udpShopCatagoryWithName:self.tef_fenlei.text ownid:self.entity._id shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
+    [CommodityHandler udpShopCatagoryWithName:self.tef_fenlei.text ownid:(int)self.entity._id shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
         if (self.updateCategory) {
-            [self.navigationController popViewControllerAnimated:YES];
             self.updateCategory();
         }
     } failed:^(NSInteger statusCode, id json) {

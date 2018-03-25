@@ -39,12 +39,13 @@
     self.tb_firstCatagory.dataSource = self;
     self.tb_firstCatagory.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tb_firstCatagory.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
-    
+    self.tb_firstCatagory.tableFooterView = [UIView new];
+    self.tb_firstCatagory.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];
     [self loadData];
 }
 
 - (void)loadData{
-    [CommodityHandler getShopCatagoryWithShopId:[LoginStorage GetShopId] pid:1 prepare:nil success:^(id obj) {
+    [CommodityHandler getShopCatagoryWithShopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_firstCatagory addObjectsFromArray:arr_data];
         [self.tb_firstCatagory reloadData];
@@ -54,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return self.arr_firstCatagory.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -70,7 +71,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    CommodityCatagoryEntity *entity = [self.arr_firstCatagory objectAtIndex:indexPath.row];
+    ShopClassificationEntity *entity = [self.arr_firstCatagory objectAtIndex:indexPath.row];
+    [self.navigationController popViewControllerAnimated:YES];
     if (self.goBackFirst) {
         self.goBackFirst(entity);
     }

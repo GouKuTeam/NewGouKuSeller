@@ -22,6 +22,8 @@
 #import "ManagerCommodityTableViewCell.h"
 #import "MoveCommodityView.h"
 #import "SearchCommodityViewController.h"
+#import "CommodityStatusView.h"
+#import "MoreEditView.h"
 
 #define NULLROW    999
 
@@ -52,6 +54,10 @@
 @property (nonatomic ,strong)UILabel           *lb_selectedNum;
 @property (nonatomic ,strong)UIView            *v_coverLeft;
 //@property (nonatomic ,strong)MoveCommodityView             *v_moveCommodity;
+@property (nonatomic ,strong)CommodityStatusView           *v_commodityStatusView;
+@property (nonatomic ,strong)MoreEditView                  *v_moreEdit;
+
+@property (nonatomic ,strong)NSNumber          *btnIndex;
 
 @end
 
@@ -67,6 +73,7 @@
     [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
     [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
     self.navigationItem.titleView = self.btn_top;
+    [self.btn_top addTarget:self action:@selector(btn_topAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(searchBarAction)];
     [btn_right setImage:[UIImage imageNamed:@"home_search"]];
@@ -116,6 +123,7 @@
 
 - (void)onCreate{
     self.selectedRow = NULLROW;
+    self.selectedSection = NULLROW;
     self.showIndex = NULLROW;
     
     self.arr_category = [NSMutableArray array];
@@ -181,12 +189,20 @@
     self.tb_left.tableViewDelegate = self;
     [self.view addSubview:self.tb_left];
     
-    self.tb_right = [[BaseTableView alloc]initWithFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaTopHeight - 50) style:UITableViewStyleGrouped hasHeaderRefreshing:NO hasFooterRefreshing:NO];
+    self.tb_right = [[BaseTableView alloc]initWithFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     self.tb_right.dataSource = self;
     self.tb_right.delegate = self;
     self.tb_right.tableViewDelegate = self;
     self.tb_right.separatorColor = [UIColor clearColor];
     [self.view addSubview:self.tb_right];
+    
+    self.v_commodityStatusView = [[CommodityStatusView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight)];
+    [self.view addSubview:self.v_commodityStatusView];
+    [self.v_commodityStatusView.btn_chushou addTarget:self action:@selector(btn_chushouAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_commodityStatusView.btn_shouwan addTarget:self action:@selector(btn_shouwanAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_commodityStatusView.btn_xiajia addTarget:self action:@selector(btn_xiajiaAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_commodityStatusView setHidden:YES];
+    
     /****
     self.btn_batchManager = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 136, SafeAreaTopHeight, 120, 44)];
     [self.view addSubview:self.btn_batchManager];
@@ -216,15 +232,14 @@
     [self.v_moveCommodity setHidden:YES];
     [self.v_moveCommodity.btn_move addTarget:self action:@selector(moveVBtnAction) forControlEvents:UIControlEventTouchUpInside];
      ****/
+    self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 88)];
+    [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_moreEdit.btn_xiajia addTarget:self action:@selector(xiaJiaAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.v_moreEdit];
+    [self.v_moreEdit setHidden:YES];
     
+    self.btnIndex = [NSNumber numberWithInt:1];
     [self loadData];
-    
-    CommodityInformationEntity *entity = [[CommodityInformationEntity alloc]init];
-    entity.price = 3.5;
-    entity.name = @"脉动橙子";
-    entity.stock = [NSNumber numberWithInt:100];
-    entity.saleAmountMonth = [NSNumber numberWithInt:90];
-    [self.arr_commodity addObject:entity];
 
 }
 
@@ -238,19 +253,50 @@
     AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+//门店分类列表
 - (void)loadData{
-        [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
-            NSArray *arr_data = (NSArray *)obj;
-            [self.arr_category addObjectsFromArray:arr_data];
-            [self.tb_left reloadData];
-//            self.v_moveCommodity.arr_moveCatagary = self.arr_category;
-        } failed:^(NSInteger statusCode, id json) {
+    
+    [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
+        NSArray *arr_data = (NSArray *)obj;
+        ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
+        entity.name = @"全部分类";
+        entity._id = 0;
+        [self.arr_category addObject:entity];
+        [self.arr_category addObjectsFromArray:arr_data];
+        self.selectedSection = 0;
+        self.selectedRow = NULLROW;
+        [self.tb_left reloadData];
+        [self.tb_right requestDataSource];
+    } failed:^(NSInteger statusCode, id json) {
 
-        }];
+    }];
+    
 }
 
 #pragma uitableview
+
+- (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedSection];
+    if (self.selectedRow != NULLROW) {
+        entity = [entity.childList objectAtIndex:self.selectedRow];
+    }
+    [CommodityHandler getCommodityListWithshopId:[LoginStorage GetShopId] shopWareCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex pageNum:(int)pageNum prepare:nil success:^(id obj) {
+        if (pageNum == 0) {
+            [self.arr_commodity removeAllObjects];
+        }
+        [self.arr_commodity addObjectsFromArray:(NSArray *)obj];
+        [self.tb_right reloadData];
+        complete([(NSArray *)obj count]);
+        if (self.arr_commodity.count == 0) {
+            self.tb_right.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_right.frame withDefaultImage:nil withNoteTitle:@"暂无数据" withNoteDetail:nil withButtonAction:nil];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == self.tb_left) {
@@ -384,7 +430,7 @@
             if (!cell){
                 cell = [[ManagerCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
             [cell contentCellWithCommodityInformationEntity:entity];
             if ([self.arr_selected containsObject:[NSNumber numberWithInt:(int)indexPath.row]]) {
                 cell.btn_select.selected = YES;
@@ -398,19 +444,10 @@
             if (!cell){
                 cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
             [cell contentCellWithCommodityInformationEntity:entity];
             cell.btn_more.tag = indexPath.row;
             [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-            cell.btn_delege.tag = indexPath.row;
-            [cell.btn_delege addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-            cell.btn_xiajia.tag = indexPath.row;
-            [cell.btn_xiajia addTarget:self action:@selector(xiaJiaAction:) forControlEvents:UIControlEventTouchUpInside];
-            if (self.showIndex == indexPath.row) {
-                [cell.v_back setHidden:NO];
-            }else{
-                [cell.v_back setHidden:YES];
-            }
             return cell;
         }
     }
@@ -424,7 +461,10 @@
         self.selectedRow = (int)indexPath.row;
         [self.tb_left reloadData];
         //加载右边数据
+        [self.tb_right requestDataSource];
     }else if (tableView == self.tb_right){
+        
+        /**  -----注掉批量管理注掉的
         NSNumber *number = [NSNumber numberWithInt:(int)indexPath.row];
         if ([self.arr_selected containsObject:number]) {
             [self.arr_selected removeObject:number];
@@ -432,7 +472,6 @@
             [self.arr_selected addObject:number];
         }
         [self.tb_right reloadData];
-        /**  -----注掉批量管理注掉的
         self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
         self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
          */
@@ -441,10 +480,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.tb_right) {
-        if (self.showIndex != NULLROW) {
-            self.showIndex = NULLROW;
-            [self.tb_right reloadData];
-        }
+        self.showIndex = NULLROW;
+        [self.v_moreEdit setHidden:YES];
     }
 }
 
@@ -457,31 +494,104 @@
     [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
     [self.tb_left reloadData];
     //加载右边数据
-    
+    [self.tb_right requestDataSource];
 }
 
 
 - (void)moreAction:(UIButton *)btn_sender{
-    if (btn_sender.tag == self.showIndex) {
+    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+    if (entity.status == 1) {
+        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+    }else if (entity.status == 2) {
+        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+    }else if (entity.status == 3) {
+        [self.v_moreEdit.btn_xiajia setTitle:@"上架" forState:UIControlStateNormal];
+    }
+    if ((int)btn_sender.tag == self.showIndex) {
+        [self.v_moreEdit setHidden:YES];
         self.showIndex = NULLROW;
     }else{
+        [self.v_moreEdit setHidden:NO];
         self.showIndex = (int)btn_sender.tag;
     }
-    [self.tb_right reloadData];
+    UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
+    CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
+    
+    [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
+    
 }
 
-- (void)deleteAction:(UIButton *)btn_sender{
-    CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
-
+//商品状态选择
+- (void)btn_chushouAction{
+    self.btnIndex = [NSNumber numberWithInt:1];
+    [self.v_commodityStatusView setHidden:YES];
+    [self.btn_top setTitle:@"出售中" forState:UIControlStateNormal];
+    [self.tb_right requestDataSource];
+    
 }
 
-- (void)xiaJiaAction:(UIButton *)btn_sender{
-    CommodityInformationEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+- (void)btn_shouwanAction{
+    self.btnIndex = [NSNumber numberWithInt:2];
+    [self.v_commodityStatusView setHidden:YES];
+    [self.btn_top setTitle:@"已售罄" forState:UIControlStateNormal];
+    [self.tb_right requestDataSource];
+}
+
+- (void)btn_xiajiaAction{
+    self.btnIndex = [NSNumber numberWithInt:3];
+    [self.v_commodityStatusView setHidden:YES];
+    [self.btn_top setTitle:@"已下架" forState:UIControlStateNormal];
+    [self.tb_right requestDataSource];
+}
+
+- (void)deleteAction{
+    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    [CommodityHandler commoditydeleteWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+        
+    } success:^(id obj) {
+        [self.arr_commodity removeObjectAtIndex:self.showIndex];
+        [self.tb_right reloadData];
+        self.showIndex = NULLROW;
+        [self.v_moreEdit setHidden:YES];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
+}
+
+- (void)xiaJiaAction{
+    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    if (entity.status == 1 || entity.status == 2) {
+        //下架方法
+        [CommodityHandler commoditydownShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:nil success:^(id obj) {
+            [self.arr_commodity removeObjectAtIndex:self.showIndex];
+            [self.tb_right reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }else if (entity.status == 3){
+        //上架方法
+        [CommodityHandler commodityupShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+            
+        } success:^(id obj) {
+            [self.arr_commodity removeObjectAtIndex:self.showIndex];
+            [self.tb_right reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+             [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }
     
 }
 -(void)searchBarAction{
     SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)btn_topAction{
+    [self.v_commodityStatusView setHidden:!self.v_commodityStatusView.isHidden];
 }
 /********注掉批量管理功能
 

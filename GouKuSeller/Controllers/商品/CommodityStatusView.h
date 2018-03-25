@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CommodityStatusView : UIView
+@property (nonatomic ,strong)UIView        *v_back;
+@property (nonatomic ,strong)UIButton      *btn_chushou;
+@property (nonatomic ,strong)UIButton      *btn_shouwan;
+@property (nonatomic ,strong)UIButton      *btn_xiajia;
+@property (nonatomic ,strong)UIImageView   *img_line1;
+@property (nonatomic ,strong)UIImageView   *img_line2;
 
 @end

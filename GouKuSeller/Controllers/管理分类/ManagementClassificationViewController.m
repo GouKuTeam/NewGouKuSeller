@@ -72,6 +72,7 @@
     self.tb_managerCatagory.delegate = self;
     self.tb_managerCatagory.dataSource = self;
     [self.tb_managerCatagory setBackgroundColor:[UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1]];
+    self.tb_managerCatagory.tableFooterView = [UIView new];
     [self loadData];
 }
 
@@ -89,6 +90,9 @@
     UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"添加二级分类" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         AddSecondClassificationViewController * vc = [[AddSecondClassificationViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
+        vc.addSecondCategory = ^{
+            [self loadData];
+        };
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
@@ -269,7 +273,7 @@
     [self.tb_managerCatagory reloadData];
 }
 
-#pragma 编辑按钮点击方法
+#pragma 编辑按钮点击方法 //二级分类
 - (void)smallEntityAction:(UIButton *)btn{
     NSInteger section = btn.tag / 1000;
     NSInteger row = btn.tag % 1000;
@@ -281,7 +285,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
+// section上的按钮(一级分类)
 - (void)btn_editAction:(UIButton *)btn{
     NSInteger i = btn.tag;
     ShopClassificationEntity *baentity = [self.arr_managerCatagory objectAtIndex:i];

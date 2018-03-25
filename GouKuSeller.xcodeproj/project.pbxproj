@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
+		7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F03020639BC50002C960 /* CommodityStatusView.m */; };
+		7416F0342067684F0002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
+		7416F035206768500002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
+		7416F036206768500002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -236,6 +240,10 @@
 /* Begin PBXFileReference section */
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7416F02F20639BC50002C960 /* CommodityStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityStatusView.h; sourceTree = "<group>"; };
+		7416F03020639BC50002C960 /* CommodityStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityStatusView.m; sourceTree = "<group>"; };
+		7416F0322067684F0002C960 /* MoreEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreEditView.h; sourceTree = "<group>"; };
+		7416F0332067684F0002C960 /* MoreEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreEditView.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -776,6 +784,10 @@
 				744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */,
 				744ABA0C205255DB00BBB26E /* StoreCategoryTableViewCell.h */,
 				744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */,
+				7416F02F20639BC50002C960 /* CommodityStatusView.h */,
+				7416F03020639BC50002C960 /* CommodityStatusView.m */,
+				7416F0322067684F0002C960 /* MoreEditView.h */,
+				7416F0332067684F0002C960 /* MoreEditView.m */,
 				74F8E92C2060E023000A17A5 /* 批量管理 */,
 				74F8E91F2060DA33000A17A5 /* 搜索 */,
 			);
@@ -1088,6 +1100,7 @@
 				74B4E893204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				74F8E8D2205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
 				744ABA81205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
+				7416F0342067684F0002C960 /* MoreEditView.m in Sources */,
 				74F8E90D205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				74F8E903205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
 				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
@@ -1142,6 +1155,7 @@
 				74B4E89F204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,
 				74F8E8FD2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				744ABA84205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
+				7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */,
 				74B4E8AB204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
@@ -1165,6 +1179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				744ABA33205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
+				7416F035206768500002C960 /* MoreEditView.m in Sources */,
 				744ABA82205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				74F8E918205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E879204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
@@ -1234,6 +1249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				744ABA34205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
+				7416F036206768500002C960 /* MoreEditView.m in Sources */,
 				744ABA83205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				74F8E919205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E87A204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,

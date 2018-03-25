@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommodityInformationEntity.h"
+#import "CommodityFromCodeEntity.h"
 
 @interface CommodityTableViewCell : UITableViewCell
 
@@ -20,10 +20,6 @@
 @property (nonatomic ,strong)UIButton        *btn_edit;                    // 编辑按钮
 @property (nonatomic ,strong)UIButton        *btn_more;                    // ...按钮
 @property (nonatomic ,strong)UIImageView     *img_line;
-@property (nonatomic ,strong)UIView          *v_back;
-@property (nonatomic ,strong)UIImageView     *img_mid_line;
-@property (nonatomic ,strong)UIButton        *btn_xiajia;
-@property (nonatomic ,strong)UIButton        *btn_delege;
 
-- (void)contentCellWithCommodityInformationEntity:(CommodityInformationEntity *)commodityInformationEntity;
+- (void)contentCellWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
 @end

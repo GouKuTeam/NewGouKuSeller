@@ -39,18 +39,21 @@
             make.height.mas_equalTo(44);
             make.width.mas_equalTo(SCREEN_WIDTH);
         }];
-        [self.btn_addCatagory setBackgroundColor:[UIColor whiteColor]];
+        self.btn_addCatagory.enabled = YES;
+        self.btn_addCatagory.backgroundColor = [UIColor whiteColor];
         
         self.lab_catagoryTitle = [[UILabel alloc]init];
         [self.btn_addCatagory addSubview:self.lab_catagoryTitle];
         [self.lab_catagoryTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
-            make.centerY.equalTo(self.btn_addCatagory);
-            make.right.equalTo(self.mas_right).offset(-20);
+            make.top.equalTo(self.btn_addCatagory);
+            make.height.equalTo(self.btn_addCatagory);
+            make.width.equalTo(self.btn_addCatagory);
         }];
         [self.lab_catagoryTitle setText:@"添加类目"];
-        [self.lab_catagoryTitle setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
+        [self.lab_catagoryTitle setTextColor:[UIColor colorWithHexString:@"#616161"]];
         [self.lab_catagoryTitle setFont:[UIFont systemFontOfSize:16]];
+        self.lab_catagoryTitle.backgroundColor = [UIColor whiteColor];
         
         
         //
@@ -86,6 +89,8 @@
             make.height.mas_equalTo(44);
         }];
         [self.v_commodityName.lab_title setText:@"商品名称"];
+        self.v_commodityName.tf_detail.enabled = NO;
+        
         
         //商品描述
         self.v_commodityDescribe = [[EditInfoView alloc] init];
@@ -96,6 +101,7 @@
             
         }];
         [self.v_commodityDescribe.lab_title setText:@"商品描述"];
+        self.v_commodityDescribe.tf_detail.enabled = NO;
         
         //商品图片
         self.lab_commodityImgTitle = [[UILabel alloc]init];
@@ -162,7 +168,7 @@
             make.height.equalTo(self.v_commodityName);
         }];
         [self.v_commoditySpecifications.lab_title setText:@"商品规格"];
-        self.v_commoditySpecifications.img_jiantou.hidden = NO;
+        self.v_commoditySpecifications.img_jiantou.hidden = YES;
         self.v_commoditySpecifications.tf_detail.enabled = NO;
         
         //商品价格
@@ -175,6 +181,7 @@
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"价格*"];
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#dc2e2e"] range:NSMakeRange(2,1)];
         [self.v_price.lab_title setAttributedText:str];
+        self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
         
         //商品库存
         self.v_stock = [[EditInfoView alloc]init];
@@ -184,6 +191,7 @@
             make.top.equalTo(self.v_price.mas_bottom);
         }];
         [self.v_stock.lab_title setText:@"库存"];
+        self.v_stock.tf_detail.keyboardType = UIKeyboardTypeNumberPad;
         
         //商品条形码
         self.v_barcode = [[EditInfoView alloc]init];
@@ -195,6 +203,7 @@
         [self.v_barcode.lab_title setText:@"条形码"];
         [self.v_barcode.img_jiantou setImage:[UIImage imageNamed:@"scan_no"]];
         [self.v_barcode.img_jiantou setHidden:NO];
+        self.v_barcode.tf_detail.enabled = NO;
         
         //商品编码
         self.v_commodityCode= [[EditInfoView alloc]init];
@@ -205,6 +214,7 @@
         }];
         [self.v_commodityCode.lab_title setText:@"商品编码"];
         [self.v_commodityCode.img_line setHidden:YES];
+        self.v_commodityCode.tf_detail.enabled = NO;
         
         [self.scl_back mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.mas_equalTo(0);

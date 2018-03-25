@@ -8,11 +8,14 @@
 
 #import "AddSecondClassificationViewController.h"
 #import "SelectFisstCatagoryViewController.h"
+#import "CommodityHandler.h"
+#import "LoginStorage.h"
 
 @interface AddSecondClassificationViewController ()
 
 @property (nonatomic ,strong)UIButton        *btn_1;
 @property (nonatomic ,strong)UITextField     *tef_erji;
+@property (nonatomic ,strong)ShopClassificationEntity *commodityCatagoryEntity;
 
 @end
 
@@ -86,15 +89,23 @@
     SelectFisstCatagoryViewController *vc = [[SelectFisstCatagoryViewController alloc]init]
     ;
     [self.navigationController pushViewController:vc animated:YES];
-    vc.goBackFirst = ^(CommodityCatagoryEntity *commodityCatagoryEntity) {
-        
+    vc.goBackFirst = ^(ShopClassificationEntity *commodityCatagoryEntity) {
+        self.commodityCatagoryEntity = commodityCatagoryEntity;
+        [self.btn_1 setTitle:commodityCatagoryEntity.name forState:UIControlStateNormal];
+        [self.btn_1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     };
-    
     
 }
 
 - (void)rightBarAction{
-    
+    [CommodityHandler addShopCatagoryWithName:self.tef_erji.text shopId:[LoginStorage GetShopId] pid:(int)self.commodityCatagoryEntity._id prepare:nil success:^(id obj) {
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.addSecondCategory) {
+            self.addSecondCategory();
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 
