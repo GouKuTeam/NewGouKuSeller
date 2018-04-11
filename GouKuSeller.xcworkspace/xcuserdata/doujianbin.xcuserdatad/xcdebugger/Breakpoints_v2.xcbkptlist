@@ -14,28 +14,18 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GouKuSeller/Controllers/&#x5546;&#x54c1;/MoveCommodityView.m"
-            timestampString = "543218929.0750819"
+            filePath = "GouKuSeller/Handler/CommodityHandler.m"
+            timestampString = "543847875.1459579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "-selectCategory:"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "+addCommodityWithShopId:name:itemId:barcode:shopWareCategoryId:wareCategoryId:price:stock:pictures:standards:wid:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,12 +36,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GouKuSeller/Handler/CommodityHandler.m"
-            timestampString = "543656804.643092"
+            timestampString = "543847875.1460201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "+getCommodityListWithshopId:shopWareCategoryId:status:pageNum:prepare:success:failed:"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "+getCommodityInformationWithBarCode:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

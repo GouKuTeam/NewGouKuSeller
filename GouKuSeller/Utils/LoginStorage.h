@@ -29,4 +29,6 @@
 + (void)saveShopId:(NSNumber *)str;
 + (NSNumber *)GetShopId;
 
++ (void)saveUserName:(NSString *)str;
++ (NSString *)GetUserName;
 @end

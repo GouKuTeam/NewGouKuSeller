@@ -28,15 +28,15 @@
 #define ERROR_DATA_TEXT          @"点击屏幕,重新加载"
 
 //-----------------------UI Colors-----------------------------
-#define COLOR_BLUE_MAIN             @"#12b6bb"
+#define COLOR_BLUE_MAIN             @"#46a8fc"
 #define COLOR_NEW_TEXTDESC          @"#b9b9b9"
-#define COLOR_GRAY_BG               @"#f4f4f4"
+#define COLOR_GRAY_BG               @"#EFEFEF"
 #define COLOR_LINE_LIGHTGRAY        @"#e0e0e0"
 #define COLOR_TOUCHDOWN             @"#F0F0F0"
 #define COLOR_TEXT_HARDGRAY         @"#000000"
 #define COLOR_TEXT_DESCGRAY         @"#b3b3b3"
 #define COLOR_NAVI_DEFAULT          @"#666666"
-#define COLOR_Main          @"#38393e"
+#define COLOR_Main                  @"#38393e"
 
 //-----------------------UI SPACING----------------------------
 //新布局间距

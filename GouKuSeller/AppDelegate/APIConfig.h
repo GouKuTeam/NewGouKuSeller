@@ -20,7 +20,7 @@
 #elif (SERVER_TYPE == 2)
     //测试打包
     #define SERVER_HOST                 @"47.97.174.40:9001"
-    #define KEY_JPUSH                   @"0b83dc8e9b61f531191e7f61"
+    #define KEY_JPUSH                   @"a39c6215cc0d16b9dd42db44"
     #define Jpush                       @"NO"
 #endif
 
@@ -32,8 +32,16 @@
 #define SERVER_PROTOCOL @"https://"
 #endif
 
+//JPUSH
+#define JPushAppKey @"a39c6215cc0d16b9dd42db44"
+
 //API VERSION
 #define API_VERSION @""
+
+/*
+     商品API
+ */
+
 //店内分类列表
 #define API_GET_ShopCommodityCategory @"/shop/ware/category/all/%@"
 //分类下店内商品列表
@@ -64,4 +72,53 @@
 #define API_GET_upshelf @"/shop/ware/stock/upshelf/%@"
 //门店商品删除
 #define API_GET_CommodityDelete @"/shop/ware/stock/delete/%@"
+//门店商品编辑
+#define API_GET_CommodityEdit @"/shop/ware/stock/update"
+
+
+
+/*
+ 活动API
+ */
+// 添加活动
+#define API_POSTactivityAdd @"/activity/add"
+
+
+
+
+/*
+ 结算API
+ */
+//结算信息 （结算首页）
+#define API_POST_AccountShow @"/account/show"
+//余额明细
+#define API_POST_AccountDetails @"/account/details"
+//获取银行列表
+#define API_POST_bankMessage @"/account/bank/message"
+//添加银行卡获取验证码
+#define API_POST_AccountCode @"/account/get/code"
+//添加银行卡
+#define API_POST_addBankCard @"/account/add/bankCard"
+//提现校验密码
+#define API_POST_checkPassword @"/account/checkPassword"
+
+
+/*
+ 收银API
+ */
+//扫码添加商品到购物车
+#define API_POST_CommodityCashier @"/shop/ware/stock"
+//提交订单
+#define API_POST_AddOrder @"/order/add"
+//扫描用户付款吗上传
+#define API_POST_ScanUserCashCode @"/weixin/pay/swiping"
+
 #endif
+
+
+
+
+
+
+
+

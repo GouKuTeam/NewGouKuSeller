@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TabBarViewController.h"
+
+static NSString *appKey = @"a39c6215cc0d16b9dd42db44";
+static NSString *channel = @"Publish channel";
+static BOOL isProduction = FALSE;  // fales 为开发环境  如果上线需改成 true
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic)TabBarViewController *tableBarController;
 
 
 @end

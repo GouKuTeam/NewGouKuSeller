@@ -42,7 +42,7 @@
 {
     [super viewDidLoad];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    self.view.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1];//[UIColor colorWithHexString:@"#f4f4f4"];
+    self.view.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];//[UIColor colorWithHexString:@"#f4f4f4"];
     if (!_isHideLeftBtn){
         [self initLeftBarView];
     }

@@ -14,6 +14,7 @@
 @property (nonatomic ,assign)int             hitType;        //1 商品条形码查出的结果 2 商品编码  3商品名称
 @property (nonatomic ,strong)NSNumber       *shopId;             //商品id
 @property (nonatomic ,strong)NSNumber       *barcode;            //商品条形码
+@property (nonatomic ,strong)NSNumber       *categoryId;
 @property (nonatomic ,strong)wareCategory   *wareCategory;       //商品类目
 @property (nonatomic ,strong)NSString       *name;
 @property (nonatomic ,strong)NSString       *categoryName;
@@ -31,6 +32,8 @@
 @property (nonatomic ,strong)NSString       *standardReplace;          //规格名称(前端显示)
 //@property (nonatomic ,strong)NSNumber       *status;           //  1 销售中  2 已售罄   3 已下架
 @property (nonatomic ,strong)NSString       *attrs;
+
+@property (nonatomic,strong)NSString        *youhuiPrice;
 
 
 + (NSArray *)parseCommodityFromCodeListWithJson:(id)json;

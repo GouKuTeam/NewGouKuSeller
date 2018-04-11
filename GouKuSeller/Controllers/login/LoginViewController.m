@@ -8,8 +8,10 @@
 
 #import "LoginViewController.h"
 #import "RTHttpClient.h"
-#import "LoginStorage.h"
+#import "SelectShopViewController.h"
 #import "CommodityViewController.h"
+#import "TabBarViewController.h"
+#import "FindPwWithUserNameViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -18,6 +20,7 @@
 @property (nonatomic ,strong)UIButton    *btn_login;
 @property (nonatomic ,assign)int          int_userName;     // =1 有内容   =0没内容
 @property (nonatomic ,assign)int          int_passWord;
+@property (nonatomic ,strong)UIButton    *btn_findPassWord;
 
 @end
 
@@ -26,11 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.isHideLeftBtn = YES;
+    self.navigationItem.leftBarButtonItem = nil;
     self.title = @"登录";
-    
-    
-    
 }
 
 - (void)onCreate{
@@ -84,17 +85,19 @@
     [self.btn_login addTarget:self action:@selector(btn_loginAction) forControlEvents:UIControlEventTouchUpInside];
     
     
-    
-    
-    
-    
-    
+    self.btn_findPassWord = [[UIButton alloc]init];
+    [self.btn_findPassWord setFrame:CGRectMake(0, 224 + SafeAreaTopHeight, SCREEN_WIDTH, 20)];
+    [self.view addSubview:self.btn_findPassWord];
+    [self.btn_findPassWord setTitle:@"找回密码" forState:UIControlStateNormal];
+    self.btn_findPassWord.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.btn_findPassWord setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+    [self.btn_findPassWord addTarget:self action:@selector(findPassWordAction) forControlEvents:UIControlEventTouchUpInside];
     
         
 }
 
 - (void)btn_loginAction{
-    NSString *strUrl = @"http://47.97.174.40:9000/sign-in";
+    NSString *strUrl = @"http://47.97.174.40:9000/login";
 
     NSDictionary *dic = @{@"account":self.tef_userName.text,@"password":self.tef_passWord.text};
 //    NSDictionary *dic = @{@"account":@"oper001",@"password":@"123456"};
@@ -104,14 +107,15 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
             
-            [LoginStorage saveShopId:[[responseObject objectForKey:@"data"] objectForKey:@"id"]];
             NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
             NSString *token = [[r allHeaderFields] objectForKey:@"Set-Cookie"];
             NSString *tolen = [token substringFromIndex:12];
             [LoginStorage saveHTTPHeader:tolen];
-            [LoginStorage saveIsLogin:YES];
-            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[CommodityViewController alloc] init]];
-            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+            [LoginStorage saveUserName:self.tef_userName.text];
+            SelectShopViewController *vc = [[SelectShopViewController alloc]init];
+            vc.arr_shop = [responseObject objectForKey:@"data"];
+            [self.navigationController pushViewController:vc animated:YES];
+            
         }else{
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
@@ -122,6 +126,11 @@
         
     }];
     
+}
+//找回密码
+- (void)findPassWordAction{
+    FindPwWithUserNameViewController *vc = [[FindPwWithUserNameViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //点击return 按钮 去掉

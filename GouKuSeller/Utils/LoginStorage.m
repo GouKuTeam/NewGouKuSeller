@@ -13,6 +13,7 @@ static NSString * const HttpHeader = @"httpHeader";
 static NSString * const PhoneNum = @"PhoneNum";
 static NSString * const YanZhengMa = @"YanZhengMa";
 static NSString * const ShopId = @"ShopId";
+static NSString * const UserName = @"UserName";
 
 @implementation LoginStorage
 
@@ -72,6 +73,18 @@ static NSString * const ShopId = @"ShopId";
 + (NSNumber *)GetShopId
 {
     return [UserDefaultsUtils valueWithKey:ShopId];
+}
+
+/**
+ *  存/取  用户名
+ */
++ (void)saveUserName:(NSString *)str{
+    [UserDefaultsUtils saveValue:str forKey:UserName];
+}
+
++ (NSString *)GetUserName
+{
+    return [UserDefaultsUtils valueWithKey:UserName];
 }
 
 
