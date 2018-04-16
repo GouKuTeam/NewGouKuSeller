@@ -11,6 +11,7 @@
 #import "ShaiXuanView.h"
 #import "SettlementHandler.h"
 #import "AccountCashDetailEntity.h"
+#import "TiXianDetailViewController.h"
 
 @interface YueDetailViewController ()<UITableViewDataSource,UITableViewDelegate,BaseTableViewDelagate>
 
@@ -85,7 +86,8 @@
     }];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 68;
 }
 
@@ -120,7 +122,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    AccountCashDetailEntity *entity = [self.arr_priceDetail objectAtIndex:indexPath.section];
+    TiXianDetailViewController *vc = [[TiXianDetailViewController alloc]init];
+    vc.crashId = [NSString stringWithFormat:@"%@",entity.cashOrderId];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)rightBarAction{

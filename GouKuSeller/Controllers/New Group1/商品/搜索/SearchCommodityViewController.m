@@ -106,7 +106,7 @@
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
     [CommodityHandler searchCommodityWithShopId:[LoginStorage GetShopId] keyword:self.str_search pageNum:(int)pageNum prepare:nil success:^(id obj) {
         NSArray *arrdata = (NSArray *)obj;
-        if (arrdata.count == 0) {
+        if (arrdata.count > 0) {
             
             [self.arr_search removeAllObjects];
         }
@@ -197,8 +197,8 @@
 
 - (void)edtiAction:(UIButton *)btn_sender{
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:btn_sender.tag];
-    
     AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
+    vc.comeFrom = @"编辑商品";
     vc.entityInformation = entity;
     [self.navigationController pushViewController:vc animated:YES];
 }

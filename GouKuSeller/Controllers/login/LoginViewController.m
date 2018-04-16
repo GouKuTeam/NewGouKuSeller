@@ -100,7 +100,6 @@
     NSString *strUrl = @"http://47.97.174.40:9000/login";
 
     NSDictionary *dic = @{@"account":self.tef_userName.text,@"password":self.tef_passWord.text};
-//    NSDictionary *dic = @{@"account":@"oper001",@"password":@"123456"};
     RTHttpClient *asas = [[RTHttpClient alloc]init];
     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
         

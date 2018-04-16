@@ -15,11 +15,11 @@
 
 @property (nonatomic,assign)    NSInteger   _id;//ID
 @property (nonatomic,assign)    NSInteger   status;//状态
-@property (nonatomic,copy)      NSString    *msg;//状态信息
+@property (nonatomic,copy)      NSString    *errMessage;//状态信息
 //@property (nonatomic)      BOOL     isDeleted;//记录是否被删除
 
 @property (nonatomic,assign)    id          res;//携带信息
-@property (nonatomic,assign)    NSInteger   code;
+@property (nonatomic,assign)    NSInteger   errCode;
 
 @property (nonatomic,assign)    double      createdAt;
 @property (nonatomic,assign)    double      updatedAt;

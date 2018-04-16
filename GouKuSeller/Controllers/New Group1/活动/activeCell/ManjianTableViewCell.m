@@ -38,6 +38,7 @@
             make.height.mas_equalTo(32);
             make.centerY.equalTo(self);
         }];
+        self.tf_man.keyboardType = UIKeyboardTypeDecimalPad;
         self.tf_man.layer.borderWidth = 0.5;
         self.tf_man.layer.cornerRadius = 2;
         self.tf_man.layer.masksToBounds = YES;
@@ -62,6 +63,7 @@
             make.height.mas_equalTo(32);
             make.centerY.equalTo(self);
         }];
+        self.tf_jian.keyboardType = UIKeyboardTypeDecimalPad;
         self.tf_jian.layer.borderWidth = 0.5;
         self.tf_jian.layer.cornerRadius = 2;
         self.tf_jian.layer.masksToBounds = YES;

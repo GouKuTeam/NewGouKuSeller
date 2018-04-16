@@ -48,6 +48,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [LoginStorage saveShopName:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"name"]];
     [LoginStorage saveShopId:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
     [LoginStorage savePhoneNum:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"phone"]];
     [LoginStorage saveIsLogin:YES];

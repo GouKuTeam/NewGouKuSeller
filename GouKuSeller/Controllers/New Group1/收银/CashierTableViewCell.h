@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CashierCommodityEntity.h"
+#import "ItemsEntity.h"
 
 @interface CashierTableViewCell : UITableViewCell
 
@@ -17,4 +18,6 @@
 @property (nonatomic ,strong)UILabel        *lab_price_yuanjia;
 @property (nonatomic ,strong)UILabel        *lab_heng;
 -(void)contentWithCashierCommodity:(CashierCommodityEntity *)entity;
+
+-(void)contentWithItemEntity:(ItemsEntity *)entity;
 @end

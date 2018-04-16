@@ -26,7 +26,7 @@
 
 #define NULLROW    999
 
-@interface CommodityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
+@interface CommodityViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate,UITextFieldDelegate>
 
 @property (nonatomic ,strong)UIButton         *btn_top;
 @property (nonatomic ,strong)UIView           *view_bottom;
@@ -186,12 +186,14 @@
     self.tb_left.delegate = self;
     self.tb_left.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     self.tb_left.tableViewDelegate = self;
+    self.tb_left.hideErrorBackView = YES;
     [self.view addSubview:self.tb_left];
     
     self.tb_right = [[BaseTableView alloc]initWithFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     self.tb_right.dataSource = self;
     self.tb_right.delegate = self;
     self.tb_right.tableViewDelegate = self;
+    self.tb_right.hideErrorBackView = YES;
     self.tb_right.separatorColor = [UIColor clearColor];
     [self.view addSubview:self.tb_right];
     
@@ -272,16 +274,35 @@
         UITextField *userNameTextField = alertController.textFields.firstObject;
         
         NSLog(@"条形码 = %@",userNameTextField.text);
-        AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
-        vc.barcode = [NSNumber numberWithLong:userNameTextField.text.longLongValue];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (![userNameTextField.text isEqualToString:@""]) {
+            
+            [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
+                NSDictionary *dic = (NSDictionary *)obj;
+                if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                    CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
+                    AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
+                    vc.comeFrom = @"新建商品";
+                    vc.entityInformation = entity;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+                }
+                
+            } failed:^(NSInteger statusCode, id json) {
+                [MBProgressHUD showErrorMessage:(NSString *)json];
+            }];
+            
+        }else{
+            [MBProgressHUD showInfoMessage:@"请输入条形码"];
+        }
 
     }]];
     
     //定义第一个输入框；
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        
+         textField.delegate = self;
 //        textField.secureTextEntry = YES;
         
     }];
@@ -289,6 +310,33 @@
     
 
     
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    
+    if (![textField.text isEqualToString:@""]) {
+        
+        [CommodityHandler getCommodityInformationWithBarCode:textField.text prepare:nil success:^(id obj) {
+            NSDictionary *dic = (NSDictionary *)obj;
+            if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
+                AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
+                vc.comeFrom = @"新建商品";
+                vc.entityInformation = entity;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+            }
+            
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }else{
+        [MBProgressHUD showInfoMessage:@"请输入条形码"];
+    }
+    return YES;
 }
 //门店分类列表
 - (void)loadData{
@@ -315,6 +363,12 @@
 #pragma uitableview
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    if (self.arr_category.count <= self.selectedSection) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        return;
+    }
     ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedSection];
     if (self.selectedRow != NULLROW) {
         entity = [entity.childList objectAtIndex:self.selectedRow];
@@ -571,6 +625,7 @@
 - (void)edtiAction:(UIButton *)btn_sender{
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
     AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
+    vc.comeFrom = @"编辑商品";
     vc.entityInformation = entity;
     [self.navigationController pushViewController:vc animated:YES];
     vc.changeEntity = ^{

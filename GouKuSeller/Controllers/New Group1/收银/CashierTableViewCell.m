@@ -89,6 +89,26 @@
     }
 }
 
+-(void)contentWithItemEntity:(ItemsEntity *)entity{
+    [self.lab_name setText:entity.name];
+    [self.lab_price_yingfu setText:[NSString stringWithFormat:@"¥%.2f",(entity.price - entity.pricePreferential) * entity.amount]];
+    if (entity.amount > 1) {
+        [self.lab_num setText:[NSString stringWithFormat:@"x%d",entity.amount]];
+    }else{
+        [self.lab_num setText:@""];
+    }
+    if (entity.pricePreferential > 0) {
+        //有活动的情况
+        [self.lab_price_yuanjia setHidden:NO];
+        [self.lab_price_yuanjia setText:[NSString stringWithFormat:@"¥%.2f",entity.price * entity.amount]];
+        NSMutableAttributedString *newPrice = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",self.lab_price_yuanjia.text]];
+        [newPrice addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, newPrice.length)];
+        self.lab_price_yuanjia.attributedText = newPrice;
+    }else{
+        [self.lab_price_yuanjia setHidden:YES];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

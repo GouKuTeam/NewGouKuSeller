@@ -30,7 +30,8 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  NSLog(@"%@",[responseObject objectForKey:@"data"]);
+                                                  
+                                                  success(responseObject);
                                                   
                                               }else{
                                                   [MBProgressHUD hideHUD];
@@ -63,13 +64,7 @@
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               
-                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  NSLog(@"%@",[responseObject objectForKey:@"data"]);
-                                                  
-                                              }else{
-                                                  [MBProgressHUD hideHUD];
-                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-                                              }
+                                              success(responseObject);
                                               
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               

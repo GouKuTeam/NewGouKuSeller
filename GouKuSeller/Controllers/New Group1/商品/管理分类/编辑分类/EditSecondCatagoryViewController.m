@@ -100,10 +100,10 @@
 - (void)btn_deleteAction{
     //删除
     [CommodityHandler delShopCatagoryWithOwnId:(int)self.sml_entity._id shopId:[LoginStorage GetShopId] pid:(int)self.entity._id prepare:nil success:^(id obj) {
-        [self.navigationController popViewControllerAnimated:YES];
         if (self.updateSecondCategory) {
             self.updateSecondCategory();
         }
+        [self.navigationController popViewControllerAnimated:YES];
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:(NSString *)json];
     }];

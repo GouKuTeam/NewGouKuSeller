@@ -31,4 +31,10 @@
 
 + (void)saveUserName:(NSString *)str;
 + (NSString *)GetUserName;
+
++ (void)saveShopName:(NSString *)str;
++ (NSString *)GetShopName;
+
++ (void)saveGouWuChe:(NSMutableArray *)arr;
++ (NSMutableArray *)GetGouWuChe;
 @end

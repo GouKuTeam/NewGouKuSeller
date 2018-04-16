@@ -19,29 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GouKuSeller/Handler/CommodityHandler.m"
-            timestampString = "543847875.1459579"
+            filePath = "GouKuSeller/Handler/&#x8ba2;&#x5355;/OrderHandler.m"
+            timestampString = "545570492.169674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "+addCommodityWithShopId:name:itemId:barcode:shopWareCategoryId:wareCategoryId:price:stock:pictures:standards:wid:prepare:success:failed:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GouKuSeller/Handler/CommodityHandler.m"
-            timestampString = "543847875.1460201"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "+getCommodityInformationWithBarCode:prepare:success:failed:"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "+searchOrderWithShopId:orderId:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

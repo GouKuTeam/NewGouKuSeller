@@ -16,9 +16,9 @@
 @property (nonatomic ,strong)NSString        *date;
 
 @property (nonatomic ,strong)NSNumber        *cashOrderId;
-@property (nonatomic ,strong)NSString        *applyTime;
-@property (nonatomic ,strong)NSString        *arriveTime;
-@property (nonatomic ,assign)int             accountCashType;
+@property (nonatomic ,assign)double           applyTime;
+@property (nonatomic ,assign)double           arriveTime;
+@property (nonatomic ,assign)int             accountCashType;  //提现状态 1 待打款 2 已打款
 @property (nonatomic ,assign)double          money;
 @property (nonatomic ,strong)BankCardEntity    *bankCard;
 

@@ -14,6 +14,10 @@ static NSString * const PhoneNum = @"PhoneNum";
 static NSString * const YanZhengMa = @"YanZhengMa";
 static NSString * const ShopId = @"ShopId";
 static NSString * const UserName = @"UserName";
+static NSString * const ShopPic = @"ShopPic";
+static NSString * const ShopName = @"ShopName";
+static NSString * const GOUWUCHE = @"gouwuche";
+
 
 @implementation LoginStorage
 
@@ -86,7 +90,39 @@ static NSString * const UserName = @"UserName";
 {
     return [UserDefaultsUtils valueWithKey:UserName];
 }
+/**
+ *  存/取  店铺头像
+ */
++ (void)saveShopMsg:(NSString *)str{
+    [UserDefaultsUtils saveValue:str forKey:ShopPic];
+}
 
++ (NSString *)GetShopPic
+{
+    return [UserDefaultsUtils valueWithKey:ShopPic];
+}
+/**
+ *  存/取  店铺名字
+ */
++ (void)saveShopName:(NSString *)str{
+    [UserDefaultsUtils saveValue:str forKey:ShopName];
+}
 
++ (NSString *)GetShopName
+{
+    return [UserDefaultsUtils valueWithKey:ShopName];
+}
+
+/**
+ *  存/取  购物车
+ */
++ (void)saveGouWuChe:(NSMutableArray *)arr{
+    [UserDefaultsUtils saveValue:arr forKey:GOUWUCHE];
+}
+
++ (NSMutableArray *)GetGouWuChe
+{
+    return [UserDefaultsUtils valueWithKey:GOUWUCHE];
+}
 
 @end

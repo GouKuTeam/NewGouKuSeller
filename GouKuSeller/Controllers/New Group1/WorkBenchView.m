@@ -16,13 +16,19 @@
         int widthbtn = SCREEN_WIDTH / 3;
         self.btn_shouyin = [[UIButton alloc]init];
         [self addSubview:self.btn_shouyin];
-        [self.btn_shouyin mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.mas_equalTo(0);
-            make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(180);
-        }];
-        
-
+        if (SafeAreaTopHeight == 88) {
+            [self.btn_shouyin mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.mas_equalTo(0);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+                make.height.mas_equalTo(224);
+            }];
+        }else{
+            [self.btn_shouyin mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.mas_equalTo(0);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+                make.height.mas_equalTo(180);
+            }];
+        }
         [self.btn_shouyin setBackgroundColor:[UIColor colorWithHexString:@"#616161"]];
         [self.btn_shouyin setTitle:@"收银" forState:UIControlStateNormal];
         [self.btn_shouyin setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
@@ -38,7 +44,7 @@
             make.top.equalTo(self.btn_shouyin.mas_bottom).offset(10);
             make.left.mas_equalTo(0);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(250);
+            make.height.mas_equalTo(125);
         }];
         [self.v_back1 setBackgroundColor:[UIColor whiteColor]];
         //商品按钮
@@ -58,28 +64,28 @@
         
         
         //盘点按钮
-        self.btn_pandian = [[UIButton alloc]init];
-        [self.v_back1 addSubview:self.btn_pandian];
-        [self.btn_pandian mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.left.mas_equalTo(widthbtn);
-            make.width.mas_equalTo(widthbtn);
-            make.height.mas_equalTo(125);
-        }];
-        [self.btn_pandian setTitle:@"盘点" forState:UIControlStateNormal];
-        [self.btn_pandian setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
-        self.btn_pandian.titleLabel.font = [UIFont systemFontOfSize:18];
-        [self.btn_pandian setImage:[UIImage imageNamed:@"inventory"] forState:UIControlStateNormal];
-        [self.btn_pandian setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 15, 0.0)];
-        [self.btn_pandian setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_pandian.imageView.frame.size.height + 15 ,-self.btn_pandian.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
-        [self.btn_pandian setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_pandian.imageView.frame.size.height, 0.0,0.0, -self.btn_pandian.titleLabel.bounds.size.width)];//图片距离右边框
+//        self.btn_pandian = [[UIButton alloc]init];
+//        [self.v_back1 addSubview:self.btn_pandian];
+//        [self.btn_pandian mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(0);
+//            make.left.mas_equalTo(widthbtn);
+//            make.width.mas_equalTo(widthbtn);
+//            make.height.mas_equalTo(125);
+//        }];
+//        [self.btn_pandian setTitle:@"盘点" forState:UIControlStateNormal];
+//        [self.btn_pandian setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+//        self.btn_pandian.titleLabel.font = [UIFont systemFontOfSize:18];
+//        [self.btn_pandian setImage:[UIImage imageNamed:@"inventory"] forState:UIControlStateNormal];
+//        [self.btn_pandian setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 15, 0.0)];
+//        [self.btn_pandian setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_pandian.imageView.frame.size.height + 15 ,-self.btn_pandian.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+//        [self.btn_pandian setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_pandian.imageView.frame.size.height, 0.0,0.0, -self.btn_pandian.titleLabel.bounds.size.width)];//图片距离右边框
         
         //活动按钮
         self.btn_active = [[UIButton alloc]init];
         [self.v_back1 addSubview:self.btn_active];
         [self.btn_active mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
-            make.left.mas_equalTo(widthbtn * 2);
+            make.left.mas_equalTo(widthbtn);
             make.width.mas_equalTo(widthbtn);
             make.height.mas_equalTo(125);
         }];
@@ -91,26 +97,26 @@
         [self.btn_active setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_active.imageView.frame.size.height, 0.0,0.0, -self.btn_active.titleLabel.bounds.size.width)];//图片距离右边框
         
         //经营按钮
-        self.btn_jingying = [[UIButton alloc]init];
-        [self.v_back1 addSubview:self.btn_jingying];
-        [self.btn_jingying mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(125);
-            make.left.mas_equalTo(0);
-            make.width.mas_equalTo(widthbtn);
-            make.height.mas_equalTo(125);
-        }];
-        [self.btn_jingying setTitle:@"经营" forState:UIControlStateNormal];
-        [self.btn_jingying setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
-        self.btn_jingying.titleLabel.font = [UIFont systemFontOfSize:18];
-        [self.btn_jingying setImage:[UIImage imageNamed:@"statistics"] forState:UIControlStateNormal];
-        [self.btn_jingying setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_jingying.imageView.frame.size.height + 15 ,-self.btn_jingying.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
-        [self.btn_jingying setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_jingying.imageView.frame.size.height, 0.0,0.0, -self.btn_jingying.titleLabel.bounds.size.width)];//图片距离右边框
+//        self.btn_jingying = [[UIButton alloc]init];
+//        [self.v_back1 addSubview:self.btn_jingying];
+//        [self.btn_jingying mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(125);
+//            make.left.mas_equalTo(0);
+//            make.width.mas_equalTo(widthbtn);
+//            make.height.mas_equalTo(125);
+//        }];
+//        [self.btn_jingying setTitle:@"经营" forState:UIControlStateNormal];
+//        [self.btn_jingying setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+//        self.btn_jingying.titleLabel.font = [UIFont systemFontOfSize:18];
+//        [self.btn_jingying setImage:[UIImage imageNamed:@"statistics"] forState:UIControlStateNormal];
+//        [self.btn_jingying setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_jingying.imageView.frame.size.height + 15 ,-self.btn_jingying.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+//        [self.btn_jingying setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_jingying.imageView.frame.size.height, 0.0,0.0, -self.btn_jingying.titleLabel.bounds.size.width)];//图片距离右边框
         //结算按钮
         self.btn_jiesuan = [[UIButton alloc]init];
         [self.v_back1 addSubview:self.btn_jiesuan];
         [self.btn_jiesuan mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(125);
-            make.left.mas_equalTo(widthbtn);
+            make.top.mas_equalTo(0);
+            make.left.mas_equalTo(widthbtn * 2);
             make.width.mas_equalTo(widthbtn);
             make.height.mas_equalTo(125);
         }];
@@ -122,15 +128,15 @@
         [self.btn_jiesuan setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_jiesuan.imageView.frame.size.height, 0.0,0.0, -self.btn_jiesuan.titleLabel.bounds.size.width)];//图片距离右边框
         
         
-        self.img_back1_heng = [[UIImageView alloc]init];
-        [self.v_back1 addSubview:self.img_back1_heng];
-        [self.img_back1_heng mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.mas_equalTo(125);
-            make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(0.5);
-        }];
-        [self.img_back1_heng setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
+//        self.img_back1_heng = [[UIImageView alloc]init];
+//        [self.v_back1 addSubview:self.img_back1_heng];
+//        [self.img_back1_heng mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(0);
+//            make.top.mas_equalTo(125);
+//            make.width.mas_equalTo(SCREEN_WIDTH);
+//            make.height.mas_equalTo(0.5);
+//        }];
+//        [self.img_back1_heng setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
         
         self.img_back1_shu1 = [[UIImageView alloc]init];
         [self.v_back1 addSubview:self.img_back1_shu1];
@@ -138,7 +144,7 @@
             make.left.mas_equalTo(widthbtn);
             make.top.mas_equalTo(0);
             make.width.mas_equalTo(0.5);
-            make.height.mas_equalTo(250);
+            make.height.mas_equalTo(125);
         }];
         [self.img_back1_shu1 setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
         
@@ -148,7 +154,7 @@
             make.left.mas_equalTo(widthbtn * 2);
             make.top.mas_equalTo(0);
             make.width.mas_equalTo(0.5);
-            make.height.mas_equalTo(250);
+            make.height.mas_equalTo(125);
         }];
         [self.img_back1_shu2 setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
         

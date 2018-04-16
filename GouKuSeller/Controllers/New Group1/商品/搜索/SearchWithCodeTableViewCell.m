@@ -143,7 +143,11 @@
         [self.lab_CommodityCode setText:[NSString stringWithFormat:@"商品编码  %@",CommodityFromCodeEntity.itemId]];
     }
     [self.lab_CommodityStock setText:[NSString stringWithFormat:@"库存  %@",CommodityFromCodeEntity.stock]];
-    self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
+    if (CommodityFromCodeEntity.saleAmountMonth == nil) {
+        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
+    }else{
+        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
+    }
     [self.lab_CommodityPrice setText:[NSString stringWithFormat:@"¥%.2f",[CommodityFromCodeEntity.price floatValue]]];
     if (CommodityFromCodeEntity.status == 1) {
         [self.lab_CommodityStatus setHidden:YES];

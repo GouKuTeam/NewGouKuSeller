@@ -11,6 +11,7 @@
 typedef void(^changeEntity)(void);
 @interface AddNewCommodityViewController : BaseViewController
 
+@property (nonatomic ,strong)NSString       *comeFrom;
 @property (nonatomic ,strong)NSNumber       *barcode;
 @property (nonatomic ,strong)CommodityFromCodeEntity    *entityInformation;
 @property (nonatomic, copy) changeEntity  changeEntity;

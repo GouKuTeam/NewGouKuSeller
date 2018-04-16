@@ -42,7 +42,7 @@
     NSDictionary *dic = @{
                           @"shopId":shopId,
                           @"page":[NSNumber numberWithInt:page],
-                          @"type":[NSNumber numberWithInt:type]
+                          @"accountType":[NSNumber numberWithInt:type]
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -109,7 +109,6 @@
                                               }
                                               
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                              
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
 }
@@ -151,7 +150,34 @@
                                        parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              
                                               success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//提现详情
++(void)cashDetailWithShopId:(NSNumber *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [self requestUrlWithPath:API_POST_CashDetail];
+    NSDictionary *dic = @{
+                          @"shopId":shopid,
+                          @"cashOrderId":cashOrderId
+                          };
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  NSLog(@"%@",[responseObject objectForKey:@"data"]);
+                                                  AccountCashDetailEntity *entity = [AccountCashDetailEntity parseStandardEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(entity);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               
                                               [self handlerErrorWithTask:task error:error complete:failed];

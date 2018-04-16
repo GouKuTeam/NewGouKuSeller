@@ -68,11 +68,11 @@
 - (void)btn_tianxianAll{
     if (self.tixianCount < 1) {
         
-    }else if (self.ketixianPrice < self.lowPrice){
-        [MBProgressHUD showInfoMessage:@"可提现金额小于最低提现金额"];
-    }
-    else{
+    }else{
         self.v_tixian.tf_price.text = [NSString stringWithFormat:@"%.2f",self.ketixianPrice];
+        [self.btn_tixian setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+        [self.btn_tixian setBackgroundColor:[UIColor colorWithHexString:@"#4167b2"]];
+        self.btn_tixian.enabled = YES;
     }
 }
 
@@ -100,6 +100,7 @@
         }
         if (![textField.text isEqualToString:@""]) {
             [self.v_tixian.tf_price setText:[NSString stringWithFormat:@"%.2f",[textField.text floatValue]]];
+            self.btn_tixian.enabled = YES;
         }
     }
 }

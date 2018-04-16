@@ -85,7 +85,6 @@
 
 
 
-
 /*
  结算API
  */
@@ -101,7 +100,8 @@
 #define API_POST_addBankCard @"/account/add/bankCard"
 //提现校验密码
 #define API_POST_checkPassword @"/account/checkPassword"
-
+//提现详情
+#define API_POST_CashDetail @"/account/cash/detail"
 
 /*
  收银API
@@ -112,6 +112,17 @@
 #define API_POST_AddOrder @"/order/add"
 //扫描用户付款吗上传
 #define API_POST_ScanUserCashCode @"/weixin/pay/swiping"
+
+
+/*
+ 订单API
+ */
+//订单列表查询
+#define API_POST_OrderList @"/order/list"
+//订单详情查询
+#define API_POST_OrderDetail @"/order/details"
+//订单搜索
+#define API_POST_OrderSearch @"/order/search"
 
 #endif
 

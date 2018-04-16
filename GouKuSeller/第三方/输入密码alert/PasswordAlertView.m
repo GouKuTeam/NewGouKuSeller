@@ -112,6 +112,7 @@
     [v_line3 setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
     [self.alertView addSubview:v_line3];
     
+    
     self.alertView.frame = CGRectMake(self.alertView.frame.origin.x, self.alertView.frame.origin.y, CGRectGetWidth(self.alertView.frame),self.confirmBtn.bottom);
     self.alertView.center = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2);
 }

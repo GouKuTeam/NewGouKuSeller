@@ -16,6 +16,7 @@
 #import "SingleSalesTableViewCell.h"
 #import "CommodityViewController.h"
 #import "ActiveHandler.h"
+#import "SelectAcTiveTypeViewController.h"
 
 @interface AddActiveViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)ActiveInformation        *v_ainformation;
@@ -134,6 +135,10 @@
         cell.tf_youhui.text = entity.youhuiPrice;
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)beginTimeAction{
@@ -321,10 +326,10 @@
         [MBProgressHUD showInfoMessage:@"请选择活动周"];
         return;
     }
-//    if (self.arr_time.count == 0) {
-//        [MBProgressHUD showInfoMessage:@"请选择活动时段"];
-//        return;
-//    }
+    if (self.arr_time.count == 0) {
+        [MBProgressHUD showInfoMessage:@"请选择活动时段"];
+        return;
+    }
     if (arr_data.count == 0) {
         [MBProgressHUD showInfoMessage:@"请填写活动信息"];
         return;
@@ -345,17 +350,41 @@
         [ActiveHandler addManJianActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:ActiceFormManJian] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
 
         } success:^(id obj) {
-
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
+                NSArray *arr_vc = self.navigationController.viewControllers;
+                for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
+                    UIViewController *vc = [arr_vc objectAtIndex:index];
+                    if (![vc isKindOfClass:[AddActiveViewController class]] && ![vc isKindOfClass:[SelectAcTiveTypeViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        return;
+                    }
+                }
+            }else{
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
         } failed:^(NSInteger statusCode, id json) {
-            [MBProgressHUD showErrorMessage:(NSString *)json];
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld",statusCode]];
         }];
     }else{
         [ActiveHandler addOtherActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:ActiceFormManJian] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:self.arr_time item:arr_data prepare:^{
             
         } success:^(id obj) {
-            
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
+                NSArray *arr_vc = self.navigationController.viewControllers;
+                for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
+                    UIViewController *vc = [arr_vc objectAtIndex:index];
+                    if (![vc isKindOfClass:[AddActiveViewController class]] && ![vc isKindOfClass:[SelectAcTiveTypeViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        return;
+                    }
+                }
+            }else{
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
         } failed:^(NSInteger statusCode, id json) {
-            [MBProgressHUD showErrorMessage:(NSString *)json];
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld",statusCode]];
         }];
     }
 

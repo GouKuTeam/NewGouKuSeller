@@ -66,6 +66,7 @@
             make.width.mas_equalTo(100);
             make.height.mas_equalTo(32);
         }];
+        self.tf_youhui.keyboardType = UIKeyboardTypeDecimalPad;
         self.tf_youhui.layer.borderWidth = 0.5;
         self.tf_youhui.layer.cornerRadius = 2;
         self.tf_youhui.layer.masksToBounds = YES;

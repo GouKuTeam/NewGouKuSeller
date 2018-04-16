@@ -93,9 +93,7 @@
                                        parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
-                                              
                                               success(responseObject);
-                                              
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               
                                               [self handlerErrorWithTask:task error:error complete:failed];

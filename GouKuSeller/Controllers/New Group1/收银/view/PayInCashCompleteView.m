@@ -49,15 +49,15 @@
             make.height.mas_equalTo(28);
         }];
         
-        self.btn_continue = [[UIButton alloc]init];
-        [self addSubview:self.btn_continue];
-        [self.btn_continue setTitle:@"继续收银" forState:UIControlStateNormal];
-        [self.btn_continue setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:UIControlStateNormal];
-        [self.btn_continue setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
-        self.btn_continue.titleLabel.font = [UIFont systemFontOfSize:18];
-        self.btn_continue.layer.cornerRadius = 3.0f;
-        self.btn_continue.layer.masksToBounds = YES;
-        [self.btn_continue mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.btn_continueShou = [[UIButton alloc]init];
+        [self addSubview:self.btn_continueShou];
+        [self.btn_continueShou setTitle:@"继续收银" forState:UIControlStateNormal];
+        [self.btn_continueShou setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:UIControlStateNormal];
+        [self.btn_continueShou setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
+        self.btn_continueShou.titleLabel.font = [UIFont systemFontOfSize:18];
+        self.btn_continueShou.layer.cornerRadius = 3.0f;
+        self.btn_continueShou.layer.masksToBounds = YES;
+        [self.btn_continueShou mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(53);
             make.top.equalTo(self.lab_zhaoling.mas_bottom).offset(75);
             make.width.mas_equalTo(SCREEN_WIDTH - 106);

@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "CommodityViewController.h"
 #import "LoginStorage.h"
+#import "RTHttpClient.h"
 
 #import "JPUSHService.h"
 #import <UserNotifications/UserNotifications.h>
@@ -58,11 +59,27 @@
                           channel:channel
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkDidReceiveMessage:)
+                                                 name:kJPFNetworkDidReceiveMessageNotification
+                                               object:nil];
     //2.1.9版本新增获取registration id block接口。
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
             NSLog(@"registrationID获取成功：%@",registrationID);
+            NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
             
+            NSDictionary *dic = @{@"registionid":registrationID};
+            RTHttpClient *asas = [[RTHttpClient alloc]init];
+            [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
+                
+            } success:^(NSURLSessionDataTask *task, id responseObject) {
+               
+                
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"error == %@",error);
+                
+            }];
         }
         else{
             NSLog(@"registrationID获取失败，code：%d",resCode);
@@ -110,27 +127,25 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
     NSDictionary * userInfo = notification.request.content.userInfo;
     
-//    UNNotificationRequest *request = notification.request; // 收到推送的请求
-//    UNNotificationContent *content = request.content; // 收到推送的消息内容
-//
-//    NSNumber *badge = content.badge;  // 推送消息的角标
-//    NSString *body = content.body;    // 推送消息体
-//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-//    NSString *title = content.title;  // 推送消息的标题
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
     
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
         //程序在前台
-        NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+//        NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
     else {
         // 程序打开走这里拿到通知信息
-        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
-        
-        
-        
+//        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
     }
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
@@ -138,49 +153,85 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     
     NSDictionary * userInfo = response.notification.request.content.userInfo;
-//    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
-//    UNNotificationContent *content = request.content; // 收到推送的消息内容
-//
-//    NSNumber *badge = content.badge;  // 推送消息的角标
-//    NSString *body = content.body;    // 推送消息体
-//    UNNotificationSound *sound = content.sound;  // 推送消息的声音
-//    NSString *subtitle = content.subtitle;  // 推送消息的副标题
-//    NSString *title = content.title;  // 推送消息的标题
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
     
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
-        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+//        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
     else {
         // 判断为本地通知
-        NSLog(@"iOS10 收到本地通知:{\nuserInfo：%@\n}",userInfo);
+       NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
         
     }
-    
     completionHandler();  // 系统要求执行这个方法
+}
+
+
+#pragma mark 获取自定义消息内容
+
+- (void)networkDidReceiveMessage:(NSNotification *)notification {
+    
+    NSDictionary * userInfo = [notification userInfo];
+    
+    NSString *content = [userInfo valueForKey:@"content"];
+    
+    NSDictionary *dic =  [self dictionaryWithJsonString:content];
+   
+    NSLog(@"dic = %@",dic);
+    if ([[dic objectForKey:@"type"] intValue] == 1 && [dic objectForKey:@"statys"] == 0) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
+    }
 }
 #endif
 
-- (NSString *)logDic:(NSDictionary *)dic {
-    if (![dic count]) {
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
         return nil;
     }
-    NSString *tempStr1 =
-    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
-                                                 withString:@"\\U"];
-    NSString *tempStr2 =
-    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    NSString *tempStr3 =
-    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *str =
-    [NSPropertyListSerialization propertyListFromData:tempData
-                                     mutabilityOption:NSPropertyListImmutable
-                                               format:NULL
-                                     errorDescription:NULL];
-    return str;
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
 }
+
+//- (NSString *)logDic:(NSDictionary *)dic {
+//    if (![dic count]) {
+//        return nil;
+//    }
+//    NSString *tempStr1 =
+//    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
+//                                                 withString:@"\\U"];
+//    NSString *tempStr2 =
+//    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+//    NSString *tempStr3 =
+//    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+//    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+//    NSString *str =
+//    [NSPropertyListSerialization propertyListFromData:tempData
+//                                     mutabilityOption:NSPropertyListImmutable
+//                                               format:NULL
+//                                     errorDescription:NULL];
+//    return str;
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

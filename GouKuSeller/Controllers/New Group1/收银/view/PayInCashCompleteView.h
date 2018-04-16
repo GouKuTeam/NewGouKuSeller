@@ -13,5 +13,5 @@
 @property (nonatomic ,strong)UIImageView         *img;
 @property (nonatomic ,strong)UILabel             *lab_shifu;
 @property (nonatomic ,strong)UILabel             *lab_zhaoling;
-@property (nonatomic ,strong)UIButton            *btn_continue;
+@property (nonatomic ,strong)UIButton            *btn_continueShou;
 @end

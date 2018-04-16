@@ -18,6 +18,54 @@
 		7416F0342067684F0002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
 		7416F035206768500002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
 		7416F036206768500002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
+		741D3C7020804D0900C56FCA /* OrderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C6F20804D0900C56FCA /* OrderHandler.m */; };
+		741D3C73208053A800C56FCA /* OrderListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C72208053A800C56FCA /* OrderListEntity.m */; };
+		741D3C762080565C00C56FCA /* OrderDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C752080565C00C56FCA /* OrderDetailEntity.m */; };
+		741D3C7920805CC200C56FCA /* DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C7820805CC200C56FCA /* DateUtils.m */; };
+		741D3C7A20805CC200C56FCA /* DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C7820805CC200C56FCA /* DateUtils.m */; };
+		741D3C7B20805CC200C56FCA /* DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C7820805CC200C56FCA /* DateUtils.m */; };
+		741D3C7E20806DC900C56FCA /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C7D20806DC900C56FCA /* OrderListTableViewCell.m */; };
+		741D3C7F20806DC900C56FCA /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C7D20806DC900C56FCA /* OrderListTableViewCell.m */; };
+		741D3C8020806DC900C56FCA /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C7D20806DC900C56FCA /* OrderListTableViewCell.m */; };
+		741D3C832080853A00C56FCA /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C822080853A00C56FCA /* OrderDetailViewController.m */; };
+		741D3C842080853A00C56FCA /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C822080853A00C56FCA /* OrderDetailViewController.m */; };
+		741D3C852080853A00C56FCA /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C822080853A00C56FCA /* OrderDetailViewController.m */; };
+		741D3C8D20808DBD00C56FCA /* ItemsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C8C20808DBD00C56FCA /* ItemsEntity.m */; };
+		741D3C8E20808DBD00C56FCA /* ItemsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C8C20808DBD00C56FCA /* ItemsEntity.m */; };
+		741D3C8F20808DBD00C56FCA /* ItemsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C8C20808DBD00C56FCA /* ItemsEntity.m */; };
+		741D3C9220808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9120808F8B00C56FCA /* OrderInformationHeaderView.m */; };
+		741D3C9320808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9120808F8B00C56FCA /* OrderInformationHeaderView.m */; };
+		741D3C9420808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9120808F8B00C56FCA /* OrderInformationHeaderView.m */; };
+		741D3C9720809EC500C56FCA /* OrderInformationFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */; };
+		741D3C9820809EC500C56FCA /* OrderInformationFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */; };
+		741D3C9920809EC500C56FCA /* OrderInformationFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */; };
+		741D3C9C2081D0D000C56FCA /* CommonAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9B2081D0D000C56FCA /* CommonAlertView.m */; };
+		741D3C9D2081D0D000C56FCA /* CommonAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9B2081D0D000C56FCA /* CommonAlertView.m */; };
+		741D3C9E2081D0D000C56FCA /* CommonAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3C9B2081D0D000C56FCA /* CommonAlertView.m */; };
+		741D3CA12081E4AB00C56FCA /* SearchOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CA02081E4AB00C56FCA /* SearchOrderViewController.m */; };
+		741D3CA22081E4AB00C56FCA /* SearchOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CA02081E4AB00C56FCA /* SearchOrderViewController.m */; };
+		741D3CA32081E4AB00C56FCA /* SearchOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CA02081E4AB00C56FCA /* SearchOrderViewController.m */; };
+		741D3CA620845D7800C56FCA /* SetAccountNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */; };
+		741D3CA720845D7800C56FCA /* SetAccountNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */; };
+		741D3CA820845D7800C56FCA /* SetAccountNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */; };
+		741D3CAB208465CE00C56FCA /* ChangePassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CAA208465CE00C56FCA /* ChangePassWordViewController.m */; };
+		741D3CAC208465CE00C56FCA /* ChangePassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CAA208465CE00C56FCA /* ChangePassWordViewController.m */; };
+		741D3CAD208465CE00C56FCA /* ChangePassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CAA208465CE00C56FCA /* ChangePassWordViewController.m */; };
+		741D3CB02084692200C56FCA /* TiXianDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */; };
+		741D3CB12084692200C56FCA /* TiXianDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */; };
+		741D3CB22084692200C56FCA /* TiXianDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */; };
+		741D3CB520846D6C00C56FCA /* TiXianCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */; };
+		741D3CB620846D6C00C56FCA /* TiXianCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */; };
+		741D3CB720846D6C00C56FCA /* TiXianCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */; };
+		741D3CBA20846D7B00C56FCA /* TiXianIngView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CB920846D7A00C56FCA /* TiXianIngView.m */; };
+		741D3CBB20846D7B00C56FCA /* TiXianIngView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CB920846D7A00C56FCA /* TiXianIngView.m */; };
+		741D3CBC20846D7B00C56FCA /* TiXianIngView.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CB920846D7A00C56FCA /* TiXianIngView.m */; };
+		741D3CBF2084892900C56FCA /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CBE2084892900C56FCA /* AboutMeViewController.m */; };
+		741D3CC02084892900C56FCA /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CBE2084892900C56FCA /* AboutMeViewController.m */; };
+		741D3CC12084892900C56FCA /* AboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CBE2084892900C56FCA /* AboutMeViewController.m */; };
+		741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
+		741D3CC520848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
+		741D3CC620848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -110,6 +158,31 @@
 		744ABAC1205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABABE205659AB00BBB26E /* CommodityCatagoryEntity.m */; };
 		744ABAC92058C90100BBB26E /* ManagerCatagoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABAC82058C90100BBB26E /* ManagerCatagoryTableViewCell.m */; };
 		7489CC80207E0B1700971BED /* PayWaitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC7F207E0B1700971BED /* PayWaitView.m */; };
+		7489CC83207F2F4A00971BED /* MyTbHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC82207F2F4A00971BED /* MyTbHeaderView.m */; };
+		7489CC92207F599100971BED /* OttoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC86207F599100971BED /* OttoTextField.m */; };
+		7489CC93207F599100971BED /* OttoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC86207F599100971BED /* OttoTextField.m */; };
+		7489CC94207F599100971BED /* OttoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC86207F599100971BED /* OttoTextField.m */; };
+		7489CC95207F599100971BED /* KeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC87207F599100971BED /* KeyboardButton.m */; };
+		7489CC96207F599100971BED /* KeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC87207F599100971BED /* KeyboardButton.m */; };
+		7489CC97207F599100971BED /* KeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC87207F599100971BED /* KeyboardButton.m */; };
+		7489CC98207F599100971BED /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC88207F599100971BED /* KeyboardView.m */; };
+		7489CC99207F599100971BED /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC88207F599100971BED /* KeyboardView.m */; };
+		7489CC9A207F599100971BED /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC88207F599100971BED /* KeyboardView.m */; };
+		7489CC9B207F599100971BED /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC89207F599100971BED /* README.md */; };
+		7489CC9C207F599100971BED /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC89207F599100971BED /* README.md */; };
+		7489CC9D207F599100971BED /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC89207F599100971BED /* README.md */; };
+		7489CC9E207F599100971BED /* OttoTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC8A207F599100971BED /* OttoTextView.m */; };
+		7489CC9F207F599100971BED /* OttoTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC8A207F599100971BED /* OttoTextView.m */; };
+		7489CCA0207F599100971BED /* OttoTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC8A207F599100971BED /* OttoTextView.m */; };
+		7489CCA1207F599100971BED /* keyboard_delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC90207F599100971BED /* keyboard_delete@3x.png */; };
+		7489CCA2207F599100971BED /* keyboard_delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC90207F599100971BED /* keyboard_delete@3x.png */; };
+		7489CCA3207F599100971BED /* keyboard_delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC90207F599100971BED /* keyboard_delete@3x.png */; };
+		7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC91207F599100971BED /* keyboard_delete@2x.png */; };
+		7489CCA5207F599100971BED /* keyboard_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC91207F599100971BED /* keyboard_delete@2x.png */; };
+		7489CCA6207F599100971BED /* keyboard_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7489CC91207F599100971BED /* keyboard_delete@2x.png */; };
+		7489CCB3207F6B4A00971BED /* AddPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CCB2207F6B4A00971BED /* AddPriceViewController.m */; };
+		7489CCB4207F6B4A00971BED /* AddPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CCB2207F6B4A00971BED /* AddPriceViewController.m */; };
+		7489CCB5207F6B4A00971BED /* AddPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CCB2207F6B4A00971BED /* AddPriceViewController.m */; };
 		7491FA22206B75400006F388 /* SettlementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491FA21206B75400006F388 /* SettlementViewController.m */; };
 		7491FA23206B75400006F388 /* SettlementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491FA21206B75400006F388 /* SettlementViewController.m */; };
 		7491FA24206B75400006F388 /* SettlementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7491FA21206B75400006F388 /* SettlementViewController.m */; };
@@ -448,6 +521,42 @@
 		7416F03020639BC50002C960 /* CommodityStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityStatusView.m; sourceTree = "<group>"; };
 		7416F0322067684F0002C960 /* MoreEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreEditView.h; sourceTree = "<group>"; };
 		7416F0332067684F0002C960 /* MoreEditView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreEditView.m; sourceTree = "<group>"; };
+		741D3C6E20804D0900C56FCA /* OrderHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderHandler.h; sourceTree = "<group>"; };
+		741D3C6F20804D0900C56FCA /* OrderHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderHandler.m; sourceTree = "<group>"; };
+		741D3C71208053A800C56FCA /* OrderListEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListEntity.h; sourceTree = "<group>"; };
+		741D3C72208053A800C56FCA /* OrderListEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListEntity.m; sourceTree = "<group>"; };
+		741D3C742080565C00C56FCA /* OrderDetailEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailEntity.h; sourceTree = "<group>"; };
+		741D3C752080565C00C56FCA /* OrderDetailEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailEntity.m; sourceTree = "<group>"; };
+		741D3C7720805CC200C56FCA /* DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtils.h; sourceTree = "<group>"; };
+		741D3C7820805CC200C56FCA /* DateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtils.m; sourceTree = "<group>"; };
+		741D3C7C20806DC900C56FCA /* OrderListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderListTableViewCell.h; sourceTree = "<group>"; };
+		741D3C7D20806DC900C56FCA /* OrderListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderListTableViewCell.m; sourceTree = "<group>"; };
+		741D3C812080853A00C56FCA /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		741D3C822080853A00C56FCA /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		741D3C8B20808DBD00C56FCA /* ItemsEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemsEntity.h; sourceTree = "<group>"; };
+		741D3C8C20808DBD00C56FCA /* ItemsEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemsEntity.m; sourceTree = "<group>"; };
+		741D3C9020808F8B00C56FCA /* OrderInformationHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderInformationHeaderView.h; sourceTree = "<group>"; };
+		741D3C9120808F8B00C56FCA /* OrderInformationHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderInformationHeaderView.m; sourceTree = "<group>"; };
+		741D3C9520809EC500C56FCA /* OrderInformationFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderInformationFooterView.h; sourceTree = "<group>"; };
+		741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderInformationFooterView.m; sourceTree = "<group>"; };
+		741D3C9A2081D0D000C56FCA /* CommonAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonAlertView.h; sourceTree = "<group>"; };
+		741D3C9B2081D0D000C56FCA /* CommonAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonAlertView.m; sourceTree = "<group>"; };
+		741D3C9F2081E4AB00C56FCA /* SearchOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchOrderViewController.h; sourceTree = "<group>"; };
+		741D3CA02081E4AB00C56FCA /* SearchOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchOrderViewController.m; sourceTree = "<group>"; };
+		741D3CA420845D7800C56FCA /* SetAccountNumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetAccountNumViewController.h; sourceTree = "<group>"; };
+		741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetAccountNumViewController.m; sourceTree = "<group>"; };
+		741D3CA9208465CE00C56FCA /* ChangePassWordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePassWordViewController.h; sourceTree = "<group>"; };
+		741D3CAA208465CE00C56FCA /* ChangePassWordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePassWordViewController.m; sourceTree = "<group>"; };
+		741D3CAE2084692200C56FCA /* TiXianDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TiXianDetailViewController.h; sourceTree = "<group>"; };
+		741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TiXianDetailViewController.m; sourceTree = "<group>"; };
+		741D3CB320846D6C00C56FCA /* TiXianCompleteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TiXianCompleteView.h; sourceTree = "<group>"; };
+		741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TiXianCompleteView.m; sourceTree = "<group>"; };
+		741D3CB820846D7A00C56FCA /* TiXianIngView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TiXianIngView.h; sourceTree = "<group>"; };
+		741D3CB920846D7A00C56FCA /* TiXianIngView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TiXianIngView.m; sourceTree = "<group>"; };
+		741D3CBD2084892900C56FCA /* AboutMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutMeViewController.h; sourceTree = "<group>"; };
+		741D3CBE2084892900C56FCA /* AboutMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
+		741D3CC220848AF200C56FCA /* ChangeShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeShopViewController.h; sourceTree = "<group>"; };
+		741D3CC320848AF200C56FCA /* ChangeShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeShopViewController.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -521,6 +630,22 @@
 		744ABAC82058C90100BBB26E /* ManagerCatagoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerCatagoryTableViewCell.m; sourceTree = "<group>"; };
 		7489CC7E207E0B1700971BED /* PayWaitView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayWaitView.h; sourceTree = "<group>"; };
 		7489CC7F207E0B1700971BED /* PayWaitView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayWaitView.m; sourceTree = "<group>"; };
+		7489CC81207F2F4A00971BED /* MyTbHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTbHeaderView.h; sourceTree = "<group>"; };
+		7489CC82207F2F4A00971BED /* MyTbHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTbHeaderView.m; sourceTree = "<group>"; };
+		7489CC85207F599100971BED /* OttoTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OttoTextView.h; sourceTree = "<group>"; };
+		7489CC86207F599100971BED /* OttoTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OttoTextField.m; sourceTree = "<group>"; };
+		7489CC87207F599100971BED /* KeyboardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardButton.m; sourceTree = "<group>"; };
+		7489CC88207F599100971BED /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
+		7489CC89207F599100971BED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7489CC8A207F599100971BED /* OttoTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OttoTextView.m; sourceTree = "<group>"; };
+		7489CC8B207F599100971BED /* OttoTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OttoTextField.h; sourceTree = "<group>"; };
+		7489CC8C207F599100971BED /* KeyboardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardButton.h; sourceTree = "<group>"; };
+		7489CC8D207F599100971BED /* OttoKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OttoKeyboardView.h; sourceTree = "<group>"; };
+		7489CC8E207F599100971BED /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
+		7489CC90207F599100971BED /* keyboard_delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_delete@3x.png"; sourceTree = "<group>"; };
+		7489CC91207F599100971BED /* keyboard_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_delete@2x.png"; sourceTree = "<group>"; };
+		7489CCB1207F6B4A00971BED /* AddPriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddPriceViewController.h; sourceTree = "<group>"; };
+		7489CCB2207F6B4A00971BED /* AddPriceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddPriceViewController.m; sourceTree = "<group>"; };
 		7491FA1E206B64540006F388 /* GouKuSeller.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GouKuSeller.entitlements; sourceTree = "<group>"; };
 		7491FA20206B75400006F388 /* SettlementViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettlementViewController.h; sourceTree = "<group>"; };
 		7491FA21206B75400006F388 /* SettlementViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettlementViewController.m; sourceTree = "<group>"; };
@@ -807,6 +932,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		741D3C6D20804CF800C56FCA /* 订单 */ = {
+			isa = PBXGroup;
+			children = (
+				741D3C6E20804D0900C56FCA /* OrderHandler.h */,
+				741D3C6F20804D0900C56FCA /* OrderHandler.m */,
+			);
+			path = "订单";
+			sourceTree = "<group>";
+		};
 		744ABA1B2052990C00BBB26E /* 管理分类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -823,6 +957,7 @@
 		744ABA1F2053E75C00BBB26E /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				741D3C6D20804CF800C56FCA /* 订单 */,
 				7491FA832079B5500006F388 /* 结算 */,
 				7491FA7D2079B0C40006F388 /* 活动 */,
 				7491FA4E206CCA280006F388 /* 商品 */,
@@ -856,6 +991,12 @@
 				74C6E33C207A2D0B0083E4A8 /* AccountCashDetailEntity.m */,
 				74C6E37A207C58D40083E4A8 /* CashierCommodityEntity.h */,
 				74C6E37B207C58D40083E4A8 /* CashierCommodityEntity.m */,
+				741D3C71208053A800C56FCA /* OrderListEntity.h */,
+				741D3C72208053A800C56FCA /* OrderListEntity.m */,
+				741D3C742080565C00C56FCA /* OrderDetailEntity.h */,
+				741D3C752080565C00C56FCA /* OrderDetailEntity.m */,
+				741D3C8B20808DBD00C56FCA /* ItemsEntity.h */,
+				741D3C8C20808DBD00C56FCA /* ItemsEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -987,6 +1128,33 @@
 			path = login;
 			sourceTree = "<group>";
 		};
+		7489CC84207F599100971BED /* OttoKeyboardView */ = {
+			isa = PBXGroup;
+			children = (
+				7489CC85207F599100971BED /* OttoTextView.h */,
+				7489CC86207F599100971BED /* OttoTextField.m */,
+				7489CC87207F599100971BED /* KeyboardButton.m */,
+				7489CC88207F599100971BED /* KeyboardView.m */,
+				7489CC89207F599100971BED /* README.md */,
+				7489CC8A207F599100971BED /* OttoTextView.m */,
+				7489CC8B207F599100971BED /* OttoTextField.h */,
+				7489CC8C207F599100971BED /* KeyboardButton.h */,
+				7489CC8D207F599100971BED /* OttoKeyboardView.h */,
+				7489CC8E207F599100971BED /* KeyboardView.h */,
+				7489CC8F207F599100971BED /* Resource */,
+			);
+			path = OttoKeyboardView;
+			sourceTree = "<group>";
+		};
+		7489CC8F207F599100971BED /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7489CC90207F599100971BED /* keyboard_delete@3x.png */,
+				7489CC91207F599100971BED /* keyboard_delete@2x.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		7491FA1F206B73FF0006F388 /* 结算 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1180,12 @@
 				74C6E339207A1FA40083E4A8 /* TiXianPassWordView.m */,
 				7491FA5A206DD8030006F388 /* YueDetailViewController.h */,
 				7491FA5B206DD8030006F388 /* YueDetailViewController.m */,
+				741D3CAE2084692200C56FCA /* TiXianDetailViewController.h */,
+				741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */,
+				741D3CB320846D6C00C56FCA /* TiXianCompleteView.h */,
+				741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */,
+				741D3CB820846D7A00C56FCA /* TiXianIngView.h */,
+				741D3CB920846D7A00C56FCA /* TiXianIngView.m */,
 				7491FA5F206DD9380006F388 /* YuEDetailTableViewCell.h */,
 				7491FA60206DD9380006F388 /* YuEDetailTableViewCell.m */,
 				7491FA64206E05C60006F388 /* ShaiXuanView.h */,
@@ -1031,6 +1205,8 @@
 				740C6889207C98930044889F /* PayInCashViewController.m */,
 				740C688B207C989F0044889F /* PayInGouKuViewController.h */,
 				740C688C207C989F0044889F /* PayInGouKuViewController.m */,
+				7489CCB1207F6B4A00971BED /* AddPriceViewController.h */,
+				7489CCB2207F6B4A00971BED /* AddPriceViewController.m */,
 				74C6E36A207B725A0083E4A8 /* view */,
 			);
 			path = "收银";
@@ -1233,6 +1409,8 @@
 			isa = PBXGroup;
 			children = (
 				744ABA3A2054284700BBB26E /* libs */,
+				741D3C7720805CC200C56FCA /* DateUtils.h */,
+				741D3C7820805CC200C56FCA /* DateUtils.m */,
 				74B4E8BE20512CD7006AFB6C /* LoginStorage.h */,
 				74B4E8C020512CD8006AFB6C /* LoginStorage.m */,
 				74B4E8C120512CD8006AFB6C /* UserDefaultsUtils.h */,
@@ -1315,6 +1493,16 @@
 			children = (
 				74BD11E92067DEB60053A3D1 /* OrderViewController.h */,
 				74BD11EA2067DEB60053A3D1 /* OrderViewController.m */,
+				741D3C9F2081E4AB00C56FCA /* SearchOrderViewController.h */,
+				741D3CA02081E4AB00C56FCA /* SearchOrderViewController.m */,
+				741D3C812080853A00C56FCA /* OrderDetailViewController.h */,
+				741D3C822080853A00C56FCA /* OrderDetailViewController.m */,
+				741D3C7C20806DC900C56FCA /* OrderListTableViewCell.h */,
+				741D3C7D20806DC900C56FCA /* OrderListTableViewCell.m */,
+				741D3C9020808F8B00C56FCA /* OrderInformationHeaderView.h */,
+				741D3C9120808F8B00C56FCA /* OrderInformationHeaderView.m */,
+				741D3C9520809EC500C56FCA /* OrderInformationFooterView.h */,
+				741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */,
 			);
 			name = "订单";
 			path = "New Group2";
@@ -1325,6 +1513,16 @@
 			children = (
 				74BD11EE2067DEBD0053A3D1 /* MyViewController.h */,
 				74BD11EF2067DEBD0053A3D1 /* MyViewController.m */,
+				741D3CC220848AF200C56FCA /* ChangeShopViewController.h */,
+				741D3CC320848AF200C56FCA /* ChangeShopViewController.m */,
+				741D3CA420845D7800C56FCA /* SetAccountNumViewController.h */,
+				741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */,
+				741D3CA9208465CE00C56FCA /* ChangePassWordViewController.h */,
+				741D3CAA208465CE00C56FCA /* ChangePassWordViewController.m */,
+				741D3CBD2084892900C56FCA /* AboutMeViewController.h */,
+				741D3CBE2084892900C56FCA /* AboutMeViewController.m */,
+				7489CC81207F2F4A00971BED /* MyTbHeaderView.h */,
+				7489CC82207F2F4A00971BED /* MyTbHeaderView.m */,
 			);
 			name = "我的";
 			path = "New Group3";
@@ -1386,6 +1584,7 @@
 		74BD12272068D8990053A3D1 /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				7489CC84207F599100971BED /* OttoKeyboardView */,
 				74C6E358207B54C70083E4A8 /* SJFullscreenPopGesture */,
 				74C6E352207B3D3E0083E4A8 /* 输入密码alert */,
 				7491FA69206E15CB0006F388 /* AddressPickerView */,
@@ -1430,6 +1629,8 @@
 				74C6E353207B3D4F0083E4A8 /* PasswordAlertView.m */,
 				740C6891207CF16A0044889F /* ChangeCommodirtyCountAlertView.h */,
 				740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */,
+				741D3C9A2081D0D000C56FCA /* CommonAlertView.h */,
+				741D3C9B2081D0D000C56FCA /* CommonAlertView.m */,
 			);
 			path = "输入密码alert";
 			sourceTree = "<group>";
@@ -1695,10 +1896,13 @@
 			files = (
 				744ABA72205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
 				7491FA71206E15CC0006F388 /* address.txt in Resources */,
+				7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */,
 				74B4E812204BD353006AFB6C /* LaunchScreen.storyboard in Resources */,
 				74B4E86F204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 				74B4E80F204BD353006AFB6C /* Assets.xcassets in Resources */,
+				7489CCA1207F599100971BED /* keyboard_delete@3x.png in Resources */,
+				7489CC9B207F599100971BED /* README.md in Resources */,
 				74B4E80D204BD353006AFB6C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1707,8 +1911,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7489CCA5207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				744ABA73205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
+				7489CCA2207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7491FA72206E15CC0006F388 /* address.txt in Resources */,
+				7489CC9C207F599100971BED /* README.md in Resources */,
 				74B4E870204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1717,8 +1924,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7489CCA6207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				744ABA74205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
+				7489CCA3207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7491FA73206E15CC0006F388 /* address.txt in Resources */,
+				7489CC9D207F599100971BED /* README.md in Resources */,
 				74B4E871204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1788,6 +1998,7 @@
 				74F8E9272060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
 				7491FA57206CCDBA0006F388 /* CashierBottomView.m in Sources */,
 				7491FA66206E05C60006F388 /* ShaiXuanView.m in Sources */,
+				741D3C73208053A800C56FCA /* OrderListEntity.m in Sources */,
 				74B4E893204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				7491FA40206CAB130006F388 /* TiXianiewController.m in Sources */,
 				74F8E8D2205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
@@ -1795,19 +2006,27 @@
 				744ABA81205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				7416F0342067684F0002C960 /* MoreEditView.m in Sources */,
 				7491FA862079B5760006F388 /* SettlementHandler.m in Sources */,
+				741D3C832080853A00C56FCA /* OrderDetailViewController.m in Sources */,
 				74BD1269206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */,
 				74F8E90D205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				7491FA7A206E15CC0006F388 /* AddressPickerView.m in Sources */,
+				741D3CB520846D6C00C56FCA /* TiXianCompleteView.m in Sources */,
 				7491FA9A2079D4F30006F388 /* FindPwWithUserNameViewController.m in Sources */,
+				741D3CBF2084892900C56FCA /* AboutMeViewController.m in Sources */,
 				74F8E903205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
 				74C6E377207C56640083E4A8 /* CashierHandler.m in Sources */,
+				741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				744ABA0820517C3600BBB26E /* BtnTop.m in Sources */,
+				741D3C7920805CC200C56FCA /* DateUtils.m in Sources */,
+				741D3C762080565C00C56FCA /* OrderDetailEntity.m in Sources */,
 				74BD12242068C7A80053A3D1 /* AddActiveViewController.m in Sources */,
 				74C6E3312079EDC10083E4A8 /* SelectShopViewController.m in Sources */,
 				744ABA8A205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				744ABA78205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
+				741D3C9720809EC500C56FCA /* OrderInformationFooterView.m in Sources */,
 				7491FA802079B0E40006F388 /* ActiveHandler.m in Sources */,
+				741D3C9220808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74BD11EB2067DEB60053A3D1 /* OrderViewController.m in Sources */,
 				74C6E355207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				74C6E36D207B728C0083E4A8 /* TitleView.m in Sources */,
@@ -1822,15 +2041,18 @@
 				74C6E364207B54D90083E4A8 /* SJScreenshotView.m in Sources */,
 				744ABA282054201B00BBB26E /* BaseHandler.m in Sources */,
 				7491FA5C206DD8030006F388 /* YueDetailViewController.m in Sources */,
+				7489CCB3207F6B4A00971BED /* AddPriceViewController.m in Sources */,
 				74BD11E12067DE830053A3D1 /* QBTabBarView.m in Sources */,
 				7491FA61206DD9380006F388 /* YuEDetailTableViewCell.m in Sources */,
 				744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */,
 				74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
+				741D3C8D20808DBD00C56FCA /* ItemsEntity.m in Sources */,
 				74BD11FA206895540053A3D1 /* SalesViewController.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,
 				744ABA9520556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				744ABA60205428AF00BBB26E /* IQTextView.m in Sources */,
 				74B4E878204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
+				741D3CBA20846D7B00C56FCA /* TiXianIngView.m in Sources */,
 				7491FAA42079E2400006F388 /* SetPassWordViewController.m in Sources */,
 				74B4E815204BD353006AFB6C /* main.m in Sources */,
 				74F8E91C205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
@@ -1841,16 +2063,22 @@
 				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,
 				7491FA902079B7A50006F388 /* BankCardEntity.m in Sources */,
+				7489CC98207F599100971BED /* KeyboardView.m in Sources */,
 				744ABA6F205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
 				74BD125A2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				741D3CA620845D7800C56FCA /* SetAccountNumViewController.m in Sources */,
 				74C6E367207B54D90083E4A8 /* UIViewController+SJVideoPlayerAdd.m in Sources */,
 				744ABA252054201B00BBB26E /* BaseEntity.m in Sources */,
 				74B4E875204BD3EC006AFB6C /* BaseViewController.m in Sources */,
+				7489CC9E207F599100971BED /* OttoTextView.m in Sources */,
 				744ABA69205428AF00BBB26E /* IQBarButtonItem.m in Sources */,
 				74BD12642069EA7F0053A3D1 /* ActiveTimeTabHeader.m in Sources */,
+				741D3C7E20806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
 				74B4E899204BD3EC006AFB6C /* AppUtils.m in Sources */,
 				7489CC80207E0B1700971BED /* PayWaitView.m in Sources */,
+				741D3CA12081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				7491FA4B206CC54F0006F388 /* CashierViewController.m in Sources */,
+				741D3C9C2081D0D000C56FCA /* CommonAlertView.m in Sources */,
 				7491FA8B2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				7491FA2C206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
 				74BD124B2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
@@ -1872,7 +2100,9 @@
 				7491FA31206B8DD20006F388 /* BankInformationView.m in Sources */,
 				7491FA45206CAB410006F388 /* TiXianView.m in Sources */,
 				74F8E8F8205935A0000A17A5 /* ShopClassificationViewController.m in Sources */,
+				7489CC95207F599100971BED /* KeyboardButton.m in Sources */,
 				74C6E33D207A2D0B0083E4A8 /* AccountCashDetailEntity.m in Sources */,
+				741D3CB02084692200C56FCA /* TiXianDetailViewController.m in Sources */,
 				744ABA7E205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
 				74BD11F02067DEBD0053A3D1 /* MyViewController.m in Sources */,
 				74BD120420689A700053A3D1 /* NotBeginningActivityTableViewCell.m in Sources */,
@@ -1882,6 +2112,7 @@
 				744ABAB5205652D300BBB26E /* LoginViewController.m in Sources */,
 				74BD120E20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				74B4E8AE204BD3EC006AFB6C /* NSString+Size.m in Sources */,
+				741D3CAB208465CE00C56FCA /* ChangePassWordViewController.m in Sources */,
 				74B4E8A2204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
 				74C6E372207C53570083E4A8 /* TitleClear.m in Sources */,
 				74B4E89C204BD3EC006AFB6C /* GetUUID.m in Sources */,
@@ -1901,6 +2132,8 @@
 				744ABA84205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
 				7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */,
 				74B4E8AB204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
+				7489CC83207F2F4A00971BED /* MyTbHeaderView.m in Sources */,
+				7489CC92207F599100971BED /* OttoTextField.m in Sources */,
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
 				744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */,
@@ -1913,6 +2146,7 @@
 				7491FA9F2079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
 				74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */,
 				744ABA63205428AF00BBB26E /* IQToolbar.m in Sources */,
+				741D3C7020804D0900C56FCA /* OrderHandler.m in Sources */,
 				7491FA22206B75400006F388 /* SettlementViewController.m in Sources */,
 				744ABA142052729500BBB26E /* ManagementClassificationViewController.m in Sources */,
 				74C6E337207A0B730083E4A8 /* BankCardDetailViewController.m in Sources */,
@@ -1933,13 +2167,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				74C6E368207B54D90083E4A8 /* UIViewController+SJVideoPlayerAdd.m in Sources */,
+				741D3CAC208465CE00C56FCA /* ChangePassWordViewController.m in Sources */,
 				744ABA33205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74BD120A20689A980053A3D1 /* BeginningActiveTableViewCell.m in Sources */,
 				7416F035206768500002C960 /* MoreEditView.m in Sources */,
 				74BD123D2068E2650053A3D1 /* ActiveZhouViewController.m in Sources */,
 				744ABA82205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				74BD11EC2067DEB60053A3D1 /* OrderViewController.m in Sources */,
+				741D3CA22081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				74F8E918205D4732000A17A5 /* CommodityBottomView.m in Sources */,
+				741D3CB620846D6C00C56FCA /* TiXianCompleteView.m in Sources */,
 				74B4E879204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
 				74F8E8F320592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74B4E81F204BD353006AFB6C /* GouKuSellerTests.m in Sources */,
@@ -1957,6 +2194,7 @@
 				744ABA79205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
 				7491FA67206E05C60006F388 /* ShaiXuanView.m in Sources */,
 				744ABA902054321300BBB26E /* CommodityHandler.m in Sources */,
+				7489CC93207F599100971BED /* OttoTextField.m in Sources */,
 				744ABA6A205428AF00BBB26E /* IQBarButtonItem.m in Sources */,
 				7491FA58206CCDBA0006F388 /* CashierBottomView.m in Sources */,
 				74F8E8EC205925D7000A17A5 /* valueList.m in Sources */,
@@ -1965,9 +2203,12 @@
 				74C6E356207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				74BD124C2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				740C6894207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
+				741D3C9320808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74B4E897204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
 				74F8E90E205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				744ABA76205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
+				7489CC99207F599100971BED /* KeyboardView.m in Sources */,
+				741D3C9820809EC500C56FCA /* OrderInformationFooterView.m in Sources */,
 				744ABA70205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
 				74F8E94A20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				744ABAC0205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */,
@@ -1994,11 +2235,13 @@
 				7491FA2D206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
 				74B4E87C204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				74C6E362207B54D90083E4A8 /* UINavigationController+SJVideoPlayerAdd.m in Sources */,
+				741D3CC520848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74BD12252068C7A80053A3D1 /* AddActiveViewController.m in Sources */,
 				7491FAA52079E2400006F388 /* SetPassWordViewController.m in Sources */,
 				744ABA9620556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				7491FA812079B0E40006F388 /* ActiveHandler.m in Sources */,
 				74BD126A206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */,
+				741D3CC02084892900C56FCA /* AboutMeViewController.m in Sources */,
 				74F8E9362060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74B4E873204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA67205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
@@ -2008,13 +2251,19 @@
 				74B4E8AF204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				7491FA8C2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				74B4E8A3204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
+				741D3C7F20806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
+				741D3C9D2081D0D000C56FCA /* CommonAlertView.m in Sources */,
 				74BD12512068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				744ABA9C20556F7200BBB26E /* NewCommodityView.m in Sources */,
+				741D3CB12084692200C56FCA /* TiXianDetailViewController.m in Sources */,
+				7489CCB4207F6B4A00971BED /* AddPriceViewController.m in Sources */,
 				7491FAA02079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
 				74F8E904205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
 				7491FA912079B7A50006F388 /* BankCardEntity.m in Sources */,
 				744ABAB0205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				74BD125B2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				741D3C842080853A00C56FCA /* OrderDetailViewController.m in Sources */,
+				741D3C7A20805CC200C56FCA /* DateUtils.m in Sources */,
 				74F8E8F9205935A0000A17A5 /* ShopClassificationViewController.m in Sources */,
 				74BD11FB206895540053A3D1 /* SalesViewController.m in Sources */,
 				744ABAAB205623D000BBB26E /* SelectCommodityCategoryViewController.m in Sources */,
@@ -2025,6 +2274,7 @@
 				74BD12472068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				7491FA872079B5760006F388 /* SettlementHandler.m in Sources */,
 				74B4E8A6204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
+				7489CC9F207F599100971BED /* OttoTextView.m in Sources */,
 				7491FA75206E15CC0006F388 /* City.m in Sources */,
 				744ABAB6205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E378207C56640083E4A8 /* CashierHandler.m in Sources */,
@@ -2040,6 +2290,8 @@
 				7491FA28206B7B000006F388 /* SettlementView.m in Sources */,
 				744ABA7C205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
 				74F8E9312060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
+				741D3CA720845D7800C56FCA /* SetAccountNumViewController.m in Sources */,
+				741D3C8E20808DBD00C56FCA /* ItemsEntity.m in Sources */,
 				74B4E8AC204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				744ABA64205428AF00BBB26E /* IQToolbar.m in Sources */,
 				74BD11E72067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */,
@@ -2049,9 +2301,11 @@
 				7491FA37206B9F8F0006F388 /* BankCardTableViewCell.m in Sources */,
 				74C6E373207C53570083E4A8 /* TitleClear.m in Sources */,
 				7491FA4C206CC54F0006F388 /* CashierViewController.m in Sources */,
+				741D3CBB20846D7B00C56FCA /* TiXianIngView.m in Sources */,
 				74F8E9282060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
 				74F8E8DD205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				744ABAA12055713200BBB26E /* EditInfoView.m in Sources */,
+				7489CC96207F599100971BED /* KeyboardButton.m in Sources */,
 				74C6E365207B54D90083E4A8 /* SJScreenshotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2061,13 +2315,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				74C6E369207B54D90083E4A8 /* UIViewController+SJVideoPlayerAdd.m in Sources */,
+				741D3CAD208465CE00C56FCA /* ChangePassWordViewController.m in Sources */,
 				744ABA34205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74BD120B20689A980053A3D1 /* BeginningActiveTableViewCell.m in Sources */,
 				7416F036206768500002C960 /* MoreEditView.m in Sources */,
 				74BD123E2068E2650053A3D1 /* ActiveZhouViewController.m in Sources */,
 				744ABA83205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				74BD11ED2067DEB60053A3D1 /* OrderViewController.m in Sources */,
+				741D3CA32081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				74F8E919205D4732000A17A5 /* CommodityBottomView.m in Sources */,
+				741D3CB720846D6C00C56FCA /* TiXianCompleteView.m in Sources */,
 				74B4E87A204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
 				74F8E8F420592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74B4E82A204BD353006AFB6C /* GouKuSellerUITests.m in Sources */,
@@ -2085,6 +2342,7 @@
 				744ABA7A205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
 				7491FA68206E05C60006F388 /* ShaiXuanView.m in Sources */,
 				744ABA912054321300BBB26E /* CommodityHandler.m in Sources */,
+				7489CC94207F599100971BED /* OttoTextField.m in Sources */,
 				744ABA6B205428AF00BBB26E /* IQBarButtonItem.m in Sources */,
 				7491FA59206CCDBA0006F388 /* CashierBottomView.m in Sources */,
 				74F8E8ED205925D7000A17A5 /* valueList.m in Sources */,
@@ -2093,9 +2351,12 @@
 				74C6E357207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				74BD124D2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				740C6895207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
+				741D3C9420808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74B4E898204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
 				74F8E90F205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				744ABA77205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
+				7489CC9A207F599100971BED /* KeyboardView.m in Sources */,
+				741D3C9920809EC500C56FCA /* OrderInformationFooterView.m in Sources */,
 				744ABA71205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
 				74F8E94B20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				744ABAC1205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */,
@@ -2122,11 +2383,13 @@
 				7491FA2E206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
 				74B4E87D204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				74C6E363207B54D90083E4A8 /* UINavigationController+SJVideoPlayerAdd.m in Sources */,
+				741D3CC620848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74BD12262068C7A80053A3D1 /* AddActiveViewController.m in Sources */,
 				7491FAA62079E2400006F388 /* SetPassWordViewController.m in Sources */,
 				744ABA9720556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				7491FA822079B0E40006F388 /* ActiveHandler.m in Sources */,
 				74BD126B206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */,
+				741D3CC12084892900C56FCA /* AboutMeViewController.m in Sources */,
 				74F8E9372060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74B4E874204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA68205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
@@ -2136,13 +2399,19 @@
 				74B4E8B0204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				7491FA8D2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				74B4E8A4204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
+				741D3C8020806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
+				741D3C9E2081D0D000C56FCA /* CommonAlertView.m in Sources */,
 				74BD12522068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				744ABA9D20556F7200BBB26E /* NewCommodityView.m in Sources */,
+				741D3CB22084692200C56FCA /* TiXianDetailViewController.m in Sources */,
+				7489CCB5207F6B4A00971BED /* AddPriceViewController.m in Sources */,
 				7491FAA12079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
 				74F8E905205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
 				7491FA922079B7A50006F388 /* BankCardEntity.m in Sources */,
 				744ABAB1205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				74BD125C2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				741D3C852080853A00C56FCA /* OrderDetailViewController.m in Sources */,
+				741D3C7B20805CC200C56FCA /* DateUtils.m in Sources */,
 				74F8E8FA205935A0000A17A5 /* ShopClassificationViewController.m in Sources */,
 				74BD11FC206895540053A3D1 /* SalesViewController.m in Sources */,
 				744ABAAC205623D000BBB26E /* SelectCommodityCategoryViewController.m in Sources */,
@@ -2153,6 +2422,7 @@
 				74BD12482068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				7491FA882079B5760006F388 /* SettlementHandler.m in Sources */,
 				74B4E8A7204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
+				7489CCA0207F599100971BED /* OttoTextView.m in Sources */,
 				7491FA76206E15CC0006F388 /* City.m in Sources */,
 				744ABAB7205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E379207C56640083E4A8 /* CashierHandler.m in Sources */,
@@ -2168,6 +2438,8 @@
 				7491FA29206B7B000006F388 /* SettlementView.m in Sources */,
 				744ABA7D205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
 				74F8E9322060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
+				741D3CA820845D7800C56FCA /* SetAccountNumViewController.m in Sources */,
+				741D3C8F20808DBD00C56FCA /* ItemsEntity.m in Sources */,
 				74B4E8AD204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				744ABA65205428AF00BBB26E /* IQToolbar.m in Sources */,
 				74BD11E82067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */,
@@ -2177,9 +2449,11 @@
 				7491FA38206B9F8F0006F388 /* BankCardTableViewCell.m in Sources */,
 				74C6E374207C53570083E4A8 /* TitleClear.m in Sources */,
 				7491FA4D206CC54F0006F388 /* CashierViewController.m in Sources */,
+				741D3CBC20846D7B00C56FCA /* TiXianIngView.m in Sources */,
 				74F8E9292060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
 				74F8E8DE205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				744ABAA22055713200BBB26E /* EditInfoView.m in Sources */,
+				7489CC97207F599100971BED /* KeyboardButton.m in Sources */,
 				74C6E366207B54D90083E4A8 /* SJScreenshotView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2336,7 +2610,7 @@
 				DEVELOPMENT_TEAM = Y5VHW74MPL;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GouKuSeller/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = GouKuSeller/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2357,7 +2631,7 @@
 				DEVELOPMENT_TEAM = Y5VHW74MPL;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/GouKuSeller/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = GouKuSeller/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller;
 				PRODUCT_NAME = "$(TARGET_NAME)";

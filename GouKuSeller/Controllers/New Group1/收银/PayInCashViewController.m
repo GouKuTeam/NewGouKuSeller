@@ -78,7 +78,7 @@
     if ([self.tf_price.text isEqualToString:@""]) {
         [self.tf_price resignFirstResponder];
         self.v_cashComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [self.v_cashComplete.btn_continue addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.v_cashComplete.btn_continueShou addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
         [self.v_cashComplete.lab_shifu setText:[NSString stringWithFormat:@"实付：¥%.2f",self.totalPrice]];
         [self.v_cashComplete.lab_zhaoling setText:[NSString stringWithFormat:@"找零：¥0.00"]];
         [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_cashComplete];
@@ -86,7 +86,7 @@
         
         [self.tf_price resignFirstResponder];
         self.v_cashComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [self.v_cashComplete.btn_continue addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.v_cashComplete.btn_continueShou addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
         [self.v_cashComplete.lab_shifu setText:[NSString stringWithFormat:@"实付：¥%.2f",self.totalPrice]];
         [self.v_cashComplete.lab_zhaoling setText:[NSString stringWithFormat:@"找零：¥%.2f",  [self.tf_price.text doubleValue] - self.totalPrice]];
         [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_cashComplete] ;

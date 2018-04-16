@@ -64,9 +64,9 @@
         if([NSJSONSerialization isValidJSONObject:dic_json])
         {
             BaseEntity *result = [BaseEntity parseObjectWithKeyValues:dic_json];
-            if (result.code == 4002) {
+            if (result.errCode == 4002) {
             }else{
-                failed(result.code,result.msg);
+                failed(result.errCode,result.errMessage);
             }
         }else{
             failed(404,@"数据获取失败");

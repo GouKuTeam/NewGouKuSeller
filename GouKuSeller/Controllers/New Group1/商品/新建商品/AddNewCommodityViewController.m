@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"新建商品";
+    self.title = self.comeFrom;
     
     UIBarButtonItem *btn_left = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarAction)];
     [btn_left setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
@@ -71,39 +71,30 @@
     
 //    UITapGestureRecognizer* tgr_commoditySpecifications = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_commoditySpecificationsAction)];
 //    [self.v_commodityView.v_commoditySpecifications addGestureRecognizer:tgr_commoditySpecifications];
-    if (self.entityInformation.name.length > 0) {
-        [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
-        [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
-        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entityInformation.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
-        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
-        [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entityInformation.standards];
-        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
-        [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.itemId]];
-        
-    }else{
-        
-        //查询商品信息
-        [self loadData];
-    }
+//    if (self.entityInformation.name.length > 0) {
+//        [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
+//        [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
+//        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entityInformation.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+//        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
+//        [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entityInformation.standards];
+//        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
+//        [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.itemId]];
+//
+//    }else{
+//
+//        //查询商品信息
+//        [self loadData];
+//    }
+    [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
+    [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
+    [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entityInformation.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
+    [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entityInformation.standards];
+    [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
+    [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.itemId]];
 
 }
 
-- (void)loadData{
-    
-//    NSNumber *barcode = [NSNumber numberWithLong:6936952325];
-    [CommodityHandler getCommodityInformationWithBarCode:self.barcode prepare:nil success:^(id obj) {
-        self.entity = (CommodityFromCodeEntity *)obj;
-        [self.v_commodityView.lab_catagoryTitle setText:self.entity.categoryName];
-        [self.v_commodityView.v_commodityName.tf_detail setText:self.entity.name];
-        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
-        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entity.detail];
-        [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entity.standards];
-        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entity.barcode]];
-        [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entity.itemId]];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-    }];
-}
 //店内分类  手势点击方法
 - (void)shopClassification{
     ShopClassificationViewController *vc = [[ShopClassificationViewController alloc]init];
@@ -182,7 +173,7 @@
 //        self.changeEntity();
 //    }
 //    [self.navigationController popViewControllerAnimated:YES];
-    if (self.entityInformation.name.length > 0) {
+    if ([self.title isEqualToString:@"编辑商品"]) {
         //从编辑按钮进来   走更新接口
         if ([self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]) {
             [MBProgressHUD showInfoMessage:@"请选择店内分类"];
@@ -229,7 +220,6 @@
         if (![self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]  && ![self.v_commodityView.v_price.tf_detail.text isEqualToString:@""] && ![self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
         }
         //网络请求
-        
         [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:self.entity.name itemId:self.entity.itemId barcode:self.entity.barcode shopWareCategoryId:self.shopCId wareCategoryId:self.entity.categoryId price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] pictures:self.entity.pictures standards:self.entity.standards wid:self.entity.wid prepare:^{
             
         } success:^(id obj) {

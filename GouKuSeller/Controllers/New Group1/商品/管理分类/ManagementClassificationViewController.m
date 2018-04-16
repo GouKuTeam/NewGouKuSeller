@@ -283,6 +283,9 @@
     vc.entity = baentity;
     vc.sml_entity = baentity_small;
     [self.navigationController pushViewController:vc animated:YES];
+    vc.updateSecondCategory = ^{
+        [self loadData];
+    };
     
 }
 // section上的按钮(一级分类)
