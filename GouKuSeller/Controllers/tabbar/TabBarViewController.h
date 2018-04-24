@@ -7,17 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QBTabBarView.h"
 
-@interface TabBarViewController : UITabBarController<QBTabBarViewDelegate>
-
-@property (strong, nonatomic) QBTabBarView *tabBarView;
-
-
-/**
- * @brief 刷新选中的item
- */
-- (void)updateTabBarSelectedItem;
-
+@interface TabBarViewController : UITabBarController
 
 @end

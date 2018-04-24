@@ -338,12 +338,6 @@
 		74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11D52067DE830053A3D1 /* TabBarViewController.m */; };
 		74BD11DC2067DE830053A3D1 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11D52067DE830053A3D1 /* TabBarViewController.m */; };
 		74BD11DD2067DE830053A3D1 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11D52067DE830053A3D1 /* TabBarViewController.m */; };
-		74BD11DE2067DE830053A3D1 /* QBTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11D92067DE830053A3D1 /* QBTabBarItem.m */; };
-		74BD11DF2067DE830053A3D1 /* QBTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11D92067DE830053A3D1 /* QBTabBarItem.m */; };
-		74BD11E02067DE830053A3D1 /* QBTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11D92067DE830053A3D1 /* QBTabBarItem.m */; };
-		74BD11E12067DE830053A3D1 /* QBTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11DA2067DE830053A3D1 /* QBTabBarView.m */; };
-		74BD11E22067DE830053A3D1 /* QBTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11DA2067DE830053A3D1 /* QBTabBarView.m */; };
-		74BD11E32067DE830053A3D1 /* QBTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11DA2067DE830053A3D1 /* QBTabBarView.m */; };
 		74BD11E62067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11E52067DEAD0053A3D1 /* WorkbenchViewController.m */; };
 		74BD11E72067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11E52067DEAD0053A3D1 /* WorkbenchViewController.m */; };
 		74BD11E82067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD11E52067DEAD0053A3D1 /* WorkbenchViewController.m */; };
@@ -784,11 +778,7 @@
 		74B4E8C520512D7C006AFB6C /* CommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityViewController.h; sourceTree = "<group>"; };
 		74B4E8C620512D7C006AFB6C /* CommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityViewController.m; sourceTree = "<group>"; };
 		74BD11D52067DE830053A3D1 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
-		74BD11D62067DE830053A3D1 /* QBTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBTabBarView.h; sourceTree = "<group>"; };
 		74BD11D72067DE830053A3D1 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
-		74BD11D82067DE830053A3D1 /* QBTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBTabBarItem.h; sourceTree = "<group>"; };
-		74BD11D92067DE830053A3D1 /* QBTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBTabBarItem.m; sourceTree = "<group>"; };
-		74BD11DA2067DE830053A3D1 /* QBTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBTabBarView.m; sourceTree = "<group>"; };
 		74BD11E42067DEAD0053A3D1 /* WorkbenchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkbenchViewController.h; sourceTree = "<group>"; };
 		74BD11E52067DEAD0053A3D1 /* WorkbenchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkbenchViewController.m; sourceTree = "<group>"; };
 		74BD11E92067DEB60053A3D1 /* OrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
@@ -1510,10 +1500,6 @@
 		74BD11F3206894BF0053A3D1 /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
-				74BD11D82067DE830053A3D1 /* QBTabBarItem.h */,
-				74BD11D92067DE830053A3D1 /* QBTabBarItem.m */,
-				74BD11D62067DE830053A3D1 /* QBTabBarView.h */,
-				74BD11DA2067DE830053A3D1 /* QBTabBarView.m */,
 				74BD11D72067DE830053A3D1 /* TabBarViewController.h */,
 				74BD11D52067DE830053A3D1 /* TabBarViewController.m */,
 			);
@@ -2089,7 +2075,6 @@
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				7491FA74206E15CC0006F388 /* City.m in Sources */,
-				74BD11DE2067DE830053A3D1 /* QBTabBarItem.m in Sources */,
 				74B4E87B204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				74BD12142068BBCC0053A3D1 /* SelectAcTiveTypeViewController.m in Sources */,
 				744ABA9B20556F7200BBB26E /* NewCommodityView.m in Sources */,
@@ -2099,7 +2084,6 @@
 				7491FA5C206DD8030006F388 /* YueDetailViewController.m in Sources */,
 				7489CCB3207F6B4A00971BED /* AddPriceViewController.m in Sources */,
 				74983675208C33CF007FEEF8 /* ActiveDetailViewController.m in Sources */,
-				74BD11E12067DE830053A3D1 /* QBTabBarView.m in Sources */,
 				7491FA61206DD9380006F388 /* YuEDetailTableViewCell.m in Sources */,
 				744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */,
 				74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
@@ -2263,7 +2247,6 @@
 				7498367B208C3789007FEEF8 /* ActiveDetailHeaderView.m in Sources */,
 				74F8E8EC205925D7000A17A5 /* valueList.m in Sources */,
 				74C6E37D207C58D40083E4A8 /* CashierCommodityEntity.m in Sources */,
-				74BD11E22067DE830053A3D1 /* QBTabBarView.m in Sources */,
 				74C6E356207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				74BD124C2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				740C6894207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
@@ -2293,7 +2276,6 @@
 				74983680208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */,
 				74F8E93B2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
 				744ABA7F205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
-				74BD11DF2067DE830053A3D1 /* QBTabBarItem.m in Sources */,
 				74BD12322068D8B30053A3D1 /* LYLOptionPicker.m in Sources */,
 				744ABA61205428AF00BBB26E /* IQTextView.m in Sources */,
 				7491FA62206DD9380006F388 /* YuEDetailTableViewCell.m in Sources */,
@@ -2417,7 +2399,6 @@
 				7498367C208C3789007FEEF8 /* ActiveDetailHeaderView.m in Sources */,
 				74F8E8ED205925D7000A17A5 /* valueList.m in Sources */,
 				74C6E37E207C58D40083E4A8 /* CashierCommodityEntity.m in Sources */,
-				74BD11E32067DE830053A3D1 /* QBTabBarView.m in Sources */,
 				74C6E357207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				74BD124D2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				740C6895207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
@@ -2447,7 +2428,6 @@
 				74983681208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */,
 				74F8E93C2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
 				744ABA80205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
-				74BD11E02067DE830053A3D1 /* QBTabBarItem.m in Sources */,
 				74BD12332068D8B30053A3D1 /* LYLOptionPicker.m in Sources */,
 				744ABA62205428AF00BBB26E /* IQTextView.m in Sources */,
 				7491FA63206DD9380006F388 /* YuEDetailTableViewCell.m in Sources */,

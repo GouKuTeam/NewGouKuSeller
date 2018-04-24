@@ -37,7 +37,7 @@
     
     UILabel *lab_totalPrice = [[UILabel alloc]initWithFrame:CGRectMake(150, 0, SCREEN_WIDTH - 150 - 10, 50)];
     [v_back addSubview:lab_totalPrice];
-    [lab_totalPrice setText:[NSString stringWithFormat:@"¥%.f",self.totalPrice]];
+    [lab_totalPrice setText:[NSString stringWithFormat:@"¥%.2f",self.totalPrice]];
     [lab_totalPrice setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [lab_totalPrice setFont:[UIFont systemFontOfSize:16]];
     [lab_totalPrice setTextAlignment:NSTextAlignmentRight];
@@ -54,7 +54,7 @@
     
     self.tf_price = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 50, 90, 50)];
     [v_back addSubview:self.tf_price];
-    [self.tf_price setPlaceholder:[NSString stringWithFormat:@"¥%.f",self.totalPrice]];
+    [self.tf_price setPlaceholder:[NSString stringWithFormat:@"¥%.2f",self.totalPrice]];
     [self.tf_price setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [self.tf_price setFont:[UIFont systemFontOfSize:16]];
     [self.tf_price setTextAlignment:NSTextAlignmentRight];

@@ -106,6 +106,8 @@
     
 }
 
+
+
 - (void)setNavUI{
     if (self.editStatus == NO) {
         self.navigationItem.titleView = self.btn_top;
@@ -156,6 +158,7 @@
     [self.btn_managementClassification setTitle:@"管理分类" forState:UIControlStateNormal];
     [self.btn_managementClassification setImage:[UIImage imageNamed:@"manager"] forState:UIControlStateNormal];
     [self.btn_managementClassification setImageEdgeInsets:UIEdgeInsetsMake(0.0, -20, 0.0, 0.0)];
+    self.btn_managementClassification.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [self.btn_managementClassification addTarget:self action:@selector(btn_managementClassificationAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.img_shu = [[UIImageView alloc]init];
@@ -181,6 +184,7 @@
     [self.btn_buildCommodity setTitle:@"新建商品" forState:UIControlStateNormal];
     [self.btn_buildCommodity setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [self.btn_buildCommodity setImageEdgeInsets:UIEdgeInsetsMake(0.0, -20, 0.0, 0.0)];
+    self.btn_buildCommodity.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [self.btn_buildCommodity addTarget:self action:@selector(btn_buildCommodityAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.tb_left = [[BaseTableView alloc]initWithFrame:CGRectMake(0,SafeAreaTopHeight, 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50) style:UITableViewStyleGrouped hasHeaderRefreshing:NO hasFooterRefreshing:NO];
@@ -197,6 +201,7 @@
     self.tb_right.tableViewDelegate = self;
     self.tb_right.hideErrorBackView = YES;
     self.tb_right.separatorColor = [UIColor clearColor];
+    self.tb_right.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tb_right];
     
     self.v_commodityStatusView = [[CommodityStatusView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight)];
@@ -205,6 +210,9 @@
     [self.v_commodityStatusView.btn_shouwan addTarget:self action:@selector(btn_shouwanAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_commodityStatusView.btn_xiajia addTarget:self action:@selector(btn_xiajiaAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_commodityStatusView setHidden:YES];
+    
+    UITapGestureRecognizer *tgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(statusViewDissmiss)];
+    [self.v_commodityStatusView addGestureRecognizer:tgp];
     
     /****
     self.btn_batchManager = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 136, SafeAreaTopHeight, 120, 44)];
@@ -276,14 +284,18 @@
             [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
                 NSDictionary *dic = (NSDictionary *)obj;
                 if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                    CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
+                     CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
                     AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
                     vc.comeFrom = @"新建商品";
                     vc.entityInformation = entity;
                     [self.navigationController pushViewController:vc animated:YES];
+                    vc.addCommodityFinish = ^{
+                        [self btn_buildCommodityAction];
+                    };
                 }else{
                     [MBProgressHUD hideHUD];
                     [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+                    [self btn_buildCommodityAction];
                 }
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -321,9 +333,13 @@
                 vc.comeFrom = @"新建商品";
                 vc.entityInformation = entity;
                 [self.navigationController pushViewController:vc animated:YES];
+                vc.addCommodityFinish = ^{
+                    [self btn_buildCommodityAction];
+                };
             }else{
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+                [self btn_buildCommodityAction];
             }
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -547,6 +563,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.showIndex = NULLROW;
+    [self.v_moreEdit setHidden:YES];
     if (tableView == self.tb_left) {
         self.selectedSection = (int)indexPath.section;
         self.selectedRow = (int)indexPath.row;
@@ -625,7 +643,7 @@
     vc.entityInformation = entity;
     [self.navigationController pushViewController:vc animated:YES];
     vc.changeEntity = ^{
-        [self.tb_right reloadData];
+        [self.tb_right requestDataSource];
     };
 }
 
@@ -774,6 +792,10 @@
 }
  
  *****/
+
+- (void)statusViewDissmiss{
+    [self.v_commodityStatusView setHidden:YES];
+}
 
 - (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation
 {

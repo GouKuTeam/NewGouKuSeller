@@ -141,36 +141,36 @@
         [self.v_jineBack addSubview:self.price_youhui];
         [self.price_youhui mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
-            make.top.equalTo(self.price_zhifu.mas_bottom).offset(3);
+            make.top.equalTo(self.price_zhifu.mas_bottom).offset(-1);
             make.height.mas_equalTo(17);
         }];
         [self.price_youhui setTextColor:[UIColor colorWithHexString:@"#979797"]];
         [self.price_youhui setFont:[UIFont systemFontOfSize:12]];
         
-        self.btn_goukuPayment = [[UIButton alloc]init];
-        [self.v_jineBack addSubview:self.btn_goukuPayment];
-        [self.btn_goukuPayment mas_makeConstraints:^(MASConstraintMaker *make) {
+//        self.btn_goukuPayment = [[UIButton alloc]init];
+//        [self.v_jineBack addSubview:self.btn_goukuPayment];
+//        [self.btn_goukuPayment mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(SCREEN_WIDTH - 110);
+//            make.top.mas_equalTo(0);
+//            make.width.mas_equalTo(110);
+//            make.height.mas_equalTo(47);
+//        }];
+//        [self.btn_goukuPayment setBackgroundColor:[UIColor colorWithHexString:@"#4167b2"]];
+//        [self.btn_goukuPayment setTitle:@"购酷支付" forState:UIControlStateNormal];
+//        [self.btn_goukuPayment setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+//        self.btn_goukuPayment.titleLabel.font = [UIFont systemFontOfSize:16];
+        
+        self.btn_cashPayment = [[UIButton alloc]init];
+        [self.v_jineBack addSubview:self.btn_cashPayment];
+        [self.btn_cashPayment mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 110);
             make.top.mas_equalTo(0);
             make.width.mas_equalTo(110);
             make.height.mas_equalTo(47);
         }];
-        [self.btn_goukuPayment setBackgroundColor:[UIColor colorWithHexString:@"#4167b2"]];
-        [self.btn_goukuPayment setTitle:@"购酷支付" forState:UIControlStateNormal];
-        [self.btn_goukuPayment setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
-        self.btn_goukuPayment.titleLabel.font = [UIFont systemFontOfSize:16];
-        
-        self.btn_cashPayment = [[UIButton alloc]init];
-        [self.v_jineBack addSubview:self.btn_cashPayment];
-        [self.btn_cashPayment mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 220);
-            make.top.mas_equalTo(0);
-            make.width.mas_equalTo(110);
-            make.height.mas_equalTo(47);
-        }];
-        [self.btn_cashPayment setBackgroundColor:[UIColor colorWithHexString:@"#E57728"]];
+        [self.btn_cashPayment setBackgroundColor:[UIColor colorWithHexString:@"#E3EAEF"]];
         [self.btn_cashPayment setTitle:@"现金支付" forState:UIControlStateNormal];
-        [self.btn_cashPayment setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+        [self.btn_cashPayment setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_cashPayment.titleLabel.font = [UIFont systemFontOfSize:16];
     }
     return self;

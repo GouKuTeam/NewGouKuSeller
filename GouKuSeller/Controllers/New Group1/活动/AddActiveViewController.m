@@ -142,6 +142,7 @@
 }
 
 - (void)beginTimeAction{
+    [self.v_ainformation.tf_activeName resignFirstResponder];
     [LYLDatePicker showDateDetermineChooseInView:self.view modeType:UIDatePickerModeDate determineChoose:^(NSString *dateString) {
         NSLog(@"%@",dateString);
         [self.v_ainformation.btn_beginTime setTitle:dateString forState:UIControlStateNormal];
@@ -149,6 +150,7 @@
     }];
 }
 - (void)endTimeAction{
+    [self.v_ainformation.tf_activeName resignFirstResponder];
     [LYLDatePicker showDateDetermineChooseInView:self.view modeType:UIDatePickerModeDate determineChoose:^(NSString *dateString) {
         NSLog(@"%@",dateString);
         [self.v_ainformation.btn_endTime setTitle:dateString forState:UIControlStateNormal];

@@ -40,7 +40,7 @@
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(14);
             make.top.mas_equalTo(44);
-            make.height.mas_equalTo(0.5);
+            make.height.mas_equalTo(0.3);
             make.right.mas_equalTo(SCREEN_WIDTH - 14);
         }];
         [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#cfcfcf"]];

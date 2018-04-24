@@ -29,6 +29,9 @@
 //@property (nonatomic ,assign)int             _status;      //订单状态  1.待支付 2.已完成 
 @property (nonatomic ,assign)double          updateAt;
 
+@property (nonatomic ,assign)double          date;           //订单列表一级菜单显示的时间
+
+
 
 
 + (NSArray *)parseStandardListWithJson:(id)json;

@@ -31,14 +31,15 @@
                                        parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
                                               
-                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
-                                                  CashierCommodityEntity *entity = [CashierCommodityEntity parseStandardEntityWithJson:[responseObject objectForKey:@"data"]];
-                                                  success(entity);
-                                              }else{
-                                                  [MBProgressHUD hideHUD];
-                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-                                              }
+//                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+//                                                  CashierCommodityEntity *entity = [CashierCommodityEntity parseStandardEntityWithJson:[responseObject objectForKey:@"data"]];
+//                                                  success(entity);
+//                                              }else{
+//                                                  [MBProgressHUD hideHUD];
+//                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+//                                              }
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               
                                               [self handlerErrorWithTask:task error:error complete:failed];

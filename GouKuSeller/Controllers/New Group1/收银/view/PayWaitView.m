@@ -31,7 +31,7 @@
         
         self.img = [[UIImageView alloc]init];
         [self.v_back addSubview:self.img];
-        [self.img setImage:[UIImage imageNamed:@"scan_big"]];
+        [self.img setImage:[UIImage imageNamed:@"wait"]];
         [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(88);
             make.top.mas_equalTo(70);
@@ -41,7 +41,7 @@
         
         self.lab = [[UILabel alloc]init];
         [self.v_back addSubview:self.lab];
-        [self.lab setText:@"请扫描用户的付款码"];
+        [self.lab setText:@"扫描成功，等待支付"];
         [self.lab setTextAlignment:NSTextAlignmentCenter];
         self.lab.font = [UIFont systemFontOfSize:18];
         self.lab.textColor = [UIColor blackColor];

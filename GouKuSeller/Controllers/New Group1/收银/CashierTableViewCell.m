@@ -31,8 +31,9 @@
             make.left.equalTo(self.lab_name.mas_right).offset(5);
             make.top.mas_equalTo(15);
             make.height.mas_equalTo(22);
-            make.right.lessThanOrEqualTo(self.mas_right).offset(-89);
+            make.right.lessThanOrEqualTo(self.mas_right).offset(-80);
         }];
+        
         [self.lab_name mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.mas_equalTo(15);

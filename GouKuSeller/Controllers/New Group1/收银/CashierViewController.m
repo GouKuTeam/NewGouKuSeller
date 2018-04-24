@@ -21,6 +21,8 @@
 #import "PayInGouKuViewController.h"
 #import "AddPriceViewController.h"
 #import "CommonAlertView.h"
+#import "PayWaitView.h"
+#import "PayInCashCompleteView.h"
 
 @interface CashierViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,TextViewClickReturnDelegate,TextFieldClickReturnDelegate,CommonAlertViewDelegate>
 @property (nonatomic, strong)UITextField         *tfsousuo;
@@ -47,6 +49,10 @@
 @property (nonatomic        )BOOL                 mojiaoAction; //抹角操作
 @property (nonatomic ,assign)double               loseSmallReduce;        //去零金额
 @property (nonatomic ,strong)NSNumber            *actId;             //整单活动id
+@property (nonatomic ,strong)NSString            *userFukuanma;     // 用户付款吗
+
+@property (nonatomic ,strong)PayWaitView      *v_wait;
+@property (nonatomic ,strong)PayInCashCompleteView      *v_cashComplete;
 
 
 @end
@@ -81,8 +87,24 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifionCashierAction) name:@"ClearShoppingCar" object:nil];
     
-    UITapGestureRecognizer *tgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tgpAction)];
-    [self.view addGestureRecognizer:tgp];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifioncashcompleteAction) name:@"cashcomplete" object:nil];
+    
+    
+    self.v_wait = [[PayWaitView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [self.view addSubview:self.v_wait];
+    [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_wait] ;
+    [self.v_wait.btn_back addTarget:self action:@selector(btn_backAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_wait setHidden:YES];
+
+    self.v_cashComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.v_cashComplete.btn_continueShou addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_cashComplete.lab_shifu setText:@"收款成功"];
+    [self.v_cashComplete.lab_zhaoling setText:@""];
+    [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_cashComplete];
+    [self.v_cashComplete setHidden:YES];
+    
+    
+
 }
 
 - (void)onCreate{
@@ -97,11 +119,12 @@
     self.tfsousuo.returnKeyType = UIReturnKeySearch;
     self.tfsousuo.leftView  = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 11.f, 0.f)];
     self.tfsousuo.leftViewMode = UITextFieldViewModeAlways;
+    [self.tfsousuo becomeFirstResponder];
     
     self.v_cashierBottom = [[CashierBottomView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 104 - SafeAreaBottomHeight, SCREEN_WIDTH, 104)];
     [self.view addSubview:self.v_cashierBottom];
     [self.v_cashierBottom.btn_cashPayment addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_cashierBottom.btn_goukuPayment addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
     self.tb_commodityList = [[UITableView alloc]initWithFrame:CGRectMake(0, 50 + SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - SafeAreaTopHeight - 104 - SafeAreaBottomHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_commodityList];
@@ -118,11 +141,16 @@
     [self.titleView.btn_mofen addTarget:self action:@selector(titleViewbtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.titleView.btn_mojiao addTarget:self action:@selector(titleViewbtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.titleView setHidden:YES];
+    UITapGestureRecognizer *tgp_titleview = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(titleViewDissMiss)];
+    [self.titleView addGestureRecognizer:tgp_titleview];
     
     self.titleClearView = [[TitleClear alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight)];
     [self.view addSubview:self.titleClearView];
     [self.titleClearView.btn_clear addTarget:self action:@selector(cashierAction) forControlEvents:UIControlEventTouchUpInside];
     [self.titleClearView setHidden:YES];
+    UITapGestureRecognizer *tgp_titleClearview = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tgp_titleClearviewDissMiss)];
+    [self.titleClearView addGestureRecognizer:tgp_titleClearview];
+    
     self.totalPrice = 0;
     self.discountPrice = 0;
     self.manjianPrice = 0;
@@ -178,7 +206,7 @@
         return;
     }else{
         if (btn == self.v_cashierBottom.btn_cashPayment) {
-            //先网络请求提交订单
+            // 现金支付   先网络请求提交订单
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             NSMutableArray *arrItem = [[NSMutableArray alloc]init];
             for (int i = 0; i < self.arr_commodityList.count; i ++) {
@@ -229,60 +257,6 @@
                 [MBProgressHUD showErrorMessage:(NSString *)json];
             }];
         }
-        if (btn == self.v_cashierBottom.btn_goukuPayment) {
-            
-            //先网络请求提交订单
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            NSMutableArray *arrItem = [[NSMutableArray alloc]init];
-            for (int i = 0; i < self.arr_commodityList.count; i ++) {
-                CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:i];
-                [dic setValue:entity.name forKey:@"name"];
-                [dic setValue:entity.skuId forKey:@"skuId"];
-                [dic setValue:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
-                [dic setValue:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
-                [dic setValue:[NSNumber numberWithDouble:entity.price -entity.settlementPrice] forKey:@"pricePreferential"];
-                [dic setValue:entity.standards forKey:@"standards"];
-                if (entity.itemActId) {
-                    [dic setValue:entity.itemActId forKey:@"itemActId"];
-                }
-                [arrItem addObject:dic];
-            }
-            [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:self.totalPrice + self.discountPrice payReduce:self.discountPrice payActual:self.totalPrice noGoods:self.noGoods payType:1 orderDiscount:self.orderDiscount orderMinus:self.orderMinus loseSmallReduce:self.loseSmallReduce prepare:^{
-                
-            } success:^(id obj) {
-                if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0){
-                    PayInGouKuViewController *vc = [[PayInGouKuViewController alloc]init];
-                    vc.orderId = [(NSDictionary *)obj objectForKey:@"data"];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"下列商品已下架或不存在，不能购买" message:[(NSDictionary *)obj objectForKey:@"errMessage"] preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        //                    [self.navigationController popViewControllerAnimated:YES];
-                    }];
-                    [alert addAction:sure];
-                    [self presentViewController:alert animated:YES completion:nil];
-                }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 3){
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"下列商品价格发生了变化" message:[(NSDictionary *)obj objectForKey:@"errMessage"] preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"刷新价格" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        //重新刷新tableview
-                        [self.arr_commodityList removeAllObjects];
-                        NSArray *arr = [CashierCommodityEntity parseStandardListWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
-                        [self.arr_commodityList addObject:arr];
-                        [self.tb_commodityList reloadData];
-                        [self getResultAction];
-                        [self.navigationController popViewControllerAnimated:YES];
-                        
-                    }];
-                    [alert addAction:sure];
-                    [self presentViewController:alert animated:YES completion:nil];
-                }else{
-                    [MBProgressHUD hideHUD];
-                    [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
-                }
-            } failed:^(NSInteger statusCode, id json) {
-                [MBProgressHUD showErrorMessage:(NSString *)json];
-            }];
-        }
     }
 }
 
@@ -297,35 +271,108 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"%@", textField);
-    
-    [CashierHandler commodityCashierWithBarcode:textField.text shopId:[LoginStorage GetShopId] addup:self.totalPrice prepare:^{
-    } success:^(id obj) {
-        CashierCommodityEntity *entity = (CashierCommodityEntity *)obj;
-        CashierCommodityEntity *demoEntity = [[CashierCommodityEntity alloc]init];
-        int index = 0;
-        for (int i = 0; i < self.arr_commodityList.count; i++) {
-            CashierCommodityEntity *caseEntity = [self.arr_commodityList objectAtIndex:i];
-            if ([caseEntity.barcode longValue] == [entity.barcode longValue]) {
-                demoEntity = caseEntity;
-                index = i;
+    if (textField.text.length < 17) {
+        // 商品条码
+        [CashierHandler commodityCashierWithBarcode:textField.text shopId:[LoginStorage GetShopId] addup:self.totalPrice prepare:^{
+        } success:^(id obj) {
+            
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
+                CashierCommodityEntity *entity = [CashierCommodityEntity parseStandardEntityWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
+                CashierCommodityEntity *demoEntity = [[CashierCommodityEntity alloc]init];
+                int index = 0;
+                for (int i = 0; i < self.arr_commodityList.count; i++) {
+                    CashierCommodityEntity *caseEntity = [self.arr_commodityList objectAtIndex:i];
+                    if ([caseEntity.barcode longValue] == [entity.barcode longValue]) {
+                        demoEntity = caseEntity;
+                        index = i;
+                    }
+                }
+                if ([demoEntity.barcode longValue] != 0) {
+                    demoEntity.amount = demoEntity.amount + 1;
+                    [self.arr_commodityList replaceObjectAtIndex:index withObject:demoEntity];
+                }else{
+                    [self.arr_commodityList addObject:entity];
+                }
+                self.actId = entity.actId;
+                self.manjianPrice = entity.payMinus;
+                self.tfsousuo.text = @"";
+                [self.tfsousuo becomeFirstResponder];
+                [self.tb_commodityList reloadData];
+                [self getResultAction];
+            }else{
+                self.tfsousuo.text = @"";
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+                
             }
-        }
-        if ([demoEntity.barcode longValue] != 0) {
-            demoEntity.amount = demoEntity.amount + 1;
-            [self.arr_commodityList replaceObjectAtIndex:index withObject:demoEntity];
-        }else{
-            [self.arr_commodityList addObject:entity];
-        }
-        self.actId = entity.actId;
-        self.manjianPrice = entity.payMinus;
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+            self.tfsousuo.text = @"";
+        }];
+    }else{
+        // 用户付款吗  先去下单  下单成功后上传付款吗 上传成功直接进入等待付款界面
+        self.userFukuanma = textField.text;
         self.tfsousuo.text = @"";
-        [self.tfsousuo becomeFirstResponder];
-        [self.tb_commodityList reloadData];
-        [self getResultAction];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-        self.tfsousuo.text = @"";
-    }];
+        //购酷支付   先网络请求提交订单
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        NSMutableArray *arrItem = [[NSMutableArray alloc]init];
+        for (int i = 0; i < self.arr_commodityList.count; i ++) {
+            CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:i];
+            [dic setValue:entity.name forKey:@"name"];
+            [dic setValue:entity.skuId forKey:@"skuId"];
+            [dic setValue:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
+            [dic setValue:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
+            [dic setValue:[NSNumber numberWithDouble:entity.price -entity.settlementPrice] forKey:@"pricePreferential"];
+            [dic setValue:entity.standards forKey:@"standards"];
+            if (entity.itemActId) {
+                [dic setValue:entity.itemActId forKey:@"itemActId"];
+            }
+            [arrItem addObject:dic];
+        }
+        [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:self.totalPrice + self.discountPrice payReduce:self.discountPrice payActual:self.totalPrice noGoods:self.noGoods payType:1 orderDiscount:self.orderDiscount orderMinus:self.orderMinus loseSmallReduce:self.loseSmallReduce prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0){
+                NSString *orderId = [(NSDictionary *)obj objectForKey:@"data"];
+               //下单成功  上传用户付款吗
+                [CashierHandler scanUserCashCodeWithOpenId:self.userFukuanma orderId:orderId prepare:^{
+                    
+                } success:^(id obj) {
+                    //扫描成功  显示等待支付界面                    
+                    [self.v_wait setHidden:NO];
+//                    [self.v_cashComplete setHidden:YES];
+                } failed:^(NSInteger statusCode, id json) {
+                    [MBProgressHUD showErrorMessage:(NSString *)json];
+                }];
+                
+            }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"下列商品已下架或不存在，不能购买" message:[(NSDictionary *)obj objectForKey:@"errMessage"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    //                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+                [alert addAction:sure];
+                [self presentViewController:alert animated:YES completion:nil];
+            }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 3){
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"下列商品价格发生了变化" message:[(NSDictionary *)obj objectForKey:@"errMessage"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"刷新价格" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    //重新刷新tableview
+                    [self.arr_commodityList removeAllObjects];
+                    NSArray *arr = [CashierCommodityEntity parseStandardListWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
+                    [self.arr_commodityList addObject:arr];
+                    [self.tb_commodityList reloadData];
+                    [self getResultAction];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+                [alert addAction:sure];
+                [self presentViewController:alert animated:YES completion:nil];
+            }else{
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }
     return YES;
 }
 
@@ -495,7 +542,28 @@
     }
 }
 
-- (void)tgpAction{
+//- (void)tgpAction{
+//    [self.tfsousuo resignFirstResponder];
+//}
+
+- (void)btn_backAction{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"ClearShoppingCar" object:nil userInfo:nil];
+    [self.v_wait setHidden:YES];
+
+}
+
+- (void)continueAction{
+    //收款完成  发送通知  回到购物车页面  并清空购物车
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"ClearShoppingCar" object:nil userInfo:nil];
+    [self.v_cashComplete setHidden:YES];
+}
+
+- (void)NocatifioncashcompleteAction{
+    [self.v_wait setHidden:YES];
+    [self.v_cashComplete setHidden:NO];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self.tfsousuo resignFirstResponder];
 }
 
@@ -509,6 +577,16 @@
     [super viewWillDisappear:animated];
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+}
+
+- (void)titleViewDissMiss{
+    [self.titleView setHidden:YES];
+    [self.tfsousuo resignFirstResponder];
+}
+
+- (void)tgp_titleClearviewDissMiss{
+    [self.titleClearView setHidden:YES];
+    [self.tfsousuo resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

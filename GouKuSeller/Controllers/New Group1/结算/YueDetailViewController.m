@@ -57,6 +57,8 @@
     self.v_shaixuan = [[ShaiXuanView alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self.view addSubview:self.v_shaixuan];
     [self.v_shaixuan setHidden:YES];
+    UITapGestureRecognizer *tpg = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shaixuanDissMiss)];
+    [self.v_shaixuan addGestureRecognizer:tpg];
     WS(weakSelf);
     self.v_shaixuan.btnSelectIndex = ^(int btnIndex) {
         weakSelf.Ktype = btnIndex;
@@ -129,6 +131,10 @@
 }
 
 - (void)rightBarAction{
+    [self.v_shaixuan setHidden:!self.v_shaixuan.isHidden];
+}
+
+- (void)shaixuanDissMiss{
     [self.v_shaixuan setHidden:!self.v_shaixuan.isHidden];
 }
 

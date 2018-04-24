@@ -71,7 +71,7 @@
 
 - (void)initLeftBarView
 {
-    UIBarButtonItem *btn_back = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_press"] style:UIBarButtonItemStyleDone target:self action:@selector(leftBarAction:)];
+    UIBarButtonItem *btn_back = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_white"] style:UIBarButtonItemStyleDone target:self action:@selector(leftBarAction:)];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 //    self.navigationItem.leftBarButtonItem.tintColor = [UIColor colorWithHexString:@"#666666"];//to do
     self.navigationItem.leftBarButtonItem = btn_back;

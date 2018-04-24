@@ -245,7 +245,7 @@
     if (wid) {
         [dic setObject:wid forKey:@"wid"];
     }
-    
+
     
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -375,13 +375,13 @@
 }
 
 //门店商品编辑(更新)
-+ (void)commodityEditWithCommodityId:(NSNumber *)commodityId price:(double)price stock:(NSString *)stock xprice:(double)xprice shopWareCategoryId:(NSNumber *)shopWareCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)commodityEditWithCommodityId:(NSString *)commodityId price:(double)price stock:(NSString *)stock xprice:(double)xprice shopWareCategoryId:(NSNumber *)shopWareCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:API_GET_CommodityEdit];
     NSDictionary *dic = @{
                           @"skuId":commodityId,
                           @"price":[NSNumber numberWithDouble:price],
                           @"stock":stock,
-                          @"xprice":[NSNumber numberWithDouble:price],
+                          @"xprice":[NSNumber numberWithDouble:xprice],
                           @"shopWareCategoryId":shopWareCategoryId
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
@@ -391,8 +391,8 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
                                                   
-                                                  NSArray *arr = [CommodityFromCodeEntity parseCommodityFromCodeListWithJson:[responseObject objectForKey:@"data"]];
-                                                  success(arr);
+                                                  CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(entity);
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];

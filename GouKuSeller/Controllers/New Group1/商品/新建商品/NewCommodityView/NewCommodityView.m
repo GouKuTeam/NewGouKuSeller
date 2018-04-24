@@ -130,7 +130,7 @@
             make.left.mas_equalTo(15);
             make.top.equalTo(self.img_commodityImgTitle.mas_bottom).offset(10);
             make.width.mas_equalTo(SCREEN_WIDTH - 15);
-            make.height.mas_equalTo(0.5);
+            make.height.mas_equalTo(0.2);
         }];
         [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#cfcfcf"]];
         
@@ -144,7 +144,7 @@
         }];
         [self.v_shopClassification.lab_title setText:@"店内分类"];
         self.v_shopClassification.img_jiantou.hidden = NO;
-        [self.v_shopClassification.tf_detail setText:@"未分类"];
+        [self.v_shopClassification.tf_detail setText:@"请选择"];
         self.v_shopClassification.tf_detail.enabled = NO;
         [self.v_shopClassification.img_line setHidden:YES];
         
@@ -178,13 +178,13 @@
             make.left.width.height.equalTo(self.v_commodityName);
             make.top.mas_equalTo(0);
         }];
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"价格*"];
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#dc2e2e"] range:NSMakeRange(2,1)];
-        [self.v_price.lab_title setAttributedText:str];
+        
+        [self.v_price.lab_title setText:@"价格"];
         self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
         [self.v_price.tf_detail setKeyboardType:KeyboardTypeNumber];
         [self.v_price.tf_detail setNumberKeyboardType:NumberKeyboardTypeDouble];
-        
+        [self.v_price.tf_detail setTextColor:[UIColor blackColor]];
+        self.v_price.tf_detail.clearsOnBeginEditing = YES;
         //商品库存
         self.v_stock = [[EditInfoView alloc]init];
         [self.v_commodityBack2 addSubview:self.v_stock];
@@ -192,12 +192,11 @@
             make.left.width.height.equalTo(self.v_commodityName);
             make.top.equalTo(self.v_price.mas_bottom);
         }];
-        NSMutableAttributedString *strkucun = [[NSMutableAttributedString alloc] initWithString:@"库存*"];
-        [strkucun addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#dc2e2e"] range:NSMakeRange(2,1)];
-        [self.v_stock.lab_title setAttributedText:strkucun];
+        [self.v_stock.lab_title setText:@"库存"];
         self.v_stock.tf_detail.keyboardType = UIKeyboardTypeNumberPad;
         [self.v_stock.tf_detail setPlaceholder:@"0"];
-        
+        [self.v_stock.tf_detail setTextColor:[UIColor blackColor]];
+        self.v_stock.tf_detail.clearsOnBeginEditing = YES;
         //进货价
         self.v_jinhuoPrice= [[EditInfoView alloc]init];
         [self.v_commodityBack2 addSubview:self.v_jinhuoPrice];
@@ -210,6 +209,9 @@
         [self.v_jinhuoPrice.tf_detail setPlaceholder:@"¥0.00"];
         [self.v_jinhuoPrice.tf_detail setKeyboardType:KeyboardTypeNumber];
         [self.v_jinhuoPrice.tf_detail setNumberKeyboardType:NumberKeyboardTypeDouble];
+        [self.v_jinhuoPrice.tf_detail setTextColor:[UIColor blackColor]];
+        self.v_jinhuoPrice.tf_detail.clearsOnBeginEditing = YES;
+        
         //商品条形码
         self.v_barcode = [[EditInfoView alloc]init];
         [self.v_commodityBack2 addSubview:self.v_barcode];
@@ -218,8 +220,8 @@
             make.top.equalTo(self.v_jinhuoPrice.mas_bottom);
         }];
         [self.v_barcode.lab_title setText:@"条形码"];
-        [self.v_barcode.img_jiantou setImage:[UIImage imageNamed:@"scan_no"]];
-        [self.v_barcode.img_jiantou setHidden:NO];
+//        [self.v_barcode.img_jiantou setImage:[UIImage imageNamed:@"scan_no"]];
+        [self.v_barcode.img_jiantou setHidden:YES];
         self.v_barcode.tf_detail.enabled = NO;
         [self.v_barcode.img_line setHidden:YES];
 
