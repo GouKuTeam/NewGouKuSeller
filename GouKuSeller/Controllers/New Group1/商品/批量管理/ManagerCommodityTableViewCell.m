@@ -7,6 +7,7 @@
 //
 
 #import "ManagerCommodityTableViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ManagerCommodityTableViewCell
 

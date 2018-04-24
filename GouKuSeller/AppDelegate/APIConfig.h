@@ -37,6 +37,8 @@
 
 //API VERSION
 #define API_VERSION @""
+//头像前缀
+#define HeadQZ @"http://pea-shop.oss-cn-hangzhou.aliyuncs.com/"
 
 /*
      商品API
@@ -81,8 +83,13 @@
  活动API
  */
 // 添加活动
-#define API_POSTactivityAdd @"/activity/add"
-
+#define API_POSTactivityAdd @"/act/addOrUpdate"
+//查询所有活动
+#define API_POST_AllActList  @"/act/list"
+//停止活动
+#define API_POST_STOPACTIVE @"/act/stop/%@"
+//查看活动详情
+#define API_GET_SELECTACTIVE @"/act/detail/%@"
 
 
 /*
@@ -124,10 +131,14 @@
 //订单搜索
 #define API_POST_OrderSearch @"/order/search"
 
+//商机门店列表
+#define API_POST_MINEShoplist @"/mine/shoplist"
 #endif
 
-
-
+/*
+ 工作台API
+ */
+#define API_GET_GetToday @"/operate/getToday"
 
 
 

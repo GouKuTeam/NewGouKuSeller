@@ -91,7 +91,7 @@
 
 -(void)contentWithItemEntity:(ItemsEntity *)entity{
     [self.lab_name setText:entity.name];
-    [self.lab_price_yingfu setText:[NSString stringWithFormat:@"¥%.2f",(entity.price - entity.pricePreferential) * entity.amount]];
+    [self.lab_price_yingfu setText:[NSString stringWithFormat:@"¥%.2f", entity.pricePreferential * entity.amount]];
     if (entity.amount > 1) {
         [self.lab_num setText:[NSString stringWithFormat:@"x%d",entity.amount]];
     }else{

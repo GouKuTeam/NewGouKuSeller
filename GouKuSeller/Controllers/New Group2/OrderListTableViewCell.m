@@ -80,7 +80,7 @@
     }
     if (entity.status == 2) {
         //已完成  显示支付时间
-        [self.lab_payTime setText:[DateUtils stringFromTimeInterval:entity.payAt formatter:@"HH:mm"]];
+        [self.lab_payTime setText:[DateUtils stringFromTimeInterval:entity.payDate formatter:@"HH:mm"]];
     }
     
 }

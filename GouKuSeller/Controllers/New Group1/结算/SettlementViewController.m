@@ -64,7 +64,6 @@
     }else{
         BankCardInformationViewController *vc = [[BankCardInformationViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
-
     }
 }
 

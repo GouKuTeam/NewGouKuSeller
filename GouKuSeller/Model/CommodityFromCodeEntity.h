@@ -21,9 +21,11 @@
 @property (nonatomic ,strong)NSString       *detail;
 @property (nonatomic ,strong)NSString       *pictures;               // 图片路径
 @property (nonatomic ,strong)NSNumber       *shopWareCategoryId; // 门店分类id
+@property (nonatomic ,strong)NSString       *shopWareCategoryName;  //门店分类名称
 @property (nonatomic ,strong)NSNumber       *saleAmount;       
 @property (nonatomic ,strong)NSNumber       *saleAmountMonth;
 @property (nonatomic ,strong)NSNumber       *price;
+@property (nonatomic ,strong)NSNumber       *xprice;           //进货价
 @property (nonatomic ,strong)NSNumber       *stock;
 @property (nonatomic ,strong)NSNumber       *wid;                //商品编码
 @property (nonatomic ,strong)NSNumber       *itemId;                //商品编码

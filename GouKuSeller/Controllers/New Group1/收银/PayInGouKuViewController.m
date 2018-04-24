@@ -35,6 +35,9 @@
     [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_wait] ;
     [self.v_wait.btn_back addTarget:self action:@selector(btn_backAction) forControlEvents:UIControlEventTouchUpInside];
     
+    UITapGestureRecognizer *tgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(quxiaoAction)];
+    [self.v_wait addGestureRecognizer:tgp];
+    
     self.tf_tiaoxingma = [[UITextField alloc]initWithFrame:CGRectMake(-500, 10 + SafeAreaTopHeight, SCREEN_WIDTH - 20, 32)];
     [self.view addSubview:self.tf_tiaoxingma];
     [self.tf_tiaoxingma setBackgroundColor:[UIColor clearColor]];
@@ -79,6 +82,10 @@
     [self.v_wait setHidden:YES];
     [self.v_wait removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)quxiaoAction{
+    [self.tf_tiaoxingma resignFirstResponder];
 }
 
 

@@ -16,5 +16,12 @@
 //新增折扣  立减  特价  活动
 + (void)addOtherActivityWithSid:(NSNumber *)sid activityType:(NSNumber *)activityType activityName:(NSString *)activityName dateAt:(NSString *)dateAt dateEnd:(NSString *)dateEnd week:(NSArray *)week time:(NSArray *)time item:(NSArray *)item prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//查看所有活动列表
++ (void)getActivityListWithActCategory:(NSNumber *)actCategory status:(NSNumber *)status pageNumber:(NSNumber *)pageNumber prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//停止活动
++ (void)stopActiveWithActiveId:(id)activeId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//查看活动详情
++ (void)selectActiveDetailWithActiveId:(id)activeId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 @end

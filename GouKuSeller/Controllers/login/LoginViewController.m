@@ -105,14 +105,9 @@
         
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
-            
-            NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
-            NSString *token = [[r allHeaderFields] objectForKey:@"Set-Cookie"];
-            NSString *tolen = [token substringFromIndex:12];
-            [LoginStorage saveHTTPHeader:tolen];
             [LoginStorage saveUserName:self.tef_userName.text];
             SelectShopViewController *vc = [[SelectShopViewController alloc]init];
-            vc.arr_shop = [responseObject objectForKey:@"data"];
+            vc.arr_shop = [[[responseObject objectForKey:@"data"] objectForKey:@"list"] objectForKey:@"data"];
             [self.navigationController pushViewController:vc animated:YES];
             
         }else{

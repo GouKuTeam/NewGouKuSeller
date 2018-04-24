@@ -15,7 +15,7 @@
 + (void)getOrderListWithShopId:(NSNumber *)shopId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:API_POST_OrderList];
     NSDictionary *dic = @{
-                          @"shopId":shopId,
+//                          @"shopId":shopId,
                           @"page":[NSNumber numberWithInt:page]
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
@@ -31,10 +31,7 @@
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
                                               }
-                        
-                                              
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                              
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
     

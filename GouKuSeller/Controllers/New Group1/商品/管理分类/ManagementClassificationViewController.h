@@ -8,6 +8,10 @@
 
 #import "BaseViewController.h"
 
+typedef void(^updateCategory)(void);
+
 @interface ManagementClassificationViewController : BaseViewController
+
+@property (nonatomic, copy) updateCategory  updateCateGory;
 
 @end

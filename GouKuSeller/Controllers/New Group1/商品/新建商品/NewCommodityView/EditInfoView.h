@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OttoKeyboardView.h"
 
 @interface EditInfoView : UIView
 
 @property (nonatomic ,strong)UILabel          *lab_title;
-@property (nonatomic ,strong)UITextField      *tf_detail;
+@property (nonatomic ,strong)OttoTextField      *tf_detail;
 @property (nonatomic ,strong)UIImageView      *img_line;
 @property (nonatomic ,strong)UIImageView      *img_jiantou;
 @end

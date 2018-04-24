@@ -18,6 +18,9 @@
 @property (nonatomic ,assign)double      payMinus;           //满减金额
 @property (nonatomic ,assign)int         amount;
 @property (nonatomic ,strong)NSNumber    *barcode;
+@property (nonatomic ,strong)NSNumber    *skuId;
+@property (nonatomic ,strong)NSNumber    *itemActId;       //单品活动id
+@property (nonatomic ,strong)NSNumber    *actId;           //整单活动id
 
 + (NSArray *)parseStandardListWithJson:(id)json;
 + (CashierCommodityEntity *)parseStandardEntityWithJson:(id)json;

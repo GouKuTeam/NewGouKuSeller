@@ -267,7 +267,7 @@
                 [MBProgressHUD showInfoMessage:@"优惠不能大于原价"];
                 return;
             }
-            [arr_data addObject:@{@"price":[NSNumber numberWithDouble:[cell.tf_man.text doubleValue]],@"minusPrice":[NSNumber numberWithDouble:[cell.tf_jian.text doubleValue]]}];
+            [arr_data addObject:@{@"fullPrice":[NSNumber numberWithDouble:[cell.tf_man.text doubleValue]],@"minusPrice":[NSNumber numberWithDouble:[cell.tf_jian.text doubleValue]]}];
         }
     }else{
         for (int i = 0; i < self.arr_active.count; i++) {
@@ -282,7 +282,7 @@
                     [MBProgressHUD showInfoMessage:@"请输入规范折扣"];
                     return;
                 }
-                [arr_data addObject:@{@"count":[NSNumber numberWithDouble:[cell.tf_youhui.text doubleValue]],@"itemId":entity.itemId,@"itemName":entity.name,@"old_price":entity.price}];
+                [arr_data addObject:@{@"discount":[NSNumber numberWithDouble:[cell.tf_youhui.text doubleValue]],@"skuId":entity.skuId}];
             }else if (self.activeType == ActiceFormTeJia){
                 if (cell.tf_youhui.text.length == 0) {
                     [MBProgressHUD showInfoMessage:@"请完善优惠信息"];
@@ -292,7 +292,7 @@
                     [MBProgressHUD showInfoMessage:@"特价金额不能大于原价"];
                     return;
                 }
-                [arr_data addObject:@{@"special_price":[NSNumber numberWithDouble:[cell.tf_youhui.text doubleValue]],@"itemId":entity.itemId,@"itemName":entity.name,@"old_price":entity.price}];
+                [arr_data addObject:@{@"favorablePrive":[NSNumber numberWithDouble:[cell.tf_youhui.text doubleValue]],@"skuId":entity.skuId}];
 
             }else if (self.activeType == ActiceFormJianJia){
                 if (cell.tf_youhui.text.length == 0) {
@@ -303,7 +303,7 @@
                     [MBProgressHUD showInfoMessage:@"减价金额不能大于原价"];
                     return;
                 }
-                [arr_data addObject:@{@"minus":[NSNumber numberWithDouble:[cell.tf_youhui.text doubleValue]],@"itemId":entity.itemId,@"itemName":entity.name,@"old_price":entity.price}];
+                [arr_data addObject:@{@"wareMinusPrice":[NSNumber numberWithDouble:[cell.tf_youhui.text doubleValue]],@"skuId":entity.skuId}];
             }
         }
 
@@ -347,7 +347,7 @@
     }
     
     if (self.activeType == ActiceFormManJian) {
-        [ActiveHandler addManJianActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:ActiceFormManJian] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
+        [ActiveHandler addManJianActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
 
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -367,7 +367,7 @@
             [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld",statusCode]];
         }];
     }else{
-        [ActiveHandler addOtherActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:ActiceFormManJian] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:self.arr_time item:arr_data prepare:^{
+        [ActiveHandler addOtherActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult item:arr_data prepare:^{
             
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {

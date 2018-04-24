@@ -84,6 +84,9 @@
         vc.addCateGory = ^{
             //loadData
             [self loadData];
+            if (self.updateCateGory) {
+                self.updateCateGory();
+            }
         };
         
     }];
@@ -92,6 +95,9 @@
         [self.navigationController pushViewController:vc animated:YES];
         vc.addSecondCategory = ^{
             [self loadData];
+            if (self.updateCateGory) {
+                self.updateCateGory();
+            }
         };
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -285,6 +291,9 @@
     [self.navigationController pushViewController:vc animated:YES];
     vc.updateSecondCategory = ^{
         [self loadData];
+        if (self.updateCateGory) {
+            self.updateCateGory();
+        }
     };
     
 }
@@ -297,6 +306,9 @@
     [self.navigationController pushViewController:vc animated:YES];
     vc.updateCategory = ^{
         [self loadData];
+        if (self.updateCateGory) {
+            self.updateCateGory();
+        }
     };
 }
 

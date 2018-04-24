@@ -8,7 +8,7 @@
 
 #import "SelectShopViewController.h"
 #import "TabBarViewController.h"
-
+#import "RTHttpClient.h"
 
 @interface SelectShopViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView     *tb_shopList;
@@ -48,12 +48,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [LoginStorage saveShopName:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"name"]];
-    [LoginStorage saveShopId:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
-    [LoginStorage savePhoneNum:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"phone"]];
-    [LoginStorage saveIsLogin:YES];
-    TabBarViewController *vc = [[TabBarViewController alloc]init];
-    [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+    NSDictionary *dic = [self.arr_shop objectAtIndex:indexPath.row];
+    NSString *strUrl = [NSString stringWithFormat:@"http://47.97.174.40:9000/login/choose/shop/%@",[dic objectForKey:@"sid"]];
+    
+    RTHttpClient *asas = [[RTHttpClient alloc]init];
+    [asas requestWithPath:strUrl method:RTHttpRequestGet parameters:nil prepare:^{
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+            [LoginStorage saveHTTPHeader:[responseObject objectForKey:@"data"]];
+            [LoginStorage saveShopName:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"name"]];
+            [LoginStorage saveShopId:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
+            [LoginStorage savePhoneNum:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"phone"]];
+            [LoginStorage saveShopPic:[NSString stringWithFormat:@"%@%@",HeadQZ,[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"logo"]]];
+            [LoginStorage saveIsLogin:YES];
+            TabBarViewController *vc = [[TabBarViewController alloc]init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error == %@",error);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -35,6 +35,9 @@
 + (void)saveShopName:(NSString *)str;
 + (NSString *)GetShopName;
 
++ (void)saveShopPic:(NSString *)str;
++ (NSString *)GetShopPic;
+
 + (void)saveGouWuChe:(NSMutableArray *)arr;
 + (NSMutableArray *)GetGouWuChe;
 @end

@@ -55,16 +55,18 @@
 
 - (void)rightBarAction{
     NSString * cagatoryName = self.tef_fenlei.text;
-    
-    [CommodityHandler addShopCatagoryWithName:cagatoryName shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
-        [self.navigationController popViewControllerAnimated:YES];
-        if (self.addCateGory) {
-            self.addCateGory();
-        }
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-    }];
-    
+    if ([self.tef_fenlei.text isEqualToString:@""]) {
+        [MBProgressHUD showInfoMessage:@"请填写一级分类名称"];
+    }else{
+        [CommodityHandler addShopCatagoryWithName:cagatoryName shopId:[LoginStorage GetShopId] pid:0 prepare:nil success:^(id obj) {
+            [self.navigationController popViewControllerAnimated:YES];
+            if (self.addCateGory) {
+                self.addCateGory();
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

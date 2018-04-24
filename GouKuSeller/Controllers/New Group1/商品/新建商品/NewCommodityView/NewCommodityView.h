@@ -30,7 +30,7 @@
 @property (nonatomic ,strong)EditInfoView      *v_price;
 @property (nonatomic ,strong)EditInfoView      *v_stock;                    //商品库存
 @property (nonatomic ,strong)EditInfoView      *v_barcode;                  //条形码
-@property (nonatomic ,strong)EditInfoView      *v_commodityCode;            //商品编码
+@property (nonatomic ,strong)EditInfoView      *v_jinhuoPrice;            //商品编码
 
 
 @end

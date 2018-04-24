@@ -7,6 +7,7 @@
 //
 
 #import "BeginningActiveTableViewCell.h"
+#import "DateUtils.h"
 
 @implementation BeginningActiveTableViewCell
 
@@ -40,6 +41,9 @@
         [self.lab_activeTime setFont:[UIFont systemFontOfSize:13]];
         
         self.lab_activeStatus = [[UILabel alloc]init];
+        [self.lab_activeStatus setText:@"进行中"];
+        [self.lab_activeStatus setTextAlignment:NSTextAlignmentRight];
+        [self.lab_activeStatus setTextColor:[UIColor colorWithHexString:@"#18AD19"]];
         [self.contentView addSubview:self.lab_activeStatus];
         [self.lab_activeStatus mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 70);
@@ -57,11 +61,9 @@
         [self.lab_activeType setTextColor:[UIColor colorWithHexString:@"#616161"]];
         [self.lab_activeType setFont:[UIFont systemFontOfSize:13]];
         
-    
-        
         self.btn_stop = [[UIButton alloc]init];
         [self.contentView addSubview: self.btn_stop];
-        [self.btn_stop setTitle:@"编辑" forState:UIControlStateNormal];
+        [self.btn_stop setTitle:@"停止" forState:UIControlStateNormal];
         self.btn_stop.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.btn_stop setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
         self.btn_stop.layer.borderWidth = 1;
@@ -75,10 +77,22 @@
             make.height.mas_equalTo(28);
         }];
         
-        
-        
     }
     return self;
+}
+
+- (void)contentCellWithActivityEntity:(ActivityEntity *)activityEntity{
+    self.lab_activeName.text = activityEntity.title;
+    self.lab_activeTime.text = [NSString stringWithFormat:@"%@至%@",[DateUtils stringFromTimeInterval:activityEntity.startTime formatter:@"yyyy-MM-dd"],[DateUtils stringFromTimeInterval:activityEntity.endTime formatter:@"yyyy-MM-dd"]];
+    if ([activityEntity.actType intValue] == 0) {
+        [self.lab_activeType setText:@"满减"];
+    }else if ([activityEntity.actType intValue] == 1){
+        [self.lab_activeType setText:@"单品-折扣"];
+    }else if ([activityEntity.actType intValue] == 2){
+        [self.lab_activeType setText:@"单品-特价"];
+    }else if ([activityEntity.actType intValue] == 3){
+        [self.lab_activeType setText:@"单品-立减"];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

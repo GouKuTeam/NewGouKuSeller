@@ -91,7 +91,6 @@
         [self.v_cashComplete.lab_zhaoling setText:[NSString stringWithFormat:@"找零：¥%.2f",  [self.tf_price.text doubleValue] - self.totalPrice]];
         [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_cashComplete] ;
     }
-    
 }
 
 - (void)continueAction{

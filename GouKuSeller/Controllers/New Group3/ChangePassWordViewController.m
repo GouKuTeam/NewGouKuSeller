@@ -7,6 +7,8 @@
 //
 
 #import "ChangePassWordViewController.h"
+#import "RTHttpClient.h"
+#import "LoginViewController.h"
 
 @interface ChangePassWordViewController ()<UITextFieldDelegate>
 @property (nonatomic ,strong)UITextField     *tf_jiu;
@@ -29,7 +31,7 @@
     
     UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 70, 44)];
     [v_back addSubview:lab1];
-    [lab1 setText:@"账号"];
+    [lab1 setText:@"旧密码"];
     [lab1 setTextColor:[UIColor blackColor]];
     [lab1 setFont:[UIFont systemFontOfSize:16]];
     
@@ -57,18 +59,21 @@
     [self.tf_jiu setPlaceholder:@"请输入旧密码"];
     self.tf_jiu.font = [UIFont systemFontOfSize:16];
     self.tf_jiu.delegate = self;
+    self.tf_jiu.secureTextEntry = YES;
     
     self.tf_xin = [[UITextField alloc]initWithFrame:CGRectMake(108, 44, SCREEN_WIDTH - 108 - 15, 44)];
     [v_back addSubview:self.tf_xin];
     [self.tf_xin setPlaceholder:@"请输入新密码"];
     self.tf_xin.font = [UIFont systemFontOfSize:16];
     self.tf_xin.delegate = self;
+    self.tf_xin.secureTextEntry = YES;
     
     self.tf_sureXin = [[UITextField alloc]initWithFrame:CGRectMake(108, 88, SCREEN_WIDTH - 108 - 15, 44)];
     [v_back addSubview:self.tf_sureXin];
     [self.tf_sureXin setPlaceholder:@"请再次确认新密码"];
     self.tf_sureXin.font = [UIFont systemFontOfSize:16];
     self.tf_sureXin.delegate = self;
+    self.tf_sureXin.secureTextEntry = YES;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(15,SafeAreaTopHeight + 175, SCREEN_WIDTH - 30, 46)];
     [self.view addSubview:btn];
@@ -99,6 +104,29 @@
         return;
     }
     NSLog(@"确定修改了");
+    
+    NSString *strUrl = @"http://47.97.174.40:9000/mine/changePassword";
+    
+    NSDictionary *dic = @{@"username":[LoginStorage GetUserName],@"oldPassword":self.tf_jiu.text,@"newPassword":self.tf_xin.text};
+    RTHttpClient *asas = [[RTHttpClient alloc]init];
+    [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+            [LoginStorage saveIsLogin:NO];
+            LoginViewController *vc = [[LoginViewController alloc]init];
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+            
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error == %@",error);
+        
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

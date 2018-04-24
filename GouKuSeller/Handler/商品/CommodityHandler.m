@@ -195,7 +195,7 @@
 }
 
 //新增商品
-+ (void)addCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)addCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid xprice:(double)xprice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
     NSString *str_url = [self requestUrlWithPath:API_GET_AddCommodity];
 //    NSDictionary *dic = @{
@@ -229,6 +229,9 @@
     }
     if (price) {
         [dic setObject:[NSNumber numberWithDouble:price] forKey:@"price"];
+    }
+    if (xprice) {
+        [dic setObject:[NSNumber numberWithDouble:xprice] forKey:@"xprice"];
     }
     if (stock) {
         [dic setObject:stock forKey:@"stock"];
@@ -315,7 +318,7 @@
 }
 
 //门店商品下架
-+ (void)commoditydownShelfWithCommodityId:(NSNumber *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)commoditydownShelfWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_downshelf,commodityId]];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
@@ -334,7 +337,7 @@
 }
 
 //门店商品上架
-+ (void)commodityupShelfWithCommodityId:(NSNumber *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)commodityupShelfWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_upshelf,commodityId]];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
@@ -353,7 +356,7 @@
 }
 
 //门店商品删除
-+ (void)commoditydeleteWithCommodityId:(NSNumber *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)commoditydeleteWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityDelete,commodityId]];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
@@ -372,12 +375,14 @@
 }
 
 //门店商品编辑(更新)
-+ (void)commodityEditWithCommodityId:(NSNumber *)commodityId price:(double)price stock:(NSNumber *)stock prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)commodityEditWithCommodityId:(NSNumber *)commodityId price:(double)price stock:(NSString *)stock xprice:(double)xprice shopWareCategoryId:(NSNumber *)shopWareCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:API_GET_CommodityEdit];
     NSDictionary *dic = @{
-                          @"id":commodityId,
+                          @"skuId":commodityId,
                           @"price":[NSNumber numberWithDouble:price],
                           @"stock":stock,
+                          @"xprice":[NSNumber numberWithDouble:price],
+                          @"shopWareCategoryId":shopWareCategoryId
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost

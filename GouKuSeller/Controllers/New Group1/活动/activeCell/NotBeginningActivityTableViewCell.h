@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ActivityEntity.h"
 
 @interface NotBeginningActivityTableViewCell : UITableViewCell
 
@@ -17,4 +18,5 @@
 @property (nonatomic ,strong)UIButton            *btn_edit;
 @property (nonatomic ,strong)UIButton            *btn_stop;
 
+- (void)contentCellWithActivityEntity:(ActivityEntity *)activityEntity;
 @end

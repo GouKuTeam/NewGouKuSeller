@@ -12,6 +12,7 @@
 #import "SetAccountNumViewController.h"
 #import "AboutMeViewController.h"
 #import "ChangeShopViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource,TextViewClickReturnDelegate,TextFieldClickReturnDelegate,UITextFieldDelegate>
 @property (nonatomic ,strong)UITableView    *tb_my;
@@ -60,7 +61,7 @@
     self.tb_my.tableHeaderView = self.tb_header;
     self.tb_my.backgroundColor = [UIColor clearColor];
     self.tb_my.scrollEnabled = NO;
-    
+    [self.tb_header.imgHead sd_setImageWithURL:[NSURL URLWithString:[LoginStorage GetShopPic]]];
  
 }
 
@@ -129,6 +130,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         vc.changeName = ^{
             [self.tb_header.lab_name setText:[LoginStorage GetShopName]];
+            [self.tb_header.imgHead sd_setImageWithURL:[NSURL URLWithString:[LoginStorage GetShopPic]]];
         };
     }
     if (indexPath.section == 1 && indexPath.row == 0) {

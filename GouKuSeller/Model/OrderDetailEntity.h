@@ -22,7 +22,7 @@
 @property (nonatomic ,assign)double          orderDiscount;     //整单折扣金额
 @property (nonatomic ,assign)double          orderMinus;     //整单立减金额
 @property (nonatomic ,assign)double          payActual;     //实付金额
-@property (nonatomic ,assign)double          payAt;     //支付时间
+@property (nonatomic ,assign)double          payDate;     //支付时间
 @property (nonatomic ,assign)double          payReduce;     //优惠金额
 @property (nonatomic ,assign)double          payTotal;     //总价金额
 @property (nonatomic ,assign)int             payType;      //支付类型  1.购酷支付  2.现金支付

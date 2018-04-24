@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ActivityEntity.h"
 @interface BeginningActiveTableViewCell : UITableViewCell
 
 @property (nonatomic ,strong)UILabel             *lab_activeName;
@@ -15,5 +15,7 @@
 @property (nonatomic ,strong)UILabel             *lab_activeStatus;
 @property (nonatomic ,strong)UILabel             *lab_activeType;
 @property (nonatomic ,strong)UIButton            *btn_stop;
+
+- (void)contentCellWithActivityEntity:(ActivityEntity *)activityEntity;
 
 @end

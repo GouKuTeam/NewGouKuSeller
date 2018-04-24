@@ -68,6 +68,7 @@
     self.tf_search.enablesReturnKeyAutomatically = YES;
     self.tf_search.tintColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
     [v_header addSubview:self.tf_search];
+    [self.tf_search becomeFirstResponder];
     
     UIButton *btn_cancel = [[UIButton alloc]initWithFrame:CGRectMake(self.tf_search.right,0, 60, 44)];
     [btn_cancel setTitle:@"取消" forState:UIControlStateNormal];
@@ -205,7 +206,7 @@
 
 - (void)deleteAction{
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
-    [CommodityHandler commoditydeleteWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+    [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
         
     } success:^(id obj) {
         [self.arr_search removeObjectAtIndex:self.showIndex];
@@ -221,7 +222,7 @@
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
     if (entity.status == 1 || entity.status == 2) {
         //下架方法
-        [CommodityHandler commoditydownShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:nil success:^(id obj) {
+        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
             entity.status = 3;
             [self.arr_search replaceObjectAtIndex:self.showIndex withObject:entity];
             [self.tb_search reloadData];
@@ -232,7 +233,7 @@
         }];
     }else if (entity.status == 3){
         //上架方法
-        [CommodityHandler commodityupShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+        [CommodityHandler commodityupShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
             
         } success:^(id obj) {
             entity.status = 1;

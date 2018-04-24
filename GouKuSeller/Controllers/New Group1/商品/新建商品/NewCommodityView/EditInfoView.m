@@ -8,6 +8,7 @@
 
 #import "EditInfoView.h"
 
+
 @implementation EditInfoView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -22,7 +23,7 @@
             make.height.equalTo(self);
         }];
         
-        self.tf_detail = [[UITextField alloc]init];
+        self.tf_detail = [[OttoTextField alloc]init];
         [self addSubview:self.tf_detail];
         [self.tf_detail mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(110);
@@ -31,7 +32,8 @@
         }];
         self.tf_detail.textColor = [UIColor colorWithHexString:@"#616161"];
         self.tf_detail.font = [UIFont systemFontOfSize:16];
-//        [self.tf_detail setPlaceholder:@"请填写"];
+
+        
         
         self.img_line = [[UIImageView alloc]init];
         [self addSubview:self.img_line];

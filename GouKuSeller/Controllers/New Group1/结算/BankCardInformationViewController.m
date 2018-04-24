@@ -181,6 +181,12 @@
     }
     if (indexPath.row == 3) {
         NSLog(@"选择开户地区");
+        BankCardTableViewCell *cell0 = [self.tb_bank cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [cell0.tf_detail resignFirstResponder];
+        BankCardTableViewCell *cell1 = [self.tb_bank cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [cell1.tf_detail resignFirstResponder];
+        BankCardTableViewCell *cell4 = [self.tb_bank cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+        [cell4.tf_detail resignFirstResponder];
         [self.pickerView show];
     }
 }

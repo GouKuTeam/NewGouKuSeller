@@ -93,8 +93,12 @@ static NSString * const GOUWUCHE = @"gouwuche";
 /**
  *  存/取  店铺头像
  */
-+ (void)saveShopMsg:(NSString *)str{
++ (void)saveShopPic:(NSString *)str{
+    if ([str isKindOfClass:[NSNull class]]) {
+        str = @"";
+    }
     [UserDefaultsUtils saveValue:str forKey:ShopPic];
+    
 }
 
 + (NSString *)GetShopPic

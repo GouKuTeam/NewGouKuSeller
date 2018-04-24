@@ -58,6 +58,8 @@
 
 @property (nonatomic ,strong)NSNumber          *btnIndex;
 
+@property (nonatomic ,strong)UIAlertController *alertController;
+
 @end
 
 @implementation CommodityViewController
@@ -256,26 +258,21 @@
     ManagementClassificationViewController *vc
     = [[ManagementClassificationViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+    vc.updateCateGory = ^{
+        [self loadData];
+    };
 }
 
 - (void)btn_buildCommodityAction{
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"输入条形码" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+    self.alertController = [UIAlertController alertControllerWithTitle:nil message:@"输入条形码" preferredStyle:UIAlertControllerStyleAlert];
+    [self.alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }]];
-
-    //增加确定按钮；
-    
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+    [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //获取第1个输入框；
-        UITextField *userNameTextField = alertController.textFields.firstObject;
-        
+        UITextField *userNameTextField = self.alertController.textFields.firstObject;
         NSLog(@"条形码 = %@",userNameTextField.text);
         if (![userNameTextField.text isEqualToString:@""]) {
-            
             [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
                 NSDictionary *dic = (NSDictionary *)obj;
                 if ([[dic objectForKey:@"errCode"] intValue] == 0) {
@@ -288,25 +285,22 @@
                     [MBProgressHUD hideHUD];
                     [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
                 }
-                
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:(NSString *)json];
             }];
-            
         }else{
             [MBProgressHUD showInfoMessage:@"请输入条形码"];
         }
-
     }]];
     
     //定义第一个输入框；
     
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [self.alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
          textField.delegate = self;
 //        textField.secureTextEntry = YES;
         
     }];
-    [self presentViewController:alertController animated:true completion:nil];
+    [self presentViewController:self.alertController animated:true completion:nil];
     
 
     
@@ -316,7 +310,9 @@
 {
     
     if (![textField.text isEqualToString:@""]) {
-        
+        [self.alertController dismissViewControllerAnimated:YES completion:^{
+            
+        }];
         [CommodityHandler getCommodityInformationWithBarCode:textField.text prepare:nil success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
@@ -329,7 +325,6 @@
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
             }
-            
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
         }];
@@ -343,6 +338,7 @@
     
     [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
+        [self.arr_category removeAllObjects];
         ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
         entity.name = @"全部分类";
         entity._id = 0;
@@ -658,7 +654,7 @@
 
 - (void)deleteAction{
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
-    [CommodityHandler commoditydeleteWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+    [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
         
     } success:^(id obj) {
         [self.arr_commodity removeObjectAtIndex:self.showIndex];
@@ -674,7 +670,7 @@
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     if (entity.status == 1 || entity.status == 2) {
         //下架方法
-        [CommodityHandler commoditydownShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:nil success:^(id obj) {
+        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
             [self.arr_commodity removeObjectAtIndex:self.showIndex];
             [self.tb_right reloadData];
             self.showIndex = NULLROW;
@@ -684,7 +680,7 @@
         }];
     }else if (entity.status == 3){
         //上架方法
-        [CommodityHandler commodityupShelfWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
+        [CommodityHandler commodityupShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
             
         } success:^(id obj) {
             [self.arr_commodity removeObjectAtIndex:self.showIndex];
@@ -705,6 +701,10 @@
 -(void)btn_topAction{
     [self.v_commodityStatusView setHidden:!self.v_commodityStatusView.isHidden];
 }
+
+//- (void)viewWillAppear:(BOOL)animated{
+//    [self loadData];
+//}
 /********注掉批量管理功能
 
 

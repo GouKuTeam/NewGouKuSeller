@@ -15,10 +15,10 @@
 //结算首页信息
 +(void)accountshowWithshopId:(NSNumber *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:API_POST_AccountShow];
-    NSDictionary *dic = @{@"shopId":shopId};
+//    NSDictionary *dic = @{@"shopId":shopId};
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:dic
+                                       parameters:nil
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               

@@ -98,14 +98,22 @@
 }
 
 - (void)rightBarAction{
-    [CommodityHandler addShopCatagoryWithName:self.tef_erji.text shopId:[LoginStorage GetShopId] pid:(int)self.commodityCatagoryEntity._id prepare:nil success:^(id obj) {
-        [self.navigationController popViewControllerAnimated:YES];
-        if (self.addSecondCategory) {
-            self.addSecondCategory();
+    if (self.commodityCatagoryEntity._id) {
+        if ([self.tef_erji.text isEqualToString:@""]) {
+            [MBProgressHUD showInfoMessage:@"请输入二级分类名称"];
+        }else{
+            [CommodityHandler addShopCatagoryWithName:self.tef_erji.text shopId:[LoginStorage GetShopId] pid:(int)self.commodityCatagoryEntity._id prepare:nil success:^(id obj) {
+                [self.navigationController popViewControllerAnimated:YES];
+                if (self.addSecondCategory) {
+                    self.addSecondCategory();
+                }
+            } failed:^(NSInteger statusCode, id json) {
+                [MBProgressHUD showErrorMessage:(NSString *)json];
+            }];
         }
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-    }];
+    }else{
+        [MBProgressHUD showInfoMessage:@"请选择一级分类"];
+    }
 }
 
 

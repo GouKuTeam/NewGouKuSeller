@@ -7,6 +7,7 @@
 //
 
 #import "ChangeShopViewController.h"
+#import "MyHandler.h"
 
 @interface ChangeShopViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -35,10 +36,23 @@
     self.tb_shop.delegate = self;
     self.tb_shop.dataSource = self;
     self.tb_shop.tableFooterView = [UIView new];
+    [self loadData];
+    
+}
+
+- (void)loadData{
+    [MyHandler mineShopListWithAccount:[LoginStorage GetUserName] prepare:^{
+        
+    } success:^(id obj) {
+        [self.arr_shop addObjectsFromArray:(NSArray *)obj];
+        [self.tb_shop reloadData];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return self.arr_shop.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -48,16 +62,37 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = @"购酷测试店";
+    cell.textLabel.text = [[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"name"];
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (self.changeName) {
-        self.changeName();
-    }
+    
+    NSString *strUrl = [NSString stringWithFormat:@"http://47.97.174.40:9000/login/choose/shop/%@",[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
+    RTHttpClient *asas = [[RTHttpClient alloc]init];
+    [asas requestWithPath:strUrl method:RTHttpRequestGet parameters:nil prepare:^{
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+            [LoginStorage saveHTTPHeader:[responseObject objectForKey:@"data"]];
+            [LoginStorage saveShopName:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"name"]];
+            [LoginStorage saveShopId:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
+            [LoginStorage savePhoneNum:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"phone"]];
+            [LoginStorage saveShopPic:[NSString stringWithFormat:@"%@%@",HeadQZ,[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"logo"]]];
+            if (self.changeName) {
+                self.changeName();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error == %@",error);
+    }];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

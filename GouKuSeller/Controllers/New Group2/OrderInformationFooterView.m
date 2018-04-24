@@ -33,7 +33,7 @@
         [self.lab_orderCode mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.top.mas_equalTo(12);
-            make.width.mas_equalTo(200);
+            make.width.mas_equalTo(280);
             make.height.mas_equalTo(20);
         }];
         

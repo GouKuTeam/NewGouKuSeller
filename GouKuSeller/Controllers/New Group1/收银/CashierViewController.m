@@ -19,7 +19,6 @@
 #import "SettlementHandler.h"
 #import "IQKeyboardManager.h"
 #import "PayInGouKuViewController.h"
-#import "OttoKeyboardView.h"
 #import "AddPriceViewController.h"
 #import "CommonAlertView.h"
 
@@ -47,6 +46,7 @@
 @property (nonatomic        )BOOL                 mofenAction; //抹分操作
 @property (nonatomic        )BOOL                 mojiaoAction; //抹角操作
 @property (nonatomic ,assign)double               loseSmallReduce;        //去零金额
+@property (nonatomic ,strong)NSNumber            *actId;             //整单活动id
 
 
 @end
@@ -80,6 +80,9 @@
     self.navigationItem.rightBarButtonItem = btn_right;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifionCashierAction) name:@"ClearShoppingCar" object:nil];
+    
+    UITapGestureRecognizer *tgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tgpAction)];
+    [self.view addGestureRecognizer:tgp];
 }
 
 - (void)onCreate{
@@ -181,11 +184,14 @@
             for (int i = 0; i < self.arr_commodityList.count; i ++) {
                 CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:i];
                 [dic setValue:entity.name forKey:@"name"];
-                [dic setValue:entity.barcode forKey:@"itemId"];
+                [dic setValue:entity.skuId forKey:@"skuId"];
                 [dic setValue:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
                 [dic setValue:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
                 [dic setValue:[NSNumber numberWithDouble:entity.price -entity.settlementPrice] forKey:@"pricePreferential"];
                 [dic setValue:entity.standards forKey:@"standards"];
+                if (entity.itemActId) {
+                    [dic setValue:entity.itemActId forKey:@"itemActId"];
+                }
                 [arrItem addObject:dic];
             }
             [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:self.totalPrice + self.discountPrice payReduce:self.discountPrice payActual:self.totalPrice noGoods:self.noGoods payType:2 orderDiscount:self.orderDiscount orderMinus:self.orderMinus loseSmallReduce:self.loseSmallReduce prepare:^{
@@ -231,11 +237,14 @@
             for (int i = 0; i < self.arr_commodityList.count; i ++) {
                 CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:i];
                 [dic setValue:entity.name forKey:@"name"];
-                [dic setValue:entity.barcode forKey:@"itemId"];
+                [dic setValue:entity.skuId forKey:@"skuId"];
                 [dic setValue:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
                 [dic setValue:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
                 [dic setValue:[NSNumber numberWithDouble:entity.price -entity.settlementPrice] forKey:@"pricePreferential"];
                 [dic setValue:entity.standards forKey:@"standards"];
+                if (entity.itemActId) {
+                    [dic setValue:entity.itemActId forKey:@"itemActId"];
+                }
                 [arrItem addObject:dic];
             }
             [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:self.totalPrice + self.discountPrice payReduce:self.discountPrice payActual:self.totalPrice noGoods:self.noGoods payType:1 orderDiscount:self.orderDiscount orderMinus:self.orderMinus loseSmallReduce:self.loseSmallReduce prepare:^{
@@ -279,6 +288,10 @@
 
 -(void)btnshouyinAction{
     [self.titleClearView setHidden:!self.titleClearView.isHidden];
+    if (self.titleView.hidden == NO) {
+        
+        [self.titleView setHidden:!self.titleView.isHidden];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -303,6 +316,7 @@
         }else{
             [self.arr_commodityList addObject:entity];
         }
+        self.actId = entity.actId;
         self.manjianPrice = entity.payMinus;
         self.tfsousuo.text = @"";
         [self.tfsousuo becomeFirstResponder];
@@ -410,6 +424,9 @@
 
 - (void)rightBarAction{
     [self.titleView setHidden:!self.titleView.isHidden];
+    if (self.titleClearView.hidden == NO) {
+        [self.titleClearView setHidden:!self.titleClearView.isHidden];
+    }
 }
 
 - (void)titleViewbtnAction:(UIButton *)btn{
@@ -456,16 +473,30 @@
     if ([alertView.title_type isEqualToString:@"添加金额"]) {
         if (btnType == CommonAlertBtnConfirm) {
             self.noGoods = [text doubleValue];
-            CashierCommodityEntity *entity = [[CashierCommodityEntity alloc]init];
-            entity.name = @"无码商品";
-            entity.settlementPrice = [text doubleValue];
-            entity.price = [text doubleValue];
-            entity.amount = 1;
-            [self.arr_commodityList insertObject:entity atIndex:0];
+            CashierCommodityEntity *caseEntity = [[CashierCommodityEntity alloc]init];
+            if (self.arr_commodityList.count > 0) {
+                caseEntity = [self.arr_commodityList objectAtIndex:0];
+            }
+            if ([caseEntity.barcode intValue] == 0 && self.arr_commodityList.count > 0) {
+                caseEntity.settlementPrice = caseEntity.settlementPrice + [text doubleValue];
+                caseEntity.price = caseEntity.price + [text doubleValue];
+                [self.arr_commodityList replaceObjectAtIndex:0 withObject:caseEntity];
+            }else{
+                CashierCommodityEntity *entity = [[CashierCommodityEntity alloc]init];
+                entity.name = @"无码商品";
+                entity.settlementPrice = [text doubleValue];
+                entity.price = [text doubleValue];
+                entity.amount = 1;
+                [self.arr_commodityList insertObject:entity atIndex:0];
+            }
             [self.tb_commodityList reloadData];
             [self getResultAction];
         }
     }
+}
+
+- (void)tgpAction{
+    [self.tfsousuo resignFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

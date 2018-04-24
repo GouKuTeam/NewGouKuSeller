@@ -134,7 +134,7 @@
 }
 
 - (void)contentCellWithCommodityFromCodeEntity:(CommodityFromCodeEntity *)CommodityFromCodeEntity{
-    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:CommodityFromCodeEntity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,CommodityFromCodeEntity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
     [self.lab_CommodityName setText:CommodityFromCodeEntity.name];
     if (CommodityFromCodeEntity.hitType == 1) {
         [self.lab_CommodityCode setText:[NSString stringWithFormat:@"条形码  %@",CommodityFromCodeEntity.barcode]];

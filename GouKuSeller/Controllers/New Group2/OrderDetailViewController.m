@@ -74,18 +74,15 @@
             ItemsEntity  *entity = [[ItemsEntity alloc]init];
             if (i == 0) {
                 entity.name = @"商品总额";
-                entity.price = self.orderDetailEntity.payTotal + self.orderDetailEntity.payReduce;
-                entity.pricePreferential = self.orderDetailEntity.payReduce;
+                entity.pricePreferential = self.orderDetailEntity.payTotal;
                 entity.amount = 1;
             }else if (i == 1){
                 entity.name = @"优惠金额";
-                entity.price = self.orderDetailEntity.payTotal;
-                entity.pricePreferential = self.orderDetailEntity.payActual;
+                entity.pricePreferential = self.orderDetailEntity.payReduce;
                 entity.amount = 1;
             }else if (i == 2){
                 entity.name = @"实付金额";
-                entity.price = self.orderDetailEntity.payTotal;
-                entity.pricePreferential = self.orderDetailEntity.payReduce;
+                entity.pricePreferential = self.orderDetailEntity.payActual;
                 entity.amount = 1;
             }
             [arr_heji addObject:entity];
@@ -99,8 +96,7 @@
             }else if (self.orderDetailEntity.payType == 2){
                 entity.name = @"现金支付";
             }
-            entity.price = self.orderDetailEntity.payTotal;
-            entity.pricePreferential = self.orderDetailEntity.payReduce;
+            entity.pricePreferential = self.orderDetailEntity.payActual;
             entity.amount = 1;
             [self.arr_data addObject:@{@"title":@"支付方式",@"data":@[entity]}];
         }else if (self.orderDetailEntity.status == 1){
@@ -108,8 +104,10 @@
         }
         [self.arr_data addObject:@{@"title":@"商品",@"data":self.orderDetailEntity.items}];
         self.tbfooter.lab_orderCode.text = [NSString stringWithFormat:@"订单编号: %@",self.orderDetailEntity.orderId];
-        NSString *paytime = [DateUtils stringFromTimeInterval:self.orderDetailEntity.payAt formatter:@"yyyy-MM-dd HH:mm:ss"];
-        [self.tbfooter.lab_payTime setText:[NSString stringWithFormat:@"支付时间: %@",paytime]];
+        NSString *paytime = [DateUtils stringFromTimeInterval:self.orderDetailEntity.payDate formatter:@"yyyy-MM-dd HH:mm:ss"];
+        if (self.orderDetailEntity.status == 2) {
+            [self.tbfooter.lab_payTime setText:[NSString stringWithFormat:@"支付时间: %@",paytime]];
+        }
         [self.tb_commodity reloadData];
         
     } failed:^(NSInteger statusCode, id json) {

@@ -12,6 +12,7 @@
 #import "CommodityViewController.h"
 #import "SettlementViewController.h"
 #import "CashierViewController.h"
+#import "MyHandler.h"
 
 @interface WorkbenchViewController ()
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
@@ -34,6 +35,22 @@
     [self.v_workBench.btn_commodity addTarget: self action:@selector(commodityAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_jiesuan addTarget:self action:@selector(jiesuanAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_shouyin addTarget:self action:@selector(shouyinAction) forControlEvents:UIControlEventTouchUpInside];
+    [self loadData];
+}
+
+- (void)loadData{
+    [MyHandler getTodayMsgprepare:^{
+        
+    } success:^(id obj) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        NSLog(@"dic == %@",dic);
+        [self.v_workBench.lab_turnoverDetail setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"sales"] floatValue]]];
+        [self.v_workBench.lab_orderDetail setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"orders"]]];
+        [self.v_workBench.lab_unitPriceDetail setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"perTicketSales"] floatValue]]];
+        
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)commodityAction{
@@ -61,6 +78,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [self loadData];
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:YES];
 }

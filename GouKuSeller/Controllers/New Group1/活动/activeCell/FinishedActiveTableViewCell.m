@@ -7,6 +7,7 @@
 //
 
 #import "FinishedActiveTableViewCell.h"
+#import "DateUtils.h"
 
 @implementation FinishedActiveTableViewCell
 
@@ -40,6 +41,9 @@
         [self.lab_activeTime setFont:[UIFont systemFontOfSize:13]];
         
         self.lab_activeStatus = [[UILabel alloc]init];
+        [self.lab_activeStatus setText:@"已停止"];
+        [self.lab_activeStatus setTextAlignment:NSTextAlignmentRight];
+        [self.lab_activeStatus setTextColor:[UIColor colorWithHexString:@"#616161"]];
         [self.contentView addSubview:self.lab_activeStatus];
         [self.lab_activeStatus mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 70);
@@ -59,6 +63,20 @@
         
     }
     return self;
+}
+
+- (void)contentCellWithActivityEntity:(ActivityEntity *)activityEntity{
+    self.lab_activeName.text = activityEntity.title;
+    self.lab_activeTime.text = [NSString stringWithFormat:@"%@至%@",[DateUtils stringFromTimeInterval:activityEntity.startTime formatter:@"yyyy-MM-dd"],[DateUtils stringFromTimeInterval:activityEntity.endTime formatter:@"yyyy-MM-dd"]];
+    if ([activityEntity.actType intValue] == 0) {
+        [self.lab_activeType setText:@"满减"];
+    }else if ([activityEntity.actType intValue] == 1){
+        [self.lab_activeType setText:@"单品-折扣"];
+    }else if ([activityEntity.actType intValue] == 2){
+        [self.lab_activeType setText:@"单品-特价"];
+    }else if ([activityEntity.actType intValue] == 3){
+        [self.lab_activeType setText:@"单品-立减"];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

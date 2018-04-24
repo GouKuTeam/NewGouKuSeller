@@ -8,10 +8,10 @@
 
 #import "BaseViewController.h"
 typedef enum : int {
-    ActiceFormZheKou = 1,
-    ActiceFormJianJia,
+    ActiceFormManJian,
+    ActiceFormZheKou,
     ActiceFormTeJia,
-    ActiceFormManJian
+    ActiceFormJianJia,
 } ActiceFormType;
 
 @interface AddActiveViewController : BaseViewController

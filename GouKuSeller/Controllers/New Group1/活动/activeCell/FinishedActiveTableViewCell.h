@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ActivityEntity.h"
 @interface FinishedActiveTableViewCell : UITableViewCell
 
 @property (nonatomic ,strong)UILabel             *lab_activeName;
 @property (nonatomic ,strong)UILabel             *lab_activeTime;
 @property (nonatomic ,strong)UILabel             *lab_activeStatus;
 @property (nonatomic ,strong)UILabel             *lab_activeType;
+
+- (void)contentCellWithActivityEntity:(ActivityEntity *)activityEntity;
 
 @end

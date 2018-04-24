@@ -15,7 +15,7 @@
 #import "CommodityFromCodeEntity.h"
 #import "LoginStorage.h"
 
-@interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
+@interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,TextViewClickReturnDelegate,TextFieldClickReturnDelegate>{
     UIImagePickerController *ipc;
 }
 
@@ -24,7 +24,8 @@
 @property (nonatomic ,strong)CommodityFromCodeEntity *entity;
 @property (nonatomic ,strong)NSNumber      *shopCId;
 @property (nonatomic ,assign)int            shopStock;
-@property (nonatomic ,assign)double         Cprice;
+@property (nonatomic ,assign)double         Cprice;   //商品价格
+@property (nonatomic ,assign)double         Xprice;   // 进货价
 
 @end
 
@@ -68,6 +69,7 @@
     self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
     self.v_commodityView.v_price.tf_detail.delegate = self;
     self.v_commodityView.v_stock.tf_detail.delegate = self;
+    self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
     
 //    UITapGestureRecognizer* tgr_commoditySpecifications = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_commoditySpecificationsAction)];
 //    [self.v_commodityView.v_commoditySpecifications addGestureRecognizer:tgr_commoditySpecifications];
@@ -87,12 +89,21 @@
 //    }
     [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
     [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
-    [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entityInformation.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
-    [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
+    [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entityInformation.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    if (self.entityInformation.detail.length > 0) {
+        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
+    }else{
+      [self.v_commodityView.v_commodityDescribe.tf_detail setText:@"-"];
+    }
     [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entityInformation.standards];
     [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
-    [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.itemId]];
-
+    [self.v_commodityView.v_price.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.price doubleValue]]];
+    if ([self.comeFrom isEqualToString:@"编辑商品"]) {
+        self.shopCId = self.entityInformation.shopWareCategoryId;
+        [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
+        [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
+        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.xprice doubleValue]]];
+    }
 }
 
 //店内分类  手势点击方法
@@ -161,6 +172,15 @@
         [self.v_commodityView.v_stock.tf_detail setTextColor:[UIColor blackColor]];
         
     }
+    if (textField == self.v_commodityView.v_jinhuoPrice.tf_detail) {
+        if (![textField.text isEqualToString:@""]) {
+            self.Xprice = [textField.text doubleValue];
+            [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",[textField.text floatValue]]];
+            [self.v_commodityView.v_jinhuoPrice.tf_detail setTextColor:[UIColor blackColor]];
+            
+            
+        }
+    }
 }
 
 - (void)leftBarAction{
@@ -173,7 +193,7 @@
 //        self.changeEntity();
 //    }
 //    [self.navigationController popViewControllerAnimated:YES];
-    if ([self.title isEqualToString:@"编辑商品"]) {
+    if ([self.comeFrom isEqualToString:@"编辑商品"]) {
         //从编辑按钮进来   走更新接口
         if ([self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]) {
             [MBProgressHUD showInfoMessage:@"请选择店内分类"];
@@ -184,13 +204,18 @@
             return;
 
         }
+        if ([self.v_commodityView.v_jinhuoPrice.tf_detail.text isEqualToString:@""]) {
+            [MBProgressHUD showInfoMessage:@"请填写进货价格"];
+            return;
+            
+        }
         if ([self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
             [MBProgressHUD showInfoMessage:@"请填写库存"];
             return;
         }
         if (![self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]  && ![self.v_commodityView.v_price.tf_detail.text isEqualToString:@""] && ![self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
         }
-        [CommodityHandler commodityEditWithCommodityId:[NSNumber numberWithInt:(int)self.entityInformation._id] price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] prepare:^{
+        [CommodityHandler commodityEditWithCommodityId:[NSNumber numberWithInt:(int)self.entityInformation.skuId] price:[self.v_commodityView.v_price.tf_detail.text doubleValue] stock:self.v_commodityView.v_stock.tf_detail.text xprice:[self.v_commodityView.v_jinhuoPrice.tf_detail.text doubleValue] shopWareCategoryId:self.shopCId prepare:^{
 
         } success:^(id obj) {
             CommodityFromCodeEntity *entity = (CommodityFromCodeEntity *)obj;
@@ -213,6 +238,11 @@
             return;
             
         }
+        if ([self.v_commodityView.v_jinhuoPrice.tf_detail.text isEqualToString:@""]) {
+            [MBProgressHUD showInfoMessage:@"请填写进货价格"];
+            return;
+            
+        }
         if ([self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
             [MBProgressHUD showInfoMessage:@"请填写库存"];
             return;
@@ -220,11 +250,12 @@
         if (![self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"未分类"]  && ![self.v_commodityView.v_price.tf_detail.text isEqualToString:@""] && ![self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
         }
         //网络请求
-        [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:self.entity.name itemId:self.entity.itemId barcode:self.entity.barcode shopWareCategoryId:self.shopCId wareCategoryId:self.entity.categoryId price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] pictures:self.entity.pictures standards:self.entity.standards wid:self.entity.wid prepare:^{
+        [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:self.entityInformation.name itemId:self.entityInformation.itemId barcode:self.entityInformation.barcode shopWareCategoryId:self.shopCId wareCategoryId:self.entityInformation.categoryId price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] pictures:self.entityInformation.pictures standards:self.entityInformation.standards wid:self.entityInformation.wid xprice:self.Xprice prepare:^{
             
         } success:^(id obj) {
             [self.navigationController popViewControllerAnimated:YES];
-        } failed:^(NSInteger statusCode, id json) {
+        } failed:^(NSInteger statusCode,
+                   id json) {
             [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
     }

@@ -25,7 +25,7 @@
         [btn_doctor setTitleColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN] forState:UIControlStateSelected];
         [btn_doctor addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
         [btn_doctor setSelected:YES];
-        btn_doctor.tag = 1;
+        btn_doctor.tag = 0;
         [self addSubview:btn_doctor];
         [self.arr_btn addObject:btn_doctor];
         
@@ -35,7 +35,7 @@
         [btn_hospital setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn_hospital setTitleColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN] forState:UIControlStateSelected];
         [btn_hospital addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
-        btn_hospital.tag = 2;
+        btn_hospital.tag = 1;
         [self addSubview:btn_hospital];
         [self.arr_btn addObject:btn_hospital];
         
@@ -44,7 +44,7 @@
         btn_department.titleLabel.font = [UIFont systemFontOfSize:16];
         [btn_department setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn_department setTitleColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN] forState:UIControlStateSelected];
-        btn_department.tag = 3;
+        btn_department.tag = 2;
         [btn_department addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
 
         [self addSubview:btn_department];
