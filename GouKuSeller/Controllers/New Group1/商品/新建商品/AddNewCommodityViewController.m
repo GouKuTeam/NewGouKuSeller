@@ -206,10 +206,10 @@
             } success:^(id obj) {
                 CommodityFromCodeEntity *entity = (CommodityFromCodeEntity *)obj;
                 self.entityInformation = entity;
+                [self.navigationController popViewControllerAnimated:YES];
                 if (self.changeEntity) {
                     self.changeEntity();
                 }
-                [self.navigationController popViewControllerAnimated:YES];
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
             }];
@@ -224,11 +224,8 @@
             [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:self.entityInformation.name itemId:self.entityInformation.itemId barcode:self.entityInformation.barcode shopWareCategoryId:self.shopCId wareCategoryId:self.entityInformation.categoryId price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] pictures:self.entityInformation.pictures standards:self.entityInformation.standards wid:self.entityInformation.wid xprice:self.Xprice prepare:^{
                 
             } success:^(id obj) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"addshangpin" object:nil userInfo:nil];
-                [self.navigationController popViewControllerAnimated:YES];
-                if (self.addCommodityFinish) {
-                    self.addCommodityFinish();
-                }
+                 [MBProgressHUD showSuccessMessage:@"新增商品成功"];
+                 [self performSelector:@selector(addCommodityFinishAction) withObject:nil afterDelay:1];
             } failed:^(NSInteger statusCode,
                        id json) {
                 [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
@@ -237,6 +234,14 @@
         
     }
     
+}
+
+- (void)addCommodityFinishAction{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"addshangpin" object:nil userInfo:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.addCommodityFinish) {
+        self.addCommodityFinish();
+    }
 }
 
 - (void)didReceiveMemoryWarning {

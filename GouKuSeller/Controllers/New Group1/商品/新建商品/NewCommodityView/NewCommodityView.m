@@ -51,7 +51,7 @@
             make.width.equalTo(self.btn_addCatagory);
         }];
         [self.lab_catagoryTitle setText:@"添加类目"];
-        [self.lab_catagoryTitle setTextColor:[UIColor colorWithHexString:@"#616161"]];
+        [self.lab_catagoryTitle setTextColor:[UIColor colorWithHexString:@"#979797"]];
         [self.lab_catagoryTitle setFont:[UIFont systemFontOfSize:16]];
         self.lab_catagoryTitle.backgroundColor = [UIColor whiteColor];
         
@@ -90,7 +90,7 @@
         }];
         [self.v_commodityName.lab_title setText:@"商品名称"];
         self.v_commodityName.tf_detail.enabled = NO;
-        
+        self.v_commodityName.tf_detail.textColor = [UIColor colorWithHexString:@"#979797"];
         
         //商品描述
         self.v_commodityDescribe = [[EditInfoView alloc] init];
@@ -102,6 +102,7 @@
         }];
         [self.v_commodityDescribe.lab_title setText:@"商品描述"];
         self.v_commodityDescribe.tf_detail.enabled = NO;
+        self.v_commodityDescribe.tf_detail.textColor = [UIColor colorWithHexString:@"#979797"];
         
         //商品图片
         self.lab_commodityImgTitle = [[UILabel alloc]init];
@@ -224,6 +225,7 @@
         [self.v_barcode.img_jiantou setHidden:YES];
         self.v_barcode.tf_detail.enabled = NO;
         [self.v_barcode.img_line setHidden:YES];
+        [self.v_barcode.tf_detail setTextColor:[UIColor colorWithHexString:@"#979797"]];
 
         
         

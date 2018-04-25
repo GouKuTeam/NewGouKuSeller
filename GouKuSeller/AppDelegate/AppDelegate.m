@@ -14,6 +14,7 @@
 
 #import "JPUSHService.h"
 #import <UserNotifications/UserNotifications.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>
 
@@ -190,6 +191,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"dic = %@",dic);
     if ([[dic objectForKey:@"type"] intValue] == 1 && [dic objectForKey:@"statys"] == 0) {
         [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
+        
     }
 }
 #endif

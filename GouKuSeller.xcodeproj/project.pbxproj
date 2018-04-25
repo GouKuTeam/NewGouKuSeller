@@ -277,6 +277,8 @@
 		7498367F208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */; };
 		74983680208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */; };
 		74983681208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */; };
+		74A1F12C208F75BC0041742B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A1F12B208F75BC0041742B /* NotificationService.m */; };
+		74A1F130208F75BC0041742B /* GouKuSellerPush.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 74A1F128208F75BC0041742B /* GouKuSellerPush.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B4E806204BD352006AFB6C /* AppDelegate.m */; };
 		74B4E80D204BD353006AFB6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E80B204BD353006AFB6C /* Main.storyboard */; };
 		74B4E80F204BD353006AFB6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E80E204BD353006AFB6C /* Assets.xcassets */; };
@@ -503,6 +505,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		74A1F12E208F75BC0041742B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74B4E7FA204BD352006AFB6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74A1F127208F75BC0041742B;
+			remoteInfo = GouKuSellerPush;
+		};
 		74B4E81B204BD353006AFB6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74B4E7FA204BD352006AFB6C /* Project object */;
@@ -518,6 +527,20 @@
 			remoteInfo = GouKuSeller;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		74A1F134208F75BC0041742B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				74A1F130208F75BC0041742B /* GouKuSellerPush.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
@@ -723,6 +746,10 @@
 		74983679208C3789007FEEF8 /* ActiveDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveDetailHeaderView.m; sourceTree = "<group>"; };
 		7498367D208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveDetailCommodityTableViewCell.h; sourceTree = "<group>"; };
 		7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveDetailCommodityTableViewCell.m; sourceTree = "<group>"; };
+		74A1F128208F75BC0041742B /* GouKuSellerPush.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GouKuSellerPush.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		74A1F12A208F75BC0041742B /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		74A1F12B208F75BC0041742B /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		74A1F12D208F75BC0041742B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74B4E802204BD352006AFB6C /* GouKuSeller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GouKuSeller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B4E805204BD352006AFB6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74B4E806204BD352006AFB6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -902,6 +929,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		74A1F125208F75BC0041742B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		74B4E7FF204BD352006AFB6C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1301,12 +1335,23 @@
 			path = "我的";
 			sourceTree = "<group>";
 		};
+		74A1F129208F75BC0041742B /* GouKuSellerPush */ = {
+			isa = PBXGroup;
+			children = (
+				74A1F12A208F75BC0041742B /* NotificationService.h */,
+				74A1F12B208F75BC0041742B /* NotificationService.m */,
+				74A1F12D208F75BC0041742B /* Info.plist */,
+			);
+			path = GouKuSellerPush;
+			sourceTree = "<group>";
+		};
 		74B4E7F9204BD352006AFB6C = {
 			isa = PBXGroup;
 			children = (
 				74B4E804204BD352006AFB6C /* GouKuSeller */,
 				74B4E81D204BD353006AFB6C /* GouKuSellerTests */,
 				74B4E828204BD353006AFB6C /* GouKuSellerUITests */,
+				74A1F129208F75BC0041742B /* GouKuSellerPush */,
 				74B4E803204BD352006AFB6C /* Products */,
 				BCD0B423BDDFAA3F3111BDC5 /* Pods */,
 				3D33247D643897427C1A3153 /* Frameworks */,
@@ -1319,6 +1364,7 @@
 				74B4E802204BD352006AFB6C /* GouKuSeller.app */,
 				74B4E81A204BD353006AFB6C /* GouKuSellerTests.xctest */,
 				74B4E825204BD353006AFB6C /* GouKuSellerUITests.xctest */,
+				74A1F128208F75BC0041742B /* GouKuSellerPush.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1824,6 +1870,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		74A1F127208F75BC0041742B /* GouKuSellerPush */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74A1F131208F75BC0041742B /* Build configuration list for PBXNativeTarget "GouKuSellerPush" */;
+			buildPhases = (
+				74A1F124208F75BC0041742B /* Sources */,
+				74A1F125208F75BC0041742B /* Frameworks */,
+				74A1F126208F75BC0041742B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GouKuSellerPush;
+			productName = GouKuSellerPush;
+			productReference = 74A1F128208F75BC0041742B /* GouKuSellerPush.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		74B4E801204BD352006AFB6C /* GouKuSeller */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74B4E82E204BD353006AFB6C /* Build configuration list for PBXNativeTarget "GouKuSeller" */;
@@ -1834,10 +1897,12 @@
 				74B4E800204BD352006AFB6C /* Resources */,
 				39E73C2BAB2A65E2599CB11C /* [CP] Embed Pods Frameworks */,
 				2DEE49663D30A770703AAD9F /* [CP] Copy Pods Resources */,
+				74A1F134208F75BC0041742B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				74A1F12F208F75BC0041742B /* PBXTargetDependency */,
 			);
 			name = GouKuSeller;
 			productName = GouKuSeller;
@@ -1889,6 +1954,10 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "窦建斌";
 				TargetAttributes = {
+					74A1F127208F75BC0041742B = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
+					};
 					74B4E801204BD352006AFB6C = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -1926,11 +1995,19 @@
 				74B4E801204BD352006AFB6C /* GouKuSeller */,
 				74B4E819204BD353006AFB6C /* GouKuSellerTests */,
 				74B4E824204BD353006AFB6C /* GouKuSellerUITests */,
+				74A1F127208F75BC0041742B /* GouKuSellerPush */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		74A1F126208F75BC0041742B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		74B4E800204BD352006AFB6C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2031,6 +2108,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		74A1F124208F75BC0041742B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74A1F12C208F75BC0041742B /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		74B4E7FE204BD352006AFB6C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2515,6 +2600,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		74A1F12F208F75BC0041742B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 74A1F127208F75BC0041742B /* GouKuSellerPush */;
+			targetProxy = 74A1F12E208F75BC0041742B /* PBXContainerItemProxy */;
+		};
 		74B4E81C204BD353006AFB6C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 74B4E801204BD352006AFB6C /* GouKuSeller */;
@@ -2548,6 +2638,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		74A1F132208F75BC0041742B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5VHW74MPL;
+				INFOPLIST_FILE = GouKuSellerPush/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller.GouKuSellerPush;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		74A1F133208F75BC0041742B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5VHW74MPL;
+				INFOPLIST_FILE = GouKuSellerPush/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller.GouKuSellerPush;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		74B4E82C204BD353006AFB6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2751,6 +2877,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		74A1F131208F75BC0041742B /* Build configuration list for PBXNativeTarget "GouKuSellerPush" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74A1F132208F75BC0041742B /* Debug */,
+				74A1F133208F75BC0041742B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		74B4E7FD204BD352006AFB6C /* Build configuration list for PBXProject "GouKuSeller" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

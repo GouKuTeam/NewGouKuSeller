@@ -253,7 +253,6 @@
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
-                                                  [MBProgressHUD showSuccessMessage:@"新增商品成功"];
                                                   success(nil);
                                               }else{
                                                   [MBProgressHUD hideHUD];

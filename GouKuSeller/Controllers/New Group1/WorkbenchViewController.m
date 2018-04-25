@@ -13,6 +13,7 @@
 #import "SettlementViewController.h"
 #import "CashierViewController.h"
 #import "MyHandler.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface WorkbenchViewController ()
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
@@ -25,7 +26,17 @@
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
     
-    
+//    AVSpeechSynthesizer * av = [[AVSpeechSynthesizer alloc]init];
+//    //设置播报的内容
+//    AVSpeechUtterance * utterance = [[AVSpeechUtterance alloc]initWithString:@"成功收款100元"];
+//    //设置语言类别
+//    utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
+//    AVSpeechSynthesisVoice * voiceType = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+//    utterance.voice = voiceType;
+//    //设置播报语速
+//    utterance.rate = 0.5;
+//    [av speakUtterance:utterance];
+
 }
 
 - (void)onCreate{

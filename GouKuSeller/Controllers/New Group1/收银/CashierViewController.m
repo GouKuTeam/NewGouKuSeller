@@ -207,20 +207,21 @@
     }else{
         if (btn == self.v_cashierBottom.btn_cashPayment) {
             // 现金支付   先网络请求提交订单
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             NSMutableArray *arrItem = [[NSMutableArray alloc]init];
             for (int i = 0; i < self.arr_commodityList.count; i ++) {
                 CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:i];
-                [dic setValue:entity.name forKey:@"name"];
-                [dic setValue:entity.skuId forKey:@"skuId"];
-                [dic setValue:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
-                [dic setValue:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
-                [dic setValue:[NSNumber numberWithDouble:entity.price -entity.settlementPrice] forKey:@"pricePreferential"];
-                [dic setValue:entity.standards forKey:@"standards"];
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                [dic setObject:entity.name forKey:@"name"];
+                [dic setObject:entity.skuId forKey:@"skuId"];
+                [dic setObject:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
+                [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
+                [dic setObject:[NSNumber numberWithDouble:entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
+                [dic setObject:entity.standards forKey:@"standards"];
                 if (entity.itemActId) {
-                    [dic setValue:entity.itemActId forKey:@"itemActId"];
+                    [dic setObject:entity.itemActId forKey:@"itemActId"];
                 }
                 [arrItem addObject:dic];
+                
             }
             [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:self.totalPrice + self.discountPrice payReduce:self.discountPrice payActual:self.totalPrice noGoods:self.noGoods payType:2 orderDiscount:self.orderDiscount orderMinus:self.orderMinus loseSmallReduce:self.loseSmallReduce prepare:^{
                 
@@ -314,9 +315,9 @@
         self.userFukuanma = textField.text;
         self.tfsousuo.text = @"";
         //购酷支付   先网络请求提交订单
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         NSMutableArray *arrItem = [[NSMutableArray alloc]init];
         for (int i = 0; i < self.arr_commodityList.count; i ++) {
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:i];
             [dic setValue:entity.name forKey:@"name"];
             [dic setValue:entity.skuId forKey:@"skuId"];
