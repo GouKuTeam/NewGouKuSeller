@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "CommodityFromCodeEntity.h"
-typedef void(^changeEntity)(void);
+typedef void(^changeEntity)(CommodityFromCodeEntity *entity);
 typedef void(^addCommodityFinish)(void);
 
 @interface AddNewCommodityViewController : BaseViewController

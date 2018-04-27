@@ -18,6 +18,8 @@
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>
 
+@property (nonatomic, assign) UIBackgroundTaskIdentifier backgrounTask;
+@property (nonatomic,strong) NSTimer *timer;
 
 @end
 
@@ -87,8 +89,6 @@
         }
     }];
 
-    
-    
     return YES;
 }
 
@@ -215,25 +215,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     return dic;
 }
 
-//- (NSString *)logDic:(NSDictionary *)dic {
-//    if (![dic count]) {
-//        return nil;
-//    }
-//    NSString *tempStr1 =
-//    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
-//                                                 withString:@"\\U"];
-//    NSString *tempStr2 =
-//    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-//    NSString *tempStr3 =
-//    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-//    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-//    NSString *str =
-//    [NSPropertyListSerialization propertyListFromData:tempData
-//                                     mutabilityOption:NSPropertyListImmutable
-//                                               format:NULL
-//                                     errorDescription:NULL];
-//    return str;
-//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -245,6 +226,28 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [self backgroundMode];
+}
+
+
+-(void)backgroundMode{
+    //创建一个背景任务去和系统请求后台运行的时间
+    self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgrounTask];
+        self.backgrounTask = UIBackgroundTaskInvalid;
+    }];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(applyToSystemForMoreTime) userInfo:nil repeats:YES];
+    [self.timer fire];
+}
+
+- (void)applyToSystemForMoreTime {
+    if ([UIApplication sharedApplication].backgroundTimeRemaining < 30.0) {//如果剩余时间小于30秒
+        [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
+        self.backgrounTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
+            self.self.backgrounTask = UIBackgroundTaskInvalid;
+        }];
+    }
 }
 
 

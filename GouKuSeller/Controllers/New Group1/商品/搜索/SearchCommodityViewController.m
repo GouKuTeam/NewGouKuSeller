@@ -15,6 +15,7 @@
 #import "CommodityFromCodeEntity.h"
 #import "MoreEditView.h"
 #import "AddNewCommodityViewController.h"
+#import "CommodityViewController.h"
 
 #define NULLROW    999
 
@@ -245,11 +246,18 @@
             [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
     }
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    NSArray *arr_vc = self.navigationController.viewControllers;
+//    for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
+//        UIViewController *vc = [arr_vc objectAtIndex:index];
+//        if (![vc isKindOfClass:[SearchCommodityViewController class]] && ![vc isKindOfClass:[CommodityViewController class]]) {
+//            [self.navigationController popToViewController:vc animated:YES];
+//            return;
+//        }
+//    }
 }
 
 - (void)cancelAction{

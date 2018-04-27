@@ -16,13 +16,9 @@
 
 @interface TabBarViewController ()
 
-
 @end
 
-
-
 @implementation TabBarViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -76,6 +76,10 @@
             [self.btn_all setBackgroundColor:[UIColor whiteColor]];
             [self.btn_all setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
             [self.btn_all setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateSelected];
+            if (i == 0) {
+                [self.btn_all setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+                [self.btn_all setBackgroundColor:[UIColor colorWithHexString:@"#4167b2"]];
+            }
             [self.btn_all addTarget:self action:@selector(btn_allAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.arr_btn addObject:self.btn_all];
         }

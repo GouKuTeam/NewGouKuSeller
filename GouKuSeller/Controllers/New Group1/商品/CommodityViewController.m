@@ -23,6 +23,7 @@
 #import "SearchCommodityViewController.h"
 #import "CommodityStatusView.h"
 #import "MoreEditView.h"
+#import "MoreAddCommodityViewController.h"
 
 #define NULLROW    999
 
@@ -204,6 +205,16 @@
     self.tb_right.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tb_right];
     
+    if (self.enterFormType == EnterFromActice) {
+        [self.view_bottom setHidden:YES];
+        [self.tb_left setFrame:CGRectMake(0,SafeAreaTopHeight, 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight)];
+        [self.tb_right setFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight)];
+    }else{
+        [self.view_bottom setHidden:NO];
+        [self.tb_left setFrame:CGRectMake(0,SafeAreaTopHeight, 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50)];
+        [self.tb_right setFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50)];
+    }
+    
     self.v_commodityStatusView = [[CommodityStatusView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight)];
     [self.view addSubview:self.v_commodityStatusView];
     [self.v_commodityStatusView.btn_chushou addTarget:self action:@selector(btn_chushouAction) forControlEvents:UIControlEventTouchUpInside];
@@ -273,46 +284,28 @@
 
 - (void)btn_buildCommodityAction{
     
-    self.alertController = [UIAlertController alertControllerWithTitle:nil message:@"输入条形码" preferredStyle:UIAlertControllerStyleAlert];
-    [self.alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    }]];
-    [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //获取第1个输入框；
-        UITextField *userNameTextField = self.alertController.textFields.firstObject;
-        NSLog(@"条形码 = %@",userNameTextField.text);
-        if (![userNameTextField.text isEqualToString:@""]) {
-            [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
-                NSDictionary *dic = (NSDictionary *)obj;
-                if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                     CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
-                    AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
-                    vc.comeFrom = @"新建商品";
-                    vc.entityInformation = entity;
-                    [self.navigationController pushViewController:vc animated:YES];
-                    vc.addCommodityFinish = ^{
-                        [self btn_buildCommodityAction];
-                    };
-                }else{
-                    [MBProgressHUD hideHUD];
-                    [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
-                    [self btn_buildCommodityAction];
-                }
-            } failed:^(NSInteger statusCode, id json) {
-                [MBProgressHUD showErrorMessage:(NSString *)json];
-            }];
-        }else{
-            [MBProgressHUD showInfoMessage:@"请输入条形码"];
-        }
-    }]];
     
-    //定义第一个输入框；
+    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"单个增加商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self addCommoditySingle];
+    }];
     
-    [self.alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-         textField.delegate = self;
-//        textField.secureTextEntry = YES;
+    UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"批量新建商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        MoreAddCommodityViewController * vc = [[MoreAddCommodityViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        vc.addCommodityMoreFinish = ^{
+            [self loadData];
+        };
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
-    [self presentViewController:self.alertController animated:true completion:nil];
+    [actionSheetController addAction:addoneCAction];
+    [actionSheetController addAction:addtwoCAction];
+    [actionSheetController addAction:cancelAction];
+    [self presentViewController:actionSheetController animated:YES completion:nil];
+    
+    
     
 
     
@@ -334,12 +327,12 @@
                 vc.entityInformation = entity;
                 [self.navigationController pushViewController:vc animated:YES];
                 vc.addCommodityFinish = ^{
-                    [self btn_buildCommodityAction];
+                    [self addCommoditySingle];
                 };
             }else{
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
-                [self btn_buildCommodityAction];
+                [self addCommoditySingle];
             }
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -637,13 +630,22 @@
 }
 
 - (void)edtiAction:(UIButton *)btn_sender{
-    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+    CommodityFromCodeEntity *entityDemo = [self.arr_commodity objectAtIndex:btn_sender.tag];
     AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
     vc.comeFrom = @"编辑商品";
-    vc.entityInformation = entity;
+    vc.entityInformation = entityDemo;
     [self.navigationController pushViewController:vc animated:YES];
-    vc.changeEntity = ^{
-        [self.tb_right requestDataSource];
+    vc.changeEntity = ^(CommodityFromCodeEntity *entity){
+        ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
+        if (self.selectedRow != NULLROW) {
+            shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
+        }
+        if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+            [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
+        }else{
+            [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+        }
+        [self.tb_right reloadData];
     };
 }
 
@@ -652,6 +654,9 @@
     self.btnIndex = [NSNumber numberWithInt:1];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"出售中" forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.tb_right requestDataSource];
     
 }
@@ -660,6 +665,9 @@
     self.btnIndex = [NSNumber numberWithInt:2];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"已售罄" forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
     [self.tb_right requestDataSource];
 }
 
@@ -667,6 +675,9 @@
     self.btnIndex = [NSNumber numberWithInt:3];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"已下架" forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.tb_right requestDataSource];
 }
 
@@ -794,6 +805,46 @@
 
 - (void)statusViewDissmiss{
     [self.v_commodityStatusView setHidden:YES];
+}
+
+//单个增加商品
+-(void)addCommoditySingle{
+    self.alertController = [UIAlertController alertControllerWithTitle:nil message:@"输入条形码" preferredStyle:UIAlertControllerStyleAlert];
+    [self.alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取第1个输入框；
+        UITextField *userNameTextField = self.alertController.textFields.firstObject;
+        NSLog(@"条形码 = %@",userNameTextField.text);
+        if (![userNameTextField.text isEqualToString:@""]) {
+            [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
+                NSDictionary *dic = (NSDictionary *)obj;
+                if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                    CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
+                    AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
+                    vc.comeFrom = @"新建商品";
+                    vc.entityInformation = entity;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    vc.addCommodityFinish = ^{
+                        [self addCommoditySingle];
+                    };
+                }else{
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+                    [self addCommoditySingle];
+                }
+            } failed:^(NSInteger statusCode, id json) {
+                [MBProgressHUD showErrorMessage:(NSString *)json];
+            }];
+        }else{
+            [MBProgressHUD showInfoMessage:@"请输入条形码"];
+        }
+    }]];
+    //定义第一个输入框；
+    [self.alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.delegate = self;
+    }];
+    [self presentViewController:self.alertController animated:true completion:nil];
 }
 
 - (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation

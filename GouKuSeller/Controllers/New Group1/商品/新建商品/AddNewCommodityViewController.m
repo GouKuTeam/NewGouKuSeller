@@ -64,9 +64,9 @@
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
     
-    UITapGestureRecognizer* imgTitle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
-    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitle];
-    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+//    UITapGestureRecognizer* imgTitle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
+//    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitle];
+//    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
     self.v_commodityView.v_price.tf_detail.delegate = self;
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
@@ -205,10 +205,9 @@
                 
             } success:^(id obj) {
                 CommodityFromCodeEntity *entity = (CommodityFromCodeEntity *)obj;
-                self.entityInformation = entity;
                 [self.navigationController popViewControllerAnimated:YES];
                 if (self.changeEntity) {
-                    self.changeEntity();
+                    self.changeEntity(entity);
                 }
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
@@ -231,9 +230,7 @@
                 [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
             }];
         }
-        
     }
-    
 }
 
 - (void)addCommodityFinishAction{

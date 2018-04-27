@@ -47,7 +47,7 @@
 }
 
 //添加订单
-+(void)addOrderWithShopId:(NSNumber *)shopid items:(NSArray *)items payTotal:(double)payTotal payReduce:(double)payReduce payActual:(double)payActual noGoods:(double)noGoods payType:(int)payType orderDiscount:(double)orderDiscount orderMinus:(double)orderMinus loseSmallReduce:(double)loseSmallReduce prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)addOrderWithShopId:(NSNumber *)shopid items:(NSArray *)items payTotal:(NSString *)payTotal payReduce:(NSString *)payReduce payActual:(NSString *)payActual noGoods:(NSString *)noGoods payType:(int)payType orderDiscount:(NSString *)orderDiscount orderMinus:(NSString *)orderMinus loseSmallReduce:(NSString *)loseSmallReduce prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [self requestUrlWithPath:API_POST_AddOrder];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (shopid) {
@@ -59,19 +59,19 @@
     }
     if (payTotal) {
         //总额
-        [dic setObject:[NSNumber numberWithDouble:payTotal] forKey:@"payTotal"];
+        [dic setObject:payTotal forKey:@"payTotal"];
     }
     if (payReduce) {
         //优惠金额
-        [dic setObject:[NSNumber numberWithDouble:payReduce] forKey:@"payReduce"];
+        [dic setObject:payReduce forKey:@"payReduce"];
     }
     if (payActual) {
         //实付金额
-        [dic setObject:[NSNumber numberWithDouble:payActual] forKey:@"payActual"];
+        [dic setObject:payActual forKey:@"payActual"];
     }
     if (noGoods) {
         //无码商品
-        [dic setObject:[NSNumber numberWithDouble:noGoods] forKey:@"noGoods"];
+        [dic setObject:noGoods forKey:@"noGoods"];
     }
     if (payType) {
         //支付方式  1 微信 2 现金
@@ -79,15 +79,15 @@
     }
     if (orderDiscount) {
         //整单折扣
-        [dic setObject:[NSNumber numberWithDouble:orderDiscount] forKey:@"orderDiscount"];
+        [dic setObject:orderDiscount forKey:@"orderDiscount"];
     }
     if (orderMinus) {
         //整单减价
-        [dic setObject:[NSNumber numberWithDouble:orderMinus] forKey:@"orderMinus"];
+        [dic setObject:orderMinus forKey:@"orderMinus"];
     }
     if (loseSmallReduce) {
         //去零
-        [dic setObject:[NSNumber numberWithDouble:loseSmallReduce] forKey:@"loseSmallReduce"];
+        [dic setObject:loseSmallReduce forKey:@"loseSmallReduce"];
     }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost

@@ -14,7 +14,7 @@
 +(void)commodityCashierWithBarcode:(NSString *)barcode shopId:(NSNumber *)shopid addup:(double)addup prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //添加订单
-+(void)addOrderWithShopId:(NSNumber *)shopid items:(NSArray *)items payTotal:(double)payTotal payReduce:(double)payReduce payActual:(double)payActual noGoods:(double)noGoods payType:(int)payType orderDiscount:(double)orderDiscount orderMinus:(double)orderMinus loseSmallReduce:(double)loseSmallReduce prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++(void)addOrderWithShopId:(NSNumber *)shopid items:(NSArray *)items payTotal:(NSString *)payTotal payReduce:(NSString *)payReduce payActual:(NSString *)payActual noGoods:(NSString *)noGoods payType:(int)payType orderDiscount:(NSString *)orderDiscount orderMinus:(NSString *)orderMinus loseSmallReduce:(NSString *)loseSmallReduce prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //扫描用户付款码
 +(void)scanUserCashCodeWithOpenId:(NSString *)openid orderId:(NSString *)orderid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;

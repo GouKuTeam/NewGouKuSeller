@@ -54,7 +54,7 @@
             make.height.mas_equalTo(49);
         }];
         [self.btn_shouwan setTitle:@"已售罄" forState:UIControlStateNormal];
-        [self.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        [self.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_shouwan.titleLabel.font = [UIFont systemFontOfSize:18];
         
         self.img_line2 = [[UIImageView alloc]init];
@@ -76,7 +76,7 @@
             make.height.mas_equalTo(49);
         }];
         [self.btn_xiajia setTitle:@"已下架" forState:UIControlStateNormal];
-        [self.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        [self.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_xiajia.titleLabel.font = [UIFont systemFontOfSize:18];
     }
     return self;

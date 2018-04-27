@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
+		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		740C688A207C98930044889F /* PayInCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6889207C98930044889F /* PayInCashViewController.m */; };
 		740C688D207C989F0044889F /* PayInGouKuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688C207C989F0044889F /* PayInGouKuViewController.m */; };
 		740C6890207CA8A30044889F /* PayInCashCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688F207CA8A30044889F /* PayInCashCompleteView.m */; };
@@ -545,6 +546,8 @@
 /* Begin PBXFileReference section */
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
+		74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreAddCommodityViewController.m; sourceTree = "<group>"; };
 		740C6888207C98930044889F /* PayInCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInCashViewController.h; sourceTree = "<group>"; };
 		740C6889207C98930044889F /* PayInCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashViewController.m; sourceTree = "<group>"; };
 		740C688B207C989F0044889F /* PayInGouKuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInGouKuViewController.h; sourceTree = "<group>"; };
@@ -1527,6 +1530,8 @@
 			children = (
 				74B4E8C520512D7C006AFB6C /* CommodityViewController.h */,
 				74B4E8C620512D7C006AFB6C /* CommodityViewController.m */,
+				74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */,
+				74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */,
 				744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */,
 				744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */,
 				744ABA0C205255DB00BBB26E /* StoreCategoryTableViewCell.h */,
@@ -2206,6 +2211,7 @@
 				7489CC80207E0B1700971BED /* PayWaitView.m in Sources */,
 				741D3CA12081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				7491FA4B206CC54F0006F388 /* CashierViewController.m in Sources */,
+				74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */,
 				741D3C9C2081D0D000C56FCA /* CommonAlertView.m in Sources */,
 				7491FA8B2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				7491FA2C206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,

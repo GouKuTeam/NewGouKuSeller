@@ -10,4 +10,5 @@
 
 @interface SearchCommodityViewController : BaseViewController
 
+
 @end

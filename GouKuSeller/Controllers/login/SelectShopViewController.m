@@ -9,6 +9,7 @@
 #import "SelectShopViewController.h"
 #import "TabBarViewController.h"
 #import "RTHttpClient.h"
+#import "JPUSHService.h"
 
 @interface SelectShopViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView     *tb_shopList;
@@ -64,6 +65,30 @@
             [LoginStorage saveIsLogin:YES];
             TabBarViewController *vc = [[TabBarViewController alloc]init];
             [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+            
+            //首次登陆  需要上传一次  推送registrationID
+            [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+                if(resCode == 0){
+                    NSLog(@"registrationID获取成功：%@",registrationID);
+                    NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
+                    
+                    NSDictionary *dic = @{@"registionid":registrationID};
+                    RTHttpClient *asas = [[RTHttpClient alloc]init];
+                    [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
+                        
+                    } success:^(NSURLSessionDataTask *task, id responseObject) {
+                        
+                        
+                    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                        NSLog(@"error == %@",error);
+                        
+                    }];
+                }
+                else{
+                    NSLog(@"registrationID获取失败，code：%d",resCode);
+                }
+            }];
+            
         }else{
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];

@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     self.isHideLeftBtn = YES;
     self.navigationItem.leftBarButtonItem = nil;
     self.title = @"登录";
@@ -109,17 +109,13 @@
             SelectShopViewController *vc = [[SelectShopViewController alloc]init];
             vc.arr_shop = [[[responseObject objectForKey:@"data"] objectForKey:@"list"] objectForKey:@"data"];
             [self.navigationController pushViewController:vc animated:YES];
-            
         }else{
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
         }
-        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error == %@",error);
-        
     }];
-    
 }
 //找回密码
 - (void)findPassWordAction{
