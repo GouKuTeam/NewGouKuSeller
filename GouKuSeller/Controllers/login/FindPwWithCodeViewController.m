@@ -90,7 +90,8 @@
 
 - (void)btn_codeAction:(UIButton *)sender{
     
-    NSString *strUrl = @"http://47.97.174.40:9000/login/getCode";
+//    NSString *strUrl = @"http://47.97.174.40:9000/login/getCode";
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login/getCode",API_Login];
     NSDictionary *dic = @{@"phone":self.phoneNum,@"account":[LoginStorage GetUserName]};
     RTHttpClient *asas = [[RTHttpClient alloc]init];
     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
@@ -154,7 +155,8 @@
 
 - (void)btn_nextAction{
     
-    NSString *strUrl = @"http://47.97.174.40:9000/login/checkCode";
+//    NSString *strUrl = @"http://47.97.174.40:9000/login/checkCode";
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login/checkCode",API_Login];
 
     NSDictionary *dic = @{@"phone":self.phoneNum,@"code":self.tf_code.text};
     RTHttpClient *asas = [[RTHttpClient alloc]init];

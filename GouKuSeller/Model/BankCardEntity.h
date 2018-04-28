@@ -15,6 +15,7 @@
 @property (nonatomic ,strong)NSString             *bankName;
 @property (nonatomic ,strong)NSString             *place;
 @property (nonatomic ,strong)NSString             *bankBranch;
+@property (nonatomic ,strong)NSString             *accountName;
 @property (nonatomic ,assign)BOOL                  cardType;
 
 

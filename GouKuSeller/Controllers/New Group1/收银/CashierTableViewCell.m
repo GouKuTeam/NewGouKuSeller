@@ -98,7 +98,7 @@
     }else{
         [self.lab_num setText:@""];
     }
-    if (entity.pricePreferential > 0) {
+    if (entity.price - entity.pricePreferential > 0) {
         //有活动的情况
         [self.lab_price_yuanjia setHidden:NO];
         [self.lab_price_yuanjia setText:[NSString stringWithFormat:@"¥%.2f",entity.price * entity.amount]];

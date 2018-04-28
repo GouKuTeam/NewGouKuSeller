@@ -79,6 +79,8 @@
     self.tb_activity.tableFooterView = [UIView new];
     
     [self.tb_activity requestDataSource];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifionaddActiveAction) name:@"addActiveComplete" object:nil];
 }
 
 - (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
@@ -195,7 +197,8 @@
         [ActiveHandler stopActiveWithActiveId:[NSNumber numberWithLong:entity._id] prepare:^{
             
         } success:^(id obj) {
-            [self.tb_activity requestDataSource];
+            [self.arr_data removeObjectAtIndex:btn.tag];
+            [self.tb_activity reloadData];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
         }];
@@ -238,6 +241,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma -
+
+- (void)NocatifionaddActiveAction{
+    [self.tb_activity requestDataSource];
+}
 
 - (UIImage *)createImageWithColor:(UIColor *)color{
     

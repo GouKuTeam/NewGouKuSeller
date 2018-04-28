@@ -22,7 +22,7 @@
 - (void)onCreate{
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0, (SCREEN_HEIGHT - SafeAreaTopHeight) / 2 - 25, SCREEN_WIDTH, 22)];
     [self.view addSubview:lab];
-    [lab setText:@"够酷.商家端"];
+    [lab setText:@"购酷.商家端"];
     [lab setTextColor:[UIColor blackColor]];
     lab.textAlignment = NSTextAlignmentCenter;
     [lab setFont:[UIFont systemFontOfSize:16]];

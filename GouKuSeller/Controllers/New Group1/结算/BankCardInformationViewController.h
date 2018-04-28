@@ -8,6 +8,13 @@
 
 #import "BaseViewController.h"
 
+typedef enum : int {
+    EnterFormJieSuan,
+    EnterFromCard
+}EnterFormType;
+
 @interface BankCardInformationViewController : BaseViewController
+
+@property (nonatomic ,assign)EnterFormType    enterFromType;
 
 @end

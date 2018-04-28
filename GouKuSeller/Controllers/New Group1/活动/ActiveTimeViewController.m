@@ -163,7 +163,7 @@
     self.arr_selectTime = [NSMutableArray arrayWithArray:self.arr_activeTime];
     if (self.v_tabHeader.switch_quantian.on) {
         [self.arr_selectTime removeAllObjects];
-        [self.arr_selectTime addObject:@{@"beginAt":@"0:00",@"endAt":@"24:00"}];
+        [self.arr_selectTime addObject:@{@"beginAt":@"00:00",@"endAt":@"23:59"}];
         NSLog(@"switch is on");
     } else {
         NSLog(@"switch is off");

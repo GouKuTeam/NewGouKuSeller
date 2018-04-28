@@ -97,7 +97,8 @@
 }
 
 - (void)btn_loginAction{
-    NSString *strUrl = @"http://47.97.174.40:9000/login";
+//    NSString *strUrl = @"http://47.97.174.40:9000/login";
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login",API_Login];
 
     NSDictionary *dic = @{@"account":self.tef_userName.text,@"password":self.tef_passWord.text};
     RTHttpClient *asas = [[RTHttpClient alloc]init];

@@ -105,8 +105,8 @@
     }
     NSLog(@"确定修改了");
     
-    NSString *strUrl = @"http://47.97.174.40:9000/mine/changePassword";
-    
+//    NSString *strUrl = @"http://47.97.174.40:9000/mine/changePassword";
+    NSString *strUrl = [NSString stringWithFormat:@"%@/mine/changePassword",API_Login];
     NSDictionary *dic = @{@"username":[LoginStorage GetUserName],@"oldPassword":self.tf_jiu.text,@"newPassword":self.tf_xin.text};
     RTHttpClient *asas = [[RTHttpClient alloc]init];
     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{

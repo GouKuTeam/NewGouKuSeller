@@ -81,8 +81,8 @@
         [MBProgressHUD showInfoMessage:@"请输入相同密码"];
         return;
     }
-    NSString *strUrl = @"http://47.97.174.40:9000/login/updateOper";
-    
+//    NSString *strUrl = @"http://47.97.174.40:9000/login/updateOper";
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login/updateOper",API_Login];
     NSDictionary *dic = @{@"account":[LoginStorage GetUserName],@"password":self.tf_sureCode.text};
     //    NSDictionary *dic = @{@"account":@"oper001",@"password":@"123456"};
     RTHttpClient *asas = [[RTHttpClient alloc]init];

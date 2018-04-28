@@ -8,11 +8,7 @@
 
 #import "BaseViewController.h"
 #import "CommodityFromCodeEntity.h"
-
-typedef enum : int {
-    EnterFormNormal,
-    EnterFromActice
-}EnterFormType;
+#import "SearchCommodityViewController.h"
 
 typedef void(^selectCommodity)(CommodityFromCodeEntity *entity);
 @interface CommodityViewController : BaseViewController

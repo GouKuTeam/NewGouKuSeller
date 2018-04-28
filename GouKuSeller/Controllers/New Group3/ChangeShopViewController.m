@@ -70,7 +70,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *strUrl = [NSString stringWithFormat:@"http://47.97.174.40:9000/login/choose/shop/%@",[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login/choose/shop/%@",API_Login,[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"sid"]];
     RTHttpClient *asas = [[RTHttpClient alloc]init];
     [asas requestWithPath:strUrl method:RTHttpRequestGet parameters:nil prepare:^{
         

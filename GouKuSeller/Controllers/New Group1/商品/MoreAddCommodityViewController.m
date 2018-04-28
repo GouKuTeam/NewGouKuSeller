@@ -68,7 +68,11 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
-    [cell.textLabel setText:entity.name];
+    if (entity.name) {
+        [cell.textLabel setText:entity.name];
+    }else{
+        [cell.textLabel setText:[NSString stringWithFormat:@"%@",entity.barcode]];
+    }
     
     return cell;
 }

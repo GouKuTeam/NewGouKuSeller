@@ -12,7 +12,6 @@
 #import "SearchWithCodeTableViewCell.h"
 #import "CommodityHandler.h"
 #import "LoginStorage.h"
-#import "CommodityFromCodeEntity.h"
 #import "MoreEditView.h"
 #import "AddNewCommodityViewController.h"
 #import "CommodityViewController.h"
@@ -81,7 +80,7 @@
     self.navigationItem.titleView = v_header;
     
     self.tb_search = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:NO hasFooterRefreshing:YES];
-
+    
     [self.view addSubview:self.tb_search];
     self.tb_search.dataSource = self;
     self.tb_search.delegate = self;
@@ -250,14 +249,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    NSArray *arr_vc = self.navigationController.viewControllers;
-//    for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
-//        UIViewController *vc = [arr_vc objectAtIndex:index];
-//        if (![vc isKindOfClass:[SearchCommodityViewController class]] && ![vc isKindOfClass:[CommodityViewController class]]) {
-//            [self.navigationController popToViewController:vc animated:YES];
-//            return;
-//        }
-//    }
+    if (self.enterFormType == EnterFromActice) {
+        CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:indexPath.row];
+        if (self.selectCommodity) {
+            self.selectCommodity(entity);
+        }
+        NSArray *arr_vc = self.navigationController.viewControllers;
+        for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
+            UIViewController *vc = [arr_vc objectAtIndex:index];
+            if (![vc isKindOfClass:[SearchCommodityViewController class]] && ![vc isKindOfClass:[CommodityViewController class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+                return;
+            }
+        }
+    }
 }
 
 - (void)cancelAction{
@@ -270,13 +275,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+

@@ -7,8 +7,17 @@
 //
 
 #import "BaseViewController.h"
+#import "CommodityFromCodeEntity.h"
 
+
+typedef enum : int {
+    EnterFormNormal,
+    EnterFromActice
+}EnterFormType;
+
+typedef void(^searchSelectCommodity)(CommodityFromCodeEntity *entity);
 @interface SearchCommodityViewController : BaseViewController
-
+@property (nonatomic,assign)EnterFormType   enterFormType;
+@property (nonatomic,copy)searchSelectCommodity   selectCommodity;
 
 @end

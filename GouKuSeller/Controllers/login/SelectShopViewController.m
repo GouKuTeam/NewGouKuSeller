@@ -50,7 +50,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *dic = [self.arr_shop objectAtIndex:indexPath.row];
-    NSString *strUrl = [NSString stringWithFormat:@"http://47.97.174.40:9000/login/choose/shop/%@",[dic objectForKey:@"sid"]];
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login/choose/shop/%@",API_Login,[dic objectForKey:@"sid"]];
     
     RTHttpClient *asas = [[RTHttpClient alloc]init];
     [asas requestWithPath:strUrl method:RTHttpRequestGet parameters:nil prepare:^{
@@ -70,7 +70,8 @@
             [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
                 if(resCode == 0){
                     NSLog(@"registrationID获取成功：%@",registrationID);
-                    NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
+//                    NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
+                    NSString *strUrl = [NSString stringWithFormat:@"%@/registionid/set",API_Login];
                     
                     NSDictionary *dic = @{@"registionid":registrationID};
                     RTHttpClient *asas = [[RTHttpClient alloc]init];

@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = nil;
     self.title = @"订单";
-    
+    [self.view setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(searchBarAction)];
     [btn_right setImage:[UIImage imageNamed:@"home_search"]];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
@@ -47,6 +47,7 @@
 - (void)onCreate{
     self.tb_order = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     [self.view addSubview:self.tb_order];
+    [self.tb_order setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     self.tb_order.delegate = self;
     self.tb_order.dataSource = self;
     self.tb_order.tableViewDelegate = self;

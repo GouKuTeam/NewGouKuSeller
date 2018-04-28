@@ -57,8 +57,15 @@
         //    }
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+    
+    BOOL isProduction;
+    if ([Jpush isEqualToString:@"YES"]) {
+        isProduction = YES;
+    }else{
+        isProduction = NO;
+    }
     //如不需要使用IDFA，advertisingIdentifier 可为nil
-    [JPUSHService setupWithOption:launchOptions appKey:appKey
+    [JPUSHService setupWithOption:launchOptions appKey:KEY_JPUSH
                           channel:channel
                  apsForProduction:isProduction
             advertisingIdentifier:nil];
@@ -70,8 +77,8 @@
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
             NSLog(@"registrationID获取成功：%@",registrationID);
-            NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
-            
+//            NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
+            NSString *strUrl = [NSString stringWithFormat:@"%@/registionid/set",API_Login];
             NSDictionary *dic = @{@"registionid":registrationID};
             RTHttpClient *asas = [[RTHttpClient alloc]init];
             [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
@@ -190,8 +197,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
    
     NSLog(@"dic = %@",dic);
     if ([[dic objectForKey:@"type"] intValue] == 1 && [dic objectForKey:@"statys"] == 0) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
 }
 #endif

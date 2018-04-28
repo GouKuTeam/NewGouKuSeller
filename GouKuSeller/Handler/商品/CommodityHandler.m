@@ -17,8 +17,8 @@
 // 获取店内分类列表数据
 + (void)getCommodityCategoryWithShopId:(NSString *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed
 {
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_ShopCommodityCategory,shopId]];
-//    NSString *str_url = @"http://47.97.174.40:9001/shop/ware/category/all/2";
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_ShopCommodityCategory,shopId]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_ShopCommodityCategory,shopId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -61,7 +61,8 @@
 
 //获取店内一级分类
 + (void)getShopCatagoryWithShopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_ShopCatagory];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_ShopCatagory];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_ShopCatagory];
     NSDictionary *dic = @{@"shopId":shopId,@"pid":[NSNumber numberWithInt:pid]};
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -85,8 +86,8 @@
 
 //获取商品规格
 + (void)getStandardWithCategoryId:(int)categoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_Standard,[NSNumber numberWithInt:categoryId]]];
-//    NSString *str_url = @"http://47.97.174.40:9001/ware/standard/list/3";
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_Standard,[NSNumber numberWithInt:categoryId]]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_Standard,[NSNumber numberWithInt:categoryId]];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -106,7 +107,8 @@
 
 + (void)getCommodityInformationWithBarCode:(NSString *)barcode prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityInformationFromBarCode,barcode]];
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityInformationFromBarCode,barcode]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_CommodityInformationFromBarCode,barcode];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -122,7 +124,8 @@
 
 //新增店内分类
 + (void)addShopCatagoryWithName:(NSString *)name shopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_AddShopCatagory];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_AddShopCatagory];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_AddShopCatagory];
     NSDictionary *dic = @{@"name":name,
                           @"shopId":shopId,
                           @"pid":[NSNumber numberWithInt:pid]
@@ -147,7 +150,8 @@
 
 //修改店内分类
 + (void)udpShopCatagoryWithName:(NSString *)name ownid:(int)ownid shopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_UdpShopCatagory];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_UdpShopCatagory];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_UdpShopCatagory];
     NSDictionary *dic = @{@"name":name,
                           @"id":[NSNumber numberWithInt:ownid],
                           @"shopId":shopId,
@@ -171,7 +175,8 @@
 }
 
 + (void)delShopCatagoryWithOwnId:(int)ownid shopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_DelShopCatagory];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_DelShopCatagory];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_DelShopCatagory];
     NSDictionary *dic = @{
                           @"id":[NSNumber numberWithInt:ownid],
                           @"shopId":shopId,
@@ -197,20 +202,8 @@
 //新增商品
 + (void)addCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid xprice:(double)xprice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
-    NSString *str_url = [self requestUrlWithPath:API_GET_AddCommodity];
-//    NSDictionary *dic = @{
-//                          @"shopId":shopId,
-//                          @"name":name,
-//                          @"itemId":itemId,
-//                          @"barcode":barcode,
-//                          @"shopWareCategoryId":shopWareCategoryId,
-//                          @"wareCategoryId":wareCategoryId,
-//                          @"price":[NSNumber numberWithDouble:price],
-//                          @"stock":stock,
-//                          @"pictures":pictures,
-//                          @"standards":standards,
-//                          @"wid":wid
-//                          };
+//    NSString *str_url = [self requestUrlWithPath:API_GET_AddCommodity];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_AddCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (shopId) {
         [dic setObject:shopId forKey:@"shopId"];
@@ -260,7 +253,8 @@
 
 //商品列表查询
 + (void)getCommodityListWithshopId:(NSNumber *)shopId shopWareCategoryId:(NSNumber *)shopWareCategoryId status:(NSNumber *)status pageNum:(int)pageNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_CommodityList];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_CommodityList];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_CommodityList];
     NSDictionary *dic = @{
                           @"shopId":shopId,
                           @"shopWareCategoryId":shopWareCategoryId,
@@ -287,7 +281,9 @@
 
 //搜索商品
 + (void)searchCommodityWithShopId:(NSNumber *)shopId keyword:(NSString *)keyword pageNum:(int)pageNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_SearchCommodity];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_SearchCommodity];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_SearchCommodity];
+
     NSDictionary *dic = @{
                           @"shopId":shopId,
                           @"keyword":keyword,
@@ -313,7 +309,8 @@
 
 //门店商品下架
 + (void)commoditydownShelfWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_downshelf,commodityId]];
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_downshelf,commodityId]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_downshelf,commodityId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -332,7 +329,8 @@
 
 //门店商品上架
 + (void)commodityupShelfWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_upshelf,commodityId]];
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_upshelf,commodityId]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_upshelf,commodityId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -351,7 +349,8 @@
 
 //门店商品删除
 + (void)commoditydeleteWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityDelete,commodityId]];
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityDelete,commodityId]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_CommodityDelete,commodityId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -370,7 +369,8 @@
 
 //门店商品编辑(更新)
 + (void)commodityEditWithCommodityId:(NSString *)commodityId price:(double)price stock:(NSString *)stock xprice:(double)xprice shopWareCategoryId:(NSNumber *)shopWareCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_CommodityEdit];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_CommodityEdit];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_CommodityEdit];
     NSDictionary *dic = @{
                           @"skuId":commodityId,
                           @"price":[NSNumber numberWithDouble:price],

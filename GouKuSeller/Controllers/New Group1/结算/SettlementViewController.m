@@ -63,6 +63,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         BankCardInformationViewController *vc = [[BankCardInformationViewController alloc]init];
+        vc.enterFromType = EnterFormJieSuan;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -79,7 +80,6 @@
         vc.entity= self.accountCashEntity.bankCard;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        
         BankCardInformationViewController *vc = [[BankCardInformationViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }

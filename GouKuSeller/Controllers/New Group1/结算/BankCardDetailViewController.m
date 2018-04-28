@@ -49,7 +49,7 @@
     }
     if (indexPath.row == 1) {
         cell.lab_title.text = @"开户名称";
-        cell.tf_detail.text = self.entity.bankName;
+        cell.tf_detail.text = self.entity.accountName;
     }
     if (indexPath.row == 2) {
         cell.lab_title.text = @"卡号";
@@ -77,6 +77,7 @@
 
 - (void)rightBarAction{
     BankCardInformationViewController *vc = [[BankCardInformationViewController alloc]init];
+    vc.enterFromType = EnterFromCard;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

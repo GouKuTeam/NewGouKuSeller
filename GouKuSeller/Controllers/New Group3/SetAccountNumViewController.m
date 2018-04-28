@@ -82,7 +82,8 @@
         
     }];
     UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *strUrl = @"http://47.97.174.40:9000/login/out";
+//        NSString *strUrl = @"http://47.97.174.40:9000/login/out";
+        NSString *strUrl = [NSString stringWithFormat:@"%@/login/out",API_Login];
         RTHttpClient *asas = [[RTHttpClient alloc]init];
         [asas requestWithPath:strUrl method:RTHttpRequestGet parameters:nil prepare:^{
             

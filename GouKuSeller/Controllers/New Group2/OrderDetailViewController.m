@@ -141,7 +141,7 @@
 {
     NSDictionary *dic = [self.arr_data objectAtIndex:indexPath.section];
     ItemsEntity *entity = [[dic objectForKey:@"data"] objectAtIndex:indexPath.row];
-    if (entity.pricePreferential > 0 && indexPath.section == self.arr_data.count - 1) {
+    if ((entity.price - entity.pricePreferential) > 0 && indexPath.section == self.arr_data.count - 1) {
         return 65;
     }else{
         return 49;

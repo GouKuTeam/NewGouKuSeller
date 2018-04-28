@@ -12,7 +12,8 @@
 
 //新增满减活动
 + (void)addManJianActivityWithSid:(NSNumber *)sid activityType:(NSNumber *)activityType activityName:(NSString *)activityName dateAt:(NSString *)dateAt dateEnd:(NSString *)dateEnd week:(NSArray *)week time:(NSArray *)time manjian:(NSArray *)manjian prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POSTactivityAdd];
+//    NSString *str_url = [self requestUrlWithPath:API_POSTactivityAdd];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POSTactivityAdd];
     NSDictionary *dic = @{
                           @"actCategory":[NSNumber numberWithInt:0],
                           @"actPlatform":[NSNumber numberWithInt:0],
@@ -48,7 +49,9 @@
 
 //新增折扣  立减  特价  活动
 + (void)addOtherActivityWithSid:(NSNumber *)sid activityType:(NSNumber *)activityType activityName:(NSString *)activityName dateAt:(NSString *)dateAt dateEnd:(NSString *)dateEnd week:(NSArray *)week time:(NSArray *)time item:(NSArray *)item prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POSTactivityAdd];
+//    NSString *str_url = [self requestUrlWithPath:API_POSTactivityAdd];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POSTactivityAdd];
+
     NSDictionary *dic = @{
                           @"actCategory":[NSNumber numberWithInt:1],
                           @"actPlatform":[NSNumber numberWithInt:0],
@@ -75,7 +78,9 @@
 }
 
 + (void)getActivityListWithActCategory:(NSNumber *)actCategory status:(NSNumber *)status pageNumber:(NSNumber *)pageNumber prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_AllActList];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_AllActList];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POST_AllActList];
+
     NSDictionary *dic = @{@"actCategory":actCategory,@"status":status,@"pageNumber":pageNumber};
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -95,7 +100,9 @@
 
 //停止活动
 + (void)stopActiveWithActiveId:(id)activeId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_POST_STOPACTIVE,activeId]];
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_POST_STOPACTIVE,activeId]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_POST_STOPACTIVE,activeId];
+
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:nil
@@ -114,7 +121,8 @@
 
 //查看活动详情
 + (void)selectActiveDetailWithActiveId:(id)activeId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_SELECTACTIVE,activeId]];
+//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_SELECTACTIVE,activeId]];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Orther,API_GET_SELECTACTIVE,activeId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil

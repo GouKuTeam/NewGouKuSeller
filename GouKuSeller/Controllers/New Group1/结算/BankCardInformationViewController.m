@@ -11,6 +11,8 @@
 #import "SelectBankViewController.h"
 #import "AddressPickerView.h"
 #import "SettlementHandler.h"
+#import "SettlementViewController.h"
+#import "BankCardDetailViewController.h"
 
 #define MAX_TIMEREMAINING 60
 
@@ -258,7 +260,27 @@
     [SettlementHandler addBankCardWithBankDic:self.dic_data prepare:^{
         
     } success:^(id obj) {
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+            [MBProgressHUD showInfoMessage:@"添加成功"];
+            if (self.enterFromType == EnterFromCard) {
+                //跳过查看  直接返回结算界面
+                NSArray *arr_vc = self.navigationController.viewControllers;
+                for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
+                    UIViewController *vc = [arr_vc objectAtIndex:index];
+                    if (![vc isKindOfClass:[BankCardInformationViewController class]] && ![vc isKindOfClass:[BankCardDetailViewController class]]) {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        return;
+                    }
+                }
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+        }
+        
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
@@ -330,6 +352,8 @@
     [self.pickerView hide];
     
 }
+
+
 
 - (UIImage *)createImageWithColor:(UIColor *)color{
     

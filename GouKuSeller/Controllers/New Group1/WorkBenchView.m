@@ -212,7 +212,7 @@
         }];
         [self.lab_turnoverDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_turnoverDetail setFont:[UIFont systemFontOfSize:16]];
-        [self.lab_turnoverDetail setText:@"$2000.00"];
+        [self.lab_turnoverDetail setText:@"¥0.00"];
         [self.lab_turnoverDetail setTextAlignment:NSTextAlignmentCenter];
 
         
@@ -238,7 +238,7 @@
         }];
         [self.lab_orderDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_orderDetail setFont:[UIFont systemFontOfSize:16]];
-        [self.lab_orderDetail setText:@"5000"];
+        [self.lab_orderDetail setText:@"0"];
         [self.lab_orderDetail setTextAlignment:NSTextAlignmentCenter];
 
         
@@ -265,7 +265,7 @@
         }];
         [self.lab_unitPriceDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_unitPriceDetail setFont:[UIFont systemFontOfSize:16]];
-        [self.lab_unitPriceDetail setText:@"$20.00"];
+        [self.lab_unitPriceDetail setText:@"¥0.00"];
         [self.lab_unitPriceDetail setTextAlignment:NSTextAlignmentCenter];
         
         self.img_back2_shu1 = [[UIImageView alloc]init];

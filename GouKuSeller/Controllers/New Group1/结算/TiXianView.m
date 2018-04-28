@@ -22,7 +22,7 @@
             make.width.mas_equalTo(SCREEN_WIDTH);
             make.height.mas_equalTo(60);
         }];
-        [self.v_bank setBackgroundColor:[UIColor colorWithHexString:@"#e5fafa"]];
+        [self.v_bank setBackgroundColor:[UIColor colorWithHexString:@"#FAFAFA"]];
         
         self.lab_bankT = [[UILabel alloc]init];
         [self.v_bank addSubview:self.lab_bankT];

@@ -8,10 +8,12 @@
 
 #import "PayInCashViewController.h"
 #import "PayInCashCompleteView.h"
+#import "OttoKeyboardView.h"
+
 
 @interface PayInCashViewController ()
 
-@property (nonatomic ,strong)UITextField     *tf_price;
+@property (nonatomic ,strong)OttoTextField     *tf_price;
 @property (nonatomic ,strong)PayInCashCompleteView      *v_cashComplete;
 
 @end
@@ -52,14 +54,15 @@
     [lab_zhifu setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [lab_zhifu setFont:[UIFont systemFontOfSize:16]];
     
-    self.tf_price = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 50, 90, 50)];
+    self.tf_price = [[OttoTextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 50, 90, 50)];
     [v_back addSubview:self.tf_price];
     [self.tf_price setPlaceholder:[NSString stringWithFormat:@"¥%.2f",self.totalPrice]];
     [self.tf_price setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [self.tf_price setFont:[UIFont systemFontOfSize:16]];
     [self.tf_price setTextAlignment:NSTextAlignmentRight];
     [self.tf_price becomeFirstResponder];
-    self.tf_price.keyboardType = UIKeyboardTypePhonePad;
+    [self.tf_price setKeyboardType:KeyboardTypeNumber];
+    [self.tf_price setNumberKeyboardType:NumberKeyboardTypeDouble];
     
     UIButton *btn_shoukuan = [[UIButton alloc]initWithFrame:CGRectMake(15, 141 + SafeAreaTopHeight, SCREEN_WIDTH - 30, 46)];
     [self.view addSubview:btn_shoukuan];

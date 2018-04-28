@@ -44,6 +44,7 @@
 @property (nonatomic ,strong)NSString             *zhekou;      //折扣数值
 @property (nonatomic ,assign)double               orderDiscount;  //整单折扣金额
 @property (nonatomic ,assign)double               orderMinus;     //整单减价
+@property (nonatomic ,assign)double               addPrice;       //整单总体应付金额
 
 @property (nonatomic        )BOOL                 mofenAction; //抹分操作
 @property (nonatomic        )BOOL                 mojiaoAction; //抹角操作
@@ -156,6 +157,7 @@
     self.orderDiscount = 0;
     self.orderMinus = 0;
     self.loseSmallReduce = 0;
+    self.addPrice = 0;
     self.mofenAction = NO;
     self.mojiaoAction = NO;
     [self getResultAction];
@@ -174,6 +176,7 @@
     self.orderDiscount = 0;
     self.orderMinus = 0;
     self.loseSmallReduce = 0;
+    self.addPrice = 0;
     self.mofenAction = NO;
     self.mojiaoAction = NO;
     [self.tb_commodityList reloadData];
@@ -191,6 +194,7 @@
     self.orderDiscount = 0;
     self.orderMinus = 0;
     self.loseSmallReduce = 0;
+    self.addPrice = 0;
     self.mofenAction = NO;
     self.mojiaoAction = NO;
     [self.tb_commodityList reloadData];
@@ -212,17 +216,24 @@
                 if (![entity.name isEqualToString:@"无码商品"]) {
                     [dic setObject:entity.name forKey:@"name"];
                     [dic setObject:entity.skuId forKey:@"skuId"];
-                    [dic setObject:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
+                    [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price] forKey:@"price"];
                     [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
-                    [dic setObject:[NSNumber numberWithDouble:entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
+                    [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
                     [dic setObject:entity.standards forKey:@"standards"];
                     if (entity.itemActId) {
                         [dic setObject:entity.itemActId forKey:@"itemActId"];
                     }
                     [arrItem addObject:dic];
                 }
+                if ([entity.name isEqualToString:@"无码商品"]){
+                    [dic setObject:entity.name forKey:@"name"];
+                    [dic setObject:@"-1" forKey:@"skuId"];
+                    [dic setObject:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
+                    [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
+                    [arrItem addObject:dic];
+                }
             }
-            [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:[NSString stringWithFormat:@"%.2f",self.totalPrice + self.discountPrice] payReduce:[NSString stringWithFormat:@"%.2f",self.discountPrice] payActual:[NSString stringWithFormat:@"%.2f",self.totalPrice] noGoods:[NSString stringWithFormat:@"%.2f",self.noGoods] payType:2 orderDiscount:[NSString stringWithFormat:@"%.2f",self.orderDiscount] orderMinus:[NSString stringWithFormat:@"%.2f",self.orderMinus] loseSmallReduce:[NSString stringWithFormat:@"%.2f",self.loseSmallReduce] prepare:^{
+            [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:[NSString stringWithFormat:@"%.2f",self.totalPrice + self.discountPrice] payReduce:[NSString stringWithFormat:@"%.2f",self.discountPrice] payActual:[NSString stringWithFormat:@"%.2f",self.totalPrice] noGoods:nil payType:2 orderDiscount:[NSString stringWithFormat:@"%.2f",self.orderDiscount] orderMinus:[NSString stringWithFormat:@"%.2f",self.orderMinus] loseSmallReduce:[NSString stringWithFormat:@"%.2f",self.loseSmallReduce] actId:self.actId prepare:^{
                 
             } success:^(id obj) {
                 if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0){
@@ -273,7 +284,7 @@
     NSLog(@"%@", textField);
     if (textField.text.length < 17) {
         // 商品条码
-        [CashierHandler commodityCashierWithBarcode:textField.text shopId:[LoginStorage GetShopId] addup:self.totalPrice prepare:^{
+        [CashierHandler commodityCashierWithBarcode:textField.text shopId:[LoginStorage GetShopId] addup:[NSString stringWithFormat:@"%.2f",self.addPrice] prepare:^{
         } success:^(id obj) {
             
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -303,7 +314,6 @@
                 self.tfsousuo.text = @"";
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
-                
             }
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -321,17 +331,23 @@
             if (![entity.name isEqualToString:@"无码商品"]) {
                 [dic setObject:entity.name forKey:@"name"];
                 [dic setObject:entity.skuId forKey:@"skuId"];
-                [dic setObject:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
+                [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price] forKey:@"price"];
                 [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
-                [dic setObject:[NSNumber numberWithDouble:entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
+                [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
                 [dic setObject:entity.standards forKey:@"standards"];
                 if (entity.itemActId) {
                     [dic setObject:entity.itemActId forKey:@"itemActId"];
                 }
                 [arrItem addObject:dic];
+            }else{
+                [dic setObject:entity.name forKey:@"name"];
+                [dic setObject:@"-1" forKey:@"skuId"];
+                [dic setObject:[NSNumber numberWithDouble:entity.price] forKey:@"price"];
+                [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
+                [arrItem addObject:dic];
             }
         }
-        [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:[NSString stringWithFormat:@"%.2f",self.totalPrice + self.discountPrice] payReduce:[NSString stringWithFormat:@"%.2f",self.discountPrice] payActual:[NSString stringWithFormat:@"%.2f",self.totalPrice] noGoods:[NSString stringWithFormat:@"%.2f",self.noGoods] payType:1 orderDiscount:[NSString stringWithFormat:@"%.2f",self.orderDiscount] orderMinus:[NSString stringWithFormat:@"%.2f",self.orderMinus] loseSmallReduce:[NSString stringWithFormat:@"%.2f",self.loseSmallReduce] prepare:^{
+        [CashierHandler addOrderWithShopId:[LoginStorage GetShopId] items:arrItem payTotal:[NSString stringWithFormat:@"%.2f",self.totalPrice + self.discountPrice] payReduce:[NSString stringWithFormat:@"%.2f",self.discountPrice] payActual:[NSString stringWithFormat:@"%.2f",self.totalPrice] noGoods:nil payType:1 orderDiscount:[NSString stringWithFormat:@"%.2f",self.orderDiscount] orderMinus:[NSString stringWithFormat:@"%.2f",self.orderMinus] loseSmallReduce:[NSString stringWithFormat:@"%.2f",self.loseSmallReduce] actId:self.actId prepare:^{
             
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0){
@@ -409,21 +425,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.tfsousuo resignFirstResponder];
     CashierCommodityEntity *entity = [self.arr_commodityList objectAtIndex:indexPath.row];
-    if (![entity.name isEqualToString:@"无码商品"]) {
-        self.alert = [[ChangeCommodirtyCountAlertView alloc]initWithName:entity.name commodirtyCount:entity.amount];
-        [self.alert show];
-        self.alert.btn_delete.tag = indexPath.row;
-        [self.alert.btn_delete addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-        WS(weakSelf);
-        self.alert.dismissAlertView = ^(int count) {
-            if (count > 0) {
-                entity.amount = count;
-                [weakSelf.arr_commodityList replaceObjectAtIndex:indexPath.row withObject:entity];
-                [weakSelf.tb_commodityList reloadData];
-                [weakSelf getResultAction];
-            }
-        };
-    }
+    self.alert = [[ChangeCommodirtyCountAlertView alloc]initWithName:entity.name commodirtyCount:entity.amount];
+    [self.alert show];
+    self.alert.btn_delete.tag = indexPath.row;
+    [self.alert.btn_delete addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    WS(weakSelf);
+    self.alert.dismissAlertView = ^(int count) {
+        if (count > 0) {
+            entity.amount = count;
+            [weakSelf.arr_commodityList replaceObjectAtIndex:indexPath.row withObject:entity];
+            [weakSelf.tb_commodityList reloadData];
+            [weakSelf getResultAction];
+            [weakSelf selectManJianPrice];
+        }
+    };
 }
 
 - (void)deleteAction:(UIButton *)btn_sender{
@@ -431,6 +446,7 @@
     [self.arr_commodityList removeObjectAtIndex:btn_sender.tag];
     [self.tb_commodityList reloadData];
     [self getResultAction];
+    [self selectManJianPrice];
 }
 
 - (void)getResultAction{
@@ -440,6 +456,9 @@
         totalPrice = totalPrice + entity.settlementPrice * entity.amount;
         youhuiPrice = youhuiPrice + (entity.price - entity.settlementPrice) * entity.amount;
     }
+    
+    //购物车金额   （用于查询满减活动）
+    self.addPrice = totalPrice;
 //    //折扣金额
     if ([self.zhekou doubleValue] > 0) {
         self.orderDiscount = totalPrice - totalPrice * ([self.zhekou doubleValue] / 10);
@@ -502,11 +521,13 @@
         self.mofenAction = YES;
         self.mojiaoAction = NO;
         [self getResultAction];
+        [self selectManJianPrice];
     }
     if (btn == self.titleView.btn_mojiao) {
         self.mojiaoAction = YES;
         self.mofenAction = NO;
         [self getResultAction];
+        [self selectManJianPrice];
     }
 }
 
@@ -516,42 +537,44 @@
         if (btnType == CommonAlertBtnConfirm) {
             self.zhekou = text;
             [self getResultAction];
+//            [self selectManJianPrice];
         }
     }
     if ([alertView.title_type isEqualToString:@"整单减价"]) {
         if (btnType == CommonAlertBtnConfirm) {
             self.orderMinus = [text intValue];
             [self getResultAction];
+//            [self selectManJianPrice];
         }
     }
     if ([alertView.title_type isEqualToString:@"添加金额"]) {
         if (btnType == CommonAlertBtnConfirm) {
             self.noGoods = [text doubleValue];
-            CashierCommodityEntity *caseEntity = [[CashierCommodityEntity alloc]init];
-            if (self.arr_commodityList.count > 0) {
-                caseEntity = [self.arr_commodityList objectAtIndex:0];
-            }
-            if ([caseEntity.barcode intValue] == 0 && self.arr_commodityList.count > 0) {
-                caseEntity.settlementPrice = caseEntity.settlementPrice + [text doubleValue];
-                caseEntity.price = caseEntity.price + [text doubleValue];
-                [self.arr_commodityList replaceObjectAtIndex:0 withObject:caseEntity];
-            }else{
-                CashierCommodityEntity *entity = [[CashierCommodityEntity alloc]init];
-                entity.name = @"无码商品";
-                entity.settlementPrice = [text doubleValue];
-                entity.price = [text doubleValue];
-                entity.amount = 1;
-                [self.arr_commodityList insertObject:entity atIndex:0];
-            }
+            CashierCommodityEntity *entity = [[CashierCommodityEntity alloc]init];
+            entity.name = @"无码商品";
+            entity.settlementPrice = [text doubleValue];
+            entity.price = [text doubleValue];
+            entity.amount = 1;
+            [self.arr_commodityList addObject:entity];
             [self.tb_commodityList reloadData];
             [self getResultAction];
+            [self selectManJianPrice];
         }
     }
 }
 
-//- (void)tgpAction{
-//    [self.tfsousuo resignFirstResponder];
-//}
+- (void)selectManJianPrice{
+    [CashierHandler selectManJianPriceWithaddup:[NSString stringWithFormat:@"%.2f",self.addPrice] prepare:^{
+        
+    } success:^(id obj) {
+        self.manjianPrice = [[(NSDictionary *)obj objectForKey:@"payMinus"] doubleValue];
+        [self getResultAction];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
+}
+
+
 
 - (void)btn_backAction{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"ClearShoppingCar" object:nil userInfo:nil];

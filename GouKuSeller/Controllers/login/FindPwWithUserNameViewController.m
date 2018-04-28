@@ -57,7 +57,8 @@
 }
 
 - (void)btn_nextAction{
-    NSString *strUrl = @"http://47.97.174.40:9000/login/checkAccount";
+//    NSString *strUrl = @"http://47.97.174.40:9000/login/checkAccount";
+    NSString *strUrl = [NSString stringWithFormat:@"%@/login/checkAccount",API_Login];
     
     NSDictionary *dic = @{@"account":self.tf_userName.text};
     //    NSDictionary *dic = @{@"account":@"oper001",@"password":@"123456"};

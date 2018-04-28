@@ -8,20 +8,33 @@
 
 #ifndef DocChat_APIConfig_h
 #define DocChat_APIConfig_h
+/*
+ http://47.97.174.40:9001
+ http://47.97.174.40:9000
+ */
+
+
 
 //1:正式网 2:测试打包
 #define SERVER_TYPE  2
 
 #if (SERVER_TYPE == 1)
     //appstore环境
-    #define SERVER_HOST                 @"webpro.zlycare.com"
-    #define KEY_JPUSH                   @"0b83dc8e9b61f531191e7f61"
+    #define API_Login                   @"https://passport.goukugogo.com"
+    #define API_OrderAndPay             @"https://trade.goukugogo.com"
+    #define API_Orther                  @"https://shop.goukugogo.com"
+    #define KEY_JPUSH                   @"a39c6215cc0d16b9dd42db44"
     #define Jpush                       @"YES"
+    #define SERVER_HOST                 @"47.97.174.40:9001"
+
 #elif (SERVER_TYPE == 2)
     //测试打包
-    #define SERVER_HOST                 @"47.97.174.40:9001"
+    #define API_Login                   @"http://47.97.174.40:9000"
+    #define API_OrderAndPay             @"http://47.97.174.40:9002"
+    #define API_Orther                  @"http://47.97.174.40:9001"
     #define KEY_JPUSH                   @"a39c6215cc0d16b9dd42db44"
     #define Jpush                       @"NO"
+    #define SERVER_HOST                 @"47.97.174.40:9001"
 #endif
 
 //HTTP_PROTOCOL 用来区分 http与https
@@ -31,7 +44,7 @@
 #else
 #define SERVER_PROTOCOL @"https://"
 #endif
-
+    #define SERVER_HOST                 @"47.97.174.40:9001"
 //JPUSH
 #define JPushAppKey @"a39c6215cc0d16b9dd42db44"
 
@@ -45,7 +58,7 @@
  */
 
 //店内分类列表
-#define API_GET_ShopCommodityCategory @"/shop/ware/category/all/%@"
+#define API_GET_ShopCommodityCategory @"/shop/ware/category/all/"
 //分类下店内商品列表
 #define API_GET_CommodityInformation @"/shop/ware/item/list"
 //商品类目列表
@@ -53,7 +66,7 @@
 //通过商品分类获取商品规格值
 #define API_GET_Standard @"/ware/standard/list/%@"
 //通过条形码获取商品信息
-#define API_GET_CommodityInformationFromBarCode @"/ware/%@"
+#define API_GET_CommodityInformationFromBarCode @"/ware/"
 //获取店内分类
 #define API_GET_ShopCatagory @"/shop/category/list"
 //添加店内分类
@@ -69,11 +82,11 @@
 //搜索商品
 #define API_GET_SearchCommodity @"/shop/ware/stock/search"
 //门店商品下架
-#define API_GET_downshelf @"/shop/ware/stock/downshelf/%@"
+#define API_GET_downshelf @"/shop/ware/stock/downshelf/"
 //门店商品上架
-#define API_GET_upshelf @"/shop/ware/stock/upshelf/%@"
+#define API_GET_upshelf @"/shop/ware/stock/upshelf/"
 //门店商品删除
-#define API_GET_CommodityDelete @"/shop/ware/stock/delete/%@"
+#define API_GET_CommodityDelete @"/shop/ware/stock/delete/"
 //门店商品编辑
 #define API_GET_CommodityEdit @"/shop/ware/stock/update"
 
@@ -87,9 +100,9 @@
 //查询所有活动
 #define API_POST_AllActList  @"/act/list"
 //停止活动
-#define API_POST_STOPACTIVE @"/act/stop/%@"
+#define API_POST_STOPACTIVE @"/act/stop/"
 //查看活动详情
-#define API_GET_SELECTACTIVE @"/act/detail/%@"
+#define API_GET_SELECTACTIVE @"/act/detail/"
 
 
 /*
@@ -119,7 +132,8 @@
 #define API_POST_AddOrder @"/order/add"
 //扫描用户付款吗上传
 #define API_POST_ScanUserCashCode @"/weixin/pay/swiping"
-
+//查询满减活动金额
+#define API_POST_SelectManJianPrice @"/shop/act/order"
 
 /*
  订单API

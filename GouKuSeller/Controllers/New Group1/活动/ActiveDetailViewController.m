@@ -91,6 +91,9 @@
             ActiveTimeEntity *entity = [arr_time objectAtIndex:i];
             if (i == 0) {
                 str_time = [NSString stringWithFormat:@"%@-%@",[DateUtils stringFromTimeInterval:entity.beginAt formatter:@"HH:mm"],[DateUtils stringFromTimeInterval:entity.endAt formatter:@"HH:mm"]];
+                if ([str_time isEqualToString:@"00:00-23:59"]) {
+                    str_time = @"全天";
+                }
             }else{
                 str_time = [str_time stringByAppendingString:[NSString stringWithFormat:@" %@-%@",[DateUtils stringFromTimeInterval:entity.beginAt formatter:@"HH:mm"],[DateUtils stringFromTimeInterval:entity.endAt formatter:@"HH:mm"]]];
             }

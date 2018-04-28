@@ -10,7 +10,8 @@
 
 @implementation MyHandler
 +(void)mineShopListWithAccount:(NSString *)account prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = @"http://47.97.174.40:9000/mine/shoplist";
+//    NSString *str_url = @"http://47.97.174.40:9000/mine/shoplist";
+    NSString *str_url = [NSString stringWithFormat:@"%@/mine/shoplist",API_Login];
     NSDictionary *dic = @{
                           @"account":account
                           };
@@ -33,7 +34,8 @@
 }
 
 +(void)getTodayMsgprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_GET_GetToday];
+//    NSString *str_url = [self requestUrlWithPath:API_GET_GetToday];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_GET_GetToday];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil

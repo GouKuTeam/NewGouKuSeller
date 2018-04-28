@@ -13,9 +13,9 @@
 @implementation OrderHandler
 
 + (void)getOrderListWithShopId:(NSNumber *)shopId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_OrderList];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_OrderList];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OrderList];
     NSDictionary *dic = @{
-//                          @"shopId":shopId,
                           @"page":[NSNumber numberWithInt:page]
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
@@ -39,7 +39,8 @@
 
 //订单详情查询
 + (void)getOrderDetailsWithShopId:(NSNumber *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_OrderDetail];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_OrderDetail];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OrderDetail];
     NSDictionary *dic = @{
                           @"shopId":shopid,
                           @"orderId":orderId
@@ -66,7 +67,8 @@
 
 //订单搜索
 + (void)searchOrderWithShopId:(NSNumber *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_OrderSearch];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_OrderSearch];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OrderSearch];
     NSDictionary *dic = @{
                           @"shopId":shopid,
                           @"orderId":orderId

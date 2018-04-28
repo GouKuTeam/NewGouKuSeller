@@ -14,7 +14,8 @@
 
 //结算首页信息
 +(void)accountshowWithshopId:(NSNumber *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_AccountShow];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_AccountShow];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AccountShow];
 //    NSDictionary *dic = @{@"shopId":shopId};
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -38,7 +39,8 @@
 }
 
 +(void)accountdetailsWithshopId:(NSNumber *)shopId page:(int)page type:(int)type prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_AccountDetails];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_AccountDetails];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AccountDetails];
     NSDictionary *dic = @{
                           @"shopId":shopId,
                           @"page":[NSNumber numberWithInt:page],
@@ -66,7 +68,8 @@
 }
 
 +(void)getbankListprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_bankMessage];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_bankMessage];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POST_bankMessage];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:nil
@@ -90,7 +93,8 @@
 
 //获取验证码
 +(void)getAccountCodeWithphoneNum:(NSString *)phoneNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_AccountCode];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_AccountCode];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AccountCode];
     NSDictionary *dic = @{
                           @"phone":phoneNum
                           };
@@ -114,21 +118,15 @@
 }
 //添加银行卡
 +(void)addBankCardWithBankDic:(NSDictionary *)dic prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_addBankCard];
-    
+//    NSString *str_url = [self requestUrlWithPath:API_POST_addBankCard];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_addBankCard];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
-                                              
-                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  [MBProgressHUD showInfoMessage:@"添加成功"];
-                                                  success(nil);
-                                              }else{
-                                                  [MBProgressHUD hideHUD];
-                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-                                              }
+                                              success(responseObject);
+                                    
                                               
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               
@@ -137,7 +135,8 @@
 }
 
 +(void)checkPassWordWithshopId:(NSNumber *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_checkPassword];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_checkPassword];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_checkPassword];
     NSDictionary *dic = @{
                           @"shopId":shopId,
                           @"cardNum":cardNum,
@@ -160,7 +159,8 @@
 
 //提现详情
 +(void)cashDetailWithShopId:(NSNumber *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [self requestUrlWithPath:API_POST_CashDetail];
+//    NSString *str_url = [self requestUrlWithPath:API_POST_CashDetail];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_CashDetail];
     NSDictionary *dic = @{
                           @"shopId":shopid,
                           @"cashOrderId":cashOrderId

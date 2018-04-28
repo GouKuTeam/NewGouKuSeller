@@ -163,6 +163,7 @@
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
                 [MBProgressHUD showInfoMessage:@"提现成功"];
+                [self.navigationController popViewControllerAnimated:YES];
             }else if([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误，请重试" message:@"" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"忘记密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

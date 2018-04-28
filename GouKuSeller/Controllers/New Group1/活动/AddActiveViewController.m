@@ -183,7 +183,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBack = ^(NSMutableArray *arr_week) {
         self.arr_week = arr_week;
-        NSArray *arr_all = [NSArray arrayWithObjects:@"一",@"二",@"三",@"四",@"五",@"六",@"日", nil];
+        NSArray *arr_all = [NSArray arrayWithObjects:@"日",@"一",@"二",@"三",@"四",@"五",@"六", nil];
         if (arr_week.count == 0) {
             [self.v_ainformation.btn_activeZhou setTitle:@"请选择周" forState:UIControlStateNormal];
             [self.v_ainformation.btn_activeZhou setTitleColor:[UIColor colorWithHexString:@"#c2c2c2"] forState:UIControlStateNormal];
@@ -219,6 +219,9 @@
             NSDictionary *dic = [self.arr_time objectAtIndex:i];
             if (i == 0) {
                 str_time = [NSString stringWithFormat:@"%@-%@",[dic objectForKey:@"beginAt"],[dic objectForKey:@"endAt"]];
+                if ([str_time isEqualToString:@"00:00-23:59"]) {
+                    str_time = @"全天";
+                }
             }else{
                 str_time = [str_time stringByAppendingString:[NSString stringWithFormat:@" %@-%@",[dic objectForKey:@"beginAt"],[dic objectForKey:@"endAt"]]];
             }
@@ -349,7 +352,7 @@
     }
     
     if (self.activeType == ActiceFormManJian) {
-        [ActiveHandler addManJianActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
+        [ActiveHandler addManJianActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.tf_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
 
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -358,6 +361,7 @@
                     UIViewController *vc = [arr_vc objectAtIndex:index];
                     if (![vc isKindOfClass:[AddActiveViewController class]] && ![vc isKindOfClass:[SelectAcTiveTypeViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
+                        [[NSNotificationCenter defaultCenter]postNotificationName:@"addActiveComplete" object:nil userInfo:nil];
                         return;
                     }
                 }
@@ -369,7 +373,7 @@
             [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld",statusCode]];
         }];
     }else{
-        [ActiveHandler addOtherActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.lab_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult item:arr_data prepare:^{
+        [ActiveHandler addOtherActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.tf_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult item:arr_data prepare:^{
             
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -378,6 +382,7 @@
                     UIViewController *vc = [arr_vc objectAtIndex:index];
                     if (![vc isKindOfClass:[AddActiveViewController class]] && ![vc isKindOfClass:[SelectAcTiveTypeViewController class]]) {
                         [self.navigationController popToViewController:vc animated:YES];
+                        [[NSNotificationCenter defaultCenter]postNotificationName:@"addActiveComplete" object:nil userInfo:nil];
                         return;
                     }
                 }

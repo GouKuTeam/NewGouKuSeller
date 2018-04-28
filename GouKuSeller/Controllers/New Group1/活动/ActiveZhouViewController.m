@@ -19,7 +19,7 @@
 {
     self = [super init];
     if (self) {
-        self.arr_activeZhou = [NSMutableArray arrayWithObjects:@"每周一",@"每周二",@"每周三",@"每周四",@"每周五",@"每周六",@"每周日", nil];
+        self.arr_activeZhou = [NSMutableArray arrayWithObjects:@"每周日",@"每周一",@"每周二",@"每周三",@"每周四",@"每周五",@"每周六", nil];
     }
     return self;
 }
