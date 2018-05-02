@@ -126,7 +126,7 @@
         [self.btn_caigou setTitle:@"采购" forState:UIControlStateNormal];
         [self.btn_caigou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_caigou.titleLabel.font = [UIFont systemFontOfSize:18];
-        [self.btn_caigou setImage:[UIImage imageNamed:@"finance"] forState:UIControlStateNormal];
+        [self.btn_caigou setImage:[UIImage imageNamed:@"shoppingcartblue"] forState:UIControlStateNormal];
         [self.btn_caigou setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_caigou.imageView.frame.size.height + 15 ,-self.btn_caigou.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
         [self.btn_caigou setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_caigou.imageView.frame.size.height, 0.0,0.0, -self.btn_caigou.titleLabel.bounds.size.width)];//图片距离右边框
         
