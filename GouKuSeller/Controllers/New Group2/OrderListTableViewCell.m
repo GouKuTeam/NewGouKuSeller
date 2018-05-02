@@ -73,15 +73,19 @@
         [self.img_pay setImage:[UIImage imageNamed:@"PayInCash"]];
     }
     [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",entity.payActual]];
-    if (entity.status == 1) {
-        //待支付  显示创建订单时间
-        [self.lab_payTime setText:[DateUtils stringFromTimeInterval:entity.date formatter:@"HH:mm"]];
-        [self.lab_payStatus setText:@"待支付"];
-    }
+//    if (entity.status == 1) {
+//        //待支付  显示创建订单时间
+//        [self.lab_payTime setText:[DateUtils stringFromTimeInterval:entity.date formatter:@"HH:mm"]];
+//        [self.lab_payStatus setText:@"待支付"];
+//    }
     if (entity.status == 2) {
         //已完成  显示支付时间
         [self.lab_payTime setText:[DateUtils stringFromTimeInterval:entity.date formatter:@"HH:mm"]];
         [self.lab_payStatus setText:@""];
+    }else{
+        //待支付  显示创建订单时间
+        [self.lab_payTime setText:[DateUtils stringFromTimeInterval:entity.date formatter:@"HH:mm"]];
+        [self.lab_payStatus setText:@"待支付"];
     }
     
 }

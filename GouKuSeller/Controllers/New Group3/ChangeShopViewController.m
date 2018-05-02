@@ -33,6 +33,7 @@
 - (void)onCreate{
     self.tb_shop = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_shop];
+    self.tb_shop.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     self.tb_shop.delegate = self;
     self.tb_shop.dataSource = self;
     self.tb_shop.tableFooterView = [UIView new];

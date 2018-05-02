@@ -182,6 +182,7 @@
     [self.tb_commodityList reloadData];
     [self getResultAction];
     [self.titleClearView setHidden:!self.titleClearView.isHidden];
+    [self.tfsousuo becomeFirstResponder];
     
 }
 - (void)NocatifionCashierAction{
@@ -199,6 +200,7 @@
     self.mojiaoAction = NO;
     [self.tb_commodityList reloadData];
     [self getResultAction];
+    [self.tfsousuo becomeFirstResponder];
     
 }
 
@@ -218,7 +220,7 @@
                     [dic setObject:entity.skuId forKey:@"skuId"];
                     [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price] forKey:@"price"];
                     [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
-                    [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
+                    [dic setObject:[NSString stringWithFormat:@"%.2f",entity.settlementPrice] forKey:@"pricePreferential"];
                     [dic setObject:entity.standards forKey:@"standards"];
                     if (entity.itemActId) {
                         [dic setObject:entity.itemActId forKey:@"itemActId"];
@@ -277,6 +279,7 @@
         
         [self.titleView setHidden:!self.titleView.isHidden];
     }
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -333,7 +336,7 @@
                 [dic setObject:entity.skuId forKey:@"skuId"];
                 [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price] forKey:@"price"];
                 [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
-                [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price - entity.settlementPrice] forKey:@"pricePreferential"];
+                [dic setObject:[NSString stringWithFormat:@"%.2f",entity.settlementPrice] forKey:@"pricePreferential"];
                 [dic setObject:entity.standards forKey:@"standards"];
                 if (entity.itemActId) {
                     [dic setObject:entity.itemActId forKey:@"itemActId"];
@@ -447,6 +450,7 @@
     [self.tb_commodityList reloadData];
     [self getResultAction];
     [self selectManJianPrice];
+    [self.tfsousuo becomeFirstResponder];
 }
 
 - (void)getResultAction{
@@ -500,6 +504,7 @@
     if (self.titleClearView.hidden == NO) {
         [self.titleClearView setHidden:!self.titleClearView.isHidden];
     }
+    [self.tfsousuo becomeFirstResponder];
 }
 
 - (void)titleViewbtnAction:(UIButton *)btn{
@@ -522,13 +527,16 @@
         self.mojiaoAction = NO;
         [self getResultAction];
         [self selectManJianPrice];
+        [self.tfsousuo becomeFirstResponder];
     }
     if (btn == self.titleView.btn_mojiao) {
         self.mojiaoAction = YES;
         self.mofenAction = NO;
         [self getResultAction];
         [self selectManJianPrice];
+        [self.tfsousuo becomeFirstResponder];
     }
+    [self.tfsousuo becomeFirstResponder];
 }
 
 #pragma CommonAlertDelegate
@@ -537,14 +545,14 @@
         if (btnType == CommonAlertBtnConfirm) {
             self.zhekou = text;
             [self getResultAction];
-//            [self selectManJianPrice];
+            [self.tfsousuo becomeFirstResponder];
         }
     }
     if ([alertView.title_type isEqualToString:@"整单减价"]) {
         if (btnType == CommonAlertBtnConfirm) {
-            self.orderMinus = [text intValue];
+            self.orderMinus = [text doubleValue];
             [self getResultAction];
-//            [self selectManJianPrice];
+            [self.tfsousuo becomeFirstResponder];
         }
     }
     if ([alertView.title_type isEqualToString:@"添加金额"]) {
@@ -559,6 +567,7 @@
             [self.tb_commodityList reloadData];
             [self getResultAction];
             [self selectManJianPrice];
+            [self.tfsousuo becomeFirstResponder];
         }
     }
 }
@@ -568,6 +577,7 @@
         
     } success:^(id obj) {
         self.manjianPrice = [[(NSDictionary *)obj objectForKey:@"payMinus"] doubleValue];
+        self.actId = [(NSDictionary *)obj objectForKey:@"actId"];
         [self getResultAction];
     } failed:^(NSInteger statusCode, id json) {
         
@@ -575,11 +585,9 @@
 }
 
 
-
 - (void)btn_backAction{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"ClearShoppingCar" object:nil userInfo:nil];
     [self.v_wait setHidden:YES];
-
 }
 
 - (void)continueAction{
@@ -611,12 +619,12 @@
 
 - (void)titleViewDissMiss{
     [self.titleView setHidden:YES];
-    [self.tfsousuo resignFirstResponder];
+    [self.tfsousuo becomeFirstResponder];
 }
 
 - (void)tgp_titleClearviewDissMiss{
     [self.titleClearView setHidden:YES];
-    [self.tfsousuo resignFirstResponder];
+    [self.tfsousuo becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
