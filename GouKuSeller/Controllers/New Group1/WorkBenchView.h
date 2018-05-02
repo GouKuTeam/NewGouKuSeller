@@ -16,6 +16,7 @@
 @property (nonatomic ,strong)UIButton              *btn_active;
 @property (nonatomic ,strong)UIButton              *btn_jingying;
 @property (nonatomic ,strong)UIButton              *btn_jiesuan;
+@property (nonatomic ,strong)UIButton              *btn_caigou;
 @property (nonatomic ,strong)UIImageView           *img_back1_heng;
 @property (nonatomic ,strong)UIImageView           *img_back1_shu1;
 @property (nonatomic ,strong)UIImageView           *img_back1_shu2;
