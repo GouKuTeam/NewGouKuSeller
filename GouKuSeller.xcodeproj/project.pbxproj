@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
+		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
 		740C688A207C98930044889F /* PayInCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6889207C98930044889F /* PayInCashViewController.m */; };
 		740C688D207C989F0044889F /* PayInGouKuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688C207C989F0044889F /* PayInGouKuViewController.m */; };
 		740C6890207CA8A30044889F /* PayInCashCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688F207CA8A30044889F /* PayInCashCompleteView.m */; };
@@ -548,6 +549,8 @@
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
 		74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreAddCommodityViewController.m; sourceTree = "<group>"; };
+		74046AEB209AB580004E64A9 /* EditPriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditPriceViewController.h; sourceTree = "<group>"; };
+		74046AEC209AB580004E64A9 /* EditPriceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditPriceViewController.m; sourceTree = "<group>"; };
 		740C6888207C98930044889F /* PayInCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInCashViewController.h; sourceTree = "<group>"; };
 		740C6889207C98930044889F /* PayInCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashViewController.m; sourceTree = "<group>"; };
 		740C688B207C989F0044889F /* PayInGouKuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInGouKuViewController.h; sourceTree = "<group>"; };
@@ -992,6 +995,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		74046AEE209AB7BD004E64A9 /* 编辑价格 */ = {
+			isa = PBXGroup;
+			children = (
+				74046AEB209AB580004E64A9 /* EditPriceViewController.h */,
+				74046AEC209AB580004E64A9 /* EditPriceViewController.m */,
+			);
+			path = "编辑价格";
+			sourceTree = "<group>";
+		};
 		741D3C6D20804CF800C56FCA /* 订单 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1159,6 +1171,7 @@
 			children = (
 				744ABA9320556D5D00BBB26E /* AddNewCommodityViewController.h */,
 				744ABA9420556D5D00BBB26E /* AddNewCommodityViewController.m */,
+				74046AEE209AB7BD004E64A9 /* 编辑价格 */,
 				744ABA9820556F4C00BBB26E /* NewCommodityView */,
 				74F8E8EF20592A8E000A17A5 /* 选择商品类目 */,
 				74F8E8EE20592A75000A17A5 /* 商品规格 */,
@@ -2209,6 +2222,7 @@
 				741D3C7E20806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
 				74B4E899204BD3EC006AFB6C /* AppUtils.m in Sources */,
 				7489CC80207E0B1700971BED /* PayWaitView.m in Sources */,
+				74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */,
 				741D3CA12081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				7491FA4B206CC54F0006F388 /* CashierViewController.m in Sources */,
 				74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */,

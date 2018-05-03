@@ -113,7 +113,6 @@
         [self.btn_jingying setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_jingying.imageView.frame.size.height, 0.0,0.0, -self.btn_jingying.titleLabel.bounds.size.width)];//图片距离右边框
         
         
-        
         //采购按钮
         self.btn_caigou = [[UIButton alloc]init];
         [self.v_back1 addSubview:self.btn_caigou];
