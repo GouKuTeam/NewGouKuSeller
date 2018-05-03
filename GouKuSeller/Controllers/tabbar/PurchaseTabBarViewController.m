@@ -1,23 +1,21 @@
 //
-//  TabBarViewController.m
-//  Live
+//  PurchaseTabBarViewController.m
+//  GouKuSeller
 //
-//  Created by 蜜友 on 15/8/3.
-//  Copyright (c) 2015年 MiYouKeJi. All rights reserved.
+//  Created by lixiao on 2018/5/3.
+//  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "TabBarViewController.h"
-#import "WorkbenchViewController.h"
-#import "OrderViewController.h"
-#import "MyViewController.h"
+#import "PurchaseTabBarViewController.h"
+#import "PurchaseOrderViewController.h"
+#import "ShoppingCartViewController.h"
+#import "SupplierListViewController.h"
 
-#define BASE_TAG 10000
-
-@interface TabBarViewController ()
+@interface PurchaseTabBarViewController ()
 
 @end
 
-@implementation TabBarViewController
+@implementation PurchaseTabBarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,29 +26,25 @@
     
     //初始化Tab下的ViewController
     [self initTabBarViewControllers];
-
+    
 }
 
 #pragma mark -
 #pragma mark 初始化Tab下的ViewController
 - (void)initTabBarViewControllers{
-   
-    //工作台
-    WorkbenchViewController *homePage = [[WorkbenchViewController alloc] init];
-    UINavigationController *homePageNav = [self changeToNavController:homePage title:@"工作台" index:1];
     
-    //订单
-    OrderViewController *search = [[OrderViewController alloc] init];
-    UINavigationController *searchNav = [self changeToNavController:search title:@"订单" index:2];
+    SupplierListViewController *supplierVC = [[SupplierListViewController alloc] init];
+    UINavigationController *supplierNav = [self changeToNavController:supplierVC title:@"供应商" index:3];
+    ShoppingCartViewController *shopVC = [[ShoppingCartViewController alloc] init];
+    UINavigationController *shopNav = [self changeToNavController:shopVC title:@"购物车" index:2];
     
-    //我的
-    MyViewController *message = [[MyViewController alloc] init];
-    UINavigationController *messageNav = [self changeToNavController:message title:@"我的" index:3];
+    PurchaseOrderViewController *orderVC = [[PurchaseOrderViewController alloc] init];
+    UINavigationController *orderNav = [self changeToNavController:orderVC title:@"采购订单" index:1];
     
-    self.viewControllers = [NSArray arrayWithObjects:homePageNav, searchNav, messageNav, nil];
-    NSArray *titles = @[@"工作台",@"订单",@"我的"];
-    NSArray *images = @[@"Tab_Normal_1",@"Tab_Normal_2",@"Tab_Normal_3"];
-    NSArray *selectImages = @[@"Tab_Selected_1",@"Tab_Selected_2",@"Tab_Selected_3"];
+    self.viewControllers = [NSArray arrayWithObjects:supplierNav,shopNav,orderNav, nil];
+    NSArray *titles = @[@"供应商",@"购物车",@"采购订单"];
+    NSArray *images = @[@"PurchaseTab_Normal_1",@"PurchaseTab_Normal_2",@"PurchaseTab_Normal_3"];
+    NSArray *selectImages = @[@"PurchaseTab_Selected_1",@"PurchaseTab_Selected_2",@"PurchaseTab_Selected_3"];
     for (int i=0; i<3; i++) {
         UITabBarItem *item = [self.tabBar.items objectAtIndex:i];
         item.tag = i;
@@ -87,8 +81,5 @@
     
     return nav;
 }
-
-
-
 
 @end
