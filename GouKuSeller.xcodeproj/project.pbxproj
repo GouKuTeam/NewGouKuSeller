@@ -11,6 +11,7 @@
 		1842CCC8209AACF700A1C7C8 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCC7209AACF700A1C7C8 /* ShoppingCartViewController.m */; };
 		1842CCCE209AAD5100A1C7C8 /* SupplierListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCCD209AAD5100A1C7C8 /* SupplierListViewController.m */; };
 		1842CCDA209AB1E200A1C7C8 /* PurchaseOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCD9209AB1E200A1C7C8 /* PurchaseOrderViewController.m */; };
+		1842CCDF209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCDE209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		740C688A207C98930044889F /* PayInCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6889207C98930044889F /* PayInCashViewController.m */; };
@@ -556,6 +557,8 @@
 		1842CCCD209AAD5100A1C7C8 /* SupplierListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierListViewController.m; sourceTree = "<group>"; };
 		1842CCD8209AB1E200A1C7C8 /* PurchaseOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderViewController.h; sourceTree = "<group>"; };
 		1842CCD9209AB1E200A1C7C8 /* PurchaseOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderViewController.m; sourceTree = "<group>"; };
+		1842CCDD209AD99E00A1C7C8 /* ShoppingCartTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartTableViewCell.h; sourceTree = "<group>"; };
+		1842CCDE209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartTableViewCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
@@ -998,6 +1001,7 @@
 		1842CCBE209AAC9100A1C7C8 /* 购物车 */ = {
 			isa = PBXGroup;
 			children = (
+				1842CCDC209AD97400A1C7C8 /* View */,
 				1842CCC6209AACF700A1C7C8 /* ShoppingCartViewController.h */,
 				1842CCC7209AACF700A1C7C8 /* ShoppingCartViewController.m */,
 			);
@@ -1011,6 +1015,15 @@
 				1842CCD9209AB1E200A1C7C8 /* PurchaseOrderViewController.m */,
 			);
 			path = "采购订单";
+			sourceTree = "<group>";
+		};
+		1842CCDC209AD97400A1C7C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1842CCDD209AD99E00A1C7C8 /* ShoppingCartTableViewCell.h */,
+				1842CCDE209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		3D33247D643897427C1A3153 /* Frameworks */ = {
@@ -2300,6 +2313,7 @@
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */,
+				1842CCDF209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m in Sources */,
 				7498365E208887D0007FEEF8 /* MyHandler.m in Sources */,
 				7491FA27206B7B000006F388 /* SettlementView.m in Sources */,
 				74B4E89F204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,
