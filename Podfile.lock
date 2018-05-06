@@ -20,6 +20,13 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AMap2DMap (5.6.0):
+    - AMapFoundation (~> 1.4)
+  - AMapFoundation (1.4.3)
+  - AMapLocation (2.6.0):
+    - AMapFoundation (~> 1.4)
+  - AMapSearch (5.7.0):
+    - AMapFoundation (~> 1.4)
   - JCore (1.1.7)
   - JPush (3.0.8):
     - JCore (~> 1.1.7)
@@ -34,6 +41,9 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 2.5.4)
+  - AMap2DMap
+  - AMapLocation
+  - AMapSearch
   - JPush
   - Masonry
   - MBProgressHUD
@@ -44,6 +54,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AMap2DMap: cf0bfd6ae97951b55cc061903b814f924ba6c221
+  AMapFoundation: 973682cfe60b92efd73a8ef8f1144fa0fa8e1296
+  AMapLocation: 55116a2c8956eab7550cbb56e989aa5cdcc424e3
+  AMapSearch: 314f75e9ce282b53dbf66455efa416c39f12b5b1
   JCore: f7459c81c135281a874a6beafdd321666adcc834
   JPush: 9574d072cc37e93fa293ba69b43ce763c440943a
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -53,6 +67,6 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 793fe3522c58128cb881605566ba6598b55206a4
+PODFILE CHECKSUM: 1086f4f9e2f95453de6f0600053b25f481b5a874
 
 COCOAPODS: 1.4.0

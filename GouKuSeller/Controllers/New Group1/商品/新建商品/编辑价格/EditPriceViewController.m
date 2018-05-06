@@ -7,13 +7,28 @@
 //
 
 #import "EditPriceViewController.h"
+#import "EditPriceHeaderView.h"
+#import "EditPriceTableViewCell.h"
+#import "EditPriceFooterView.h"
 
-@interface EditPriceViewController ()
+@interface EditPriceViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic ,strong)EditPriceHeaderView     *tb_header;
+@property (nonatomic ,strong)EditPriceFooterView     *tb_footer;
+@property (nonatomic ,strong)NSMutableArray          *arr_data;
+@property (nonatomic ,strong)UITableView             *tb_editPrice;
+
 
 @end
 
 @implementation EditPriceViewController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.arr_data = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"价格";
@@ -24,7 +39,29 @@
 }
 
 - (void)onCreate{
+    self.tb_header = [[EditPriceHeaderView alloc]init];
+    self.tb_footer = [[EditPriceFooterView alloc]init];
     
+    self.tb_editPrice = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    [self.view addSubview:self.tb_header];
+    self.tb_editPrice.delegate = self;
+    self.tb_editPrice.dataSource = self;
+    self.tb_editPrice.tableHeaderView = self.tb_header;
+    self.tb_editPrice.tableFooterView = self.tb_footer;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arr_data.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"NotBeginningActivity";
+    EditPriceTableViewCell *cell = (EditPriceTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell){
+        cell = [[EditPriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    return cell;
 }
 
 - (void)rightBarAction{

@@ -8,5 +8,8 @@ target 'GouKuSeller' do
     pod 'MJExtension', '2.5.5'
     pod 'MBProgressHUD'
     pod 'SDWebImage', '3.8.2'
+    pod 'AMap2DMap'
+    pod 'AMapSearch'
+    pod 'AMapLocation'
 end
 inhibit_all_warnings!

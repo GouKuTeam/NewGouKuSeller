@@ -14,7 +14,8 @@
 #import "CashierViewController.h"
 #import "MyHandler.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "PurchaseTabBarViewController.h"
+#import "EditAddressViewController.h"
 @interface WorkbenchViewController ()
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
 
@@ -46,6 +47,8 @@
     [self.v_workBench.btn_commodity addTarget: self action:@selector(commodityAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_jiesuan addTarget:self action:@selector(jiesuanAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_shouyin addTarget:self action:@selector(shouyinAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_workBench.btn_caigou addTarget:self action:@selector(caigouAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_workBench.btn_pandian addTarget:self action:@selector(pandianuAction) forControlEvents:UIControlEventTouchUpInside];
     [self loadData];
 }
 
@@ -84,6 +87,17 @@
 
 - (void)shouyinAction{
     CashierViewController *vc = [[CashierViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)caigouAction{
+    PurchaseTabBarViewController *vc = [[PurchaseTabBarViewController alloc]init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+}
+
+- (void)pandianuAction{
+    EditAddressViewController *vc = [[EditAddressViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
