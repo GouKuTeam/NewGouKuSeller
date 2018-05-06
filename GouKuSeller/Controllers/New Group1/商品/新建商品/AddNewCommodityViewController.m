@@ -14,6 +14,7 @@
 #import "CommodityHandler.h"
 #import "CommodityFromCodeEntity.h"
 #import "LoginStorage.h"
+#import "EditPriceViewController.h"
 
 @interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,TextViewClickReturnDelegate,TextFieldClickReturnDelegate>{
     UIImagePickerController *ipc;
@@ -71,22 +72,13 @@
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
     
-//    UITapGestureRecognizer* tgr_commoditySpecifications = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_commoditySpecificationsAction)];
-//    [self.v_commodityView.v_commoditySpecifications addGestureRecognizer:tgr_commoditySpecifications];
-//    if (self.entityInformation.name.length > 0) {
-//        [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
-//        [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
-//        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:self.entityInformation.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
-//        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
-//        [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entityInformation.standards];
-//        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
-//        [self.v_commodityView.v_commodityCode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.itemId]];
-//
-//    }else{
-//
-//        //查询商品信息
-//        [self loadData];
-//    }
+    //供应商身份点击价格
+    
+    UITapGestureRecognizer* tgr_editPrice = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_editPriceAction)];
+    self.v_commodityView.v_price.tf_detail.userInteractionEnabled = YES;
+    [self.v_commodityView.v_price.tf_detail addGestureRecognizer:tgr_editPrice];
+    
+
     [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
     [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
     [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entityInformation.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
@@ -121,9 +113,9 @@
     };
 }
 
-//商品规格点击方法
-- (void)tgr_commoditySpecificationsAction{
-    CommodityStandardViewController *vc = [[CommodityStandardViewController alloc]init];
+//商品编辑价格点击方法
+- (void)tgr_editPriceAction{
+    EditPriceViewController *vc = [[EditPriceViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 //头像按钮点击方法

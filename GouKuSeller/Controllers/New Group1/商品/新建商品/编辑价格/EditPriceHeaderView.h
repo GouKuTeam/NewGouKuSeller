@@ -12,5 +12,7 @@
 
 @property (nonatomic ,strong)UISegmentedControl       *segmentC;
 @property (nonatomic ,strong)UITextField              *tf_price;
+@property (nonatomic ,strong)UISwitch                 *v_switch;
+
 
 @end

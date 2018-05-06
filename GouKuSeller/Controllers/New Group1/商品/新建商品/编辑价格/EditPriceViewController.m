@@ -39,19 +39,39 @@
 }
 
 - (void)onCreate{
-    self.tb_header = [[EditPriceHeaderView alloc]init];
-    self.tb_footer = [[EditPriceFooterView alloc]init];
+    self.tb_header = [[EditPriceHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 98)];
+    self.tb_header.clipsToBounds = YES;
+    [self.tb_header.v_switch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    self.tb_footer = [[EditPriceFooterView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 54)];
+    [self.tb_footer.btn_add addTarget:self action:@selector(addDanWei) forControlEvents:UIControlEventTouchUpInside];
     
-    self.tb_editPrice = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
-    [self.view addSubview:self.tb_header];
+    self.tb_editPrice = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    [self.view addSubview:self.tb_editPrice];
     self.tb_editPrice.delegate = self;
     self.tb_editPrice.dataSource = self;
     self.tb_editPrice.tableHeaderView = self.tb_header;
     self.tb_editPrice.tableFooterView = self.tb_footer;
+    self.tb_editPrice.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.arr_data.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.arr_data.count;
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 176;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,8 +80,38 @@
     if (!cell){
         cell = [[EditPriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+    cell.btn_delete.tag = indexPath.section;
+    [cell.btn_delete addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    NSDictionary *dic = [self.arr_data objectAtIndex:indexPath.section];
+    cell.tf_dengyu.text = [dic objectForKey:@"count"];
+    cell.tf_price.text = [dic objectForKey:@"price"];
+    cell.tf_name.text = [dic objectForKey:@"unitName"];
     return cell;
+}
+
+- (void)switchAction:(id)sender{
+    if (self.tb_header.v_switch.on == YES) {
+        NSLog(@"switch is on");
+        [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 142)];
+    } else {
+        NSLog(@"switch is off");
+        [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 98)];
+    }
+    self.tb_editPrice.tableHeaderView = self.tb_header;
+}
+
+- (void)addDanWei{
+    for (int i = 0; i < self.arr_data.count; i++) {
+        EditPriceTableViewCell *cell = [self.tb_editPrice cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:i]];
+        [self.arr_data replaceObjectAtIndex:i withObject:@{@"unitName":cell.tf_name.text,@"count":cell.tf_dengyu.text,@"price":cell.tf_price.text}];
+    }
+    [self.arr_data addObject:@{@"unitName":@"",@"count":@"",@"price":@""}];
+    [self.tb_editPrice reloadData];
+}
+
+- (void)deleteAction:(UIButton *)btn_sender{
+    [self.arr_data removeObjectAtIndex:btn_sender.tag];
+    [self.tb_editPrice reloadData];
 }
 
 - (void)rightBarAction{

@@ -13,6 +13,11 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        
+        UIView *v_line1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+        [v_line1 setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+        [self addSubview:v_line1];
         
         self.btn_add = [[UIButton alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 44)];
         [self addSubview:self.btn_add];

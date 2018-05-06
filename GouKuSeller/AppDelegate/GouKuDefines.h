@@ -28,13 +28,13 @@
 #define ERROR_DATA_TEXT          @"点击屏幕,重新加载"
 
 //-----------------------UI Colors-----------------------------
-#define COLOR_BLUE_MAIN             @"#46a8fc"
+#define COLOR_BLUE_MAIN             @"#4167B2"
 #define COLOR_NEW_TEXTDESC          @"#b9b9b9"
 #define COLOR_GRAY_BG               @"#EFEFEF"
 #define COLOR_LINE_LIGHTGRAY        @"#e0e0e0"
 #define COLOR_TOUCHDOWN             @"#F0F0F0"
 #define COLOR_TEXT_HARDGRAY         @"#000000"
-#define COLOR_TEXT_DESCGRAY         @"#b3b3b3"
+#define COLOR_TEXT_DESCGRAY         @"#616161"
 #define COLOR_NAVI_DEFAULT          @"#666666"
 #define COLOR_Main                  @"#38393e"
 
@@ -46,9 +46,9 @@
 #define SPACING_ORDER_DETAIL      16
 
 //-----------------------UI FONT--------------------------------
-#define FONT_SIZE_TITLE         17
-#define FONT_SIZE_DESC          15
-#define FONT_SIZE_MEMO          13
+#define FONT_SIZE_TITLE         16
+#define FONT_SIZE_DESC          14
+#define FONT_SIZE_MEMO          12
 
 //------------------------------DATE FORMATTER-----------------------------------
 #define DATE_FORMATTER_DEFAULT      @"yyyy-MM-dd HH:mm"

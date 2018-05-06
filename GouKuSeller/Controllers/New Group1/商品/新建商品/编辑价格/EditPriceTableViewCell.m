@@ -49,27 +49,29 @@
         [self.contentView addSubview:img3];
         [img3 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         
-        self.tf_name = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, SCREEN_WIDTH - 115, 45)];
+        self.tf_name = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 113, 0, 100, 45)];
         [self.contentView addSubview:self.tf_name];
         [self.tf_name setPlaceholder:@"输入名称"];
         [self.tf_name setFont:[UIFont systemFontOfSize:16]];
         [self.tf_name setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.tf_name setTextAlignment:NSTextAlignmentRight];
         
-        self.lab_jian = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 30, 44, 30, 44)];
+        self.lab_jian = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 30 - 13, 44, 30, 44)];
         [self.contentView addSubview:self.lab_jian];
         [self.lab_jian setText:@"件"];
         [self.lab_jian setFont:[UIFont systemFontOfSize:16]];
         [self.lab_jian setTextColor:[UIColor colorWithHexString:@"#000000"]];
+        [self.lab_jian setTextAlignment:NSTextAlignmentRight];
+
         
-        self.tf_dengyu = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 44, SCREEN_WIDTH - 130, 45)];
+        self.tf_dengyu = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 140, 44, 100, 45)];
         [self.contentView addSubview:self.tf_dengyu];
         [self.tf_dengyu setPlaceholder:@"输入数量"];
         [self.tf_dengyu setFont:[UIFont systemFontOfSize:16]];
         [self.tf_dengyu setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.tf_dengyu setTextAlignment:NSTextAlignmentRight];
         
-        self.tf_price = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 88, SCREEN_WIDTH - 115, 45)];
+        self.tf_price = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 113, 88, 100, 45)];
         [self.contentView addSubview:self.tf_price];
         [self.tf_price setPlaceholder:@"输入价格"];
         [self.tf_price setFont:[UIFont systemFontOfSize:16]];

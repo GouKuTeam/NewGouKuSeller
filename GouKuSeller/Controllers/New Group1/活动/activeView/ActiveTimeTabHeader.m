@@ -40,7 +40,6 @@
             make.top.mas_equalTo(3);
         }];
         self.switch_quantian.layer.anchorPoint = CGPointMake(0, 0.3);
-//        self.switch_quantian.on = NO;
         [self.switch_quantian setOn:NO animated:true];
         
         self.lab_zidingyi = [[UILabel alloc]init];
