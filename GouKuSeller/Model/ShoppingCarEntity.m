@@ -7,8 +7,17 @@
 //
 
 #import "ShoppingCarEntity.h"
-
+#import "WareEntity.h"
+#import "StoreEntity.h"
 @implementation ShoppingCarEntity
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"shoppingCarShops" : [StoreEntity class],
+             @"invalidItems":[WareEntity class],
+             };
+}
 
 + (ShoppingCarEntity *)parseShoppingCarEntityWithJson:(id)json{
     return [self parseObjectWithKeyValues:json];

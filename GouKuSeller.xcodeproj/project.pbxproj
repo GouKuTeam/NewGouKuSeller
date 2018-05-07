@@ -21,6 +21,8 @@
 		1891DA9120A01EC8008E16F7 /* StoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9020A01EC8008E16F7 /* StoreEntity.m */; };
 		1891DA9420A01F94008E16F7 /* WareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9320A01F94008E16F7 /* WareEntity.m */; };
 		1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */; };
+		1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */; };
+		1891DA9F20A052CF008E16F7 /* ShoppingBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9E20A052CF008E16F7 /* ShoppingBottomView.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
@@ -601,6 +603,10 @@
 		1891DA9320A01F94008E16F7 /* WareEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WareEntity.m; sourceTree = "<group>"; };
 		1891DA9520A020E7008E16F7 /* ShoppingCarEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarEntity.h; sourceTree = "<group>"; };
 		1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarEntity.m; sourceTree = "<group>"; };
+		1891DA9A20A024F7008E16F7 /* ShoppingHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingHandler.h; sourceTree = "<group>"; };
+		1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingHandler.m; sourceTree = "<group>"; };
+		1891DA9D20A052CF008E16F7 /* ShoppingBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingBottomView.h; sourceTree = "<group>"; };
+		1891DA9E20A052CF008E16F7 /* ShoppingBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingBottomView.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
@@ -1106,6 +1112,8 @@
 				1842CCE4209BF39200A1C7C8 /* ConfirmOrderTableViewCell.m */,
 				1842CCE6209BF89500A1C7C8 /* AddressHeaderView.h */,
 				1842CCE7209BF89500A1C7C8 /* AddressHeaderView.m */,
+				1891DA9D20A052CF008E16F7 /* ShoppingBottomView.h */,
+				1891DA9E20A052CF008E16F7 /* ShoppingBottomView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1121,6 +1129,15 @@
 				1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1891DA9920A024CA008E16F7 /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				1891DA9A20A024F7008E16F7 /* ShoppingHandler.h */,
+				1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */,
+			);
+			path = "购物车";
 			sourceTree = "<group>";
 		};
 		3D33247D643897427C1A3153 /* Frameworks */ = {
@@ -1205,6 +1222,7 @@
 		744ABA1F2053E75C00BBB26E /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				1891DA9920A024CA008E16F7 /* 购物车 */,
 				7498365B208887AC007FEEF8 /* 我的 */,
 				741D3C6D20804CF800C56FCA /* 订单 */,
 				7491FA832079B5500006F388 /* 结算 */,
@@ -2388,6 +2406,7 @@
 				7489CCB3207F6B4A00971BED /* AddPriceViewController.m in Sources */,
 				74983675208C33CF007FEEF8 /* ActiveDetailViewController.m in Sources */,
 				7491FA61206DD9380006F388 /* YuEDetailTableViewCell.m in Sources */,
+				1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */,
 				744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */,
 				74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
 				741D3C8D20808DBD00C56FCA /* ItemsEntity.m in Sources */,
@@ -2494,6 +2513,7 @@
 				7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */,
 				74B4E8AB204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				7489CC83207F2F4A00971BED /* MyTbHeaderView.m in Sources */,
+				1891DA9F20A052CF008E16F7 /* ShoppingBottomView.m in Sources */,
 				7489CC92207F599100971BED /* OttoTextField.m in Sources */,
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
