@@ -100,7 +100,13 @@
         
     }
     return self;
-    
+}
+
+- (void)contentCellWithWareEntity:(WareEntity *)wareEntity{
+    [self.iv_image sd_setImageWithURL:[NSURL URLWithString:wareEntity.warePicurl] placeholderImage:nil];
+    [self.lb_name setText:wareEntity.wareName];
+    [self.lb_price setText:[NSString stringWithFormat:@"￥%.2f",wareEntity.warePrice]];
+    [self.lb_specification setText:wareEntity.unitName];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -15,7 +15,7 @@
 +(void)commodityCashierWithBarcode:(NSString *)barcode shopId:(NSNumber *)shopid addup:(NSString *)addup prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
 //    NSString *str_url = [self requestUrlWithPath:API_POST_CommodityCashier];
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POST_CommodityCashier];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_CommodityCashier];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (shopid) {
         [dic setObject:shopid forKey:@"shopId"];
@@ -133,7 +133,7 @@
 //查询满减金额
 +(void)selectManJianPriceWithaddup:(NSString *)addup prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POST_SelectManJianPrice];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SelectManJianPrice];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (addup) {
         [dic setObject:addup forKey:@"addup"];

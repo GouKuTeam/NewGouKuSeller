@@ -22,7 +22,7 @@
     //appstore环境
     #define API_Login                   @"https://passport.goukugogo.com"
     #define API_OrderAndPay             @"https://trade.goukugogo.com"
-    #define API_Orther                  @"https://shop.goukugogo.com"
+    #define API_Other                   @"https://shop.goukugogo.com"
     #define KEY_JPUSH                   @"a39c6215cc0d16b9dd42db44"
     #define Jpush                       @"YES"
     #define SERVER_HOST                 @"47.97.174.40:9001"
@@ -31,7 +31,7 @@
     //测试打包
     #define API_Login                   @"http://47.97.174.40:9000"
     #define API_OrderAndPay             @"http://47.97.174.40:9002"
-    #define API_Orther                  @"http://47.97.174.40:9001"
+    #define API_Other                   @"http://47.97.174.40:9001"
     #define KEY_JPUSH                   @"a39c6215cc0d16b9dd42db44"
     #define Jpush                       @"NO"
     #define SERVER_HOST                 @"47.97.174.40:9001"
@@ -162,7 +162,10 @@
  */
 #define API_GET_GetToday @"/operate/getToday"
 
-
+/*
+ 购物车API
+ */
+#define API_GET_SHOPPINGLIST @"/shopping/get"
 
 
 
