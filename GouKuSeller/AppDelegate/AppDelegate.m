@@ -15,6 +15,9 @@
 #import "JPUSHService.h"
 #import <UserNotifications/UserNotifications.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>
 
@@ -34,8 +37,14 @@
     UIViewController *loginVC = [[LoginViewController alloc]init];
     UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:loginVC];
     if ([LoginStorage isLogin] == YES) {
-        self.tableBarController = [[TabBarViewController alloc] init];
-        self.window.rootViewController = self.tableBarController;
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
+            self.tableBarController = [[TabBarViewController alloc] init];
+            self.window.rootViewController = self.tableBarController;
+        }
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
+            self.supplierTabbarViewController = [[SupplierTabbarViewController alloc] init];
+            self.window.rootViewController = self.supplierTabbarViewController;
+        }
     }else{
         self.window.rootViewController = navLogin;
     }
@@ -95,7 +104,7 @@
             NSLog(@"registrationID获取失败，code：%d",resCode);
         }
     }];
-
+    [AMapServices sharedServices].apiKey = @"2c81b2b54c03fbdabdbcde8c90d0617c";
     return YES;
 }
 

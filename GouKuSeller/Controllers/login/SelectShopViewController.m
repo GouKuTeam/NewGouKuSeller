@@ -10,6 +10,7 @@
 #import "TabBarViewController.h"
 #import "RTHttpClient.h"
 #import "JPUSHService.h"
+#import "SupplierTabbarViewController.h"
 
 @interface SelectShopViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView     *tb_shopList;
@@ -63,8 +64,17 @@
             [LoginStorage savePhoneNum:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"phone"]];
             [LoginStorage saveShopPic:[NSString stringWithFormat:@"%@%@",HeadQZ,[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"logo"]]];
             [LoginStorage saveIsLogin:YES];
-            TabBarViewController *vc = [[TabBarViewController alloc]init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+            [LoginStorage saveType:[NSString stringWithFormat:@"%@",[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"type"]]];
+            if ([[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"type"] intValue] == 1) {
+                //门店
+                TabBarViewController *vc = [[TabBarViewController alloc]init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+            }
+            if ([[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"type"] intValue] == 3) {
+                //供应商
+                SupplierTabbarViewController *vc = [[SupplierTabbarViewController alloc]init];
+                [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+            }
             
             //首次登陆  需要上传一次  推送registrationID
             [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {

@@ -40,4 +40,7 @@
 
 + (void)saveGouWuChe:(NSMutableArray *)arr;
 + (NSMutableArray *)GetGouWuChe;
+
++ (void)saveType:(NSString *)typeStr;
++ (NSString *)GetTypeStr;
 @end

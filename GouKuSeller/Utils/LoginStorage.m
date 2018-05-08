@@ -17,7 +17,7 @@ static NSString * const UserName = @"UserName";
 static NSString * const ShopPic = @"ShopPic";
 static NSString * const ShopName = @"ShopName";
 static NSString * const GOUWUCHE = @"gouwuche";
-
+static NSString * const TYPE = @"TYPE";
 
 @implementation LoginStorage
 
@@ -127,6 +127,15 @@ static NSString * const GOUWUCHE = @"gouwuche";
 + (NSMutableArray *)GetGouWuChe
 {
     return [UserDefaultsUtils valueWithKey:GOUWUCHE];
+}
+/**
+*  存/取 type
+*/
++ (void)saveType:(NSString *)typeStr{
+    [UserDefaultsUtils saveValue:typeStr forKey:TYPE];
+}
++ (NSString *)GetTypeStr{
+    return [UserDefaultsUtils valueWithKey:TYPE];
 }
 
 @end

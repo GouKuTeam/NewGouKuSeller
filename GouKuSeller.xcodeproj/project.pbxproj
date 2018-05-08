@@ -306,9 +306,31 @@
 		74A1F12C208F75BC0041742B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A1F12B208F75BC0041742B /* NotificationService.m */; };
 		74A1F130208F75BC0041742B /* GouKuSellerPush.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 74A1F128208F75BC0041742B /* GouKuSellerPush.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */; };
+		74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFA3209FFAB4005C5A16 /* LocationTableViewCell.m */; };
+		74ACFFB020A04DE9005C5A16 /* OrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFAF20A04DE9005C5A16 /* OrderManagerViewController.m */; };
+		74ACFFB320A04DF4005C5A16 /* OrderSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFB220A04DF4005C5A16 /* OrderSelectViewController.m */; };
+		74ACFFB620A04E11005C5A16 /* CustomerManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFB520A04E11005C5A16 /* CustomerManagerViewController.m */; };
+		74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFB820A04E1B005C5A16 /* ShopManagerViewController.m */; };
+		74ACFFBB20A051C0005C5A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74ACFFBA20A051C0005C5A16 /* Assets.xcassets */; };
+		74ACFFBC20A051C0005C5A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74ACFFBA20A051C0005C5A16 /* Assets.xcassets */; };
+		74ACFFBD20A051C0005C5A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74ACFFBA20A051C0005C5A16 /* Assets.xcassets */; };
+		74ACFFC020A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFBE20A0552A005C5A16 /* ActiveTimeTableViewCell.m */; };
+		74ACFFC120A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFBE20A0552A005C5A16 /* ActiveTimeTableViewCell.m */; };
+		74ACFFC220A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFBE20A0552A005C5A16 /* ActiveTimeTableViewCell.m */; };
+		74ACFFC520A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFC420A056CE005C5A16 /* SupplierTabbarViewController.m */; };
+		74ACFFC620A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFC420A056CE005C5A16 /* SupplierTabbarViewController.m */; };
+		74ACFFC720A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFC420A056CE005C5A16 /* SupplierTabbarViewController.m */; };
+		74ACFFCA20A14A70005C5A16 /* ShopManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFC920A14A70005C5A16 /* ShopManagerView.m */; };
+		74ACFFCB20A14A70005C5A16 /* ShopManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFC920A14A70005C5A16 /* ShopManagerView.m */; };
+		74ACFFCC20A14A70005C5A16 /* ShopManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFC920A14A70005C5A16 /* ShopManagerView.m */; };
+		74ACFFCF20A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */; };
+		74ACFFD020A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */; };
+		74ACFFD120A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */; };
+		74ACFFD420A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */; };
+		74ACFFD520A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */; };
+		74ACFFD620A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */; };
 		74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B4E806204BD352006AFB6C /* AppDelegate.m */; };
 		74B4E80D204BD353006AFB6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E80B204BD353006AFB6C /* Main.storyboard */; };
-		74B4E80F204BD353006AFB6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E80E204BD353006AFB6C /* Assets.xcassets */; };
 		74B4E812204BD353006AFB6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E810204BD353006AFB6C /* LaunchScreen.storyboard */; };
 		74B4E815204BD353006AFB6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B4E814204BD353006AFB6C /* main.m */; };
 		74B4E81F204BD353006AFB6C /* GouKuSellerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B4E81E204BD353006AFB6C /* GouKuSellerTests.m */; };
@@ -430,9 +452,6 @@
 		74BD12642069EA7F0053A3D1 /* ActiveTimeTabHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD12632069EA7F0053A3D1 /* ActiveTimeTabHeader.m */; };
 		74BD12652069EA7F0053A3D1 /* ActiveTimeTabHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD12632069EA7F0053A3D1 /* ActiveTimeTabHeader.m */; };
 		74BD12662069EA7F0053A3D1 /* ActiveTimeTabHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD12632069EA7F0053A3D1 /* ActiveTimeTabHeader.m */; };
-		74BD1269206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD1268206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m */; };
-		74BD126A206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD1268206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m */; };
-		74BD126B206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BD1268206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m */; };
 		74C6E3312079EDC10083E4A8 /* SelectShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E3302079EDC10083E4A8 /* SelectShopViewController.m */; };
 		74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74C6E3322079F9500083E4A8 /* Images.xcassets */; };
 		74C6E337207A0B730083E4A8 /* BankCardDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E336207A0B730083E4A8 /* BankCardDetailViewController.m */; };
@@ -827,11 +846,31 @@
 		74A1F12D208F75BC0041742B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74ACFF9E209C307D005C5A16 /* LocationAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationAddressViewController.h; sourceTree = "<group>"; };
 		74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationAddressViewController.m; sourceTree = "<group>"; };
+		74ACFFA2209FFAB4005C5A16 /* LocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
+		74ACFFA3209FFAB4005C5A16 /* LocationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
+		74ACFFAE20A04DE9005C5A16 /* OrderManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderManagerViewController.h; sourceTree = "<group>"; };
+		74ACFFAF20A04DE9005C5A16 /* OrderManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderManagerViewController.m; sourceTree = "<group>"; };
+		74ACFFB120A04DF4005C5A16 /* OrderSelectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderSelectViewController.h; sourceTree = "<group>"; };
+		74ACFFB220A04DF4005C5A16 /* OrderSelectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderSelectViewController.m; sourceTree = "<group>"; };
+		74ACFFB420A04E11005C5A16 /* CustomerManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerManagerViewController.h; sourceTree = "<group>"; };
+		74ACFFB520A04E11005C5A16 /* CustomerManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerManagerViewController.m; sourceTree = "<group>"; };
+		74ACFFB720A04E1B005C5A16 /* ShopManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopManagerViewController.h; sourceTree = "<group>"; };
+		74ACFFB820A04E1B005C5A16 /* ShopManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopManagerViewController.m; sourceTree = "<group>"; };
+		74ACFFBA20A051C0005C5A16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74ACFFBE20A0552A005C5A16 /* ActiveTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveTimeTableViewCell.m; sourceTree = "<group>"; };
+		74ACFFBF20A0552B005C5A16 /* ActiveTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveTimeTableViewCell.h; sourceTree = "<group>"; };
+		74ACFFC320A056CE005C5A16 /* SupplierTabbarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierTabbarViewController.h; sourceTree = "<group>"; };
+		74ACFFC420A056CE005C5A16 /* SupplierTabbarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierTabbarViewController.m; sourceTree = "<group>"; };
+		74ACFFC820A14A70005C5A16 /* ShopManagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopManagerView.h; sourceTree = "<group>"; };
+		74ACFFC920A14A70005C5A16 /* ShopManagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopManagerView.m; sourceTree = "<group>"; };
+		74ACFFCD20A14DA5005C5A16 /* SupplierCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierCommodityViewController.h; sourceTree = "<group>"; };
+		74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityViewController.m; sourceTree = "<group>"; };
+		74ACFFD220A15489005C5A16 /* AddSupplierCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddSupplierCommodityViewController.h; sourceTree = "<group>"; };
+		74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddSupplierCommodityViewController.m; sourceTree = "<group>"; };
 		74B4E802204BD352006AFB6C /* GouKuSeller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GouKuSeller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B4E805204BD352006AFB6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74B4E806204BD352006AFB6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		74B4E80C204BD353006AFB6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		74B4E80E204BD353006AFB6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74B4E811204BD353006AFB6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74B4E813204BD353006AFB6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74B4E814204BD353006AFB6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -926,8 +965,6 @@
 		74BD125E206920E90053A3D1 /* SalesHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SalesHeaderView.h; sourceTree = "<group>"; };
 		74BD12622069EA7F0053A3D1 /* ActiveTimeTabHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveTimeTabHeader.h; sourceTree = "<group>"; };
 		74BD12632069EA7F0053A3D1 /* ActiveTimeTabHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveTimeTabHeader.m; sourceTree = "<group>"; };
-		74BD1267206A3D2F0053A3D1 /* ActiveTimeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ActiveTimeTableViewCell.h; path = "GouKuSeller/Controllers/New Group1/活动/ActiveTimeTableViewCell.h"; sourceTree = SOURCE_ROOT; };
-		74BD1268206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ActiveTimeTableViewCell.m; path = "GouKuSeller/Controllers/New Group1/活动/ActiveTimeTableViewCell.m"; sourceTree = SOURCE_ROOT; };
 		74C6E32F2079EDC10083E4A8 /* SelectShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectShopViewController.h; sourceTree = "<group>"; };
 		74C6E3302079EDC10083E4A8 /* SelectShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectShopViewController.m; sourceTree = "<group>"; };
 		74C6E3322079F9500083E4A8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -1068,12 +1105,12 @@
 		1842CCBE209AAC9100A1C7C8 /* 购物车 */ = {
 			isa = PBXGroup;
 			children = (
-				1842CCDC209AD97400A1C7C8 /* View */,
 				1842CCC6209AACF700A1C7C8 /* ShoppingCartViewController.h */,
 				1842CCC7209AACF700A1C7C8 /* ShoppingCartViewController.m */,
-				74046B07209C03C6004E64A9 /* 地址管理 */,
 				1842CCE0209B080A00A1C7C8 /* ConfirmOrderViewController.h */,
 				1842CCE1209B080A00A1C7C8 /* ConfirmOrderViewController.m */,
+				1842CCDC209AD97400A1C7C8 /* View */,
+				74046B07209C03C6004E64A9 /* 地址管理 */,
 			);
 			path = "购物车";
 			sourceTree = "<group>";
@@ -1158,6 +1195,8 @@
 				74046B0C209C1AE2004E64A9 /* CreateAddressViewController.m */,
 				74ACFF9E209C307D005C5A16 /* LocationAddressViewController.h */,
 				74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */,
+				74ACFFA2209FFAB4005C5A16 /* LocationTableViewCell.h */,
+				74ACFFA3209FFAB4005C5A16 /* LocationTableViewCell.m */,
 			);
 			path = "地址管理";
 			sourceTree = "<group>";
@@ -1338,7 +1377,6 @@
 			children = (
 				744ABA9320556D5D00BBB26E /* AddNewCommodityViewController.h */,
 				744ABA9420556D5D00BBB26E /* AddNewCommodityViewController.m */,
-				74046AEE209AB7BD004E64A9 /* 编辑价格 */,
 				744ABA9820556F4C00BBB26E /* NewCommodityView */,
 				74F8E8EF20592A8E000A17A5 /* 选择商品类目 */,
 				74F8E8EE20592A75000A17A5 /* 商品规格 */,
@@ -1538,6 +1576,70 @@
 			path = "采购";
 			sourceTree = "<group>";
 		};
+		74ACFFA820A04D0E005C5A16 /* 商家端 */ = {
+			isa = PBXGroup;
+			children = (
+				74BD11F4206894CD0053A3D1 /* 工作台 */,
+				74BD11F5206894E80053A3D1 /* 订单 */,
+				74BD11F6206894FA0053A3D1 /* 我的 */,
+			);
+			path = "商家端";
+			sourceTree = "<group>";
+		};
+		74ACFFA920A04D2C005C5A16 /* 供应商 */ = {
+			isa = PBXGroup;
+			children = (
+				74ACFFAA20A04DAD005C5A16 /* 订单处理 */,
+				74ACFFAB20A04DB3005C5A16 /* 订单查询 */,
+				74ACFFAC20A04DBE005C5A16 /* 客户管理 */,
+				74ACFFAD20A04DC5005C5A16 /* 店铺管理 */,
+			);
+			path = "供应商";
+			sourceTree = "<group>";
+		};
+		74ACFFAA20A04DAD005C5A16 /* 订单处理 */ = {
+			isa = PBXGroup;
+			children = (
+				74ACFFAE20A04DE9005C5A16 /* OrderManagerViewController.h */,
+				74ACFFAF20A04DE9005C5A16 /* OrderManagerViewController.m */,
+			);
+			path = "订单处理";
+			sourceTree = "<group>";
+		};
+		74ACFFAB20A04DB3005C5A16 /* 订单查询 */ = {
+			isa = PBXGroup;
+			children = (
+				74ACFFB120A04DF4005C5A16 /* OrderSelectViewController.h */,
+				74ACFFB220A04DF4005C5A16 /* OrderSelectViewController.m */,
+			);
+			path = "订单查询";
+			sourceTree = "<group>";
+		};
+		74ACFFAC20A04DBE005C5A16 /* 客户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				74ACFFB420A04E11005C5A16 /* CustomerManagerViewController.h */,
+				74ACFFB520A04E11005C5A16 /* CustomerManagerViewController.m */,
+			);
+			path = "客户管理";
+			sourceTree = "<group>";
+		};
+		74ACFFAD20A04DC5005C5A16 /* 店铺管理 */ = {
+			isa = PBXGroup;
+			children = (
+				74ACFFB720A04E1B005C5A16 /* ShopManagerViewController.h */,
+				74ACFFB820A04E1B005C5A16 /* ShopManagerViewController.m */,
+				74ACFFC820A14A70005C5A16 /* ShopManagerView.h */,
+				74ACFFC920A14A70005C5A16 /* ShopManagerView.m */,
+				74ACFFCD20A14DA5005C5A16 /* SupplierCommodityViewController.h */,
+				74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */,
+				74ACFFD220A15489005C5A16 /* AddSupplierCommodityViewController.h */,
+				74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */,
+				74046AEE209AB7BD004E64A9 /* 编辑价格 */,
+			);
+			path = "店铺管理";
+			sourceTree = "<group>";
+		};
 		74B4E7F9204BD352006AFB6C = {
 			isa = PBXGroup;
 			children = (
@@ -1576,10 +1678,10 @@
 				74B4E85D204BD3EC006AFB6C /* Utils */,
 				744ABA202053E76F00BBB26E /* Model */,
 				74B4E80B204BD353006AFB6C /* Main.storyboard */,
-				74B4E80E204BD353006AFB6C /* Assets.xcassets */,
 				74B4E810204BD353006AFB6C /* LaunchScreen.storyboard */,
 				74B4E813204BD353006AFB6C /* Info.plist */,
 				74B4E814204BD353006AFB6C /* main.m */,
+				74ACFFBA20A051C0005C5A16 /* Assets.xcassets */,
 				74C6E3322079F9500083E4A8 /* Images.xcassets */,
 			);
 			path = GouKuSeller;
@@ -1657,9 +1759,8 @@
 			children = (
 				74BD11F3206894BF0053A3D1 /* tabbar */,
 				744ABAB2205652C200BBB26E /* login */,
-				74BD11F4206894CD0053A3D1 /* 工作台 */,
-				74BD11F5206894E80053A3D1 /* 订单 */,
-				74BD11F6206894FA0053A3D1 /* 我的 */,
+				74ACFFA920A04D2C005C5A16 /* 供应商 */,
+				74ACFFA820A04D0E005C5A16 /* 商家端 */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1745,6 +1846,8 @@
 				74BD11D52067DE830053A3D1 /* TabBarViewController.m */,
 				1842CCB7209AA20F00A1C7C8 /* PurchaseTabBarViewController.h */,
 				1842CCB8209AA21000A1C7C8 /* PurchaseTabBarViewController.m */,
+				74ACFFC320A056CE005C5A16 /* SupplierTabbarViewController.h */,
+				74ACFFC420A056CE005C5A16 /* SupplierTabbarViewController.m */,
 			);
 			path = tabbar;
 			sourceTree = "<group>";
@@ -1840,8 +1943,8 @@
 				74BD12452068EA470053A3D1 /* ManjianTableViewCell.m */,
 				74BD12492068F4A80053A3D1 /* SingleSalesTableViewCell.h */,
 				74BD124A2068F4A80053A3D1 /* SingleSalesTableViewCell.m */,
-				74BD1267206A3D2F0053A3D1 /* ActiveTimeTableViewCell.h */,
-				74BD1268206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m */,
+				74ACFFBF20A0552B005C5A16 /* ActiveTimeTableViewCell.h */,
+				74ACFFBE20A0552A005C5A16 /* ActiveTimeTableViewCell.m */,
 				7498367D208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.h */,
 				7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */,
 			);
@@ -2207,9 +2310,9 @@
 				7491FA71206E15CC0006F388 /* address.txt in Resources */,
 				7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */,
+				74ACFFBB20A051C0005C5A16 /* Assets.xcassets in Resources */,
 				74B4E812204BD353006AFB6C /* LaunchScreen.storyboard in Resources */,
 				74B4E86F204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
-				74B4E80F204BD353006AFB6C /* Assets.xcassets in Resources */,
 				7489CCA1207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7489CC9B207F599100971BED /* README.md in Resources */,
 				74B4E80D204BD353006AFB6C /* Main.storyboard in Resources */,
@@ -2224,6 +2327,7 @@
 				744ABA73205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
 				7489CCA2207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7491FA72206E15CC0006F388 /* address.txt in Resources */,
+				74ACFFBC20A051C0005C5A16 /* Assets.xcassets in Resources */,
 				7489CC9C207F599100971BED /* README.md in Resources */,
 				74B4E870204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 			);
@@ -2237,6 +2341,7 @@
 				744ABA74205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
 				7489CCA3207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7491FA73206E15CC0006F388 /* address.txt in Resources */,
+				74ACFFBD20A051C0005C5A16 /* Assets.xcassets in Resources */,
 				7489CC9D207F599100971BED /* README.md in Resources */,
 				74B4E871204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 			);
@@ -2270,7 +2375,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller-resources.sh",
-				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -2330,7 +2435,6 @@
 				7491FA862079B5760006F388 /* SettlementHandler.m in Sources */,
 				74046AFA209ADD82004E64A9 /* SupplierListTableViewCell.m in Sources */,
 				741D3C832080853A00C56FCA /* OrderDetailViewController.m in Sources */,
-				74BD1269206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */,
 				74046AF4209ABFB5004E64A9 /* EditPriceHeaderView.m in Sources */,
 				74F8E90D205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				7491FA7A206E15CC0006F388 /* AddressPickerView.m in Sources */,
@@ -2342,11 +2446,14 @@
 				74C6E377207C56640083E4A8 /* CashierHandler.m in Sources */,
 				741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
+				74ACFFD420A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */,
 				744ABA0820517C3600BBB26E /* BtnTop.m in Sources */,
 				741D3C7920805CC200C56FCA /* DateUtils.m in Sources */,
+				74ACFFB020A04DE9005C5A16 /* OrderManagerViewController.m in Sources */,
 				741D3C762080565C00C56FCA /* OrderDetailEntity.m in Sources */,
 				74046B0D209C1AE2004E64A9 /* CreateAddressViewController.m in Sources */,
 				74BD12242068C7A80053A3D1 /* AddActiveViewController.m in Sources */,
+				74ACFFC520A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74C6E3312079EDC10083E4A8 /* SelectShopViewController.m in Sources */,
 				744ABA8A205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				744ABA78205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
@@ -2355,6 +2462,7 @@
 				741D3C9220808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74BD11EB2067DEB60053A3D1 /* OrderViewController.m in Sources */,
 				74C6E355207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
+				74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */,
 				74C6E36D207B728C0083E4A8 /* TitleView.m in Sources */,
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
@@ -2392,6 +2500,7 @@
 				740C688A207C98930044889F /* PayInCashViewController.m in Sources */,
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
+				74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,
 				7491FA902079B7A50006F388 /* BankCardEntity.m in Sources */,
 				74046AF7209AD709004E64A9 /* EditPriceFooterView.m in Sources */,
@@ -2416,6 +2525,7 @@
 				1842CCF2209C33C600A1C7C8 /* PurchaseOrderHeaderView.m in Sources */,
 				74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */,
 				1842CCCE209AAD5100A1C7C8 /* SupplierListViewController.m in Sources */,
+				74ACFFCA20A14A70005C5A16 /* ShopManagerView.m in Sources */,
 				741D3C9C2081D0D000C56FCA /* CommonAlertView.m in Sources */,
 				7491FA8B2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				7491FA2C206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
@@ -2449,6 +2559,7 @@
 				74F8E917205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E8C220512CD8006AFB6C /* UserDefaultsUtils.m in Sources */,
 				744ABAB5205652D300BBB26E /* LoginViewController.m in Sources */,
+				74ACFFC020A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				74BD120E20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				74B4E8AE204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				741D3CAB208465CE00C56FCA /* ChangePassWordViewController.m in Sources */,
@@ -2468,9 +2579,11 @@
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
 				744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */,
+				74ACFFB620A04E11005C5A16 /* CustomerManagerViewController.m in Sources */,
 				1842CCDF209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m in Sources */,
 				7498365E208887D0007FEEF8 /* MyHandler.m in Sources */,
 				7491FA27206B7B000006F388 /* SettlementView.m in Sources */,
+				74ACFFB320A04DF4005C5A16 /* OrderSelectViewController.m in Sources */,
 				74B4E89F204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,
 				74F8E8FD2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				744ABA84205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
@@ -2501,6 +2614,7 @@
 				74F8E8E120592074000A17A5 /* StandardEntity.m in Sources */,
 				74F8E912205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
 				744ABAAF205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
+				74ACFFCF20A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
 				1842CCDA209AB1E200A1C7C8 /* PurchaseOrderViewController.m in Sources */,
 				74B4E8C320512CD8006AFB6C /* LoginStorage.m in Sources */,
 				74B4E896204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
@@ -2570,9 +2684,11 @@
 				74BD12382068D8B30053A3D1 /* UIView+Extension.m in Sources */,
 				74F8E8FE2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				74983676208C33CF007FEEF8 /* ActiveDetailViewController.m in Sources */,
+				74ACFFC620A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74B4E89D204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8B205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				74BD11DC2067DE830053A3D1 /* TabBarViewController.m in Sources */,
+				74ACFFC120A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				7491FA78206E15CC0006F388 /* Province.m in Sources */,
 				74BD120520689A700053A3D1 /* NotBeginningActivityTableViewCell.m in Sources */,
 				74BD12152068BBCC0053A3D1 /* SelectAcTiveTypeViewController.m in Sources */,
@@ -2585,6 +2701,7 @@
 				744ABA6D205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABA2E2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				7491FA2D206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
+				74ACFFCB20A14A70005C5A16 /* ShopManagerView.m in Sources */,
 				74B4E87C204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				74C6E362207B54D90083E4A8 /* UINavigationController+SJVideoPlayerAdd.m in Sources */,
 				741D3CC520848AF200C56FCA /* ChangeShopViewController.m in Sources */,
@@ -2592,13 +2709,13 @@
 				7491FAA52079E2400006F388 /* SetPassWordViewController.m in Sources */,
 				744ABA9620556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				7491FA812079B0E40006F388 /* ActiveHandler.m in Sources */,
-				74BD126A206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */,
 				741D3CC02084892900C56FCA /* AboutMeViewController.m in Sources */,
 				74F8E9362060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74B4E873204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA67205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				7491FA7B206E15CC0006F388 /* AddressPickerView.m in Sources */,
 				7491FA3C206BA5D50006F388 /* SelectBankViewController.m in Sources */,
+				74ACFFD020A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
 				74BD120F20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				74B4E8AF204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				7491FA8C2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
@@ -2654,6 +2771,7 @@
 				74BD12202068C0AB0053A3D1 /* ActiveInformation.m in Sources */,
 				7491FA37206B9F8F0006F388 /* BankCardTableViewCell.m in Sources */,
 				74C6E373207C53570083E4A8 /* TitleClear.m in Sources */,
+				74ACFFD520A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */,
 				7491FA4C206CC54F0006F388 /* CashierViewController.m in Sources */,
 				741D3CBB20846D7B00C56FCA /* TiXianIngView.m in Sources */,
 				74F8E9282060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
@@ -2723,9 +2841,11 @@
 				74BD12392068D8B30053A3D1 /* UIView+Extension.m in Sources */,
 				74F8E8FF2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				74983677208C33CF007FEEF8 /* ActiveDetailViewController.m in Sources */,
+				74ACFFC720A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74B4E89E204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8C205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				74BD11DD2067DE830053A3D1 /* TabBarViewController.m in Sources */,
+				74ACFFC220A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				7491FA79206E15CC0006F388 /* Province.m in Sources */,
 				74BD120620689A700053A3D1 /* NotBeginningActivityTableViewCell.m in Sources */,
 				74BD12162068BBCC0053A3D1 /* SelectAcTiveTypeViewController.m in Sources */,
@@ -2738,6 +2858,7 @@
 				744ABA6E205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABA2F2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				7491FA2E206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
+				74ACFFCC20A14A70005C5A16 /* ShopManagerView.m in Sources */,
 				74B4E87D204BD3EC006AFB6C /* BaseTableView.m in Sources */,
 				74C6E363207B54D90083E4A8 /* UINavigationController+SJVideoPlayerAdd.m in Sources */,
 				741D3CC620848AF200C56FCA /* ChangeShopViewController.m in Sources */,
@@ -2745,13 +2866,13 @@
 				7491FAA62079E2400006F388 /* SetPassWordViewController.m in Sources */,
 				744ABA9720556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				7491FA822079B0E40006F388 /* ActiveHandler.m in Sources */,
-				74BD126B206A3D2F0053A3D1 /* ActiveTimeTableViewCell.m in Sources */,
 				741D3CC12084892900C56FCA /* AboutMeViewController.m in Sources */,
 				74F8E9372060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74B4E874204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA68205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				7491FA7C206E15CC0006F388 /* AddressPickerView.m in Sources */,
 				7491FA3D206BA5D50006F388 /* SelectBankViewController.m in Sources */,
+				74ACFFD120A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
 				74BD121020689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				74B4E8B0204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				7491FA8D2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
@@ -2807,6 +2928,7 @@
 				74BD12212068C0AB0053A3D1 /* ActiveInformation.m in Sources */,
 				7491FA38206B9F8F0006F388 /* BankCardTableViewCell.m in Sources */,
 				74C6E374207C53570083E4A8 /* TitleClear.m in Sources */,
+				74ACFFD620A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */,
 				7491FA4D206CC54F0006F388 /* CashierViewController.m in Sources */,
 				741D3CBC20846D7B00C56FCA /* TiXianIngView.m in Sources */,
 				74F8E9292060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
