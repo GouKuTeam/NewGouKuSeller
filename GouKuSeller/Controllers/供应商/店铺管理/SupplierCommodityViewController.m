@@ -23,6 +23,8 @@
 #import "CommodityStatusView.h"
 #import "MoreEditView.h"
 #import "MoreAddCommodityViewController.h"
+#import "SupplierCommodityEndity.h"
+#import "SupplierCommodityListTableViewCell.h"
 
 #define NULLROW    999
 
@@ -284,10 +286,6 @@
     [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_category removeAllObjects];
-        ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
-        entity.name = @"全部分类";
-        entity._id = 0;
-        [self.arr_category addObject:entity];
         [self.arr_category addObjectsFromArray:arr_data];
         self.selectedSection = 0;
         self.selectedRow = NULLROW;
@@ -314,7 +312,10 @@
     if (self.selectedRow != NULLROW) {
         entity = [entity.childList objectAtIndex:self.selectedRow];
     }
-    [CommodityHandler getCommodityListWithshopId:[LoginStorage GetShopId] shopWareCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex pageNum:(int)pageNum prepare:nil success:^(id obj) {
+    
+    [CommodityHandler selectSupplierCommodityListWithKeyword:nil status:self.btnIndex firstCategoryId:[NSNumber numberWithInteger:entity._id] page:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
         if (pageNum == 0) {
             [self.arr_commodity removeAllObjects];
         }
@@ -474,12 +475,12 @@
             return cell;
         }else{
             static NSString *CellIdentifier = @"PotentialStoreTableViewCell";
-            CommodityTableViewCell *cell = (CommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            SupplierCommodityListTableViewCell *cell = (SupplierCommodityListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             if (!cell){
-                cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell = [[SupplierCommodityListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
-            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
-            [cell contentCellWithCommodityInformationEntity:entity];
+            SupplierCommodityEndity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+            [cell contentCellWithSupplierCommodityEndity:entity];
             cell.btn_more.tag = indexPath.row;
             cell.btn_edit.tag = indexPath.row;
             [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -500,14 +501,6 @@
         [self.tb_left reloadData];
         //加载右边数据
         [self.tb_right requestDataSource];
-    }else if (tableView == self.tb_right){
-        if (self.enterFormType == EnterFromActice) {
-            if (self.selectCommodity) {
-                CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
-                self.selectCommodity(entity);
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }
     }
 }
 
@@ -525,7 +518,7 @@
 
 
 - (void)moreAction:(UIButton *)btn_sender{
-    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
+    SupplierCommodityEndity *entity = [self.arr_commodity objectAtIndex:btn_sender.tag];
     if (entity.status == 1) {
         [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
     }else if (entity.status == 2) {

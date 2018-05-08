@@ -43,4 +43,14 @@
 //门店商品编辑(更新)
 + (void)commodityEditWithCommodityId:(NSString *)commodityId price:(double)price stock:(NSString *)stock xprice:(double)xprice shopWareCategoryId:(NSNumber *)shopWareCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+
+
+
+
+
+//供应商新建商品
++ (void)addSupplierCommodityWithWareItemId:(NSNumber *)wareItemId firstCategoryId:(NSNumber *)firstCategoryId stock:(int )stock xprice:(NSString *)xprice musing:(NSString *)musing price:(NSString *)price saleUnits:(NSArray *)saleUnits prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//供应商商品列表查询
++ (void)selectSupplierCommodityListWithKeyword:(NSString *)keyword status:(NSNumber *)status firstCategoryId:(NSNumber *)firstCategoryId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end

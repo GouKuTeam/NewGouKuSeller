@@ -329,6 +329,8 @@
 		74ACFFD420A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */; };
 		74ACFFD520A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */; };
 		74ACFFD620A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */; };
+		74ACFFD920A1A66C005C5A16 /* SupplierCommodityEndity.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFD820A1A66C005C5A16 /* SupplierCommodityEndity.m */; };
+		74ACFFDF20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFDE20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m */; };
 		74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B4E806204BD352006AFB6C /* AppDelegate.m */; };
 		74B4E80D204BD353006AFB6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E80B204BD353006AFB6C /* Main.storyboard */; };
 		74B4E812204BD353006AFB6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B4E810204BD353006AFB6C /* LaunchScreen.storyboard */; };
@@ -867,6 +869,10 @@
 		74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityViewController.m; sourceTree = "<group>"; };
 		74ACFFD220A15489005C5A16 /* AddSupplierCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddSupplierCommodityViewController.h; sourceTree = "<group>"; };
 		74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddSupplierCommodityViewController.m; sourceTree = "<group>"; };
+		74ACFFD720A1A66C005C5A16 /* SupplierCommodityEndity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierCommodityEndity.h; sourceTree = "<group>"; };
+		74ACFFD820A1A66C005C5A16 /* SupplierCommodityEndity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityEndity.m; sourceTree = "<group>"; };
+		74ACFFDD20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierCommodityListTableViewCell.h; sourceTree = "<group>"; };
+		74ACFFDE20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityListTableViewCell.m; sourceTree = "<group>"; };
 		74B4E802204BD352006AFB6C /* GouKuSeller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GouKuSeller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74B4E805204BD352006AFB6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		74B4E806204BD352006AFB6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1635,6 +1641,10 @@
 				74ACFFCE20A14DA5005C5A16 /* SupplierCommodityViewController.m */,
 				74ACFFD220A15489005C5A16 /* AddSupplierCommodityViewController.h */,
 				74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */,
+				74ACFFD720A1A66C005C5A16 /* SupplierCommodityEndity.h */,
+				74ACFFD820A1A66C005C5A16 /* SupplierCommodityEndity.m */,
+				74ACFFDD20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.h */,
+				74ACFFDE20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m */,
 				74046AEE209AB7BD004E64A9 /* 编辑价格 */,
 			);
 			path = "店铺管理";
@@ -2419,6 +2429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1842CCC8209AACF700A1C7C8 /* ShoppingCartViewController.m in Sources */,
+				74ACFFDF20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m in Sources */,
 				1842CCE5209BF39200A1C7C8 /* ConfirmOrderTableViewCell.m in Sources */,
 				74BD121F2068C0AB0053A3D1 /* ActiveInformation.m in Sources */,
 				74F8E9272060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
@@ -2582,6 +2593,7 @@
 				74ACFFB620A04E11005C5A16 /* CustomerManagerViewController.m in Sources */,
 				1842CCDF209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m in Sources */,
 				7498365E208887D0007FEEF8 /* MyHandler.m in Sources */,
+				74ACFFD920A1A66C005C5A16 /* SupplierCommodityEndity.m in Sources */,
 				7491FA27206B7B000006F388 /* SettlementView.m in Sources */,
 				74ACFFB320A04DF4005C5A16 /* OrderSelectViewController.m in Sources */,
 				74B4E89F204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,

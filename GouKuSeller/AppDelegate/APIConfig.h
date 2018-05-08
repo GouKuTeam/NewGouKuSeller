@@ -91,6 +91,14 @@
 #define API_GET_CommodityEdit @"/shop/ware/stock/update"
 
 
+/*
+ 供应商商品API
+ */
+//供应商商品列表查询  查询所有商品(后台管理)
+#define API_POST_SupplierCommodityList @"/wareSku/manage/list"
+//供应商新增商品
+#define API_POST_AddSupplierCommdity @"/wareSku/manage/addOrUpdate"
+
 
 /*
  活动API

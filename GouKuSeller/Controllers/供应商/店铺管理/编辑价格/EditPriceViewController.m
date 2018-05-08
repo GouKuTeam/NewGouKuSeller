@@ -11,7 +11,7 @@
 #import "EditPriceTableViewCell.h"
 #import "EditPriceFooterView.h"
 
-@interface EditPriceViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface EditPriceViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic ,strong)EditPriceHeaderView     *tb_header;
 @property (nonatomic ,strong)EditPriceFooterView     *tb_footer;
 @property (nonatomic ,strong)NSMutableArray          *arr_data;
@@ -86,7 +86,17 @@
     cell.tf_dengyu.text = [dic objectForKey:@"count"];
     cell.tf_price.text = [dic objectForKey:@"price"];
     cell.tf_name.text = [dic objectForKey:@"unitName"];
+    cell.tf_name.delegate = self;
+    cell.tf_price.delegate = self;
+    cell.tf_dengyu.delegate = self;
     return cell;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    for (int i = 0; i < self.arr_data.count; i++) {
+        EditPriceTableViewCell *cell = [self.tb_editPrice cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:i]];
+        [self.arr_data replaceObjectAtIndex:i withObject:@{@"unitName":cell.tf_name.text.length > 0 ? cell.tf_name.text : @"" ,@"count":cell.tf_dengyu.text.length > 0 ? cell.tf_dengyu.text : @"",@"price":cell.tf_price.text.length > 0 ? cell.tf_price.text : @""}];
+    }
 }
 
 - (void)switchAction:(id)sender{
@@ -101,10 +111,6 @@
 }
 
 - (void)addDanWei{
-    for (int i = 0; i < self.arr_data.count; i++) {
-        EditPriceTableViewCell *cell = [self.tb_editPrice cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:i]];
-        [self.arr_data replaceObjectAtIndex:i withObject:@{@"unitName":cell.tf_name.text,@"count":cell.tf_dengyu.text,@"price":cell.tf_price.text}];
-    }
     [self.arr_data addObject:@{@"unitName":@"",@"count":@"",@"price":@""}];
     [self.tb_editPrice reloadData];
 }
@@ -115,6 +121,7 @@
 }
 
 - (void)rightBarAction{
+    [self.view endEditing:YES];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     NSMutableArray *arr_data = [NSMutableArray array];
     [dic removeAllObjects];
@@ -127,10 +134,10 @@
                 [MBProgressHUD showInfoMessage:@"请完善时间段"];
                 return;
             }
-            [arr_data addObject:@{@"unitName":cell.tf_name.text,@"count":cell.tf_dengyu.text,@"price":cell.tf_price.text}];
         }
+        [dic setValue:@"true" forKey:@"using"];
         [dic setValue:self.tb_header.tf_price.text forKey:@"price"];
-        [dic setValue:arr_data forKey:@"saleUnits"];
+        [dic setValue:self.arr_data forKey:@"saleUnits"];
     } else {
         NSLog(@"switch is off");
         for (int i = 0; i < self.arr_data.count; i++) {
@@ -139,9 +146,9 @@
                 [MBProgressHUD showInfoMessage:@"请完善时间段"];
                 return;
             }
-            [arr_data addObject:@{@"unitName":cell.tf_name.text,@"count":cell.tf_dengyu.text,@"price":cell.tf_price.text}];
         }
-        [dic setValue:arr_data forKey:@"saleUnits"];
+        [dic setValue:@"false" forKey:@"using"];
+        [dic setValue:self.arr_data forKey:@"saleUnits"];
     }
     NSLog(@"dic == %@",dic);
     [self.navigationController popViewControllerAnimated:YES];
@@ -157,13 +164,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

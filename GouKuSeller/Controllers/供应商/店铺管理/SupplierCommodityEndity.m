@@ -10,4 +10,12 @@
 
 @implementation SupplierCommodityEndity
 
++ (NSArray *)parseSupplierCommodityEndityListWithJson:(id)json{
+    return [self parseObjectArrayWithKeyValues:json];
+}
+
++ (SupplierCommodityEndity *)parseSupplierCommodityEndityWithJson:(id)json{
+    return [self parseObjectWithKeyValues:json];
+}
+
 @end

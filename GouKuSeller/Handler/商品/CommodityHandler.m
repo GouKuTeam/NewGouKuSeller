@@ -12,6 +12,7 @@
 #import "CommodityCatagoryEntity.h"
 #import "StandardEntity.h"
 #import "CommodityFromCodeEntity.h"
+#import "SupplierCommodityEndity.h"
 @implementation CommodityHandler
 
 // 获取店内分类列表数据
@@ -202,7 +203,6 @@
 //新增商品
 + (void)addCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid xprice:(double)xprice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
-//    NSString *str_url = [self requestUrlWithPath:API_GET_AddCommodity];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_GET_AddCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (shopId) {
@@ -394,6 +394,78 @@
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
+}
+
+//供应商新建商品
++ (void)addSupplierCommodityWithWareItemId:(NSNumber *)wareItemId firstCategoryId:(NSNumber *)firstCategoryId stock:(int)stock xprice:(NSString *)xprice musing:(NSString *)musing price:(NSString *)price saleUnits:(NSArray *)saleUnits prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POST_AddSupplierCommdity];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (wareItemId) {
+        [dic setObject:wareItemId forKey:@"wareItemId"];
+    }
+    if (firstCategoryId) {
+        [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
+    }
+    if (stock) {
+        [dic setObject:[NSNumber numberWithInt:stock] forKey:@"stock"];
+    }
+    if (xprice) {
+        [dic setObject:xprice forKey:@"xprice"];
+    }
+    if (musing) {
+        [dic setObject:musing forKey:@"using"];
+    }
+    if (price) {
+        [dic setObject:price forKey:@"price"];
+    }
+    if (saleUnits) {
+        [dic setObject:saleUnits forKey:@"saleUnits"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+   
+}
+
+//供应商商品列表查询
++ (void)selectSupplierCommodityListWithKeyword:(NSString *)keyword status:(NSNumber *)status firstCategoryId:(NSNumber *)firstCategoryId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Orther,API_POST_SupplierCommodityList];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (keyword) {
+        [dic setObject:keyword forKey:@"keyword"];
+    }
+    if (firstCategoryId) {
+        [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
+    }
+    if (status) {
+        [dic setObject:status forKey:@"status"];
+    }
+    if (page) {
+        [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
+    }
+    
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  NSArray *arr_data = [SupplierCommodityEndity parseSupplierCommodityEndityListWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(arr_data);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+   
 }
 
 @end

@@ -25,6 +25,7 @@
 @property (nonatomic ,assign)int            shopStock;
 @property (nonatomic ,assign)double         Cprice;   //商品价格
 @property (nonatomic ,assign)double         Xprice;   // 进货价
+@property (nonatomic ,strong)NSDictionary  *dic_price;
 
 @end
 
@@ -110,6 +111,7 @@
     EditPriceViewController *vc = [[EditPriceViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBackAddSupplierCommodity = ^(NSDictionary *dic) {
+        self.dic_price = dic;
         NSArray *arr = [dic objectForKey:@"saleUnits"];
         NSString *str_price = @"";
         for (int i = 0; i < arr.count; i++) {
@@ -191,18 +193,28 @@
         if ([self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"请选择"]) {
             [MBProgressHUD showInfoMessage:@"请选择店内分类"];
             return;
-        }else{
-            //网络请求
-            [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:self.entityInformation.name itemId:self.entityInformation.itemId barcode:self.entityInformation.barcode shopWareCategoryId:self.shopCId wareCategoryId:self.entityInformation.categoryId price:self.Cprice stock:[NSNumber numberWithInt:self.shopStock] pictures:self.entityInformation.pictures standards:self.entityInformation.standards wid:self.entityInformation.wid xprice:self.Xprice prepare:^{
-                
-            } success:^(id obj) {
+        }
+        if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
+            [MBProgressHUD showInfoMessage:@"请填写价格"];
+            return;
+        }
+        if ([self.v_commodityView.v_stock.tf_detail.text isEqualToString:@""]) {
+            [MBProgressHUD showInfoMessage:@"请填写库存"];
+            return;
+        }
+        //网络请求
+        [CommodityHandler addSupplierCommodityWithWareItemId:[NSNumber numberWithLong:self.entityInformation._id] firstCategoryId:self.shopCId stock:self.shopStock xprice:[NSString stringWithFormat:@"%.2f",self.Xprice] musing:[self.dic_price objectForKey:@"using"] price:[self.dic_price objectForKey:@"price"] saleUnits:[self.dic_price objectForKey:@"saleUnits"] prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
                 [MBProgressHUD showSuccessMessage:@"新增商品成功"];
                 [self performSelector:@selector(addCommodityFinishAction) withObject:nil afterDelay:1];
-            } failed:^(NSInteger statusCode,
-                       id json) {
-                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
-            }];
-        }
+            }else{
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errCode"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            
+        }];
     }
 }
 
