@@ -74,11 +74,20 @@
         [self.contentView addSubview:self.lab_CommodityPrice];
         [self.lab_CommodityPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_CommodityName);
-            make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(5);
-            make.right.equalTo(self.lab_CommodityName);
+            make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(10);
         }];
-        self.lab_CommodityPrice.font = [UIFont systemFontOfSize:16];
+        self.lab_CommodityPrice.font = [UIFont boldSystemFontOfSize:16];
         [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+        
+        self.lab_CommodityUnit = [[UILabel alloc]init];
+        [self.contentView addSubview:self.lab_CommodityUnit];
+        [self.lab_CommodityUnit mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lab_CommodityPrice.mas_right).offset(1);
+            make.top.height.equalTo(self.lab_CommodityPrice);
+        }];
+        [self.lab_CommodityUnit setFont:[UIFont systemFontOfSize:12]];
+        [self.lab_CommodityUnit setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityUnit setHidden:YES];
         
         self.btn_more = [[UIButton alloc]init];
         [self.btn_more setImage:[UIImage imageNamed:@"dian"] forState:UIControlStateNormal];
@@ -124,24 +133,25 @@
     return self;
 }
 
-- (void)contentCellWithCommodityFromCodeEntity:(CommodityFromCodeEntity *)CommodityFromCodeEntity{
-    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:CommodityFromCodeEntity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
-    [self.lab_CommodityName setText:CommodityFromCodeEntity.name];
-    [self.lab_CommodityStock setText:[NSString stringWithFormat:@"库存  %@",CommodityFromCodeEntity.stock]];
-    if (CommodityFromCodeEntity.saleAmountMonth == nil) {
+- (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity{
+    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:supplierCommodityEndity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.lab_CommodityName setText:supplierCommodityEndity.name];
+    [self.lab_CommodityStock setText:[NSString stringWithFormat:@"库存  %@",supplierCommodityEndity.stock]];
+    if (supplierCommodityEndity.saleAmountMonth == nil) {
         self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
     }else{
-        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
+        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",supplierCommodityEndity.saleAmountMonth];
     }
-    [self.lab_CommodityPrice setText:[NSString stringWithFormat:@"¥%.2f",[CommodityFromCodeEntity.price floatValue]]];
-    if (CommodityFromCodeEntity.status == 1) {
+    [self.lab_CommodityPrice setText:[NSString stringWithFormat:@"¥%.2f",supplierCommodityEndity.price]];
+    [self.lab_CommodityUnit setText:supplierCommodityEndity.unit];
+    if (supplierCommodityEndity.status == 1) {
         [self.lab_CommodityStatus setHidden:YES];
         [self.lab_CommodityName setTextColor:[UIColor blackColor]];
         [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
         [self.lab_CommoditySalesVolume setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
         [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
     }
-    if (CommodityFromCodeEntity.status == 2) {
+    if (supplierCommodityEndity.status == 2) {
         [self.lab_CommodityStatus setHidden:NO];
         [self.lab_CommodityStatus setText:@"已售罄"];
         [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
@@ -149,7 +159,7 @@
         [self.lab_CommoditySalesVolume setTextColor:[UIColor colorWithHexString:@"#979797"]];
         [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
     }
-    if (CommodityFromCodeEntity.status == 3) {
+    if (supplierCommodityEndity.status == 3) {
         [self.lab_CommodityStatus setHidden:NO];
         [self.lab_CommodityStatus setText:@"已下架"];
         [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];

@@ -52,5 +52,13 @@
 + (void)addSupplierCommodityWithWareItemId:(NSNumber *)wareItemId firstCategoryId:(NSNumber *)firstCategoryId stock:(int )stock xprice:(NSString *)xprice musing:(NSString *)musing price:(NSString *)price saleUnits:(NSArray *)saleUnits prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //供应商商品列表查询
 + (void)selectSupplierCommodityListWithKeyword:(NSString *)keyword status:(NSNumber *)status firstCategoryId:(NSNumber *)firstCategoryId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//供应商修改商品状态
++ (void)updateSupplierCommodityStatusWithCommodityId:(NSNumber *)commodityId type:(NSNumber *)type prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//供应商商品删除
++ (void)deleteSupplierCommodityWithCommodityId:(NSNumber *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//获取商品详情
++ (void)getSupplierCommodityInformationWithSkuId:(NSNumber *)skuId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//供应商商品修改
++ (void)updateSupplierCommodityWithSkuId:(NSNumber *)skuId wareItemId:(NSNumber *)wareItemId firstCategoryId:(NSNumber *)firstCategoryId stock:(int)stock xprice:(NSString *)xprice musing:(BOOL)musing price:(NSString *)price saleUnits:(NSArray *)saleUnits deleteUnitIds:(NSArray *)deleteUnitIds prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 @end

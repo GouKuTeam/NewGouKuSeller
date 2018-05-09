@@ -27,6 +27,8 @@
 @property (nonatomic ,assign)double         Xprice;   // 进货价
 @property (nonatomic ,strong)NSDictionary  *dic_price;
 
+@property (nonatomic ,strong)SupplierCommodityEndity *scEntity;
+
 @end
 
 @implementation AddSupplierCommodityViewController
@@ -58,40 +60,81 @@
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
     
-    //    UITapGestureRecognizer* imgTitle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
-    //    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitle];
-    //    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+
     self.v_commodityView.v_price.tf_detail.delegate = self;
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
     
-    //供应商身份点击价格
+    [self.v_commodityView.btn_priceEdit setHidden:NO];
+    [self.v_commodityView.btn_priceEdit addTarget:self action:@selector(tgr_editPriceAction) forControlEvents:UIControlEventTouchUpInside];
     
-    UITapGestureRecognizer* tgr_editPrice = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_editPriceAction)];
-    self.v_commodityView.v_price.tf_detail.userInteractionEnabled = YES;
-    [self.v_commodityView.v_price.tf_detail addGestureRecognizer:tgr_editPrice];
-    
-    
-    [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
-    [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
-    [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entityInformation.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
-    if (self.entityInformation.detail.length > 0) {
-        [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
+    if ([self.comeFrom isEqualToString:@"新建商品"]) {
+        [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
+        [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
+        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entityInformation.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+        if (self.entityInformation.detail.length > 0) {
+            [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.entityInformation.detail];
+        }else{
+            [self.v_commodityView.v_commodityDescribe.tf_detail setText:@"-"];
+        }
+        
+        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
+        self.Cprice = [self.entityInformation.price doubleValue];
+        self.Xprice = [self.entityInformation.xprice doubleValue];
+        self.shopStock = [self.entityInformation.stock intValue];
     }else{
-        [self.v_commodityView.v_commodityDescribe.tf_detail setText:@"-"];
+        [self loadSupplierCommodityData];
     }
+    
+//    if ([self.comeFrom isEqualToString:@"编辑商品"]) {
+//        self.shopCId = self.entityInformation.shopWareCategoryId;
+//        [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
+//        [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
+//        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.xprice doubleValue]]];
+//        //供应商商品价格显示价格规格    待完成
+//    }
+    
+    
+}
 
-    [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
-    self.Cprice = [self.entityInformation.price doubleValue];
-    self.Xprice = [self.entityInformation.xprice doubleValue];
-    self.shopStock = [self.entityInformation.stock intValue];
-    if ([self.comeFrom isEqualToString:@"编辑商品"]) {
-        self.shopCId = self.entityInformation.shopWareCategoryId;
-        [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
-        [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
-        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.xprice doubleValue]]];
-        //供应商商品价格显示价格规格    待完成
-    }
+- (void)loadSupplierCommodityData{
+    [CommodityHandler getSupplierCommodityInformationWithSkuId:self.skuId prepare:^{
+        
+    } success:^(id obj) {
+        self.scEntity = (SupplierCommodityEndity *)obj;
+        [self.v_commodityView.lab_catagoryTitle setText:self.scEntity.categoryName];
+        [self.v_commodityView.v_commodityName.tf_detail setText:self.scEntity.name];
+        [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.scEntity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+        if (self.scEntity.detail.length > 0) {
+            [self.v_commodityView.v_commodityDescribe.tf_detail setText:self.scEntity.detail];
+        }else{
+            [self.v_commodityView.v_commodityDescribe.tf_detail setText:@"-"];
+        }
+        [self.v_commodityView.v_shopClassification.tf_detail setText:self.scEntity.firstCategoryName];
+        
+        [self.v_commodityView.v_stock.tf_detail setText:self.scEntity.stock];
+        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",self.scEntity.xprice]];
+        [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.scEntity.barcode]];
+
+        NSString *str_price = @"";
+        for (int i = 0; i < self.scEntity.saleUnits.count; i++) {
+            NSDictionary *dic = [self.scEntity.saleUnits objectAtIndex:i];
+            if (i == 0) {
+                str_price = [NSString stringWithFormat:@"%@¥%@",[dic objectForKey:@"unitName"],[dic objectForKey:@"price"]];
+                
+            }else{
+                str_price = [str_price stringByAppendingString:[NSString stringWithFormat:@"; %@¥%@",[dic objectForKey:@"unitName"],[dic objectForKey:@"price"]]];
+            }
+        }
+        if (self.scEntity.defaultUsing == YES) {
+            NSString *morenPrice = [NSString stringWithFormat:@"件¥%.2f",self.scEntity.defaultPrice];
+            str_price = [NSString stringWithFormat:@"%@；%@",morenPrice,str_price];
+        }
+        [self.v_commodityView.v_price.tf_detail setText:str_price];
+        
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 //店内分类  手势点击方法
@@ -102,6 +145,7 @@
         [self.v_commodityView.v_shopClassification.tf_detail setText:shopClassificationEntity.name];
         [self.v_commodityView.v_shopClassification.tf_detail setTextColor:[UIColor blackColor]];
         self.shopCId = [NSNumber numberWithInt:(int)shopClassificationEntity._id];
+        self.scEntity.firstCategoryId = [NSNumber numberWithInt:(int)shopClassificationEntity._id];
         
     };
 }
@@ -109,13 +153,18 @@
 //商品编辑价格点击方法
 - (void)tgr_editPriceAction{
     EditPriceViewController *vc = [[EditPriceViewController alloc]init];
+    vc.defaultUnit = self.scEntity.defaultUsing;
+    vc.defaultPrice = self.scEntity.defaultPrice;
+    vc.arr_data = [NSMutableArray arrayWithArray:self.scEntity.saleUnits];
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBackAddSupplierCommodity = ^(NSDictionary *dic) {
+        self.scEntity.defaultUsing = [[dic objectForKey:@"using"] boolValue];
+        self.scEntity.defaultPrice = [[dic objectForKey:@"price"] doubleValue];
+        self.scEntity.saleUnits = [dic objectForKey:@"saleUnits"];
         self.dic_price = dic;
-        NSArray *arr = [dic objectForKey:@"saleUnits"];
         NSString *str_price = @"";
-        for (int i = 0; i < arr.count; i++) {
-            NSDictionary *dic = [arr objectAtIndex:i];
+        for (int i = 0; i < self.scEntity.saleUnits.count; i++) {
+            NSDictionary *dic = [self.scEntity.saleUnits objectAtIndex:i];
             if (i == 0) {
                 str_price = [NSString stringWithFormat:@"%@¥%@",[dic objectForKey:@"unitName"],[dic objectForKey:@"price"]];
                 
@@ -123,9 +172,8 @@
                 str_price = [str_price stringByAppendingString:[NSString stringWithFormat:@"; %@¥%@",[dic objectForKey:@"unitName"],[dic objectForKey:@"price"]]];
             }
         }
-        NSString *aaa = [dic objectForKey:@"price"];
-        if (aaa.length > 0) {
-            NSString *morenPrice = [NSString stringWithFormat:@"件¥%@",[dic objectForKey:@"price"]];
+        if (self.scEntity.defaultUsing == YES) {
+            NSString *morenPrice = [NSString stringWithFormat:@"件¥%.2f",self.scEntity.defaultPrice];
             str_price = [NSString stringWithFormat:@"%@；%@",morenPrice,str_price];
         }
         [self.v_commodityView.v_price.tf_detail setText:str_price];
@@ -153,10 +201,10 @@
     if (textField == self.v_commodityView.v_jinhuoPrice.tf_detail) {
         if (![textField.text isEqualToString:@""]) {
             self.Xprice = [textField.text doubleValue];
-            [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",[textField.text floatValue]]];
+            [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",[textField.text floatValue]]];
             [self.v_commodityView.v_jinhuoPrice.tf_detail setTextColor:[UIColor blackColor]];
         }else{
-            [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",self.Xprice]];
+            [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",self.Xprice]];
             [self.v_commodityView.v_jinhuoPrice.tf_detail setTextColor:[UIColor blackColor]];
         }
     }
@@ -176,10 +224,10 @@
             [MBProgressHUD showInfoMessage:@"请选择店内分类"];
             return;
         }else{
-            [CommodityHandler commodityEditWithCommodityId:[NSString stringWithFormat:@"%@",self.entityInformation.skuId] price:self.Cprice stock:self.v_commodityView.v_stock.tf_detail.text xprice:self.Xprice shopWareCategoryId:self.shopCId prepare:^{
+            [CommodityHandler updateSupplierCommodityWithSkuId:self.scEntity.skuId wareItemId:self.scEntity.wareItemId firstCategoryId:self.scEntity.firstCategoryId stock:[self.v_commodityView.v_stock.tf_detail.text intValue] xprice:self.v_commodityView.v_jinhuoPrice.tf_detail.text musing:self.scEntity.defaultUsing price:[NSString stringWithFormat:@"%.2f",self.scEntity.defaultPrice] saleUnits:self.scEntity.saleUnits deleteUnitIds:[self.dic_price objectForKey:@"deleteUnitIds"] prepare:^{
                 
             } success:^(id obj) {
-                CommodityFromCodeEntity *entity = (CommodityFromCodeEntity *)obj;
+                SupplierCommodityEndity *entity = (SupplierCommodityEndity *)obj;
                 [self.navigationController popViewControllerAnimated:YES];
                 if (self.changeEntity) {
                     self.changeEntity(entity);

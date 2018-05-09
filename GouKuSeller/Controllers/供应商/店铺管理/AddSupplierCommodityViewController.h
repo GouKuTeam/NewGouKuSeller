@@ -8,15 +8,18 @@
 
 #import "BaseViewController.h"
 #import "CommodityFromCodeEntity.h"
-typedef void(^changeEntity)(CommodityFromCodeEntity *entity);
+#import "SupplierCommodityEndity.h"
+typedef void(^changeEntity)(SupplierCommodityEndity *entity);
 typedef void(^addCommodityFinish)(void);
 
 @interface AddSupplierCommodityViewController : BaseViewController
 
 @property (nonatomic ,strong)NSString       *comeFrom;
 @property (nonatomic ,strong)NSNumber       *barcode;
+@property (nonatomic ,strong)NSNumber       *skuId;
 @property (nonatomic ,strong)CommodityFromCodeEntity    *entityInformation;
 @property (nonatomic, copy) changeEntity  changeEntity;
 @property (nonatomic, copy) addCommodityFinish  addCommodityFinish;
+
 
 @end

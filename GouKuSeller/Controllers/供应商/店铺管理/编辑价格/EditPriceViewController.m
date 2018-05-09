@@ -14,7 +14,7 @@
 @interface EditPriceViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (nonatomic ,strong)EditPriceHeaderView     *tb_header;
 @property (nonatomic ,strong)EditPriceFooterView     *tb_footer;
-@property (nonatomic ,strong)NSMutableArray          *arr_data;
+@property (nonatomic ,strong)NSMutableArray          *arr_deleteId;
 @property (nonatomic ,strong)UITableView             *tb_editPrice;
 
 
@@ -25,7 +25,7 @@
 {
     self = [super init];
     if (self) {
-        self.arr_data = [[NSMutableArray alloc]init];
+        self.arr_deleteId = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -44,6 +44,14 @@
     [self.tb_header.v_switch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     self.tb_footer = [[EditPriceFooterView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 54)];
     [self.tb_footer.btn_add addTarget:self action:@selector(addDanWei) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (self.defaultUnit == YES) {
+        //启用默认单位
+        self.tb_header.v_switch.on = YES;
+        [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 142)];
+        self.tb_editPrice.tableHeaderView = self.tb_header;
+        [self.tb_header.tf_price setText:[NSString stringWithFormat:@"%.2f",self.defaultPrice]];
+    }
     
     self.tb_editPrice = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_editPrice];
@@ -80,17 +88,20 @@
     if (!cell){
         cell = [[EditPriceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.btn_delete.tag = indexPath.section;
     [cell.btn_delete addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
     NSDictionary *dic = [self.arr_data objectAtIndex:indexPath.section];
-    cell.tf_dengyu.text = [dic objectForKey:@"count"];
-    cell.tf_price.text = [dic objectForKey:@"price"];
+    cell.tf_dengyu.text = [NSString stringWithFormat:@"%d",[[dic objectForKey:@"count"] intValue]];
+    cell.tf_price.text = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"price"] doubleValue]];
     cell.tf_name.text = [dic objectForKey:@"unitName"];
     cell.tf_name.delegate = self;
     cell.tf_price.delegate = self;
     cell.tf_dengyu.delegate = self;
     return cell;
 }
+
+
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     for (int i = 0; i < self.arr_data.count; i++) {
@@ -116,6 +127,10 @@
 }
 
 - (void)deleteAction:(UIButton *)btn_sender{
+    NSDictionary *dic = [self.arr_data objectAtIndex:btn_sender.tag];
+    if ([[dic objectForKey:@"id"] intValue] != 0) {
+        [self.arr_deleteId addObject:[NSNumber numberWithLong:[[dic objectForKey:@"id"] longValue]]];
+    }
     [self.arr_data removeObjectAtIndex:btn_sender.tag];
     [self.tb_editPrice reloadData];
 }
@@ -131,11 +146,12 @@
         for (int i = 0; i < self.arr_data.count; i++) {
             EditPriceTableViewCell *cell = [self.tb_editPrice cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             if ([cell.tf_name.text isEqualToString:@""] || [cell.tf_dengyu.text isEqualToString:@""] || [cell.tf_price.text isEqualToString:@""] || [self.tb_header.tf_price.text isEqualToString:@""]) {
-                [MBProgressHUD showInfoMessage:@"请完善时间段"];
+                [MBProgressHUD showInfoMessage:@"请完善规则"];
                 return;
             }
         }
-        [dic setValue:@"true" forKey:@"using"];
+        [dic setValue:self.arr_deleteId forKey:@"deleteUnitIds"];
+        [dic setValue:[NSNumber numberWithBool:YES] forKey:@"using"];
         [dic setValue:self.tb_header.tf_price.text forKey:@"price"];
         [dic setValue:self.arr_data forKey:@"saleUnits"];
     } else {
@@ -143,11 +159,12 @@
         for (int i = 0; i < self.arr_data.count; i++) {
             EditPriceTableViewCell *cell = [self.tb_editPrice cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             if ([cell.tf_name.text isEqualToString:@""] || [cell.tf_dengyu.text isEqualToString:@""] || [cell.tf_price.text isEqualToString:@""]) {
-                [MBProgressHUD showInfoMessage:@"请完善时间段"];
+                [MBProgressHUD showInfoMessage:@"请完善规则"];
                 return;
             }
         }
-        [dic setValue:@"false" forKey:@"using"];
+        [dic setValue:self.arr_deleteId forKey:@"deleteUnitIds"];
+        [dic setValue:[NSNumber numberWithBool:NO] forKey:@"using"];
         [dic setValue:self.arr_data forKey:@"saleUnits"];
     }
     NSLog(@"dic == %@",dic);

@@ -32,5 +32,7 @@
 @property (nonatomic ,strong)EditInfoView      *v_barcode;                  //条形码
 @property (nonatomic ,strong)EditInfoView      *v_jinhuoPrice;            //商品编码
 
+@property (nonatomic ,strong)UIButton          *btn_priceEdit;
+
 
 @end

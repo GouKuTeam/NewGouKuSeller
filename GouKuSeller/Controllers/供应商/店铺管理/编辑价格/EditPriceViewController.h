@@ -12,4 +12,9 @@ typedef void(^GoBackAddSupplierCommodity)(NSDictionary *dic);
 @interface EditPriceViewController : BaseViewController
 
 @property (nonatomic ,copy)GoBackAddSupplierCommodity   goBackAddSupplierCommodity;
+
+@property (nonatomic ,assign)double          defaultPrice;      //默认价格
+@property (nonatomic ,assign)BOOL            defaultUnit;
+@property (nonatomic ,strong)NSMutableArray          *arr_data;
+
 @end

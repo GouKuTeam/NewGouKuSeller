@@ -25,6 +25,7 @@
 #import "MoreAddCommodityViewController.h"
 #import "SupplierCommodityEndity.h"
 #import "SupplierCommodityListTableViewCell.h"
+#import "SearchSupplierCommodityViewController.h"
 
 #define NULLROW    999
 
@@ -67,7 +68,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setHidden:NO];
+
     self.btn_top = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 2, 44)];
     [self.btn_top setTitle:@"出售中" forState:UIControlStateNormal];
     [self.btn_top setImage:[UIImage imageNamed:@"triangle_down_white"] forState:UIControlStateNormal];
@@ -178,15 +179,6 @@
     self.tb_right.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tb_right];
     
-    if (self.enterFormType == EnterFromActice) {
-        [self.view_bottom setHidden:YES];
-        [self.tb_left setFrame:CGRectMake(0,SafeAreaTopHeight, 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight)];
-        [self.tb_right setFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight)];
-    }else{
-        [self.view_bottom setHidden:NO];
-        [self.tb_left setFrame:CGRectMake(0,SafeAreaTopHeight, 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50)];
-        [self.tb_right setFrame:CGRectMake(100, SafeAreaTopHeight,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 50)];
-    }
     
     self.v_commodityStatusView = [[CommodityStatusView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight)];
     [self.view addSubview:self.v_commodityStatusView];
@@ -197,13 +189,6 @@
     
     UITapGestureRecognizer *tgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(statusViewDissmiss)];
     [self.v_commodityStatusView addGestureRecognizer:tgp];
-    
-    
-    if (self.enterFormType == EnterFromActice) {
-        [self.view_bottom setHidden:YES];
-    }else{
-        [self.view_bottom setHidden:NO];
-    }
     
     self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 88)];
     [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
@@ -541,19 +526,19 @@
 }
 
 - (void)edtiAction:(UIButton *)btn_sender{
-    CommodityFromCodeEntity *entityDemo = [self.arr_commodity objectAtIndex:btn_sender.tag];
+    SupplierCommodityEndity *entityDemo = [self.arr_commodity objectAtIndex:btn_sender.tag];
     AddSupplierCommodityViewController *vc = [[AddSupplierCommodityViewController alloc]init];
     vc.comeFrom = @"编辑商品";
-    vc.entityInformation = entityDemo;
+    vc.skuId = entityDemo.skuId;
     [self.navigationController pushViewController:vc animated:YES];
-    vc.changeEntity = ^(CommodityFromCodeEntity *entity){
+    vc.changeEntity = ^(SupplierCommodityEndity *entity){
         if ([self.btnIndex intValue] == 2) {
             //已售完
             ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
             if (self.selectedRow != NULLROW) {
                 shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
             }
-            if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+            if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
                 if (entityDemo.stock > 0) {
                     [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
                 }else{
@@ -568,7 +553,7 @@
             if (self.selectedRow != NULLROW) {
                 shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
             }
-            if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+            if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
                 [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
             }else{
                 [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
@@ -612,8 +597,8 @@
 }
 
 - (void)deleteAction{
-    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
-    [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+    SupplierCommodityEndity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    [CommodityHandler deleteSupplierCommodityWithCommodityId:entity.skuId prepare:^{
         
     } success:^(id obj) {
         [self.arr_commodity removeObjectAtIndex:self.showIndex];
@@ -626,10 +611,12 @@
 }
 
 - (void)xiaJiaAction{
-    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    SupplierCommodityEndity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     if (entity.status == 1 || entity.status == 2) {
         //下架方法
-        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
+        [CommodityHandler updateSupplierCommodityStatusWithCommodityId:entity.skuId type:[NSNumber numberWithInt:0] prepare:^{
+            
+        } success:^(id obj) {
             [self.arr_commodity removeObjectAtIndex:self.showIndex];
             [self.tb_right reloadData];
             self.showIndex = NULLROW;
@@ -639,7 +626,7 @@
         }];
     }else if (entity.status == 3){
         //上架方法
-        [CommodityHandler commodityupShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+        [CommodityHandler updateSupplierCommodityStatusWithCommodityId:entity.skuId type:[NSNumber numberWithInt:1] prepare:^{
             
         } success:^(id obj) {
             [self.arr_commodity removeObjectAtIndex:self.showIndex];
@@ -652,14 +639,9 @@
     }
 }
 -(void)searchBarAction{
-    SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];
-    vc.enterFormType = self.enterFormType;
+    SearchSupplierCommodityViewController *vc = [[SearchSupplierCommodityViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
-    vc.selectCommodity = ^(CommodityFromCodeEntity *entity){
-        if (self.selectCommodity) {
-            self.selectCommodity(entity);
-        }
-    };
+    
 }
 
 -(void)btn_topAction{

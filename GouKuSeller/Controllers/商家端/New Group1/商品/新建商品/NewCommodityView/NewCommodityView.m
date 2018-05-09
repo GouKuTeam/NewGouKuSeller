@@ -187,6 +187,14 @@
         [self.v_price.tf_detail setTextColor:[UIColor blackColor]];
         self.v_price.tf_detail.clearsOnBeginEditing = YES;
         [self.v_price.img_jiantou setHidden:NO];
+        
+        self.btn_priceEdit = [[UIButton alloc]init];
+        [self.v_commodityBack2 addSubview:self.btn_priceEdit];
+        [self.btn_priceEdit mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.height.equalTo(self.v_price.tf_detail);
+            make.right.equalTo(self.mas_right);
+        }];
+        [self.btn_priceEdit setHidden:YES];
         //商品库存
         self.v_stock = [[EditInfoView alloc]init];
         [self.v_commodityBack2 addSubview:self.v_stock];

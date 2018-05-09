@@ -24,10 +24,22 @@
 
 @implementation ShopManagerViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = nil;
-    [self.navigationController.navigationBar setHidden:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -75,6 +87,7 @@
 }
 
 - (void)btn_commodityAction{
+    [self.navigationController.navigationBar setHidden:NO];
     SupplierCommodityViewController *vc = [[SupplierCommodityViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

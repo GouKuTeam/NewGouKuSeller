@@ -66,18 +66,7 @@
             make.width.height.mas_equalTo(22);
         }];
         
-        self.lab_commodityNum = [[UILabel alloc]init];
-        [self.contentView addSubview:self.lab_commodityNum];
-        [self.lab_commodityNum setTextColor:[UIColor colorWithHexString:@"#4167B2"]];
-        self.lab_commodityNum.layer.cornerRadius = 6;
-        self.lab_commodityNum.layer.borderWidth = 0.5;
-        self.lab_commodityNum.layer.borderColor = [[UIColor colorWithHexString:@"#4167B2"] CGColor];
-        self.lab_commodityNum.font = [UIFont systemFontOfSize:10];
-        [self.lab_commodityNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 25);
-            make.top.mas_equalTo(62);
-            make.width.height.mas_equalTo(12);
-        }];
+        
         
         
     }

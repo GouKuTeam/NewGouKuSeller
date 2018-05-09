@@ -15,7 +15,6 @@
 @property (nonatomic ,strong)UILabel            *lab_price;
 @property (nonatomic ,strong)UILabel            *lab_priceGuiGe;
 @property (nonatomic ,strong)UIButton           *btn_addCommodity;
-@property (nonatomic ,strong)UILabel            *lab_commodityNum;
 
 
 @end

@@ -75,10 +75,18 @@
         [self.lab_CommodityPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_CommodityName);
             make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(10);
-            make.right.equalTo(self.lab_CommodityName);
         }];
-        self.lab_CommodityPrice.font = [UIFont systemFontOfSize:16];
+        self.lab_CommodityPrice.font = [UIFont boldSystemFontOfSize:16];
         [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+        
+        self.lab_CommodityUnit = [[UILabel alloc]init];
+        [self.contentView addSubview:self.lab_CommodityUnit];
+        [self.lab_CommodityUnit mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lab_CommodityPrice.mas_right).offset(1);
+            make.top.height.equalTo(self.lab_CommodityPrice);
+        }];
+        [self.lab_CommodityUnit setFont:[UIFont systemFontOfSize:12]];
+        [self.lab_CommodityUnit setTextColor:[UIColor colorWithHexString:@"#979797"]];
         
         self.btn_more = [[UIButton alloc]init];
         [self.btn_more setImage:[UIImage imageNamed:@"dian"] forState:UIControlStateNormal];
@@ -130,6 +138,7 @@
     self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",supplierCommodityEndity.stock];
     self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",supplierCommodityEndity.saleAmountMonth];
     self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",supplierCommodityEndity.price];
+    self.lab_CommodityUnit.text = [NSString stringWithFormat:@"/%@",supplierCommodityEndity.unit];
     if (supplierCommodityEndity.status == 1) {
         [self.lab_CommodityStatus setHidden:YES];
         [self.lab_CommodityName setTextColor:[UIColor blackColor]];

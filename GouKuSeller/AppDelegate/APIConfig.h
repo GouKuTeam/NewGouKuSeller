@@ -98,7 +98,14 @@
 #define API_POST_SupplierCommodityList @"/wareSku/manage/list"
 //供应商新增商品
 #define API_POST_AddSupplierCommdity @"/wareSku/manage/addOrUpdate"
-
+//供应商商品修改
+#define API_POST_UpdateSupplierCommodity @"/wareSku/manage/addOrUpdate"
+//供应商修改商品状态
+#define API_POST_UpdateSupplierCommodityStatus @"/wareSku/manage/updateStatus"
+//供应商商品删除
+#define API_POST_SupplierCommodityDelete @"/wareSku/manage/delete/"
+//获取商品详情
+#define API_POST_GETSupplierCommodityInformation @"/wareSku/show/get/"
 
 /*
  活动API

@@ -18,6 +18,7 @@
 @property (nonatomic ,strong)UILabel         *lab_CommodityStock;          // 商品库存
 @property (nonatomic ,strong)UILabel         *lab_CommoditySalesVolume;    // 商品销量
 @property (nonatomic ,strong)UILabel         *lab_CommodityPrice;          // 商品价格
+@property (nonatomic ,strong)UILabel         *lab_CommodityUnit;           // 商品单位
 @property (nonatomic ,strong)UIButton        *btn_edit;                    // 编辑按钮
 @property (nonatomic ,strong)UIButton        *btn_more;                    // ...按钮
 @property (nonatomic ,strong)UIImageView     *img_line;
