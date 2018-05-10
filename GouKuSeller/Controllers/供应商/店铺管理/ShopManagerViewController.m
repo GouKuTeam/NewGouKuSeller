@@ -14,6 +14,7 @@
 #import "SupplierCommodityViewController.h"
 #import "DispatchingViewController.h"
 #import "SettlementViewController.h"
+#import "SupplierSettingViewController.h"
 
 @interface ShopManagerViewController ()
 
@@ -54,7 +55,7 @@
     [self.tb_header.imgHead sd_setImageWithURL:[NSURL URLWithString:[LoginStorage GetShopPic]]];
     
     UIButton *btn_set = [[UIButton alloc]init];
-    
+    [btn_set addTarget:self action:@selector(btnsetAction) forControlEvents:UIControlEventTouchUpInside];
     [self.tb_header addSubview:btn_set];
     [btn_set setImage:[UIImage imageNamed:@"warning"] forState:UIControlStateNormal];
     if (SafeAreaTopHeight == 88) {
@@ -106,6 +107,13 @@
 - (void)btn_jiesuanAction{
     [self.navigationController.navigationBar setHidden:NO];
     SettlementViewController *vc = [[SettlementViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btnsetAction{
+    [self.navigationController.navigationBar setHidden:NO];
+    SupplierSettingViewController *vc = [[SupplierSettingViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

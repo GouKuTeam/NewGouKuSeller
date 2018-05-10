@@ -105,6 +105,7 @@
 		741D3CC520848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
 		741D3CC620848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
 		743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */; };
+		743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -732,6 +733,8 @@
 		741D3CC320848AF200C56FCA /* ChangeShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeShopViewController.m; sourceTree = "<group>"; };
 		743C5F2020A41BEF00E617AF /* RechargeAmountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeAmountViewController.h; sourceTree = "<group>"; };
 		743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeAmountViewController.m; sourceTree = "<group>"; };
+		743C5F2320A4251E00E617AF /* SupplierSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierSettingViewController.h; sourceTree = "<group>"; };
+		743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierSettingViewController.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1733,6 +1736,8 @@
 				74ACFFDE20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m */,
 				7410F71B20A4092D00F9A724 /* DispatchingViewController.h */,
 				7410F71C20A4092E00F9A724 /* DispatchingViewController.m */,
+				743C5F2320A4251E00E617AF /* SupplierSettingViewController.h */,
+				743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */,
 				74046AEE209AB7BD004E64A9 /* 编辑价格 */,
 			);
 			path = "店铺管理";
@@ -2707,6 +2712,7 @@
 				74983661208B84EC007FEEF8 /* ActivityEntity.m in Sources */,
 				744ABA37205420D700BBB26E /* CommodityInformationEntity.m in Sources */,
 				74F8E908205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m in Sources */,
+				743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */,
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
