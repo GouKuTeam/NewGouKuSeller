@@ -22,6 +22,12 @@
 		1891DA9420A01F94008E16F7 /* WareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9320A01F94008E16F7 /* WareEntity.m */; };
 		1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */; };
 		1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */; };
+		1891DAA520A3E8EA008E16F7 /* CategoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAA420A3E8EA008E16F7 /* CategoryEntity.m */; };
+		1891DAA920A3EB4D008E16F7 /* PurchaseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAA820A3EB4D008E16F7 /* PurchaseHandler.m */; };
+		1891DAAC20A3EE71008E16F7 /* SupplierTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAAB20A3EE71008E16F7 /* SupplierTableViewController.m */; };
+		1891DAB320A3F172008E16F7 /* HYTabbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAAD20A3F170008E16F7 /* HYTabbarView.m */; };
+		1891DAB420A3F172008E16F7 /* HYTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAAF20A3F170008E16F7 /* HYTopBar.m */; };
+		1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
@@ -629,6 +635,18 @@
 		1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarEntity.m; sourceTree = "<group>"; };
 		1891DA9A20A024F7008E16F7 /* ShoppingHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingHandler.h; sourceTree = "<group>"; };
 		1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingHandler.m; sourceTree = "<group>"; };
+		1891DAA320A3E8EA008E16F7 /* CategoryEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryEntity.h; sourceTree = "<group>"; };
+		1891DAA420A3E8EA008E16F7 /* CategoryEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryEntity.m; sourceTree = "<group>"; };
+		1891DAA720A3EB4D008E16F7 /* PurchaseHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseHandler.h; sourceTree = "<group>"; };
+		1891DAA820A3EB4D008E16F7 /* PurchaseHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseHandler.m; sourceTree = "<group>"; };
+		1891DAAA20A3EE71008E16F7 /* SupplierTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierTableViewController.h; sourceTree = "<group>"; };
+		1891DAAB20A3EE71008E16F7 /* SupplierTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierTableViewController.m; sourceTree = "<group>"; };
+		1891DAAD20A3F170008E16F7 /* HYTabbarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTabbarView.m; sourceTree = "<group>"; };
+		1891DAAE20A3F170008E16F7 /* HYTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTopBar.h; sourceTree = "<group>"; };
+		1891DAAF20A3F170008E16F7 /* HYTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTopBar.m; sourceTree = "<group>"; };
+		1891DAB020A3F171008E16F7 /* HYTabbarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTabbarCollectionCell.h; sourceTree = "<group>"; };
+		1891DAB120A3F171008E16F7 /* HYTabbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTabbarView.h; sourceTree = "<group>"; };
+		1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTabbarCollectionCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
@@ -1121,6 +1139,8 @@
 				74ACFFE820A298CB005C5A16 /* View */,
 				1842CCCC209AAD5100A1C7C8 /* SupplierListViewController.h */,
 				1842CCCD209AAD5100A1C7C8 /* SupplierListViewController.m */,
+				1891DAAA20A3EE71008E16F7 /* SupplierTableViewController.h */,
+				1891DAAB20A3EE71008E16F7 /* SupplierTableViewController.m */,
 				74ACFFE520A293A3005C5A16 /* SupplierShopViewController.h */,
 				74ACFFE620A293A3005C5A16 /* SupplierShopViewController.m */,
 				74046AFE209AFB9E004E64A9 /* SupplierCommodityInformationViewController.h */,
@@ -1189,6 +1209,15 @@
 				1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */,
 			);
 			path = "购物车";
+			sourceTree = "<group>";
+		};
+		1891DAA620A3EB02008E16F7 /* 采购 */ = {
+			isa = PBXGroup;
+			children = (
+				1891DAA720A3EB4D008E16F7 /* PurchaseHandler.h */,
+				1891DAA820A3EB4D008E16F7 /* PurchaseHandler.m */,
+			);
+			path = "采购";
 			sourceTree = "<group>";
 		};
 		3D33247D643897427C1A3153 /* Frameworks */ = {
@@ -1275,6 +1304,7 @@
 		744ABA1F2053E75C00BBB26E /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				1891DAA620A3EB02008E16F7 /* 采购 */,
 				1891DA9920A024CA008E16F7 /* 购物车 */,
 				7498365B208887AC007FEEF8 /* 我的 */,
 				741D3C6D20804CF800C56FCA /* 订单 */,
@@ -1329,6 +1359,8 @@
 				1891DA9020A01EC8008E16F7 /* StoreEntity.m */,
 				1891DA9220A01F94008E16F7 /* WareEntity.h */,
 				1891DA9320A01F94008E16F7 /* WareEntity.m */,
+				1891DAA320A3E8EA008E16F7 /* CategoryEntity.h */,
+				1891DAA420A3E8EA008E16F7 /* CategoryEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1696,6 +1728,12 @@
 		74ACFFE820A298CB005C5A16 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1891DAB020A3F171008E16F7 /* HYTabbarCollectionCell.h */,
+				1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */,
+				1891DAB120A3F171008E16F7 /* HYTabbarView.h */,
+				1891DAAD20A3F170008E16F7 /* HYTabbarView.m */,
+				1891DAAE20A3F170008E16F7 /* HYTopBar.h */,
+				1891DAAF20A3F170008E16F7 /* HYTopBar.m */,
 				74046AF8209ADD82004E64A9 /* SupplierListTableViewCell.h */,
 				74046AF9209ADD82004E64A9 /* SupplierListTableViewCell.m */,
 				74046AFB209AF6D5004E64A9 /* SupplierCommodityTableViewCell.h */,
@@ -2446,8 +2484,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2530,11 +2567,13 @@
 				7491FA802079B0E40006F388 /* ActiveHandler.m in Sources */,
 				741D3C9220808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74BD11EB2067DEB60053A3D1 /* OrderViewController.m in Sources */,
+				1891DAB420A3F172008E16F7 /* HYTopBar.m in Sources */,
 				74C6E355207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */,
 				74C6E36D207B728C0083E4A8 /* TitleView.m in Sources */,
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
+				1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */,
 				74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */,
 				1842CCB9209AA21000A1C7C8 /* PurchaseTabBarViewController.m in Sources */,
 				7491FA74206E15CC0006F388 /* City.m in Sources */,
@@ -2555,6 +2594,7 @@
 				74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
 				741D3C8D20808DBD00C56FCA /* ItemsEntity.m in Sources */,
 				74BD11FA206895540053A3D1 /* SalesViewController.m in Sources */,
+				1891DAAC20A3EE71008E16F7 /* SupplierTableViewController.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,
 				744ABA9520556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				1842CCE8209BF89500A1C7C8 /* AddressHeaderView.m in Sources */,
@@ -2577,6 +2617,7 @@
 				7491FA902079B7A50006F388 /* BankCardEntity.m in Sources */,
 				74046AF7209AD709004E64A9 /* EditPriceFooterView.m in Sources */,
 				7489CC98207F599100971BED /* KeyboardView.m in Sources */,
+				1891DAA920A3EB4D008E16F7 /* PurchaseHandler.m in Sources */,
 				744ABA6F205428AF00BBB26E /* IQPreviousNextView.m in Sources */,
 				7498367F208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */,
 				74BD125A2068FD080053A3D1 /* WorkBenchView.m in Sources */,
@@ -2603,6 +2644,7 @@
 				7491FA2C206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
 				74BD124B2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				744ABA66205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
+				1891DAB320A3F172008E16F7 /* HYTabbarView.m in Sources */,
 				74C6E361207B54D90083E4A8 /* UINavigationController+SJVideoPlayerAdd.m in Sources */,
 				74B4E87E204BD3EC006AFB6C /* MJRefreshAnimationStateHeader.m in Sources */,
 				74BD123C2068E2650053A3D1 /* ActiveZhouViewController.m in Sources */,
@@ -2679,6 +2721,7 @@
 				7491FA3B206BA5D50006F388 /* SelectBankViewController.m in Sources */,
 				7491FA9F2079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
 				74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */,
+				1891DAA520A3E8EA008E16F7 /* CategoryEntity.m in Sources */,
 				744ABA63205428AF00BBB26E /* IQToolbar.m in Sources */,
 				741D3C7020804D0900C56FCA /* OrderHandler.m in Sources */,
 				7491FA22206B75400006F388 /* SettlementViewController.m in Sources */,

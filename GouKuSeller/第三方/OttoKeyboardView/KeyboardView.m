@@ -11,7 +11,6 @@
 #import "OttoKeyboardView.h"
 
 #define screenHeight [UIScreen mainScreen].bounds.size.height
-#define SafeAreaBottomHeight (screenHeight == 812.0 ? 34 : 0)
 
 @interface KeyboardView ()
 

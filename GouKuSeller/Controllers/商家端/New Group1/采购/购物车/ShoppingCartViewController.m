@@ -59,7 +59,7 @@
         [self.arr_data addObjectsFromArray:self.shoppingCarEntity.shoppingCarShops];
         if (self.shoppingCarEntity.invalidItems.count > 0) {
             StoreEntity *entity = [[StoreEntity alloc]init];
-            entity.shopName = @"失效商品";
+            entity.name = @"失效商品";
             entity.shoppingCatItems = self.shoppingCarEntity.invalidItems;
             [self.arr_data addObject:entity];
         }
@@ -114,8 +114,8 @@
     [v_header addSubview:iv_arrow];
 
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
-    [iv_avatar sd_setImageWithURL:[NSURL URLWithString:storeEntity.shopPicurl] placeholderImage:nil];
-    [lb_title setText:storeEntity.shopName];
+    [iv_avatar sd_setImageWithURL:[NSURL URLWithString:storeEntity.logo] placeholderImage:nil];
+    [lb_title setText:storeEntity.name];
     
     return v_header;
 }
@@ -135,7 +135,7 @@
     [v_footer addSubview:lb_amount];
     
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
-    [lb_StartingPrice setText:[NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.shopTakeOffPrice]];
+    [lb_StartingPrice setText:[NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice]];
     double sectionAmount = 0.00;
     for (WareEntity *entity in selectStoreEntity.shoppingCatItems) {
         sectionAmount = sectionAmount + entity.wareCount * entity.warePrice;
