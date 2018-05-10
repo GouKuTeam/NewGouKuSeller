@@ -8,32 +8,24 @@
 
 #import "SupplierListViewController.h"
 #import "TabBarViewController.h"
-#import "SupplierListTableViewCell.h"
-
-@interface SupplierListViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
+#import "PurchaseHandler.h"
+#import "CategoryEntity.h"
+#import "SupplierTableViewController.h"
+#import "HYTabbarView.h"
+@interface SupplierListViewController ()<UITextFieldDelegate,HYTopBarDelegate>
 
 @property (nonatomic, strong)UITextField           *tf_search;
-@property (nonatomic ,strong)NSMutableArray        *arr_supplierList;
-@property (nonatomic ,strong)BaseTableView         *tb_supplierList;
+@property (nonatomic, strong)HYTabbarView          *v_topBar;
 
 @end
 
 @implementation SupplierListViewController
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.arr_supplierList = [[NSMutableArray alloc]init];
-    }
-    return self;
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 - (void)onCreate{
-//    UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH - 50, 44)];
-    
     self.tf_search = [[UITextField alloc]initWithFrame:CGRectMake(30, 7, SCREEN_WIDTH - 40, 30)];
     UIView *v_left = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34, 30)];
     UIImageView *iv_icon = [[UIImageView alloc]initWithFrame:CGRectMake(10, 6, 18, 18)];
@@ -54,40 +46,34 @@
     self.tf_search.tintColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
     self.navigationItem.titleView = self.tf_search;
     
-    self.tb_supplierList = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 42.3, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 42.3) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
-    [self.view addSubview:self.tb_supplierList];
-    self.tb_supplierList.delegate = self;
-    self.tb_supplierList.dataSource = self;
-    self.tb_supplierList.tableViewDelegate = self;
-    self.tb_supplierList.tableFooterView = [UIView new];
+    [self loadData];
+    
+    self.v_topBar = [[HYTabbarView alloc]initWithFrame:CGRectMake(0, NAVIGATIONBAR_VER_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_VER_HEIGHT - 49)];
+    [self.view addSubview:self.v_topBar];
+    self.v_topBar.tabbar.topBarDelegate = self;
+    self.v_topBar.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
     
 }
 
-- (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //关注 返回95  没有返回80
-    return 80;
-}
-
-- (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.arr_supplierList.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"NotBeginningActivity";
-    SupplierListTableViewCell *cell = (SupplierListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell){
-        cell = [[SupplierListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (void)loadData{
+    [PurchaseHandler getAllCategoryWithPrepare:^{
+        [MBProgressHUD showActivityMessageInView:nil];
+    } success:^(id obj) {
+        [MBProgressHUD hideHUD];
+        NSArray *arr_category = (NSArray *)obj;
+        if (arr_category.count > 0) {
+            for (CategoryEntity *entity in arr_category) {
+                SupplierTableViewController * vc = [[SupplierTableViewController alloc]init];
+                vc.title = entity.categoryName;
+                vc.categoryEntity = entity;
+                [self.v_topBar addSubItemWithViewController:vc];
+            }
+            [self.v_topBar.tabbar setSelectedItem:0];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

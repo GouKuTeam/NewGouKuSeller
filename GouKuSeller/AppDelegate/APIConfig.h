@@ -170,9 +170,13 @@
 #define API_GET_GetToday @"/operate/getToday"
 
 /*
- 购物车API
+ 采购API
  */
+//购物车列表
 #define API_GET_SHOPPINGLIST @"/shopping/get"
-
+//所有类目
+#define API_GET_ALLCATEGORY @"/common/industry/list"
+//类目搜索供应商
+#define API_GET_SUPPLIERWITHCATEGORY @"/supplier/search/industry"
 
 
