@@ -106,6 +106,7 @@
 		741D3CC620848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
 		743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */; };
 		743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */; };
+		743C5F2820A42C7200E617AF /* SearchSupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2720A42C7200E617AF /* SearchSupplierViewController.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -735,6 +736,8 @@
 		743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeAmountViewController.m; sourceTree = "<group>"; };
 		743C5F2320A4251E00E617AF /* SupplierSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierSettingViewController.h; sourceTree = "<group>"; };
 		743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierSettingViewController.m; sourceTree = "<group>"; };
+		743C5F2620A42C7200E617AF /* SearchSupplierViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSupplierViewController.h; sourceTree = "<group>"; };
+		743C5F2720A42C7200E617AF /* SearchSupplierViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSupplierViewController.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1159,6 +1162,8 @@
 				74046AFF209AFB9E004E64A9 /* SupplierCommodityInformationViewController.m */,
 				74046B01209AFC02004E64A9 /* SupplierInformationViewController.h */,
 				74046B02209AFC02004E64A9 /* SupplierInformationViewController.m */,
+				743C5F2620A42C7200E617AF /* SearchSupplierViewController.h */,
+				743C5F2720A42C7200E617AF /* SearchSupplierViewController.m */,
 			);
 			path = "供应商";
 			sourceTree = "<group>";
@@ -2614,6 +2619,7 @@
 				744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */,
 				74F8E9302060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,
 				741D3C8D20808DBD00C56FCA /* ItemsEntity.m in Sources */,
+				743C5F2820A42C7200E617AF /* SearchSupplierViewController.m in Sources */,
 				74BD11FA206895540053A3D1 /* SalesViewController.m in Sources */,
 				1891DAAC20A3EE71008E16F7 /* SupplierTableViewController.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,

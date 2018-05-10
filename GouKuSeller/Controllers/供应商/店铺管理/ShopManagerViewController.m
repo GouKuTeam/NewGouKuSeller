@@ -57,13 +57,13 @@
     UIButton *btn_set = [[UIButton alloc]init];
     [btn_set addTarget:self action:@selector(btnsetAction) forControlEvents:UIControlEventTouchUpInside];
     [self.tb_header addSubview:btn_set];
-    [btn_set setImage:[UIImage imageNamed:@"warning"] forState:UIControlStateNormal];
+    [btn_set setImage:[UIImage imageNamed:@"setting_white"] forState:UIControlStateNormal];
     if (SafeAreaTopHeight == 88) {
         [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130 + 44)];
-        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 44, 18, 16)];
+        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 44, 18, 18)];
     }else{
         [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130 + 20)];
-        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 20, 18, 16)];
+        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 20, 18, 18)];
     }
     
     self.v_shopManager = [[ShopManagerView alloc]initWithFrame:CGRectMake(0, self.tb_header.bottom + 10, SCREEN_WIDTH, 380)];
