@@ -7,15 +7,26 @@
 //
 
 #import "SearchSupplierViewController.h"
-
-@interface SearchSupplierViewController ()<UITextFieldDelegate>
+#import "PurchaseHandler.h"
+#import "StoreEntity.h"
+#import "SupplierListTableViewCell.h"
+@interface SearchSupplierViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITextField           *tf_search;
+@property (nonatomic, strong)BaseTableView         *tb_supplier;
+@property (nonatomic, strong)NSMutableArray        *arr_data;
 
 @end
 
 @implementation SearchSupplierViewController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.arr_data = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -44,6 +55,7 @@
     self.tf_search.enablesReturnKeyAutomatically = YES;
     self.tf_search.tintColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
     [v_header addSubview:self.tf_search];
+    [self.tf_search becomeFirstResponder];
     
     UIButton *btn_cancel = [[UIButton alloc]initWithFrame:CGRectMake(self.tf_search.right,0, 60, 44)];
     [btn_cancel setTitle:@"取消" forState:UIControlStateNormal];
@@ -51,8 +63,58 @@
     btn_cancel.titleLabel.font = [UIFont systemFontOfSize:16];
     [btn_cancel addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
     [v_header addSubview:btn_cancel];
-    
     self.navigationItem.titleView = v_header;
+    
+    self.tb_supplier = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    [self.view addSubview:self.tb_supplier];
+    self.tb_supplier.delegate = self;
+    self.tb_supplier.dataSource = self;
+    self.tb_supplier.tableFooterView = [UIView new];
+    
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [PurchaseHandler searchSupplierWithName:textField.text prepare:^{
+        
+    } success:^(id obj) {
+        
+        [self.arr_data removeAllObjects];
+        if (self.arr_data.count == 0) {
+            self.tb_supplier.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_supplier.frame withDefaultImage:nil withNoteTitle:@"暂未搜索到此供应商" withNoteDetail:nil withButtonAction:nil];
+        }
+        [self.arr_data addObjectsFromArray:(NSArray *)obj];
+        [self.tb_supplier reloadData];
+        
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
+    return YES;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //关注 返回95  没有返回80
+    StoreEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
+    if (entity.isAttention == YES) {
+        return 95;
+    }else{
+        return 80;
+    }
+}
+
+- (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arr_data.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"NotBeginningActivity";
+    SupplierListTableViewCell *cell = (SupplierListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell){
+        cell = [[SupplierListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    StoreEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
+    [cell contentCellWithStoreEntity:entity];
+    return cell;
 }
 
 

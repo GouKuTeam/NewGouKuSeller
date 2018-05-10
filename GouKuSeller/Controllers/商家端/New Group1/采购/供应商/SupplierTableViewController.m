@@ -57,7 +57,7 @@
         [self.tb_supplierList reloadData];
         complete([(NSArray *)obj count]);
         if (self.arr_supplierList.count == 0) {
-            self.tb_supplierList.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_supplierList.frame withDefaultImage:nil withNoteTitle:@"暂无数据" withNoteDetail:nil withButtonAction:nil];
+            self.tb_supplierList.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_supplierList.frame withDefaultImage:nil withNoteTitle:@"暂未数据" withNoteDetail:nil withButtonAction:nil];
         }
     } failed:^(NSInteger statusCode, id json) {
         if (complete) {

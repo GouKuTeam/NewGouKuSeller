@@ -49,7 +49,6 @@
     UIButton *btn_search = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 40, 30)];
     [self.navigationItem.titleView addSubview:btn_search];
     [btn_search addTarget:self action:@selector(btnSearchAction) forControlEvents:UIControlEventTouchUpInside];
-    [btn_search setBackgroundColor:[UIColor redColor]];
     
     self.v_topBar = [[HYTabbarView alloc]initWithFrame:CGRectMake(0, NAVIGATIONBAR_VER_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_VER_HEIGHT - 49)];
     [self.view addSubview:self.v_topBar];
