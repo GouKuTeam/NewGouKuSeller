@@ -8,7 +8,7 @@
 
 #import "HYTabbarView.h"
 #import "HYTabbarCollectionCell.h"
-#import "HealthTableViewController.h"
+#import "SupplierTableViewController.h"
 
 static CGFloat const topBarHeight = 44; //顶部标签条的高度
 
@@ -60,12 +60,12 @@ static CGFloat const topBarHeight = 44; //顶部标签条的高度
 }
 
 - (void)loadDataWithItem:(int)item{
-    HealthTableViewController *vc = [self.subViewControllers objectAtIndex:item];
+    SupplierTableViewController *vc = [self.subViewControllers objectAtIndex:item];
     [vc loadData];
 }
 
 - (void)scrollToTopWithItem:(int)item{
-    HealthTableViewController *vc = [self.subViewControllers objectAtIndex:item];
+    SupplierTableViewController *vc = [self.subViewControllers objectAtIndex:item];
     [vc scrollToTop];
 }
 

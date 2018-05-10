@@ -35,6 +35,16 @@
     [self.tb_supplierList requestDataSource];
 }
 
+- (void)loadData{
+    [self.tb_supplierList requestDataSource];
+}
+
+- (void)scrollToTop{
+    if (self.tb_supplierList.contentOffset.y > 0) {
+        [self.tb_supplierList scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
     [PurchaseHandler getCategorySupplierWithCategoryId:self.categoryEntity.categoryId page:(int)pageNum prepare:^{
     } success:^(id obj) {
@@ -78,6 +88,10 @@
     
 }
 
+
+- (void)setTableFrameWithHeight:(double)height{
+    [_tb_supplierList setFrame:CGRectMake(_tb_supplierList.left, _tb_supplierList.top, _tb_supplierList.width,height)];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

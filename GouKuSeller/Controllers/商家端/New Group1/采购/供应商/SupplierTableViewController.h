@@ -13,4 +13,8 @@
 
 @property (nonatomic,strong)CategoryEntity    *categoryEntity;
 
+- (void)loadData;
+- (void)scrollToTop;
+- (void)setTableFrameWithHeight:(double)height;
+
 @end

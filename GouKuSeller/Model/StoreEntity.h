@@ -24,6 +24,8 @@
 @property (nonatomic,assign)double       freightPrice;      //供应商门店运费
 @property (nonatomic,strong)NSArray      *shoppingCatItems; //供应商门店订单商品
 
+@property (nonatomic,assign)BOOL         isSelected;
+
 
 + (NSArray *)parseStoreListWithJson:(id)json;
 + (StoreEntity *)parseStoreEntityWithJson:(id)json;

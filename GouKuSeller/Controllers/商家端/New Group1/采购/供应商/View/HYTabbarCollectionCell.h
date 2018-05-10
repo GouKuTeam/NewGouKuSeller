@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HealthTableViewController.h"
+#import "SupplierTableViewController.h"
 
 @interface HYTabbarCollectionCell : UICollectionViewCell
-@property (nonatomic,strong) HealthTableViewController *subVc;
+@property (nonatomic,strong) SupplierTableViewController *subVc;
 @end

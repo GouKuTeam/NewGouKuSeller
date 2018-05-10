@@ -16,7 +16,7 @@
 
 @implementation HYTabbarCollectionCell
 
-- (void)setSubVc:(HealthTableViewController *)subVc{
+- (void)setSubVc:(SupplierTableViewController *)subVc{
     
     _subVc = subVc;
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
