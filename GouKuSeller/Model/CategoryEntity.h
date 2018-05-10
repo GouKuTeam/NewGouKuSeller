@@ -10,8 +10,8 @@
 
 @interface CategoryEntity : BaseEntity
 
-@property (nonatomic,strong)NSNumber        *categoryId;
-@property (nonatomic,strong)NSString        *categoryName;
+@property (nonatomic,strong)NSNumber        *industryId;
+@property (nonatomic,strong)NSString        *industryName;
 
 + (NSArray *)parseCategoryListWithJson:(id)json;
 

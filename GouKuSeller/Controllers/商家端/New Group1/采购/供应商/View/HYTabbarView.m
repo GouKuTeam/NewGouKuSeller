@@ -10,7 +10,7 @@
 #import "HYTabbarCollectionCell.h"
 #import "SupplierTableViewController.h"
 
-static CGFloat const topBarHeight = 44; //顶部标签条的高度
+static CGFloat const topBarHeight = 42; //顶部标签条的高度
 
 @interface HYTabbarView () <UICollectionViewDataSource,UICollectionViewDelegate,HYTopBarDelegate>
 

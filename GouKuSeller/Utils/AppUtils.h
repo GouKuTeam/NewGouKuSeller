@@ -23,4 +23,6 @@
 //获取设备类型
 + (NSString *)deviceName;
 
++ (UIViewController *)activityViewController;
+
 @end

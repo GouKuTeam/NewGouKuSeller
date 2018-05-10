@@ -35,9 +35,10 @@
 //类目搜索供应商
 + (void)getCategorySupplierWithCategoryId:(NSNumber *)categoryId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_SUPPLIERWITHCATEGORY];
+    NSDictionary *dic = @{@"page":[NSNumber numberWithInt:page],@"industryId":categoryId};
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:nil
+                                       parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {

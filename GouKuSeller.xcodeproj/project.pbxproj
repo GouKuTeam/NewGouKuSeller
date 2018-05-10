@@ -28,6 +28,7 @@
 		1891DAB320A3F172008E16F7 /* HYTabbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAAD20A3F170008E16F7 /* HYTabbarView.m */; };
 		1891DAB420A3F172008E16F7 /* HYTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAAF20A3F170008E16F7 /* HYTopBar.m */; };
 		1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */; };
+		1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
@@ -649,6 +650,8 @@
 		1891DAB020A3F171008E16F7 /* HYTabbarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTabbarCollectionCell.h; sourceTree = "<group>"; };
 		1891DAB120A3F171008E16F7 /* HYTabbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYTabbarView.h; sourceTree = "<group>"; };
 		1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTabbarCollectionCell.m; sourceTree = "<group>"; };
+		1891DAB620A4230A008E16F7 /* CategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
+		1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
@@ -1750,6 +1753,8 @@
 				74046AFC209AF6D5004E64A9 /* SupplierCommodityTableViewCell.m */,
 				74ACFFE920A298EB005C5A16 /* SupplierHeaderView.h */,
 				74ACFFEA20A298EB005C5A16 /* SupplierHeaderView.m */,
+				1891DAB620A4230A008E16F7 /* CategoryTableViewCell.h */,
+				1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2721,6 +2726,7 @@
 				7489CC92207F599100971BED /* OttoTextField.m in Sources */,
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74F57FFB20A2BBBB000D8C8F /* SearchSupplierCommodityViewController.m in Sources */,
+				1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
 				744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */,
 				74BD11E62067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */,

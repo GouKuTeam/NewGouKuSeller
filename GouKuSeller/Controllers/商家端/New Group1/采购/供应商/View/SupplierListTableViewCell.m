@@ -20,6 +20,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.img_head = [[UIImageView alloc]init];
+        self.img_head.contentMode = UIViewContentModeScaleAspectFill;
         [self.contentView addSubview:self.img_head];
         self.img_head.layer.cornerRadius = 2.0f;
         self.img_head.layer.masksToBounds = YES;
@@ -126,6 +127,7 @@
         [self.lab_guanzhu setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
         [self.lab_guanzhu setFont:[UIFont systemFontOfSize:10]];
         self.lab_guanzhu.layer.borderWidth = 0.5f;
+        self.lab_guanzhu.textAlignment = NSTextAlignmentCenter;
         self.lab_guanzhu.layer.borderColor = [[UIColor colorWithHexString:@"#E6670C"] CGColor];
         [self.lab_guanzhu mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_name);
@@ -137,6 +139,33 @@
         
     }
     return self;
+}
+
+- (void)contentCellWithStoreEntity:(StoreEntity *)storeEntity{
+    [self.img_head sd_setImageWithURL:[NSURL URLWithString:storeEntity.logo] placeholderImage:nil];
+    self.lab_name.text = storeEntity.name;
+    if (storeEntity.industry.count > 0) {
+        NSString *category = [storeEntity.industry firstObject];
+        for (int i = 1; i < storeEntity.industry.count; i++) {
+            category = [category stringByAppendingString:[NSString stringWithFormat:@" %@",[storeEntity.industry objectAtIndex:i]]];
+        }
+        self.lab_category.text = category;
+    }
+    if (storeEntity.agencyBrand.count > 0) {
+        NSString *agencyBrand = [storeEntity.agencyBrand firstObject];
+        for (int i = 1; i < storeEntity.agencyBrand.count; i++) {
+            agencyBrand = [agencyBrand stringByAppendingString:[NSString stringWithFormat:@" %@",[storeEntity.agencyBrand objectAtIndex:i]]];
+        }
+        self.lab_categoryDetail.text = agencyBrand;
+    }
+    self.lab_shopNum.text = [NSString stringWithFormat:@"%ld家订货门店",storeEntity.shopNum];
+    self.lab_orderNum.text = [NSString stringWithFormat:@"%ld笔订单",storeEntity.orderNum];
+    self.lab_startingPrice.text = [NSString stringWithFormat:@"¥%d元起送",(int)storeEntity.takeOffPrice];
+    if (storeEntity.isAttention == YES) {
+        [self.lab_guanzhu setHidden:NO];
+    }else{
+        [self.lab_guanzhu setHidden:YES];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
