@@ -10,4 +10,6 @@
 
 @interface CategoryTableViewCell : UITableViewCell
 
+@property (nonatomic,strong)UILabel    *lb_name;
+
 @end

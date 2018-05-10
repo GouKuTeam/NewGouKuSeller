@@ -9,11 +9,15 @@
 #import "SupplierShopViewController.h"
 #import "SupplierHeaderView.h"
 #import "SupplierCommodityTableViewCell.h"
+#import "CategoryTableViewCell.h"
+
 @interface SupplierShopViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic,strong)BaseTableView   *tb_left;
 @property (nonatomic,strong)BaseTableView   *tb_right;
 @property (nonatomic,strong)UIBarButtonItem *btn_attention;
+@property (nonatomic,strong)NSMutableArray  *arr_category;
+@property (nonatomic,strong)NSMutableArray  *arr_data;
 
 @end
 
@@ -83,12 +87,51 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"SupplierCommodityTableViewCell";
-    SupplierCommodityTableViewCell *cell = (SupplierCommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell){
-        cell = [[SupplierCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if (self.tb_left == tableView) {
+        static NSString *CellIdentifier = @"SupplierCommodityTableViewCell";
+        SupplierCommodityTableViewCell *cell = (SupplierCommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell){
+            cell = [[SupplierCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        return cell;
+    }else{
+        static NSString *CellIdentifier = @"SupplierCommodityTableViewCell";
+        SupplierCommodityTableViewCell *cell = (SupplierCommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell){
+            cell = [[SupplierCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        return cell;
     }
-    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView == self.tb_left) {
+        return 0.01;
+    }else{
+        return 30;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (tableView == self.tb_left) {
+        return nil;
+    }else{
+        UIView *v_header = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tb_right.width, 30)];
+        [v_header setBackgroundColor:[UIColor whiteColor]];
+        
+        UILabel *lb_title = [[UILabel alloc]initWithFrame:CGRectMake(7, 0, self.tb_right.width - 14, 30)];
+        [lb_title setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
+        [v_header addSubview:lb_title];
+        return v_header;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section:(NSInteger)section{
+    return nil;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
