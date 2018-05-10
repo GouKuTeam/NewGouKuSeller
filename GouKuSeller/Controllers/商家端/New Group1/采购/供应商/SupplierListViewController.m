@@ -46,9 +46,8 @@
     self.tf_search.enablesReturnKeyAutomatically = YES;
     self.tf_search.tintColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
     self.navigationItem.titleView = self.tf_search;
-    self.tf_search.enabled = NO;
     UIButton *btn_search = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 40, 30)];
-    [self.tf_search addSubview:btn_search];
+    [self.navigationItem.titleView addSubview:btn_search];
     [btn_search addTarget:self action:@selector(btnSearchAction) forControlEvents:UIControlEventTouchUpInside];
     [btn_search setBackgroundColor:[UIColor redColor]];
     
@@ -104,7 +103,8 @@
 
 - (void)btnSearchAction{
     SearchSupplierViewController *vc = [[SearchSupplierViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)leftBarAction:(id)sender{

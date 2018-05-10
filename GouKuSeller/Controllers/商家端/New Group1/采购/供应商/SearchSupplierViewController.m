@@ -55,8 +55,9 @@
     self.navigationItem.titleView = v_header;
 }
 
+
 - (void)cancelAction{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
