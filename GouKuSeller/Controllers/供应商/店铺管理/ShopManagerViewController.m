@@ -13,7 +13,7 @@
 #import "MyHandler.h"
 #import "SupplierCommodityViewController.h"
 #import "DispatchingViewController.h"
-
+#import "SettlementViewController.h"
 
 @interface ShopManagerViewController ()
 
@@ -69,6 +69,7 @@
     [self.view addSubview:self.v_shopManager];
     [self.v_shopManager.btn_commodity addTarget:self action:@selector(btn_commodityAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_shopManager.btn_peisong addTarget:self action:@selector(btn_peisongAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_shopManager.btn_jiesuan addTarget:self action:@selector(btn_jiesuanAction) forControlEvents:UIControlEventTouchUpInside];
     [self loadData];
     
 }
@@ -98,6 +99,13 @@
 - (void)btn_peisongAction{
     [self.navigationController.navigationBar setHidden:NO];
     DispatchingViewController *vc = [[DispatchingViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btn_jiesuanAction{
+    [self.navigationController.navigationBar setHidden:NO];
+    SettlementViewController *vc = [[SettlementViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -35,7 +35,7 @@
     [self.view addSubview:self.v_settlementBack];
     [self.v_settlementBack.btn_tixian addTarget:self action:@selector(btn_tixianAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_settlementBack.btn_mingxi addTarget:self action:@selector(yuemingxiAction) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self.v_settlementBack.btn_chongzhi addTarget:self action:@selector(btn_chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)loadData{
@@ -66,6 +66,10 @@
         vc.enterFromType = EnterFormJieSuan;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)btn_chongzhiAction{
+    
 }
 
 - (void)yuemingxiAction{

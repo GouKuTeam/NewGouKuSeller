@@ -69,7 +69,7 @@
 
 +(void)getbankListprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_bankMessage];
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_bankMessage];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_bankMessage];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:nil

@@ -63,21 +63,15 @@
         
         self.v_backTiXian = [[UIView alloc]init];
         [self addSubview:self.v_backTiXian];
-        [self.v_backTiXian mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.equalTo(self.v_header.mas_bottom);
-            make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(100);
-        }];
         [self.v_backTiXian setBackgroundColor:[UIColor whiteColor]];
         
         self.btn_tixian = [[UIButton alloc]init];
         [self.v_backTiXian addSubview:self.btn_tixian];
         [self.btn_tixian mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
-            make.top.mas_equalTo(23);
+            make.top.mas_equalTo(26);
             make.width.mas_equalTo(SCREEN_WIDTH - 30);
-            make.height.mas_equalTo(57);
+            make.height.mas_equalTo(46);
         }];
         [self.btn_tixian setTitle:@"提现" forState:UIControlStateNormal];
         [self.btn_tixian setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
@@ -85,6 +79,44 @@
         self.btn_tixian.titleLabel.font = [UIFont systemFontOfSize:18];
         self.btn_tixian.layer.cornerRadius = 3.0f;
         self.btn_tixian.layer.masksToBounds = YES;
+        
+        
+        self.btn_chongzhi = [[UIButton alloc]init];
+        [self.v_backTiXian addSubview:self.btn_chongzhi];
+        [self.btn_chongzhi mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.btn_tixian.mas_bottom).offset(20);
+            make.width.mas_equalTo(SCREEN_WIDTH - 30);
+            make.height.mas_equalTo(46);
+        }];
+        [self.btn_chongzhi setTitle:@"充值" forState:UIControlStateNormal];
+        [self.btn_chongzhi setTitleColor:[UIColor colorWithHexString:@"#4167B2"] forState:UIControlStateNormal];
+        [self.btn_chongzhi setBackgroundColor:[UIColor colorWithHexString:@"#FFFFFF"]];
+        self.btn_chongzhi.titleLabel.font = [UIFont systemFontOfSize:18];
+        self.btn_chongzhi.layer.cornerRadius = 3.0f;
+        self.btn_chongzhi.layer.masksToBounds = YES;
+        self.btn_chongzhi.layer.borderWidth = 1.0f;
+        self.btn_chongzhi.layer.borderColor = [[UIColor colorWithHexString:@"#4167B2"] CGColor];
+        [self.btn_chongzhi setHidden:YES];
+        
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
+            //供应商
+            [self.v_backTiXian mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(0);
+                make.top.equalTo(self.v_header.mas_bottom);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+                make.height.mas_equalTo(163);
+            }];
+            [self.btn_chongzhi setHidden:NO];
+        }else{
+            [self.v_backTiXian mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(0);
+                make.top.equalTo(self.v_header.mas_bottom);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+                make.height.mas_equalTo(100);
+                [self.btn_chongzhi setHidden:YES];
+            }];
+        }
         
         self.v_backJieSuan = [[UIView alloc]init];
         [self addSubview:self.v_backJieSuan];

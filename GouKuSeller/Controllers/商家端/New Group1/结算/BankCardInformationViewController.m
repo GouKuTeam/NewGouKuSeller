@@ -219,7 +219,18 @@
                 [MBProgressHUD showInfoMessage:@"请填写银行卡号"];
                 return;
             }
-            [self.dic_data setValue:cell.tf_detail.text forKey:@"cardNum"];
+            NSString *cardNum = [self getDigitsOnly:cell.tf_detail.text];
+            BOOL right = [self isValidCardNumber:cardNum];
+            if (right == YES) {
+                NSLog(@"yes");
+                [self.dic_data setValue:cell.tf_detail.text forKey:@"cardNum"];
+            }
+            if (right == NO) {
+                NSLog(@"no");
+                [MBProgressHUD showInfoMessage:@"请输入正确的银行卡卡号"];
+                return;
+            }
+            
         }
         if (i == 2) {
             if ([cell.tf_detail.text isEqualToString:@""]) {
@@ -351,6 +362,52 @@
     cell.tf_detail.text = [NSString stringWithFormat:@"%@-%@-%@",province,city,area];
     [self.pickerView hide];
     
+}
+
+//剔除卡号里的非法字符
+-(NSString *)getDigitsOnly:(NSString*)s
+{
+    NSString *digitsOnly = @"";
+    char c;
+    for (int i = 0; i < s.length; i++)
+    {
+        c = [s characterAtIndex:i];
+        if (isdigit(c))
+        {
+            digitsOnly =[digitsOnly stringByAppendingFormat:@"%c",c];
+        }
+    }
+    return digitsOnly;
+}
+
+//检查银行卡是否合法
+//Luhn算法
+-(BOOL)isValidCardNumber:(NSString *)cardNumber
+{
+    NSString *digitsOnly = [self getDigitsOnly:cardNumber];
+    int sum = 0;
+    int digit = 0;
+    int addend = 0;
+    BOOL timesTwo = false;
+    
+    for (int i = (digitsOnly.length - 1); i >= 0; i--)
+    {
+        digit = [digitsOnly characterAtIndex:i] - '0';
+        if (timesTwo)
+        {
+            addend = digit * 2;
+            if (addend > 9) {
+                addend -= 9;
+            }
+        }
+        else {
+            addend = digit;
+        }
+        sum += addend;
+        timesTwo = !timesTwo;
+    }
+    int modulus = sum % 10;
+    return modulus == 0;
 }
 
 

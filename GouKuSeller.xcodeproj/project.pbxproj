@@ -103,6 +103,7 @@
 		741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
 		741D3CC520848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
 		741D3CC620848AF200C56FCA /* ChangeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741D3CC320848AF200C56FCA /* ChangeShopViewController.m */; };
+		743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -726,6 +727,8 @@
 		741D3CBE2084892900C56FCA /* AboutMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutMeViewController.m; sourceTree = "<group>"; };
 		741D3CC220848AF200C56FCA /* ChangeShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeShopViewController.h; sourceTree = "<group>"; };
 		741D3CC320848AF200C56FCA /* ChangeShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeShopViewController.m; sourceTree = "<group>"; };
+		743C5F2020A41BEF00E617AF /* RechargeAmountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RechargeAmountViewController.h; sourceTree = "<group>"; };
+		743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RechargeAmountViewController.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1557,6 +1560,8 @@
 				7491FA60206DD9380006F388 /* YuEDetailTableViewCell.m */,
 				7491FA64206E05C60006F388 /* ShaiXuanView.h */,
 				7491FA65206E05C60006F388 /* ShaiXuanView.m */,
+				743C5F2020A41BEF00E617AF /* RechargeAmountViewController.h */,
+				743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */,
 			);
 			path = "结算";
 			sourceTree = "<group>";
@@ -2577,6 +2582,7 @@
 				74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */,
 				74C6E36D207B728C0083E4A8 /* TitleView.m in Sources */,
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
+				743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */,
 				74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */,
