@@ -97,6 +97,7 @@
     SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
     StoreEntity *entity = [self.arr_supplierList objectAtIndex:indexPath.row];
     vc.storeEntity = entity;
+    vc.hidesBottomBarWhenPushed = YES;
     [[(UITabBarController *)[AppUtils activityViewController] selectedViewController] pushViewController:vc animated:YES];
 }
 
