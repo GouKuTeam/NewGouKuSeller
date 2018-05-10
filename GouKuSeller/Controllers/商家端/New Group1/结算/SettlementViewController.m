@@ -14,6 +14,8 @@
 #import "AccountCashEntity.h"
 #import "SettlementHandler.h"
 #import "BankCardDetailViewController.h"
+#import "RechargeAmountViewController.h"
+
 @interface SettlementViewController ()
 @property (nonatomic ,strong)SettlementView         *v_settlementBack;
 @property (nonatomic ,strong)AccountCashEntity      *accountCashEntity;
@@ -69,7 +71,8 @@
 }
 
 - (void)btn_chongzhiAction{
-    
+    RechargeAmountViewController *vc = [[RechargeAmountViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)yuemingxiAction{
