@@ -10,7 +10,7 @@
 #import "PrefixHeader.pch"
 
 static CGFloat const topBarItemMargin = 20; ///标题之间的间距
-static CGFloat const topBarHeight = 44; //顶部标签条的高度
+static CGFloat const topBarHeight = 42; //顶部标签条的高度
 
 @interface HYTopBar()
 @property (nonatomic,strong) UIButton *selectedBtn;
@@ -42,8 +42,8 @@ static CGFloat const topBarHeight = 44; //顶部标签条的高度
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn sizeToFit];
-    btn.titleLabel.font = [UIFont systemFontOfSize:17];
-    [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [btn setTitleColor:[UIColor colorWithHexString:@"#616161"] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN] forState:UIControlStateSelected];
     [btn addTarget:self action:@selector(itemSelectedChange:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
@@ -73,14 +73,14 @@ static CGFloat const topBarHeight = 44; //顶部标签条的高度
         [UIView animateWithDuration:0.25 animations:^{
             
             btn.selected = YES;
-            btn.titleLabel.font = [UIFont systemFontOfSize:17];
+            btn.titleLabel.font = [UIFont systemFontOfSize:13];
             if (btn.left == 0) {
-                [self.v_line setFrame:CGRectMake(btn.left + 15, 42, btn.width, 2)];
+                [self.v_line setFrame:CGRectMake(btn.left + 15, topBarHeight - 2, btn.width, 2)];
             }else{
-                [self.v_line setFrame:CGRectMake(btn.left, 42, btn.width, 2)];
+                [self.v_line setFrame:CGRectMake(btn.left, topBarHeight - 2, btn.width, 2)];
             }
             self.selectedBtn.selected = NO;
-            self.selectedBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+            self.selectedBtn.titleLabel.font = [UIFont systemFontOfSize:13];
             self.selectedBtn = btn;
             
             // 计算偏移量

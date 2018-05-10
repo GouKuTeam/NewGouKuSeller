@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreEntity.h"
 
 @interface SupplierListTableViewCell : UITableViewCell
 
@@ -18,5 +19,7 @@
 @property (nonatomic ,strong)UILabel            *lab_orderNum;
 @property (nonatomic ,strong)UILabel            *lab_startingPrice;
 @property (nonatomic ,strong)UILabel            *lab_guanzhu;
+
+- (void)contentCellWithStoreEntity:(StoreEntity *)storeEntity;
 
 @end

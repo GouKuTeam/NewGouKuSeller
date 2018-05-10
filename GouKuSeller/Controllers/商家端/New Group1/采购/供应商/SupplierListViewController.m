@@ -46,13 +46,16 @@
     self.tf_search.tintColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
     self.navigationItem.titleView = self.tf_search;
     
-    [self loadData];
-    
     self.v_topBar = [[HYTabbarView alloc]initWithFrame:CGRectMake(0, NAVIGATIONBAR_VER_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_VER_HEIGHT - 49)];
     [self.view addSubview:self.v_topBar];
     self.v_topBar.tabbar.topBarDelegate = self;
-    self.v_topBar.backgroundColor = [UIColor colorWithHexString:@"#FAFAFA"];
+    self.v_topBar.backgroundColor = [UIColor whiteColor];
     
+    UIView *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONBAR_VER_HEIGHT + 42, SCREEN_WIDTH, 0.5)];
+    [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    [self.view addSubview:v_line];
+    
+    [self loadData];
 }
 
 - (void)loadData{
@@ -64,7 +67,7 @@
         if (arr_category.count > 0) {
             for (CategoryEntity *entity in arr_category) {
                 SupplierTableViewController * vc = [[SupplierTableViewController alloc]init];
-                vc.title = entity.categoryName;
+                vc.title = entity.industryName;
                 vc.categoryEntity = entity;
                 [self.v_topBar addSubItemWithViewController:vc];
             }
@@ -74,6 +77,16 @@
         [MBProgressHUD hideHUD];
         [MBProgressHUD showErrorMessage:(NSString *)json];
     }];
+}
+
+- (void)HYTopBarChangeSelectedItem:(HYTopBar *)topbar selectedIndex:(NSInteger)index{
+    self.v_topBar.contentView.contentOffset = CGPointMake(HYScreenW * index, 0);
+}
+
+- (void)topBarDetailDidSelectedIndex:(int)selectedIndex{
+    if (selectedIndex != self.v_topBar.tabbar.selectedIndex) {
+        [self.v_topBar.tabbar setSelectedItem:selectedIndex];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

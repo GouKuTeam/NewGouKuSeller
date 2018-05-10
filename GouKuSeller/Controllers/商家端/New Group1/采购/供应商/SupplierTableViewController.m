@@ -9,6 +9,8 @@
 #import "SupplierTableViewController.h"
 #import "SupplierListTableViewCell.h"
 #import "PurchaseHandler.h"
+#import "StoreEntity.h"
+#import "SupplierShopViewController.h"
 
 @interface SupplierTableViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -26,7 +28,7 @@
 }
 
 - (void)onCreate{
-    self.tb_supplierList = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 42.3, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 42.3) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
+    self.tb_supplierList = [[BaseTableView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 42.3) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     [self.view addSubview:self.tb_supplierList];
     self.tb_supplierList.delegate = self;
     self.tb_supplierList.dataSource = self;
@@ -46,7 +48,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
-    [PurchaseHandler getCategorySupplierWithCategoryId:self.categoryEntity.categoryId page:(int)pageNum prepare:^{
+    [PurchaseHandler getCategorySupplierWithCategoryId:self.categoryEntity.industryId page:(int)pageNum prepare:^{
     } success:^(id obj) {
         if (pageNum == 0) {
             [self.arr_supplierList removeAllObjects];
@@ -67,7 +69,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     //关注 返回95  没有返回80
-    return 80;
+    StoreEntity *entity = [self.arr_supplierList objectAtIndex:indexPath.row];
+    if (entity.isAttention == YES) {
+        return 95;
+    }else{
+        return 80;
+    }
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -80,12 +87,17 @@
     if (!cell){
         cell = [[SupplierListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
+    StoreEntity *entity = [self.arr_supplierList objectAtIndex:indexPath.row];
+    [cell contentCellWithStoreEntity:entity];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
+    StoreEntity *entity = [self.arr_supplierList objectAtIndex:indexPath.row];
+    vc.storeEntity = entity;
+    [[(UITabBarController *)[AppUtils activityViewController] selectedViewController] pushViewController:vc animated:YES];
 }
 
 

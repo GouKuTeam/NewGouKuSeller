@@ -11,13 +11,13 @@
 @interface StoreEntity : BaseEntity
 @property (nonatomic,strong)NSNumber     *shopId;           //供应商门店ID
 @property (nonatomic,strong)NSString     *name;             //供应商门店名称
-@property (nonatomic,strong)NSString     *orderNum;         //订单数量
-@property (nonatomic,strong)NSString     *shopNum;          //订购的店铺数
+@property (nonatomic,assign)NSInteger    orderNum;         //订单数量
+@property (nonatomic,assign)NSInteger    shopNum;          //订购的店铺数
 @property (nonatomic,strong)NSArray      *industry;         //品类 数组
 @property (nonatomic,strong)NSArray      *agencyBrand;      //代理的品牌  数组
 @property (nonatomic,strong)NSString     *logo;             //供应商门店LOGO
 @property (nonatomic,assign)double       takeOffPrice;      //供应商门店起送价格
-@property (nonatomic,strong)NSNumber     *isAttention;      //是否关注 0 未关注 1 已关注
+@property (nonatomic,assign)BOOL         isAttention;      //是否关注 0 未关注 1 已关注
 @property (nonatomic,strong)NSString     *phone;            //事务人电话
 
 @property (nonatomic,assign)double       orderPrice;        //供应商门店订单总价

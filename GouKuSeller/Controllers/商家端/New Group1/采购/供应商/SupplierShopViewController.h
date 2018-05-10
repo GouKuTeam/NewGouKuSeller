@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "StoreEntity.h"
 
 @interface SupplierShopViewController : BaseViewController
+
+@property (nonatomic,strong)StoreEntity    *storeEntity;
 
 @end

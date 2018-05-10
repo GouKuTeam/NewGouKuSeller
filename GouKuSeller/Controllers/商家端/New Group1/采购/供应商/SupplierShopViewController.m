@@ -13,6 +13,7 @@
 
 @property (nonatomic,strong)BaseTableView   *tb_left;
 @property (nonatomic,strong)BaseTableView   *tb_right;
+@property (nonatomic,strong)UIBarButtonItem *btn_attention;
 
 @end
 
@@ -38,6 +39,9 @@
 - (void)onCreate{
     
     SupplierHeaderView *v_header = [[SupplierHeaderView alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH, 66)];
+    [v_header.iv_avatar sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:nil];
+    [v_header.lb_name setText:self.storeEntity.name];
+    [v_header.lb_startPrice setText:[NSString stringWithFormat:@"%d元起送",(int)self.storeEntity.takeOffPrice]];
     [self.view addSubview:v_header];
     
     self.tb_left = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom,85,SCREEN_HEIGHT - v_header.bottom - SafeAreaBottomHeight - SafeAreaTopHeight) style:UITableViewStyleGrouped hasHeaderRefreshing:NO hasFooterRefreshing:NO];
@@ -53,11 +57,21 @@
     self.tb_right.tableFooterView = [UIView new];
     self.tb_right.backgroundColor = [UIColor blueColor];
     [self.view addSubview:self.tb_right];
+    
+    UIBarButtonItem *btn_search = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_white"] style:UIBarButtonItemStyleDone target:self action:@selector(searchAction)];
+    self.btn_attention = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"shoucang-white"] style:UIBarButtonItemStyleDone target:self action:@selector(attentionAction)];
+    if (self.storeEntity.isAttention == YES) {
+        [_btn_attention setImage:[UIImage imageNamed:@"shocuang-orange"]];
+    }
+    self.navigationItem.rightBarButtonItems = @[self.btn_attention,btn_search];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)searchAction{
+    
+}
+
+- (void)attentionAction{
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
