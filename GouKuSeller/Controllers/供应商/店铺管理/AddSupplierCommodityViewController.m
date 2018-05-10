@@ -152,6 +152,7 @@
 
 //商品编辑价格点击方法
 - (void)tgr_editPriceAction{
+    self.scEntity = [[SupplierCommodityEndity alloc]init];
     EditPriceViewController *vc = [[EditPriceViewController alloc]init];
     vc.defaultUnit = self.scEntity.defaultUsing;
     vc.defaultPrice = self.scEntity.defaultPrice;
@@ -224,7 +225,7 @@
             [MBProgressHUD showInfoMessage:@"请选择店内分类"];
             return;
         }else{
-            [CommodityHandler updateSupplierCommodityWithSkuId:self.scEntity.skuId wareItemId:self.scEntity.wareItemId firstCategoryId:self.scEntity.firstCategoryId stock:[self.v_commodityView.v_stock.tf_detail.text intValue] xprice:self.v_commodityView.v_jinhuoPrice.tf_detail.text musing:self.scEntity.defaultUsing price:[NSString stringWithFormat:@"%.2f",self.scEntity.defaultPrice] saleUnits:self.scEntity.saleUnits deleteUnitIds:[self.dic_price objectForKey:@"deleteUnitIds"] prepare:^{
+            [CommodityHandler updateSupplierCommodityWithSkuId:self.scEntity.skuId wareItemId:self.scEntity.wareItemId firstCategoryId:self.scEntity.firstCategoryId stock:[self.v_commodityView.v_stock.tf_detail.text intValue] xprice:self.v_commodityView.v_jinhuoPrice.tf_detail.text musing:self.scEntity.defaultUsing price:[NSString stringWithFormat:@"%.2f",self.scEntity.defaultPrice] saleUnits:self.scEntity.saleUnits deleteUnitIds:[self.dic_price objectForKey:@"deleteUnitIds"] hitType:self.hitType prepare:^{
                 
             } success:^(id obj) {
                 SupplierCommodityEndity *entity = (SupplierCommodityEndity *)obj;

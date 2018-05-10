@@ -20,6 +20,7 @@ typedef void(^addCommodityFinish)(void);
 @property (nonatomic ,strong)CommodityFromCodeEntity    *entityInformation;
 @property (nonatomic, copy) changeEntity  changeEntity;
 @property (nonatomic, copy) addCommodityFinish  addCommodityFinish;
+@property (nonatomic ,assign)int             hitType;
 
 
 @end

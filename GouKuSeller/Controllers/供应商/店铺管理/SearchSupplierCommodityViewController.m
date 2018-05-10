@@ -199,6 +199,7 @@
     SupplierCommodityEndity *entityDemo = [self.arr_search objectAtIndex:btn_sender.tag];
     AddSupplierCommodityViewController *vc = [[AddSupplierCommodityViewController alloc]init];
     vc.comeFrom = @"编辑商品";
+    vc.hitType = entityDemo.hitType;
     vc.skuId = entityDemo.skuId;
     [self.navigationController pushViewController:vc animated:YES];
     vc.changeEntity = ^(SupplierCommodityEndity *entity) {
