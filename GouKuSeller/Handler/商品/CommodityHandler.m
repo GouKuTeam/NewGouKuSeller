@@ -537,7 +537,7 @@
 }
 
 //供应商商品修改
-+ (void)updateSupplierCommodityWithSkuId:(NSNumber *)skuId wareItemId:(NSNumber *)wareItemId firstCategoryId:(NSNumber *)firstCategoryId stock:(int)stock xprice:(NSString *)xprice musing:(BOOL)musing price:(NSString *)price saleUnits:(NSArray *)saleUnits deleteUnitIds:(NSArray *)deleteUnitIds prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)updateSupplierCommodityWithSkuId:(NSNumber *)skuId wareItemId:(NSNumber *)wareItemId firstCategoryId:(NSNumber *)firstCategoryId stock:(int)stock xprice:(NSString *)xprice musing:(BOOL)musing price:(NSString *)price saleUnits:(NSArray *)saleUnits deleteUnitIds:(NSArray *)deleteUnitIds hitType:(int)hitType prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_UpdateSupplierCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -567,6 +567,9 @@
     }
     if (deleteUnitIds.count > 0) {
         [dic setObject:deleteUnitIds forKey:@"deleteUnitIds"];
+    }
+    if (hitType) {
+        [dic setObject:[NSNumber numberWithInt:hitType] forKey:@"hitType"];
     }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost

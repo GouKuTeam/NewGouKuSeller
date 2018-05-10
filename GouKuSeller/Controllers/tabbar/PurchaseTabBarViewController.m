@@ -9,7 +9,8 @@
 #import "PurchaseTabBarViewController.h"
 #import "PurchaseOrderViewController.h"
 #import "ShoppingCartViewController.h"
-#import "SupplierShopViewController.h"
+#import "SupplierListViewController.h"
+
 
 @interface PurchaseTabBarViewController ()
 
@@ -33,7 +34,7 @@
 #pragma mark 初始化Tab下的ViewController
 - (void)initTabBarViewControllers{
     
-    SupplierShopViewController *supplierVC = [[SupplierShopViewController alloc] init];
+    SupplierListViewController *supplierVC = [[SupplierListViewController alloc] init];
     UINavigationController *supplierNav = [self changeToNavController:supplierVC title:@"供应商" index:3];
     ShoppingCartViewController *shopVC = [[ShoppingCartViewController alloc] init];
     UINavigationController *shopNav = [self changeToNavController:shopVC title:@"购物车" index:2];
