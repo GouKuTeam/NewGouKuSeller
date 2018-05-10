@@ -50,6 +50,7 @@
 		740C6893207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
 		740C6894207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
 		740C6895207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
+		7410F71D20A4092E00F9A724 /* DispatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410F71C20A4092E00F9A724 /* DispatchingViewController.m */; };
 		7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F03020639BC50002C960 /* CommodityStatusView.m */; };
 		7416F0342067684F0002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
 		7416F035206768500002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
@@ -683,6 +684,8 @@
 		740C688F207CA8A30044889F /* PayInCashCompleteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashCompleteView.m; sourceTree = "<group>"; };
 		740C6891207CF16A0044889F /* ChangeCommodirtyCountAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCommodirtyCountAlertView.h; sourceTree = "<group>"; };
 		740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCommodirtyCountAlertView.m; sourceTree = "<group>"; };
+		7410F71B20A4092D00F9A724 /* DispatchingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DispatchingViewController.h; sourceTree = "<group>"; };
+		7410F71C20A4092E00F9A724 /* DispatchingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DispatchingViewController.m; sourceTree = "<group>"; };
 		7416F02F20639BC50002C960 /* CommodityStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityStatusView.h; sourceTree = "<group>"; };
 		7416F03020639BC50002C960 /* CommodityStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityStatusView.m; sourceTree = "<group>"; };
 		7416F0322067684F0002C960 /* MoreEditView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreEditView.h; sourceTree = "<group>"; };
@@ -1720,6 +1723,8 @@
 				74ACFFD820A1A66C005C5A16 /* SupplierCommodityEndity.m */,
 				74ACFFDD20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.h */,
 				74ACFFDE20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m */,
+				7410F71B20A4092D00F9A724 /* DispatchingViewController.h */,
+				7410F71C20A4092E00F9A724 /* DispatchingViewController.m */,
 				74046AEE209AB7BD004E64A9 /* 编辑价格 */,
 			);
 			path = "店铺管理";
@@ -2674,6 +2679,7 @@
 				74F8E917205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E8C220512CD8006AFB6C /* UserDefaultsUtils.m in Sources */,
 				744ABAB5205652D300BBB26E /* LoginViewController.m in Sources */,
+				7410F71D20A4092E00F9A724 /* DispatchingViewController.m in Sources */,
 				74ACFFC020A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				74BD120E20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				74B4E8AE204BD3EC006AFB6C /* NSString+Size.m in Sources */,

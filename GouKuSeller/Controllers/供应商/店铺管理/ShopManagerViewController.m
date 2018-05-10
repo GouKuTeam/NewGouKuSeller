@@ -12,6 +12,7 @@
 #import "ShopManagerView.h"
 #import "MyHandler.h"
 #import "SupplierCommodityViewController.h"
+#import "DispatchingViewController.h"
 
 
 @interface ShopManagerViewController ()
@@ -66,7 +67,8 @@
     
     self.v_shopManager = [[ShopManagerView alloc]initWithFrame:CGRectMake(0, self.tb_header.bottom + 10, SCREEN_WIDTH, 380)];
     [self.view addSubview:self.v_shopManager];
-    [self.v_shopManager.btn_commodity addTappedWithTarget:self action:@selector(btn_commodityAction)];
+    [self.v_shopManager.btn_commodity addTarget:self action:@selector(btn_commodityAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_shopManager.btn_peisong addTarget:self action:@selector(btn_peisongAction) forControlEvents:UIControlEventTouchUpInside];
     [self loadData];
     
 }
@@ -89,6 +91,13 @@
 - (void)btn_commodityAction{
     [self.navigationController.navigationBar setHidden:NO];
     SupplierCommodityViewController *vc = [[SupplierCommodityViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btn_peisongAction{
+    [self.navigationController.navigationBar setHidden:NO];
+    DispatchingViewController *vc = [[DispatchingViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
