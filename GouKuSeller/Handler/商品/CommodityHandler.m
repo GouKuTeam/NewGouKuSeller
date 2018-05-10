@@ -18,7 +18,6 @@
 // 获取店内分类列表数据
 + (void)getCommodityCategoryWithShopId:(NSString *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed
 {
-//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_ShopCommodityCategory,shopId]];
     NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_ShopCommodityCategory,shopId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet

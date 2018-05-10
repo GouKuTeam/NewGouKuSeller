@@ -12,7 +12,9 @@
 #import "ShopManagerView.h"
 #import "MyHandler.h"
 #import "SupplierCommodityViewController.h"
-
+#import "DispatchingViewController.h"
+#import "SettlementViewController.h"
+#import "SupplierSettingViewController.h"
 
 @interface ShopManagerViewController ()
 
@@ -53,20 +55,22 @@
     [self.tb_header.imgHead sd_setImageWithURL:[NSURL URLWithString:[LoginStorage GetShopPic]]];
     
     UIButton *btn_set = [[UIButton alloc]init];
-    
+    [btn_set addTarget:self action:@selector(btnsetAction) forControlEvents:UIControlEventTouchUpInside];
     [self.tb_header addSubview:btn_set];
-    [btn_set setImage:[UIImage imageNamed:@"warning"] forState:UIControlStateNormal];
+    [btn_set setImage:[UIImage imageNamed:@"setting_white"] forState:UIControlStateNormal];
     if (SafeAreaTopHeight == 88) {
         [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130 + 44)];
-        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 44, 18, 16)];
+        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 44, 18, 18)];
     }else{
         [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130 + 20)];
-        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 20, 18, 16)];
+        [btn_set setFrame:CGRectMake(SCREEN_WIDTH - 18 - 15, 12 + 20, 18, 18)];
     }
     
     self.v_shopManager = [[ShopManagerView alloc]initWithFrame:CGRectMake(0, self.tb_header.bottom + 10, SCREEN_WIDTH, 380)];
     [self.view addSubview:self.v_shopManager];
-    [self.v_shopManager.btn_commodity addTappedWithTarget:self action:@selector(btn_commodityAction)];
+    [self.v_shopManager.btn_commodity addTarget:self action:@selector(btn_commodityAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_shopManager.btn_peisong addTarget:self action:@selector(btn_peisongAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_shopManager.btn_jiesuan addTarget:self action:@selector(btn_jiesuanAction) forControlEvents:UIControlEventTouchUpInside];
     [self loadData];
     
 }
@@ -89,6 +93,27 @@
 - (void)btn_commodityAction{
     [self.navigationController.navigationBar setHidden:NO];
     SupplierCommodityViewController *vc = [[SupplierCommodityViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btn_peisongAction{
+    [self.navigationController.navigationBar setHidden:NO];
+    DispatchingViewController *vc = [[DispatchingViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btn_jiesuanAction{
+    [self.navigationController.navigationBar setHidden:NO];
+    SettlementViewController *vc = [[SettlementViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btnsetAction{
+    [self.navigationController.navigationBar setHidden:NO];
+    SupplierSettingViewController *vc = [[SupplierSettingViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
