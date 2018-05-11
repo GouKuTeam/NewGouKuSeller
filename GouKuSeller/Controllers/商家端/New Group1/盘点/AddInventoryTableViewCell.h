@@ -13,5 +13,6 @@
 @property (nonatomic ,strong)UILabel        *lab_name;
 @property (nonatomic ,strong)UILabel        *lab_stock;
 @property (nonatomic ,strong)UILabel        *lab_inventoryNum;
+@property (nonatomic ,strong)UIImageView    *img_line;
 
 @end

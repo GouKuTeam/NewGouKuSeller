@@ -56,11 +56,17 @@
     self.tb_commodity.dataSource = self;
     self.tb_commodity.tableHeaderView = self.header;
     self.tb_commodity.tableFooterView = [UIView new];
+    [self.tb_commodity setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    self.tb_commodity.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 42;
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 10;
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 42;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.arr_data.count;
@@ -72,17 +78,20 @@
     if (!cell){
         cell = [[AddInventoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    if (indexPath.row == self.arr_data.count - 1) {
+        [cell.img_line setHidden:YES];
+    }
+    
     
     return cell;
 }
 
-- (CGFloat)labelHeight:(NSString *)labelStr UseWidth:(float)width andFont:(id)font
-{
-    float textMaxWidth = width;
-    NSDictionary * attribute = @{ NSFontAttributeName : font};
-    CGSize size = CGSizeMake(textMaxWidth, MAXFLOAT);
-    CGRect rect = [labelStr boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:attribute context:nil];
-    return  rect.size.height;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.tfsousuo resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

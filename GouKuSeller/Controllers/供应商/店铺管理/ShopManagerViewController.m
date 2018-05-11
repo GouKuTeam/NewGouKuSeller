@@ -16,8 +16,14 @@
 #import "SettlementViewController.h"
 #import "SupplierSettingViewController.h"
 #import "InventoryViewController.h"
+#import "WXSpeechSynthesizer.h"
+#import "WXSpeechSynthesizerPlayer.h"
+
 
 @interface ShopManagerViewController ()
+//<WXSpeechSynthesizerDelegate,WXSpeechSynthesizerPlayerDelegate>{
+//    WXSpeechSynthesizerPlayer *_player;
+//}
 
 @property (nonatomic ,strong)MyTbHeaderView      *tb_header;
 @property (nonatomic ,strong)ShopManagerView     *v_shopManager;
@@ -43,8 +49,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = nil;
-    // Do any additional setup after loading the view.
+//    _player = [[WXSpeechSynthesizerPlayer alloc] init];
+//    _player.delegate = self;
+//    WXSpeechSynthesizer * speechSynthesizer = [WXSpeechSynthesizer sharedSpeechSynthesizer];
+//    [speechSynthesizer setDelegate:self];
+//    [speechSynthesizer setAppID:@"wxf5cfccf099ab98d4"];
+//    [speechSynthesizer setVolumn:1.0];
+//    [speechSynthesizer startWithText:@"微信支付收款3.31元"];
+    
 }
+
+
+//- (void)speechSynthesizerResultSpeechData:(NSData *)speechData speechFormat:(int)speechFormat{
+//    [_player play];
+//}
+//
+//- (void)speechSynthesizerMakeError:(NSInteger)error{
+//
+//}
 
 - (void)onCreate{
 

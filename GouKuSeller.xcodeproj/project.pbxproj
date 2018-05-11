@@ -115,6 +115,36 @@
 		743C5F3620A52F3500E617AF /* AddInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3520A52F3500E617AF /* AddInventoryViewController.m */; };
 		743C5F3920A5337D00E617AF /* AddInventoryTabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */; };
 		743C5F3C20A53DDB00E617AF /* AddInventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */; };
+		743C5F4220A5551400E617AF /* libmtaWXOsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F4020A5551400E617AF /* libmtaWXOsdk.a */; };
+		743C5F4320A5551400E617AF /* libmtaWXOsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F4020A5551400E617AF /* libmtaWXOsdk.a */; };
+		743C5F4420A5551400E617AF /* libmtaWXOsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F4020A5551400E617AF /* libmtaWXOsdk.a */; };
+		743C5F4520A5551400E617AF /* libWXVoiceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F4120A5551400E617AF /* libWXVoiceSDK.a */; };
+		743C5F4620A5551400E617AF /* libWXVoiceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F4120A5551400E617AF /* libWXVoiceSDK.a */; };
+		743C5F4720A5551400E617AF /* libWXVoiceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F4120A5551400E617AF /* libWXVoiceSDK.a */; };
+		743C5F4A20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F4920A5578600E617AF /* WXSpeechSynthesizerPlayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		743C5F4B20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F4920A5578600E617AF /* WXSpeechSynthesizerPlayer.m */; };
+		743C5F4C20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F4920A5578600E617AF /* WXSpeechSynthesizerPlayer.m */; };
+		743C5F5420A581CE00E617AF /* SearchCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5320A581CE00E617AF /* SearchCustomerViewController.m */; };
+		743C5F5520A581CE00E617AF /* SearchCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5320A581CE00E617AF /* SearchCustomerViewController.m */; };
+		743C5F5620A581CE00E617AF /* SearchCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5320A581CE00E617AF /* SearchCustomerViewController.m */; };
+		743C5F5920A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5820A582A100E617AF /* CustomerManagerTableViewCell.m */; };
+		743C5F5A20A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5820A582A100E617AF /* CustomerManagerTableViewCell.m */; };
+		743C5F5B20A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5820A582A100E617AF /* CustomerManagerTableViewCell.m */; };
+		743C5F5E20A588E200E617AF /* CustomerManagerEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5D20A588E200E617AF /* CustomerManagerEntity.m */; };
+		743C5F5F20A588E200E617AF /* CustomerManagerEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5D20A588E200E617AF /* CustomerManagerEntity.m */; };
+		743C5F6020A588E200E617AF /* CustomerManagerEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F5D20A588E200E617AF /* CustomerManagerEntity.m */; };
+		743C5F6420A58A4C00E617AF /* CustomerManagerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6320A58A4C00E617AF /* CustomerManagerHandler.m */; };
+		743C5F6520A58A4C00E617AF /* CustomerManagerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6320A58A4C00E617AF /* CustomerManagerHandler.m */; };
+		743C5F6620A58A4C00E617AF /* CustomerManagerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6320A58A4C00E617AF /* CustomerManagerHandler.m */; };
+		743C5F6920A5906100E617AF /* CustomerShopInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6820A5906100E617AF /* CustomerShopInformationViewController.m */; };
+		743C5F6A20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6820A5906100E617AF /* CustomerShopInformationViewController.m */; };
+		743C5F6B20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6820A5906100E617AF /* CustomerShopInformationViewController.m */; };
+		743C5F6E20A592DE00E617AF /* CustomerShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6D20A592DE00E617AF /* CustomerShopView.m */; };
+		743C5F6F20A592DE00E617AF /* CustomerShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6D20A592DE00E617AF /* CustomerShopView.m */; };
+		743C5F7020A592DE00E617AF /* CustomerShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F6D20A592DE00E617AF /* CustomerShopView.m */; };
+		743C5F7320A5A3F200E617AF /* CustomerLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F7220A5A3F200E617AF /* CustomerLocationViewController.m */; };
+		743C5F7420A5A3F200E617AF /* CustomerLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F7220A5A3F200E617AF /* CustomerLocationViewController.m */; };
+		743C5F7520A5A3F200E617AF /* CustomerLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F7220A5A3F200E617AF /* CustomerLocationViewController.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -762,6 +792,26 @@
 		743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryTabHeaderView.m; sourceTree = "<group>"; };
 		743C5F3A20A53DDB00E617AF /* AddInventoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInventoryTableViewCell.h; sourceTree = "<group>"; };
 		743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryTableViewCell.m; sourceTree = "<group>"; };
+		743C5F3E20A5551300E617AF /* WXVoiceSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXVoiceSDK.h; sourceTree = "<group>"; };
+		743C5F3F20A5551300E617AF /* WXSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizer.h; sourceTree = "<group>"; };
+		743C5F4020A5551400E617AF /* libmtaWXOsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmtaWXOsdk.a; sourceTree = "<group>"; };
+		743C5F4120A5551400E617AF /* libWXVoiceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWXVoiceSDK.a; sourceTree = "<group>"; };
+		743C5F4820A5578600E617AF /* WXSpeechSynthesizerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizerPlayer.h; sourceTree = "<group>"; };
+		743C5F4920A5578600E617AF /* WXSpeechSynthesizerPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechSynthesizerPlayer.m; sourceTree = "<group>"; };
+		743C5F5220A581CE00E617AF /* SearchCustomerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCustomerViewController.h; sourceTree = "<group>"; };
+		743C5F5320A581CE00E617AF /* SearchCustomerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCustomerViewController.m; sourceTree = "<group>"; };
+		743C5F5720A582A100E617AF /* CustomerManagerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerManagerTableViewCell.h; sourceTree = "<group>"; };
+		743C5F5820A582A100E617AF /* CustomerManagerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerManagerTableViewCell.m; sourceTree = "<group>"; };
+		743C5F5C20A588E200E617AF /* CustomerManagerEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerManagerEntity.h; sourceTree = "<group>"; };
+		743C5F5D20A588E200E617AF /* CustomerManagerEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerManagerEntity.m; sourceTree = "<group>"; };
+		743C5F6220A58A4C00E617AF /* CustomerManagerHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerManagerHandler.h; sourceTree = "<group>"; };
+		743C5F6320A58A4C00E617AF /* CustomerManagerHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerManagerHandler.m; sourceTree = "<group>"; };
+		743C5F6720A5906100E617AF /* CustomerShopInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerShopInformationViewController.h; sourceTree = "<group>"; };
+		743C5F6820A5906100E617AF /* CustomerShopInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerShopInformationViewController.m; sourceTree = "<group>"; };
+		743C5F6C20A592DE00E617AF /* CustomerShopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerShopView.h; sourceTree = "<group>"; };
+		743C5F6D20A592DE00E617AF /* CustomerShopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerShopView.m; sourceTree = "<group>"; };
+		743C5F7120A5A3F200E617AF /* CustomerLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomerLocationViewController.h; sourceTree = "<group>"; };
+		743C5F7220A5A3F200E617AF /* CustomerLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomerLocationViewController.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1143,6 +1193,8 @@
 			files = (
 				74C6E351207A52AA0083E4A8 /* CoreFoundation.framework in Frameworks */,
 				74C6E34F207A529F0083E4A8 /* CoreTelephony.framework in Frameworks */,
+				743C5F4520A5551400E617AF /* libWXVoiceSDK.a in Frameworks */,
+				743C5F4220A5551400E617AF /* libmtaWXOsdk.a in Frameworks */,
 				74C6E34D207A52910083E4A8 /* SystemConfiguration.framework in Frameworks */,
 				74C6E34B207A52840083E4A8 /* CoreGraphics.framework in Frameworks */,
 				74C6E349207A52750083E4A8 /* Foundation.framework in Frameworks */,
@@ -1159,6 +1211,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743C5F4620A5551400E617AF /* libWXVoiceSDK.a in Frameworks */,
+				743C5F4320A5551400E617AF /* libmtaWXOsdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1166,6 +1220,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743C5F4720A5551400E617AF /* libWXVoiceSDK.a in Frameworks */,
+				743C5F4420A5551400E617AF /* libmtaWXOsdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1332,6 +1388,8 @@
 		743C5F2920A45DB300E617AF /* WXManager */ = {
 			isa = PBXGroup;
 			children = (
+				743C5F4820A5578600E617AF /* WXSpeechSynthesizerPlayer.h */,
+				743C5F4920A5578600E617AF /* WXSpeechSynthesizerPlayer.m */,
 				743C5F2A20A45DCA00E617AF /* WXApiManager.h */,
 				743C5F2B20A45DCA00E617AF /* WXApiManager.m */,
 			);
@@ -1355,6 +1413,26 @@
 			path = "盘点";
 			sourceTree = "<group>";
 		};
+		743C5F3D20A554FE00E617AF /* 微信语音合成 */ = {
+			isa = PBXGroup;
+			children = (
+				743C5F4020A5551400E617AF /* libmtaWXOsdk.a */,
+				743C5F4120A5551400E617AF /* libWXVoiceSDK.a */,
+				743C5F3F20A5551300E617AF /* WXSpeechSynthesizer.h */,
+				743C5F3E20A5551300E617AF /* WXVoiceSDK.h */,
+			);
+			path = "微信语音合成";
+			sourceTree = "<group>";
+		};
+		743C5F6120A58A3800E617AF /* 客户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				743C5F6220A58A4C00E617AF /* CustomerManagerHandler.h */,
+				743C5F6320A58A4C00E617AF /* CustomerManagerHandler.m */,
+			);
+			path = "客户管理";
+			sourceTree = "<group>";
+		};
 		744ABA1B2052990C00BBB26E /* 管理分类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1371,6 +1449,7 @@
 		744ABA1F2053E75C00BBB26E /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				743C5F6120A58A3800E617AF /* 客户管理 */,
 				1891DAA620A3EB02008E16F7 /* 采购 */,
 				1891DA9920A024CA008E16F7 /* 购物车 */,
 				7498365B208887AC007FEEF8 /* 我的 */,
@@ -1428,6 +1507,8 @@
 				1891DA9320A01F94008E16F7 /* WareEntity.m */,
 				1891DAA320A3E8EA008E16F7 /* CategoryEntity.h */,
 				1891DAA420A3E8EA008E16F7 /* CategoryEntity.m */,
+				743C5F5C20A588E200E617AF /* CustomerManagerEntity.h */,
+				743C5F5D20A588E200E617AF /* CustomerManagerEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1768,6 +1849,16 @@
 			children = (
 				74ACFFB420A04E11005C5A16 /* CustomerManagerViewController.h */,
 				74ACFFB520A04E11005C5A16 /* CustomerManagerViewController.m */,
+				743C5F5720A582A100E617AF /* CustomerManagerTableViewCell.h */,
+				743C5F5820A582A100E617AF /* CustomerManagerTableViewCell.m */,
+				743C5F5220A581CE00E617AF /* SearchCustomerViewController.h */,
+				743C5F5320A581CE00E617AF /* SearchCustomerViewController.m */,
+				743C5F6720A5906100E617AF /* CustomerShopInformationViewController.h */,
+				743C5F6820A5906100E617AF /* CustomerShopInformationViewController.m */,
+				743C5F6C20A592DE00E617AF /* CustomerShopView.h */,
+				743C5F6D20A592DE00E617AF /* CustomerShopView.m */,
+				743C5F7120A5A3F200E617AF /* CustomerLocationViewController.h */,
+				743C5F7220A5A3F200E617AF /* CustomerLocationViewController.m */,
 			);
 			path = "客户管理";
 			sourceTree = "<group>";
@@ -2155,6 +2246,7 @@
 		74BD12272068D8990053A3D1 /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				743C5F3D20A554FE00E617AF /* 微信语音合成 */,
 				743C5F2920A45DB300E617AF /* WXManager */,
 				74046B0E209C2E00004E64A9 /* GCPlaceholderTextView */,
 				7489CC84207F599100971BED /* OttoKeyboardView */,
@@ -2632,6 +2724,7 @@
 				7491FA9A2079D4F30006F388 /* FindPwWithUserNameViewController.m in Sources */,
 				741D3CBF2084892900C56FCA /* AboutMeViewController.m in Sources */,
 				74F8E903205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
+				743C5F5420A581CE00E617AF /* SearchCustomerViewController.m in Sources */,
 				74C6E377207C56640083E4A8 /* CashierHandler.m in Sources */,
 				741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
@@ -2699,6 +2792,7 @@
 				74ACFFE420A1E813005C5A16 /* ShoppingBottomView.m in Sources */,
 				740C688A207C98930044889F /* PayInCashViewController.m in Sources */,
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
+				743C5F7320A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
 				74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,
@@ -2733,6 +2827,7 @@
 				74BD124B2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				744ABA66205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				1891DAB320A3F172008E16F7 /* HYTabbarView.m in Sources */,
+				743C5F5E20A588E200E617AF /* CustomerManagerEntity.m in Sources */,
 				74C6E361207B54D90083E4A8 /* UINavigationController+SJVideoPlayerAdd.m in Sources */,
 				74B4E87E204BD3EC006AFB6C /* MJRefreshAnimationStateHeader.m in Sources */,
 				74BD123C2068E2650053A3D1 /* ActiveZhouViewController.m in Sources */,
@@ -2795,6 +2890,7 @@
 				7491FA27206B7B000006F388 /* SettlementView.m in Sources */,
 				74ACFFB320A04DF4005C5A16 /* OrderSelectViewController.m in Sources */,
 				74B4E89F204BD3EC006AFB6C /* UILabel+LineSpace.m in Sources */,
+				743C5F5920A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */,
 				74F8E8FD2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				744ABA84205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
 				7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */,
@@ -2805,6 +2901,7 @@
 				74F57FFB20A2BBBB000D8C8F /* SearchSupplierCommodityViewController.m in Sources */,
 				1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
+				743C5F6920A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */,
 				74BD11E62067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */,
 				74046B03209AFC02004E64A9 /* SupplierInformationViewController.m in Sources */,
@@ -2815,6 +2912,7 @@
 				1891DA9120A01EC8008E16F7 /* StoreEntity.m in Sources */,
 				7491FA3B206BA5D50006F388 /* SelectBankViewController.m in Sources */,
 				7491FA9F2079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
+				743C5F4A20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */,
 				74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */,
 				1891DAA520A3E8EA008E16F7 /* CategoryEntity.m in Sources */,
 				744ABA63205428AF00BBB26E /* IQToolbar.m in Sources */,
@@ -2826,6 +2924,7 @@
 				74C6E337207A0B730083E4A8 /* BankCardDetailViewController.m in Sources */,
 				744ABAAA205623D000BBB26E /* SelectCommodityCategoryViewController.m in Sources */,
 				74F8E8E120592074000A17A5 /* StandardEntity.m in Sources */,
+				743C5F6E20A592DE00E617AF /* CustomerShopView.m in Sources */,
 				74F8E912205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
 				744ABAAF205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				74ACFFCF20A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
@@ -2835,6 +2934,7 @@
 				74B4E8A5204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
 				1842CCEC209BFE9600A1C7C8 /* PurchaseOrderTableViewCell.m in Sources */,
 				7491FA77206E15CC0006F388 /* Province.m in Sources */,
+				743C5F6420A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
 				740C6893207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2883,6 +2983,7 @@
 				740C6894207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
 				741D3C9320808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74B4E897204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
+				743C5F4B20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */,
 				74F8E90E205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				744ABA76205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
 				7489CC99207F599100971BED /* KeyboardView.m in Sources */,
@@ -2901,6 +3002,8 @@
 				74ACFFC620A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74B4E89D204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8B205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
+				743C5F6520A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
+				743C5F6F20A592DE00E617AF /* CustomerShopView.m in Sources */,
 				74BD11DC2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				74ACFFC120A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				7491FA78206E15CC0006F388 /* Province.m in Sources */,
@@ -2930,7 +3033,9 @@
 				7491FA7B206E15CC0006F388 /* AddressPickerView.m in Sources */,
 				7491FA3C206BA5D50006F388 /* SelectBankViewController.m in Sources */,
 				74ACFFD020A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
+				743C5F5520A581CE00E617AF /* SearchCustomerViewController.m in Sources */,
 				74BD120F20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
+				743C5F6A20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				74B4E8AF204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				7491FA8C2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				74B4E8A3204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
@@ -2944,7 +3049,9 @@
 				74F8E904205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
 				7491FA912079B7A50006F388 /* BankCardEntity.m in Sources */,
 				744ABAB0205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
+				743C5F7420A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74BD125B2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				743C5F5A20A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */,
 				741D3C842080853A00C56FCA /* OrderDetailViewController.m in Sources */,
 				741D3C7A20805CC200C56FCA /* DateUtils.m in Sources */,
 				74F8E8F9205935A0000A17A5 /* ShopClassificationViewController.m in Sources */,
@@ -2958,6 +3065,7 @@
 				7491FA872079B5760006F388 /* SettlementHandler.m in Sources */,
 				74B4E8A6204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
 				7489CC9F207F599100971BED /* OttoTextView.m in Sources */,
+				743C5F5F20A588E200E617AF /* CustomerManagerEntity.m in Sources */,
 				7491FA75206E15CC0006F388 /* City.m in Sources */,
 				744ABAB6205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E378207C56640083E4A8 /* CashierHandler.m in Sources */,
@@ -3040,6 +3148,7 @@
 				740C6895207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
 				741D3C9420808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74B4E898204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
+				743C5F4C20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */,
 				74F8E90F205A5FA2000A17A5 /* CustomCommoditySpecificationsTableViewCell.m in Sources */,
 				744ABA77205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
 				7489CC9A207F599100971BED /* KeyboardView.m in Sources */,
@@ -3058,6 +3167,8 @@
 				74ACFFC720A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74B4E89E204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8C205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
+				743C5F6620A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
+				743C5F7020A592DE00E617AF /* CustomerShopView.m in Sources */,
 				74BD11DD2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				74ACFFC220A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				7491FA79206E15CC0006F388 /* Province.m in Sources */,
@@ -3087,7 +3198,9 @@
 				7491FA7C206E15CC0006F388 /* AddressPickerView.m in Sources */,
 				7491FA3D206BA5D50006F388 /* SelectBankViewController.m in Sources */,
 				74ACFFD120A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
+				743C5F5620A581CE00E617AF /* SearchCustomerViewController.m in Sources */,
 				74BD121020689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
+				743C5F6B20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				74B4E8B0204BD3EC006AFB6C /* NSString+Size.m in Sources */,
 				7491FA8D2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				74B4E8A4204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
@@ -3101,7 +3214,9 @@
 				74F8E905205A5F36000A17A5 /* CustomCommoditySpecificationsViewController.m in Sources */,
 				7491FA922079B7A50006F388 /* BankCardEntity.m in Sources */,
 				744ABAB1205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
+				743C5F7520A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74BD125C2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				743C5F5B20A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */,
 				741D3C852080853A00C56FCA /* OrderDetailViewController.m in Sources */,
 				741D3C7B20805CC200C56FCA /* DateUtils.m in Sources */,
 				74F8E8FA205935A0000A17A5 /* ShopClassificationViewController.m in Sources */,
@@ -3115,6 +3230,7 @@
 				7491FA882079B5760006F388 /* SettlementHandler.m in Sources */,
 				74B4E8A7204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
 				7489CCA0207F599100971BED /* OttoTextView.m in Sources */,
+				743C5F6020A588E200E617AF /* CustomerManagerEntity.m in Sources */,
 				7491FA76206E15CC0006F388 /* City.m in Sources */,
 				744ABAB7205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E379207C56640083E4A8 /* CashierHandler.m in Sources */,
@@ -3348,6 +3464,10 @@
 				INFOPLIST_FILE = GouKuSeller/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3369,6 +3489,10 @@
 				INFOPLIST_FILE = GouKuSeller/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3383,6 +3507,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GouKuSellerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.a.a.GouKuSellerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3397,6 +3525,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GouKuSellerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.a.a.GouKuSellerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3411,6 +3543,10 @@
 				DEVELOPMENT_TEAM = Y5VHW74MPL;
 				INFOPLIST_FILE = GouKuSellerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.a.a.GouKuSellerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3425,6 +3561,10 @@
 				DEVELOPMENT_TEAM = Y5VHW74MPL;
 				INFOPLIST_FILE = GouKuSellerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.a.a.GouKuSellerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

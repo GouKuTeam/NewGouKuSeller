@@ -14,7 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setBackgroundColor:[UIColor whiteColor]];
-        self.lab_name = [[UILabel alloc]initWithFrame:CGRectMake(10, 13, 60, 18)];
+        self.lab_name = [[UILabel alloc]initWithFrame:CGRectMake(15, 13, 60, 18)];
         [self addSubview:self.lab_name];
         [self.lab_name setText:@"商品名称"];
         [self.lab_name setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];

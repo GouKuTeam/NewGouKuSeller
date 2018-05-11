@@ -183,4 +183,12 @@
 //名字搜索供应商
 #define API_POST_SearchSupplier @"/supplier/search"
 
+/*
+ 客户管理API
+ */
+//获取客户管理列表
+#define API_POST_GetCustomerList @"/supplier/customer/list"
+//搜索客户
+#define API_POST_SearchCustomer @"/supplier/search/customer/"
+
 

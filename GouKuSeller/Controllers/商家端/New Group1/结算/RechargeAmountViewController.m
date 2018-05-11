@@ -124,14 +124,19 @@
 
 - (void)btn_chongzhiAction{
     [self.tf_price resignFirstResponder];
-    [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
-        
-    } success:^(id obj) {
-        NSDictionary *dic = (NSDictionary *)obj;
-        [self weiXinPayWithDic:dic];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-    }];
+    if ([WXApi isWXAppInstalled]) {
+        [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
+            
+        } success:^(id obj) {
+            NSDictionary *dic = (NSDictionary *)obj;
+            [self weiXinPayWithDic:dic];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }else{
+        [MBProgressHUD showInfoMessage:@"请安装微信"];
+    }
+    
 }
 
 - (void)weiXinPayWithDic:(NSDictionary *)wechatPayDic {

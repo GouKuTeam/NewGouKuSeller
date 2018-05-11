@@ -24,7 +24,6 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  NSLog(@"%@",[responseObject objectForKey:@"data"]);
                                                   AccountCashEntity *data = [AccountCashEntity parseStandardEntityWithJson:[responseObject objectForKey:@"data"]];
                                                   success(data);
                                               }else{
