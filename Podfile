@@ -11,5 +11,6 @@ target 'GouKuSeller' do
     pod 'AMap3DMap'
     pod 'AMapSearch'
     pod 'AMapLocation'
+    pod 'WechatOpenSDK'
 end
 inhibit_all_warnings!

@@ -16,6 +16,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "PurchaseTabBarViewController.h"
 #import "EditAddressViewController.h"
+#import "InventoryViewController.h"
 @interface WorkbenchViewController ()
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
 
@@ -97,7 +98,7 @@
 }
 
 - (void)pandianuAction{
-    EditAddressViewController *vc = [[EditAddressViewController alloc]init];
+    InventoryViewController *vc = [[InventoryViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

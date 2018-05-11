@@ -20,6 +20,7 @@ typedef void(^BtnSelectIndex)(int btnIndex);
 @property (nonatomic ,strong)UIButton            *btn_all;
 @property (nonatomic ,strong)UIButton            *btn_xiaoshou;
 @property (nonatomic ,strong)UIButton            *btn_tixian;
+@property (nonatomic ,strong)UIButton            *btn_chongzhi;
 
 @property (nonatomic ,strong)UIImageView         *img_heng;
 @property (nonatomic ,strong)NSMutableArray      *arr_btn;

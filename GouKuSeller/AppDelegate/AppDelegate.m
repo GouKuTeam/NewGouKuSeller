@@ -17,6 +17,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+#import <WXApi.h>
 
 
 @interface AppDelegate ()<JPUSHRegisterDelegate>
@@ -105,6 +106,7 @@
         }
     }];
     [AMapServices sharedServices].apiKey = @"2c81b2b54c03fbdabdbcde8c90d0617c";
+    [WXApi registerApp:@"wxf5cfccf099ab98d4"];
     return YES;
 }
 

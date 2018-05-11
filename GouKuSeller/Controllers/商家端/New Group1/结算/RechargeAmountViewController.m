@@ -7,8 +7,12 @@
 //
 
 #import "RechargeAmountViewController.h"
+#import "SettlementHandler.h"
+#import <WXApi.h>
+#import "WXApiManager.h"
 
-@interface RechargeAmountViewController ()<UITextFieldDelegate>
+
+@interface RechargeAmountViewController ()<UITextFieldDelegate,WXApiManagerDelegate>
 @property (nonatomic ,strong)UITextField      *tf_price;
 @property (nonatomic ,strong)UIButton         *btn_chongzhi;
 
@@ -21,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"充值";
+    [WXApiManager sharedManager].delegate = self;
 }
 
 - (void)onCreate{
@@ -119,7 +124,43 @@
 
 - (void)btn_chongzhiAction{
     [self.tf_price resignFirstResponder];
+    [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
+        
+    } success:^(id obj) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        [self weiXinPayWithDic:dic];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
 }
+
+- (void)weiXinPayWithDic:(NSDictionary *)wechatPayDic {
+    PayReq *req = [[PayReq alloc] init];
+    req.openID = [wechatPayDic objectForKey:@"appId"];
+    req.partnerId = [wechatPayDic objectForKey:@"partnerId"];
+    req.prepayId = [wechatPayDic objectForKey:@"prepayId"];
+    req.package = [wechatPayDic objectForKey:@"packages"];
+    req.nonceStr = [wechatPayDic objectForKey:@"nonceStr"];
+    req.timeStamp = [[wechatPayDic objectForKey:@"timesTamp"] intValue];
+    req.sign = [wechatPayDic objectForKey:@"sign"];
+    [WXApi sendReq:req];
+}
+
+- (void)managerDidRecvPaymentResponse:(PayResp *)response {
+    switch (response.errCode) {
+        case WXSuccess:
+//            [self checkWechatPayResult];
+            break;
+        case WXErrCodeUserCancel:
+            [MBProgressHUD showInfoMessage:@"中途取消"];
+            break;
+        default:{
+            [MBProgressHUD showInfoMessage:@"支付失败"];
+        }
+            break;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

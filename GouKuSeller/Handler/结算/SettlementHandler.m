@@ -184,4 +184,22 @@
                                           }];
 }
 
+//微信充值
++(void)weixinchongzhiWithPrice:(NSString *)price prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_WEIXINchongzhi];
+    NSDictionary *dic = @{
+                          @"sum":price
+                          };
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end

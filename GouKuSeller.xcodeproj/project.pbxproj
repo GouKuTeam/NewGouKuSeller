@@ -107,6 +107,11 @@
 		743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */; };
 		743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */; };
 		743C5F2820A42C7200E617AF /* SearchSupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2720A42C7200E617AF /* SearchSupplierViewController.m */; };
+		743C5F2C20A45DCA00E617AF /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2B20A45DCA00E617AF /* WXApiManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		743C5F3020A528F500E617AF /* InventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F2F20A528F500E617AF /* InventoryViewController.m */; };
+		743C5F3320A52C3800E617AF /* InventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3220A52C3800E617AF /* InventoryTableViewCell.m */; };
+		743C5F3620A52F3500E617AF /* AddInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3520A52F3500E617AF /* AddInventoryViewController.m */; };
+		743C5F3920A5337D00E617AF /* AddInventoryTabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -738,6 +743,16 @@
 		743C5F2420A4251E00E617AF /* SupplierSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierSettingViewController.m; sourceTree = "<group>"; };
 		743C5F2620A42C7200E617AF /* SearchSupplierViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSupplierViewController.h; sourceTree = "<group>"; };
 		743C5F2720A42C7200E617AF /* SearchSupplierViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSupplierViewController.m; sourceTree = "<group>"; };
+		743C5F2A20A45DCA00E617AF /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		743C5F2B20A45DCA00E617AF /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		743C5F2E20A528F500E617AF /* InventoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryViewController.h; sourceTree = "<group>"; };
+		743C5F2F20A528F500E617AF /* InventoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryViewController.m; sourceTree = "<group>"; };
+		743C5F3120A52C3800E617AF /* InventoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryTableViewCell.h; sourceTree = "<group>"; };
+		743C5F3220A52C3800E617AF /* InventoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryTableViewCell.m; sourceTree = "<group>"; };
+		743C5F3420A52F3400E617AF /* AddInventoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInventoryViewController.h; sourceTree = "<group>"; };
+		743C5F3520A52F3500E617AF /* AddInventoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryViewController.m; sourceTree = "<group>"; };
+		743C5F3720A5337D00E617AF /* AddInventoryTabHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInventoryTabHeaderView.h; sourceTree = "<group>"; };
+		743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryTabHeaderView.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1303,6 +1318,30 @@
 				741D3C6F20804D0900C56FCA /* OrderHandler.m */,
 			);
 			path = "订单";
+			sourceTree = "<group>";
+		};
+		743C5F2920A45DB300E617AF /* WXManager */ = {
+			isa = PBXGroup;
+			children = (
+				743C5F2A20A45DCA00E617AF /* WXApiManager.h */,
+				743C5F2B20A45DCA00E617AF /* WXApiManager.m */,
+			);
+			path = WXManager;
+			sourceTree = "<group>";
+		};
+		743C5F2D20A528BB00E617AF /* 盘点 */ = {
+			isa = PBXGroup;
+			children = (
+				743C5F2E20A528F500E617AF /* InventoryViewController.h */,
+				743C5F2F20A528F500E617AF /* InventoryViewController.m */,
+				743C5F3120A52C3800E617AF /* InventoryTableViewCell.h */,
+				743C5F3220A52C3800E617AF /* InventoryTableViewCell.m */,
+				743C5F3420A52F3400E617AF /* AddInventoryViewController.h */,
+				743C5F3520A52F3500E617AF /* AddInventoryViewController.m */,
+				743C5F3720A5337D00E617AF /* AddInventoryTabHeaderView.h */,
+				743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */,
+			);
+			path = "盘点";
 			sourceTree = "<group>";
 		};
 		744ABA1B2052990C00BBB26E /* 管理分类 */ = {
@@ -1992,6 +2031,7 @@
 				7491FA48206CC5330006F388 /* 收银 */,
 				74B4E8C420512D6E006AFB6C /* 商品 */,
 				74BD11F72068952B0053A3D1 /* 活动 */,
+				743C5F2D20A528BB00E617AF /* 盘点 */,
 				7491FA1F206B73FF0006F388 /* 结算 */,
 			);
 			name = "工作台";
@@ -2100,6 +2140,7 @@
 		74BD12272068D8990053A3D1 /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				743C5F2920A45DB300E617AF /* WXManager */,
 				74046B0E209C2E00004E64A9 /* GCPlaceholderTextView */,
 				7489CC84207F599100971BED /* OttoKeyboardView */,
 				74C6E358207B54C70083E4A8 /* SJFullscreenPopGesture */,
@@ -2509,7 +2550,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2623,6 +2665,7 @@
 				74BD11FA206895540053A3D1 /* SalesViewController.m in Sources */,
 				1891DAAC20A3EE71008E16F7 /* SupplierTableViewController.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,
+				743C5F2C20A45DCA00E617AF /* WXApiManager.m in Sources */,
 				744ABA9520556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				1842CCE8209BF89500A1C7C8 /* AddressHeaderView.m in Sources */,
 				744ABA60205428AF00BBB26E /* IQTextView.m in Sources */,
@@ -2679,12 +2722,15 @@
 				74B4E872204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				74F8E8F220592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74F8E93A2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
+				743C5F3920A5337D00E617AF /* AddInventoryTabHeaderView.m in Sources */,
 				74BD12342068D8B30053A3D1 /* LYLDatePicker.m in Sources */,
 				744ABAC92058C90100BBB26E /* ManagerCatagoryTableViewCell.m in Sources */,
+				743C5F3320A52C3800E617AF /* InventoryTableViewCell.m in Sources */,
 				744ABA6C205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABAA02055713200BBB26E /* EditInfoView.m in Sources */,
 				74B4E8A8204BD3EC006AFB6C /* KeyChainStore.m in Sources */,
 				74046B0A209C03EE004E64A9 /* EditAddressTableViewCell.m in Sources */,
+				743C5F3620A52F3500E617AF /* AddInventoryViewController.m in Sources */,
 				744ABA75205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
 				74B4E8C720512D7C006AFB6C /* CommodityViewController.m in Sources */,
 				7491FA31206B8DD20006F388 /* BankInformationView.m in Sources */,
@@ -2720,6 +2766,7 @@
 				74F8E908205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m in Sources */,
 				743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */,
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
+				743C5F3020A528F500E617AF /* InventoryViewController.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
 				744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */,
@@ -3343,6 +3390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5VHW74MPL;
 				INFOPLIST_FILE = GouKuSellerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.a.a.GouKuSellerUITests;
@@ -3356,6 +3404,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y5VHW74MPL;
 				INFOPLIST_FILE = GouKuSellerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.a.a.GouKuSellerUITests;

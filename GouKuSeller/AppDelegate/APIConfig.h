@@ -137,6 +137,8 @@
 #define API_POST_checkPassword @"/account/checkPassword"
 //提现详情
 #define API_POST_CashDetail @"/account/cash/detail"
+//微信充值
+#define API_POST_WEIXINchongzhi @"/account/recharge/weixin"
 
 /*
  收银API

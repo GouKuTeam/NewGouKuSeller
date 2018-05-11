@@ -23,4 +23,7 @@
 +(void)checkPassWordWithshopId:(NSNumber *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //提现详情
 +(void)cashDetailWithShopId:(NSNumber *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//微信充值
++(void)weixinchongzhiWithPrice:(NSString *)price prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end

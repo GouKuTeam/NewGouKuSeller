@@ -83,7 +83,6 @@
             [self.btn_all addTarget:self action:@selector(btn_allAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.arr_btn addObject:self.btn_all];
         }
-        
     }
     return self;
 }

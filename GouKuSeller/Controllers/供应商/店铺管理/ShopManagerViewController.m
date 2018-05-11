@@ -15,6 +15,7 @@
 #import "DispatchingViewController.h"
 #import "SettlementViewController.h"
 #import "SupplierSettingViewController.h"
+#import "InventoryViewController.h"
 
 @interface ShopManagerViewController ()
 
@@ -71,6 +72,7 @@
     [self.v_shopManager.btn_commodity addTarget:self action:@selector(btn_commodityAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_shopManager.btn_peisong addTarget:self action:@selector(btn_peisongAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_shopManager.btn_jiesuan addTarget:self action:@selector(btn_jiesuanAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_shopManager.btn_pandian addTarget:self action:@selector(btn_pandianAction) forControlEvents:UIControlEventTouchUpInside];
     [self loadData];
     
 }
@@ -114,6 +116,12 @@
 - (void)btnsetAction{
     [self.navigationController.navigationBar setHidden:NO];
     SupplierSettingViewController *vc = [[SupplierSettingViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btn_pandianAction{
+    InventoryViewController *vc = [[InventoryViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
