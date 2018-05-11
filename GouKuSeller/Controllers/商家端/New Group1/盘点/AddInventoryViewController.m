@@ -8,18 +8,30 @@
 
 #import "AddInventoryViewController.h"
 #import "AddInventoryTabHeaderView.h"
+#import "AddInventoryTableViewCell.h"
 
-@interface AddInventoryViewController ()<UITextFieldDelegate>
+@interface AddInventoryViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong)UITextField                    *tfsousuo;
 @property (nonatomic, strong)AddInventoryTabHeaderView      *header;
+@property (nonatomic ,strong)UITableView                    *tb_commodity;
+@property (nonatomic ,strong)NSMutableArray                 *arr_data;
 @end
 
 @implementation AddInventoryViewController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.arr_data = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"新建盘点单";
+    [self.arr_data addObject:@""];
+    [self.arr_data addObject:@""];
 }
 
 - (void)onCreate{
@@ -35,8 +47,42 @@
     self.tfsousuo.leftViewMode = UITextFieldViewModeAlways;
     [self.tfsousuo becomeFirstResponder];
     
-    self.header = [[AddInventoryTabHeaderView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 50, SCREEN_WIDTH, 43)];
+    self.header = [[AddInventoryTabHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 43)];
     [self.view addSubview:self.header];
+    
+    self.tb_commodity = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 50, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    [self.view addSubview:self.tb_commodity];
+    self.tb_commodity.delegate = self;
+    self.tb_commodity.dataSource = self;
+    self.tb_commodity.tableHeaderView = self.header;
+    self.tb_commodity.tableFooterView = [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 42;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arr_data.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"AddInventoryTableViewCell";
+    AddInventoryTableViewCell *cell = (AddInventoryTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell){
+        cell = [[AddInventoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    return cell;
+}
+
+- (CGFloat)labelHeight:(NSString *)labelStr UseWidth:(float)width andFont:(id)font
+{
+    float textMaxWidth = width;
+    NSDictionary * attribute = @{ NSFontAttributeName : font};
+    CGSize size = CGSizeMake(textMaxWidth, MAXFLOAT);
+    CGRect rect = [labelStr boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:attribute context:nil];
+    return  rect.size.height;
 }
 
 - (void)didReceiveMemoryWarning {

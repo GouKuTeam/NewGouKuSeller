@@ -114,6 +114,7 @@
 		743C5F3320A52C3800E617AF /* InventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3220A52C3800E617AF /* InventoryTableViewCell.m */; };
 		743C5F3620A52F3500E617AF /* AddInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3520A52F3500E617AF /* AddInventoryViewController.m */; };
 		743C5F3920A5337D00E617AF /* AddInventoryTabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */; };
+		743C5F3C20A53DDB00E617AF /* AddInventoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -759,6 +760,8 @@
 		743C5F3520A52F3500E617AF /* AddInventoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryViewController.m; sourceTree = "<group>"; };
 		743C5F3720A5337D00E617AF /* AddInventoryTabHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInventoryTabHeaderView.h; sourceTree = "<group>"; };
 		743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryTabHeaderView.m; sourceTree = "<group>"; };
+		743C5F3A20A53DDB00E617AF /* AddInventoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInventoryTableViewCell.h; sourceTree = "<group>"; };
+		743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryTableViewCell.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1346,6 +1349,8 @@
 				743C5F3520A52F3500E617AF /* AddInventoryViewController.m */,
 				743C5F3720A5337D00E617AF /* AddInventoryTabHeaderView.h */,
 				743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */,
+				743C5F3A20A53DDB00E617AF /* AddInventoryTableViewCell.h */,
+				743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */,
 			);
 			path = "盘点";
 			sourceTree = "<group>";
@@ -2690,6 +2695,7 @@
 				74F8E91C205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
 				74BD12502068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				744ABA7B205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
+				743C5F3C20A53DDB00E617AF /* AddInventoryTableViewCell.m in Sources */,
 				74ACFFE420A1E813005C5A16 /* ShoppingBottomView.m in Sources */,
 				740C688A207C98930044889F /* PayInCashViewController.m in Sources */,
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
