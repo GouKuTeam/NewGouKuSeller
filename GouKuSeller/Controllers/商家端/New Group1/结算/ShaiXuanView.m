@@ -19,9 +19,9 @@
         [self addSubview:self.v_back];
         [self.v_back mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
-            make.top.mas_equalTo(SCREEN_HEIGHT - 160);
+            make.top.mas_equalTo(SCREEN_HEIGHT - 160 - 68);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(160);
+            make.height.mas_equalTo(160 + 68);
         }];
         self.v_back.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
         
@@ -58,14 +58,14 @@
         [self.img_heng setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         
         self.arr_btn = [[NSMutableArray alloc]init];
-        NSArray *arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现", nil];
+        NSArray *arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值", nil];
         CGFloat btnWidth = (SCREEN_WIDTH - 60) / 3;
-        for (int i = 0; i < 3; i ++) {
+        for (int i = 0; i < arr_btnName.count; i ++) {
             self.btn_all = [[UIButton alloc]init];
             [self.v_back addSubview:self.btn_all];
             [self.btn_all mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(20 + (btnWidth + 10) * i);
-                make.top.mas_equalTo(self.img_heng.mas_bottom).offset(20);
+                make.left.mas_equalTo(20 + (btnWidth + 10) * (i%3));
+                make.top.mas_equalTo(self.img_heng.mas_bottom).offset(20 + i/3 * 57.8 + i/3 * 10);
                 make.width.mas_equalTo(btnWidth);
                 make.height.mas_equalTo(57.8);
             }];

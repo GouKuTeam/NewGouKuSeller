@@ -29,6 +29,8 @@
 		1891DAB420A3F172008E16F7 /* HYTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAAF20A3F170008E16F7 /* HYTopBar.m */; };
 		1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */; };
 		1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */; };
+		18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */; };
+		18B3F97420A440830000A30C /* TitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97320A440830000A30C /* TitleCollectionViewCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
@@ -659,6 +661,10 @@
 		1891DAB220A3F171008E16F7 /* HYTabbarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYTabbarCollectionCell.m; sourceTree = "<group>"; };
 		1891DAB620A4230A008E16F7 /* CategoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewCell.h; sourceTree = "<group>"; };
 		1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewCell.m; sourceTree = "<group>"; };
+		18B3F96F20A43F880000A30C /* SupplierCommodityHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierCommodityHeaderView.h; sourceTree = "<group>"; };
+		18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityHeaderView.m; sourceTree = "<group>"; };
+		18B3F97220A440830000A30C /* TitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleCollectionViewCell.h; sourceTree = "<group>"; };
+		18B3F97320A440830000A30C /* TitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleCollectionViewCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
@@ -1804,6 +1810,10 @@
 				74ACFFEA20A298EB005C5A16 /* SupplierHeaderView.m */,
 				1891DAB620A4230A008E16F7 /* CategoryTableViewCell.h */,
 				1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */,
+				18B3F96F20A43F880000A30C /* SupplierCommodityHeaderView.h */,
+				18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */,
+				18B3F97220A440830000A30C /* TitleCollectionViewCell.h */,
+				18B3F97320A440830000A30C /* TitleCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2599,6 +2609,7 @@
 				7491FA66206E05C60006F388 /* ShaiXuanView.m in Sources */,
 				741D3C73208053A800C56FCA /* OrderListEntity.m in Sources */,
 				74B4E893204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
+				18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */,
 				7491FA40206CAB130006F388 /* TiXianiewController.m in Sources */,
 				74F8E8D2205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
 				74046B06209C0335004E64A9 /* EditAddressViewController.m in Sources */,
@@ -2675,6 +2686,7 @@
 				74046B11209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */,
 				74B4E815204BD353006AFB6C /* main.m in Sources */,
 				7498366B208C3162007FEEF8 /* ActiveTimeEntity.m in Sources */,
+				18B3F97420A440830000A30C /* TitleCollectionViewCell.m in Sources */,
 				74F8E91C205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
 				74BD12502068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				744ABA7B205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
