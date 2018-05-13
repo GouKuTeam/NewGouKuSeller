@@ -23,10 +23,11 @@
 }
 
 - (void)onCreate{
-    self.customerShopView = [[CustomerShopView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.customerShopView = [[CustomerShopView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.customerShopView];
     [self.customerShopView.img_head sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entity.logo]] placeholderImage:[UIImage imageNamed:@"headPic"]];
-    [self.customerShopView.lab_shopName setText:[NSString stringWithFormat:@"联系人：%@",self.entity.shopName]];
+    [self.customerShopView.lab_shopName setText:self.entity.shopName];
+    [self.customerShopView.lab_shopPerson setText:[NSString stringWithFormat:@"联系人：%@",self.entity.personName]];
     [self.customerShopView.btn_address setTitle:self.entity.address forState:UIControlStateNormal];
     [self.customerShopView.lab_price setText:[NSString stringWithFormat:@"%.2f",[self.entity.moneySum doubleValue]]];
     [self.customerShopView.lab_order setText:[NSString stringWithFormat:@"%@",self.entity.orderNum]];

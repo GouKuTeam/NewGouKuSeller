@@ -19,6 +19,7 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        [self setBackgroundColor:[UIColor whiteColor]];
         self.img_touxiang = [[UIImageView alloc]init];
         [self.contentView addSubview:self.img_touxiang];
         self.img_touxiang.layer.cornerRadius = 2.0f;

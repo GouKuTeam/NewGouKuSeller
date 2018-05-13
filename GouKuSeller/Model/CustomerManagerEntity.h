@@ -18,6 +18,8 @@
 @property (nonatomic ,strong)NSString       *logo;
 @property (nonatomic ,strong)NSNumber       *moneySum;         //销售总额
 @property (nonatomic ,strong)NSNumber       *orderNum;         //订单数量
+@property (nonatomic ,assign)double          lat;               //纬度
+@property (nonatomic ,assign)double          lon;               //经度
 
 + (NSArray *)parseCustomerManagerListWithJson:(id)json;
 + (CustomerManagerEntity *)parseCustomerManagerEntityWithJson:(id)json;

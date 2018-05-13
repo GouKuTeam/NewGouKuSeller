@@ -75,6 +75,7 @@
         self.btn_address = [[UIButton alloc]init];
         [v_back1 addSubview:self.btn_address];
         self.btn_address.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.btn_address.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.btn_address setTitleColor:[UIColor colorWithHexString:@"#616161"] forState:UIControlStateNormal];
         [self.btn_address mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(31);
