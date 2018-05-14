@@ -17,6 +17,7 @@
         [self.lb_title setFont:[UIFont systemFontOfSize:13]];
         [self.lb_title setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:self.lb_title];
+        
     }
     return self;
 }
