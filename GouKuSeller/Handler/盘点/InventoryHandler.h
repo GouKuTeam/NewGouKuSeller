@@ -13,5 +13,12 @@
 + (void)selectInventoryWareInventoryInformationWithBarcode:(NSString *)barcode prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //查询盘点记录列表
 + (void)inventroyListWithPage:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
-
+//盘点记录新增
++ (void)addInventoryWithTitle:(NSString *)title status:(NSNumber *)status wares:(NSArray *)wares prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//删除一条盘点记录
++ (void)deleteInventroyWithInventroyId:(NSNumber *)inventoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//查询一条盘点记录
++ (void)selectInventroyDetailWithInventroyId:(NSNumber *)inventoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//盘点记录修改
++ (void)updateInventoryWithInventoryId:(NSNumber *)inventoryId Title:(NSString *)title status:(NSNumber *)status wares:(NSArray *)wares prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 @end

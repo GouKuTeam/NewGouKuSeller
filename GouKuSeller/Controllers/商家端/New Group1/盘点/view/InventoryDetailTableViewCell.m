@@ -1,14 +1,14 @@
 //
-//  AddInventoryTableViewCell.m
+//  InventoryDetailTableViewCell.m
 //  GouKuSeller
 //
-//  Created by 窦建斌 on 2018/5/11.
+//  Created by 窦建斌 on 2018/5/14.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "AddInventoryTableViewCell.h"
+#import "InventoryDetailTableViewCell.h"
 
-@implementation AddInventoryTableViewCell
+@implementation InventoryDetailTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -25,12 +25,12 @@
         [self.lab_name setFont:[UIFont systemFontOfSize:14]];
         self.lab_name.numberOfLines = 0;
         [self.lab_name mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
+            make.left.mas_equalTo(15);
             make.top.mas_equalTo(11.7);
             make.right.equalTo(self.mas_right).offset(-130);
         }];
         
-
+        
         self.lab_stock = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_stock];
         [self.lab_stock setTextColor:[UIColor colorWithHexString:@"#000000"]];
@@ -53,20 +53,20 @@
             make.width.mas_equalTo(50);
         }];
         
-        self.img_line = [[UIImageView alloc]init];
-        [self.contentView addSubview:self.img_line];
-        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
-        [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.top.equalTo(self.lab_name.mas_bottom).offset(11.2);
-            make.width.mas_equalTo(SCREEN_WIDTH - 10);
-            make.height.mas_equalTo(0.5);
+        self.lab_chaNum = [[UILabel alloc]init];
+        [self.contentView addSubview:self.lab_chaNum];
+        [self.lab_chaNum setFont:[UIFont systemFontOfSize:12]];
+        [self.lab_chaNum setTextAlignment:NSTextAlignmentRight];
+        [self.lab_chaNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_name.mas_bottom);
+            make.left.mas_equalTo(SCREEN_WIDTH - 60);
+            make.width.mas_equalTo(50);
         }];
         
         [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(0);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.bottom.equalTo(self.lab_name.mas_bottom).offset(11.7);
+            make.bottom.equalTo(self.lab_chaNum.mas_bottom).offset(9.3);
         }];
         
     }
@@ -77,7 +77,17 @@
     [self.lab_name setText:entity.name];
     [self.lab_stock setText:[NSString stringWithFormat:@"%d",entity.stock]];
     [self.lab_inventoryNum setText:[NSString stringWithFormat:@"%d",entity.inventoryNum]];
-    
+    if (entity.stock > entity.inventoryNum) {
+        [self.lab_chaNum setText:[NSString stringWithFormat:@"亏%d",entity.stock - entity.inventoryNum]];
+        [self.lab_chaNum setTextColor:[UIColor colorWithHexString:@"#D0021B"]];
+    }
+    if (entity.stock < entity.inventoryNum) {
+        [self.lab_chaNum setText:[NSString stringWithFormat:@"盈%d",entity.inventoryNum - entity.stock]];
+        [self.lab_chaNum setTextColor:[UIColor colorWithHexString:@"#329702"]];
+    }
+    if (entity.stock == entity.inventoryNum) {
+        [self.lab_chaNum setText:@""];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

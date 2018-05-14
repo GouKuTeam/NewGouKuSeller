@@ -1,30 +1,34 @@
 //
-//  AddInventoryViewController.m
+//  EditInventoryViewController.m
 //  GouKuSeller
 //
-//  Created by 窦建斌 on 2018/5/11.
+//  Created by 窦建斌 on 2018/5/14.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "AddInventoryViewController.h"
+#import "EditInventoryViewController.h"
 #import "AddInventoryTabHeaderView.h"
 #import "AddInventoryTableViewCell.h"
 #import "InventoryHandler.h"
 #import "InventoryEntity.h"
 #import "AddInventoryFooterView.h"
 #import "ChangeInventoryNumAlertView.h"
+#import "InventoryListEntity.h"
 
-@interface AddInventoryViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface EditInventoryViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong)UITextField                    *tfsousuo;
 @property (nonatomic, strong)AddInventoryTabHeaderView      *header;
 @property (nonatomic, strong)AddInventoryFooterView         *bottom;
 @property (nonatomic ,strong)UITableView                    *tb_commodity;
 @property (nonatomic ,strong)NSMutableArray                 *arr_data;
-@property (nonatomic ,strong)ChangeInventoryNumAlertView *alert;
+@property (nonatomic ,strong)ChangeInventoryNumAlertView    *alert;
+@property (nonatomic ,strong)InventoryListEntity            *entity;
+
 @end
 
-@implementation AddInventoryViewController
+@implementation EditInventoryViewController
+
 - (instancetype)init
 {
     self = [super init];
@@ -32,10 +36,6 @@
         self.arr_data = [[NSMutableArray alloc]init];
     }
     return self;
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"新建盘点单";
 }
 
 - (void)onCreate{
@@ -57,14 +57,28 @@
     [self.view addSubview:self.tb_commodity];
     self.tb_commodity.delegate = self;
     self.tb_commodity.dataSource = self;
+    self.tb_commodity.tableHeaderView = self.header;
     self.tb_commodity.tableFooterView = [UIView new];
     [self.tb_commodity setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    //    self.tb_commodity.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.bottom = [[AddInventoryFooterView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 46, SCREEN_WIDTH, 46)];
     [self.view addSubview:self.bottom];
     [self.bottom.btn_caogao addTarget:self action:@selector(caogaoAction) forControlEvents:UIControlEventTouchUpInside];
     [self.bottom.btn_tijiao addTarget:self action:@selector(tijiaoAction) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self loadData];
+}
+
+- (void)loadData{
+    [InventoryHandler selectInventroyDetailWithInventroyId:self.inventoryId prepare:^{
+        
+    } success:^(id obj) {
+        self.entity = (InventoryListEntity *)obj;
+        [self.arr_data addObjectsFromArray:self.entity.wares];
+        [self.tb_commodity reloadData];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -101,7 +115,7 @@
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
         }
-
+        
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:(NSString *)json];
         self.tfsousuo.text = @"";
@@ -170,11 +184,17 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:entity.name forKey:@"name"];
         [dic setObject:entity.skuId forKey:@"skuId"];
+        if (entity._id > 0) {
+            [dic setObject:[NSNumber numberWithLong:entity._id] forKey:@"id"];
+        }
+        if (entity.inventoryNum > 0) {
+            [dic setObject:[NSNumber numberWithInt:entity.inventoryNum] forKey:@"inventoryNum"];
+        }
         [dic setObject:[NSNumber numberWithInt:entity.inventoryNum] forKey:@"inventoryNum"];
         [arrItem addObject:dic];
     }
     if (arrItem.count > 0) {
-        [InventoryHandler addInventoryWithTitle:nil status:[NSNumber numberWithInt:0] wares:arrItem prepare:^{
+        [InventoryHandler updateInventoryWithInventoryId:[NSNumber numberWithLong:self.entity._id] Title:nil status:[NSNumber numberWithInt:0] wares:arrItem prepare:^{
             
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -207,7 +227,6 @@
     }else{
         [MBProgressHUD showInfoMessage:@"请先添加需要盘点的商品"];
     }
-    
 }
 
 - (void)tijiaoAction{
@@ -217,6 +236,9 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:entity.name forKey:@"name"];
         [dic setObject:entity.skuId forKey:@"skuId"];
+        if (entity._id > 0) {
+            [dic setObject:[NSNumber numberWithLong:entity._id] forKey:@"id"];
+        }
         if (entity.inventoryNum > 0) {
             [dic setObject:[NSNumber numberWithInt:entity.inventoryNum] forKey:@"inventoryNum"];
         }else{
@@ -227,7 +249,7 @@
         [arrItem addObject:dic];
     }
     if (arrItem.count > 0) {
-        [InventoryHandler addInventoryWithTitle:nil status:[NSNumber numberWithInt:1] wares:arrItem prepare:^{
+        [InventoryHandler updateInventoryWithInventoryId:[NSNumber numberWithLong:self.entity._id] Title:nil status:[NSNumber numberWithInt:1] wares:arrItem prepare:^{
             
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -255,7 +277,7 @@
                 [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
             }
         } failed:^(NSInteger statusCode, id json) {
-            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+           [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
     }else{
         [MBProgressHUD showInfoMessage:@"请先添加需要盘点的商品"];
@@ -272,9 +294,14 @@
 
 - (void)addInventoryFinishAction{
     [self.navigationController popViewControllerAnimated:YES];
-    if (self.addInventoryFinish) {
-        self.addInventoryFinish();
+    if (self.updateInventoryFinish) {
+        self.updateInventoryFinish();
     }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"编辑盘点单";
 }
 
 - (void)didReceiveMemoryWarning {

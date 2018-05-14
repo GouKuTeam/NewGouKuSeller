@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
-
+typedef void(^addInventoryFinish)(void);
 @interface AddInventoryViewController : BaseViewController
+
+@property (nonatomic, copy) addInventoryFinish  addInventoryFinish;
+
 
 @end

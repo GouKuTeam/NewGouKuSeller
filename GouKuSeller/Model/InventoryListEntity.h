@@ -10,11 +10,15 @@
 
 @interface InventoryListEntity : BaseEntity
 
+@property (nonatomic ,assign)double         createTime;
 @property (nonatomic ,assign)double         createAt;
 @property (nonatomic ,assign)double         updateAt;
 @property (nonatomic ,strong)NSString      *title;
 @property (nonatomic ,assign)double         submitTime;
 @property (nonatomic ,strong)NSNumber      *shopId;
+@property (nonatomic ,strong)NSArray       *errArray;
+@property (nonatomic ,strong)NSArray       *wares;
+
 
 + (NSArray *)parseInventoryListListWithJson:(id)json;
 + (InventoryListEntity *)parseInventoryListEntityWithJson:(id)json;

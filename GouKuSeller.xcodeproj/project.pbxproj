@@ -150,6 +150,13 @@
 		743C5F7E20A933B900E617AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F7D20A933B800E617AF /* AudioToolbox.framework */; };
 		743C5F8020A933CC00E617AF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743C5F7F20A933CC00E617AF /* AVFoundation.framework */; };
 		743C5F8620A954CD00E617AF /* InventoryListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F8520A954CD00E617AF /* InventoryListEntity.m */; };
+		743C5F8A20A969E200E617AF /* AddInventoryFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F8920A969E200E617AF /* AddInventoryFooterView.m */; };
+		743C5F8D20A9739400E617AF /* ChangeInventoryNumAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F8C20A9739400E617AF /* ChangeInventoryNumAlertView.m */; };
+		743C5F9020A98F5500E617AF /* InventoryDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F8F20A98F5500E617AF /* InventoryDetailHeaderView.m */; };
+		743C5F9320A98F6D00E617AF /* InventoryDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9220A98F6D00E617AF /* InventoryDetailFooterView.m */; };
+		743C5F9620A990AE00E617AF /* EditInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9520A990AE00E617AF /* EditInventoryViewController.m */; };
+		743C5F9920A99C0100E617AF /* InventoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9820A99C0100E617AF /* InventoryDetailViewController.m */; };
+		743C5F9C20A9A4C500E617AF /* InventoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -825,6 +832,20 @@
 		743C5F7F20A933CC00E617AF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		743C5F8420A954CD00E617AF /* InventoryListEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryListEntity.h; sourceTree = "<group>"; };
 		743C5F8520A954CD00E617AF /* InventoryListEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryListEntity.m; sourceTree = "<group>"; };
+		743C5F8820A969E200E617AF /* AddInventoryFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInventoryFooterView.h; sourceTree = "<group>"; };
+		743C5F8920A969E200E617AF /* AddInventoryFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInventoryFooterView.m; sourceTree = "<group>"; };
+		743C5F8B20A9739400E617AF /* ChangeInventoryNumAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeInventoryNumAlertView.h; sourceTree = "<group>"; };
+		743C5F8C20A9739400E617AF /* ChangeInventoryNumAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeInventoryNumAlertView.m; sourceTree = "<group>"; };
+		743C5F8E20A98F5500E617AF /* InventoryDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryDetailHeaderView.h; sourceTree = "<group>"; };
+		743C5F8F20A98F5500E617AF /* InventoryDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailHeaderView.m; sourceTree = "<group>"; };
+		743C5F9120A98F6D00E617AF /* InventoryDetailFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryDetailFooterView.h; sourceTree = "<group>"; };
+		743C5F9220A98F6D00E617AF /* InventoryDetailFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailFooterView.m; sourceTree = "<group>"; };
+		743C5F9420A990AE00E617AF /* EditInventoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInventoryViewController.h; sourceTree = "<group>"; };
+		743C5F9520A990AE00E617AF /* EditInventoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInventoryViewController.m; sourceTree = "<group>"; };
+		743C5F9720A99C0100E617AF /* InventoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryDetailViewController.h; sourceTree = "<group>"; };
+		743C5F9820A99C0100E617AF /* InventoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailViewController.m; sourceTree = "<group>"; };
+		743C5F9A20A9A4C500E617AF /* InventoryDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryDetailTableViewCell.h; sourceTree = "<group>"; };
+		743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailTableViewCell.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1418,14 +1439,13 @@
 			children = (
 				743C5F2E20A528F500E617AF /* InventoryViewController.h */,
 				743C5F2F20A528F500E617AF /* InventoryViewController.m */,
-				743C5F3120A52C3800E617AF /* InventoryTableViewCell.h */,
-				743C5F3220A52C3800E617AF /* InventoryTableViewCell.m */,
 				743C5F3420A52F3400E617AF /* AddInventoryViewController.h */,
 				743C5F3520A52F3500E617AF /* AddInventoryViewController.m */,
-				743C5F3720A5337D00E617AF /* AddInventoryTabHeaderView.h */,
-				743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */,
-				743C5F3A20A53DDB00E617AF /* AddInventoryTableViewCell.h */,
-				743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */,
+				743C5F9420A990AE00E617AF /* EditInventoryViewController.h */,
+				743C5F9520A990AE00E617AF /* EditInventoryViewController.m */,
+				743C5F9720A99C0100E617AF /* InventoryDetailViewController.h */,
+				743C5F9820A99C0100E617AF /* InventoryDetailViewController.m */,
+				743C5F8720A969B500E617AF /* view */,
 			);
 			path = "盘点";
 			sourceTree = "<group>";
@@ -1457,6 +1477,27 @@
 				743C5F7820A92CF300E617AF /* InventoryHandler.m */,
 			);
 			path = "盘点";
+			sourceTree = "<group>";
+		};
+		743C5F8720A969B500E617AF /* view */ = {
+			isa = PBXGroup;
+			children = (
+				743C5F3120A52C3800E617AF /* InventoryTableViewCell.h */,
+				743C5F3220A52C3800E617AF /* InventoryTableViewCell.m */,
+				743C5F3A20A53DDB00E617AF /* AddInventoryTableViewCell.h */,
+				743C5F3B20A53DDB00E617AF /* AddInventoryTableViewCell.m */,
+				743C5F3720A5337D00E617AF /* AddInventoryTabHeaderView.h */,
+				743C5F3820A5337D00E617AF /* AddInventoryTabHeaderView.m */,
+				743C5F8820A969E200E617AF /* AddInventoryFooterView.h */,
+				743C5F8920A969E200E617AF /* AddInventoryFooterView.m */,
+				743C5F8E20A98F5500E617AF /* InventoryDetailHeaderView.h */,
+				743C5F8F20A98F5500E617AF /* InventoryDetailHeaderView.m */,
+				743C5F9120A98F6D00E617AF /* InventoryDetailFooterView.h */,
+				743C5F9220A98F6D00E617AF /* InventoryDetailFooterView.m */,
+				743C5F9A20A9A4C500E617AF /* InventoryDetailTableViewCell.h */,
+				743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		744ABA1B2052990C00BBB26E /* 管理分类 */ = {
@@ -2318,6 +2359,8 @@
 				74C6E353207B3D4F0083E4A8 /* PasswordAlertView.m */,
 				740C6891207CF16A0044889F /* ChangeCommodirtyCountAlertView.h */,
 				740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */,
+				743C5F8B20A9739400E617AF /* ChangeInventoryNumAlertView.h */,
+				743C5F8C20A9739400E617AF /* ChangeInventoryNumAlertView.m */,
 				741D3C9A2081D0D000C56FCA /* CommonAlertView.h */,
 				741D3C9B2081D0D000C56FCA /* CommonAlertView.m */,
 			);
@@ -2731,6 +2774,7 @@
 				74BD121F2068C0AB0053A3D1 /* ActiveInformation.m in Sources */,
 				74ACFFE720A293A3005C5A16 /* SupplierShopViewController.m in Sources */,
 				74F8E9272060DA60000A17A5 /* SearchCommodityViewController.m in Sources */,
+				743C5F9020A98F5500E617AF /* InventoryDetailHeaderView.m in Sources */,
 				7491FA57206CCDBA0006F388 /* CashierBottomView.m in Sources */,
 				74ACFFEB20A298EB005C5A16 /* SupplierHeaderView.m in Sources */,
 				7491FA66206E05C60006F388 /* ShaiXuanView.m in Sources */,
@@ -2738,6 +2782,7 @@
 				74B4E893204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */,
 				7491FA40206CAB130006F388 /* TiXianiewController.m in Sources */,
+				743C5F9920A99C0100E617AF /* InventoryDetailViewController.m in Sources */,
 				74F8E8D2205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
 				74046B06209C0335004E64A9 /* EditAddressViewController.m in Sources */,
 				74C6E33A207A1FA40083E4A8 /* TiXianPassWordView.m in Sources */,
@@ -2781,6 +2826,7 @@
 				743C5F7920A92CF300E617AF /* InventoryHandler.m in Sources */,
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */,
+				743C5F9320A98F6D00E617AF /* InventoryDetailFooterView.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */,
 				74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */,
@@ -2796,6 +2842,7 @@
 				7491FA5C206DD8030006F388 /* YueDetailViewController.m in Sources */,
 				7489CCB3207F6B4A00971BED /* AddPriceViewController.m in Sources */,
 				74983675208C33CF007FEEF8 /* ActiveDetailViewController.m in Sources */,
+				743C5F8D20A9739400E617AF /* ChangeInventoryNumAlertView.m in Sources */,
 				7491FA61206DD9380006F388 /* YuEDetailTableViewCell.m in Sources */,
 				1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */,
 				744ABA1A205295F000BBB26E /* AddSecondClassificationViewController.m in Sources */,
@@ -2892,7 +2939,9 @@
 				74F8E917205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E8C220512CD8006AFB6C /* UserDefaultsUtils.m in Sources */,
 				744ABAB5205652D300BBB26E /* LoginViewController.m in Sources */,
+				743C5F8A20A969E200E617AF /* AddInventoryFooterView.m in Sources */,
 				7410F71D20A4092E00F9A724 /* DispatchingViewController.m in Sources */,
+				743C5F9C20A9A4C500E617AF /* InventoryDetailTableViewCell.m in Sources */,
 				74ACFFC020A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				74BD120E20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				74B4E8AE204BD3EC006AFB6C /* NSString+Size.m in Sources */,
@@ -2946,6 +2995,7 @@
 				7491FA9F2079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
 				743C5F7C20A92E2700E617AF /* InventoryEntity.m in Sources */,
 				743C5F4A20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */,
+				743C5F9620A990AE00E617AF /* EditInventoryViewController.m in Sources */,
 				74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */,
 				1891DAA520A3E8EA008E16F7 /* CategoryEntity.m in Sources */,
 				744ABA63205428AF00BBB26E /* IQToolbar.m in Sources */,

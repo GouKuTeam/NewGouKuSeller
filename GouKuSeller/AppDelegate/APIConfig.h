@@ -201,4 +201,12 @@
 #define API_GET_InventroyList @"/inventory/list/"
 //通过条形码查询商品库存
 #define API_POST_SelectInventoryInformation @"/inventory/ware/"
+//盘点记录新增
+#define API_POST_AddInventory @"/inventory/addOrUpdate"
+//删除一条盘点记录
+#define API_GET_DeleteInventory @"/inventory/delete/"
+//查询一条盘点记录
+#define API_GET_SelectInventoryDetail @"/inventory/detail/"
+//盘点记录修改
+#define API_POST_InventoryUpdate @"/inventory/addOrUpdate"
 

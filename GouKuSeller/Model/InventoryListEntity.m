@@ -7,8 +7,16 @@
 //
 
 #import "InventoryListEntity.h"
+#import "InventoryEntity.h"
 
 @implementation InventoryListEntity
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"wares" : [InventoryEntity class],
+             };
+}
 
 + (NSArray *)parseInventoryListListWithJson:(id)json
 {
