@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181B136220A9357F0079E536 /* SelectUnitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181B136120A9357F0079E536 /* SelectUnitView.m */; };
 		1842CCB9209AA21000A1C7C8 /* PurchaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCB8209AA21000A1C7C8 /* PurchaseTabBarViewController.m */; };
 		1842CCC8209AACF700A1C7C8 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCC7209AACF700A1C7C8 /* ShoppingCartViewController.m */; };
 		1842CCCE209AAD5100A1C7C8 /* SupplierListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCCD209AAD5100A1C7C8 /* SupplierListViewController.m */; };
@@ -647,6 +648,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		181B136020A9357F0079E536 /* SelectUnitView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectUnitView.h; sourceTree = "<group>"; };
+		181B136120A9357F0079E536 /* SelectUnitView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectUnitView.m; sourceTree = "<group>"; };
 		1842CCB7209AA20F00A1C7C8 /* PurchaseTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseTabBarViewController.h; sourceTree = "<group>"; };
 		1842CCB8209AA21000A1C7C8 /* PurchaseTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseTabBarViewController.m; sourceTree = "<group>"; };
 		1842CCC6209AACF700A1C7C8 /* ShoppingCartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartViewController.h; sourceTree = "<group>"; };
@@ -1905,6 +1908,8 @@
 				18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */,
 				18B3F97220A440830000A30C /* TitleCollectionViewCell.h */,
 				18B3F97320A440830000A30C /* TitleCollectionViewCell.m */,
+				181B136020A9357F0079E536 /* SelectUnitView.h */,
+				181B136120A9357F0079E536 /* SelectUnitView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2766,6 +2771,7 @@
 				743C5F2820A42C7200E617AF /* SearchSupplierViewController.m in Sources */,
 				74BD11FA206895540053A3D1 /* SalesViewController.m in Sources */,
 				1891DAAC20A3EE71008E16F7 /* SupplierTableViewController.m in Sources */,
+				181B136220A9357F0079E536 /* SelectUnitView.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,
 				743C5F2C20A45DCA00E617AF /* WXApiManager.m in Sources */,
 				744ABA9520556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
