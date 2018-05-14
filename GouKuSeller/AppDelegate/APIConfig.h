@@ -194,3 +194,11 @@
 #define API_POST_SearchCustomer @"/supplier/search/customer/"
 
 
+/*
+ 盘点API
+ */
+//查询盘点列表
+#define API_GET_InventroyList @"/inventory/list/"
+//通过条形码查询商品库存
+#define API_POST_SelectInventoryInformation @"/inventory/ware/"
+

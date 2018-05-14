@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InventoryEntity.h"
 
 @interface AddInventoryTableViewCell : UITableViewCell
 
@@ -14,5 +15,7 @@
 @property (nonatomic ,strong)UILabel        *lab_stock;
 @property (nonatomic ,strong)UILabel        *lab_inventoryNum;
 @property (nonatomic ,strong)UIImageView    *img_line;
+
+- (void)contentCellWithInventoryEntity:(InventoryEntity *)entity;
 
 @end
