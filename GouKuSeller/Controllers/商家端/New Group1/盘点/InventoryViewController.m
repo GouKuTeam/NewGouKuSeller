@@ -9,8 +9,10 @@
 #import "InventoryViewController.h"
 #import "AddInventoryViewController.h"
 #import "InventoryTableViewCell.h"
+#import "InventoryListEntity.h"
+#import "InventoryHandler.h"
 
-@interface InventoryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface InventoryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
 @property (nonatomic ,strong)BaseTableView          *tb_inventory;
 @property (nonatomic ,strong)NSMutableArray         *arr_inventory;
@@ -40,9 +42,31 @@
     [self.view addSubview:self.tb_inventory];
     self.tb_inventory.delegate = self;
     self.tb_inventory.dataSource = self;
+    self.tb_inventory.tableViewDelegate = self;
     self.tb_inventory.tableFooterView = [UIView new];
     self.tb_inventory.rowHeight = 78;
     self.tb_inventory.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    [InventoryHandler inventroyListWithPage:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
+        if (pageNum == 0) {
+            [self.arr_inventory removeAllObjects];
+        }
+        [self.arr_inventory addObjectsFromArray:(NSArray *)obj];
+        [self.tb_inventory reloadData];
+        complete([(NSArray *)obj count]);
+        if (self.arr_inventory.count == 0) {
+            self.tb_inventory.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_inventory.frame withDefaultImage:nil withNoteTitle:@"暂无数据" withNoteDetail:nil withButtonAction:nil];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

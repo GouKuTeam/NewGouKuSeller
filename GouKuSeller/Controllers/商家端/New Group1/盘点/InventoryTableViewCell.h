@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InventoryListEntity.h"
 
 @interface InventoryTableViewCell : UITableViewCell
 
@@ -15,5 +16,7 @@
 @property (nonatomic ,strong)UIImageView          *img_status;
 @property (nonatomic ,strong)UILabel              *lab_status;
 @property (nonatomic ,strong)UIButton             *btn_delete;
+
+- (void)contentCellWithInventroyListEntity:(InventoryListEntity *)entity;
 
 @end

@@ -9,6 +9,8 @@
 #import "AddInventoryViewController.h"
 #import "AddInventoryTabHeaderView.h"
 #import "AddInventoryTableViewCell.h"
+#import "InventoryHandler.h"
+#import "InventoryEntity.h"
 
 @interface AddInventoryViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -48,7 +50,6 @@
     [self.tfsousuo becomeFirstResponder];
     
     self.header = [[AddInventoryTabHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 43)];
-    [self.view addSubview:self.header];
     
     self.tb_commodity = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 50, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_commodity];
@@ -60,13 +61,39 @@
     self.tb_commodity.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [InventoryHandler selectInventoryWareInventoryInformationWithBarcode:textField.text prepare:^{
+        
+    } success:^(id obj) {
+        if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
+            InventoryEntity *entity = [InventoryEntity parseInventoryEntityWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
+            for (int i = 0; i < self.arr_data.count; i++) {
+                InventoryEntity *caseEntity = [self.arr_data objectAtIndex:i];
+                if ([caseEntity.skuId longValue] == [entity.skuId longValue]) {
+                    [self.arr_data replaceObjectAtIndex:i withObject:entity];
+                }else{
+                    [self.arr_data addObject:entity];
+                }
+            }
+            self.tfsousuo.text = @"";
+            [self.tb_commodity reloadData];
+            [self.tfsousuo becomeFirstResponder];
+        }else{
+            self.tfsousuo.text = @"";
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+        self.tfsousuo.text = @"";
+    }];
+    
+    return YES;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 10;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 42;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.arr_data.count;
@@ -81,7 +108,8 @@
     if (indexPath.row == self.arr_data.count - 1) {
         [cell.img_line setHidden:YES];
     }
-    
+    InventoryEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
+    [cell contentCellWithInventoryEntity:entity];
     
     return cell;
 }

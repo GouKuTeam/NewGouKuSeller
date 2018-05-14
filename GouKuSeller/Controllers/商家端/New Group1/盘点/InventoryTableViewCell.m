@@ -7,6 +7,7 @@
 //
 
 #import "InventoryTableViewCell.h"
+#import "DateUtils.h"
 
 @implementation InventoryTableViewCell
 
@@ -41,6 +42,10 @@
         
     }
     return self;
+}
+
+- (void)contentCellWithInventroyListEntity:(InventoryListEntity *)entity{
+//    [self.lab_time setText:[DateUtils stringFromTimeInterval:entity.createAt formatter:@"yyyy-MM-dd HH:mm:ss"]];
 }
 
 
