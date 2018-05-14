@@ -69,6 +69,7 @@
     [self.v_commodityView.btn_priceEdit addTarget:self action:@selector(tgr_editPriceAction) forControlEvents:UIControlEventTouchUpInside];
     
     if ([self.comeFrom isEqualToString:@"新建商品"]) {
+        self.scEntity = [[SupplierCommodityEndity alloc]init];
         [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
         [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
         [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entityInformation.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
@@ -77,7 +78,7 @@
         }else{
             [self.v_commodityView.v_commodityDescribe.tf_detail setText:@"-"];
         }
-        
+
         [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
         self.Cprice = [self.entityInformation.price doubleValue];
         self.Xprice = [self.entityInformation.xprice doubleValue];
@@ -85,16 +86,6 @@
     }else{
         [self loadSupplierCommodityData];
     }
-    
-//    if ([self.comeFrom isEqualToString:@"编辑商品"]) {
-//        self.shopCId = self.entityInformation.shopWareCategoryId;
-//        [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
-//        [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
-//        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.xprice doubleValue]]];
-//        //供应商商品价格显示价格规格    待完成
-//    }
-    
-    
 }
 
 - (void)loadSupplierCommodityData{
@@ -152,7 +143,7 @@
 
 //商品编辑价格点击方法
 - (void)tgr_editPriceAction{
-    self.scEntity = [[SupplierCommodityEndity alloc]init];
+//    self.scEntity = [[SupplierCommodityEndity alloc]init];
     EditPriceViewController *vc = [[EditPriceViewController alloc]init];
     vc.defaultUnit = self.scEntity.defaultUsing;
     vc.defaultPrice = self.scEntity.defaultPrice;

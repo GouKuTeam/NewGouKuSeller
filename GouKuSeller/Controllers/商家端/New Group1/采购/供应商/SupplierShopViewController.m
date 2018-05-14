@@ -13,6 +13,8 @@
 #import "CommodityHandler.h"
 #import "ShopClassificationEntity.h"
 #import "SupplierCommodityHeaderView.h"
+#import "PurchaseHandler.h"
+#import "SupplierCommodityEndity.h"
 
 @interface SupplierShopViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,BaseTableViewDelagate>
 
@@ -56,9 +58,12 @@
     [v_header.lb_startPrice setText:[NSString stringWithFormat:@"%d元起送",(int)self.storeEntity.takeOffPrice]];
     [self.view addSubview:v_header];
     
-    self.v_supplierCommodityHeader = [[SupplierCommodityHeaderView alloc]init];
-    self.v_supplierCommodityHeader.backgroundColor = [UIColor yellowColor];
+    self.v_supplierCommodityHeader = [[SupplierCommodityHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 85, 34)];
     self.v_supplierCommodityHeader.clipsToBounds = YES;
+    WS(weakSelf);
+    self.v_supplierCommodityHeader.selectItem = ^{
+        [weakSelf.tb_right requestDataSource];
+    };
     
     self.tb_left = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom,85,SCREEN_HEIGHT - v_header.bottom - SafeAreaBottomHeight - SafeAreaTopHeight) style:UITableViewStyleGrouped hasHeaderRefreshing:NO hasFooterRefreshing:NO];
     self.tb_left.delegate = self;
@@ -73,8 +78,9 @@
     self.tb_right.dataSource = self;
     self.tb_right.tableViewDelegate = self;
     self.tb_right.tableFooterView = [UIView new];
-    self.tb_right.rowHeight = 72;
+    self.tb_right.rowHeight = 96;
     self.tb_right.backgroundColor = [UIColor whiteColor];
+    self.tb_right.separatorColor = [UIColor clearColor];
     self.tb_right.tableHeaderView = self.v_supplierCommodityHeader;
     [self.view addSubview:self.tb_right];
     
@@ -118,14 +124,34 @@
 }
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
-    
+    ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
+    entity = [self.arr_category objectAtIndex:self.selectedFirst];
+    if (entity.childList.count > 0) {
+        entity = [entity.childList objectAtIndex:self.v_supplierCommodityHeader.selectedSecond];
+    }
+    [PurchaseHandler getWareWithShopId:self.storeEntity.shopId keyword:nil status:nil firstCategoryId:[NSNumber numberWithInteger:entity._id] page:pageNum prepare:^{
+    } success:^(id obj) {
+        if (pageNum == 0) {
+            [self.arr_data removeAllObjects];
+        }
+        [self.arr_data addObjectsFromArray:(NSArray *)obj];
+        [self.tb_right reloadData];
+        complete([(NSArray *)obj count]);
+        if (self.arr_data.count == 0) {
+            self.tb_right.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_right.frame withDefaultImage:nil withNoteTitle:@"暂未数据" withNoteDetail:nil withButtonAction:nil];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
 }
 
 - (void)reloadSupplierCommodityHeaderView{
     if (self.arr_category.count > 0) {
         ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedFirst];
-        self.v_supplierCommodityHeader.arr_data = entity.childList;
-        if (entity.childList > 0) {
+        if (entity.childList.count > 0) {
             CGFloat  height = 0.00;
             if (entity.childList.count % 3 == 0) {
                 height = 30 + entity.childList.count/3*34 + (entity.childList.count/3 - 1)*7;
@@ -133,11 +159,14 @@
                 height = 30 + (entity.childList.count/3 + 1)*34 + (entity.childList.count/3 + 1 - 1)*7;
             }
             [self.v_supplierCommodityHeader setFrame:CGRectMake(0,0, self.v_supplierCommodityHeader.width, height)];
+            [self.v_supplierCommodityHeader.collectionView setFrame:CGRectMake(7, 15, self.v_supplierCommodityHeader.width - 7, self.v_supplierCommodityHeader.height - 30)];
         }else{
-            [self.v_supplierCommodityHeader setFrame:CGRectZero];
+            [self.v_supplierCommodityHeader setFrame:CGRectMake(0, 0, self.v_supplierCommodityHeader.width, 12)];
         }
+        self.v_supplierCommodityHeader.selectedSecond = 0;
+        self.v_supplierCommodityHeader.arr_data = entity.childList;
+        [self.tb_right setTableHeaderView:self.v_supplierCommodityHeader];
     }
-    [self.tb_right setTableHeaderView:self.v_supplierCommodityHeader];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -174,6 +203,8 @@
         if (!cell){
             cell = [[SupplierCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:indexPath.row];
+        [cell contentCellWithWareEntity:entity];
         return cell;
     }
 }
@@ -182,7 +213,7 @@
     if (tableView == self.tb_left) {
         return 0.01;
     }else{
-        return 30;
+        return 20;
     }
 }
 
@@ -194,16 +225,25 @@
     if (tableView == self.tb_left) {
         return nil;
     }else{
-        UIView *v_header = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tb_right.width, 30)];
+        UIView *v_header = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tb_right.width, 20)];
         [v_header setBackgroundColor:[UIColor whiteColor]];
         
-        UILabel *lb_title = [[UILabel alloc]initWithFrame:CGRectMake(7, 0, self.tb_right.width - 14, 30)];
+        UILabel *lb_title = [[UILabel alloc]initWithFrame:CGRectMake(7, 0, self.tb_right.width - 14, 20)];
+        [lb_title setTextColor:[UIColor blackColor]];
         [lb_title setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
         [v_header addSubview:lb_title];
         
         if (self.arr_category.count > 0) {
             ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedFirst];
             lb_title.text = entity.name;
+        }
+        if (self.arr_category.count > 0) {
+            ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
+            entity = [self.arr_category objectAtIndex:self.selectedFirst];
+            if (entity.childList.count > 0) {
+                entity = [entity.childList objectAtIndex:self.v_supplierCommodityHeader.selectedSecond];
+            }
+            [lb_title setText:entity.name];
         }
         return v_header;
     }
@@ -214,7 +254,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == self.tb_left) {
+    if (tableView == self.tb_left && self.selectedFirst != indexPath.row) {
         self.selectedFirst = (int)indexPath.row;
         [self reloadSupplierCommodityHeaderView];
         [self.tb_left reloadData];

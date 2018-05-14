@@ -11,7 +11,7 @@
 #import "ShoppingCartTableViewCell.h"
 #import "ShoppingCarEntity.h"
 #import "StoreEntity.h"
-#import "WareEntity.h"
+#import "SupplierCommodityEndity.h"
 #import "ShoppingHandler.h"
 #import "ShoppingBottomView.h"
 
@@ -137,8 +137,8 @@
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
     [lb_StartingPrice setText:[NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice]];
     double sectionAmount = 0.00;
-    for (WareEntity *entity in selectStoreEntity.shoppingCatItems) {
-        sectionAmount = sectionAmount + entity.wareCount * entity.warePrice;
+    for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
+        sectionAmount = sectionAmount + entity.count * entity.price;
     }
     NSString *str_sectionAmount = [NSString stringWithFormat:@"合计：￥%.2f",sectionAmount];
     NSMutableAttributedString *str_amount = [[NSMutableAttributedString alloc]initWithString:str_sectionAmount];
@@ -155,7 +155,7 @@
         cell = [[ShoppingCartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:indexPath.section];
-    WareEntity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
+    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
     [cell contentCellWithWareEntity:wareEntity];
     cell.btn_select.tag = indexPath.section*100 + indexPath.row;
     [cell.btn_select addTarget:self action:@selector(selectRowAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,7 +187,7 @@
     NSInteger section = btn_sender.tag / 100;
     NSInteger row = btn_sender.tag % 100;
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
-    WareEntity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
+    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
     NSMutableArray *arr_select = [NSMutableArray arrayWithArray:selectStoreEntity.shoppingCatItems];
     if ([arr_select containsObject:wareEntity]) {
@@ -220,8 +220,8 @@
 - (void)getAllPrice{
     double double_allPrice = 0.00;
     for (StoreEntity *selectStoreEntity in self.arr_select) {
-        for (WareEntity *selectWareEntity in selectStoreEntity.shoppingCatItems) {
-            double_allPrice = double_allPrice + selectWareEntity.warePrice * selectWareEntity.wareCount;
+        for (SupplierCommodityEndity *selectWareEntity in selectStoreEntity.shoppingCatItems) {
+            double_allPrice = double_allPrice + selectWareEntity.price * selectWareEntity.count;
         }
     }
     NSString *str_allPrice = [NSString stringWithFormat:@"合计：￥%.2f",double_allPrice];

@@ -19,7 +19,6 @@
 		1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCEE209C004200A1C7C8 /* ImageCollectionViewCell.m */; };
 		1842CCF2209C33C600A1C7C8 /* PurchaseOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */; };
 		1891DA9120A01EC8008E16F7 /* StoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9020A01EC8008E16F7 /* StoreEntity.m */; };
-		1891DA9420A01F94008E16F7 /* WareEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9320A01F94008E16F7 /* WareEntity.m */; };
 		1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */; };
 		1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */; };
 		1891DAA520A3E8EA008E16F7 /* CategoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAA420A3E8EA008E16F7 /* CategoryEntity.m */; };
@@ -672,8 +671,6 @@
 		1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderHeaderView.m; sourceTree = "<group>"; };
 		1891DA8F20A01EC8008E16F7 /* StoreEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreEntity.h; sourceTree = "<group>"; };
 		1891DA9020A01EC8008E16F7 /* StoreEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreEntity.m; sourceTree = "<group>"; };
-		1891DA9220A01F94008E16F7 /* WareEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WareEntity.h; sourceTree = "<group>"; };
-		1891DA9320A01F94008E16F7 /* WareEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WareEntity.m; sourceTree = "<group>"; };
 		1891DA9520A020E7008E16F7 /* ShoppingCarEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarEntity.h; sourceTree = "<group>"; };
 		1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarEntity.m; sourceTree = "<group>"; };
 		1891DA9A20A024F7008E16F7 /* ShoppingHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingHandler.h; sourceTree = "<group>"; };
@@ -1499,12 +1496,12 @@
 				7498366A208C3162007FEEF8 /* ActiveTimeEntity.m */,
 				7498366E208C3176007FEEF8 /* ActiveRulesEntity.h */,
 				7498366F208C3176007FEEF8 /* ActiveRulesEntity.m */,
+				74ACFFD720A1A66C005C5A16 /* SupplierCommodityEndity.h */,
+				74ACFFD820A1A66C005C5A16 /* SupplierCommodityEndity.m */,
 				1891DA9520A020E7008E16F7 /* ShoppingCarEntity.h */,
 				1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */,
 				1891DA8F20A01EC8008E16F7 /* StoreEntity.h */,
 				1891DA9020A01EC8008E16F7 /* StoreEntity.m */,
-				1891DA9220A01F94008E16F7 /* WareEntity.h */,
-				1891DA9320A01F94008E16F7 /* WareEntity.m */,
 				1891DAA320A3E8EA008E16F7 /* CategoryEntity.h */,
 				1891DAA420A3E8EA008E16F7 /* CategoryEntity.m */,
 				743C5F5C20A588E200E617AF /* CustomerManagerEntity.h */,
@@ -1876,8 +1873,6 @@
 				74ACFFD320A15489005C5A16 /* AddSupplierCommodityViewController.m */,
 				74F57FF920A2BBBB000D8C8F /* SearchSupplierCommodityViewController.h */,
 				74F57FFA20A2BBBB000D8C8F /* SearchSupplierCommodityViewController.m */,
-				74ACFFD720A1A66C005C5A16 /* SupplierCommodityEndity.h */,
-				74ACFFD820A1A66C005C5A16 /* SupplierCommodityEndity.m */,
 				74ACFFDD20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.h */,
 				74ACFFDE20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m */,
 				7410F71B20A4092D00F9A724 /* DispatchingViewController.h */,
@@ -2657,8 +2652,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2760,7 +2754,6 @@
 				74BD12312068D8B30053A3D1 /* LYLOptionPicker.m in Sources */,
 				74C6E364207B54D90083E4A8 /* SJScreenshotView.m in Sources */,
 				744ABA282054201B00BBB26E /* BaseHandler.m in Sources */,
-				1891DA9420A01F94008E16F7 /* WareEntity.m in Sources */,
 				1842CCE2209B080A00A1C7C8 /* ConfirmOrderViewController.m in Sources */,
 				7491FA5C206DD8030006F388 /* YueDetailViewController.m in Sources */,
 				7489CCB3207F6B4A00971BED /* AddPriceViewController.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "ShoppingCarEntity.h"
-#import "WareEntity.h"
+#import "SupplierCommodityEndity.h"
 #import "StoreEntity.h"
 @implementation ShoppingCarEntity
 
@@ -15,7 +15,7 @@
 {
     return @{
              @"shoppingCarShops" : [StoreEntity class],
-             @"invalidItems":[WareEntity class],
+             @"invalidItems":[SupplierCommodityEndity class],
              };
 }
 

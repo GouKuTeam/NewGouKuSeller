@@ -92,8 +92,16 @@
     cell.btn_delete.tag = indexPath.section;
     [cell.btn_delete addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
     NSDictionary *dic = [self.arr_data objectAtIndex:indexPath.section];
-    cell.tf_dengyu.text = [NSString stringWithFormat:@"%d",[[dic objectForKey:@"count"] intValue]];
-    cell.tf_price.text = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"price"] doubleValue]];
+    if ([[dic objectForKey:@"count"] intValue] > 0) {
+        cell.tf_dengyu.text = [NSString stringWithFormat:@"%d",[[dic objectForKey:@"count"] intValue]];
+    }else{
+        cell.tf_dengyu.text = @"";
+    }
+    if ([[dic objectForKey:@"price"] doubleValue] > 0) {
+        cell.tf_price.text = [NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"price"] doubleValue]];
+    }else{
+        cell.tf_price.text = @"";
+    }
     cell.tf_name.text = [dic objectForKey:@"unitName"];
     cell.tf_name.delegate = self;
     cell.tf_price.delegate = self;

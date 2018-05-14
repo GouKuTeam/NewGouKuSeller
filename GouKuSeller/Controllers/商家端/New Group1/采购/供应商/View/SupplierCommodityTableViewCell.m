@@ -61,16 +61,20 @@
         [self.contentView addSubview:self.btn_addCommodity];
         [self.btn_addCommodity setImage:[UIImage imageNamed:@"addtocart"] forState:UIControlStateNormal];
         [self.btn_addCommodity mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 39);
-            make.top.mas_equalTo(66);
+            make.left.equalTo(self.mas_right).offset(-39);
+            make.bottom.equalTo(self.img_pic.mas_bottom);
             make.width.height.mas_equalTo(22);
         }];
         
-        
-        
-        
     }
     return self;
+}
+
+- (void)contentCellWithWareEntity:(SupplierCommodityEndity *)wareEntity{
+    [self.img_pic sd_setImageWithURL:[NSURL URLWithString:wareEntity.pictures] placeholderImage:nil];
+    [self.lab_name setText:wareEntity.name];
+    [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",wareEntity.price]];
+    [self.lab_priceGuiGe setText:[NSString stringWithFormat:@"/%@",wareEntity.unit]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

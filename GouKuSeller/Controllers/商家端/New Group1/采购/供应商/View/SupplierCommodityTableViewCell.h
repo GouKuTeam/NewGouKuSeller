@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SupplierCommodityEndity.h"
 
 @interface SupplierCommodityTableViewCell : UITableViewCell
 
@@ -16,5 +17,6 @@
 @property (nonatomic ,strong)UILabel            *lab_priceGuiGe;
 @property (nonatomic ,strong)UIButton           *btn_addCommodity;
 
+- (void)contentCellWithWareEntity:(SupplierCommodityEndity *)wareEntity;
 
 @end

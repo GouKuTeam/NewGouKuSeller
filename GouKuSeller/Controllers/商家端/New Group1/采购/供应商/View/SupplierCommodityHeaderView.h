@@ -10,8 +10,11 @@
 
 @interface SupplierCommodityHeaderView : UIView<UICollectionViewDelegate,UICollectionViewDataSource>
 
+typedef void(^SelectItem)(void);
+
 @property (nonatomic,strong)UICollectionView    *collectionView;
 @property (nonatomic,strong)NSArray             *arr_data;
 @property (nonatomic,assign)int                 selectedSecond;
 
+@property (nonatomic,copy)SelectItem            selectItem;
 @end

@@ -30,12 +30,13 @@
             make.right.equalTo(self.mas_right).offset(-130);
         }];
         [self.lab_name setText:@"手动阀开始的发挥空间士大夫哈萨克东方航空的撒发货快拉上东方航空士大夫哈克斯的返回"];
-        
+
         self.lab_stock = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_stock];
         [self.lab_stock setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_stock setFont:[UIFont systemFontOfSize:14]];
         [self.lab_stock setTextAlignment:NSTextAlignmentRight];
+        [self.lab_stock setBackgroundColor:[UIColor greenColor]];
         [self.lab_stock mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 120);
             make.top.mas_equalTo(11.7);
@@ -48,6 +49,7 @@
         [self.lab_inventoryNum setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_inventoryNum setFont:[UIFont systemFontOfSize:14]];
         [self.lab_inventoryNum setTextAlignment:NSTextAlignmentRight];
+        [self.lab_inventoryNum setBackgroundColor:[UIColor blueColor]];
         [self.lab_inventoryNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 60);
             make.top.mas_equalTo(11.7);
@@ -70,8 +72,6 @@
             make.width.mas_equalTo(SCREEN_WIDTH);
             make.bottom.equalTo(self.lab_name.mas_bottom).offset(11.7);
         }];
-        
-        
         
     }
     return self;

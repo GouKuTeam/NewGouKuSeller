@@ -182,6 +182,8 @@
 #define API_GET_SUPPLIERWITHCATEGORY @"/supplier/search/industry"
 //名字搜索供应商
 #define API_POST_SearchSupplier @"/supplier/search"
+//查询所有商品
+#define API_GET_WARE @"/wareSku/show/list"
 
 /*
  客户管理API

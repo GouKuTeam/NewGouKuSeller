@@ -7,14 +7,14 @@
 //
 
 #import "StoreEntity.h"
-#import "WareEntity.h"
+#import "SupplierCommodityEndity.h"
 
 @implementation StoreEntity
 
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"shoppingCatItems" : [WareEntity class],
+             @"shoppingCatItems" : [SupplierCommodityEndity class],
              };
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WareEntity.h"
+#import "SupplierCommodityEndity.h"
 
 @interface ShoppingCartTableViewCell : UITableViewCell
 
@@ -20,5 +20,5 @@
 @property (nonatomic,strong)UIButton      *btn_plus;
 @property (nonatomic,strong)UITextField   *tf_number;
 
-- (void)contentCellWithWareEntity:(WareEntity *)wareEntity;
+- (void)contentCellWithWareEntity:(SupplierCommodityEndity *)wareEntity;
 @end

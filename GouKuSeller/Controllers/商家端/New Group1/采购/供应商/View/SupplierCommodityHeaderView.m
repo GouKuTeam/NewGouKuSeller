@@ -16,12 +16,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH - 85 - 21)/3, 34);
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH - 85 - 28)/3, 34);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 7;
         layout.minimumInteritemSpacing = 7;
         
-        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,15,frame.size.width,34) collectionViewLayout:layout];
+        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(7,15,frame.size.width - 7,34) collectionViewLayout:layout];
         self.collectionView.backgroundColor = [UIColor whiteColor];
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
@@ -39,12 +39,16 @@
     [self.collectionView reloadData];
 }
 
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.arr_data.count;
 }
 
-- ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    TitleCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TitleCollectionViewCell class]) forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    TitleCollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"TitleCell" forIndexPath:indexPath];
     if (self.selectedSecond == indexPath.row) {
         cell.layer.borderColor = [[UIColor colorWithHexString:@"#E6670C"] CGColor];
         cell.backgroundColor = [UIColor whiteColor];
@@ -52,11 +56,20 @@
         cell.lb_title.textColor = [UIColor colorWithHexString:@"#E6670C"];
     }else{
         cell.layer.borderColor = [[UIColor colorWithHexString:COLOR_GRAY_BG] CGColor];
+        cell.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
         cell.lb_title.textColor = [UIColor colorWithHexString:@"#616161"];
     }
     ShopClassificationEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
     cell.lb_title.text = entity.name;
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    self.selectedSecond = (int)indexPath.row;
+    [self.collectionView reloadData];
+    if (self.selectItem) {
+        self.selectItem();
+    }
 }
 
 @end
