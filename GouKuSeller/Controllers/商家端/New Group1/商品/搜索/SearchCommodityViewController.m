@@ -117,7 +117,6 @@
         if (self.arr_search.count == 0) {
             self.tb_search.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_search.frame withDefaultImage:nil withNoteTitle:@"未找到相关商品" withNoteDetail:nil withButtonAction:nil];
         }
-        NSLog(@"arrcount == %ldx",self.arr_search.count);
     } failed:^(NSInteger statusCode, id json) {
         if (complete) {
             complete(CompleteBlockErrorCode);

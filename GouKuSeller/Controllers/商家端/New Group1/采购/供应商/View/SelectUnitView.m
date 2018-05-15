@@ -46,6 +46,7 @@
         }];
         
         self.btn_less = [[UIButton alloc]init];
+        [self.btn_less addTarget:self action:@selector(lessAction) forControlEvents:UIControlEventTouchUpInside];
         [self.btn_less setImage:[UIImage imageNamed:@"less_white"] forState:UIControlStateNormal];
         [self addSubview:self.btn_less];
         [self.btn_less mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,6 +59,7 @@
         [self.tf_count setTextColor:[UIColor blackColor]];
         [self.tf_count setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
         self.tf_count.layer.borderWidth = 0.5;
+        self.tf_count.textAlignment = NSTextAlignmentCenter;
         self.tf_count.layer.borderColor = [[UIColor colorWithHexString:@"#DCDCDC"] CGColor];
         [self addSubview:self.tf_count];
         [self.tf_count mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,6 +70,7 @@
         
         self.btn_plus = [[UIButton alloc]init];
         [self.btn_plus setImage:[UIImage imageNamed:@"plus_white"] forState:UIControlStateNormal];
+        [self.btn_less addTarget:self action:@selector(plusAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.btn_plus];
         [self.btn_plus mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.tf_count.mas_right);
@@ -76,12 +79,10 @@
         
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
         layout.itemSize = CGSizeMake((SCREEN_WIDTH - 60)/4, 30);
-        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        layout.minimumLineSpacing = 10;
-        layout.minimumInteritemSpacing = 10;
+        layout.minimumLineSpacing = 9;
+        layout.minimumInteritemSpacing = 9;
         
-        self.collectionView = [[UICollectionView alloc]init];
-        [self.collectionView setCollectionViewLayout:layout];
+        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectNull collectionViewLayout:layout];
         self.collectionView.backgroundColor = [UIColor whiteColor];
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
@@ -94,6 +95,17 @@
             make.left.mas_equalTo(15);
             make.width.mas_equalTo(SCREEN_WIDTH - 30);
             make.bottom.equalTo(self.tf_count.mas_top).offset(-20);
+            make.height.mas_equalTo(30);
+        }];
+        
+        self.lb_unitTitle = [[UILabel alloc]init];
+        [self.lb_unitTitle setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
+        [self.lb_unitTitle setTextColor:[UIColor blackColor]];
+        [self.lb_unitTitle setText:@"选择规格"];
+        [self addSubview:self.lb_unitTitle];
+        [self.lb_unitTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.bottom.equalTo(self.collectionView.mas_top).offset(-11);
         }];
         
         self.iv_avatar = [[UIImageView alloc]init];
@@ -101,7 +113,7 @@
         [self addSubview:self.iv_avatar];
         [self.iv_avatar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
-            make.bottom.equalTo(self.collectionView.mas_top).offset(-19);
+            make.bottom.equalTo(self.lb_unitTitle.mas_top).offset(-19);
             make.width.height.mas_equalTo(72);
         }];
         
@@ -131,6 +143,16 @@
             make.top.equalTo(self.iv_avatar.mas_top).offset(-16);
         }];
         
+        self.v_hide = [[UIView alloc]init];
+        [self addSubview:self.v_hide];
+        [self.v_hide mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.bottom.equalTo(self.v_back.mas_top);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+        }];
+        self.v_hide.userInteractionEnabled = YES;
+        [self.v_hide addTappedWithTarget:self action:@selector(hideAction)];
     }
     return self;
 }
@@ -140,7 +162,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 0;
+    return self.supplierCommodityEndity.saleUnits.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -154,12 +176,52 @@
         cell.layer.borderWidth = 1;
         cell.lb_title.textColor = [UIColor blackColor];
     }
+    NSDictionary *dic = [self.supplierCommodityEndity.saleUnits objectAtIndex:indexPath.row];
+    cell.lb_title.text = [dic objectForKey:@"unitName"];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
     self.selectIndex = (int)indexPath.row;
+    NSDictionary *dic = [self.supplierCommodityEndity.saleUnits objectAtIndex:indexPath.row];
+    [self.lb_price setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"price"] doubleValue]]];
     [self.collectionView reloadData];
+}
+
+- (void)contentViewWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity{
+    self.supplierCommodityEndity = supplierCommodityEndity;
+    [self.iv_avatar sd_setImageWithURL:[NSURL URLWithString:supplierCommodityEndity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    if (supplierCommodityEndity.saleUnits.count > 0) {
+        NSDictionary *dic = [supplierCommodityEndity.saleUnits firstObject];
+        [self.lb_price setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"price"] doubleValue]]];
+        [self.lb_num setText:[NSString stringWithFormat:@"库存%d%@",[supplierCommodityEndity.stock intValue],supplierCommodityEndity.unit]];
+        self.selectIndex = 0;
+        [self.tf_count setText:@"1"];
+        CGFloat  height = 0.00;
+        if (supplierCommodityEndity.saleUnits.count % 4 == 0) {
+            height = supplierCommodityEndity.saleUnits.count/4*30 + (supplierCommodityEndity.saleUnits.count/4 - 1)*9;
+        }else{
+            height = (supplierCommodityEndity.saleUnits.count/4 + 1)*30 + (supplierCommodityEndity.saleUnits.count/4 + 1 - 1)*9;
+        }
+        [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(height);
+        }];
+        [self.collectionView reloadData];
+    }
+}
+
+- (void)lessAction{
+    if ([self.tf_count.text intValue] > 0) {
+        self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] - 1];
+    }
+}
+
+- (void)plusAction{
+    self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] + 1];
+}
+
+- (void)hideAction{
+    [self setHidden:YES];
 }
 
 @end

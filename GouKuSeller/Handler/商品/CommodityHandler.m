@@ -468,6 +468,8 @@
    
 }
 
+
+
 //供应商修改商品状态
 + (void)updateSupplierCommodityStatusWithCommodityId:(NSNumber *)commodityId type:(NSNumber *)type prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_UpdateSupplierCommodityStatus];

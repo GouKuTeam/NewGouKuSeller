@@ -131,7 +131,7 @@
         self.lab_guanzhu.layer.borderColor = [[UIColor colorWithHexString:@"#E6670C"] CGColor];
         [self.lab_guanzhu mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_name);
-            make.top.equalTo(self.lab_category.mas_bottom).offset(3);
+            make.top.equalTo(self.lab_shopNum.mas_bottom).offset(3);
             make.width.mas_equalTo(36);
             make.height.mas_equalTo(14);
         }];

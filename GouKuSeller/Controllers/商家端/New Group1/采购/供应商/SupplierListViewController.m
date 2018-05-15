@@ -50,12 +50,12 @@
     [self.navigationItem.titleView addSubview:btn_search];
     [btn_search addTarget:self action:@selector(btnSearchAction) forControlEvents:UIControlEventTouchUpInside];
     
-    self.v_topBar = [[HYTabbarView alloc]initWithFrame:CGRectMake(0, NAVIGATIONBAR_VER_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_VER_HEIGHT - 49)];
+    self.v_topBar = [[HYTabbarView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - 49)];
     [self.view addSubview:self.v_topBar];
     self.v_topBar.tabbar.topBarDelegate = self;
     self.v_topBar.backgroundColor = [UIColor whiteColor];
     
-    UIView *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONBAR_VER_HEIGHT + 42, SCREEN_WIDTH, 0.5)];
+    UIView *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 42, SCREEN_WIDTH, 0.5)];
     [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     [self.view addSubview:v_line];
     

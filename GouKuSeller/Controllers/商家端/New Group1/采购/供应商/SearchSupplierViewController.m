@@ -80,12 +80,11 @@
     } success:^(id obj) {
         
         [self.arr_data removeAllObjects];
-        if (self.arr_data.count == 0) {
-            self.tb_supplier.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_supplier.frame withDefaultImage:nil withNoteTitle:@"暂未搜索到此供应商" withNoteDetail:nil withButtonAction:nil];
-        }
         [self.arr_data addObjectsFromArray:(NSArray *)obj];
         [self.tb_supplier reloadData];
-        
+        if (self.arr_data.count == 0) {
+            self.tb_supplier.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_supplier.frame withDefaultImage:nil withNoteTitle:@"暂未搜索到此供应商" withNoteDetail:nil withButtonAction:nil];
+        }        
     } failed:^(NSInteger statusCode, id json) {
         
     }];

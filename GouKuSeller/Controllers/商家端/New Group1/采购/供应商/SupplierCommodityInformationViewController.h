@@ -7,7 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "StoreEntity.h"
+#import "SupplierCommodityEndity.h"
 
 @interface SupplierCommodityInformationViewController : BaseViewController
+
+@property (nonatomic,strong)StoreEntity                *storeEntity;
+@property (nonatomic,strong)SupplierCommodityEndity    *supplierCommodityEndity;
 
 @end

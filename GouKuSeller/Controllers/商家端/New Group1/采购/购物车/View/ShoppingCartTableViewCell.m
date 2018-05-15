@@ -41,14 +41,20 @@
         [self addSubview:self.lb_specification];
         
         self.btn_less = [[UIButton alloc]init];
+        [self.btn_less setImage:[UIImage imageNamed:@"less_white"] forState:UIControlStateNormal];
         [self addSubview:self.btn_less];
         
         self.tf_number = [[UITextField alloc]init];
         self.tf_number.textColor = [UIColor blackColor];
         self.tf_number.font = [UIFont systemFontOfSize:14];
+        self.tf_number.layer.borderColor = [[UIColor colorWithHexString:COLOR_GRAY_BG] CGColor];
+        self.tf_number.textAlignment = NSTextAlignmentCenter;
+        self.tf_number.layer.borderWidth = 0.5;
+
         [self addSubview:self.tf_number];
         
         self.btn_plus = [[UIButton alloc]init];
+        [self.btn_plus setImage:[UIImage imageNamed:@"plus_white"] forState:UIControlStateNormal];
         [self addSubview:self.btn_plus];
         
         [self.btn_select mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,7 +77,7 @@
         
         [self.lb_price mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lb_name);
-            make.bottom.equalTo(self.lb_price.mas_bottom);
+            make.bottom.equalTo(self.iv_image.mas_bottom);
             make.height.mas_equalTo(16);
         }];
         
@@ -80,22 +86,23 @@
             make.centerY.equalTo(self.lb_price);
         }];
         
-        [self.btn_less mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.tf_number.mas_left);
+        [self.btn_plus mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.mas_right).offset(-10);
             make.width.height.mas_equalTo(22);
-            make.bottom.equalTo(self.mas_bottom).offset(-9);
+            make.bottom.equalTo(self.iv_image);
         }];
         
         [self.tf_number mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.btn_less.mas_left);
+            make.right.equalTo(self.btn_plus.mas_left);
             make.width.mas_equalTo(40);
             make.height.mas_equalTo(22);
-            make.centerY.equalTo(self.btn_less);
+            make.centerY.equalTo(self.btn_plus);
         }];
         
-        [self.btn_plus mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.mas_right).offset(-10);
-            make.width.height.centerY.equalTo(self.btn_less);
+        [self.btn_less mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.tf_number.mas_left);
+            make.width.height.mas_equalTo(22);
+            make.bottom.equalTo(self.iv_image);
         }];
         
     }
@@ -103,10 +110,11 @@
 }
 
 - (void)contentCellWithWareEntity:(SupplierCommodityEndity *)wareEntity{
-    [self.iv_image sd_setImageWithURL:[NSURL URLWithString:wareEntity.pictures] placeholderImage:nil];
+    [self.iv_image sd_setImageWithURL:[NSURL URLWithString:wareEntity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
     [self.lb_name setText:wareEntity.name];
     [self.lb_price setText:[NSString stringWithFormat:@"￥%.2f",wareEntity.price]];
     [self.lb_specification setText:wareEntity.unit];
+    self.tf_number.text = [NSString stringWithFormat:@"%ld",wareEntity.count];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

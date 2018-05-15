@@ -96,6 +96,7 @@
  */
 //供应商商品列表查询  查询所有商品(后台管理)
 #define API_POST_SupplierCommodityList @"/wareSku/manage/list"
+
 //供应商新增商品
 #define API_POST_AddSupplierCommdity @"/wareSku/manage/addOrUpdate"
 //供应商商品修改
@@ -109,7 +110,7 @@
 //供应商添加关注
 #define API_POST_SupplierAttentionAdd @"/shop/supplier/attention/add"
 //供应商取消关注
-#define API_POST_SupplierAttentionCancel @"/shop/supplier/attention/calcel"
+#define API_POST_SupplierAttentionCancel @"/shop/supplier/attention/cancel"
 
 /*
  活动API
@@ -178,16 +179,40 @@
 /*
  采购API
  */
-//购物车列表
-#define API_GET_SHOPPINGLIST @"/shopping/get"
 //所有类目
 #define API_GET_ALLCATEGORY @"/common/industry/list"
 //类目搜索供应商
-#define API_GET_SUPPLIERWITHCATEGORY @"/supplier/search/industry"
+#define API_GET_SUPPLIERWITHCATEGORY @"/shop/supplier/search/industry"
 //名字搜索供应商
-#define API_POST_SearchSupplier @"/supplier/search"
+#define API_POST_SearchSupplier @"/shop/supplier/search"
 //查询所有商品
 #define API_GET_WARE @"/wareSku/show/list"
+//购物车列表
+#define API_GET_SHOPPINGLIST @"/shopping/get"
+//添加购物车
+#define API_POST_AddShoppingCar @"/shopping/add"
+//清空购物车
+#define API_GET_DeleteShoppingCar @"/shopping/delete"
+//删除一个购物车商品
+#define API_POST_DeleteShoppingInfo @"/shopping/delete/info"
+//清空失效商品
+#define API_GET_ShoppingRemove @"/shopping/remove"
+//结算生成新订单
+#define API_POST_NewOrder @"/shopOrder/new"
+
+/*
+ 地址管理API
+ */
+//查看所有地址
+#define API_POST_SelectAddressList @"address/list"
+//添加新的地址
+#define API_POST_AddNewAddress @"/shop/add/address"
+//设置默认地址
+#define API_GET_SettingDefaultAddress @"/shop/default/address"
+//获取默认地址
+#define API_POST_SelectDefaultAddress @"/shop/get/default/address"
+//删除地址
+#define API_GET_DeleteAddress @"/shop/delete/address"
 
 /*
  客户管理API

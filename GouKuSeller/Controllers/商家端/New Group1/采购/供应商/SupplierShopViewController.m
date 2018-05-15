@@ -15,6 +15,11 @@
 #import "SupplierCommodityHeaderView.h"
 #import "PurchaseHandler.h"
 #import "SupplierCommodityEndity.h"
+#import "SupplierInformationViewController.h"
+#import "SearchCommodityInSupplierShopViewController.h"
+#import "SupplierCommodityInformationViewController.h"
+#import "SelectUnitView.h"
+#import "PurchaseHandler.h"
 
 @interface SupplierShopViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,BaseTableViewDelagate>
 
@@ -26,6 +31,7 @@
 @property (nonatomic,assign)int              selectedFirst;
 @property (nonatomic,strong)SupplierCommodityHeaderView  *v_supplierCommodityHeader;
 @property (nonatomic,strong)UIView          *v_line;
+@property (nonatomic,strong)SelectUnitView  *selectUnitView;
 
 @end
 
@@ -53,10 +59,12 @@
 - (void)onCreate{
     
     SupplierHeaderView *v_header = [[SupplierHeaderView alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH, 66)];
-    [v_header.iv_avatar sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:nil];
+    [v_header.iv_avatar sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
     [v_header.lb_name setText:self.storeEntity.name];
     [v_header.lb_startPrice setText:[NSString stringWithFormat:@"%d元起送",(int)self.storeEntity.takeOffPrice]];
     [self.view addSubview:v_header];
+    UITapGestureRecognizer *vHeaderTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gotoShopDetailAction)];
+    [v_header addGestureRecognizer:vHeaderTgp];
     
     self.v_supplierCommodityHeader = [[SupplierCommodityHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 85, 34)];
     self.v_supplierCommodityHeader.clipsToBounds = YES;
@@ -85,24 +93,73 @@
     [self.view addSubview:self.tb_right];
     
     self.v_line = [[UIView alloc]initWithFrame:CGRectMake(85, self.tb_left.top, 1,self.tb_left.height)];
+    [self.v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     [self.view addSubview:self.v_line];
     
     UIBarButtonItem *btn_search = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_white"] style:UIBarButtonItemStyleDone target:self action:@selector(searchAction)];
     self.btn_attention = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"shoucang-white"] style:UIBarButtonItemStyleDone target:self action:@selector(attentionAction)];
     if (self.storeEntity.isAttention == YES) {
-        [_btn_attention setImage:[UIImage imageNamed:@"shocuang-orange"]];
+        UIImage *image = [UIImage imageNamed:@"shocuang-orange"];
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [_btn_attention setImage:image];
     }
     self.navigationItem.rightBarButtonItems = @[self.btn_attention,btn_search];
+    
+    self.selectUnitView = [[SelectUnitView alloc]init];
+    [self.selectUnitView setHidden:YES];
+    [self.selectUnitView.btn_confirm addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.selectUnitView];
+    [self.selectUnitView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(SCREEN_HEIGHT);
+    }];
     
     [self loadData];
 }
 
 - (void)searchAction{
-    
+    SearchCommodityInSupplierShopViewController *vc = [[SearchCommodityInSupplierShopViewController alloc]init];
+    vc.shopId = self.storeEntity.shopId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)attentionAction{
-    
+    if (self.storeEntity.isAttention == NO) {
+        //未关注
+        [PurchaseHandler addSupplierAttentionWithSid:self.storeEntity.shopId name:self.storeEntity.name prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+                UIImage *image = [UIImage imageNamed:@"shocuang-orange"];
+                image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_btn_attention setImage:image];
+                self.storeEntity.isAttention = YES;
+            }else{
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }
+    if (self.storeEntity.isAttention == YES) {
+        //已关注
+        [PurchaseHandler cancelSupplierAttentionWithSid:self.storeEntity.shopId name:self.storeEntity.name prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+                UIImage *image = [UIImage imageNamed:@"shoucang-white"];
+                image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [_btn_attention setImage:image];
+                self.storeEntity.isAttention = NO;
+            }else{
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }
 }
 
 - (void)loadData{
@@ -113,10 +170,12 @@
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_category removeAllObjects];
         [self.arr_category addObjectsFromArray:arr_data];
-        self.selectedFirst = 0;
-        [self.tb_left reloadData];
-        [self reloadSupplierCommodityHeaderView];
-        [self.tb_right requestDataSource];
+        if (self.arr_category.count > 0) {
+            self.selectedFirst = 0;
+            [self.tb_left reloadData];
+            [self reloadSupplierCommodityHeaderView];
+            [self.tb_right requestDataSource];
+        }
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -205,6 +264,8 @@
         }
         SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:indexPath.row];
         [cell contentCellWithWareEntity:entity];
+        cell.tag = indexPath.row;
+        [cell.btn_addCommodity addTarget:self action:@selector(addCommityAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
@@ -225,27 +286,20 @@
     if (tableView == self.tb_left) {
         return nil;
     }else{
-        UIView *v_header = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tb_right.width, 20)];
-        [v_header setBackgroundColor:[UIColor whiteColor]];
         
         UILabel *lb_title = [[UILabel alloc]initWithFrame:CGRectMake(7, 0, self.tb_right.width - 14, 20)];
         [lb_title setTextColor:[UIColor blackColor]];
         [lb_title setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
-        [v_header addSubview:lb_title];
         
-        if (self.arr_category.count > 0) {
-            ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedFirst];
-            lb_title.text = entity.name;
-        }
         if (self.arr_category.count > 0) {
             ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
             entity = [self.arr_category objectAtIndex:self.selectedFirst];
             if (entity.childList.count > 0) {
                 entity = [entity.childList objectAtIndex:self.v_supplierCommodityHeader.selectedSecond];
             }
-            [lb_title setText:entity.name];
+            [lb_title setText:[NSString stringWithFormat:@"   %@",entity.name]];
         }
-        return v_header;
+        return lb_title;
     }
 }
 
@@ -260,6 +314,39 @@
         [self.tb_left reloadData];
         [self.tb_right requestDataSource];
     }
+    if (tableView == self.tb_right) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self changeNavigationOriginal];
+        self.navigationController.navigationBar.translucent = YES;
+        SupplierCommodityInformationViewController *vc = [[SupplierCommodityInformationViewController alloc]init];
+        vc.storeEntity = self.storeEntity;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)addCommityAction:(UIButton *)btn_sender{
+    SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (int i = 0; i < 6; i ++) {
+        NSDictionary *dic = @{@"price":[NSNumber numberWithInt:i + 20],@"unitName":@"莉莉",@"id":[NSNumber numberWithInt:i + 20]};
+        [arr addObject:dic];
+    }
+    entity.saleUnits = arr;
+    [self.selectUnitView contentViewWithSupplierCommodityEndity:entity];
+    [self.selectUnitView setHidden:NO];
+}
+
+- (void)confirmAction{
+    NSDictionary *dic = [self.selectUnitView.supplierCommodityEndity.saleUnits objectAtIndex:self.selectUnitView.selectIndex];
+    [PurchaseHandler addCommodityToShoppingCarWithSkuId:self.selectUnitView.supplierCommodityEndity.skuId skuUnitId:[dic objectForKey:@"id"] count:[NSNumber numberWithInt:[self.selectUnitView.tf_count.text intValue]] prepare:^{
+        [MBProgressHUD showActivityMessageInView:nil];
+    } success:^(id obj) {
+        [MBProgressHUD hideHUD];
+        [self.selectUnitView setHidden:YES];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -304,6 +391,14 @@
         }
         [self.v_line setFrame:CGRectMake(85, self.tb_left.top, 1,self.tb_left.height)];
     }
+}
+
+- (void)gotoShopDetailAction{
+    [self changeNavigationOriginal];
+    self.navigationController.navigationBar.translucent = YES;
+    SupplierInformationViewController *vc = [[SupplierInformationViewController alloc]init];
+    vc.storeEntity = self.storeEntity;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

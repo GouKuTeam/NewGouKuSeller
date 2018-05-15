@@ -32,6 +32,7 @@
     // Do any additional setup after loading the view.
     self.title = @"购物车";
     self.arr_data = [NSMutableArray array];
+    self.arr_select = [NSMutableArray array];
 }
 
 - (void)onCreate{
@@ -48,6 +49,7 @@
     [self.v_bottomNormal.btn_selectAll addTarget:self action:@selector(selectAllAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.v_bottomNormal];
     
+    [self.tb_shoppingCart requestDataSource];
 }
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
@@ -65,18 +67,30 @@
         }
         [self.arr_select removeAllObjects];
         for (int i = 0; i < self.arr_data.count; i++) {
-            StoreEntity *entity = [self.arr_data objectAtIndex:i];
+            StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
             entity.shoppingCatItems = @[];
             [self.arr_select addObject:entity];
         }
-        [self.tb_shoppingCart reloadData];
+        complete([self.arr_data count]);
     } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
         [MBProgressHUD showErrorMessage:(NSString *)json];
     }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.arr_data.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
+    return storeEntity.shoppingCatItems.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 76;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -89,7 +103,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 42)];
-
+    [v_header setBackgroundColor:[UIColor whiteColor]];
     UIButton *btn_select = [[UIButton alloc]initWithFrame:CGRectMake(10, 11, 20, 20)];
     [btn_select setImage:[UIImage imageNamed:@"unselect"] forState:UIControlStateNormal];
     [btn_select setImage:[UIImage imageNamed:@"payComplete"] forState:UIControlStateSelected];
@@ -99,6 +113,7 @@
     [v_header addSubview:btn_select];
     
     UIImageView *iv_avatar = [[UIImageView alloc]initWithFrame:CGRectMake(btn_select.right + 10, 10, 22, 22)];
+    iv_avatar.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [iv_avatar.layer setCornerRadius:11];
     [iv_avatar.layer setMasksToBounds:YES];
     iv_avatar.contentMode = UIViewContentModeScaleAspectFill;
@@ -114,7 +129,9 @@
     [v_header addSubview:iv_arrow];
 
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
+    StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:storeEntity.logo] placeholderImage:nil];
+    [btn_select setSelected:selectStoreEntity.isSelected];
     [lb_title setText:storeEntity.name];
     
     return v_header;
@@ -122,7 +139,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *v_footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 42 + 10)];
-    [v_footer setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    [v_footer setBackgroundColor:[UIColor whiteColor]];
     
     UILabel *lb_StartingPrice = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 150, 42)];
     [lb_StartingPrice setFont:[UIFont systemFontOfSize:14]];
@@ -132,6 +149,7 @@
     UILabel *lb_amount = [[UILabel alloc]initWithFrame:CGRectMake(160, 0, SCREEN_WIDTH - 170, 42)];
     [lb_amount setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
     [lb_amount setFont:[UIFont systemFontOfSize:16]];
+    [lb_amount setTextAlignment:NSTextAlignmentRight];
     [v_footer addSubview:lb_amount];
     
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
@@ -145,6 +163,11 @@
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, 3)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 3)];
     [lb_amount setAttributedText:str_amount];
+    
+    UIView *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, 42, SCREEN_WIDTH, 10)];
+    [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    [v_footer addSubview:v_line];
+    
     return v_footer;
 }
 
@@ -159,19 +182,39 @@
     [cell contentCellWithWareEntity:wareEntity];
     cell.btn_select.tag = indexPath.section*100 + indexPath.row;
     [cell.btn_select addTarget:self action:@selector(selectRowAction:) forControlEvents:UIControlEventTouchUpInside];
-    NSMutableArray *arr_select = [self.arr_select objectAtIndex:indexPath.section];
-    if ([arr_select containsObject:wareEntity]) {
+    StoreEntity *selectStore = [self.arr_select objectAtIndex:indexPath.section];
+    if ([selectStore.shoppingCatItems containsObject:wareEntity]) {
         [cell.btn_select setSelected:YES];
     }else{
         [cell.btn_select setSelected:NO];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
+    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
+    StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
+    NSMutableArray *arr_select = [NSMutableArray arrayWithArray:selectStoreEntity.shoppingCatItems];
+    if ([arr_select containsObject:wareEntity]) {
+        [arr_select removeObject:wareEntity];
+    }else{
+        [arr_select addObject:wareEntity];
+    }
+    selectStoreEntity.shoppingCatItems = arr_select;
+    [self.arr_select replaceObjectAtIndex:section withObject:selectStoreEntity];
+    [self.tb_shoppingCart reloadData];
+    [self getAllPrice];
 }
 
 - (void)selectSectionAction:(UIButton *)btn_sender{
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:btn_sender.tag];
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:btn_sender.tag];
-    if (storeEntity.isSelected == NO) {
+    if (selectStoreEntity.isSelected == NO) {
         selectStoreEntity.isSelected = YES;
         selectStoreEntity.shoppingCatItems = storeEntity.shoppingCatItems;
     }else{
@@ -204,11 +247,16 @@
 - (void)selectAllAction{
     [self.v_bottomNormal.btn_selectAll setSelected:!self.v_bottomNormal.btn_selectAll.isSelected];
     if (self.v_bottomNormal.btn_selectAll.isSelected == YES) {
-        self.arr_select = self.arr_data;
+        [self.arr_select removeAllObjects];
+        for (int i = 0; i < self.arr_data.count; i++) {
+            StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
+            entity.isSelected = YES;
+            [self.arr_select addObject:entity];
+        }
     }else{
         [self.arr_select removeAllObjects];
         for (int i = 0; i < self.arr_data.count; i++) {
-            StoreEntity *entity = [self.arr_data objectAtIndex:i];
+            StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
             entity.shoppingCatItems = @[];
             [self.arr_select addObject:entity];
         }

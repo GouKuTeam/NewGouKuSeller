@@ -47,6 +47,8 @@
 		74046B11209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		74046B12209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		74046B13209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
+		740C46B020AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */; };
+		740C46B320AAE10F00626A8B /* AddressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B220AAE10F00626A8B /* AddressEntity.m */; };
 		740C688A207C98930044889F /* PayInCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6889207C98930044889F /* PayInCashViewController.m */; };
 		740C688D207C989F0044889F /* PayInGouKuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688C207C989F0044889F /* PayInGouKuViewController.m */; };
 		740C6890207CA8A30044889F /* PayInCashCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688F207CA8A30044889F /* PayInCashCompleteView.m */; };
@@ -736,6 +738,10 @@
 		74046B0C209C1AE2004E64A9 /* CreateAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateAddressViewController.m; sourceTree = "<group>"; };
 		74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		74046B10209C2E11004E64A9 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		740C46AE20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCommodityInSupplierShopViewController.h; sourceTree = "<group>"; };
+		740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCommodityInSupplierShopViewController.m; sourceTree = "<group>"; };
+		740C46B120AAE10F00626A8B /* AddressEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressEntity.h; sourceTree = "<group>"; };
+		740C46B220AAE10F00626A8B /* AddressEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressEntity.m; sourceTree = "<group>"; };
 		740C6888207C98930044889F /* PayInCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInCashViewController.h; sourceTree = "<group>"; };
 		740C6889207C98930044889F /* PayInCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashViewController.m; sourceTree = "<group>"; };
 		740C688B207C989F0044889F /* PayInGouKuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInGouKuViewController.h; sourceTree = "<group>"; };
@@ -1280,6 +1286,8 @@
 				74046B02209AFC02004E64A9 /* SupplierInformationViewController.m */,
 				743C5F2620A42C7200E617AF /* SearchSupplierViewController.h */,
 				743C5F2720A42C7200E617AF /* SearchSupplierViewController.m */,
+				740C46AE20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.h */,
+				740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */,
 			);
 			path = "供应商";
 			sourceTree = "<group>";
@@ -1581,6 +1589,8 @@
 				743C5F8520A954CD00E617AF /* InventoryListEntity.m */,
 				743C5F7A20A92E2700E617AF /* InventoryEntity.h */,
 				743C5F7B20A92E2700E617AF /* InventoryEntity.m */,
+				740C46B120AAE10F00626A8B /* AddressEntity.h */,
+				740C46B220AAE10F00626A8B /* AddressEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2823,6 +2833,7 @@
 				74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */,
 				74C6E36D207B728C0083E4A8 /* TitleView.m in Sources */,
 				743C5F8620A954CD00E617AF /* InventoryListEntity.m in Sources */,
+				740C46B320AAE10F00626A8B /* AddressEntity.m in Sources */,
 				743C5F7920A92CF300E617AF /* InventoryHandler.m in Sources */,
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */,
@@ -2851,6 +2862,7 @@
 				743C5F2820A42C7200E617AF /* SearchSupplierViewController.m in Sources */,
 				74BD11FA206895540053A3D1 /* SalesViewController.m in Sources */,
 				1891DAAC20A3EE71008E16F7 /* SupplierTableViewController.m in Sources */,
+				740C46B020AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m in Sources */,
 				181B136220A9357F0079E536 /* SelectUnitView.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,
 				743C5F2C20A45DCA00E617AF /* WXApiManager.m in Sources */,

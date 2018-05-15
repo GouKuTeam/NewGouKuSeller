@@ -7,9 +7,11 @@
 //
 
 #import "SupplierInformationViewController.h"
+#import "PurchaseHandler.h"
 
 @interface SupplierInformationViewController ()
 
+@property (nonatomic ,strong)UIButton        *btn_right;
 @property (nonatomic ,strong)UIImageView     *img_head;
 @property (nonatomic ,strong)UILabel         *lab_name;
 @property (nonatomic ,strong)UILabel         *lab_shopNum;
@@ -25,10 +27,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationController.navigationBar setHidden:YES];
-    
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
+
 
 - (void)onCreate{
     UIView *v_head = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150)];
@@ -40,27 +50,34 @@
     [btn_left setBackgroundImage:[UIImage imageNamed:@"back_white"] forState:UIControlStateNormal];
     [btn_left addTappedWithTarget:self action:@selector(btnLeftAction)];
     
-    UIButton *btn_right = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 43, 30, 23, 23)];
-    [v_head addSubview:btn_right];
-    [btn_right setBackgroundImage:[UIImage imageNamed:@"shoucang-white"] forState:UIControlStateNormal];
-    [btn_right addTappedWithTarget:self action:@selector(btnRightAction)];
+    self.btn_right = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 43, 30, 23, 23)];
+    [v_head addSubview:self.btn_right];
+    if (self.storeEntity.isAttention == YES) {
+        [self.btn_right setBackgroundImage:[UIImage imageNamed:@"shocuang-orange"] forState:UIControlStateNormal];
+    }else{
+        [self.btn_right setBackgroundImage:[UIImage imageNamed:@"shoucang-white"] forState:UIControlStateNormal];
+    }
+    [self.btn_right addTappedWithTarget:self action:@selector(btnRightAction)];
     
     self.img_head = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - 76) / 2, 91, 76, 76)];
     [self.view addSubview:self.img_head];
     self.img_head.layer.cornerRadius = 2.0f;
     self.img_head.layer.masksToBounds = YES;
+    [self.img_head sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
     
     self.lab_name = [[UILabel alloc]initWithFrame:CGRectMake(10, 178, SCREEN_WIDTH - 20, 25)];
     [self.view addSubview:self.lab_name];
     [self.lab_name setTextColor:[UIColor blackColor]];
     [self.lab_name setFont:[UIFont boldSystemFontOfSize:18]];
     [self.lab_name setTextAlignment:NSTextAlignmentCenter];
+    [self.lab_name setText:self.storeEntity.name];
     
     self.lab_shopNum = [[UILabel alloc]initWithFrame:CGRectMake(0, 231, SCREEN_WIDTH / 3, 20)];
     [self.view addSubview:self.lab_shopNum];
     [self.lab_shopNum setTextAlignment:NSTextAlignmentCenter];
     [self.lab_shopNum setTextColor:[UIColor blackColor]];
     [self.lab_shopNum setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld家",self.storeEntity.shopNum]];
     
     UILabel *shopNum = [[UILabel alloc]initWithFrame:CGRectMake(0, 252, SCREEN_WIDTH / 3, 20)];
     [self.view addSubview:shopNum];
@@ -74,6 +91,7 @@
     [self.lab_orderNum setTextAlignment:NSTextAlignmentCenter];
     [self.lab_orderNum setTextColor:[UIColor blackColor]];
     [self.lab_orderNum setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld笔",self.storeEntity.orderNum]];
     
     UILabel *orderNum = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 3, 252, SCREEN_WIDTH / 3, 20)];
     [self.view addSubview:orderNum];
@@ -87,6 +105,7 @@
     [self.lab_startingPrice setTextAlignment:NSTextAlignmentCenter];
     [self.lab_startingPrice setTextColor:[UIColor blackColor]];
     [self.lab_startingPrice setFont:[UIFont boldSystemFontOfSize:14]];
+    [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f元",self.storeEntity.takeOffPrice]];
     
     UILabel *startingPrice = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 3 * 2, 252, SCREEN_WIDTH / 3, 20)];
     [self.view addSubview:startingPrice];
@@ -117,6 +136,15 @@
     [self.view addSubview:self.lab_hangyeDetail];
     [self.lab_hangyeDetail setTextColor:[UIColor colorWithHexString:@"#919191"]];
     [self.lab_hangyeDetail setFont:[UIFont boldSystemFontOfSize:16]];
+    
+    if (self.storeEntity.industry.count > 0) {
+        NSString *category = [self.storeEntity.industry firstObject];
+        for (int i = 1; i < self.storeEntity.industry.count; i++) {
+            category = [category stringByAppendingString:[NSString stringWithFormat:@" %@",[self.storeEntity.industry objectAtIndex:i]]];
+        }
+        self.lab_hangyeDetail.text = category;
+    }
+    
 
     UILabel *lab_pinpai = [[UILabel alloc]initWithFrame:CGRectMake(15, 389, 200, 24)];
     [self.view addSubview:lab_pinpai];
@@ -128,6 +156,13 @@
     [self.view addSubview:self.lab_pinpaiDetail];
     [self.lab_pinpaiDetail setTextColor:[UIColor colorWithHexString:@"#919191"]];
     [self.lab_pinpaiDetail setFont:[UIFont boldSystemFontOfSize:16]];
+    if (self.storeEntity.agencyBrand.count > 0) {
+        NSString *agencyBrand = [self.storeEntity.agencyBrand firstObject];
+        for (int i = 1; i < self.storeEntity.agencyBrand.count; i++) {
+            agencyBrand = [agencyBrand stringByAppendingString:[NSString stringWithFormat:@" %@",[self.storeEntity.agencyBrand objectAtIndex:i]]];
+        }
+        self.lab_pinpaiDetail.text = agencyBrand;
+    }
     
     self.btn_tell = [[UIButton alloc]initWithFrame:CGRectMake(15, 453 + self.lab_pinpaiDetail.frame.size.height, SCREEN_WIDTH - 30, 42)];
     [self.view addSubview:self.btn_tell];
@@ -140,9 +175,16 @@
     self.btn_tell.layer.masksToBounds = YES;
     self.btn_tell.layer.borderWidth = 1.0f;
     self.btn_tell.layer.borderColor = [[UIColor colorWithHexString:@"#C2C2C2"] CGColor];
+    [self.btn_tell addTarget:self action:@selector(btn_tellAction) forControlEvents:UIControlEventTouchUpInside];
     
     
-    
+}
+
+- (void)btn_tellAction{
+    NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"tel:%@",self.storeEntity.phone];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
 }
 
 - (void)btnLeftAction{
@@ -150,9 +192,39 @@
 }
 
 - (void)btnRightAction{
-    
+    if (self.storeEntity.isAttention == NO) {
+        //未关注
+        [PurchaseHandler addSupplierAttentionWithSid:self.storeEntity.shopId name:self.storeEntity.name prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+                [self.btn_right setBackgroundImage:[UIImage imageNamed:@"shocuang-orange"] forState:UIControlStateNormal];
+                self.storeEntity.isAttention = YES;
+            }else{
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }
+    if (self.storeEntity.isAttention == YES) {
+        //已关注
+        [PurchaseHandler cancelSupplierAttentionWithSid:self.storeEntity.shopId name:self.storeEntity.name prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+                [self.btn_right setBackgroundImage:[UIImage imageNamed:@"shoucang-white"] forState:UIControlStateNormal];
+                self.storeEntity.isAttention = NO;
+            }else{
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

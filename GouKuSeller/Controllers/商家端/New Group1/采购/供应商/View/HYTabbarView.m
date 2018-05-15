@@ -96,7 +96,7 @@ static CGFloat const topBarHeight = 42; //顶部标签条的高度
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 0;
         
-        _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, topBarHeight, HYScreenW, HYScreenH - topBarHeight - NAVIGATIONBAR_VER_HEIGHT - 49) collectionViewLayout:layout];
+        _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, topBarHeight, HYScreenW, HYScreenH - topBarHeight - SafeAreaTopHeight - 49) collectionViewLayout:layout];
         
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.pagingEnabled = YES;
