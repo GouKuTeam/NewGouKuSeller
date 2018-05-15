@@ -106,6 +106,10 @@
 #define API_POST_SupplierCommodityDelete @"/wareSku/manage/delete/"
 //获取商品详情
 #define API_POST_GETSupplierCommodityInformation @"/wareSku/show/get/"
+//供应商添加关注
+#define API_POST_SupplierAttentionAdd @"/shop/supplier/attention/add"
+//供应商取消关注
+#define API_POST_SupplierAttentionCancel @"/shop/supplier/attention/calcel"
 
 /*
  活动API

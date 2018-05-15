@@ -110,4 +110,47 @@
                                           }];
 }
 
+//关注供应商
++ (void)addSupplierAttentionWithSid:(NSNumber *)sid name:(NSString *)name prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SupplierAttentionAdd];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (sid) {
+        [dic setObject:(sid) forKey:@"(sid)"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+
+}
+
+//取消关注(供应商）
++ (void)cancelSupplierAttentionWithSid:(NSNumber *)sid name:(NSString *)name prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SupplierAttentionCancel];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (sid) {
+        [dic setObject:(sid) forKey:@"(sid)"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end
