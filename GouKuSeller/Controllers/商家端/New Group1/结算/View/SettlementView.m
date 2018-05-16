@@ -97,26 +97,13 @@
         self.btn_chongzhi.layer.masksToBounds = YES;
         self.btn_chongzhi.layer.borderWidth = 1.0f;
         self.btn_chongzhi.layer.borderColor = [[UIColor colorWithHexString:@"#4167B2"] CGColor];
-        [self.btn_chongzhi setHidden:YES];
         
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
-            //供应商
-            [self.v_backTiXian mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(0);
-                make.top.equalTo(self.v_header.mas_bottom);
-                make.width.mas_equalTo(SCREEN_WIDTH);
-                make.height.mas_equalTo(163);
-            }];
-            [self.btn_chongzhi setHidden:NO];
-        }else{
-            [self.v_backTiXian mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(0);
-                make.top.equalTo(self.v_header.mas_bottom);
-                make.width.mas_equalTo(SCREEN_WIDTH);
-                make.height.mas_equalTo(100);
-                [self.btn_chongzhi setHidden:YES];
-            }];
-        }
+        [self.v_backTiXian mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.equalTo(self.v_header.mas_bottom);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(163);
+        }];
         
         self.v_backJieSuan = [[UIView alloc]init];
         [self addSubview:self.v_backJieSuan];

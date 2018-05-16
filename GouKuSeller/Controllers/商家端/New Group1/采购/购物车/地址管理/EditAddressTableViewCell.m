@@ -62,7 +62,7 @@
         [img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         [img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
-            make.top.equalTo(self.lab_address.mas_bottom).offset(10);
+            make.top.equalTo(self.lab_address.mas_bottom).offset(5);
             make.width.mas_equalTo(SCREEN_WIDTH);
             make.height.mas_equalTo(0.5);
         }];
@@ -70,8 +70,12 @@
         self.btn_morenAddress = [[UIButton alloc]init];
         [self.v_back addSubview:self.btn_morenAddress];
         [self.btn_morenAddress setTitle:@"默认地址" forState:UIControlStateNormal];
+        [self.btn_morenAddress setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         [self.btn_morenAddress setImage:[UIImage imageNamed:@"unselect"] forState:UIControlStateNormal];
-        [self.btn_morenAddress setImageEdgeInsets:UIEdgeInsetsMake(0.0, -8.5, 0.0, 0.0)];
+        [self.btn_morenAddress setContentMode:UIViewContentModeScaleAspectFill];
+        self.btn_morenAddress.clipsToBounds = YES;
+        self.btn_morenAddress.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.btn_morenAddress setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
         self.btn_morenAddress.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [self.btn_morenAddress mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15.5);
@@ -85,7 +89,9 @@
         [self.v_back addSubview:self.btn_delete];
         [self.btn_delete setTitle:@"删除" forState:UIControlStateNormal];
         [self.btn_delete setImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-        [self.btn_delete setImageEdgeInsets:UIEdgeInsetsMake(0.0, -8, 0.0, 0.0)];
+        [self.btn_delete setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+        self.btn_delete.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.btn_delete setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
         self.btn_delete.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [self.btn_delete mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 48 - 17);
@@ -97,12 +103,31 @@
         [self.v_back mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.left.mas_equalTo(0);
-            make.height.equalTo(self.btn_delete.mas_bottom).offset(12);
+            make.bottom.equalTo(self.btn_delete.mas_bottom).offset(12);
             make.width.mas_equalTo(SCREEN_WIDTH);
+        }];
+        
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.top.mas_equalTo(0);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.bottom.equalTo(self.v_back.mas_bottom);
         }];
         
     }
     return self;
+}
+
+- (void)contentCellWithAddressEntity:(AddressEntity *)entity{
+    [self.lab_name setText:entity.name];
+    [self.lab_phone setText:entity.phone];
+    [self.lab_address setText:entity.address];
+    if (entity.isDefault == 1) {
+        //是默认地址
+        [self.btn_morenAddress setImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];
+    }else{
+        //非默认地址
+        [self.btn_morenAddress setImage:[UIImage imageNamed:@"unselect"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -1,26 +1,28 @@
 //
-//  RechargeAmountViewController.m
+//  SupplierPayViewController.m
 //  GouKuSeller
 //
-//  Created by 窦建斌 on 2018/5/10.
+//  Created by 窦建斌 on 2018/5/16.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "RechargeAmountViewController.h"
+#import "SupplierPayViewController.h"
 #import "SettlementHandler.h"
 #import <WXApi.h>
 #import "WXApiManager.h"
+#import "PayInCashCompleteView.h"
 
-
-@interface RechargeAmountViewController ()<UITextFieldDelegate,WXApiManagerDelegate>
+@interface SupplierPayViewController ()<UITextFieldDelegate,WXApiManagerDelegate>
 @property (nonatomic ,strong)UITextField      *tf_price;
 @property (nonatomic ,strong)UIButton         *btn_chongzhi;
 
 @property (nonatomic ,assign)int          int_userName;     // =1 有内容   =0没内容
+@property (nonatomic ,strong)PayInCashCompleteView      *v_chongzhiComplete;
+@property (nonatomic ,strong)PayInCashCompleteView      *v_zhifuComplete;
 
 @end
 
-@implementation RechargeAmountViewController
+@implementation SupplierPayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +31,10 @@
 }
 
 - (void)onCreate{
-    UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 255)];
+    
+    self.payPrice = @"32.4";
+    
+    UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 280)];
     [self.view addSubview:v_back];
     [v_back setBackgroundColor:[UIColor whiteColor]];
     
@@ -56,13 +61,30 @@
     [v_back addSubview:img_line];
     [img_line setBackgroundColor:[UIColor colorWithHexString:@"#CFCFCF"]];
     
-    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, img_line.bottom + 38.7, 80, 22)];
+    
+    UILabel *lab_buchong = [[UILabel alloc]init];
+    [v_back addSubview:lab_buchong];
+    CGFloat width = [self widthForString:[NSString stringWithFormat:@"本次采购最少需充值¥%@",self.payPrice] fontSize:14 andHeight:22];
+    [lab_buchong setFrame:CGRectMake(15, img_line.bottom + 9, width, 22)];
+    [lab_buchong setTextColor:[UIColor colorWithHexString:@"#616161"]];
+    [lab_buchong setFont:[UIFont systemFontOfSize:14]];
+    [lab_buchong setText:[NSString stringWithFormat:@"本次采购最少需充值¥%@",self.payPrice]];
+    
+    
+    UIButton *btn_buchong = [[UIButton alloc]initWithFrame:CGRectMake(lab_buchong.right + 20, img_line.bottom + 9, 60, 22)];
+    [v_back addSubview:btn_buchong];
+    [btn_buchong setTitle:@"补充金额" forState:UIControlStateNormal];
+    [btn_buchong setTitleColor:[UIColor colorWithHexString:@"#5D84D1"] forState:UIControlStateNormal];
+    btn_buchong.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btn_buchong addTarget:self action:@selector(btn_buchongAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(15, lab_buchong.bottom + 33, 80, 22)];
     [v_back addSubview:lab2];
     [lab2 setText:@"支付方式"];
     [lab2 setTextColor:[UIColor blackColor]];
     [lab2 setFont:[UIFont systemFontOfSize:16]];
     
-    UIButton *btn_weixin = [[UIButton alloc]initWithFrame:CGRectMake(99, img_line.bottom + 30, 110, 40)];
+    UIButton *btn_weixin = [[UIButton alloc]initWithFrame:CGRectMake(99, lab_buchong.bottom + 24, 110, 40)];
     [v_back addSubview:btn_weixin];
     [btn_weixin setTitle:@"微信" forState:UIControlStateNormal];
     [btn_weixin setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -82,6 +104,24 @@
     self.btn_chongzhi.layer.cornerRadius = 3.0f;
     self.btn_chongzhi.enabled = NO;
     [self.btn_chongzhi addTarget:self action:@selector(btn_chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.v_chongzhiComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.v_chongzhiComplete.btn_continueShou setTitle:@"完成" forState:UIControlStateNormal];
+    [self.v_chongzhiComplete.btn_continueShou addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_chongzhiComplete.lab_shifu setText:@"充值成功"];
+    [self.v_chongzhiComplete.lab_zhaoling setText:[NSString stringWithFormat:@"¥%@",self.payPrice]];
+    [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_chongzhiComplete];
+    [self.v_chongzhiComplete setHidden:YES];
+    
+    
+    self.v_zhifuComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.v_zhifuComplete.btn_continueShou setTitle:@"完成" forState:UIControlStateNormal];
+    [self.v_zhifuComplete.btn_continueShou addTarget:self action:@selector(zhifucontinueAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_zhifuComplete.lab_shifu setText:@"支付成功"];
+    [self.v_zhifuComplete.lab_zhaoling setText:[NSString stringWithFormat:@"¥%@",self.totalPrice]];
+    [self.view addSubview:self.v_zhifuComplete];
+    [self.v_zhifuComplete setHidden:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -123,19 +163,20 @@
 }
 
 - (void)btn_chongzhiAction{
+    
     [self.tf_price resignFirstResponder];
-//    if ([WXApi isWXAppInstalled]) {
-//        [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
-//
-//        } success:^(id obj) {
-//            NSDictionary *dic = (NSDictionary *)obj;
-//            [self weiXinPayWithDic:dic];
-//        } failed:^(NSInteger statusCode, id json) {
-//            [MBProgressHUD showErrorMessage:(NSString *)json];
-//        }];
-//    }else{
-//        [MBProgressHUD showInfoMessage:@"请安装微信"];
-//    }
+    //    if ([WXApi isWXAppInstalled]) {
+    //        [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
+    //
+    //        } success:^(id obj) {
+    //            NSDictionary *dic = (NSDictionary *)obj;
+    //            [self weiXinPayWithDic:dic];
+    //        } failed:^(NSInteger statusCode, id json) {
+    //            [MBProgressHUD showErrorMessage:(NSString *)json];
+    //        }];
+    //    }else{
+    //        [MBProgressHUD showInfoMessage:@"请安装微信"];
+    //    }
     [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
         
     } success:^(id obj) {
@@ -165,7 +206,7 @@
 - (void)managerDidRecvPaymentResponse:(PayResp *)response {
     switch (response.errCode) {
         case WXSuccess:
-//            [self checkWechatPayResult];
+            [self.v_zhifuComplete setHidden:NO];
             break;
         case WXErrCodeUserCancel:
             [MBProgressHUD showInfoMessage:@"中途取消"];
@@ -176,6 +217,38 @@
             break;
     }
 }
+
+- (void)btn_buchongAction{
+    self.tf_price.text = self.payPrice;
+    [self.btn_chongzhi setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
+    [self.btn_chongzhi setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+    self.btn_chongzhi.enabled = YES;
+}
+
+- (void)continueAction{
+    //充值成功  返回确认订单界面  并且把充值金额带回去   重新刷新账户余额
+    
+    [self.v_chongzhiComplete setHidden:YES];
+    [self.v_chongzhiComplete removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.changAccountPrice) {
+        self.changAccountPrice(self.payPrice);
+    }
+}
+
+- (void)zhifucontinueAction{
+    //支付成功  返回购物车
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
+-(CGFloat) widthForString:(NSString *)value fontSize:(float)fontSize andHeight:(float)height
+{
+    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(CGFLOAT_MAX, height) lineBreakMode:NSLineBreakByWordWrapping];
+    return sizeToFit.width;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

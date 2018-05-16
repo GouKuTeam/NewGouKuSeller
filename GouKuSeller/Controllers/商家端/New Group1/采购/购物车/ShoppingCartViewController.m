@@ -14,6 +14,8 @@
 #import "SupplierCommodityEndity.h"
 #import "ShoppingHandler.h"
 #import "ShoppingBottomView.h"
+#import "PurchaseHandler.h"
+#import "AddressEntity.h"
 
 @interface ShoppingCartViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -47,6 +49,7 @@
     
     self.v_bottomNormal = [[ShoppingBottomView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 49 - 46, SCREEN_WIDTH, 46)];
     [self.v_bottomNormal.btn_selectAll addTarget:self action:@selector(selectAllAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottomNormal.btn_checkout addTarget:self action:@selector(checkoutlAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.v_bottomNormal];
     
     [self.tb_shoppingCart requestDataSource];
@@ -277,6 +280,28 @@
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, 3)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 3)];
     [self.v_bottomNormal.lb_allPrice setAttributedText:str_amount];
+}
+
+- (void)checkoutlAction{
+    
+    //获取默认地址
+    [PurchaseHandler selectDefaultAddressWithPrepare:^{
+        
+    } success:^(id obj) {
+        
+        if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+            AddressEntity *entity = [AddressEntity parseAddressEntityWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
+            if (entity.name.length > 0) {
+                //有默认地址   把地址带入下一界面
+            }else{
+                //没有默认地址   下一界面显示去添加地址   添加之后把地址带回来  界面重新布局
+            }
+        }else{
+            [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)leftBarAction:(id)sender{

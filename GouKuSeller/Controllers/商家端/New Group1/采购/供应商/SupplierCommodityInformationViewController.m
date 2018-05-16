@@ -7,6 +7,8 @@
 //
 
 #import "SupplierCommodityInformationViewController.h"
+#import "PurchaseHandler.h"
+#import "StoreEntity.h"
 
 @interface SupplierCommodityInformationViewController ()
 
@@ -29,6 +31,7 @@
 @property (nonatomic ,strong)UIView         *v2;
 @property (nonatomic ,strong)UIView         *v_bottom;
 
+@property (nonatomic ,strong)StoreEntity    *storeEntity;
 
 @end
 
@@ -89,7 +92,7 @@
         make.top.equalTo(self.lab_price.mas_bottom).offset(6);
         make.height.mas_equalTo(17);
     }];
-    [self.lab_stock setText:[NSString stringWithFormat:@"%@",self.supplierCommodityEndity.stock]];
+    [self.lab_stock setText:[NSString stringWithFormat:@"库存%@%@",self.supplierCommodityEndity.stock,self.supplierCommodityEndity.unit]];
     
     [self.v1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
@@ -117,7 +120,7 @@
         make.top.mas_equalTo(13.7);
         make.width.height.mas_equalTo(24);
     }];
-    [self.img_supplierPic sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    
     
     self.lab_supplierName = [[UILabel alloc]init];
     [self.v2 addSubview:self.lab_supplierName];
@@ -129,7 +132,7 @@
         make.right.equalTo(self.v2.mas_right).offset(-84);
         make.height.mas_equalTo(20);
     }];
-    [self.lab_supplierName setText:self.storeEntity.name];
+    
     
     self.btn_enter = [[UIButton alloc]init];
     [self.v2 addSubview:self.btn_enter];
@@ -158,7 +161,7 @@
         make.width.mas_equalTo(SCREEN_WIDTH / 3);
         make.height.mas_equalTo(17);
     }];
-    [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.shopNum]];
+    
     
     UILabel *shopNum = [[UILabel alloc]init];
     [self.v2 addSubview:shopNum];
@@ -184,7 +187,7 @@
         make.width.mas_equalTo(SCREEN_WIDTH / 3);
         make.height.mas_equalTo(17);
     }];
-    [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.orderNum]];
+    
     
     UILabel *orderNum = [[UILabel alloc]init];
     [self.v2 addSubview:orderNum];
@@ -210,7 +213,7 @@
         make.width.mas_equalTo(SCREEN_WIDTH / 3);
         make.height.mas_equalTo(17);
     }];
-    [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f",self.storeEntity.takeOffPrice]];
+    
     
     UILabel *startingPrice = [[UILabel alloc]init];
     [self.v2 addSubview:startingPrice];
@@ -236,8 +239,14 @@
     }];
     
     UIImageView * img_shu2 = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 3 * 2, 239, 0.5, 28)];
-    [self.view addSubview:img_shu2];
+    [self.v2 addSubview:img_shu2];
     [img_shu2 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
+    [img_shu2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(SCREEN_WIDTH / 3 * 2);
+        make.top.mas_equalTo(57);
+        make.width.mas_equalTo(0.5);
+        make.height.mas_equalTo(28);
+    }];
     
     self.lab_commodityStatus = [[UILabel alloc]init];
     [self.scrollView addSubview:self.lab_commodityStatus];
@@ -245,20 +254,17 @@
     [self.lab_commodityStatus setTextAlignment:NSTextAlignmentCenter];
     [self.lab_commodityStatus setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
     [self.lab_commodityStatus setFont:[UIFont systemFontOfSize:14]];
+    [self.lab_commodityStatus setText:@"商品库存不足，无法购买"];
     [self.lab_commodityStatus mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
-        make.top.mas_equalTo(SCREEN_HEIGHT - 78);
+        make.top.equalTo(self.v2.mas_bottom).offset(10);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(32);
     }];
     
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.top.mas_equalTo(SafeAreaTopHeight);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 46);
-        make.bottom.equalTo(self.v2.mas_bottom).offset(12);
-    }];
+    
+    
+    
     
     self.v_bottom = [[UIView alloc]init];
     [self.view addSubview:self.v_bottom];
@@ -273,30 +279,32 @@
     self.btn_supplier = [[UIButton alloc]init];
     [self.v_bottom addSubview:self.btn_supplier];
     [self.btn_supplier mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(0);
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(5);
         make.width.mas_equalTo(SCREEN_WIDTH / 4);
-        make.height.mas_equalTo(46);
+        make.height.mas_equalTo(41);
     }];
     [self.btn_supplier setTitle:@"供应商" forState:UIControlStateNormal];
     [self.btn_supplier setTitleColor:[UIColor colorWithHexString:@"#979797"] forState:UIControlStateNormal];
     self.btn_supplier.titleLabel.font = [UIFont systemFontOfSize:11];
-    [self.btn_supplier setImage:[UIImage imageNamed:@"finance"] forState:UIControlStateNormal];
-    [self.btn_supplier setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_supplier.imageView.frame.size.height + 15 ,-self.btn_supplier.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+    [self.btn_supplier setImage:[UIImage imageNamed:@"gongyingshang"] forState:UIControlStateNormal];
+    [self.btn_supplier setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_supplier.imageView.frame.size.height + 5 ,-self.btn_supplier.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
     [self.btn_supplier setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_supplier.imageView.frame.size.height, 0.0,0.0, -self.btn_supplier.titleLabel.bounds.size.width)];//图片距离右边框
     
     //
     self.btn_shoppingCart = [[UIButton alloc]init];
     [self.v_bottom addSubview:self.btn_shoppingCart];
     [self.btn_shoppingCart mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH / 4 * 2);
-        make.height.mas_equalTo(46);
+        make.top.mas_equalTo(5);
+        make.left.mas_equalTo(SCREEN_WIDTH / 4);
+        make.width.mas_equalTo(SCREEN_WIDTH / 4);
+        make.height.mas_equalTo(41);
     }];
     [self.btn_shoppingCart setTitle:@"购物车" forState:UIControlStateNormal];
     [self.btn_shoppingCart setTitleColor:[UIColor colorWithHexString:@"#979797"] forState:UIControlStateNormal];
     self.btn_shoppingCart.titleLabel.font = [UIFont systemFontOfSize:11];
     [self.btn_shoppingCart setImage:[UIImage imageNamed:@"shoppingcartgrey"] forState:UIControlStateNormal];
-    [self.btn_shoppingCart setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_shoppingCart.imageView.frame.size.height + 15 ,-self.btn_shoppingCart.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+    [self.btn_shoppingCart setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_shoppingCart.imageView.frame.size.height + 5 ,-self.btn_shoppingCart.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
     [self.btn_shoppingCart setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_shoppingCart.imageView.frame.size.height, 0.0,0.0, -self.btn_shoppingCart.titleLabel.bounds.size.width)];//图片距离右边框
     
     self.btn_addShoppingCart = [[UIButton alloc]init];
@@ -311,10 +319,45 @@
         make.height.mas_equalTo(46);
     }];
     
+    if ([self.supplierCommodityEndity.stock intValue] > 0) {
+        [self.lab_commodityStatus setHidden:YES];
+        [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(SafeAreaTopHeight);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 46);
+            make.bottom.equalTo(self.v2.mas_bottom).offset(12);
+        }];
+    }else{
+        self.btn_addShoppingCart.enabled = NO;
+        [self.btn_addShoppingCart setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+        [self.btn_addShoppingCart setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:UIControlStateNormal];
+        [self.lab_commodityStatus setHidden:NO];
+        [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(SafeAreaTopHeight);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 46);
+            make.bottom.equalTo(self.lab_commodityStatus.mas_bottom);
+        }];
+    }
+    
+    [self loadData];
 }
 
 - (void)loadData{
-    
+    [PurchaseHandler selectSupplierDetailWithShopId:self.shopId prepare:^{
+        
+    } success:^(id obj) {
+        self.storeEntity = (StoreEntity *)obj;
+        [self.img_supplierPic sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
+        [self.lab_supplierName setText:self.storeEntity.name];
+        [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.shopNum]];
+        [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.orderNum]];
+        [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f",self.storeEntity.takeOffPrice]];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

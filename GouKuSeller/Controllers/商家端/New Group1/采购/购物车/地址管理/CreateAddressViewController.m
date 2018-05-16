@@ -9,12 +9,23 @@
 #import "CreateAddressViewController.h"
 #import "GCPlaceholderTextView.h"
 #import "LocationAddressViewController.h"
+#import "PurchaseHandler.h"
 
 @interface CreateAddressViewController ()<UITextFieldDelegate>
 
 @property (nonatomic ,strong)UITextField                   *tf_name;
 @property (nonatomic ,strong)UITextField                   *tf_phone;
 @property (nonatomic ,strong)GCPlaceholderTextView         *tf_address;
+@property (nonatomic ,assign)int                            provinceId;
+@property (nonatomic ,assign)int                            cityId;
+@property (nonatomic ,assign)int                            districtId;
+@property (nonatomic ,strong)NSString                      *provinceName;
+@property (nonatomic ,strong)NSString                      *cityName;
+@property (nonatomic ,strong)NSString                      *districtName;
+@property (nonatomic ,strong)NSString                      *lat;
+@property (nonatomic ,strong)NSString                      *lon;
+
+
 @end
 
 @implementation CreateAddressViewController
@@ -25,9 +36,13 @@
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
+    
 }
 
+
+
 - (void)onCreate{
+    [self loadData];
     UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 220)];
     [self.view addSubview:v_back];
     [v_back setBackgroundColor:[UIColor whiteColor]];
@@ -98,11 +113,23 @@
     [imgline3 setBackgroundColor:[UIColor colorWithHexString:@"#CFCFCF"]];
 }
 
+- (void)loadData{
+    [PurchaseHandler getProvinceCityAreaprepare:^{
+        
+    } success:^(id obj) {
+        
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
+}
+
 - (void)tgp_addressAction{
     LocationAddressViewController *vc = [[LocationAddressViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBackAddress = ^(AMapPOI *poiEntity) {
         [self.tf_address setText:poiEntity.address];
+        self.lon = [NSString stringWithFormat:@"%f",poiEntity.location.longitude];
+        self.lat = [NSString stringWithFormat:@"%f",poiEntity.location.latitude];
     };
 }
 
@@ -115,6 +142,13 @@
         [MBProgressHUD showErrorMessage:@"请填写手机号"];
         return;
     }
+    [PurchaseHandler addNewAddressWithName:self.tf_name.text phone:self.tf_phone.text provinceId:self.provinceId cityId:self.cityId districtId:self.districtId provinceName:self.provinceName cityName:self.cityName districtName:self.districtName address:self.tf_address.text lat:self.lat lon:self.lon prepare:^{
+        
+    } success:^(id obj) {
+        
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

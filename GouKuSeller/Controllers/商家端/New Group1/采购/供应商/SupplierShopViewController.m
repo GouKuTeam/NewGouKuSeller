@@ -317,21 +317,17 @@
     if (tableView == self.tb_right) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self changeNavigationOriginal];
+        SupplierCommodityEndity *sentity = [self.arr_data objectAtIndex:indexPath.row];
         self.navigationController.navigationBar.translucent = YES;
         SupplierCommodityInformationViewController *vc = [[SupplierCommodityInformationViewController alloc]init];
-        vc.storeEntity = self.storeEntity;
+        vc.supplierCommodityEndity = sentity;
+        vc.shopId = self.storeEntity.shopId;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (void)addCommityAction:(UIButton *)btn_sender{
     SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
-    NSMutableArray *arr = [NSMutableArray array];
-    for (int i = 0; i < 6; i ++) {
-        NSDictionary *dic = @{@"price":[NSNumber numberWithInt:i + 20],@"unitName":@"莉莉",@"id":[NSNumber numberWithInt:i + 20]};
-        [arr addObject:dic];
-    }
-    entity.saleUnits = arr;
     [self.selectUnitView contentViewWithSupplierCommodityEndity:entity];
     [self.selectUnitView setHidden:NO];
 }

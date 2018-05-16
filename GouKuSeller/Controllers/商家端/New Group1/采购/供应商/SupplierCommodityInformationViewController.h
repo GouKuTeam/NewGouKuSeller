@@ -12,7 +12,7 @@
 
 @interface SupplierCommodityInformationViewController : BaseViewController
 
-@property (nonatomic,strong)StoreEntity                *storeEntity;
+@property (nonatomic,strong)NSNumber                   *shopId;
 @property (nonatomic,strong)SupplierCommodityEndity    *supplierCommodityEndity;
 
 @end

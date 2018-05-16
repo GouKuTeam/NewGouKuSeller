@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddressEntity.h"
 
 @interface EditAddressTableViewCell : UITableViewCell
 
@@ -16,5 +17,7 @@
 @property (nonatomic ,strong)UILabel          *lab_address;
 @property (nonatomic ,strong)UIButton         *btn_morenAddress;
 @property (nonatomic ,strong)UIButton         *btn_delete;
+
+- (void)contentCellWithAddressEntity:(AddressEntity *)entity;
 
 @end

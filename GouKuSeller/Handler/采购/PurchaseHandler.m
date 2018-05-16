@@ -259,12 +259,7 @@
                                        parameters:nil
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
-                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  success(nil);
-                                              }else{
-                                                  [MBProgressHUD hideHUD];
-                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-                                              }
+                                              success(responseObject);
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
@@ -278,8 +273,40 @@
                                        parameters:nil
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//删除地址
++ (void)deleteAddressWithAddressId:(NSNumber *)addressId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@/%@",API_Other,API_GET_DeleteAddress,addressId];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//查询供应商详情
++ (void)selectSupplierDetailWithShopId:(NSNumber *)shopid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SelectSupplierDetail];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (shopid) {
+        [dic setObject:shopid forKey:@"shopId"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  AddressEntity *entity = [AddressEntity parseAddressEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  StoreEntity *entity = [StoreEntity parseStoreEntityWithJson:[responseObject objectForKey:@"data"]];
                                                   success(entity);
                                               }else{
                                                   [MBProgressHUD hideHUD];
@@ -290,9 +317,9 @@
                                           }];
 }
 
-//删除地址
-+ (void)deleteAddressWithAddressId:(NSNumber *)addressId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@/%@",API_Other,API_GET_DeleteAddress,addressId];
+//获取省市区
++ (void)getProvinceCityAreaprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_SSQ];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil

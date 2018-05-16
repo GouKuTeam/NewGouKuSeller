@@ -185,6 +185,8 @@
 #define API_GET_SUPPLIERWITHCATEGORY @"/shop/supplier/search/industry"
 //名字搜索供应商
 #define API_POST_SearchSupplier @"/shop/supplier/search"
+//供应商详情查询
+#define API_POST_SelectSupplierDetail @"/shop/supplier/detail"
 //查询所有商品
 #define API_GET_WARE @"/wareSku/show/list"
 //购物车列表
@@ -199,12 +201,15 @@
 #define API_GET_ShoppingRemove @"/shopping/remove"
 //结算生成新订单
 #define API_POST_NewOrder @"/shopOrder/new"
+//查询采购订单列表
+#define API_POST_ShopOrderList @"/shopOrder/user/list"
+
 
 /*
  地址管理API
  */
 //查看所有地址
-#define API_POST_SelectAddressList @"address/list"
+#define API_POST_SelectAddressList @"/shop/address/list"
 //添加新的地址
 #define API_POST_AddNewAddress @"/shop/add/address"
 //设置默认地址
@@ -213,7 +218,8 @@
 #define API_POST_SelectDefaultAddress @"/shop/get/default/address"
 //删除地址
 #define API_GET_DeleteAddress @"/shop/delete/address"
-
+//获取省市区
+#define API_GET_SSQ @"/common/province/city/district/list"
 /*
  客户管理API
  */

@@ -15,6 +15,7 @@
 #import "SettlementHandler.h"
 #import "BankCardDetailViewController.h"
 #import "RechargeAmountViewController.h"
+#import "SupplierPayViewController.h"
 
 @interface SettlementViewController ()
 @property (nonatomic ,strong)SettlementView         *v_settlementBack;
@@ -71,8 +72,10 @@
 }
 
 - (void)btn_chongzhiAction{
+    
     RechargeAmountViewController *vc = [[RechargeAmountViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (void)yuemingxiAction{

@@ -50,6 +50,7 @@
     [self.v_workBench.btn_shouyin addTarget:self action:@selector(shouyinAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_caigou addTarget:self action:@selector(caigouAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_pandian addTarget:self action:@selector(pandianuAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_workBench.btn_jingying addTarget:self action:@selector(jingyingAction) forControlEvents:UIControlEventTouchUpInside];
     [self loadData];
 }
 
@@ -99,6 +100,12 @@
 
 - (void)pandianuAction{
     InventoryViewController *vc = [[InventoryViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)jingyingAction{
+    EditAddressViewController *vc = [[EditAddressViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

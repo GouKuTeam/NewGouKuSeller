@@ -45,4 +45,10 @@
 //删除地址
 + (void)deleteAddressWithAddressId:(NSNumber *)addressId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//查询供应商详情
++ (void)selectSupplierDetailWithShopId:(NSNumber *)shopid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//获取省市区
++ (void)getProvinceCityAreaprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end

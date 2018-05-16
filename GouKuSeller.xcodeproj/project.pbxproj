@@ -49,6 +49,9 @@
 		74046B13209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		740C46B020AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */; };
 		740C46B320AAE10F00626A8B /* AddressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B220AAE10F00626A8B /* AddressEntity.m */; };
+		740C46B620AC33ED00626A8B /* SupplierPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B520AC33ED00626A8B /* SupplierPayViewController.m */; };
+		740C46B820AC3F8700626A8B /* TiXianPassWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E339207A1FA40083E4A8 /* TiXianPassWordView.m */; };
+		740C46B920AC3F8700626A8B /* TiXianPassWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E339207A1FA40083E4A8 /* TiXianPassWordView.m */; };
 		740C688A207C98930044889F /* PayInCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6889207C98930044889F /* PayInCashViewController.m */; };
 		740C688D207C989F0044889F /* PayInGouKuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688C207C989F0044889F /* PayInGouKuViewController.m */; };
 		740C6890207CA8A30044889F /* PayInCashCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688F207CA8A30044889F /* PayInCashCompleteView.m */; };
@@ -742,6 +745,8 @@
 		740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCommodityInSupplierShopViewController.m; sourceTree = "<group>"; };
 		740C46B120AAE10F00626A8B /* AddressEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressEntity.h; sourceTree = "<group>"; };
 		740C46B220AAE10F00626A8B /* AddressEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressEntity.m; sourceTree = "<group>"; };
+		740C46B420AC33ED00626A8B /* SupplierPayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierPayViewController.h; sourceTree = "<group>"; };
+		740C46B520AC33ED00626A8B /* SupplierPayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierPayViewController.m; sourceTree = "<group>"; };
 		740C6888207C98930044889F /* PayInCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInCashViewController.h; sourceTree = "<group>"; };
 		740C6889207C98930044889F /* PayInCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashViewController.m; sourceTree = "<group>"; };
 		740C688B207C989F0044889F /* PayInGouKuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInGouKuViewController.h; sourceTree = "<group>"; };
@@ -1299,6 +1304,8 @@
 				1842CCC7209AACF700A1C7C8 /* ShoppingCartViewController.m */,
 				1842CCE0209B080A00A1C7C8 /* ConfirmOrderViewController.h */,
 				1842CCE1209B080A00A1C7C8 /* ConfirmOrderViewController.m */,
+				740C46B420AC33ED00626A8B /* SupplierPayViewController.h */,
+				740C46B520AC33ED00626A8B /* SupplierPayViewController.m */,
 				1842CCDC209AD97400A1C7C8 /* View */,
 				74046B07209C03C6004E64A9 /* 地址管理 */,
 			);
@@ -1420,6 +1427,31 @@
 				74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */,
 			);
 			path = GCPlaceholderTextView;
+			sourceTree = "<group>";
+		};
+		740C46B720AC3F6B00626A8B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7491FA2F206B8DD20006F388 /* BankInformationView.h */,
+				7491FA30206B8DD20006F388 /* BankInformationView.m */,
+				7491FA25206B7B000006F388 /* SettlementView.h */,
+				7491FA26206B7B000006F388 /* SettlementView.m */,
+				7491FA34206B9F8F0006F388 /* BankCardTableViewCell.h */,
+				7491FA35206B9F8F0006F388 /* BankCardTableViewCell.m */,
+				7491FA43206CAB410006F388 /* TiXianView.h */,
+				7491FA44206CAB410006F388 /* TiXianView.m */,
+				74C6E338207A1FA40083E4A8 /* TiXianPassWordView.h */,
+				74C6E339207A1FA40083E4A8 /* TiXianPassWordView.m */,
+				741D3CB320846D6C00C56FCA /* TiXianCompleteView.h */,
+				741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */,
+				741D3CB820846D7A00C56FCA /* TiXianIngView.h */,
+				741D3CB920846D7A00C56FCA /* TiXianIngView.m */,
+				7491FA5F206DD9380006F388 /* YuEDetailTableViewCell.h */,
+				7491FA60206DD9380006F388 /* YuEDetailTableViewCell.m */,
+				7491FA64206E05C60006F388 /* ShaiXuanView.h */,
+				7491FA65206E05C60006F388 /* ShaiXuanView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		741D3C6D20804CF800C56FCA /* 订单 */ = {
@@ -1752,38 +1784,21 @@
 		7491FA1F206B73FF0006F388 /* 结算 */ = {
 			isa = PBXGroup;
 			children = (
+				740C46B720AC3F6B00626A8B /* View */,
 				7491FA20206B75400006F388 /* SettlementViewController.h */,
 				7491FA21206B75400006F388 /* SettlementViewController.m */,
-				7491FA25206B7B000006F388 /* SettlementView.h */,
-				7491FA26206B7B000006F388 /* SettlementView.m */,
 				74C6E335207A0B730083E4A8 /* BankCardDetailViewController.h */,
 				74C6E336207A0B730083E4A8 /* BankCardDetailViewController.m */,
 				7491FA2A206B8BE10006F388 /* BankCardInformationViewController.h */,
 				7491FA2B206B8BE10006F388 /* BankCardInformationViewController.m */,
-				7491FA34206B9F8F0006F388 /* BankCardTableViewCell.h */,
-				7491FA35206B9F8F0006F388 /* BankCardTableViewCell.m */,
 				7491FA39206BA5D50006F388 /* SelectBankViewController.h */,
 				7491FA3A206BA5D50006F388 /* SelectBankViewController.m */,
-				7491FA2F206B8DD20006F388 /* BankInformationView.h */,
-				7491FA30206B8DD20006F388 /* BankInformationView.m */,
 				7491FA3E206CAB130006F388 /* TiXianiewController.h */,
 				7491FA3F206CAB130006F388 /* TiXianiewController.m */,
-				7491FA43206CAB410006F388 /* TiXianView.h */,
-				7491FA44206CAB410006F388 /* TiXianView.m */,
-				74C6E338207A1FA40083E4A8 /* TiXianPassWordView.h */,
-				74C6E339207A1FA40083E4A8 /* TiXianPassWordView.m */,
 				7491FA5A206DD8030006F388 /* YueDetailViewController.h */,
 				7491FA5B206DD8030006F388 /* YueDetailViewController.m */,
 				741D3CAE2084692200C56FCA /* TiXianDetailViewController.h */,
 				741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */,
-				741D3CB320846D6C00C56FCA /* TiXianCompleteView.h */,
-				741D3CB420846D6C00C56FCA /* TiXianCompleteView.m */,
-				741D3CB820846D7A00C56FCA /* TiXianIngView.h */,
-				741D3CB920846D7A00C56FCA /* TiXianIngView.m */,
-				7491FA5F206DD9380006F388 /* YuEDetailTableViewCell.h */,
-				7491FA60206DD9380006F388 /* YuEDetailTableViewCell.m */,
-				7491FA64206E05C60006F388 /* ShaiXuanView.h */,
-				7491FA65206E05C60006F388 /* ShaiXuanView.m */,
 				743C5F2020A41BEF00E617AF /* RechargeAmountViewController.h */,
 				743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */,
 			);
@@ -2933,6 +2948,7 @@
 				744ABA6C205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABAA02055713200BBB26E /* EditInfoView.m in Sources */,
 				74B4E8A8204BD3EC006AFB6C /* KeyChainStore.m in Sources */,
+				740C46B620AC33ED00626A8B /* SupplierPayViewController.m in Sources */,
 				74046B0A209C03EE004E64A9 /* EditAddressTableViewCell.m in Sources */,
 				743C5F3620A52F3500E617AF /* AddInventoryViewController.m in Sources */,
 				744ABA75205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
@@ -3097,6 +3113,7 @@
 				74ACFFC620A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74B4E89D204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8B205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
+				740C46B820AC3F8700626A8B /* TiXianPassWordView.m in Sources */,
 				743C5F6520A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
 				743C5F6F20A592DE00E617AF /* CustomerShopView.m in Sources */,
 				74BD11DC2067DE830053A3D1 /* TabBarViewController.m in Sources */,
@@ -3262,6 +3279,7 @@
 				74ACFFC720A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74B4E89E204BD3EC006AFB6C /* GetUUID.m in Sources */,
 				744ABA8C205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
+				740C46B920AC3F8700626A8B /* TiXianPassWordView.m in Sources */,
 				743C5F6620A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
 				743C5F7020A592DE00E617AF /* CustomerShopView.m in Sources */,
 				74BD11DD2067DE830053A3D1 /* TabBarViewController.m in Sources */,

@@ -9,6 +9,7 @@
 #import "SearchCommodityInSupplierShopViewController.h"
 #import "SupplierCommodityTableViewCell.h"
 #import "PurchaseHandler.h"
+#import "SupplierCommodityInformationViewController.h"
 
 @interface SearchCommodityInSupplierShopViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -46,7 +47,7 @@
     self.tf_search.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
     self.tf_search.leftView = v_left;
     self.tf_search.leftViewMode = UITextFieldViewModeAlways;
-    self.tf_search.placeholder = @"输入订单号搜索订单";
+    self.tf_search.placeholder = @"搜索商品条形码或名称";
     self.tf_search.font = [UIFont systemFontOfSize:FONT_SIZE_DESC];
     self.tf_search.textColor = [UIColor blackColor];
     [self.tf_search.layer setCornerRadius:5];
@@ -117,6 +118,15 @@
     SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:indexPath.row];
     [cell contentCellWithWareEntity:entity];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:indexPath.row];
+    SupplierCommodityInformationViewController *vc = [[SupplierCommodityInformationViewController alloc]init];
+    vc.supplierCommodityEndity = entity;
+    vc.shopId = self.shopId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)cancelAction{

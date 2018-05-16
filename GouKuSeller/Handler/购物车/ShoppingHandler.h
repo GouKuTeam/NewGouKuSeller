@@ -22,4 +22,10 @@
 //清空购物车失效商品
 + (void)shoppingRemoveWithPrepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//结算生成新订单
++ (void)generateNewOrderWithReceiver:(NSString *)receiver address:(NSString *)address phone:(NSString *)phone items:(NSArray *)items remarks:(NSArray *)remarks prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//查询采购订单列表
++ (void)selectOrderListWithStatus:(NSNumber *)status keyWord:(NSString *)keyWord prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end
