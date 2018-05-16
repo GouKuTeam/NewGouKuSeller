@@ -10,4 +10,6 @@
 
 @interface ConfirmOrderViewController : BaseViewController
 
+@property (nonatomic,strong)NSMutableArray   *arr_selectedData;
+
 @end
