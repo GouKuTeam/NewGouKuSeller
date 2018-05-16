@@ -177,7 +177,7 @@
         cell.lb_title.textColor = [UIColor blackColor];
     }
     NSDictionary *dic = [self.supplierCommodityEndity.saleUnits objectAtIndex:indexPath.row];
-    cell.lb_title.text = [dic objectForKey:@"unitName"];
+    cell.lb_title.text = [NSString stringWithFormat:@"%@(%d%@)",[dic objectForKey:@"unitName"],[[dic objectForKey:@"count"] intValue],self.supplierCommodityEndity.unit];
     return cell;
 }
 

@@ -16,6 +16,7 @@
 #import "ShoppingBottomView.h"
 #import "PurchaseHandler.h"
 #import "AddressEntity.h"
+#import "ShoppingInvalidTableViewCell.h"
 
 @interface ShoppingCartViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -136,6 +137,20 @@
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:storeEntity.logo] placeholderImage:nil];
     [btn_select setSelected:selectStoreEntity.isSelected];
     [lb_title setText:storeEntity.name];
+    if ([storeEntity.name isEqualToString:@"失效商品"]) {
+        [iv_avatar setHidden:YES];
+        [btn_select setHidden:YES];
+        [iv_arrow setHidden:YES];
+        [lb_title setFrame:CGRectMake(10, 0, SCREEN_WIDTH - 100, 42)];
+        [lb_title setText:storeEntity.name];
+        UIButton *btn_delete = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 50, 42)];
+        [btn_delete setTitle:@"清空" forState:UIControlStateNormal];
+        [btn_delete setTitleColor:[UIColor colorWithHexString:@"#E6670C"] forState:UIControlStateNormal];
+        [btn_delete.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        btn_delete.tag = section;
+        [btn_delete addTarget:self action:@selector(deleteInvalidAction) forControlEvents:UIControlEventTouchUpInside];
+        [v_header addSubview:btn_delete];
+    }
     
     return v_header;
 }
@@ -156,6 +171,8 @@
     [v_footer addSubview:lb_amount];
     
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
+    StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
+
     [lb_StartingPrice setText:[NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice]];
     double sectionAmount = 0.00;
     for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
@@ -171,28 +188,44 @@
     [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     [v_footer addSubview:v_line];
     
-    return v_footer;
+    if ([storeEntity.name isEqualToString:@"失效商品"]) {
+        return nil;
+    }else{
+        return v_footer;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"shoppingCell";
-    ShoppingCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[ShoppingCartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:indexPath.section];
-    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
-    [cell contentCellWithWareEntity:wareEntity];
-    cell.btn_select.tag = indexPath.section*100 + indexPath.row;
-    [cell.btn_select addTarget:self action:@selector(selectRowAction:) forControlEvents:UIControlEventTouchUpInside];
-    StoreEntity *selectStore = [self.arr_select objectAtIndex:indexPath.section];
-    if ([selectStore.shoppingCatItems containsObject:wareEntity]) {
-        [cell.btn_select setSelected:YES];
+    if (![storeEntity.name isEqualToString:@"失效商品"]) {
+        static NSString *identifier = @"shoppingCell";
+        ShoppingCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[ShoppingCartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
+        [cell contentCellWithWareEntity:wareEntity];
+        cell.btn_select.tag = indexPath.section*100 + indexPath.row;
+        [cell.btn_select addTarget:self action:@selector(selectRowAction:) forControlEvents:UIControlEventTouchUpInside];
+        StoreEntity *selectStore = [self.arr_select objectAtIndex:indexPath.section];
+        if ([selectStore.shoppingCatItems containsObject:wareEntity]) {
+            [cell.btn_select setSelected:YES];
+        }else{
+            [cell.btn_select setSelected:NO];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }else{
-        [cell.btn_select setSelected:NO];
+        static NSString *identifier = @"shoppingInvalidCell";
+        ShoppingInvalidTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[ShoppingInvalidTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
+        [cell contentCellWithWareEntity:wareEntity];
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -200,18 +233,24 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
-    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
-    StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
-    NSMutableArray *arr_select = [NSMutableArray arrayWithArray:selectStoreEntity.shoppingCatItems];
-    if ([arr_select containsObject:wareEntity]) {
-        [arr_select removeObject:wareEntity];
-    }else{
-        [arr_select addObject:wareEntity];
+    if (![storeEntity.name isEqualToString:@"失效商品"]) {
+        SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
+        StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
+        NSMutableArray *arr_select = [NSMutableArray arrayWithArray:selectStoreEntity.shoppingCatItems];
+        if ([arr_select containsObject:wareEntity]) {
+            [arr_select removeObject:wareEntity];
+        }else{
+            [arr_select addObject:wareEntity];
+        }
+        selectStoreEntity.shoppingCatItems = arr_select;
+        [self.arr_select replaceObjectAtIndex:section withObject:selectStoreEntity];
+        [self.tb_shoppingCart reloadData];
+        [self getAllPrice];
     }
-    selectStoreEntity.shoppingCatItems = arr_select;
-    [self.arr_select replaceObjectAtIndex:section withObject:selectStoreEntity];
-    [self.tb_shoppingCart reloadData];
-    [self getAllPrice];
+}
+
+- (void)deleteInvalidAction{
+    
 }
 
 - (void)selectSectionAction:(UIButton *)btn_sender{

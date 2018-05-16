@@ -9,6 +9,7 @@
 #import "SupplierCommodityInformationViewController.h"
 #import "PurchaseHandler.h"
 #import "StoreEntity.h"
+#import "SelectUnitView.h"
 
 @interface SupplierCommodityInformationViewController ()
 
@@ -30,6 +31,8 @@
 @property (nonatomic ,strong)UIView         *v1;
 @property (nonatomic ,strong)UIView         *v2;
 @property (nonatomic ,strong)UIView         *v_bottom;
+@property (nonatomic,strong)SelectUnitView  *selectUnitView;
+
 
 @property (nonatomic ,strong)StoreEntity    *storeEntity;
 
@@ -312,6 +315,7 @@
     [self.btn_addShoppingCart setTitle:@"加入购物车" forState:UIControlStateNormal];
     [self.btn_addShoppingCart setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
     [self.btn_addShoppingCart setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:UIControlStateNormal];
+    [self.btn_addShoppingCart addTarget:self action:@selector(addShopCartAction) forControlEvents:UIControlEventTouchUpInside];
     [self.btn_addShoppingCart mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(SCREEN_WIDTH / 2);
         make.top.mas_equalTo(0);
@@ -343,7 +347,37 @@
     }
     
     [self loadData];
+    
+    self.selectUnitView = [[SelectUnitView alloc]init];
+    [self.selectUnitView setHidden:YES];
+    [self.selectUnitView.btn_confirm addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.selectUnitView];
+    [self.selectUnitView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(SCREEN_HEIGHT);
+    }];
 }
+
+- (void)addShopCartAction{
+    [self.selectUnitView contentViewWithSupplierCommodityEndity:self.supplierCommodityEndity];
+    [self.selectUnitView setHidden:NO];
+}
+
+- (void)confirmAction{
+    NSDictionary *dic = [self.selectUnitView.supplierCommodityEndity.saleUnits objectAtIndex:self.selectUnitView.selectIndex];
+    [PurchaseHandler addCommodityToShoppingCarWithSkuId:self.selectUnitView.supplierCommodityEndity.skuId skuUnitId:[dic objectForKey:@"id"] count:[NSNumber numberWithInt:[self.selectUnitView.tf_count.text intValue]] prepare:^{
+        [MBProgressHUD showActivityMessageInView:nil];
+    } success:^(id obj) {
+        [MBProgressHUD hideHUD];
+        [self.selectUnitView setHidden:YES];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
+}
+
 
 - (void)loadData{
     [PurchaseHandler selectSupplierDetailWithShopId:self.shopId prepare:^{

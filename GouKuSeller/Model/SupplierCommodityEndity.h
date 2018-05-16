@@ -35,6 +35,7 @@
 @property (nonatomic ,strong)NSString                      *unit;      //列表显示的默认单位名称
 @property (nonatomic ,assign)double                        price;      //列表显示的默认单位价格
 @property (nonatomic ,assign)NSInteger                     count;
+@property (nonatomic ,strong)NSString                      *remark;
 
 
 + (NSArray *)parseSupplierCommodityEndityListWithJson:(id)json;
