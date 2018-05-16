@@ -14,6 +14,7 @@
 #import "SupplierCommodityEndity.h"
 #import "ShoppingHandler.h"
 #import "ShoppingBottomView.h"
+#import "ConfirmOrderViewController.h"
 
 @interface ShoppingCartViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -22,6 +23,8 @@
 @property (nonatomic,strong)ShoppingCarEntity *shoppingCarEntity;
 @property (nonatomic,strong)NSMutableArray    *arr_select;
 @property (nonatomic,strong)ShoppingBottomView  *v_bottomNormal;
+@property (nonatomic,assign)int                 editStatus;
+@property (nonatomic,strong)UIBarButtonItem   *btn_right;
 
 @end
 
@@ -33,6 +36,10 @@
     self.title = @"购物车";
     self.arr_data = [NSMutableArray array];
     self.arr_select = [NSMutableArray array];
+    
+    self.btn_right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStyleDone target:self action:@selector(editAction)];
+    self.navigationItem.rightBarButtonItem = self.btn_right;
+    
 }
 
 - (void)onCreate{
@@ -47,6 +54,7 @@
     
     self.v_bottomNormal = [[ShoppingBottomView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 49 - 46, SCREEN_WIDTH, 46)];
     [self.v_bottomNormal.btn_selectAll addTarget:self action:@selector(selectAllAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottomNormal.btn_checkout addTarget:self action:@selector(checkAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.v_bottomNormal];
     
     [self.tb_shoppingCart requestDataSource];
@@ -279,9 +287,36 @@
     [self.v_bottomNormal.lb_allPrice setAttributedText:str_amount];
 }
 
+- (void)checkAction{
+    if (self.editStatus == 0) {
+        ConfirmOrderViewController *vc = [[ConfirmOrderViewController alloc]init];
+        vc.arr_selectedData = self.arr_select;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        //批量删除
+    }
+}
+
 - (void)leftBarAction:(id)sender{
     TabBarViewController *vc = [[TabBarViewController alloc]init];
     [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+}
+
+- (void)editAction{
+    if (self.editStatus == 0) {
+        self.editStatus = 1;
+        [self.btn_right setTitle:@"完成"];
+        [self.v_bottomNormal.lb_allPrice setHidden:YES];
+        [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:@"#E6670C"]];
+        [self.v_bottomNormal.btn_checkout setTitle:@"删除" forState:UIControlStateNormal];
+    }else{
+        self.editStatus = 0;
+        [self.btn_right setTitle:@"编辑"];
+        [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
+        [self.v_bottomNormal.lb_allPrice setHidden:NO];
+        [self.v_bottomNormal.btn_checkout setTitle:@"结算" forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
