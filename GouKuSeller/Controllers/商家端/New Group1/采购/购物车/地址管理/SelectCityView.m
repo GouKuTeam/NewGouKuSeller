@@ -82,8 +82,23 @@
     return  self.frame.size.width/3;
 }
 
-//显示的标题
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    
+    UILabel *lb_title = (UILabel *)view;
+    
+    if (lb_title == nil) {
+        lb_title = [[UILabel alloc]init];
+        lb_title.font = [UIFont systemFontOfSize:17];
+        lb_title.textColor = [UIColor blackColor];
+        [lb_title setTextAlignment:NSTextAlignmentCenter];
+        [lb_title setBackgroundColor:[UIColor clearColor]];
+    }
+    lb_title.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    
+    return lb_title;
+}
 
+//显示的标题
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if (component == 0) {
         NSDictionary *dic = [self.arr_data objectAtIndex:row];
@@ -99,21 +114,6 @@
         return [dicThree objectForKey:@"districtName"];
     }
 }
-
-////显示的标题字体、颜色等属性
-//
-//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
-//
-//    NSString *str = [_nameArray objectAtIndex:row];
-//
-//    NSMutableAttributedString *AttributedString = [[NSMutableAttributedString alloc]initWithString:str];
-//
-//    [AttributedString addAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:18], NSForegroundColorAttributeName:[UIColor whiteColor]} range:NSMakeRange(0, [AttributedString  length])];
-//
-//    return AttributedString;
-//
-//}
-
 
 //被选择的行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{

@@ -127,6 +127,7 @@
 }
 
 - (void)selectCity{
+    [self.view endEditing:YES];
     [self.selectCityView setHidden:NO];
 }
 
@@ -152,13 +153,23 @@
 
 - (void)confirmAction{
     [self.selectCityView setHidden:YES];
-    NSDictionary *dic = [self.selectCityView.arr_data objectAtIndex:self.selectCityView.selectedOneIndex];
-    NSDictionary *dicTwo = [[dic objectForKey:@"cityList"] objectAtIndex:self.selectCityView.selectedTwoIndex];
-    NSDictionary *dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
+    NSDictionary *dic = [NSDictionary dictionary];
+    NSDictionary *dicTwo = [NSDictionary dictionary];
+    NSDictionary *dicThree = [NSDictionary dictionary];
+    
+    if (self.selectCityView.arr_data.count > 0) {
+        dic = [self.selectCityView.arr_data objectAtIndex:self.selectCityView.selectedOneIndex];
+    }
+    if ([[dic objectForKey:@"cityList"] count] > 0) {
+        dicTwo = [[dic objectForKey:@"cityList"] objectAtIndex:self.selectCityView.selectedTwoIndex];
+    }
+    if ([[dicTwo objectForKey:@"districtList"] count] > 0) {
+        dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
+    }
     self.provinceId = [[dic objectForKey:@"id"] intValue];
     self.cityId = [[dicTwo objectForKey:@"code"] intValue];
     self.districtId = [[dicThree objectForKey:@"id"] intValue];
-    [self.lb_city setText:[NSString stringWithFormat:@"%@ %@ %@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[dicThree objectForKey:@"districtName"]]];
+    [self.lb_city setText:[NSString stringWithFormat:@"%@ %@ %@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[[dicThree objectForKey:@"districtName"] length] > 0 ? [dicThree objectForKey:@"districtName"] : @""]];
 }
 
 - (void)rightBarAction{
