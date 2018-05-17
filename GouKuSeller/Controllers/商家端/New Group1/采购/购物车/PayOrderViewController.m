@@ -15,7 +15,6 @@
 #import "SupplierPayViewController.h"
 #import "PayInCashCompleteView.h"
 
-
 @interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)BaseTableView    *tb_confirmOrder;
@@ -64,17 +63,21 @@
 
 - (void)setUpBottomUI{
     
+    self.total = 1000000;
     
     UIView *v_yue = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50 - 54, SCREEN_WIDTH, 46)];
+    [v_yue setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:v_yue];
     UILabel *lab_yue = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 200, 46)];
     [lab_yue setFont:[UIFont systemFontOfSize:14]];
     [lab_yue setTextColor:[UIColor colorWithHexString:@"#616161"]];
     NSMutableAttributedString *str_yu = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"余额支付(剩余¥%.2f)",self.accountPrice]];
-    [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 3)];
+    [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
     [lab_yue setAttributedText:str_yu];
+    [v_yue addSubview:lab_yue];
     
     if (self.accountPrice < self.total) {
-        //账户余额 大于 订单金额
+        
         UIButton *btn_chongzhi = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 76, 8, 66, 30)];
         [btn_chongzhi setTitle:@"充值" forState:UIControlStateNormal];
         [btn_chongzhi setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
@@ -117,6 +120,11 @@
     self.btn_payOrder.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.btn_payOrder addTarget:self action:@selector(payOrder) forControlEvents:UIControlEventTouchUpInside];
     [v_bottom addSubview:self.btn_payOrder];
+    
+    if (self.accountPrice < self.total) {
+        [self.btn_payOrder setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+        self.btn_payOrder.enabled = NO;
+    }
 }
 
 - (void)payOrder{

@@ -86,7 +86,8 @@
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  success(nil);
+                                                  ShoppingCarEntity *entity = [ShoppingCarEntity parseShoppingCarEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(entity);
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];

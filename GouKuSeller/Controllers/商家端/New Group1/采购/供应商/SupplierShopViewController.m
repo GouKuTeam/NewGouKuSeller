@@ -264,7 +264,7 @@
         }
         SupplierCommodityEndity *entity = [self.arr_data objectAtIndex:indexPath.row];
         [cell contentCellWithWareEntity:entity];
-        cell.tag = indexPath.row;
+        cell.btn_addCommodity.tag = indexPath.row;
         [cell.btn_addCommodity addTarget:self action:@selector(addCommityAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }

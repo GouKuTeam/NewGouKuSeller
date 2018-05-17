@@ -18,6 +18,7 @@
 #import "AddressEntity.h"
 #import "ShoppingInvalidTableViewCell.h"
 #import "ConfirmOrderViewController.h"
+#import "SupplierShopViewController.h"
 
 @interface ShoppingCartViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -70,20 +71,7 @@
         
     } success:^(id obj) {
         self.shoppingCarEntity = (ShoppingCarEntity *)obj;
-        [self.arr_data removeAllObjects];
-        [self.arr_data addObjectsFromArray:self.shoppingCarEntity.shoppingCarShops];
-        if (self.shoppingCarEntity.invalidItems.count > 0) {
-            StoreEntity *entity = [[StoreEntity alloc]init];
-            entity.name = @"失效商品";
-            entity.shoppingCatItems = self.shoppingCarEntity.invalidItems;
-            [self.arr_data addObject:entity];
-        }
-        [self.arr_select removeAllObjects];
-        for (int i = 0; i < self.arr_data.count; i++) {
-            StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
-            entity.shoppingCatItems = @[];
-            [self.arr_select addObject:entity];
-        }
+        [self refreshUI];
         complete([self.arr_data count]);
     } failed:^(NSInteger statusCode, id json) {
         if (complete) {
@@ -91,6 +79,25 @@
         }
         [MBProgressHUD showErrorMessage:(NSString *)json];
     }];
+}
+
+- (void)refreshUI{
+    [self.arr_data removeAllObjects];
+    [self.arr_data addObjectsFromArray:self.shoppingCarEntity.shoppingCarShops];
+    if (self.shoppingCarEntity.invalidItems.count > 0) {
+        StoreEntity *entity = [[StoreEntity alloc]init];
+        entity.name = @"失效商品";
+        entity.shoppingCatItems = self.shoppingCarEntity.invalidItems;
+        [self.arr_data addObject:entity];
+    }
+    [self.arr_select removeAllObjects];
+    for (int i = 0; i < self.arr_data.count; i++) {
+        StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
+        entity.shoppingCatItems = @[];
+        [self.arr_select addObject:entity];
+    }
+    [self.v_bottomNormal.btn_selectAll setSelected:NO];
+    [self getAllPrice];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -122,8 +129,9 @@
     [btn_select setImage:[UIImage imageNamed:@"payComplete"] forState:UIControlStateSelected];
     btn_select.tag = section;
     [btn_select addTarget:self action:@selector(selectSectionAction:) forControlEvents:UIControlEventTouchUpInside];
-//    UITapGestureRecognizer *vHeaderTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(vHeaderTgp:)];
-//    [v_header addGestureRecognizer:vHeaderTgp];
+    v_header.tag = section;
+    UITapGestureRecognizer *vHeaderTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(vHeaderTgp:)];
+    [v_header addGestureRecognizer:vHeaderTgp];
     [v_header addSubview:btn_select];
     
     UIImageView *iv_avatar = [[UIImageView alloc]initWithFrame:CGRectMake(btn_select.right + 10, 10, 22, 22)];
@@ -196,7 +204,7 @@
     NSString *str_takeOffPrice = [NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice];
     NSString *str_all = str_takeOffPrice;
     if (self.editStatus == 0) {
-        if ((sectionAmount - selectStoreEntity.takeOffPrice) > 0) {
+        if ((sectionAmount - selectStoreEntity.takeOffPrice) >= 0) {
         }else{
             str_all = [str_all stringByAppendingString:[NSString stringWithFormat:@"    还差%.2f元起送",selectStoreEntity.takeOffPrice - sectionAmount]];
         }
@@ -209,6 +217,12 @@
     UIView *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, 42, SCREEN_WIDTH, 10)];
     [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     [v_footer addSubview:v_line];
+    
+    if (self.editStatus == 1) {
+        [lb_StartingPrice setHidden:YES];
+    }else{
+        [lb_StartingPrice setHidden:NO];
+    }
     
     if ([storeEntity.name isEqualToString:@"失效商品"]) {
         return nil;
@@ -507,29 +521,8 @@
             [MBProgressHUD showActivityMessageInView:nil];
         } success:^(id obj) {
             [MBProgressHUD hideHUD];
-            NSMutableArray *arr_result = self.arr_data;
-            for (int i = 0;i < self.arr_select.count;i++) {
-                StoreEntity *storeEntity = [self.arr_data objectAtIndex:i];
-                StoreEntity *selectStoreEntity = [self.arr_data objectAtIndex:i];
-                NSMutableArray *arr_items = [NSMutableArray arrayWithArray:storeEntity.shoppingCatItems];
-                for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
-                    if ([arr_items containsObject:entity]) {
-                        [arr_items removeObject:entity];
-                    }
-                }
-                storeEntity.shoppingCatItems = arr_items;
-                [arr_result replaceObjectAtIndex:i withObject:storeEntity];
-                if (storeEntity.shoppingCatItems.count == 0) {
-                    [arr_result removeObjectAtIndex:i];
-                }
-            }
-            self.arr_data = arr_result;
-            [self.arr_select removeAllObjects];
-            for (int i = 0; i < self.arr_data.count; i++) {
-                StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
-                entity.shoppingCatItems = @[];
-                [self.arr_select addObject:entity];
-            }
+            self.shoppingCarEntity = (ShoppingCarEntity *)obj;
+            [self refreshUI];
             [self.tb_shoppingCart reloadData];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD hideHUD];
@@ -557,7 +550,17 @@
         [self.v_bottomNormal.lb_allPrice setHidden:NO];
         [self.v_bottomNormal.btn_checkout setTitle:@"结算" forState:UIControlStateNormal];
     }
+    [self.tb_shoppingCart reloadData];
     [self getAllPrice];
+}
+
+- (void)vHeaderTgp:(UITapGestureRecognizer *)tap{
+    UIView *v_sender = [tap view];
+    StoreEntity *entity = [self.arr_data objectAtIndex:v_sender.tag];
+    SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
+    vc.storeEntity = entity;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

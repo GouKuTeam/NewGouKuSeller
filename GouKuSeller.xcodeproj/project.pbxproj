@@ -166,6 +166,7 @@
 		743C5F9620A990AE00E617AF /* EditInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9520A990AE00E617AF /* EditInventoryViewController.m */; };
 		743C5F9920A99C0100E617AF /* InventoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9820A99C0100E617AF /* InventoryDetailViewController.m */; };
 		743C5F9C20A9A4C500E617AF /* InventoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */; };
+		744817F820ADB8EE00A7F3DD /* AddressNullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744817F720ADB8EE00A7F3DD /* AddressNullView.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -869,6 +870,8 @@
 		743C5F9820A99C0100E617AF /* InventoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailViewController.m; sourceTree = "<group>"; };
 		743C5F9A20A9A4C500E617AF /* InventoryDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryDetailTableViewCell.h; sourceTree = "<group>"; };
 		743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailTableViewCell.m; sourceTree = "<group>"; };
+		744817F620ADB8EE00A7F3DD /* AddressNullView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressNullView.h; sourceTree = "<group>"; };
+		744817F720ADB8EE00A7F3DD /* AddressNullView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressNullView.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1349,6 +1352,8 @@
 				1842CCE7209BF89500A1C7C8 /* AddressHeaderView.m */,
 				74ACFFE020A1E7CF005C5A16 /* ShoppingBottomView.h */,
 				74ACFFE320A1E813005C5A16 /* ShoppingBottomView.m */,
+				744817F620ADB8EE00A7F3DD /* AddressNullView.h */,
+				744817F720ADB8EE00A7F3DD /* AddressNullView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2934,6 +2939,7 @@
 				741D3CA620845D7800C56FCA /* SetAccountNumViewController.m in Sources */,
 				74C6E367207B54D90083E4A8 /* UIViewController+SJVideoPlayerAdd.m in Sources */,
 				744ABA252054201B00BBB26E /* BaseEntity.m in Sources */,
+				744817F820ADB8EE00A7F3DD /* AddressNullView.m in Sources */,
 				74B4E875204BD3EC006AFB6C /* BaseViewController.m in Sources */,
 				7489CC9E207F599100971BED /* OttoTextView.m in Sources */,
 				744ABA69205428AF00BBB26E /* IQBarButtonItem.m in Sources */,

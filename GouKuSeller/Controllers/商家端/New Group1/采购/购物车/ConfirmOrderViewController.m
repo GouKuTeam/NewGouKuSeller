@@ -14,6 +14,7 @@
 #import "PayOrderViewController.h"
 #import "ShoppingHandler.h"
 #import "EditAddressViewController.h"
+#import "AddressNullView.h"
 
 @interface ConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
@@ -43,9 +44,16 @@
     self.tb_confirmOrder.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [self.view addSubview:self.tb_confirmOrder];
     
+    self.addressEntity.name = @"";
     self.v_header = [[AddressHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
     [self.v_header contentCellWithAddressEntity:self.addressEntity];
-    self.tb_confirmOrder.tableHeaderView = self.v_header;
+    if (self.addressEntity.name.length > 0) {
+        self.tb_confirmOrder.tableHeaderView = self.v_header;
+    }else{
+        AddressNullView *addressNullView = [[AddressNullView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        [addressNullView.btn_gotoAddress addTarget:self action:@selector(addressTgpAction) forControlEvents:UIControlEventTouchUpInside];
+        self.tb_confirmOrder.tableHeaderView = addressNullView;
+    }
     UITapGestureRecognizer *addressTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressTgpAction)];
     [self.v_header addGestureRecognizer:addressTgp];
 
@@ -249,7 +257,8 @@
     vc.addressEnterFromType = AddressEnterFromConfirmOrder;
     [self.navigationController pushViewController:vc animated:YES];
     vc.selectAddressComplete = ^(AddressEntity *addressEntity) {
-      [self.v_header contentCellWithAddressEntity:addressEntity];
+        [self.v_header contentCellWithAddressEntity:addressEntity];
+        self.tb_confirmOrder.tableHeaderView = self.v_header;
     };
 }
 
