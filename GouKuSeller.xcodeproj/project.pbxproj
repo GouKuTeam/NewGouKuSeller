@@ -20,6 +20,7 @@
 		1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCEE209C004200A1C7C8 /* ImageCollectionViewCell.m */; };
 		1842CCF2209C33C600A1C7C8 /* PurchaseOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */; };
 		1882F6E920AD5C4800513EE7 /* SelectCityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882F6E820AD5C4800513EE7 /* SelectCityView.m */; };
+		1882F6EC20AD746400513EE7 /* CountDownManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882F6EB20AD746400513EE7 /* CountDownManager.m */; };
 		1891DA9120A01EC8008E16F7 /* StoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9020A01EC8008E16F7 /* StoreEntity.m */; };
 		1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */; };
 		1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */; };
@@ -694,6 +695,8 @@
 		1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderHeaderView.m; sourceTree = "<group>"; };
 		1882F6E720AD5C4800513EE7 /* SelectCityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCityView.h; sourceTree = "<group>"; };
 		1882F6E820AD5C4800513EE7 /* SelectCityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCityView.m; sourceTree = "<group>"; };
+		1882F6EA20AD746400513EE7 /* CountDownManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountDownManager.h; sourceTree = "<group>"; };
+		1882F6EB20AD746400513EE7 /* CountDownManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountDownManager.m; sourceTree = "<group>"; };
 		1891DA8F20A01EC8008E16F7 /* StoreEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreEntity.h; sourceTree = "<group>"; };
 		1891DA9020A01EC8008E16F7 /* StoreEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreEntity.m; sourceTree = "<group>"; };
 		1891DA9520A020E7008E16F7 /* ShoppingCarEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarEntity.h; sourceTree = "<group>"; };
@@ -1329,6 +1332,8 @@
 				1842CCE9209BFE7900A1C7C8 /* View */,
 				1842CCD8209AB1E200A1C7C8 /* PurchaseOrderViewController.h */,
 				1842CCD9209AB1E200A1C7C8 /* PurchaseOrderViewController.m */,
+				1882F6EA20AD746400513EE7 /* CountDownManager.h */,
+				1882F6EB20AD746400513EE7 /* CountDownManager.m */,
 			);
 			path = "采购订单";
 			sourceTree = "<group>";
@@ -2827,6 +2832,7 @@
 				74046B06209C0335004E64A9 /* EditAddressViewController.m in Sources */,
 				74C6E33A207A1FA40083E4A8 /* TiXianPassWordView.m in Sources */,
 				744ABA81205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
+				1882F6EC20AD746400513EE7 /* CountDownManager.m in Sources */,
 				7416F0342067684F0002C960 /* MoreEditView.m in Sources */,
 				7491FA862079B5760006F388 /* SettlementHandler.m in Sources */,
 				74046AFA209ADD82004E64A9 /* SupplierListTableViewCell.m in Sources */,
