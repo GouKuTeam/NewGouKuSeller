@@ -1,35 +1,39 @@
 //
-//  ConfirmOrderViewController.m
+//  PayOrderViewController.m
 //  GouKuSeller
 //
-//  Created by lixiao on 2018/5/3.
+//  Created by 窦建斌 on 2018/5/16.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "ConfirmOrderViewController.h"
+#import "PayOrderViewController.h"
 #import "ConfirmOrderTableViewCell.h"
 #import "AddressHeaderView.h"
 #import "StoreEntity.h"
 #import "SupplierCommodityEndity.h"
-#import "PayOrderViewController.h"
-#import "ShoppingHandler.h"
+#import "NSString+Size.h"
+#import "SupplierPayViewController.h"
+#import "PayInCashCompleteView.h"
 
-@interface ConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+
+@interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong)BaseTableView    *tb_confirmOrder;
 @property (nonatomic,strong)AddressHeaderView  *v_header;
 
 @property (nonatomic,strong)UILabel     *lb_allPrice;
-@property (nonatomic,strong)UIButton    *btn_confirmOrder;
+@property (nonatomic,strong)UIButton    *btn_payOrder;
+
+@property (nonatomic ,strong)PayInCashCompleteView      *v_zhifuComplete;
 
 @end
 
-@implementation ConfirmOrderViewController
+@implementation PayOrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"提交订单";
+    self.title = @"支付订单";
 }
 
 - (void)onCreate{
@@ -43,13 +47,51 @@
     [self.view addSubview:self.tb_confirmOrder];
     
     self.v_header = [[AddressHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
+    [self.v_header.iv_arrow setHidden:YES];
     [self.v_header contentCellWithAddressEntity:self.addressEntity];
     self.tb_confirmOrder.tableHeaderView = self.v_header;
-
+    
     [self setUpBottomUI];
+    
+    self.v_zhifuComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.v_zhifuComplete.btn_continueShou setTitle:@"完成" forState:UIControlStateNormal];
+    [self.v_zhifuComplete.btn_continueShou addTarget:self action:@selector(zhifucontinueAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_zhifuComplete.lab_shifu setText:@"支付成功"];
+    [self.v_zhifuComplete.lab_zhaoling setText:[NSString stringWithFormat:@"¥%.2f",self.total]];
+    [self.view addSubview:self.v_zhifuComplete];
+    [self.v_zhifuComplete setHidden:YES];
 }
 
 - (void)setUpBottomUI{
+    
+    
+    UIView *v_yue = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50 - 54, SCREEN_WIDTH, 46)];
+    UILabel *lab_yue = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 200, 46)];
+    [lab_yue setFont:[UIFont systemFontOfSize:14]];
+    [lab_yue setTextColor:[UIColor colorWithHexString:@"#616161"]];
+    NSMutableAttributedString *str_yu = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"余额支付(剩余¥%.2f)",self.accountPrice]];
+    [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 3)];
+    [lab_yue setAttributedText:str_yu];
+    
+    if (self.accountPrice < self.total) {
+        //账户余额 大于 订单金额
+        UIButton *btn_chongzhi = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 76, 8, 66, 30)];
+        [btn_chongzhi setTitle:@"充值" forState:UIControlStateNormal];
+        [btn_chongzhi setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
+        [btn_chongzhi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        btn_chongzhi.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btn_chongzhi addTarget:self action:@selector(chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
+        [v_yue addSubview:btn_chongzhi];
+        
+        CGFloat width = [lab_yue.text fittingLabelWidthWithHeight:15 andFontSize:[UIFont systemFontOfSize:14]];
+        UILabel *lab_nopay = [[UILabel alloc]initWithFrame:CGRectMake(width + 10 + 5, 0, 60, 46)];
+        [lab_nopay setText:@"不足支付"];
+        [lab_nopay setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
+        [lab_nopay setFont:[UIFont systemFontOfSize:14]];
+        [v_yue addSubview:lab_nopay];
+        
+    }
+    
     UIView *v_bottom = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50, SCREEN_WIDTH, 50)];
     [v_bottom setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:v_bottom];
@@ -69,40 +111,22 @@
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 3)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 3)];
     [self.lb_allPrice setAttributedText:str_amount];
-    self.btn_confirmOrder = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 120, 0, 120, 50)];
-    [self.btn_confirmOrder setTitle:@"提交订单" forState:UIControlStateNormal];
-    [self.btn_confirmOrder setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
-    self.btn_confirmOrder.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.btn_confirmOrder addTarget:self action:@selector(confirmOrder) forControlEvents:UIControlEventTouchUpInside];
-    [v_bottom addSubview:self.btn_confirmOrder];
+    self.btn_payOrder = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 120, 0, 120, 50)];
+    [self.btn_payOrder setTitle:@"去支付" forState:UIControlStateNormal];
+    [self.btn_payOrder setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
+    self.btn_payOrder.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.btn_payOrder addTarget:self action:@selector(payOrder) forControlEvents:UIControlEventTouchUpInside];
+    [v_bottom addSubview:self.btn_payOrder];
 }
 
-- (void)confirmOrder{
-    NSMutableArray *arr_items = [NSMutableArray array];
-    NSMutableArray *arr_remark = [NSMutableArray array];
-    for (StoreEntity *storeEntity in self.arr_selectedData) {
-        if (storeEntity.remark.length > 0) {
-            [arr_remark addObject:@{@"shopId":storeEntity.shopId,@"remark":storeEntity.remark}];
-        }
-        for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
-            [arr_items addObject:@{@"skuId":entity.skuId,@"skuUnitId":entity.skuUnitId}];
-        }
-    }
-    [ShoppingHandler generateNewOrderWithReceiver:self.addressEntity.name address:self.addressEntity.address phone:self.addressEntity.phone items:arr_items remarks:arr_remark prepare:^{
-        [MBProgressHUD showActivityMessageInView:nil];
-    } success:^(id obj) {
-        [MBProgressHUD hideHUD];
-        PayOrderViewController *vc = [[PayOrderViewController alloc]init];
-        vc.addressEntity = self.addressEntity;
-        vc.arr_selectedData = self.arr_selectedData;
-        vc.total = [[(NSDictionary *)obj objectForKey:@"total"] doubleValue];
-        vc.accountPrice = [[(NSDictionary *)obj objectForKey:@"accountPrice"] doubleValue];
-//        vc.orderId = [NSString stringWithFormat:@"%@",]
-        [self.navigationController pushViewController:vc animated:YES];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-    }];
+- (void)payOrder{
+    
+}
+
+- (void)chongzhiAction{
+    SupplierPayViewController *vc = [[SupplierPayViewController alloc]init];
+    vc.payPrice = [NSString stringWithFormat:@"%.2f",self.total - self.accountPrice];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -180,11 +204,9 @@
     [v_footer addSubview:lb_memoTitle];
     
     UITextField *tf_memo = [[UITextField alloc]initWithFrame:CGRectMake(58, 42, SCREEN_WIDTH - 58 - 10, 42)];
-    [tf_memo setPlaceholder:@"请填写备注"];
+    [tf_memo setEnabled:NO];
     [tf_memo setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
     [tf_memo setTextColor:[UIColor blackColor]];
-    tf_memo.delegate = self;
-    tf_memo.tag = section;
     [v_footer addSubview:tf_memo];
     
     UILabel *lb_priceTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 42 * 2, 48, 42)];
@@ -215,6 +237,7 @@
     lb_price.text = [NSString stringWithFormat:@"￥%.2f",sectionAmount];
     lb_yunfeiPrice.text = [NSString stringWithFormat:@"￥%.2f",selectStoreEntity.freightPrice];
     tf_memo.text = selectStoreEntity.remark;
+    
     return v_footer;
 }
 
@@ -231,14 +254,9 @@
     return cell;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    StoreEntity *storeEntity = [self.arr_selectedData objectAtIndex:textField.tag];
-    storeEntity.remark = textField.text;
-    [self.arr_selectedData replaceObjectAtIndex:textField.tag withObject:storeEntity];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.view endEditing:YES];
+- (void)zhifucontinueAction{
+    //支付成功  返回购物车
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

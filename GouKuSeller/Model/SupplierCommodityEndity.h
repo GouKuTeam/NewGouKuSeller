@@ -36,6 +36,7 @@
 @property (nonatomic ,assign)double                        price;      //列表显示的默认单位价格
 @property (nonatomic ,assign)NSInteger                     count;
 @property (nonatomic ,strong)NSString                      *remark;
+@property (nonatomic ,strong)NSNumber                      *skuUnitId;
 
 
 + (NSArray *)parseSupplierCommodityEndityListWithJson:(id)json;

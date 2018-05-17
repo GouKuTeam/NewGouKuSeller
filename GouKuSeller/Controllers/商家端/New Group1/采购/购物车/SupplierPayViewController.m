@@ -115,13 +115,7 @@
     [self.v_chongzhiComplete setHidden:YES];
     
     
-    self.v_zhifuComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.v_zhifuComplete.btn_continueShou setTitle:@"完成" forState:UIControlStateNormal];
-    [self.v_zhifuComplete.btn_continueShou addTarget:self action:@selector(zhifucontinueAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_zhifuComplete.lab_shifu setText:@"支付成功"];
-    [self.v_zhifuComplete.lab_zhaoling setText:[NSString stringWithFormat:@"¥%@",self.totalPrice]];
-    [self.view addSubview:self.v_zhifuComplete];
-    [self.v_zhifuComplete setHidden:YES];
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -180,6 +174,7 @@
     [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
         
     } success:^(id obj) {
+        
         if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
             [self weiXinPayWithDic:[(NSDictionary *)obj objectForKey:@"data"]];
         }else{
@@ -206,7 +201,9 @@
 - (void)managerDidRecvPaymentResponse:(PayResp *)response {
     switch (response.errCode) {
         case WXSuccess:
-            [self.v_zhifuComplete setHidden:NO];
+            self.payPrice = self.tf_price.text;
+            [self.v_chongzhiComplete.lab_zhaoling setText:self.payPrice];
+            [self.v_chongzhiComplete setHidden:NO];
             break;
         case WXErrCodeUserCancel:
             [MBProgressHUD showInfoMessage:@"中途取消"];

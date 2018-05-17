@@ -13,6 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         
         self.lb_name = [[UILabel alloc]init];
         [self.lb_name setFont:[UIFont systemFontOfSize:FONT_SIZE_TITLE]];
@@ -32,6 +33,7 @@
         [self addSubview:self.lb_address];
         
         self.iv_arrow = [[UIImageView alloc]init];
+        [self.iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
         [self addSubview:self.iv_arrow];
         
         [self.lb_name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,6 +50,7 @@
         }];
         
         [self.lb_address mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lb_name.mas_bottom).offset(10);
             make.left.equalTo(self.lb_name);
             make.width.mas_equalTo(SCREEN_WIDTH - 20);
             make.height.mas_lessThanOrEqualTo(32);
@@ -61,6 +64,12 @@
         
     }
     return self;
+}
+
+- (void)contentCellWithAddressEntity:(AddressEntity *)addressEntity{
+    self.lb_name.text = addressEntity.name;
+    self.lb_phone.text = addressEntity.phone;
+    self.lb_address.text = addressEntity.address;
 }
 
 @end

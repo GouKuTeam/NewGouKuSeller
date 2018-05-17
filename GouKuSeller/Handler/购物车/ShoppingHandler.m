@@ -51,9 +51,40 @@
 //删除一个购物车商品
 + (void)deleteShopSingleCommodityWithSkuId:(NSNumber *)skuId skuUnitId:(NSNumber *)skuUnitId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_DeleteShoppingInfo];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (skuId) {
+        [dic setObject:skuId forKey:@"skuId"];
+    }
+    if (skuUnitId) {
+        [dic setObject:skuUnitId forKey:@"skuUnitId"];
+    }
+   
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:nil
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//删除多个购物车商品
++ (void)deleteShopMoreCommodityWithCommodityArray:(NSArray *)commodityArray prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_DeleteMoreShoppingInfo];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (commodityArray) {
+        [dic setObject:commodityArray forKey:@"commodityArray"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
@@ -89,7 +120,7 @@
 //结算生成新订单
 + (void)generateNewOrderWithReceiver:(NSString *)receiver address:(NSString *)address phone:(NSString *)phone items:(NSArray *)items remarks:(NSArray *)remarks prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_NewOrder];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_NewOrder];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (receiver) {
         [dic setObject:receiver forKey:@"receiver"];
@@ -112,7 +143,7 @@
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  
+                                                  success([responseObject objectForKey:@"data"]);
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddressEntity.h"
 
 @interface AddressHeaderView : UIView
 
@@ -14,5 +15,7 @@
 @property (nonatomic,strong)UILabel      *lb_phone;
 @property (nonatomic,strong)UILabel      *lb_address;
 @property (nonatomic,strong)UIImageView  *iv_arrow;
+
+- (void)contentCellWithAddressEntity:(AddressEntity *)addressEntity;
 
 @end

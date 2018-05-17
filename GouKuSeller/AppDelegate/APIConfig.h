@@ -197,6 +197,8 @@
 #define API_GET_DeleteShoppingCar @"/shopping/delete"
 //删除一个购物车商品
 #define API_POST_DeleteShoppingInfo @"/shopping/delete/info"
+//删除多个购物车商品
+#define API_POST_DeleteMoreShoppingInfo @"/shopping/delete/list"
 //清空失效商品
 #define API_GET_ShoppingRemove @"/shopping/remove"
 //结算生成新订单

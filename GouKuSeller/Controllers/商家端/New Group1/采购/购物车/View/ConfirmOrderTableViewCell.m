@@ -50,7 +50,7 @@
         
         [self.lb_name mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.iv_image.mas_right).offset(10);
-            make.top.mas_equalTo(8);
+            make.top.equalTo(self.iv_image);
             make.right.equalTo(self.mas_right).offset(-88);
             make.height.mas_lessThanOrEqualTo(36);
         }];
@@ -73,11 +73,19 @@
             make.height.mas_equalTo(14);
         }];
         
-        
     }
     return self;
     
 }
+
+- (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity{
+    [self.iv_image sd_setImageWithURL:[NSURL URLWithString:supplierCommodityEndity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.lb_name setText:supplierCommodityEndity.name];
+    [self.lb_price setText:[NSString stringWithFormat:@"¥%.2f",supplierCommodityEndity.price]];
+    [self.lb_number setText:[NSString stringWithFormat:@"x%d",(int)supplierCommodityEndity.count]];
+    [self.lb_specification setText:supplierCommodityEndity.unit];
+}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

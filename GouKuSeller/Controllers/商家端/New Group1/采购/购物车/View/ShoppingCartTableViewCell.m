@@ -71,7 +71,7 @@
         
         [self.lb_name mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.iv_image.mas_right).offset(10);
-            make.top.mas_equalTo(10);
+            make.top.equalTo(self.iv_image);
             make.right.equalTo(self.mas_right).offset(-10);
         }];
         

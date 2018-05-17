@@ -7,7 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "AddressEntity.h"
 
 @interface ConfirmOrderViewController : BaseViewController
+
+@property (nonatomic,strong)NSMutableArray   *arr_selectedData;
+@property (nonatomic,strong)AddressEntity    *addressEntity;
 
 @end

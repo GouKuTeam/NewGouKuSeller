@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SupplierCommodityEndity.h"
 
 @interface ConfirmOrderTableViewCell : UITableViewCell
 
@@ -16,5 +17,6 @@
 @property (nonatomic,strong)UILabel       *lb_specification;
 @property (nonatomic,strong)UILabel       *lb_number;
 
+- (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity;
 
 @end

@@ -17,6 +17,7 @@
 #import "PurchaseHandler.h"
 #import "AddressEntity.h"
 #import "ShoppingInvalidTableViewCell.h"
+#import "ConfirmOrderViewController.h"
 
 @interface ShoppingCartViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -25,6 +26,8 @@
 @property (nonatomic,strong)ShoppingCarEntity *shoppingCarEntity;
 @property (nonatomic,strong)NSMutableArray    *arr_select;
 @property (nonatomic,strong)ShoppingBottomView  *v_bottomNormal;
+@property (nonatomic,assign)int                 editStatus;
+@property (nonatomic,strong)UIBarButtonItem   *btn_right;
 
 @end
 
@@ -36,6 +39,10 @@
     self.title = @"购物车";
     self.arr_data = [NSMutableArray array];
     self.arr_select = [NSMutableArray array];
+    
+    self.btn_right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStyleDone target:self action:@selector(editAction)];
+    self.navigationItem.rightBarButtonItem = self.btn_right;
+    
 }
 
 - (void)onCreate{
@@ -49,8 +56,10 @@
     [self.view addSubview:self.tb_shoppingCart];
     
     self.v_bottomNormal = [[ShoppingBottomView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 49 - 46, SCREEN_WIDTH, 46)];
+    [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+    [self.v_bottomNormal.btn_checkout setEnabled:NO];
     [self.v_bottomNormal.btn_selectAll addTarget:self action:@selector(selectAllAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_bottomNormal.btn_checkout addTarget:self action:@selector(checkoutlAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottomNormal.btn_checkout addTarget:self action:@selector(checkAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.v_bottomNormal];
     
     [self.tb_shoppingCart requestDataSource];
@@ -159,9 +168,9 @@
     UIView *v_footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 42 + 10)];
     [v_footer setBackgroundColor:[UIColor whiteColor]];
     
-    UILabel *lb_StartingPrice = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 150, 42)];
+    UILabel *lb_StartingPrice = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 250, 42)];
     [lb_StartingPrice setFont:[UIFont systemFontOfSize:14]];
-    [lb_StartingPrice setTextColor:[UIColor blackColor]];
+    [lb_StartingPrice setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
     [v_footer addSubview:lb_StartingPrice];
     
     UILabel *lb_amount = [[UILabel alloc]initWithFrame:CGRectMake(160, 0, SCREEN_WIDTH - 170, 42)];
@@ -173,7 +182,6 @@
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
 
-    [lb_StartingPrice setText:[NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice]];
     double sectionAmount = 0.00;
     for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
         sectionAmount = sectionAmount + entity.count * entity.price;
@@ -183,6 +191,16 @@
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, 3)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 3)];
     [lb_amount setAttributedText:str_amount];
+    
+    NSString *str_takeOffPrice = [NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice];
+    NSString *str_all = str_takeOffPrice;
+    if (sectionAmount > selectStoreEntity.takeOffPrice) {
+    }else{
+        str_all = [str_all stringByAppendingString:[NSString stringWithFormat:@"    还差%.2f元起送",selectStoreEntity.takeOffPrice - sectionAmount]];
+    }
+    NSMutableAttributedString *str_allTakeOffPrice = [[NSMutableAttributedString alloc]initWithString:str_all];
+    [str_allTakeOffPrice addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, str_takeOffPrice.length)];
+    [lb_StartingPrice setAttributedText:str_allTakeOffPrice];
     
     UIView *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, 42, SCREEN_WIDTH, 10)];
     [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
@@ -206,7 +224,7 @@
         }
         SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
         [cell contentCellWithWareEntity:wareEntity];
-        cell.btn_select.tag = indexPath.section*100 + indexPath.row;
+        cell.btn_select.tag = indexPath.section*1000 + indexPath.row;
         [cell.btn_select addTarget:self action:@selector(selectRowAction:) forControlEvents:UIControlEventTouchUpInside];
         StoreEntity *selectStore = [self.arr_select objectAtIndex:indexPath.section];
         if ([selectStore.shoppingCatItems containsObject:wareEntity]) {
@@ -215,6 +233,10 @@
             [cell.btn_select setSelected:NO];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.btn_less.tag = indexPath.section * 1000 + indexPath.row;
+        cell.btn_plus.tag = indexPath.section * 1000 + indexPath.row;
+        [cell.btn_less addTarget:self action:@selector(lessAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn_plus addTarget:self action:@selector(plusAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else{
         static NSString *identifier = @"shoppingInvalidCell";
@@ -225,6 +247,49 @@
         SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
         [cell contentCellWithWareEntity:wareEntity];
         return cell;
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return   UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        StoreEntity *storeEntity = [self.arr_data objectAtIndex:indexPath.section];
+        SupplierCommodityEndity *entity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
+        [ShoppingHandler deleteShopSingleCommodityWithSkuId:entity.skuId skuUnitId:entity.skuUnitId prepare:^{
+            [MBProgressHUD showActivityMessageInView:nil];
+        } success:^(id obj) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showSuccessMessage:@"删除成功"];
+            StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:indexPath.section];
+            NSMutableArray *arr_data = [NSMutableArray arrayWithArray:storeEntity.shoppingCatItems];
+            NSMutableArray *arr_selectData = [NSMutableArray arrayWithArray:selectStoreEntity.shoppingCatItems];
+            
+            if ([arr_selectData containsObject:[arr_data objectAtIndex:indexPath.row]]) {
+                [arr_selectData removeObject:[arr_data objectAtIndex:indexPath.row]];
+                selectStoreEntity.shoppingCatItems = arr_selectData;
+                [self.arr_select replaceObjectAtIndex:indexPath.section withObject:selectStoreEntity];
+            }
+            [arr_data removeObjectAtIndex:indexPath.row];
+            if (arr_data.count == 0) {
+                [self.arr_data removeObjectAtIndex:indexPath.section];
+            }
+            storeEntity.shoppingCatItems = arr_data;
+            [self.arr_data replaceObjectAtIndex:indexPath.section withObject:storeEntity];
+            [self.tb_shoppingCart reloadData];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
     }
 }
 
@@ -249,8 +314,49 @@
     }
 }
 
-- (void)deleteInvalidAction{
+- (void)lessAction:(UIButton *)btn_sender{
+    NSInteger section = btn_sender.tag / 1000;
+    NSInteger row = btn_sender.tag % 1000;
+    StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
+    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
+    if (wareEntity.count > 1) {
+        [PurchaseHandler addCommodityToShoppingCarWithSkuId:wareEntity.skuId skuUnitId:wareEntity.skuUnitId count:[NSNumber numberWithInt:-1] prepare:^{
+        } success:^(id obj) {
+            wareEntity.count = wareEntity.count - 1;
+            [self.tb_shoppingCart reloadData];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }
+}
+
+- (void)plusAction:(UIButton *)btn_sender{
+    NSInteger section = btn_sender.tag / 1000;
+    NSInteger row = btn_sender.tag % 1000;
+    StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
+    SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
+    [PurchaseHandler addCommodityToShoppingCarWithSkuId:wareEntity.skuId skuUnitId:wareEntity.skuUnitId count:[NSNumber numberWithInt:1] prepare:^{
+    } success:^(id obj) {
+        wareEntity.count = wareEntity.count + 1;
+        [self.tb_shoppingCart reloadData];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
     
+}
+
+- (void)deleteInvalidAction{
+    [ShoppingHandler shoppingRemoveWithPrepare:^{
+        [MBProgressHUD showActivityMessageInView:nil];
+    } success:^(id obj) {
+        [MBProgressHUD hideHUD];
+        [self.arr_select removeLastObject];
+        [self.arr_data removeLastObject];
+        [self.tb_shoppingCart reloadData];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
 }
 
 - (void)selectSectionAction:(UIButton *)btn_sender{
@@ -269,14 +375,15 @@
 }
 
 - (void)selectRowAction:(UIButton *)btn_sender{
-    NSInteger section = btn_sender.tag / 100;
-    NSInteger row = btn_sender.tag % 100;
+    NSInteger section = btn_sender.tag / 1000;
+    NSInteger row = btn_sender.tag % 1000;
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
     SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:row];
     StoreEntity *selectStoreEntity = [self.arr_select objectAtIndex:section];
     NSMutableArray *arr_select = [NSMutableArray arrayWithArray:selectStoreEntity.shoppingCatItems];
     if ([arr_select containsObject:wareEntity]) {
         [arr_select removeObject:wareEntity];
+        selectStoreEntity.isSelected = NO;
     }else{
         [arr_select addObject:wareEntity];
     }
@@ -319,33 +426,128 @@
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, 3)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 3)];
     [self.v_bottomNormal.lb_allPrice setAttributedText:str_amount];
+    
+    if (double_allPrice > 0) {
+        BOOL isCheck = NO;
+        for (StoreEntity *storeEntity in self.arr_select) {
+            double sectionAmount = 0.00;
+            for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
+                sectionAmount = sectionAmount + entity.count * entity.price;
+            }
+            if (sectionAmount > storeEntity.takeOffPrice) {
+                isCheck = YES;
+            }
+        }
+        if (isCheck == YES) {
+            if (self.editStatus == 0) {
+                [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
+            }else{
+                [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:@"#E6670C"]];
+            }
+            [self.v_bottomNormal.btn_checkout setEnabled:YES];
+        }else{
+            [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+            [self.v_bottomNormal.btn_checkout setEnabled:NO];
+        }
+    }else{
+        [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+        [self.v_bottomNormal.btn_checkout setEnabled:NO];
+    }
+        
 }
 
-- (void)checkoutlAction{
-    
-    //获取默认地址
-    [PurchaseHandler selectDefaultAddressWithPrepare:^{
-        
-    } success:^(id obj) {
-        
-        if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
-            AddressEntity *entity = [AddressEntity parseAddressEntityWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
-            if (entity.name.length > 0) {
-                //有默认地址   把地址带入下一界面
+- (void)checkAction{
+    if (self.editStatus == 0) {
+        //获取默认地址
+        [PurchaseHandler selectDefaultAddressWithPrepare:^{
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+                AddressEntity *entity = [AddressEntity parseAddressEntityWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
+                NSMutableArray *arr_selectResult = [NSMutableArray array];
+                for (int i = 0; i < self.arr_select.count; i++) {
+                    StoreEntity *storeEntity = [[self.arr_select objectAtIndex:i] copy];
+                    double sectionAmount = 0.00;
+                    for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
+                        sectionAmount = sectionAmount + entity.count * entity.price;
+                    }
+                    if (sectionAmount > storeEntity.takeOffPrice) {
+                        [arr_selectResult addObject:storeEntity];
+                    }
+                }
+                ConfirmOrderViewController *vc = [[ConfirmOrderViewController alloc]init];
+                vc.arr_selectedData = arr_selectResult;
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.addressEntity = entity;
+                [self.navigationController pushViewController:vc animated:YES];
             }else{
-                //没有默认地址   下一界面显示去添加地址   添加之后把地址带回来  界面重新布局
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
             }
-        }else{
-            [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+        } failed:^(NSInteger statusCode, id json) {
+            
+        }];
+    }else{
+        //批量删除
+        NSMutableArray *arr_data = [NSMutableArray array];
+        for (StoreEntity *selectStoreEntity in self.arr_select) {
+            for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
+                [arr_data addObject:@{@"skuId":entity.skuId,@"skuUnitId":entity.skuUnitId}];
+            }
         }
-    } failed:^(NSInteger statusCode, id json) {
-        
-    }];
+        [ShoppingHandler deleteShopMoreCommodityWithCommodityArray:arr_data prepare:^{
+            [MBProgressHUD showActivityMessageInView:nil];
+        } success:^(id obj) {
+            [MBProgressHUD hideHUD];
+            NSMutableArray *arr_result = self.arr_data;
+            for (int i = 0;i < self.arr_select.count;i++) {
+                StoreEntity *storeEntity = [self.arr_data objectAtIndex:i];
+                StoreEntity *selectStoreEntity = [self.arr_data objectAtIndex:i];
+                NSMutableArray *arr_items = [NSMutableArray arrayWithArray:storeEntity.shoppingCatItems];
+                for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
+                    if ([arr_items containsObject:entity]) {
+                        [arr_items removeObject:entity];
+                    }
+                }
+                storeEntity.shoppingCatItems = arr_items;
+                [arr_result replaceObjectAtIndex:i withObject:storeEntity];
+                if (storeEntity.shoppingCatItems.count == 0) {
+                    [arr_result removeObjectAtIndex:i];
+                }
+            }
+            self.arr_data = arr_result;
+            [self.arr_select removeAllObjects];
+            for (int i = 0; i < self.arr_data.count; i++) {
+                StoreEntity *entity = [[self.arr_data objectAtIndex:i] copy];
+                entity.shoppingCatItems = @[];
+                [self.arr_select addObject:entity];
+            }
+            [self.tb_shoppingCart reloadData];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }
 }
 
 - (void)leftBarAction:(id)sender{
     TabBarViewController *vc = [[TabBarViewController alloc]init];
     [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+}
+
+- (void)editAction{
+    if (self.editStatus == 0) {
+        self.editStatus = 1;
+        [self.btn_right setTitle:@"完成"];
+        [self.v_bottomNormal.lb_allPrice setHidden:YES];
+        [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:@"#E6670C"]];
+        [self.v_bottomNormal.btn_checkout setTitle:@"删除" forState:UIControlStateNormal];
+    }else{
+        self.editStatus = 0;
+        [self.btn_right setTitle:@"编辑"];
+        [self.v_bottomNormal.btn_checkout setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
+        [self.v_bottomNormal.lb_allPrice setHidden:NO];
+        [self.v_bottomNormal.btn_checkout setTitle:@"结算" forState:UIControlStateNormal];
+    }
+    [self getAllPrice];
 }
 
 - (void)didReceiveMemoryWarning {
