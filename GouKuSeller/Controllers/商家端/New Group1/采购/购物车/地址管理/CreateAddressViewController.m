@@ -10,6 +10,8 @@
 #import "GCPlaceholderTextView.h"
 #import "LocationAddressViewController.h"
 #import "PurchaseHandler.h"
+#import "SelectCityView.h"
+#import "PurchaseHandler.h"
 
 @interface CreateAddressViewController ()<UITextFieldDelegate>
 
@@ -24,7 +26,8 @@
 @property (nonatomic ,strong)NSString                      *districtName;
 @property (nonatomic ,strong)NSString                      *lat;
 @property (nonatomic ,strong)NSString                      *lon;
-
+@property (nonatomic ,strong)UILabel                       *lb_city;
+@property (nonatomic ,strong)SelectCityView                *selectCityView;
 
 @end
 
@@ -37,9 +40,12 @@
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
     
+    self.selectCityView = [[SelectCityView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.selectCityView];
+    [self.selectCityView setHidden:YES];
+    [self.selectCityView.btn_confirm addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    
 }
-
-
 
 - (void)onCreate{
     [self loadData];
@@ -86,6 +92,13 @@
     self.tf_phone.font = [UIFont systemFontOfSize:16];
     self.tf_phone.delegate = self;
     
+    self.lb_city = [[UILabel alloc]initWithFrame:CGRectMake(100, 88, SCREEN_WIDTH - 110, 44)];
+    [self.lb_city setFont:[UIFont systemFontOfSize:16]];
+    [self.lb_city setTextColor:[UIColor blackColor]];
+    self.lb_city.userInteractionEnabled = YES;
+    [self.lb_city addTappedWithTarget:self action:@selector(selectCity)];
+    [v_back addSubview:self.lb_city];
+    
     self.tf_address = [[GCPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 136, SCREEN_WIDTH - 150, 75)];
     [v_back addSubview:self.tf_address];
     [self.tf_address setTextColor:[UIColor blackColor]];
@@ -113,11 +126,15 @@
     [imgline3 setBackgroundColor:[UIColor colorWithHexString:@"#CFCFCF"]];
 }
 
+- (void)selectCity{
+    [self.selectCityView setHidden:NO];
+}
+
 - (void)loadData{
     [PurchaseHandler getProvinceCityAreaprepare:^{
         
     } success:^(id obj) {
-        
+        self.selectCityView.arr_data = [(NSDictionary *)obj objectForKey:@"data"];
     } failed:^(NSInteger statusCode, id json) {
         
     }];
@@ -131,6 +148,17 @@
         self.lon = [NSString stringWithFormat:@"%f",poiEntity.location.longitude];
         self.lat = [NSString stringWithFormat:@"%f",poiEntity.location.latitude];
     };
+}
+
+- (void)confirmAction{
+    [self.selectCityView setHidden:YES];
+    NSDictionary *dic = [self.selectCityView.arr_data objectAtIndex:self.selectCityView.selectedOneIndex];
+    NSDictionary *dicTwo = [[dic objectForKey:@"cityList"] objectAtIndex:self.selectCityView.selectedTwoIndex];
+    NSDictionary *dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
+    self.provinceId = [[dic objectForKey:@"id"] intValue];
+    self.cityId = [[dicTwo objectForKey:@"code"] intValue];
+    self.districtId = [[dicThree objectForKey:@"id"] intValue];
+    [self.lb_city setText:[NSString stringWithFormat:@"%@ %@ %@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[dicThree objectForKey:@"districtName"]]];
 }
 
 - (void)rightBarAction{
