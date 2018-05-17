@@ -144,6 +144,9 @@
 - (void)rightBarAction{
     CreateAddressViewController *vc = [[CreateAddressViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+    vc.addAddressComplete = ^{
+        [self loadData];
+    };
 }
 
 - (void)didReceiveMemoryWarning {
