@@ -170,9 +170,9 @@
     [lb_title setTextColor:[UIColor colorWithHexString:@"#616161"]];
     [v_header addSubview:lb_title];
     
-    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 8, 14.5 + 10, 13, 13)];
-    [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
-    [v_header addSubview:iv_arrow];
+//    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 15, 19, 24, 24)];
+//    [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
+//    [v_header addSubview:iv_arrow];
     
     StoreEntity *selectStoreEntity = [self.arr_selectedData objectAtIndex:section];
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:selectStoreEntity.logo] placeholderImage:nil];
@@ -256,6 +256,10 @@
 
 - (void)zhifucontinueAction{
     //支付成功  返回购物车
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)leftBarAction:(id)sender{
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

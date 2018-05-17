@@ -250,7 +250,7 @@
                 [MBProgressHUD showSuccessMessage:@"新增商品成功"];
                 [self performSelector:@selector(addCommodityFinishAction) withObject:nil afterDelay:1];
             }else{
-                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errCode"]];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
             }
         } failed:^(NSInteger statusCode, id json) {
             

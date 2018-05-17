@@ -13,6 +13,7 @@
 #import "SupplierCommodityEndity.h"
 #import "PayOrderViewController.h"
 #import "ShoppingHandler.h"
+#import "EditAddressViewController.h"
 
 @interface ConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
@@ -45,6 +46,8 @@
     self.v_header = [[AddressHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
     [self.v_header contentCellWithAddressEntity:self.addressEntity];
     self.tb_confirmOrder.tableHeaderView = self.v_header;
+    UITapGestureRecognizer *addressTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressTgpAction)];
+    [self.v_header addGestureRecognizer:addressTgp];
 
     [self setUpBottomUI];
 }
@@ -85,7 +88,11 @@
             [arr_remark addObject:@{@"shopId":storeEntity.shopId,@"remark":storeEntity.remark}];
         }
         for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
-            [arr_items addObject:@{@"skuId":entity.skuId,@"skuUnitId":entity.skuUnitId}];
+            if ([entity.skuUnitId intValue] > 0) {
+                [arr_items addObject:@{@"skuId":entity.skuId,@"skuUnitId":entity.skuUnitId}];
+            }else{
+                [arr_items addObject:@{@"skuId":entity.skuId}];
+            }
         }
     }
     [ShoppingHandler generateNewOrderWithReceiver:self.addressEntity.name address:self.addressEntity.address phone:self.addressEntity.phone items:arr_items remarks:arr_remark prepare:^{
@@ -146,9 +153,9 @@
     [lb_title setTextColor:[UIColor colorWithHexString:@"#616161"]];
     [v_header addSubview:lb_title];
     
-    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 8, 14.5 + 10, 13, 13)];
-    [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
-    [v_header addSubview:iv_arrow];
+//    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 15, 19, 24, 24)];
+//    [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
+//    [v_header addSubview:iv_arrow];
     
     StoreEntity *selectStoreEntity = [self.arr_selectedData objectAtIndex:section];
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:selectStoreEntity.logo] placeholderImage:nil];
@@ -235,6 +242,15 @@
     StoreEntity *storeEntity = [self.arr_selectedData objectAtIndex:textField.tag];
     storeEntity.remark = textField.text;
     [self.arr_selectedData replaceObjectAtIndex:textField.tag withObject:storeEntity];
+}
+
+- (void)addressTgpAction{
+    EditAddressViewController *vc = [[EditAddressViewController alloc]init];
+    vc.addressEnterFromType = AddressEnterFromConfirmOrder;
+    [self.navigationController pushViewController:vc animated:YES];
+    vc.selectAddressComplete = ^(AddressEntity *addressEntity) {
+      [self.v_header contentCellWithAddressEntity:addressEntity];
+    };
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

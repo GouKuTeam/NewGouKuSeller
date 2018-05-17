@@ -8,6 +8,7 @@
 
 #import "ShoppingHandler.h"
 #import "ShoppingCarEntity.h"
+#import "PurchaseOrderEntity.h"
 @implementation ShoppingHandler
 
 //获取购物车列表
@@ -139,7 +140,7 @@
     }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:nil
+                                       parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
@@ -154,11 +155,16 @@
 }
 
 //查询采购订单列表
-+ (void)selectOrderListWithStatus:(NSNumber *)status keyWord:(NSString *)keyWord prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)selectOrderListWithStatus:(NSNumber *)status keyWord:(NSString *)keyWord page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_ShopOrderList];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (page) {
+        [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
+    }
     if (status) {
-        [dic setObject:status forKey:@"status"];
+        if (status != [NSNumber numberWithInt:999]) {
+           [dic setObject:status forKey:@"status"];
+        }
     }
     if (keyWord) {
         [dic setObject:keyWord forKey:@"keyWord"];
@@ -166,11 +172,12 @@
     
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:nil
+                                       parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  
+                                                  NSArray *arr = [PurchaseOrderEntity parsePurchaseOrderEntityListWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(arr);
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];

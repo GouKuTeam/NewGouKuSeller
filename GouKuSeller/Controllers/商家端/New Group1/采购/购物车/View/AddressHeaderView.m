@@ -50,18 +50,17 @@
         }];
         
         [self.lb_address mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.lb_name.mas_bottom).offset(10);
+            make.top.equalTo(self.lb_name.mas_bottom).offset(7);
             make.left.equalTo(self.lb_name);
-            make.width.mas_equalTo(SCREEN_WIDTH - 20);
+            make.width.mas_equalTo(SCREEN_WIDTH - 45);
             make.height.mas_lessThanOrEqualTo(32);
         }];
         
         [self.iv_arrow mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(13);
+            make.width.height.mas_equalTo(24);
             make.top.mas_equalTo(38);
-            make.left.mas_equalTo(SCREEN_WIDTH - 24);
+            make.left.mas_equalTo(SCREEN_WIDTH - 27);
         }];
-        
     }
     return self;
 }
