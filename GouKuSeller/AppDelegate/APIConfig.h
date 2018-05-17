@@ -205,8 +205,12 @@
 #define API_POST_NewOrder @"/shopOrder/new"
 //查询采购订单列表
 #define API_POST_ShopOrderList @"/shopOrder/user/list"
-
-
+//查询采购订单详情
+#define API_GET_ShopOrderDetail @"/shopOrder/shop/get/"
+//取消采购订单
+#define API_GET_CancelShopOrder @"/shopOrder/user/close/"
+//采购订单确认收货
+#define API_GET_ConfirmShopOrder @"/shopOrder/user/confirm/"
 /*
  地址管理API
  */
