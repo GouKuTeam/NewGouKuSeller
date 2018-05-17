@@ -156,9 +156,9 @@
     NSDictionary *dicTwo = [[dic objectForKey:@"cityList"] objectAtIndex:self.selectCityView.selectedTwoIndex];
     NSDictionary *dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
     self.provinceId = [[dic objectForKey:@"id"] intValue];
-    self.cityId = [[dicTwo objectForKey:@"code"] intValue];
+    self.cityId = [[dicTwo objectForKey:@"id"] intValue];
     self.districtId = [[dicThree objectForKey:@"id"] intValue];
-    [self.lb_city setText:[NSString stringWithFormat:@"%@ %@ %@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[dicThree objectForKey:@"districtName"]]];
+    [self.lb_city setText:[NSString stringWithFormat:@"%@-%@-%@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[dicThree objectForKey:@"districtName"]]];
 }
 
 - (void)rightBarAction{
