@@ -19,6 +19,7 @@
 		1842CCEC209BFE9600A1C7C8 /* PurchaseOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCEB209BFE9600A1C7C8 /* PurchaseOrderTableViewCell.m */; };
 		1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCEE209C004200A1C7C8 /* ImageCollectionViewCell.m */; };
 		1842CCF2209C33C600A1C7C8 /* PurchaseOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */; };
+		1882F6E920AD5C4800513EE7 /* SelectCityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882F6E820AD5C4800513EE7 /* SelectCityView.m */; };
 		1891DA9120A01EC8008E16F7 /* StoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9020A01EC8008E16F7 /* StoreEntity.m */; };
 		1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9620A020E7008E16F7 /* ShoppingCarEntity.m */; };
 		1891DA9C20A024F7008E16F7 /* ShoppingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DA9B20A024F7008E16F7 /* ShoppingHandler.m */; };
@@ -691,6 +692,8 @@
 		1842CCEE209C004200A1C7C8 /* ImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewCell.m; sourceTree = "<group>"; };
 		1842CCF0209C33C600A1C7C8 /* PurchaseOrderHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderHeaderView.h; sourceTree = "<group>"; };
 		1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderHeaderView.m; sourceTree = "<group>"; };
+		1882F6E720AD5C4800513EE7 /* SelectCityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCityView.h; sourceTree = "<group>"; };
+		1882F6E820AD5C4800513EE7 /* SelectCityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCityView.m; sourceTree = "<group>"; };
 		1891DA8F20A01EC8008E16F7 /* StoreEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreEntity.h; sourceTree = "<group>"; };
 		1891DA9020A01EC8008E16F7 /* StoreEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreEntity.m; sourceTree = "<group>"; };
 		1891DA9520A020E7008E16F7 /* ShoppingCarEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarEntity.h; sourceTree = "<group>"; };
@@ -1422,6 +1425,8 @@
 				74046B09209C03EE004E64A9 /* EditAddressTableViewCell.m */,
 				74046B0B209C1AE2004E64A9 /* CreateAddressViewController.h */,
 				74046B0C209C1AE2004E64A9 /* CreateAddressViewController.m */,
+				1882F6E720AD5C4800513EE7 /* SelectCityView.h */,
+				1882F6E820AD5C4800513EE7 /* SelectCityView.m */,
 				74ACFF9E209C307D005C5A16 /* LocationAddressViewController.h */,
 				74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */,
 				74ACFFA2209FFAB4005C5A16 /* LocationTableViewCell.h */,
@@ -3058,6 +3063,7 @@
 				1842CCEC209BFE9600A1C7C8 /* PurchaseOrderTableViewCell.m in Sources */,
 				7491FA77206E15CC0006F388 /* Province.m in Sources */,
 				743C5F6420A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
+				1882F6E920AD5C4800513EE7 /* SelectCityView.m in Sources */,
 				740C6893207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
