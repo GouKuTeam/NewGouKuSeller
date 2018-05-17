@@ -496,7 +496,11 @@
         NSMutableArray *arr_data = [NSMutableArray array];
         for (StoreEntity *selectStoreEntity in self.arr_select) {
             for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
-                [arr_data addObject:@{@"skuId":entity.skuId,@"skuUnitId":entity.skuUnitId}];
+                if ([entity.skuUnitId intValue] > 0) {
+                    [arr_data addObject:@{@"skuId":entity.skuId,@"skuUnitId":entity.skuUnitId}];
+                }else{
+                    [arr_data addObject:@{@"skuId":entity.skuId}];
+                }
             }
         }
         [ShoppingHandler deleteShopMoreCommodityWithCommodityArray:arr_data prepare:^{

@@ -79,13 +79,10 @@
 //删除多个购物车商品
 + (void)deleteShopMoreCommodityWithCommodityArray:(NSArray *)commodityArray prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_DeleteMoreShoppingInfo];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    if (commodityArray) {
-        [dic setObject:commodityArray forKey:@"commodityArray"];
-    }
+
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:dic
+                                       parameters:commodityArray
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
@@ -229,7 +226,7 @@
 
 //采购订单确认收货
 + (void)confirmShopOrderDetailWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_OrderAndPay,API_GET_ConfirmShopOrder,orderId];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_OrderAndPay,API_GET_ConfirmShopOrder ,orderId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
