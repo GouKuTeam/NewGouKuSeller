@@ -244,4 +244,23 @@
                                           }];
 }
 
+//获取购物车中商品个数
++ (void)getCountInShopCartprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_GET_GetCountInShopCart];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success([responseObject objectForKey:@"data"]);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end

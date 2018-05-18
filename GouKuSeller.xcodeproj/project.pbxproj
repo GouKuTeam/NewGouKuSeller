@@ -169,6 +169,10 @@
 		743C5F9C20A9A4C500E617AF /* InventoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */; };
 		744817F820ADB8EE00A7F3DD /* AddressNullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744817F720ADB8EE00A7F3DD /* AddressNullView.m */; };
 		744817FB20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744817FA20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m */; };
+		744817FE20AEA5C800A7F3DD /* TermOfShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744817FD20AEA5C800A7F3DD /* TermOfShopViewController.m */; };
+		7448180820AEA97700A7F3DD /* 商家违规条例.md in Resources */ = {isa = PBXBuildFile; fileRef = 7448180720AEA97700A7F3DD /* 商家违规条例.md */; };
+		7448180920AEA97700A7F3DD /* 商家违规条例.md in Resources */ = {isa = PBXBuildFile; fileRef = 7448180720AEA97700A7F3DD /* 商家违规条例.md */; };
+		7448180A20AEA97700A7F3DD /* 商家违规条例.md in Resources */ = {isa = PBXBuildFile; fileRef = 7448180720AEA97700A7F3DD /* 商家违规条例.md */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -878,6 +882,9 @@
 		744817F720ADB8EE00A7F3DD /* AddressNullView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressNullView.m; sourceTree = "<group>"; };
 		744817F920AE6F3000A7F3DD /* SearchPurchaseOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchPurchaseOrderViewController.h; sourceTree = "<group>"; };
 		744817FA20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchPurchaseOrderViewController.m; sourceTree = "<group>"; };
+		744817FC20AEA5C800A7F3DD /* TermOfShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermOfShopViewController.h; sourceTree = "<group>"; };
+		744817FD20AEA5C800A7F3DD /* TermOfShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TermOfShopViewController.m; sourceTree = "<group>"; };
+		7448180720AEA97700A7F3DD /* 商家违规条例.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "商家违规条例.md"; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -2086,6 +2093,7 @@
 				74B4E80B204BD353006AFB6C /* Main.storyboard */,
 				74B4E810204BD353006AFB6C /* LaunchScreen.storyboard */,
 				74B4E813204BD353006AFB6C /* Info.plist */,
+				7448180720AEA97700A7F3DD /* 商家违规条例.md */,
 				74B4E814204BD353006AFB6C /* main.m */,
 				74ACFFBA20A051C0005C5A16 /* Assets.xcassets */,
 				74C6E3322079F9500083E4A8 /* Images.xcassets */,
@@ -2307,6 +2315,8 @@
 				741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */,
 				741D3CA9208465CE00C56FCA /* ChangePassWordViewController.h */,
 				741D3CAA208465CE00C56FCA /* ChangePassWordViewController.m */,
+				744817FC20AEA5C800A7F3DD /* TermOfShopViewController.h */,
+				744817FD20AEA5C800A7F3DD /* TermOfShopViewController.m */,
 				741D3CBD2084892900C56FCA /* AboutMeViewController.h */,
 				741D3CBE2084892900C56FCA /* AboutMeViewController.m */,
 				7489CC81207F2F4A00971BED /* MyTbHeaderView.h */,
@@ -2718,6 +2728,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				744ABA72205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
+				7448180820AEA97700A7F3DD /* 商家违规条例.md in Resources */,
 				7491FA71206E15CC0006F388 /* address.txt in Resources */,
 				7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */,
@@ -2735,6 +2746,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7489CCA5207F599100971BED /* keyboard_delete@2x.png in Resources */,
+				7448180920AEA97700A7F3DD /* 商家违规条例.md in Resources */,
 				744ABA73205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
 				7489CCA2207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7491FA72206E15CC0006F388 /* address.txt in Resources */,
@@ -2749,6 +2761,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7489CCA6207F599100971BED /* keyboard_delete@2x.png in Resources */,
+				7448180A20AEA97700A7F3DD /* 商家违规条例.md in Resources */,
 				744ABA74205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
 				7489CCA3207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7491FA73206E15CC0006F388 /* address.txt in Resources */,
@@ -2933,6 +2946,7 @@
 				74BD12502068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				744ABA7B205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
 				743C5F3C20A53DDB00E617AF /* AddInventoryTableViewCell.m in Sources */,
+				744817FE20AEA5C800A7F3DD /* TermOfShopViewController.m in Sources */,
 				74ACFFE420A1E813005C5A16 /* ShoppingBottomView.m in Sources */,
 				740C688A207C98930044889F /* PayInCashViewController.m in Sources */,
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,

@@ -211,6 +211,9 @@
 #define API_GET_CancelShopOrder @"/shopOrder/user/close/"
 //采购订单确认收货
 #define API_GET_ConfirmShopOrder @"/shopOrder/user/confirm/"
+//获取购物车中商品个数
+#define API_GET_GetCountInShopCart @"/shopping/getCount"
+
 /*
  地址管理API
  */

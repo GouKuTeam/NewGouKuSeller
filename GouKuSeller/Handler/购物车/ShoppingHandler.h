@@ -40,4 +40,7 @@
 //采购订单确认收货
 + (void)confirmShopOrderDetailWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//获取购物车中商品个数
++ (void)getCountInShopCartprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end
