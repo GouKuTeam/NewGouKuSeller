@@ -8,6 +8,7 @@
 
 #import "PurchaseOrderTableViewCell.h"
 #import "ImageCollectionViewCell.h"
+#import "CountDownManager.h"
 
 @implementation PurchaseOrderTableViewCell
 
@@ -15,6 +16,7 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(countDownNotfifcation) name:kCountDownNotification object:nil];
         self.backgroundColor = [UIColor whiteColor];
         
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
@@ -85,6 +87,19 @@
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, jian.length)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, jian.length)];
     [self.lb_amount setAttributedText:str_amount];
+    if (purchaseOrderEntity.status == 0) {
+        [self.btn_cancelOrder setHidden:NO];
+    }else if (purchaseOrderEntity.status == 3){
+        [self.btn_cancelOrder setHidden:YES];
+        [self.btn_payOrder setHidden:NO];
+    }else{
+        [self.btn_cancelOrder setHidden:YES];
+        [self.btn_payOrder setHidden:YES];
+    }
+}
+
+- (void)countDownNotfifcation{
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

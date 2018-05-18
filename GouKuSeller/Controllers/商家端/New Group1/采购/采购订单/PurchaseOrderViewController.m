@@ -32,6 +32,7 @@
     self.arr_data = [NSMutableArray array];
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_white"] style:UIBarButtonItemStyleDone target:self action:@selector(searchAction)];
     self.navigationItem.rightBarButtonItem = btn_right;
+    
 }
 
 - (void)onCreate{
