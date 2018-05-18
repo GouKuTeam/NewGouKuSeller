@@ -1,97 +1,94 @@
 //
-//  PurchaseOrderViewController.m
+//  SearchPurchaseOrderViewController.m
 //  GouKuSeller
 //
-//  Created by lixiao on 2018/5/3.
+//  Created by 窦建斌 on 2018/5/18.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "PurchaseOrderViewController.h"
-#import "TabBarViewController.h"
-#import "PurchaseOrderHeaderView.h"
-#import "PurchaseOrderTableViewCell.h"
+#import "SearchPurchaseOrderViewController.h"
 #import "ShoppingHandler.h"
 #import "PurchaseOrderEntity.h"
-#import "SearchPurchaseOrderViewController.h"
+#import "PurchaseOrderTableViewCell.h"
 
-@interface PurchaseOrderViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
-
-@property (nonatomic,strong)BaseTableView    *tb_purchaseOrder;
-@property (nonatomic,strong)NSMutableArray   *arr_data;
-@property (nonatomic,assign)int               btnIndex;
+@interface SearchPurchaseOrderViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong)UITextField            *tf_search;
+@property (nonatomic,strong)BaseTableView           *tb_purchaseOrder;
+@property (nonatomic ,strong)NSMutableArray         *arr_order;
 
 @end
 
-@implementation PurchaseOrderViewController
+@implementation SearchPurchaseOrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isHideLeftBtn = YES;
     // Do any additional setup after loading the view.
-    self.title = @"采购订单";
-    self.arr_data = [NSMutableArray array];
-    UIBarButtonItem *btn_right = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_white"] style:UIBarButtonItemStyleDone target:self action:@selector(searchAction)];
-    self.navigationItem.rightBarButtonItem = btn_right;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.arr_order = [[NSMutableArray alloc]init];
+    }
+    return self;
 }
 
 - (void)onCreate{
-    self.btnIndex = 999;
-    self.navigationItem.leftBarButtonItem = nil;
-    PurchaseOrderHeaderView *v_header = [[PurchaseOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 43)];
-    [self.view addSubview:v_header];
-    v_header.selectItem = ^(int index) {
-        if (index == 0) {
-            self.btnIndex = 999;
-            [self.tb_purchaseOrder requestDataSource];
-        }
-        if (index == 1) {
-            self.btnIndex = 0;
-            [self.tb_purchaseOrder requestDataSource];
-        }
-        if (index == 2) {
-            self.btnIndex = 2;
-            [self.tb_purchaseOrder requestDataSource];
-        }
-        if (index == 3) {
-            self.btnIndex = 3;
-            [self.tb_purchaseOrder requestDataSource];
-        }
-        if (index == 4) {
-            self.btnIndex = 9;
-            [self.tb_purchaseOrder requestDataSource];
-        }
-    };
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.navigationItem.leftBarButtonItem.customView = [UIView new];
+    UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 44)];
     
-    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight - SafeAreaTopHeight - 49) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:NO];
+    self.tf_search = [[UITextField alloc]initWithFrame:CGRectMake(0, 7, v_header.width - 50, 30)];
+    UIView *v_left = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34, 30)];
+    UIImageView *iv_icon = [[UIImageView alloc]initWithFrame:CGRectMake(10, 6, 18, 18)];
+    [iv_icon setImage:[UIImage imageNamed:@"home_search"]];
+    [v_left addSubview:iv_icon];
+    self.tf_search.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
+    self.tf_search.leftView = v_left;
+    self.tf_search.leftViewMode = UITextFieldViewModeAlways;
+    self.tf_search.placeholder = @"搜索商品名称、供应商或订单号";
+    self.tf_search.font = [UIFont systemFontOfSize:FONT_SIZE_DESC];
+    self.tf_search.textColor = [UIColor blackColor];
+    [self.tf_search.layer setCornerRadius:5];
+    self.tf_search.layer.masksToBounds = YES;
+    self.tf_search.delegate = self;
+    self.tf_search.returnKeyType = UIReturnKeySearch;
+    self.tf_search.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.tf_search.enablesReturnKeyAutomatically = YES;
+    self.tf_search.tintColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
+    [v_header addSubview:self.tf_search];
+    
+    UIButton *btn_cancel = [[UIButton alloc]initWithFrame:CGRectMake(self.tf_search.right,0, 60, 44)];
+    [btn_cancel setTitle:@"取消" forState:UIControlStateNormal];
+    [btn_cancel setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+    btn_cancel.titleLabel.font = [UIFont systemFontOfSize:16];
+    [btn_cancel addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+    [v_header addSubview:btn_cancel];
+    
+    self.navigationItem.titleView = v_header;
+    
+    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    [self.view addSubview:self.tb_purchaseOrder];
     self.tb_purchaseOrder.delegate = self;
     self.tb_purchaseOrder.dataSource = self;
-    self.tb_purchaseOrder.tableViewDelegate = self;
     self.tb_purchaseOrder.tableFooterView = [UIView new];
-    self.tb_purchaseOrder.separatorColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
-    self.tb_purchaseOrder.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
-    [self.view addSubview:self.tb_purchaseOrder];
-    [self.tb_purchaseOrder requestDataSource];
 }
 
-- (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
-    [ShoppingHandler selectOrderListWithStatus:[NSNumber numberWithInt:self.btnIndex] keyWord:nil page:(int)pageNum prepare:^{
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    NSLog(@"%@",textField.text);
+    [ShoppingHandler selectOrderListWithStatus:nil keyWord:textField.text page:(int)nil prepare:^{
         
     } success:^(id obj) {
-        if (pageNum == 0) {
-            [self.arr_data removeAllObjects];
-        }
-        [self.arr_data addObjectsFromArray:(NSArray *)obj];
+        [self.arr_order removeAllObjects];
+        [self.arr_order addObjectsFromArray:(NSArray *)obj];
         [self.tb_purchaseOrder reloadData];
-        complete([(NSArray *)obj count]);
-        if (self.arr_data.count == 0) {
-            self.tb_purchaseOrder.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_purchaseOrder.frame withDefaultImage:nil withNoteTitle:@"暂无采购订单数据" withNoteDetail:nil withButtonAction:nil];
-        }
     } failed:^(NSInteger statusCode, id json) {
-        if (complete) {
-            complete(CompleteBlockErrorCode);
-        }
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
+    return YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -107,7 +104,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.arr_data.count;
+    return self.arr_order.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -115,7 +112,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:indexPath.section];
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:indexPath.section];
     if (entity.status == 0 || entity.status == 3) {
         return 173;
     }else{
@@ -157,7 +154,7 @@
     [lb_status setTextAlignment:NSTextAlignmentRight];
     [v_header addSubview:lb_status];
     
-    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:section];
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:section];
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:entity.logo] placeholderImage:nil];
     [lb_title setText:entity.name];
     if (entity.status == 0) {//(0待付款1待接单2待发货3待收货8已完成9已取消)
@@ -183,38 +180,29 @@
     if (!cell) {
         cell = [[PurchaseOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:indexPath.section];
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:indexPath.section];
     [cell contentCellWithPurchaseOrderEntity:entity];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:indexPath.section];
-    [ShoppingHandler selectShopOrderDetailWithOrderId:entity.orderId prepare:^{
-        
-    } success:^(id obj) {
-        
-    } failed:^(NSInteger statusCode, id json) {
-        
-    }];
+- (void)cancelAction{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
-- (void)searchAction{
-    SearchPurchaseOrderViewController *vc = [[SearchPurchaseOrderViewController alloc]init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:NO];
-}
-
-
-- (void)leftBarAction:(id)sender{
-    TabBarViewController *vc = [[TabBarViewController alloc]init];
-    [UIApplication sharedApplication].keyWindow.rootViewController = vc;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

@@ -22,6 +22,7 @@
 @property (nonatomic ,strong)NSNumber         *count;             //订单商品数量
 @property (nonatomic ,assign)NSNumber         *createTime;        //下单时间
 @property (nonatomic ,assign)NSNumber         *payTime;           //付款时间
+@property (nonatomic ,strong)NSNumber         *countDown;         //倒计时(秒)
 @property (nonatomic ,strong)NSArray          *items;             //订单商品数组
 
 //"status":<number>,          //订单状态(0待付款1待接单2待发货3待收货8已完成9已取消)

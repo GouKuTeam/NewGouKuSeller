@@ -15,7 +15,7 @@
 
 @property (nonatomic ,strong)TiXianView       *v_tixian;
 @property (nonatomic ,strong)UIButton         *btn_tixian;
-@property (nonatomic ,assign)int          int_userName;     // =1 有内容   =0没内容
+@property (nonatomic ,assign)int               int_userName;     // =1 有内容   =0没内容
 
 @end
 
@@ -34,7 +34,7 @@
     NSString *str_cardNum = [self.cardNum substringFromIndex:self.cardNum.length - 4];
     [self.v_tixian.lab_bankNum setText:[NSString stringWithFormat:@"%@(%@)",self.cardName,str_cardNum]];
     [self.v_tixian.lab_ketixian setText:[NSString stringWithFormat:@"可提现金额¥%.2f",self.ketixianPrice]];
-    [self.v_tixian.lab_zuiditixian setText:[NSString stringWithFormat:@"最低提现金额¥%.2f",self.lowPrice]];
+    [self.v_tixian.lab_zuiditixian setText:@"提现手续费0.1%"];
     [self.v_tixian.lab_tixiancount setText:[NSString stringWithFormat:@"今日可提现%d次",self.tixianCount]];
     
     [self.v_tixian.btn_tianxianAll addTarget:self action:@selector(btn_tianxianAll) forControlEvents:UIControlEventTouchUpInside];
@@ -49,15 +49,12 @@
     self.btn_tixian.layer.cornerRadius = 3.0f;
     self.btn_tixian.layer.masksToBounds = YES;
     self.btn_tixian.enabled = NO;
-    if (self.tixianCount < 1) {
+    if (self.tixianCount == 0) {
         [self.btn_tixian setTitle:@"今日提现次数已用完" forState:UIControlStateNormal];
         [self.btn_tixian setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         [self.btn_tixian setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.v_tixian.tf_price.enabled = NO;
     }
-    
-    
-//    self.btn_tixian.enabled = YES;
 }
 
 - (void)btn_tixianAction{
@@ -81,7 +78,7 @@
         return;
     }else{
         
-        PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:[self.v_tixian.tf_price.text doubleValue] delegate:self];
+        PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:[self.v_tixian.tf_price.text doubleValue] title:@"提现" delegate:self];
         [view show];
     }
 }
@@ -171,7 +168,7 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 UIAlertAction *again = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:[self.v_tixian.tf_price.text doubleValue] delegate:self];
+                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:[self.v_tixian.tf_price.text doubleValue] title:@"提现" delegate:self];
                     [view show];
                 }];
                 [alert addAction:forgetPassword];

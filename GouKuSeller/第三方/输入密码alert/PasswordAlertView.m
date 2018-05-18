@@ -19,7 +19,7 @@
 @end
 @implementation PasswordAlertView
 
-- (instancetype)initWithPrice:(double)price delegate:(id)delegate{
+- (instancetype)initWithPrice:(double)price title:(NSString *)title delegate:(id)delegate{
     self = [super init];
     if (self) {
         self.delegate = delegate;
@@ -68,7 +68,7 @@
     [lb_withdraw setFont:[UIFont systemFontOfSize:16]];
     [lb_withdraw setTextColor:[UIColor blackColor]];
     [lb_withdraw setTextAlignment:NSTextAlignmentCenter];
-    [lb_withdraw setText:@"提现"];
+    [lb_withdraw setText:self.title];
     [self.alertView addSubview:lb_withdraw];
     
     UILabel *lb_price = [[UILabel alloc]initWithFrame:CGRectMake(15,lb_withdraw.bottom + 8, self.alertView.width - 30, 38)];

@@ -29,8 +29,9 @@ typedef NS_ENUM(NSInteger, PasswordAlertBtnType) {
 @property(nonatomic,strong)UIButton*            cancelBtn;
 @property(nonatomic,strong)UITextField          *tf_password;
 @property(nonatomic,assign)double               double_price;
+@property(nonatomic,strong)NSString             *title;
 
-- (instancetype)initWithPrice:(double)price delegate:(id)delegate;
+- (instancetype)initWithPrice:(double)price title:(NSString *)title delegate:(id)delegate;
 
 - (void)show;
 - (void)dismiss;

@@ -262,6 +262,7 @@
         if (!cell) {
             cell = [[ShoppingInvalidTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
         [cell contentCellWithWareEntity:wareEntity];
         return cell;
@@ -312,7 +313,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     StoreEntity *storeEntity = [self.arr_data objectAtIndex:section];
@@ -557,10 +558,12 @@
 - (void)vHeaderTgp:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
     StoreEntity *entity = [self.arr_data objectAtIndex:v_sender.tag];
-    SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
-    vc.storeEntity = entity;
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (![entity.name isEqualToString:@"失效商品"]) {
+        SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
+        vc.storeEntity = entity;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
