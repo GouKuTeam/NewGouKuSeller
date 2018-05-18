@@ -18,8 +18,9 @@
 
 @interface ConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
-@property (nonatomic,strong)BaseTableView    *tb_confirmOrder;
+@property (nonatomic,strong)BaseTableView      *tb_confirmOrder;
 @property (nonatomic,strong)AddressHeaderView  *v_header;
+@property (nonatomic,strong)AddressNullView    *addressNullView;
 
 @property (nonatomic,strong)UILabel     *lb_allPrice;
 @property (nonatomic,strong)UIButton    *btn_confirmOrder;
@@ -50,9 +51,9 @@
     if (self.addressEntity.name.length > 0) {
         self.tb_confirmOrder.tableHeaderView = self.v_header;
     }else{
-        AddressNullView *addressNullView = [[AddressNullView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-        [addressNullView.btn_gotoAddress addTarget:self action:@selector(addressTgpAction) forControlEvents:UIControlEventTouchUpInside];
-        self.tb_confirmOrder.tableHeaderView = addressNullView;
+        self.addressNullView = [[AddressNullView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        [self.addressNullView.btn_gotoAddress addTarget:self action:@selector(addressTgpAction) forControlEvents:UIControlEventTouchUpInside];
+        self.tb_confirmOrder.tableHeaderView = self.addressNullView;
     }
     UITapGestureRecognizer *addressTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressTgpAction)];
     [self.v_header addGestureRecognizer:addressTgp];
@@ -89,6 +90,10 @@
 }
 
 - (void)confirmOrder{
+    if (self.tb_confirmOrder.tableHeaderView == self.addressNullView) {
+        [MBProgressHUD showErrorMessage:@"请选择收货地址"];
+        return;
+    }
     NSMutableArray *arr_items = [NSMutableArray array];
     NSMutableArray *arr_remark = [NSMutableArray array];
     for (StoreEntity *storeEntity in self.arr_selectedData) {
@@ -104,7 +109,7 @@
         }
     }
     [ShoppingHandler generateNewOrderWithReceiver:self.addressEntity.name address:self.addressEntity.address phone:self.addressEntity.phone items:arr_items remarks:arr_remark prepare:^{
-        [MBProgressHUD showActivityMessageInView:nil];
+        [MBProgressHUD showActivityMessageInView:@"正在提交订单"];
     } success:^(id obj) {
         [MBProgressHUD hideHUD];
         PayOrderViewController *vc = [[PayOrderViewController alloc]init];
@@ -112,7 +117,6 @@
         vc.arr_selectedData = self.arr_selectedData;
         vc.total = [[(NSDictionary *)obj objectForKey:@"total"] doubleValue];
         vc.accountPrice = [[(NSDictionary *)obj objectForKey:@"accountPrice"] doubleValue];
-//        vc.orderId = [NSString stringWithFormat:@"%@",]
         [self.navigationController pushViewController:vc animated:YES];
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD hideHUD];
@@ -160,10 +164,6 @@
     [lb_title setFont:[UIFont systemFontOfSize:14]];
     [lb_title setTextColor:[UIColor colorWithHexString:@"#616161"]];
     [v_header addSubview:lb_title];
-    
-//    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 15, 19, 24, 24)];
-//    [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
-//    [v_header addSubview:iv_arrow];
     
     StoreEntity *selectStoreEntity = [self.arr_selectedData objectAtIndex:section];
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:selectStoreEntity.logo] placeholderImage:nil];
@@ -232,7 +232,6 @@
     tf_memo.text = selectStoreEntity.remark;
     return v_footer;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"confirmOrderCell";

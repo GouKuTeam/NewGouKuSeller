@@ -14,16 +14,22 @@
 #import "NSString+Size.h"
 #import "SupplierPayViewController.h"
 #import "PayInCashCompleteView.h"
+#import "PasswordAlertView.h"
+#import "FindPwWithUserNameViewController.h"
 
-@interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,PasswordAlertViewDelegate>
 
-@property (nonatomic,strong)BaseTableView    *tb_confirmOrder;
-@property (nonatomic,strong)AddressHeaderView  *v_header;
+@property (nonatomic,strong)BaseTableView               *tb_confirmOrder;
+@property (nonatomic,strong)AddressHeaderView           *v_header;
 
-@property (nonatomic,strong)UILabel     *lb_allPrice;
-@property (nonatomic,strong)UIButton    *btn_payOrder;
+@property (nonatomic,strong)UILabel                     *lb_allPrice;
+@property (nonatomic,strong)UIButton                    *btn_payOrder;
 
 @property (nonatomic ,strong)PayInCashCompleteView      *v_zhifuComplete;
+@property (nonatomic ,strong)UIView                     *v_yue;
+@property (nonatomic ,strong)UILabel                    *lab_yue;
+@property (nonatomic ,strong)UIButton                   *btn_chongzhi;
+@property (nonatomic ,strong)UILabel                    *lab_nopay;
 
 @end
 
@@ -63,35 +69,33 @@
 
 - (void)setUpBottomUI{
     
-    self.total = 1000000;
-    
-    UIView *v_yue = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50 - 54, SCREEN_WIDTH, 46)];
-    [v_yue setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:v_yue];
-    UILabel *lab_yue = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 200, 46)];
-    [lab_yue setFont:[UIFont systemFontOfSize:14]];
-    [lab_yue setTextColor:[UIColor colorWithHexString:@"#616161"]];
+    self.v_yue = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50 - 54, SCREEN_WIDTH, 46)];
+    [self.v_yue setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:self.v_yue];
+    self.lab_yue = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 200, 46)];
+    [self.lab_yue setFont:[UIFont systemFontOfSize:14]];
+    [self.lab_yue setTextColor:[UIColor colorWithHexString:@"#616161"]];
     NSMutableAttributedString *str_yu = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"余额支付(剩余¥%.2f)",self.accountPrice]];
     [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
-    [lab_yue setAttributedText:str_yu];
-    [v_yue addSubview:lab_yue];
+    [self.lab_yue setAttributedText:str_yu];
+    [self.v_yue addSubview:self.lab_yue];
     
     if (self.accountPrice < self.total) {
         
-        UIButton *btn_chongzhi = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 76, 8, 66, 30)];
-        [btn_chongzhi setTitle:@"充值" forState:UIControlStateNormal];
-        [btn_chongzhi setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
-        [btn_chongzhi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        btn_chongzhi.titleLabel.font = [UIFont systemFontOfSize:14];
-        [btn_chongzhi addTarget:self action:@selector(chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
-        [v_yue addSubview:btn_chongzhi];
+        self.btn_chongzhi = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 76, 8, 66, 30)];
+        [self.btn_chongzhi setTitle:@"充值" forState:UIControlStateNormal];
+        [self.btn_chongzhi setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
+        [self.btn_chongzhi setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.btn_chongzhi.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.btn_chongzhi addTarget:self action:@selector(chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.v_yue addSubview:self.btn_chongzhi];
         
-        CGFloat width = [lab_yue.text fittingLabelWidthWithHeight:15 andFontSize:[UIFont systemFontOfSize:14]];
-        UILabel *lab_nopay = [[UILabel alloc]initWithFrame:CGRectMake(width + 10 + 5, 0, 60, 46)];
-        [lab_nopay setText:@"不足支付"];
-        [lab_nopay setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
-        [lab_nopay setFont:[UIFont systemFontOfSize:14]];
-        [v_yue addSubview:lab_nopay];
+        CGFloat width = [self.lab_yue.text fittingLabelWidthWithHeight:15 andFontSize:[UIFont systemFontOfSize:14]];
+        self.lab_nopay = [[UILabel alloc]initWithFrame:CGRectMake(width + 10 + 5, 0, 60, 46)];
+        [self.lab_nopay setText:@"不足支付"];
+        [self.lab_nopay setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
+        [self.lab_nopay setFont:[UIFont systemFontOfSize:14]];
+        [self.v_yue addSubview:self.lab_nopay];
         
     }
     
@@ -103,13 +107,8 @@
     [self.lb_allPrice setFont:[UIFont boldSystemFontOfSize:20]];
     [self.lb_allPrice setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
     [v_bottom addSubview:self.lb_allPrice];
-    double double_allPrice = 0.00;
-    for (StoreEntity *selectStoreEntity in self.arr_selectedData) {
-        for (SupplierCommodityEndity *selectWareEntity in selectStoreEntity.shoppingCatItems) {
-            double_allPrice = double_allPrice + selectWareEntity.price * selectWareEntity.count;
-        }
-    }
-    NSString *str_allPrice = [NSString stringWithFormat:@"合计：￥%.2f",double_allPrice];
+
+    NSString *str_allPrice = [NSString stringWithFormat:@"合计：￥%.2f",self.total];
     NSMutableAttributedString *str_amount = [[NSMutableAttributedString alloc]initWithString:str_allPrice];
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 3)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 3)];
@@ -128,13 +127,18 @@
 }
 
 - (void)payOrder{
-    
+    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.total title:@"余额支付" delegate:self];
+    [view show];
 }
 
 - (void)chongzhiAction{
     SupplierPayViewController *vc = [[SupplierPayViewController alloc]init];
     vc.payPrice = [NSString stringWithFormat:@"%.2f",self.total - self.accountPrice];
     [self.navigationController pushViewController:vc animated:YES];
+    vc.changAccountPrice = ^(NSString *price) {
+        self.accountPrice = self.accountPrice + [price doubleValue];
+        [self getResult];
+    };
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -177,10 +181,6 @@
     [lb_title setFont:[UIFont systemFontOfSize:14]];
     [lb_title setTextColor:[UIColor colorWithHexString:@"#616161"]];
     [v_header addSubview:lb_title];
-    
-//    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 15, 19, 24, 24)];
-//    [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
-//    [v_header addSubview:iv_arrow];
     
     StoreEntity *selectStoreEntity = [self.arr_selectedData objectAtIndex:section];
     [iv_avatar sd_setImageWithURL:[NSURL URLWithString:selectStoreEntity.logo] placeholderImage:nil];
@@ -260,6 +260,51 @@
     SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
     [cell contentCellWithSupplierCommodityEndity:wareEntity];
     return cell;
+}
+
+#pragma PasswordDelegate
+- (void)alertView:(PasswordAlertView *)alertView buttonType:(PasswordAlertBtnType)btnType passwordStr:(NSString *)password{
+    if (btnType == PasswordAlertBtnConfirm) {
+//        [SettlementHandler checkPassWordWithshopId:[LoginStorage GetShopId] cardNum:self.cardNum money:[self.v_tixian.tf_price.text doubleValue] username:[LoginStorage GetUserName] password:password prepare:^{
+//        } success:^(id obj) {
+//            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+//                [MBProgressHUD showInfoMessage:@"提现成功"];
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }else if([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
+//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误，请重试" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//                UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"忘记密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                    FindPwWithUserNameViewController *vc = [[FindPwWithUserNameViewController alloc]init];
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }];
+//                UIAlertAction *again = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:[self.v_tixian.tf_price.text doubleValue] title:@"提现" delegate:self];
+//                    [view show];
+//                }];
+//                [alert addAction:forgetPassword];
+//                [alert addAction:again];
+//                [self presentViewController:alert animated:YES completion:nil];
+//
+//            }else{
+//                [MBProgressHUD hideHUD];
+//                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+//            }
+//        } failed:^(NSInteger statusCode, id json) {
+//            [MBProgressHUD showErrorMessage:(NSString *)json];
+//        }];
+    }
+}
+
+
+- (void)getResult{
+    if (self.accountPrice > self.total) {
+        NSMutableAttributedString *str_yu = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"余额支付(剩余¥%.2f)",self.accountPrice]];
+        [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
+        [self.lab_yue setAttributedText:str_yu];
+        [self.btn_chongzhi setHidden:YES];
+        [self.lab_nopay setHidden:YES];
+        [self.btn_payOrder setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
+        self.btn_payOrder.enabled = YES;
+    }
 }
 
 - (void)zhifucontinueAction{

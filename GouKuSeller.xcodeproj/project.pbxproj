@@ -168,6 +168,7 @@
 		743C5F9920A99C0100E617AF /* InventoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9820A99C0100E617AF /* InventoryDetailViewController.m */; };
 		743C5F9C20A9A4C500E617AF /* InventoryDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */; };
 		744817F820ADB8EE00A7F3DD /* AddressNullView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744817F720ADB8EE00A7F3DD /* AddressNullView.m */; };
+		744817FB20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744817FA20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -875,6 +876,8 @@
 		743C5F9B20A9A4C500E617AF /* InventoryDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryDetailTableViewCell.m; sourceTree = "<group>"; };
 		744817F620ADB8EE00A7F3DD /* AddressNullView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressNullView.h; sourceTree = "<group>"; };
 		744817F720ADB8EE00A7F3DD /* AddressNullView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressNullView.m; sourceTree = "<group>"; };
+		744817F920AE6F3000A7F3DD /* SearchPurchaseOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchPurchaseOrderViewController.h; sourceTree = "<group>"; };
+		744817FA20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchPurchaseOrderViewController.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1338,6 +1341,8 @@
 				1842CCE9209BFE7900A1C7C8 /* View */,
 				1842CCD8209AB1E200A1C7C8 /* PurchaseOrderViewController.h */,
 				1842CCD9209AB1E200A1C7C8 /* PurchaseOrderViewController.m */,
+				744817F920AE6F3000A7F3DD /* SearchPurchaseOrderViewController.h */,
+				744817FA20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m */,
 				1882F6EA20AD746400513EE7 /* CountDownManager.h */,
 				1882F6EB20AD746400513EE7 /* CountDownManager.m */,
 			);
@@ -2887,6 +2892,7 @@
 				743C5F9320A98F6D00E617AF /* InventoryDetailFooterView.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */,
+				744817FB20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m in Sources */,
 				74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */,
 				1842CCB9209AA21000A1C7C8 /* PurchaseTabBarViewController.m in Sources */,
 				7491FA74206E15CC0006F388 /* City.m in Sources */,
