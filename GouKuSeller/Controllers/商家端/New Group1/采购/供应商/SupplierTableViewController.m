@@ -101,7 +101,6 @@
     [[(UITabBarController *)[AppUtils activityViewController] selectedViewController] pushViewController:vc animated:YES];
 }
 
-
 - (void)setTableFrameWithHeight:(double)height{
     [_tb_supplierList setFrame:CGRectMake(_tb_supplierList.left, _tb_supplierList.top, _tb_supplierList.width,height)];
 }

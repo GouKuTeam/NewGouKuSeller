@@ -303,11 +303,7 @@
     [actionSheetController addAction:addtwoCAction];
     [actionSheetController addAction:cancelAction];
     [self presentViewController:actionSheetController animated:YES completion:nil];
-    
-    
-    
-    
-    
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

@@ -10,7 +10,6 @@
 #import "EditAddressTableViewCell.h"
 #import "CreateAddressViewController.h"
 #import "PurchaseHandler.h"
-#import "AddressEntity.h"
 
 @interface EditAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)BaseTableView         *tb_adress;
@@ -86,6 +85,18 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.addressEnterFromType == AddressEnterFromConfirmOrder) {
+        AddressEntity *entity = [self.arr_adress objectAtIndex:indexPath.row];
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.selectAddressComplete) {
+            self.selectAddressComplete(entity);
+        }
+    }
+    
+}
+
 - (void)btn_morenAddressAction:(UIButton *)btn{
     
     AddressEntity *entity = [self.arr_adress objectAtIndex:btn.tag];
@@ -133,6 +144,9 @@
 - (void)rightBarAction{
     CreateAddressViewController *vc = [[CreateAddressViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+    vc.addAddressComplete = ^{
+        [self loadData];
+    };
 }
 
 - (void)didReceiveMemoryWarning {

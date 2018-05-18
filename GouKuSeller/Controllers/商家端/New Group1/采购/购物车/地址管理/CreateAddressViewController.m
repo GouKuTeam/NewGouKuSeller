@@ -167,9 +167,13 @@
         dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
     }
     self.provinceId = [[dic objectForKey:@"id"] intValue];
-    self.cityId = [[dicTwo objectForKey:@"code"] intValue];
+    self.cityId = [[dicTwo objectForKey:@"id"] intValue];
     self.districtId = [[dicThree objectForKey:@"id"] intValue];
-    [self.lb_city setText:[NSString stringWithFormat:@"%@ %@ %@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[[dicThree objectForKey:@"districtName"] length] > 0 ? [dicThree objectForKey:@"districtName"] : @""]];
+    self.provinceName = [dic objectForKey:@"provinceName"];
+    self.cityName = [dicTwo objectForKey:@"cityName"];
+    self.districtName = [dicThree objectForKey:@"districtName"];
+    
+    [self.lb_city setText:[NSString stringWithFormat:@"%@-%@-%@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[[dicThree objectForKey:@"districtName"] length] > 0 ? [dicThree objectForKey:@"districtName"] : @""]];
 }
 
 - (void)rightBarAction{
@@ -184,10 +188,18 @@
     [PurchaseHandler addNewAddressWithName:self.tf_name.text phone:self.tf_phone.text provinceId:self.provinceId cityId:self.cityId districtId:self.districtId provinceName:self.provinceName cityName:self.cityName districtName:self.districtName address:self.tf_address.text lat:self.lat lon:self.lon prepare:^{
         
     } success:^(id obj) {
-        
+        [MBProgressHUD showSuccessMessage:@"添加成功"];
+        [self performSelector:@selector(addAddressFinish) withObject:nil afterDelay:1];
     } failed:^(NSInteger statusCode, id json) {
         
     }];
+}
+
+- (void)addAddressFinish{
+    [self.navigationController popViewControllerAnimated:YES];
+    if (self.addAddressComplete) {
+        self.addAddressComplete();
+    }
 }
 
 - (void)didReceiveMemoryWarning {

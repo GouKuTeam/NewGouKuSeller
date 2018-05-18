@@ -10,11 +10,13 @@
 #import "TabBarViewController.h"
 #import "PurchaseOrderHeaderView.h"
 #import "PurchaseOrderTableViewCell.h"
+#import "ShoppingHandler.h"
 
-@interface PurchaseOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PurchaseOrderViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
 @property (nonatomic,strong)BaseTableView    *tb_purchaseOrder;
 @property (nonatomic,strong)NSMutableArray   *arr_data;
+@property (nonatomic,assign)int               btnIndex;
 
 @end
 
@@ -31,19 +33,61 @@
 }
 
 - (void)onCreate{
+    self.btnIndex = 999;
     self.navigationItem.leftBarButtonItem = nil;
     PurchaseOrderHeaderView *v_header = [[PurchaseOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 43)];
     [self.view addSubview:v_header];
     v_header.selectItem = ^(int index) {
-        
+        if (index == 0) {
+            self.btnIndex = 999;
+            [self.tb_purchaseOrder requestDataSource];
+        }
+        if (index == 1) {
+            self.btnIndex = 0;
+            [self.tb_purchaseOrder requestDataSource];
+        }
+        if (index == 2) {
+            self.btnIndex = 2;
+            [self.tb_purchaseOrder requestDataSource];
+        }
+        if (index == 3) {
+            self.btnIndex = 3;
+            [self.tb_purchaseOrder requestDataSource];
+        }
+        if (index == 4) {
+            self.btnIndex = 9;
+            [self.tb_purchaseOrder requestDataSource];
+        }
     };
     
-    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:YES];
+    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:NO];
     self.tb_purchaseOrder.delegate = self;
     self.tb_purchaseOrder.dataSource = self;
     self.tb_purchaseOrder.tableFooterView = [UIView new];
     self.tb_purchaseOrder.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [self.view addSubview:self.tb_purchaseOrder];
+    [self.tb_purchaseOrder requestDataSource];
+}
+
+- (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    [ShoppingHandler selectOrderListWithStatus:[NSNumber numberWithInt:self.btnIndex] keyWord:nil page:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
+        if (pageNum == 0) {
+            [self.arr_data removeAllObjects];
+        }
+        [self.arr_data addObjectsFromArray:(NSArray *)obj];
+        [self.tb_purchaseOrder reloadData];
+        complete([(NSArray *)obj count]);
+        if (self.arr_data.count == 0) {
+            self.tb_purchaseOrder.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_purchaseOrder.frame withDefaultImage:nil withNoteTitle:@"暂无采购订单数据" withNoteDetail:nil withButtonAction:nil];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

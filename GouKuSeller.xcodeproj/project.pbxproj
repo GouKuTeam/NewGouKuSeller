@@ -56,6 +56,7 @@
 		740C46B920AC3F8700626A8B /* TiXianPassWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E339207A1FA40083E4A8 /* TiXianPassWordView.m */; };
 		740C46BC20AC638400626A8B /* ShoppingInvalidTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46BB20AC638400626A8B /* ShoppingInvalidTableViewCell.m */; };
 		740C46BF20AC6E4500626A8B /* PayOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46BE20AC6E4500626A8B /* PayOrderViewController.m */; };
+		740C46C220AD57A400626A8B /* PurchaseOrderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46C120AD57A400626A8B /* PurchaseOrderEntity.m */; };
 		740C688A207C98930044889F /* PayInCashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6889207C98930044889F /* PayInCashViewController.m */; };
 		740C688D207C989F0044889F /* PayInGouKuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688C207C989F0044889F /* PayInGouKuViewController.m */; };
 		740C6890207CA8A30044889F /* PayInCashCompleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C688F207CA8A30044889F /* PayInCashCompleteView.m */; };
@@ -759,6 +760,8 @@
 		740C46BB20AC638400626A8B /* ShoppingInvalidTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingInvalidTableViewCell.m; sourceTree = "<group>"; };
 		740C46BD20AC6E4500626A8B /* PayOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayOrderViewController.h; sourceTree = "<group>"; };
 		740C46BE20AC6E4500626A8B /* PayOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayOrderViewController.m; sourceTree = "<group>"; };
+		740C46C020AD57A400626A8B /* PurchaseOrderEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderEntity.h; sourceTree = "<group>"; };
+		740C46C120AD57A400626A8B /* PurchaseOrderEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderEntity.m; sourceTree = "<group>"; };
 		740C6888207C98930044889F /* PayInCashViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInCashViewController.h; sourceTree = "<group>"; };
 		740C6889207C98930044889F /* PayInCashViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashViewController.m; sourceTree = "<group>"; };
 		740C688B207C989F0044889F /* PayInGouKuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayInGouKuViewController.h; sourceTree = "<group>"; };
@@ -1643,6 +1646,8 @@
 				743C5F7B20A92E2700E617AF /* InventoryEntity.m */,
 				740C46B120AAE10F00626A8B /* AddressEntity.h */,
 				740C46B220AAE10F00626A8B /* AddressEntity.m */,
+				740C46C020AD57A400626A8B /* PurchaseOrderEntity.h */,
+				740C46C120AD57A400626A8B /* PurchaseOrderEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2951,6 +2956,7 @@
 				74ACFFCA20A14A70005C5A16 /* ShopManagerView.m in Sources */,
 				741D3C9C2081D0D000C56FCA /* CommonAlertView.m in Sources */,
 				7491FA8B2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
+				740C46C220AD57A400626A8B /* PurchaseOrderEntity.m in Sources */,
 				7491FA2C206B8BE10006F388 /* BankCardInformationViewController.m in Sources */,
 				74BD124B2068F4A80053A3D1 /* SingleSalesTableViewCell.m in Sources */,
 				744ABA66205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,

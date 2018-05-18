@@ -50,6 +50,7 @@
         self.tf_number.layer.borderColor = [[UIColor colorWithHexString:COLOR_GRAY_BG] CGColor];
         self.tf_number.textAlignment = NSTextAlignmentCenter;
         self.tf_number.layer.borderWidth = 0.5;
+        self.tf_number.enabled = NO;
 
         [self addSubview:self.tf_number];
         

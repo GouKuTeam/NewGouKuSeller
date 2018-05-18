@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+typedef void(^addAddressComplete)(void);
 
 @interface CreateAddressViewController : BaseViewController
+
+@property (nonatomic ,copy)addAddressComplete addAddressComplete;
 
 @end

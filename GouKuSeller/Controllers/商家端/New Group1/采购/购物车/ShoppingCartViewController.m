@@ -122,7 +122,8 @@
     [btn_select setImage:[UIImage imageNamed:@"payComplete"] forState:UIControlStateSelected];
     btn_select.tag = section;
     [btn_select addTarget:self action:@selector(selectSectionAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+//    UITapGestureRecognizer *vHeaderTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(vHeaderTgp:)];
+//    [v_header addGestureRecognizer:vHeaderTgp];
     [v_header addSubview:btn_select];
     
     UIImageView *iv_avatar = [[UIImageView alloc]initWithFrame:CGRectMake(btn_select.right + 10, 10, 22, 22)];
@@ -137,7 +138,7 @@
     [lb_title setTextColor:[UIColor colorWithHexString:@"#616161"]];
     [v_header addSubview:lb_title];
     
-    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 8, 14.5, 13, 13)];
+    UIImageView *iv_arrow = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 12 - 15, 9, 24, 24)];
     [iv_arrow setImage:[UIImage imageNamed:@"triangle_right"]];
     [v_header addSubview:iv_arrow];
 
@@ -194,10 +195,13 @@
     
     NSString *str_takeOffPrice = [NSString stringWithFormat:@"%d元起送",(int)selectStoreEntity.takeOffPrice];
     NSString *str_all = str_takeOffPrice;
-    if (sectionAmount > selectStoreEntity.takeOffPrice) {
-    }else{
-        str_all = [str_all stringByAppendingString:[NSString stringWithFormat:@"    还差%.2f元起送",selectStoreEntity.takeOffPrice - sectionAmount]];
+    if (self.editStatus == 0) {
+        if ((sectionAmount - selectStoreEntity.takeOffPrice) > 0) {
+        }else{
+            str_all = [str_all stringByAppendingString:[NSString stringWithFormat:@"    还差%.2f元起送",selectStoreEntity.takeOffPrice - sectionAmount]];
+        }
     }
+    
     NSMutableAttributedString *str_allTakeOffPrice = [[NSMutableAttributedString alloc]initWithString:str_all];
     [str_allTakeOffPrice addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, str_takeOffPrice.length)];
     [lb_StartingPrice setAttributedText:str_allTakeOffPrice];
@@ -324,6 +328,7 @@
         } success:^(id obj) {
             wareEntity.count = wareEntity.count - 1;
             [self.tb_shoppingCart reloadData];
+            [self getAllPrice];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
         }];
@@ -339,6 +344,7 @@
     } success:^(id obj) {
         wareEntity.count = wareEntity.count + 1;
         [self.tb_shoppingCart reloadData];
+        [self getAllPrice];
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:(NSString *)json];
     }];
@@ -434,7 +440,7 @@
             for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
                 sectionAmount = sectionAmount + entity.count * entity.price;
             }
-            if (sectionAmount > storeEntity.takeOffPrice) {
+            if (sectionAmount >= storeEntity.takeOffPrice) {
                 isCheck = YES;
             }
         }
