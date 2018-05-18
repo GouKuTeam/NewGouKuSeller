@@ -15,12 +15,14 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.backgroundColor = [UIColor whiteColor];
+        
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
         layout.itemSize = CGSizeMake(68, 68);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 10;
         
-        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,9, SCREEN_WIDTH,68) collectionViewLayout:layout];
+        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(10,9, SCREEN_WIDTH - 10,68) collectionViewLayout:layout];
         self.collectionView.backgroundColor = [UIColor whiteColor];
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
@@ -31,7 +33,7 @@
         [self addSubview:self.collectionView];
         
         self.v_line = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.bottom + 9, SCREEN_WIDTH, 0.5)];
-        [self.v_line setBackgroundColor:[UIColor colorWithHexString:@"#CFCFCF"]];
+        [self.v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
         [self addSubview:self.v_line];
         
         self.lb_amount = [[UILabel alloc]initWithFrame:CGRectMake(10, self.v_line.bottom, SCREEN_WIDTH - 20, 44)];
@@ -64,12 +66,25 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 0;
+    return self.purchaseOrderEntity.items.count;
 }
 
-- ( UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    ImageCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([ImageCollectionViewCell class]) forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    ImageCollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"imageCell" forIndexPath:indexPath];
+    SupplierCommodityEndity *entity = [self.purchaseOrderEntity.items objectAtIndex:indexPath.row];
+    [cell.iv_image sd_setImageWithURL:[NSURL URLWithString:entity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
     return cell;
+}
+
+- (void)contentCellWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    self.purchaseOrderEntity = purchaseOrderEntity;
+    [self.collectionView reloadData];
+    NSString *jian = [NSString stringWithFormat:@"共%d件，合计:",[purchaseOrderEntity.count intValue]];
+    NSString *price = [jian stringByAppendingString:[NSString stringWithFormat:@"¥%.2f",purchaseOrderEntity.payTotal]];
+    NSMutableAttributedString *str_amount = [[NSMutableAttributedString alloc]initWithString:price];
+    [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, jian.length)];
+    [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, jian.length)];
+    [self.lb_amount setAttributedText:str_amount];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -11,6 +11,7 @@
 #import "PurchaseOrderHeaderView.h"
 #import "PurchaseOrderTableViewCell.h"
 #import "ShoppingHandler.h"
+#import "PurchaseOrderEntity.h"
 
 @interface PurchaseOrderViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -60,10 +61,12 @@
         }
     };
     
-    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:NO];
+    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight - SafeAreaTopHeight - 49) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:NO];
     self.tb_purchaseOrder.delegate = self;
     self.tb_purchaseOrder.dataSource = self;
+    self.tb_purchaseOrder.tableViewDelegate = self;
     self.tb_purchaseOrder.tableFooterView = [UIView new];
+    self.tb_purchaseOrder.separatorColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     self.tb_purchaseOrder.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [self.view addSubview:self.tb_purchaseOrder];
     [self.tb_purchaseOrder requestDataSource];
@@ -106,6 +109,19 @@
     return self.arr_data.count;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:indexPath.section];
+    if (entity.status == 0 || entity.status == 3) {
+        return 173;
+    }else{
+        return 132;
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 52;
 }
@@ -116,11 +132,16 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 52)];
-    [v_header setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    [v_header setBackgroundColor:[UIColor whiteColor]];
+    
+    UIView  *v_line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    [v_line setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    [v_header addSubview:v_line];
     
     UIImageView *iv_avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 20, 22, 22)];
     [iv_avatar.layer setCornerRadius:11];
     [iv_avatar.layer setMasksToBounds:YES];
+    [iv_avatar setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     iv_avatar.contentMode = UIViewContentModeScaleAspectFill;
     [v_header addSubview:iv_avatar];
     
@@ -135,6 +156,22 @@
     [lb_status setTextAlignment:NSTextAlignmentRight];
     [v_header addSubview:lb_status];
     
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:section];
+    [iv_avatar sd_setImageWithURL:[NSURL URLWithString:entity.logo] placeholderImage:nil];
+    [lb_title setText:entity.name];
+    if (entity.status == 0) {//(0待付款1待接单2待发货3待收货8已完成9已取消)
+        [lb_status setText:@"待付款"];
+    }else if (entity.status == 1){
+        [lb_status setText:@"待接单"];
+    }else if (entity.status == 2){
+        [lb_status setText:@"待发货"];
+    }else if (entity.status == 3){
+        [lb_status setText:@"待收货"];
+    }else if (entity.status == 8){
+        [lb_status setText:@"已完成"];
+    }else if (entity.status == 9){
+        [lb_status setText:@"已取消"];
+    }
     return v_header;
 }
 
@@ -145,6 +182,8 @@
     if (!cell) {
         cell = [[PurchaseOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:indexPath.section];
+    [cell contentCellWithPurchaseOrderEntity:entity];
     return cell;
 }
 

@@ -109,8 +109,6 @@
     return cell;
 }
 
-
-
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     for (int i = 0; i < self.arr_data.count; i++) {
         EditPriceTableViewCell *cell = [self.tb_editPrice cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:i]];
@@ -180,7 +178,6 @@
     if (self.goBackAddSupplierCommodity) {
         self.goBackAddSupplierCommodity(dic);
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {

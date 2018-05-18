@@ -7,6 +7,7 @@
 //
 
 #import "AddressHeaderView.h"
+#import "NSString+Size.h"
 
 @implementation AddressHeaderView
 
@@ -58,9 +59,10 @@
         
         [self.iv_arrow mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.height.mas_equalTo(24);
-            make.top.mas_equalTo(38);
             make.left.mas_equalTo(SCREEN_WIDTH - 27);
+            make.centerY.equalTo(self);
         }];
+        
     }
     return self;
 }
@@ -69,6 +71,11 @@
     self.lb_name.text = addressEntity.name;
     self.lb_phone.text = addressEntity.phone;
     self.lb_address.text = addressEntity.address;
+    CGFloat height = [addressEntity.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 45 andFontSize:[UIFont systemFontOfSize:FONT_SIZE_MEMO]];
+    if (height > 32) {
+        height = 32;
+    }
+    [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 42 + height + 11)];
 }
 
 @end

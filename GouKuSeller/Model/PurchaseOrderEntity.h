@@ -15,6 +15,7 @@
 @property (nonatomic ,strong)NSString         *logo;              //商户LOGO
 @property (nonatomic ,strong)NSString         *phone;             //商户联系方式
 @property (nonatomic ,strong)NSNumber         *orderId;           //订单ID
+@property (nonatomic ,strong)NSNumber         *remark;            //备注
 @property (nonatomic ,strong)NSNumber         *number;            //订单当日序号
 @property (nonatomic ,assign)double            payFreight;        //订单运费
 @property (nonatomic ,assign)double            payTotal;          //订单总价

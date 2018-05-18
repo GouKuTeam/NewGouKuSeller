@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PurchaseOrderEntity.h"
+#import "SupplierCommodityEndity.h"
 
-@interface PurchaseOrderTableViewCell : UITableViewCell<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface PurchaseOrderTableViewCell: UITableViewCell<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,strong)UICollectionView   *collectionView;
 @property (nonatomic,strong)UILabel            *lb_amount;
 @property (nonatomic,strong)UIView             *v_line;
 @property (nonatomic,strong)UIButton           *btn_cancelOrder;
 @property (nonatomic,strong)UIButton           *btn_payOrder;
+@property (nonatomic,strong)PurchaseOrderEntity *purchaseOrderEntity;
+
+- (void)contentCellWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 
 @end

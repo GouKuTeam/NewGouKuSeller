@@ -70,7 +70,7 @@
         
         self.btn_plus = [[UIButton alloc]init];
         [self.btn_plus setImage:[UIImage imageNamed:@"plus_white"] forState:UIControlStateNormal];
-        [self.btn_less addTarget:self action:@selector(plusAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.btn_plus addTarget:self action:@selector(plusAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.btn_plus];
         [self.btn_plus mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.tf_count.mas_right);
@@ -211,7 +211,7 @@
 }
 
 - (void)lessAction{
-    if ([self.tf_count.text intValue] > 0) {
+    if ([self.tf_count.text intValue] > 1) {
         self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] - 1];
     }
 }
