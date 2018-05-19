@@ -198,14 +198,13 @@
         
         self.lab_orderId = [[UILabel alloc]init];
         [self addSubview:self.lab_orderId];
-//        [self.lab_orderId setText:@"6565565665564"];
         [self.lab_orderId setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self.lab_orderId setFont:[UIFont systemFontOfSize:14]];
         [self.lab_orderId setTextAlignment:NSTextAlignmentRight];
         [self.lab_orderId mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 150);
+            make.left.mas_equalTo(100);
             make.top.equalTo(lab22.mas_bottom).offset(15);
-            make.width.mas_equalTo(130);
+            make.right.equalTo(self.mas_right).offset(-21);
             make.height.mas_equalTo(22);
         }];
     }

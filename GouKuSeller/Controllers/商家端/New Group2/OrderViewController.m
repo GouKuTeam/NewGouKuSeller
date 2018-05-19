@@ -45,7 +45,7 @@
 
 
 - (void)onCreate{
-    self.tb_order = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
+    self.tb_order = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 5) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     [self.view addSubview:self.tb_order];
     [self.tb_order setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     self.tb_order.delegate = self;

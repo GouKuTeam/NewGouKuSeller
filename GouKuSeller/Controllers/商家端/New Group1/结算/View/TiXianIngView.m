@@ -192,7 +192,7 @@
         [lab33 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(21);
             make.top.equalTo(lab22.mas_bottom).offset(15);
-            make.width.mas_equalTo(90);
+            make.width.mas_equalTo(70);
             make.height.mas_equalTo(22);
         }];
         
@@ -203,9 +203,9 @@
         [self.lab_orderId setFont:[UIFont systemFontOfSize:14]];
         [self.lab_orderId setTextAlignment:NSTextAlignmentRight];
         [self.lab_orderId mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 150);
+            make.left.mas_equalTo(100);
             make.top.equalTo(lab22.mas_bottom).offset(15);
-            make.width.mas_equalTo(130);
+            make.right.equalTo(self.mas_right).offset(-21);
             make.height.mas_equalTo(22);
         }];
     }
