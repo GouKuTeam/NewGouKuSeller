@@ -10,6 +10,8 @@
 #import "PurchaseOrderEntity.h"
 #import "SupplierCommodityEndity.h"
 
+typedef void(^CountDownZero)(PurchaseOrderEntity *entity);
+
 @interface PurchaseOrderTableViewCell: UITableViewCell<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,strong)UICollectionView   *collectionView;
@@ -18,6 +20,7 @@
 @property (nonatomic,strong)UIButton           *btn_cancelOrder;
 @property (nonatomic,strong)UIButton           *btn_payOrder;
 @property (nonatomic,strong)PurchaseOrderEntity *purchaseOrderEntity;
+@property (nonatomic,copy)CountDownZero        countDownZero;
 
 - (void)contentCellWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 

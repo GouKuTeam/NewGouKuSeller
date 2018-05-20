@@ -10,6 +10,7 @@
 #import "ShoppingHandler.h"
 #import "PurchaseOrderEntity.h"
 #import "PurchaseOrderTableViewCell.h"
+#import "PurchaseOrderDetailViewController.h"
 
 @interface SearchPurchaseOrderViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITextField            *tf_search;
@@ -85,6 +86,9 @@
         [self.arr_order removeAllObjects];
         [self.arr_order addObjectsFromArray:(NSArray *)obj];
         [self.tb_purchaseOrder reloadData];
+        if (self.arr_order.count == 0) {
+            self.tb_purchaseOrder.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_purchaseOrder.frame withDefaultImage:nil withNoteTitle:@"暂无采购订单数据" withNoteDetail:nil withButtonAction:nil];
+        }
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
@@ -180,9 +184,78 @@
     if (!cell) {
         cell = [[PurchaseOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:indexPath.section];
     [cell contentCellWithPurchaseOrderEntity:entity];
+    cell.countDownZero = ^(PurchaseOrderEntity *entity) {
+        [self.tb_purchaseOrder reloadData];
+    };
+    cell.btn_cancelOrder.tag = indexPath.section;
+    cell.btn_payOrder.tag = indexPath.section;
+    [cell.btn_cancelOrder addTarget:self action:@selector(cancelPurchaseOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.btn_payOrder addTarget:self action:@selector(PayPurchaseOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:indexPath.section];
+    PurchaseOrderDetailViewController *vc = [[PurchaseOrderDetailViewController alloc]init];
+    vc.orderId = entity.orderId;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)cancelPurchaseOrderAction:(UIButton *)sender{
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:sender.tag];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认取消订单?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [ShoppingHandler cancelShopOrderDetailWithOrderId:entity.orderId prepare:^{
+            
+        } success:^(id obj) {
+            entity.status = 9;
+            [self.tb_purchaseOrder reloadData];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:json];
+        }];
+        
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)PayPurchaseOrderAction:(UIButton *)sender{
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:sender.tag];
+    if (entity.status == 0) {
+        PurchaseOrderDetailViewController *vc = [[PurchaseOrderDetailViewController alloc]init];
+        vc.orderId = entity.orderId;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (entity.status == 3) {
+        //确认收货
+        [ShoppingHandler confirmShopOrderDetailWithOrderId:entity.orderId prepare:^{
+            
+        } success:^(id obj) {
+            entity.status = 8;
+            [self.tb_purchaseOrder reloadData];
+        } failed:^(NSInteger statusCode, id json) {
+            
+        }];
+    }
+}
+
+- (void)vHeaderTgp:(UITapGestureRecognizer *)tap{
+    UIView *v_sender = [tap view];
+    PurchaseOrderEntity *entity = [self.arr_order objectAtIndex:v_sender.tag];
+    PurchaseOrderDetailViewController *vc = [[PurchaseOrderDetailViewController alloc]init];
+    vc.orderId = entity.orderId;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)cancelAction{

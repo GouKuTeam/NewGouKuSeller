@@ -32,8 +32,6 @@
 
 - (void)onCreate{
     
-    self.payPrice = @"32.4";
-    
     UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 280)];
     [self.view addSubview:v_back];
     [v_back setBackgroundColor:[UIColor whiteColor]];
@@ -232,12 +230,6 @@
         self.changAccountPrice(self.payPrice);
     }
 }
-
-- (void)zhifucontinueAction{
-    //支付成功  返回购物车
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 
 -(CGFloat) widthForString:(NSString *)value fontSize:(float)fontSize andHeight:(float)height
 {

@@ -173,6 +173,15 @@
 		7448180820AEA97700A7F3DD /* 商家违规条例.md in Resources */ = {isa = PBXBuildFile; fileRef = 7448180720AEA97700A7F3DD /* 商家违规条例.md */; };
 		7448180920AEA97700A7F3DD /* 商家违规条例.md in Resources */ = {isa = PBXBuildFile; fileRef = 7448180720AEA97700A7F3DD /* 商家违规条例.md */; };
 		7448180A20AEA97700A7F3DD /* 商家违规条例.md in Resources */ = {isa = PBXBuildFile; fileRef = 7448180720AEA97700A7F3DD /* 商家违规条例.md */; };
+		7448180D20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448180C20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m */; };
+		7448180E20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448180C20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m */; };
+		7448180F20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448180C20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m */; };
+		7448181220AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448181120AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m */; };
+		7448181320AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448181120AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m */; };
+		7448181420AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448181120AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m */; };
+		7448181C20AFF7B900A7F3DD /* OrderDetailCountDownManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448181B20AFF7B900A7F3DD /* OrderDetailCountDownManager.m */; };
+		7448181F20B1A79900A7F3DD /* PurchaseOrderStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448181E20B1A79900A7F3DD /* PurchaseOrderStatusView.m */; };
+		7448182220B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448182120B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -885,6 +894,16 @@
 		744817FC20AEA5C800A7F3DD /* TermOfShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermOfShopViewController.h; sourceTree = "<group>"; };
 		744817FD20AEA5C800A7F3DD /* TermOfShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TermOfShopViewController.m; sourceTree = "<group>"; };
 		7448180720AEA97700A7F3DD /* 商家违规条例.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "商家违规条例.md"; sourceTree = "<group>"; };
+		7448180B20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderDetailViewController.h; sourceTree = "<group>"; };
+		7448180C20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderDetailViewController.m; sourceTree = "<group>"; };
+		7448181020AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderDetailBottomView.h; sourceTree = "<group>"; };
+		7448181120AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderDetailBottomView.m; sourceTree = "<group>"; };
+		7448181A20AFF7B900A7F3DD /* OrderDetailCountDownManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailCountDownManager.h; sourceTree = "<group>"; };
+		7448181B20AFF7B900A7F3DD /* OrderDetailCountDownManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailCountDownManager.m; sourceTree = "<group>"; };
+		7448181D20B1A79900A7F3DD /* PurchaseOrderStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderStatusView.h; sourceTree = "<group>"; };
+		7448181E20B1A79900A7F3DD /* PurchaseOrderStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderStatusView.m; sourceTree = "<group>"; };
+		7448182020B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PurchaseOrderStatusTableViewCell.h; sourceTree = "<group>"; };
+		7448182120B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderStatusTableViewCell.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1348,10 +1367,10 @@
 				1842CCE9209BFE7900A1C7C8 /* View */,
 				1842CCD8209AB1E200A1C7C8 /* PurchaseOrderViewController.h */,
 				1842CCD9209AB1E200A1C7C8 /* PurchaseOrderViewController.m */,
+				7448180B20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.h */,
+				7448180C20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m */,
 				744817F920AE6F3000A7F3DD /* SearchPurchaseOrderViewController.h */,
 				744817FA20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m */,
-				1882F6EA20AD746400513EE7 /* CountDownManager.h */,
-				1882F6EB20AD746400513EE7 /* CountDownManager.m */,
 			);
 			path = "采购订单";
 			sourceTree = "<group>";
@@ -1384,6 +1403,16 @@
 				1842CCEE209C004200A1C7C8 /* ImageCollectionViewCell.m */,
 				1842CCF0209C33C600A1C7C8 /* PurchaseOrderHeaderView.h */,
 				1842CCF1209C33C600A1C7C8 /* PurchaseOrderHeaderView.m */,
+				7448181020AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.h */,
+				7448181120AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m */,
+				1882F6EA20AD746400513EE7 /* CountDownManager.h */,
+				1882F6EB20AD746400513EE7 /* CountDownManager.m */,
+				7448181A20AFF7B900A7F3DD /* OrderDetailCountDownManager.h */,
+				7448181B20AFF7B900A7F3DD /* OrderDetailCountDownManager.m */,
+				7448181D20B1A79900A7F3DD /* PurchaseOrderStatusView.h */,
+				7448181E20B1A79900A7F3DD /* PurchaseOrderStatusView.m */,
+				7448182020B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.h */,
+				7448182120B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2955,6 +2984,7 @@
 				74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,
 				7491FA902079B7A50006F388 /* BankCardEntity.m in Sources */,
+				7448181F20B1A79900A7F3DD /* PurchaseOrderStatusView.m in Sources */,
 				74046AF7209AD709004E64A9 /* EditPriceFooterView.m in Sources */,
 				7489CC98207F599100971BED /* KeyboardView.m in Sources */,
 				1891DAA920A3EB4D008E16F7 /* PurchaseHandler.m in Sources */,
@@ -3045,6 +3075,7 @@
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				743C5F3020A528F500E617AF /* InventoryViewController.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
+				7448181220AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
 				744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */,
 				74ACFFB620A04E11005C5A16 /* CustomerManagerViewController.m in Sources */,
@@ -3064,6 +3095,7 @@
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74F57FFB20A2BBBB000D8C8F /* SearchSupplierCommodityViewController.m in Sources */,
 				1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */,
+				7448180D20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
 				743C5F6920A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */,
@@ -3076,7 +3108,9 @@
 				1891DA9120A01EC8008E16F7 /* StoreEntity.m in Sources */,
 				7491FA3B206BA5D50006F388 /* SelectBankViewController.m in Sources */,
 				7491FA9F2079D8CE0006F388 /* FindPwWithCodeViewController.m in Sources */,
+				7448182220B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m in Sources */,
 				743C5F7C20A92E2700E617AF /* InventoryEntity.m in Sources */,
+				7448181C20AFF7B900A7F3DD /* OrderDetailCountDownManager.m in Sources */,
 				743C5F4A20A5578600E617AF /* WXSpeechSynthesizerPlayer.m in Sources */,
 				743C5F9620A990AE00E617AF /* EditInventoryViewController.m in Sources */,
 				74F8E9442060FF7C000A17A5 /* wareCategory.m in Sources */,
@@ -3219,6 +3253,7 @@
 				744ABAB0205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				743C5F7420A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74BD125B2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				7448181320AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
 				743C5F5A20A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */,
 				741D3C842080853A00C56FCA /* OrderDetailViewController.m in Sources */,
 				741D3C7A20805CC200C56FCA /* DateUtils.m in Sources */,
@@ -3269,6 +3304,7 @@
 				744ABAA12055713200BBB26E /* EditInfoView.m in Sources */,
 				7489CC96207F599100971BED /* KeyboardButton.m in Sources */,
 				74C6E365207B54D90083E4A8 /* SJScreenshotView.m in Sources */,
+				7448180E20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3385,6 +3421,7 @@
 				744ABAB1205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				743C5F7520A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74BD125C2068FD080053A3D1 /* WorkBenchView.m in Sources */,
+				7448181420AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
 				743C5F5B20A582A100E617AF /* CustomerManagerTableViewCell.m in Sources */,
 				741D3C852080853A00C56FCA /* OrderDetailViewController.m in Sources */,
 				741D3C7B20805CC200C56FCA /* DateUtils.m in Sources */,
@@ -3435,6 +3472,7 @@
 				744ABAA22055713200BBB26E /* EditInfoView.m in Sources */,
 				7489CC97207F599100971BED /* KeyboardButton.m in Sources */,
 				74C6E366207B54D90083E4A8 /* SJScreenshotView.m in Sources */,
+				7448180F20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

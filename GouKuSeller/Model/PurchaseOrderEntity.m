@@ -15,6 +15,7 @@
 {
     return @{
              @"items" : [SupplierCommodityEndity class],
+             @"address": [AddressEntity class],
              };
 }
 

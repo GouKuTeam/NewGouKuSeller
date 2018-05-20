@@ -34,7 +34,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor whiteColor], NSForegroundColorAttributeName,
                                                                      [UIFont boldSystemFontOfSize:17.0], NSFontAttributeName, nil]];
-    [self.navigationController.navigationBar setShadowImage:[UIColor imageWithColor:[UIColor colorWithHexString:COLOR_LINE_LIGHTGRAY] size:CGSizeMake(self.view.frame.size.width, 0.5)]];
+    [self.navigationController.navigationBar setShadowImage:[UIColor imageWithColor:[UIColor clearColor] size:CGSizeMake(self.view.frame.size.width, 0.5)]];
     self.navigationController.navigationBar.translucent = YES;
 }
 

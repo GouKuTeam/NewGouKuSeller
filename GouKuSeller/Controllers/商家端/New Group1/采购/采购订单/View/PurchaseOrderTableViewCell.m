@@ -32,6 +32,7 @@
         self.collectionView.showsVerticalScrollIndicator = NO;
         self.collectionView.showsHorizontalScrollIndicator = NO;
         [self.collectionView registerClass:[ImageCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
+        self.collectionView.userInteractionEnabled = NO;
         [self addSubview:self.collectionView];
         
         self.v_line = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.bottom + 9, SCREEN_WIDTH, 0.5)];
@@ -89,9 +90,12 @@
     [self.lb_amount setAttributedText:str_amount];
     if (purchaseOrderEntity.status == 0) {
         [self.btn_cancelOrder setHidden:NO];
+        [self.btn_payOrder setHidden:NO];
+        [self.btn_payOrder setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",purchaseOrderEntity.countDown/3600,(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
     }else if (purchaseOrderEntity.status == 3){
         [self.btn_cancelOrder setHidden:YES];
         [self.btn_payOrder setHidden:NO];
+        [self.btn_payOrder setTitle:@"确认收货" forState:UIControlStateNormal];
     }else{
         [self.btn_cancelOrder setHidden:YES];
         [self.btn_payOrder setHidden:YES];
@@ -99,7 +103,20 @@
 }
 
 - (void)countDownNotfifcation{
-    
+    if (self.purchaseOrderEntity.status == 0) {
+        NSInteger countDown = self.purchaseOrderEntity.countDown - 1;
+        self.purchaseOrderEntity.countDown = self.purchaseOrderEntity.countDown - 1;
+        if (countDown < 0) {
+        }else{
+            [self.btn_payOrder setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",countDown/3600,(countDown/60)%60,countDown%60] forState:UIControlStateNormal];
+        }
+        if (countDown == 0) {
+            if (self.countDownZero) {
+                self.purchaseOrderEntity.status = 9;
+                self.countDownZero(self.purchaseOrderEntity);
+            }
+        }
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

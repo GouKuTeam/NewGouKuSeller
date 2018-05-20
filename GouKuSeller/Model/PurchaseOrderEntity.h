@@ -7,6 +7,7 @@
 //
 
 #import "BaseEntity.h"
+#import "AddressEntity.h"
 
 @interface PurchaseOrderEntity : BaseEntity
 
@@ -20,11 +21,13 @@
 @property (nonatomic ,assign)double            payFreight;        //订单运费
 @property (nonatomic ,assign)double            payTotal;          //订单总价
 @property (nonatomic ,strong)NSNumber         *count;             //订单商品数量
-@property (nonatomic ,assign)NSNumber         *createTime;        //下单时间
+@property (nonatomic ,assign)double            createTime;        //下单时间
 @property (nonatomic ,assign)NSNumber         *payTime;           //付款时间
-@property (nonatomic ,strong)NSNumber         *countDown;         //倒计时(秒)
+@property (nonatomic ,assign)long             countDown;          //倒计时(秒)
 @property (nonatomic ,strong)NSArray          *items;             //订单商品数组
 @property (nonatomic ,strong)NSArray          *flow;              //订单状态描述数组
+@property (nonatomic ,strong)AddressEntity    *address;           //地址对象
+@property (nonatomic ,assign)double            accountPrice;      //账户余额
 
 
 //"status":<number>,          //订单状态(0待付款1待接单2待发货3待收货8已完成9已取消)

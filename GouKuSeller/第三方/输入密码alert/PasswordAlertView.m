@@ -24,6 +24,7 @@
     if (self) {
         self.delegate = delegate;
         self.double_price = price;
+        self.title = title;
     }
     return self;
 }
