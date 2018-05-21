@@ -246,7 +246,7 @@
 
 //获取购物车中商品个数
 + (void)getCountInShopCartprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_GET_GetCountInShopCart];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_GetCountInShopCart];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
