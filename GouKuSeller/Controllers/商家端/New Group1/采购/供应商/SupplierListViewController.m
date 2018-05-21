@@ -13,6 +13,8 @@
 #import "SupplierTableViewController.h"
 #import "HYTabbarView.h"
 #import "SearchSupplierViewController.h"
+#import "ShoppingHandler.h"
+#import "PurchaseTabBarViewController.h"
 @interface SupplierListViewController ()<UITextFieldDelegate,HYTopBarDelegate>
 
 @property (nonatomic, strong)UITextField           *tf_search;
@@ -24,6 +26,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [ShoppingHandler getCountInShopCartprepare:^{
+    } success:^(id obj) {
+        if ([obj intValue] > 0) {
+            [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[obj intValue]];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+    }];
 }
 
 - (void)onCreate{

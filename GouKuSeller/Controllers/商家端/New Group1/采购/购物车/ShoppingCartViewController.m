@@ -19,6 +19,7 @@
 #import "ShoppingInvalidTableViewCell.h"
 #import "ConfirmOrderViewController.h"
 #import "SupplierShopViewController.h"
+#import "PurchaseTabBarViewController.h"
 
 @interface ShoppingCartViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
@@ -44,6 +45,21 @@
     self.btn_right = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStyleDone target:self action:@selector(editAction)];
     self.navigationItem.rightBarButtonItem = self.btn_right;
     
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadShoppingCount];
+}
+
+- (void)loadShoppingCount{
+    [ShoppingHandler getCountInShopCartprepare:^{
+    } success:^(id obj) {
+        if ([obj intValue] > 0) {
+            [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[obj intValue]];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+    }];
 }
 
 - (void)onCreate{
@@ -305,6 +321,7 @@
             storeEntity.shoppingCatItems = arr_data;
             [self.arr_data replaceObjectAtIndex:indexPath.section withObject:storeEntity];
             [self.tb_shoppingCart reloadData];
+            [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[(PurchaseTabBarViewController *)self.tabBarController unViewedCount] - 1];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -374,6 +391,7 @@
         [self.arr_select removeLastObject];
         [self.arr_data removeLastObject];
         [self.tb_shoppingCart reloadData];
+        [self loadShoppingCount];
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -525,6 +543,7 @@
             self.shoppingCarEntity = (ShoppingCarEntity *)obj;
             [self refreshUI];
             [self.tb_shoppingCart reloadData];
+            [self loadShoppingCount];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:(NSString *)json];
