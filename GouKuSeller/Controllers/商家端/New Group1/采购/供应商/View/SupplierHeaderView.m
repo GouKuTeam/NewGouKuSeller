@@ -27,9 +27,9 @@
         [self.lb_name setFont:[UIFont systemFontOfSize:20]];
         [self addSubview:self.lb_name];
         
-        UIImageView *img_jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(self.lb_name.right + 10, self.lb_name.top + 2, 24, 24)];
-        [img_jiantou setImage:[UIImage imageNamed:@"triangle_right"]];
-        [self addSubview:img_jiantou];
+        self.img_jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(self.lb_name.right + 10, self.lb_name.top + 2, 24, 24)];
+        [self.img_jiantou setImage:[UIImage imageNamed:@"triangle_right"]];
+        [self addSubview:self.img_jiantou];
         
         self.lb_startPrice = [[UILabel alloc]initWithFrame:CGRectMake(self.lb_name.left, self.lb_name.bottom + 1, self.lb_name.width, 20)];
         [self.lb_startPrice setTextColor:[UIColor colorWithHexString:@"#EFEFEF"]];

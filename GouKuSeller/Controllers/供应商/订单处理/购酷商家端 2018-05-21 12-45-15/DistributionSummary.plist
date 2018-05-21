@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>购酷商家端.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>766BC183857619D589CC035FDC80EE3AE1E7D76E</string>
+				<key>dateExpires</key>
+				<string>2019/4/24</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>766BC183857619D589CC035FDC80EE3AE1E7D76E</string>
+						<key>dateExpires</key>
+						<string>2019/4/24</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>entitlements</key>
+					<dict>
+						<key>application-identifier</key>
+						<string>Y5VHW74MPL.com.gouku.GouKuSeller.GouKuSellerPush</string>
+						<key>com.apple.developer.team-identifier</key>
+						<string>Y5VHW74MPL</string>
+						<key>get-task-allow</key>
+						<false/>
+						<key>keychain-access-groups</key>
+						<array>
+							<string>Y5VHW74MPL.com.gouku.GouKuSeller.GouKuSellerPush</string>
+						</array>
+					</dict>
+					<key>name</key>
+					<string>GouKuSellerPush.appex</string>
+					<key>profile</key>
+					<dict>
+						<key>UUID</key>
+						<string>1bdf5d44-23c6-4f3c-a5c6-86af21fe6a92</string>
+						<key>name</key>
+						<string>iOS Team Ad Hoc Provisioning Profile: *</string>
+					</dict>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>Y5VHW74MPL</string>
+						<key>name</key>
+						<string>Shanghai Xunmeng Robot Co., Ltd.</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>Y5VHW74MPL.com.gouku.GouKuSeller</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>Y5VHW74MPL</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>GouKuSeller.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>835c44ea-b3fd-4d6e-a4d3-2f4813eada7c</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.gouku.GouKuSeller</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>Y5VHW74MPL</string>
+				<key>name</key>
+				<string>Shanghai Xunmeng Robot Co., Ltd.</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

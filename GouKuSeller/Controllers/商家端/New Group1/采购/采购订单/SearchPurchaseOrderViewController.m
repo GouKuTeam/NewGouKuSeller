@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.view setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
 }
 
 - (instancetype)init
@@ -39,7 +39,6 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationItem.leftBarButtonItem.customView = [UIView new];
     UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 44)];
-    
     self.tf_search = [[UITextField alloc]initWithFrame:CGRectMake(0, 7, v_header.width - 50, 30)];
     UIView *v_left = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34, 30)];
     UIImageView *iv_icon = [[UIImageView alloc]initWithFrame:CGRectMake(10, 6, 18, 18)];
@@ -69,10 +68,11 @@
     
     self.navigationItem.titleView = v_header;
     
-    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    self.tb_purchaseOrder = [[BaseTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaBottomHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_purchaseOrder];
     self.tb_purchaseOrder.delegate = self;
     self.tb_purchaseOrder.dataSource = self;
+    [self.tb_purchaseOrder setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     self.tb_purchaseOrder.tableFooterView = [UIView new];
 }
 

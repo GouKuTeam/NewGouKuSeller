@@ -20,6 +20,7 @@
 #import "SupplierCommodityInformationViewController.h"
 #import "SelectUnitView.h"
 #import "PurchaseHandler.h"
+#import "NSString+Size.h"
 
 @interface SupplierShopViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,BaseTableViewDelagate>
 
@@ -61,6 +62,8 @@
     SupplierHeaderView *v_header = [[SupplierHeaderView alloc]initWithFrame:CGRectMake(0,0,SCREEN_WIDTH, 66)];
     [v_header.iv_avatar sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
     [v_header.lb_name setText:self.storeEntity.name];
+    CGFloat width = [self.storeEntity.name fittingLabelWidthWithHeight:28 andFontSize:[UIFont systemFontOfSize:20]];
+    [v_header.img_jiantou setFrame:CGRectMake(width + 76, v_header.lb_name.top + 2, 24, 24)];
     [v_header.lb_startPrice setText:[NSString stringWithFormat:@"%d元起送",(int)self.storeEntity.takeOffPrice]];
     [self.view addSubview:v_header];
     UITapGestureRecognizer *vHeaderTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gotoShopDetailAction)];

@@ -13,5 +13,6 @@
 @property (nonatomic,strong)UIImageView     *iv_avatar;
 @property (nonatomic,strong)UILabel         *lb_name;
 @property (nonatomic,strong)UILabel         *lb_startPrice;
+@property (nonatomic,strong)UIImageView     *img_jiantou;
 
 @end

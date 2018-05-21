@@ -12,6 +12,7 @@
 
 @property (nonatomic ,strong)NSString          *name;
 @property (nonatomic ,strong)NSString          *phone;
+@property (nonatomic ,strong)NSString          *address;
 @property (nonatomic ,strong)NSString          *area;
 @property (nonatomic ,assign)int                isDefault;    //是否默认 1 默认地址  0 不是
 @property (nonatomic ,assign)int                provinceId;
@@ -20,7 +21,6 @@
 @property (nonatomic ,strong)NSString          *provinceName;
 @property (nonatomic ,strong)NSString          *cityName;
 @property (nonatomic ,strong)NSString          *districtName;
-@property (nonatomic ,strong)NSString          *address;
 @property (nonatomic ,assign)double             lat;
 @property (nonatomic ,assign)double             lon;
 

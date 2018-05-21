@@ -35,7 +35,7 @@
 }
 
 - (void)onCreate{
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     self.navigationItem.leftBarButtonItem.customView = [UIView new];
     UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 30, 44)];
     
@@ -73,6 +73,7 @@
     self.tb_supplierCommodity.delegate = self;
     self.tb_supplierCommodity.dataSource = self;
     self.tb_supplierCommodity.rowHeight = 96;
+    self.tb_supplierCommodity.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     self.tb_supplierCommodity.tableFooterView = [UIView new];
 }
 

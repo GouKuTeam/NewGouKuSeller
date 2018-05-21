@@ -11,6 +11,7 @@
 
 @interface PurchaseOrderEntity : BaseEntity
 
+//商户端用的
 @property (nonatomic ,strong)NSNumber         *shopId;            //商户ID
 @property (nonatomic ,strong)NSString         *name;              //商户名称
 @property (nonatomic ,strong)NSString         *logo;              //商户LOGO
@@ -28,6 +29,7 @@
 @property (nonatomic ,strong)NSArray          *flow;              //订单状态描述数组
 @property (nonatomic ,strong)AddressEntity    *address;           //地址对象
 @property (nonatomic ,assign)double            accountPrice;      //账户余额
+//供应商订单加的
 
 
 //"status":<number>,          //订单状态(0待付款1待接单2待发货3待收货8已完成9已取消)

@@ -7,8 +7,10 @@
 //
 
 #import "OrderManagerViewController.h"
+#import "ExportOrderViewController.h"
 
 @interface OrderManagerViewController ()
+@property (nonatomic ,strong)UIButton             *btn_daochu;
 
 @end
 
@@ -18,6 +20,21 @@
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = nil;
     // Do any additional setup after loading the view.
+}
+
+- (void)onCreate{
+    self.btn_daochu = [[UIButton alloc]initWithFrame:CGRectMake(15, SCREEN_HEIGHT - 109, 44, 44)];
+    [self.view addSubview:self.btn_daochu];
+    [self.view bringSubviewToFront:self.btn_daochu];
+    [self.btn_daochu setBackgroundImage:[UIImage imageNamed:@"export"] forState:UIControlStateNormal];
+    [self.btn_daochu addTarget:self action:@selector(btn_daochuAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)btn_daochuAction{
+    ExportOrderViewController *vc = [[ExportOrderViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {
