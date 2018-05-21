@@ -7,6 +7,8 @@
 //
 
 #import "ExportOrderViewController.h"
+#import "LYLOptionPicker.h"
+#import "LYLDatePicker.h"
 
 @interface ExportOrderViewController ()
 
@@ -76,7 +78,7 @@
     [v_back2 addSubview:self.tf_youxiang];
     self.tf_youxiang.textAlignment = NSTextAlignmentRight;
     [self.tf_youxiang setPlaceholder:@"输入邮箱"];
-    [self.tf_youxiang setTextColor:[UIColor colorWithHexString:@"#979797"]];
+    [self.tf_youxiang setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [self.tf_youxiang setFont:[UIFont systemFontOfSize:16]];
     
     UIButton *btn_daochu = [[UIButton alloc]initWithFrame:CGRectMake(15, v_back2.bottom + 21, SCREEN_WIDTH - 30, 46)];
@@ -90,15 +92,84 @@
 }
 
 - (void)btn_beginAtAction{
-    
+    [LYLDatePicker showDateDetermineChooseInView:self.view modeType:UIDatePickerModeDate determineChoose:^(NSString *dateString) {
+        [self.btn_beginAt setTitle:dateString forState:UIControlStateNormal];
+        [self.btn_beginAt setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    }];
 }
 
 - (void)btn_endAtAction{
-    
+    [LYLDatePicker showDateDetermineChooseInView:self.view modeType:UIDatePickerModeDate determineChoose:^(NSString *dateString) {
+        [self.btn_endAt setTitle:dateString forState:UIControlStateNormal];
+        [self.btn_endAt setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    }];
 }
 
 - (void)btndaochuAction{
+    if ([self.btn_beginAt.titleLabel.text isEqualToString:@"选择开始日期"]) {
+        [MBProgressHUD showErrorMessage:@"请选择开始日期"];
+        return;
+    }
+    if ([self.btn_endAt.titleLabel.text isEqualToString:@"选择结束日期"]) {
+        [MBProgressHUD showErrorMessage:@"请选择结束日期"];
+        return;
+    }
+    if ([self isValidateEmail:self.tf_youxiang.text] == NO) {
+        [MBProgressHUD showErrorMessage:@"请填入正确的邮箱格式"];
+        return;
+    }
     
+    NSDateFormatter *beiginformatter = [[NSDateFormatter alloc]init];
+    [beiginformatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *beiginDate = [beiginformatter dateFromString:self.btn_beginAt.titleLabel.text];
+    
+    NSDateFormatter *endformatter = [[NSDateFormatter alloc]init];
+    [endformatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *endDate = [endformatter dateFromString:self.btn_endAt.titleLabel.text];
+    int result = [self compareBeginDay:beiginDate withEndDay:endDate];
+    if (result == -1) {
+        NSLog(@"正确");
+        //提交数据
+    }else{
+        [MBProgressHUD showErrorMessage:@"开始日期必须小于结束日期"];
+        return;
+    }
+}
+
+- (int)compareBeginDay:(NSDate *)BeginDay withEndDay:(NSDate *)EndDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *beginDayStr = [dateFormatter stringFromDate:BeginDay];
+    
+    NSString *endDayStr = [dateFormatter stringFromDate:EndDay];
+    
+    NSDate *dateA = [dateFormatter dateFromString:beginDayStr];
+    
+    NSDate *dateB = [dateFormatter dateFromString:endDayStr];
+    
+    NSComparisonResult result = [dateA compare:dateB];
+    
+    if (result == NSOrderedDescending) {
+        //NSLog(@"BeginDay比 EndDay时间晚");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //NSLog(@"BeginDay比 EndDay时间早");
+        return -1;
+    }
+    //NSLog(@"两者时间是同一个时间");
+    return 0;
+    
+}
+
+-(BOOL)isValidateEmail:(NSString *)email
+{
+    NSString  *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" ;
+    NSPredicate  *emailTest = [ NSPredicate   predicateWithFormat : @"SELF MATCHES%@",emailRegex];
+    return  [emailTest  evaluateWithObject :email];
 }
 
 - (void)didReceiveMemoryWarning {

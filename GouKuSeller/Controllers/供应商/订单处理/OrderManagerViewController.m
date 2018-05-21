@@ -28,6 +28,7 @@
     [self.view bringSubviewToFront:self.btn_daochu];
     [self.btn_daochu setBackgroundImage:[UIImage imageNamed:@"export"] forState:UIControlStateNormal];
     [self.btn_daochu addTarget:self action:@selector(btn_daochuAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.btn_daochu setHidden:YES];
 }
 
 - (void)btn_daochuAction{
