@@ -183,6 +183,21 @@
 		7448181F20B1A79900A7F3DD /* PurchaseOrderStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448181E20B1A79900A7F3DD /* PurchaseOrderStatusView.m */; };
 		7448182220B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448182120B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m */; };
 		7448182820B2852E00A7F3DD /* ExportOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448182720B2852E00A7F3DD /* ExportOrderViewController.m */; };
+		7448183120B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183020B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m */; };
+		7448183220B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183020B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m */; };
+		7448183320B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183020B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m */; };
+		7448183620B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183520B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m */; };
+		7448183720B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183520B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m */; };
+		7448183820B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183520B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m */; };
+		7448183B20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183A20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m */; };
+		7448183C20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183A20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m */; };
+		7448183D20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448183A20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m */; };
+		7448184120B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184020B2D26100A7F3DD /* SupplierOrderHandler.m */; };
+		7448184220B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184020B2D26100A7F3DD /* SupplierOrderHandler.m */; };
+		7448184320B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184020B2D26100A7F3DD /* SupplierOrderHandler.m */; };
+		7448184C20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */; };
+		7448184D20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */; };
+		7448184E20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -907,6 +922,16 @@
 		7448182120B1AB0A00A7F3DD /* PurchaseOrderStatusTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseOrderStatusTableViewCell.m; sourceTree = "<group>"; };
 		7448182620B2852E00A7F3DD /* ExportOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExportOrderViewController.h; sourceTree = "<group>"; };
 		7448182720B2852E00A7F3DD /* ExportOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExportOrderViewController.m; sourceTree = "<group>"; };
+		7448182F20B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierOrderManagerSectionHeaderView.h; sourceTree = "<group>"; };
+		7448183020B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderManagerSectionHeaderView.m; sourceTree = "<group>"; };
+		7448183420B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierOrderManagerSectionFooterView.h; sourceTree = "<group>"; };
+		7448183520B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderManagerSectionFooterView.m; sourceTree = "<group>"; };
+		7448183920B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierOrderManagerTableViewCell.h; sourceTree = "<group>"; };
+		7448183A20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderManagerTableViewCell.m; sourceTree = "<group>"; };
+		7448183F20B2D26100A7F3DD /* SupplierOrderHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierOrderHandler.h; sourceTree = "<group>"; };
+		7448184020B2D26100A7F3DD /* SupplierOrderHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderHandler.m; sourceTree = "<group>"; };
+		7448184A20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierOrderSelectHeaderView.h; sourceTree = "<group>"; };
+		7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderSelectHeaderView.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1612,6 +1637,37 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		7448182E20B2B95F00A7F3DD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7448182F20B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.h */,
+				7448183020B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m */,
+				7448183420B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.h */,
+				7448183520B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m */,
+				7448183920B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.h */,
+				7448183A20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		7448183E20B2D24C00A7F3DD /* 供应商订单 */ = {
+			isa = PBXGroup;
+			children = (
+				7448183F20B2D26100A7F3DD /* SupplierOrderHandler.h */,
+				7448184020B2D26100A7F3DD /* SupplierOrderHandler.m */,
+			);
+			path = "供应商订单";
+			sourceTree = "<group>";
+		};
+		7448184420B2D93900A7F3DD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7448184A20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.h */,
+				7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		744ABA1B2052990C00BBB26E /* 管理分类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1628,6 +1684,7 @@
 		744ABA1F2053E75C00BBB26E /* Handler */ = {
 			isa = PBXGroup;
 			children = (
+				7448183E20B2D24C00A7F3DD /* 供应商订单 */,
 				743C5F7620A92CC800E617AF /* 盘点 */,
 				743C5F6120A58A3800E617AF /* 客户管理 */,
 				1891DAA620A3EB02008E16F7 /* 采购 */,
@@ -2000,6 +2057,7 @@
 		74ACFFAA20A04DAD005C5A16 /* 订单处理 */ = {
 			isa = PBXGroup;
 			children = (
+				7448182E20B2B95F00A7F3DD /* view */,
 				74ACFFAE20A04DE9005C5A16 /* OrderManagerViewController.h */,
 				74ACFFAF20A04DE9005C5A16 /* OrderManagerViewController.m */,
 				7448182620B2852E00A7F3DD /* ExportOrderViewController.h */,
@@ -2011,6 +2069,7 @@
 		74ACFFAB20A04DB3005C5A16 /* 订单查询 */ = {
 			isa = PBXGroup;
 			children = (
+				7448184420B2D93900A7F3DD /* view */,
 				74ACFFB120A04DF4005C5A16 /* OrderSelectViewController.h */,
 				74ACFFB220A04DF4005C5A16 /* OrderSelectViewController.m */,
 			);
@@ -2876,6 +2935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1842CCC8209AACF700A1C7C8 /* ShoppingCartViewController.m in Sources */,
+				7448183B20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m in Sources */,
 				74ACFFDF20A1B0D7005C5A16 /* SupplierCommodityListTableViewCell.m in Sources */,
 				1842CCE5209BF39200A1C7C8 /* ConfirmOrderTableViewCell.m in Sources */,
 				74BD121F2068C0AB0053A3D1 /* ActiveInformation.m in Sources */,
@@ -2913,6 +2973,7 @@
 				741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74ACFFD420A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */,
+				7448183120B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */,
 				744ABA0820517C3600BBB26E /* BtnTop.m in Sources */,
 				741D3C7920805CC200C56FCA /* DateUtils.m in Sources */,
 				74ACFFB020A04DE9005C5A16 /* OrderManagerViewController.m in Sources */,
@@ -2971,6 +3032,7 @@
 				1842CCE8209BF89500A1C7C8 /* AddressHeaderView.m in Sources */,
 				744ABA60205428AF00BBB26E /* IQTextView.m in Sources */,
 				74B4E878204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
+				7448184C20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */,
 				741D3CBA20846D7B00C56FCA /* TiXianIngView.m in Sources */,
 				7491FAA42079E2400006F388 /* SetPassWordViewController.m in Sources */,
 				74046B11209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */,
@@ -3032,6 +3094,7 @@
 				74F8E8F220592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74F8E93A2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
 				743C5F3920A5337D00E617AF /* AddInventoryTabHeaderView.m in Sources */,
+				7448183620B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m in Sources */,
 				74BD12342068D8B30053A3D1 /* LYLDatePicker.m in Sources */,
 				744ABAC92058C90100BBB26E /* ManagerCatagoryTableViewCell.m in Sources */,
 				740C46BF20AC6E4500626A8B /* PayOrderViewController.m in Sources */,
@@ -3079,6 +3142,7 @@
 				74F8E908205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m in Sources */,
 				743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */,
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
+				7448184120B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */,
 				743C5F3020A528F500E617AF /* InventoryViewController.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				7448181220AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
@@ -3166,6 +3230,7 @@
 				74F8E8F320592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74B4E81F204BD353006AFB6C /* GouKuSellerTests.m in Sources */,
 				74B4E87F204BD3EC006AFB6C /* MJRefreshAnimationStateHeader.m in Sources */,
+				7448183720B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m in Sources */,
 				74BD11F12067DEBD0053A3D1 /* MyViewController.m in Sources */,
 				74F8E8D3205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
 				74B4E89A204BD3EC006AFB6C /* AppUtils.m in Sources */,
@@ -3201,7 +3266,9 @@
 				744ABAC0205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */,
 				744ABA88205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				74BD1260206920E90053A3D1 /* SalesHeaderView.m in Sources */,
+				7448184D20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */,
 				744ABA262054201B00BBB26E /* BaseEntity.m in Sources */,
+				7448184220B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */,
 				74BD12352068D8B30053A3D1 /* LYLDatePicker.m in Sources */,
 				74BD12382068D8B30053A3D1 /* UIView+Extension.m in Sources */,
 				74F8E8FE2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
@@ -3245,6 +3312,7 @@
 				74BD120F20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				743C5F6A20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				74B4E8AF204BD3EC006AFB6C /* NSString+Size.m in Sources */,
+				7448183C20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m in Sources */,
 				7491FA8C2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				74B4E8A3204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
 				741D3C7F20806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
@@ -3276,6 +3344,7 @@
 				7489CC9F207F599100971BED /* OttoTextView.m in Sources */,
 				743C5F5F20A588E200E617AF /* CustomerManagerEntity.m in Sources */,
 				7491FA75206E15CC0006F388 /* City.m in Sources */,
+				7448183220B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */,
 				744ABAB6205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E378207C56640083E4A8 /* CashierHandler.m in Sources */,
 				74983671208C3176007FEEF8 /* ActiveRulesEntity.m in Sources */,
@@ -3334,6 +3403,7 @@
 				74F8E8F420592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74B4E82A204BD353006AFB6C /* GouKuSellerUITests.m in Sources */,
 				74B4E880204BD3EC006AFB6C /* MJRefreshAnimationStateHeader.m in Sources */,
+				7448183820B2B9EA00A7F3DD /* SupplierOrderManagerSectionFooterView.m in Sources */,
 				74BD11F22067DEBD0053A3D1 /* MyViewController.m in Sources */,
 				74F8E8D4205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
 				74B4E89B204BD3EC006AFB6C /* AppUtils.m in Sources */,
@@ -3369,7 +3439,9 @@
 				744ABAC1205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */,
 				744ABA89205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				74BD1261206920E90053A3D1 /* SalesHeaderView.m in Sources */,
+				7448184E20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */,
 				744ABA272054201B00BBB26E /* BaseEntity.m in Sources */,
+				7448184320B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */,
 				74BD12362068D8B30053A3D1 /* LYLDatePicker.m in Sources */,
 				74BD12392068D8B30053A3D1 /* UIView+Extension.m in Sources */,
 				74F8E8FF2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
@@ -3413,6 +3485,7 @@
 				74BD121020689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				743C5F6B20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				74B4E8B0204BD3EC006AFB6C /* NSString+Size.m in Sources */,
+				7448183D20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m in Sources */,
 				7491FA8D2079B6DD0006F388 /* AccountCashEntity.m in Sources */,
 				74B4E8A4204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
 				741D3C8020806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
@@ -3444,6 +3517,7 @@
 				7489CCA0207F599100971BED /* OttoTextView.m in Sources */,
 				743C5F6020A588E200E617AF /* CustomerManagerEntity.m in Sources */,
 				7491FA76206E15CC0006F388 /* City.m in Sources */,
+				7448183320B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */,
 				744ABAB7205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E379207C56640083E4A8 /* CashierHandler.m in Sources */,
 				74983672208C3176007FEEF8 /* ActiveRulesEntity.m in Sources */,

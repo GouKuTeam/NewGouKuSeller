@@ -14,6 +14,7 @@
 @property (nonatomic ,strong)NSString          *phone;
 @property (nonatomic ,strong)NSString          *address;
 @property (nonatomic ,strong)NSString          *area;
+@property (nonatomic ,strong)NSString          *userShop;     // 商家名称
 @property (nonatomic ,assign)int                isDefault;    //是否默认 1 默认地址  0 不是
 @property (nonatomic ,assign)int                provinceId;
 @property (nonatomic ,assign)int                cityId;

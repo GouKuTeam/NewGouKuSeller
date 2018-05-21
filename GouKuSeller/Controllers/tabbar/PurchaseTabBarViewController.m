@@ -111,17 +111,19 @@
     badgeView.layer.cornerRadius = 8;
     badgeView.layer.masksToBounds = YES;
     badgeView.text = str_count;
-    badgeView.textColor = [UIColor whiteColor];
+    badgeView.textColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
     badgeView.font = [UIFont systemFontOfSize:FONT_SIZE_MEMO];
     badgeView.textAlignment = NSTextAlignmentCenter;
-    badgeView.backgroundColor = [UIColor colorWithHexString:@"#FF3B30"];
+    badgeView.backgroundColor = [UIColor whiteColor];
+    badgeView.layer.borderColor = [[UIColor colorWithHexString:COLOR_BLUE_MAIN] CGColor];
+    badgeView.layer.borderWidth = 0.5;
     CGRect tabFrame = self.tabBar.frame;
     
     //确定小红点的位置
     float percentX = (index + 0.60) / self.viewControllers.count;
     CGFloat x = ceilf(percentX * tabFrame.size.width);
     CGFloat y = ceilf(0.1 * tabFrame.size.height);
-    badgeView.frame = CGRectMake(x, y, width, 16);
+    badgeView.frame = CGRectMake(x-10, y-3, width, 16);
     [self.tabBar addSubview:badgeView];
     
 }

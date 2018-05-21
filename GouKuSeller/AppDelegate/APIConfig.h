@@ -254,3 +254,18 @@
 //盘点记录修改
 #define API_POST_InventoryUpdate @"/inventory/addOrUpdate"
 
+/*
+ 供应商订单API
+ */
+//供应商订单列表查询
+#define API_POST_SupplierOrderList @"/shopOrder/shop/list"
+//供应商修改订单价格
+#define API_POST_SupplierChangePrice @"/shopOrder/shop/updatePrice"
+//供应商发货
+#define API_GET_SupplierSend @"/shopOrder/shop/send/"
+//供应商取消订单
+#define API_GET_SupplierCancelOrder @"/shopOrder/shop/close/"
+
+
+
+
