@@ -265,7 +265,8 @@
 #define API_GET_SupplierSend @"/shopOrder/shop/send/"
 //供应商取消订单
 #define API_GET_SupplierCancelOrder @"/shopOrder/shop/close/"
-
+//获取待处理订单数量
+#define API_GET_SupplierOrderCount @"/shopOrder/shop/getCount"
 
 
 

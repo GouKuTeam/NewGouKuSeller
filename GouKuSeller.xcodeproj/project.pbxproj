@@ -198,6 +198,7 @@
 		7448184C20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */; };
 		7448184D20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */; };
 		7448184E20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */; };
+		7448185120B4091500A7F3DD /* SupplierCountEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448185020B4091500A7F3DD /* SupplierCountEntity.m */; };
 		744ABA0820517C3600BBB26E /* BtnTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0720517C3600BBB26E /* BtnTop.m */; };
 		744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */; };
 		744ABA0E205255DB00BBB26E /* StoreCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABA0D205255DB00BBB26E /* StoreCategoryTableViewCell.m */; };
@@ -932,6 +933,8 @@
 		7448184020B2D26100A7F3DD /* SupplierOrderHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderHandler.m; sourceTree = "<group>"; };
 		7448184A20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierOrderSelectHeaderView.h; sourceTree = "<group>"; };
 		7448184B20B2D97200A7F3DD /* SupplierOrderSelectHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierOrderSelectHeaderView.m; sourceTree = "<group>"; };
+		7448184F20B4091500A7F3DD /* SupplierCountEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierCountEntity.h; sourceTree = "<group>"; };
+		7448185020B4091500A7F3DD /* SupplierCountEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCountEntity.m; sourceTree = "<group>"; };
 		744ABA0620517C3600BBB26E /* BtnTop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BtnTop.h; sourceTree = "<group>"; };
 		744ABA0720517C3600BBB26E /* BtnTop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BtnTop.m; sourceTree = "<group>"; };
 		744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityTableViewCell.h; sourceTree = "<group>"; };
@@ -1754,6 +1757,8 @@
 				740C46B220AAE10F00626A8B /* AddressEntity.m */,
 				740C46C020AD57A400626A8B /* PurchaseOrderEntity.h */,
 				740C46C120AD57A400626A8B /* PurchaseOrderEntity.m */,
+				7448184F20B4091500A7F3DD /* SupplierCountEntity.h */,
+				7448185020B4091500A7F3DD /* SupplierCountEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2984,6 +2989,7 @@
 				74C6E3312079EDC10083E4A8 /* SelectShopViewController.m in Sources */,
 				744ABA8A205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				744ABA78205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
+				7448185120B4091500A7F3DD /* SupplierCountEntity.m in Sources */,
 				741D3C9720809EC500C56FCA /* OrderInformationFooterView.m in Sources */,
 				7491FA802079B0E40006F388 /* ActiveHandler.m in Sources */,
 				741D3C9220808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,

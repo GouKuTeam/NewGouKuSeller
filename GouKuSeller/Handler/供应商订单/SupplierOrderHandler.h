@@ -20,4 +20,7 @@
 
 //供应商发货
 +(void)supplierSendCommodityWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//获取供应商订单个数
++(void)getSupplierOrderCountPrepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 @end

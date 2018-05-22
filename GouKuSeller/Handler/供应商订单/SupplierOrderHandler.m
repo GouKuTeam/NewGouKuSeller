@@ -8,12 +8,12 @@
 
 #import "SupplierOrderHandler.h"
 #import "PurchaseOrderEntity.h"
-
+#import "SupplierCountEntity.h"
 @implementation SupplierOrderHandler
 
 //根据状态或关键词查询供应商订单列表
 + (void)supplierOrderListWithStatus:(NSNumber *)status keyWord:(NSString *)keyWord prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_SelectInventoryInformation];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_SupplierOrderList];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (status) {
         if (status != [NSNumber numberWithInt:999]) {
@@ -95,6 +95,26 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
                                                   success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//获取供应商订单个数
++(void)getSupplierOrderCountPrepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_GET_SupplierOrderCount];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  SupplierCountEntity *entity = [SupplierCountEntity parseSupplierCountEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(entity);
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
