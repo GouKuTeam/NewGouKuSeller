@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PurchaseOrderEntity.h"
 
 @interface SupplierOrderManagerSectionHeaderView : UIView
 
@@ -24,6 +25,8 @@
 @property (nonatomic ,strong)UILabel               *lab_commodityTitle;
 @property (nonatomic ,strong)UIButton              *btn_zhankai;
 
+- (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 
+- (CGFloat)getHeightWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 
 @end

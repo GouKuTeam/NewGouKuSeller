@@ -13,7 +13,7 @@
 
 //根据状态或关键词查询供应商订单列表
 + (void)supplierOrderListWithStatus:(NSNumber *)status keyWord:(NSString *)keyWord prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_SelectInventoryInformation];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_SupplierOrderList];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (status) {
         if (status != [NSNumber numberWithInt:999]) {

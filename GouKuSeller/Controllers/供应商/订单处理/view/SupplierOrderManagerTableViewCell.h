@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SupplierCommodityEndity.h"
 
 @interface SupplierOrderManagerTableViewCell : UITableViewCell
 
 @property (nonatomic ,strong)UILabel           *lab_name;
 @property (nonatomic ,strong)UILabel           *lab_count;
 @property (nonatomic ,strong)UILabel           *lab_price;
+
+- (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity;
 
 @end

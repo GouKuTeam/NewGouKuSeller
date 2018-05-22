@@ -7,6 +7,8 @@
 //
 
 #import "SupplierOrderManagerSectionFooterView.h"
+#import "DateUtils.h"
+#import "CountDownManager.h"
 
 @implementation SupplierOrderManagerSectionFooterView
 
@@ -14,6 +16,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(countDownNotfifcation) name:kCountDownNotification object:nil];
+        
         self.img_line = [[UIImageView alloc]init];
         [self addSubview:self.img_line];
         [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
@@ -26,7 +30,7 @@
         
         self.btn_priceDetail = [[UIButton alloc]init];
         [self addSubview:self.btn_priceDetail];
-        [self.btn_priceDetail setBackgroundImage:[UIImage imageNamed:@"warning"] forState:UIControlStateNormal];
+        [self.btn_priceDetail setBackgroundImage:[UIImage imageNamed:@"help"] forState:UIControlStateNormal];
         [self.btn_priceDetail mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(SCREEN_WIDTH - 14 - 20);
             make.top.equalTo(self.img_line.mas_bottom).offset(9);
@@ -106,5 +110,27 @@
     }
     return self;
 }
+
+- (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    [self.lab_countAndPrice setText:[NSString stringWithFormat:@"共%d件，合计¥%.2f",[purchaseOrderEntity.count intValue],purchaseOrderEntity.payActual]];
+    [self.lab_countAndPrice setText:[NSString stringWithFormat:@"%@下单    订单编号：%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.createTime formatter:@"MM-dd HH:mm"],purchaseOrderEntity.orderId]];
+    [self.btn_right setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",purchaseOrderEntity.countDown/3600,(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
+    self.purchaseOrderEntity = purchaseOrderEntity;
+}
+
+- (void)countDownNotfifcation{
+        NSInteger countDown = self.purchaseOrderEntity.countDown - 1;
+        self.purchaseOrderEntity.countDown = self.purchaseOrderEntity.countDown - 1;
+        if (countDown < 0) {
+        }else{
+            [self.btn_right setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",countDown/3600,(countDown/60)%60,countDown%60] forState:UIControlStateNormal];
+        }
+        if (countDown == 0) {
+            if (self.countDownZero) {
+                self.countDownZero(self.purchaseOrderEntity);
+            }
+        }
+}
+
 
 @end

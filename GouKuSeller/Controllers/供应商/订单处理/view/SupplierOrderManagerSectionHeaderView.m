@@ -7,6 +7,7 @@
 //
 
 #import "SupplierOrderManagerSectionHeaderView.h"
+#import "NSString+Size.h"
 
 @implementation SupplierOrderManagerSectionHeaderView
 
@@ -152,6 +153,41 @@
         }];
     }
     return self;
+}
+
+- (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    self.lab_orderNum.text = [NSString stringWithFormat:@"#%@",purchaseOrderEntity.number];
+    if (purchaseOrderEntity.status == 0) {
+        [self.lab_orderStatus setText:@"待付款"];
+    }else{
+        [self.lab_orderStatus setText:@"待配送"];
+    }
+    self.lab_shopName.text = purchaseOrderEntity.address.name;
+    self.lab_shopAddress.text = purchaseOrderEntity.address.address;
+    self.lab_remarkDetail.text = purchaseOrderEntity.remark;
+    
+    if (purchaseOrderEntity.remark.length > 0) {
+        [self.lab_remarkTitle setHidden:YES];
+        [self.img_line1 setHidden:YES];
+        [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_shopAddress.mas_bottom);
+        }];
+    }else{
+        [self.lab_remarkTitle setHidden:NO];
+        [self.img_line1 setHidden:NO];
+        [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_remarkTitle);
+        }];
+    }
+}
+
+- (CGFloat)getHeightWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    CGFloat height = 150.00;
+    if ([purchaseOrderEntity.remark length] > 0) {
+        height = height + 42;
+    }
+    height = height + [purchaseOrderEntity.address.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
+    return height;
 }
 
 @end

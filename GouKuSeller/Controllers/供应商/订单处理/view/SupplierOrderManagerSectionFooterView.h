@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PurchaseOrderEntity.h"
 
+typedef void(^CountDownZero)(PurchaseOrderEntity *entity);
 @interface SupplierOrderManagerSectionFooterView : UIView
 
 @property (nonatomic ,strong)UIImageView           *img_line;
@@ -18,5 +20,9 @@
 @property (nonatomic ,strong)UIView                *v_order;
 @property (nonatomic ,strong)UILabel               *lab_createTimeAndNum;
 @property (nonatomic ,strong)UIButton              *btn_copy;
+@property (nonatomic ,strong)PurchaseOrderEntity   *purchaseOrderEntity;
+@property (nonatomic ,copy)CountDownZero        countDownZero;
+
+- (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 
 @end
