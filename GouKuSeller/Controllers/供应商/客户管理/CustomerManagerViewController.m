@@ -40,7 +40,7 @@
 }
 
 - (void)onCreate{
-    self.tb_customer = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
+    self.tb_customer = [[BaseTableView alloc]initWithFrame:CGRectMake(0,10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaBottomHeight - 10) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     [self.view addSubview:self.tb_customer];
     self.tb_customer.delegate = self;
     self.tb_customer.dataSource = self;

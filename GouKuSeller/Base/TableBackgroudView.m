@@ -44,7 +44,7 @@
         if (str_noteTitle.length == 0) {
             [lb_noteTitle setFrame:CGRectZero];
         }else{
-            [lb_noteTitle setFrame:CGRectMake(SPACING_CONTROLS,currentY + SPACING_CONTROLS,frame.size.width - SPACING_CONTROLS * 2,height_noteTitle)];
+            [lb_noteTitle setFrame:CGRectMake(SPACING_CONTROLS,currentY + SPACING_CONTROLS - 80,frame.size.width - SPACING_CONTROLS * 2,height_noteTitle)];
             currentY = lb_noteTitle.bottom;
         }
         
