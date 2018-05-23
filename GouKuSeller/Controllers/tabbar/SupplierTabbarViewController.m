@@ -11,6 +11,7 @@
 #import "OrderSelectViewController.h"
 #import "CustomerManagerViewController.h"
 #import "ShopManagerViewController.h"
+#import "NSString+Size.h"
 
 @interface SupplierTabbarViewController ()
 
@@ -85,5 +86,65 @@
     return nav;
 }
 
+//----------------------红点的显示与消失--------------------------
+- (void)showBadgeOnItemIndex:(int)index withCount:(int)count{
+    if (count <= 0) {
+        [self hideBadgeOnItemIndex:index];
+        return;
+    }
+    CGFloat width = 0;
+    NSString *str_count = @"";
+    if (count < 10) {
+        width = 16;
+        str_count = [NSString stringWithFormat:@"%d",count];
+    }else{
+        if (count > 999) {
+            str_count = @"...";
+        }else{
+            str_count = [NSString stringWithFormat:@"%d",count];
+        }
+        width = [str_count fittingLabelWidthWithHeight:16 andFontSize:[UIFont systemFontOfSize:FONT_SIZE_MEMO]] + 6;
+    }
+    self.unViewedCount = count;
+    //移除之前的小红点
+    [self removeBadgeOnItemIndex:index];
+    //新建小红点
+    UILabel *badgeView = [[UILabel alloc]init];
+    badgeView.tag = 888 + index;
+    badgeView.layer.cornerRadius = 8;
+    badgeView.layer.masksToBounds = YES;
+    badgeView.text = str_count;
+    badgeView.textColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
+    badgeView.font = [UIFont systemFontOfSize:FONT_SIZE_MEMO];
+    badgeView.textAlignment = NSTextAlignmentCenter;
+    badgeView.backgroundColor = [UIColor whiteColor];
+    badgeView.layer.borderColor = [[UIColor colorWithHexString:COLOR_BLUE_MAIN] CGColor];
+    badgeView.layer.borderWidth = 0.5;
+    CGRect tabFrame = self.tabBar.frame;
+    
+    //确定小红点的位置
+    float percentX = (index + 0.60) / self.viewControllers.count;
+    CGFloat x = ceilf(percentX * tabFrame.size.width);
+    CGFloat y = ceilf(0.1 * tabFrame.size.height);
+    badgeView.frame = CGRectMake(x-10, y-3, width, 16);
+    [self.tabBar addSubview:badgeView];
+    
+}
+
+- (void)hideBadgeOnItemIndex:(int)index{
+    //移除小红点
+    self.unViewedCount = 0;
+    [self removeBadgeOnItemIndex:index];
+}
+
+- (void)removeBadgeOnItemIndex:(int)index{
+    //按照tag值进行移除
+    for (UIView *subView in self.tabBar.subviews) {
+        
+        if (subView.tag == 888+index) {
+            [subView removeFromSuperview];
+        }
+    }
+}
 
 @end
