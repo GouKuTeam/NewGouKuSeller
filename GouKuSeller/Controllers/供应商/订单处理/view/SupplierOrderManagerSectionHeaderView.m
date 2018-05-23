@@ -193,6 +193,7 @@
         height = height + 42;
     }
     height = height + [purchaseOrderEntity.address.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
+
     return height;
 }
 

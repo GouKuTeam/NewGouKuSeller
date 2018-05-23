@@ -114,11 +114,11 @@
     badgeView.layer.cornerRadius = 8;
     badgeView.layer.masksToBounds = YES;
     badgeView.text = str_count;
-    badgeView.textColor = [UIColor colorWithHexString:COLOR_BLUE_MAIN];
+    badgeView.textColor = [UIColor whiteColor];
     badgeView.font = [UIFont systemFontOfSize:FONT_SIZE_MEMO];
     badgeView.textAlignment = NSTextAlignmentCenter;
-    badgeView.backgroundColor = [UIColor whiteColor];
-    badgeView.layer.borderColor = [[UIColor colorWithHexString:COLOR_BLUE_MAIN] CGColor];
+    badgeView.backgroundColor = [UIColor colorWithHexString:@"#E6670C"];
+    badgeView.layer.borderColor = [[UIColor colorWithHexString:@"#E6670C"] CGColor];
     badgeView.layer.borderWidth = 0.5;
     CGRect tabFrame = self.tabBar.frame;
     

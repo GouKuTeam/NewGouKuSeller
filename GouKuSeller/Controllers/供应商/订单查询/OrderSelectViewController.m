@@ -19,6 +19,7 @@
 #import "SupplierCountEntity.h"
 #import "SupplierTabbarViewController.h"
 #import "SupplierSearchOrderViewController.h"
+#import "SupplierPriceDetailView.h"
 
 @interface OrderSelectViewController ()
 <UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate,UITextFieldDelegate>
@@ -31,6 +32,7 @@
 @property (nonatomic ,assign)int                        pendingTotal;
 @property (nonatomic ,assign)int                        allTotal;
 @property (nonatomic ,strong)UIAlertController         *alertController;
+@property (nonatomic ,strong)SupplierPriceDetailView   *supplierPriceDetailView;
 
 @end
 
@@ -64,7 +66,7 @@
         }
         [self.tb_orderManager requestDataSource];
     };
-    self.tb_orderManager = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight - 49) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:NO];
+    self.tb_orderManager = [[BaseTableView alloc]initWithFrame:CGRectMake(0,v_header.bottom, SCREEN_WIDTH,self.view.height - v_header.bottom - SafeAreaBottomHeight - 49 - 50) style:UITableViewStyleGrouped hasHeaderRefreshing:YES hasFooterRefreshing:NO];
     self.tb_orderManager.delegate = self;
     self.tb_orderManager.dataSource = self;
     self.tb_orderManager.tableViewDelegate = self;
@@ -73,6 +75,15 @@
     self.tb_orderManager.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [self.view addSubview:self.tb_orderManager];
     [self.tb_orderManager requestDataSource];
+    
+    self.supplierPriceDetailView = [[SupplierPriceDetailView alloc]init];
+    [self.supplierPriceDetailView setHidden:YES];
+    [[[UIApplication  sharedApplication]keyWindow]addSubview:self.supplierPriceDetailView];
+    [self.supplierPriceDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(SCREEN_HEIGHT);
+    }];
 }
 
 - (void)searchAction{
@@ -152,6 +163,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:section];
+    if (entity.status == 3 || entity.status == 8 || entity.status == 9) {
+        return 65;
+    }
     return 120;
 }
 
@@ -182,6 +197,12 @@
     [v_footer contentViewWithPurchaseOrderEntity:entity];
     v_footer.btn_right.tag = section;
     [v_footer.btn_right addTarget:self action:@selector(btn_rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_footer.btn_copy.tag = section;
+    [v_footer.btn_copy addTarget:self action:@selector(btn_copyAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_footer.btn_cancelOrder.tag = section;
+    [v_footer.btn_cancelOrder addTarget:self action:@selector(btn_cancelOrderAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_footer.btn_priceDetail.tag = section;
+    [v_footer.btn_priceDetail addTarget:self action:@selector(showPriceDetail:) forControlEvents:UIControlEventTouchUpInside];
     v_footer.countDownZero = ^(PurchaseOrderEntity *entity) {
         [self.arr_data removeObjectAtIndex:section];
         [SupplierOrderHandler supplierCancelOrderWithOrderId:entity.orderId prepare:^{
@@ -219,6 +240,13 @@
     [self.tb_orderManager reloadData];
 }
 
+- (void)btn_copyAction:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    [MBProgressHUD showInfoMessage:@"复制成功"];
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = [NSString stringWithFormat:@"%@",entity.orderId];
+}
+
 - (void)btn_rightAction:(UIButton *)btn_sender{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
     if (entity.status == 0) {
@@ -249,12 +277,47 @@
         [SupplierOrderHandler supplierSendCommodityWithOrderId:entity.orderId prepare:^{
             
         } success:^(id obj) {
-            [self.arr_data removeObjectAtIndex:btn_sender.tag];
+            entity.status = 3;
             [self.tb_orderManager reloadData];
+            
         } failed:^(NSInteger statusCode, id json) {
             
         }];
     }
+}
+
+- (void)showPriceDetail:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    [self.supplierPriceDetailView contentViewWithPurchaseOrderEntity:entity];
+    [self.supplierPriceDetailView setHidden:NO];
+}
+
+- (void)btn_cancelOrderAction:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定取消此采购订单?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SupplierOrderHandler supplierCancelOrderWithOrderId:entity.orderId prepare:^{
+            
+        } success:^(id obj) {
+            if (self.selectIndex == 999) {
+                //在全部状态的列表
+                entity.status = 9;
+                [self.tb_orderManager reloadData];
+            }else{
+                [self.arr_data removeObjectAtIndex:btn_sender.tag];
+                [self.tb_orderManager reloadData];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            
+        }];
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

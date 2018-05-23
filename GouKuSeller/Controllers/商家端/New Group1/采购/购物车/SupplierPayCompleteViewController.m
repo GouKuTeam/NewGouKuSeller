@@ -36,13 +36,13 @@
 }
 
 - (void)zhifucontinueAction{
+    [self.navigationController popToRootViewControllerAnimated:NO];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"PayCompleteAndRefreshData" object:nil userInfo:nil];
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[PurchaseOrderViewController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
-        }
-    }
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.01];
+}
+
+- (void)delayMethod{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"GoToPurchaseOrder" object:nil userInfo:nil];
 }
 
 - (void)leftBarAction:(id)sender{

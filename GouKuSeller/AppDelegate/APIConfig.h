@@ -111,6 +111,8 @@
 #define API_POST_SupplierAttentionAdd @"/shop/supplier/attention/add"
 //供应商取消关注
 #define API_POST_SupplierAttentionCancel @"/shop/supplier/attention/cancel"
+//设置运费起送费
+#define API_POST_SetSupplierPrice @"/supplier/set/price"
 
 /*
  活动API

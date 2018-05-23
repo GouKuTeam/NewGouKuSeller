@@ -39,11 +39,12 @@
             [btn_demo addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.arr_btn addObject:btn_demo];
             
-            UILabel  *lb_num = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/arr_title.count * i + SCREEN_WIDTH/arr_title.count/2 + 8, 25, 14, 14)];
-            [lb_num setBackgroundColor:[UIColor colorWithHexString:@"#FF3B30"]];
-            [lb_num setFont:[UIFont systemFontOfSize:11]];
+            UILabel  *lb_num = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/arr_title.count * i + SCREEN_WIDTH/arr_title.count/2 + 8, 25, 16, 16)];
+            [lb_num setBackgroundColor:[UIColor colorWithHexString:@"#E6670C"]];
+            [lb_num setFont:[UIFont systemFontOfSize:FONT_SIZE_MEMO]];
+            [lb_num setTextAlignment:NSTextAlignmentCenter];
             [lb_num setTextColor:[UIColor whiteColor]];
-            [lb_num.layer setCornerRadius:7];
+            [lb_num.layer setCornerRadius:8];
             lb_num.layer.masksToBounds = YES;
             [self addSubview:lb_num];
             [self.arr_num addObject:lb_num];
@@ -51,6 +52,17 @@
         
     }
     return self;
+}
+
+- (void)setItemWithIndex:(NSInteger)index{
+    for (UIButton *btn_demo in self.arr_btn) {
+        [btn_demo setSelected:NO];
+    }
+    UIButton *btn_sender = [self.arr_btn objectAtIndex:index];
+    [btn_sender setSelected:YES];
+    if (self.selectType) {
+        self.selectType(index);
+    }
 }
 
 - (void)buttonAction:(UIButton *)btn_sender{

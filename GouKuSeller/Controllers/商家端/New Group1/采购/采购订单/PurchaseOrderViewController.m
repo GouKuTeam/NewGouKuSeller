@@ -318,7 +318,7 @@
 
 - (void)NocatifionPayCompleteAndRefreshDataAction{
     self.btnIndex = 999;
-    [self.tb_purchaseOrder requestDataSource];
+    [self.tb_purchaseOrder loadDataNoRefreshing];
 }
 
 - (void)leftBarAction:(id)sender{

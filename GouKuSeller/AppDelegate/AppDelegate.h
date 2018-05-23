@@ -21,6 +21,5 @@ static BOOL isProduction = FALSE;  // fales 为开发环境  如果上线需改�
 @property (strong, nonatomic)TabBarViewController          *tableBarController;
 @property (strong, nonatomic)SupplierTabbarViewController  *supplierTabbarViewController;
 
-
 @end
 

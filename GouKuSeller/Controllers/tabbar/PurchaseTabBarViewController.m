@@ -86,7 +86,6 @@
 }
 
 - (void)gotoPurchaseOrder{
-    [self.selectedViewController popToRootViewControllerAnimated:YES];
     self.selectedIndex = 2;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "DispatchingViewController.h"
+#import "SupplierOrderHandler.h"
 
 @interface DispatchingViewController ()<UITextFieldDelegate>
 
@@ -81,6 +82,14 @@
         [MBProgressHUD showInfoMessage:@"请输入运费"];
         return;
     }
+    [SupplierOrderHandler setSupplierPriceWithDispatchingPrice:self.tf_freight.text takeOffPrice:self.tf_minimumDeliveryAmount.text prepare:^{
+        
+    } success:^(id obj) {
+        [MBProgressHUD showSuccessMessage:@"设置成功成功"];
+        [self performSelector:@selector(setCompleteAction) withObject:nil afterDelay:1];
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -91,6 +100,10 @@
         [self.tf_freight setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
     }
     
+}
+
+- (void)setCompleteAction{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -51,6 +51,7 @@
     [super viewWillAppear:animated];
     [self loadShoppingCount];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifionPayCompleteAndRefreshDataAction) name:@"PayCompleteAndRefreshData" object:nil];
+    [self.tb_shoppingCart loadDataNoRefreshing];
 }
 
 - (void)loadShoppingCount{

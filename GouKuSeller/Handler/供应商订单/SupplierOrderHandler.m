@@ -124,4 +124,30 @@
                                           }];
 }
 
+//设置供应商运费和起送费
++ (void)setSupplierPriceWithDispatchingPrice:(NSString *)dispatchingPrice takeOffPrice:(NSString *)takeOffPrice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SetSupplierPrice];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (dispatchingPrice) {
+        [dic setObject:dispatchingPrice forKey:@"dispatchingPrice"];
+    }
+    if (takeOffPrice) {
+        [dic setObject:takeOffPrice forKey:@"takeOffPrice"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end

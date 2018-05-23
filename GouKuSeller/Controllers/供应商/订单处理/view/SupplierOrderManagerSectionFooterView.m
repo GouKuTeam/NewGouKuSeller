@@ -38,7 +38,7 @@
         }];
         
         self.lab_countAndPrice = [[UILabel alloc]init];
-        [self.lab_createTimeAndNum setFont:[UIFont systemFontOfSize:14]];
+        [self.lab_createTimeAndNum setFont:[UIFont boldSystemFontOfSize:16]];
         [self addSubview:self.lab_countAndPrice];
         [self.lab_countAndPrice setTextAlignment:NSTextAlignmentRight];
         [self.lab_countAndPrice mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -114,12 +114,25 @@
 }
 
 - (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
-    [self.lab_countAndPrice setText:[NSString stringWithFormat:@"共%d件，合计¥%.2f",[purchaseOrderEntity.count intValue],purchaseOrderEntity.payActual]];
+    NSString *str_countAndPrice = [NSString stringWithFormat:@"共%d件，合计¥%.2f",[purchaseOrderEntity.count intValue],purchaseOrderEntity.payActual];
+    NSString *str_count = [NSString stringWithFormat:@"共%d件，合计",[purchaseOrderEntity.count intValue]];
+    NSMutableAttributedString *str_amount = [[NSMutableAttributedString alloc]initWithString:str_countAndPrice];
+    [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, str_count.length)];
+    [self.lab_countAndPrice setAttributedText:str_amount];
     [self.lab_createTimeAndNum setText:[NSString stringWithFormat:@"%@下单    订单编号：%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.createTime formatter:@"MM-dd HH:mm"],purchaseOrderEntity.orderId]];
     if (purchaseOrderEntity.status == 0) {
         [self.btn_right setTitle:[NSString stringWithFormat:@"修改价格%02zd:%02zd:%02zd",purchaseOrderEntity.countDown/3600,(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
-    }else{
+    }else if(purchaseOrderEntity.status == 2){
         [self.btn_right setTitle:@"发货" forState:UIControlStateNormal];
+    }else if (purchaseOrderEntity.status == 8 || purchaseOrderEntity.status == 9 || purchaseOrderEntity.status == 3){
+        [self.btn_cancelOrder setHidden:YES];
+        [self.btn_right setHidden:YES];
+        [self.v_order mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.equalTo(self.lab_countAndPrice.mas_bottom).offset(12);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(28);
+        }];
     }
     self.purchaseOrderEntity = purchaseOrderEntity;
 }

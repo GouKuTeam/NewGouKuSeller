@@ -50,6 +50,9 @@
 		74046B11209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		74046B12209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		74046B13209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
+		740C38BB20B579CC00ACFBAE /* SupplierPriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */; };
+		740C38BF20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */; };
+		740C38C020B57EE900ACFBAE /* cancerPurchaseOrder.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */; };
 		740C46B020AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */; };
 		740C46B320AAE10F00626A8B /* AddressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B220AAE10F00626A8B /* AddressEntity.m */; };
 		740C46B620AC33ED00626A8B /* SupplierPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B520AC33ED00626A8B /* SupplierPayViewController.m */; };
@@ -787,6 +790,10 @@
 		74046B0C209C1AE2004E64A9 /* CreateAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateAddressViewController.m; sourceTree = "<group>"; };
 		74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		74046B10209C2E11004E64A9 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		740C38B920B579CC00ACFBAE /* SupplierPriceDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierPriceDetailView.h; sourceTree = "<group>"; };
+		740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierPriceDetailView.m; sourceTree = "<group>"; };
+		740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PurchaseOrderPayComplete.wav; sourceTree = "<group>"; };
+		740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cancerPurchaseOrder.wav; sourceTree = "<group>"; };
 		740C46AE20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCommodityInSupplierShopViewController.h; sourceTree = "<group>"; };
 		740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCommodityInSupplierShopViewController.m; sourceTree = "<group>"; };
 		740C46B120AAE10F00626A8B /* AddressEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressEntity.h; sourceTree = "<group>"; };
@@ -1540,6 +1547,15 @@
 			path = GCPlaceholderTextView;
 			sourceTree = "<group>";
 		};
+		740C38BC20B57ECC00ACFBAE /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */,
+				740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */,
+			);
+			path = sound;
+			sourceTree = "<group>";
+		};
 		740C46B720AC3F6B00626A8B /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1662,6 +1678,8 @@
 				7448183A20B2CE0900A7F3DD /* SupplierOrderManagerTableViewCell.m */,
 				1882F6F020B3B6B500513EE7 /* SupplierOrderHeaderView.h */,
 				1882F6F120B3B6B500513EE7 /* SupplierOrderHeaderView.m */,
+				740C38B920B579CC00ACFBAE /* SupplierPriceDetailView.h */,
+				740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2203,6 +2221,7 @@
 				74B4E856204BD3EC006AFB6C /* Network */,
 				74B4E85D204BD3EC006AFB6C /* Utils */,
 				744ABA202053E76F00BBB26E /* Model */,
+				740C38BC20B57ECC00ACFBAE /* sound */,
 				74B4E80B204BD353006AFB6C /* Main.storyboard */,
 				74B4E810204BD353006AFB6C /* LaunchScreen.storyboard */,
 				74B4E813204BD353006AFB6C /* Info.plist */,
@@ -2842,6 +2861,7 @@
 			files = (
 				744ABA72205428AF00BBB26E /* IQKeyboardManager.bundle in Resources */,
 				7448180820AEA97700A7F3DD /* 商家违规条例.md in Resources */,
+				740C38BF20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav in Resources */,
 				7491FA71206E15CC0006F388 /* address.txt in Resources */,
 				7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */,
@@ -2850,6 +2870,7 @@
 				74B4E86F204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 				7489CCA1207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7489CC9B207F599100971BED /* README.md in Resources */,
+				740C38C020B57EE900ACFBAE /* cancerPurchaseOrder.wav in Resources */,
 				74B4E80D204BD353006AFB6C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3129,6 +3150,7 @@
 				74046B0A209C03EE004E64A9 /* EditAddressTableViewCell.m in Sources */,
 				743C5F3620A52F3500E617AF /* AddInventoryViewController.m in Sources */,
 				744ABA75205428AF00BBB26E /* IQKeyboardManager.m in Sources */,
+				740C38BB20B579CC00ACFBAE /* SupplierPriceDetailView.m in Sources */,
 				74B4E8C720512D7C006AFB6C /* CommodityViewController.m in Sources */,
 				7491FA31206B8DD20006F388 /* BankInformationView.m in Sources */,
 				7491FA45206CAB410006F388 /* TiXianView.m in Sources */,

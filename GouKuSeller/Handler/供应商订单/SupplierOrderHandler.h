@@ -23,4 +23,7 @@
 
 //获取供应商订单个数
 +(void)getSupplierOrderCountPrepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//设置供应商运费和起送费
++ (void)setSupplierPriceWithDispatchingPrice:(NSString *)dispatchingPrice takeOffPrice:(NSString *)takeOffPrice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 @end

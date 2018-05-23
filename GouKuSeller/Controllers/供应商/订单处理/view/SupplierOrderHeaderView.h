@@ -15,4 +15,6 @@ typedef void(^SelectType)(NSInteger   index);
 @property (nonatomic,strong)NSMutableArray      *arr_num;
 @property (nonatomic,copy)SelectType     selectType;
 
+- (void)setItemWithIndex:(NSInteger)index;
+
 @end

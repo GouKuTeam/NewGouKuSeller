@@ -18,6 +18,8 @@
 #import "SupplierCommodityEndity.h"
 #import "SupplierCountEntity.h"
 #import "SupplierTabbarViewController.h"
+#import "SupplierPriceDetailView.h"
+#import "NSString+Size.h"
 
 @interface OrderManagerViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate,UITextFieldDelegate>
 
@@ -28,6 +30,7 @@
 @property (nonatomic ,assign)int                        selectIndex;
 @property (nonatomic ,assign)int                       obligationTotal;
 @property (nonatomic ,assign)int                       pendingTotal;
+@property (nonatomic ,strong)SupplierPriceDetailView   *supplierPriceDetailView;
 
 @property (nonatomic ,strong)UIAlertController *alertController;
 
@@ -42,10 +45,11 @@
     self.arr_data = [NSMutableArray array];
     [kCountDownManager start];
     // Do any additional setup after loading the view.
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshSupplierOrderData) name:@"RefreshSupplierOrderData" object:nil];
 }
 
 - (void)onCreate{
+    
     self.v_header = [[SupplierOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SafeAreaStatusBarHeight + 72)];
     [self.view addSubview:self.v_header];
     WS(weakSelf);
@@ -65,7 +69,6 @@
     self.tb_orderManager.separatorColor = [UIColor clearColor];
     self.tb_orderManager.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [self.view addSubview:self.tb_orderManager];
-    [self.tb_orderManager requestDataSource];
 
     self.btn_daochu = [[UIButton alloc]initWithFrame:CGRectMake(15, SCREEN_HEIGHT - 109, 44, 44)];
     [self.view addSubview:self.btn_daochu];
@@ -73,6 +76,17 @@
     [self.btn_daochu setBackgroundImage:[UIImage imageNamed:@"export"] forState:UIControlStateNormal];
     [self.btn_daochu addTarget:self action:@selector(btn_daochuAction) forControlEvents:UIControlEventTouchUpInside];
     [self.btn_daochu setHidden:YES];
+    
+    self.supplierPriceDetailView = [[SupplierPriceDetailView alloc]init];
+    [self.supplierPriceDetailView setHidden:YES];
+    [[[UIApplication  sharedApplication]keyWindow]addSubview:self.supplierPriceDetailView];
+    [self.supplierPriceDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(SCREEN_HEIGHT);
+    }];
+    
+    [self.v_header setItemWithIndex:0];
 }
 
 - (void)btn_daochuAction{
@@ -188,6 +202,8 @@
     [v_footer.btn_cancelOrder addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     v_footer.btn_copy.tag = section;
     [v_footer.btn_copy addTarget:self action:@selector(btn_copyAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_footer.btn_priceDetail.tag = section;
+    [v_footer.btn_priceDetail addTarget:self action:@selector(showPriceDetail:) forControlEvents:UIControlEventTouchUpInside];
     v_footer.countDownZero = ^(PurchaseOrderEntity *entity) {
         [self.arr_data removeObjectAtIndex:section];
         self.obligationTotal = self.obligationTotal - 1;
@@ -229,13 +245,27 @@
 
 - (void)cancelAction:(UIButton *)btn_sender{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
-    [self.arr_data removeObjectAtIndex:btn_sender.tag];
-    self.obligationTotal = self.obligationTotal - 1;
-    [self setNumData];
-    [SupplierOrderHandler supplierCancelOrderWithOrderId:entity.orderId prepare:^{
-    } success:^(id obj) {
-    } failed:^(NSInteger statusCode, id json) {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定取消此采购订单?" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
     }];
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SupplierOrderHandler supplierCancelOrderWithOrderId:entity.orderId prepare:^{
+            
+        } success:^(id obj) {
+            [self.arr_data removeObjectAtIndex:btn_sender.tag];
+            [self.tb_orderManager reloadData];
+            self.obligationTotal = self.obligationTotal - 1;
+            [self setNumData];
+        } failed:^(NSInteger statusCode, id json) {
+            
+        }];
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 - (void)btn_tellAction:(UIButton *)btn_sender{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
@@ -292,22 +322,46 @@
     }
 }
 
+- (void)showPriceDetail:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    [self.supplierPriceDetailView contentViewWithPurchaseOrderEntity:entity];
+    [self.supplierPriceDetailView setHidden:NO];
+}
+
 - (void)setNumData{
     UILabel *lb_num1 = [self.v_header.arr_num objectAtIndex:0];
     UILabel *lb_num2 = [self.v_header.arr_num objectAtIndex:1];
     if (self.obligationTotal > 0) {
         [lb_num1 setHidden:NO];
         [lb_num1 setText:[NSString stringWithFormat:@"%d",self.obligationTotal]];
+        CGFloat width = 16;
+        if (self.obligationTotal < 10) {
+            width = 16;
+        }else{
+            width = [lb_num1.text fittingLabelWidthWithHeight:16 andFontSize:[UIFont systemFontOfSize:FONT_SIZE_MEMO]] + 6;
+        }
+        [lb_num1 setFrame:CGRectMake(lb_num1.left, lb_num1.top, width, lb_num1.height)];
     }else{
         [lb_num1 setHidden:YES];
     }
     if (self.pendingTotal > 0) {
         [lb_num2 setHidden:NO];
         [lb_num2 setText:[NSString stringWithFormat:@"%d",self.pendingTotal]];
+        CGFloat width = 16;
+        if (self.pendingTotal < 10) {
+            width = 16;
+        }else{
+            width = [lb_num2.text fittingLabelWidthWithHeight:16 andFontSize:[UIFont systemFontOfSize:FONT_SIZE_MEMO]] + 6;
+        }
+        [lb_num2 setFrame:CGRectMake(lb_num2.left, lb_num2.top, width, lb_num2.height)];
     }else{
         [lb_num2 setHidden:YES];
     }
     [(SupplierTabbarViewController *)self.tabBarController showBadgeOnItemIndex:0 withCount:self.obligationTotal + self.pendingTotal];
+}
+
+- (void)RefreshSupplierOrderData{
+    [self.v_header setItemWithIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {

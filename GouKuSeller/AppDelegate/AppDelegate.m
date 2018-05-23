@@ -212,7 +212,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
     if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 1) {
-        //采购订单   用户支付成功已下单  发送通知给订单处理界面刷新数据 同时播放声音
+        //采购订单   用户支付成功已下单  发送通知给订单处理界面刷新数据
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshSupplierOrderData" object:nil userInfo:nil];
         
     }
     if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 5) {
