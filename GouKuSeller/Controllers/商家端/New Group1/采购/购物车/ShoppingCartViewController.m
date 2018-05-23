@@ -50,6 +50,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self loadShoppingCount];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifionPayCompleteAndRefreshDataAction) name:@"PayCompleteAndRefreshData" object:nil];
 }
 
 - (void)loadShoppingCount{
@@ -583,6 +584,10 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)NocatifionPayCompleteAndRefreshDataAction{
+    [self.tb_shoppingCart requestDataSource];
 }
 
 - (void)didReceiveMemoryWarning {

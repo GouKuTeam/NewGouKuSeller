@@ -263,4 +263,46 @@
                                           }];
 }
 
+//用户支付订单
++ (void)payOrderWithOrderId:(NSString *)orderId passWord:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+   NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_UserPayOrder];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (orderId) {
+        [dic setObject:orderId forKey:@"orderId"];
+    }
+    if (password) {
+        [dic setObject:password forKey:@"password"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//用户支付多个订单
++ (void)payMoreOrderWithOrderId:(NSArray *)orderId passWord:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_UserPayOrderMore];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (orderId) {
+        [dic setObject:orderId forKey:@"orderIdList"];
+    }
+    if (password) {
+        [dic setObject:password forKey:@"password"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end

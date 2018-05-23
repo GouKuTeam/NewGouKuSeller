@@ -291,6 +291,8 @@
 		744ABAC0205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABABE205659AB00BBB26E /* CommodityCatagoryEntity.m */; };
 		744ABAC1205659AB00BBB26E /* CommodityCatagoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABABE205659AB00BBB26E /* CommodityCatagoryEntity.m */; };
 		744ABAC92058C90100BBB26E /* ManagerCatagoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 744ABAC82058C90100BBB26E /* ManagerCatagoryTableViewCell.m */; };
+		747EDC4620B5117D00FCAFDE /* SupplierPayCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747EDC4520B5117D00FCAFDE /* SupplierPayCompleteViewController.m */; };
+		747EDC4920B5296500FCAFDE /* SupplierSearchOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747EDC4820B5296500FCAFDE /* SupplierSearchOrderViewController.m */; };
 		7489CC80207E0B1700971BED /* PayWaitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC7F207E0B1700971BED /* PayWaitView.m */; };
 		7489CC83207F2F4A00971BED /* MyTbHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC82207F2F4A00971BED /* MyTbHeaderView.m */; };
 		7489CC92207F599100971BED /* OttoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7489CC86207F599100971BED /* OttoTextField.m */; };
@@ -1009,6 +1011,10 @@
 		744ABABE205659AB00BBB26E /* CommodityCatagoryEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityCatagoryEntity.m; sourceTree = "<group>"; };
 		744ABAC72058C90100BBB26E /* ManagerCatagoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManagerCatagoryTableViewCell.h; sourceTree = "<group>"; };
 		744ABAC82058C90100BBB26E /* ManagerCatagoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManagerCatagoryTableViewCell.m; sourceTree = "<group>"; };
+		747EDC4420B5117C00FCAFDE /* SupplierPayCompleteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierPayCompleteViewController.h; sourceTree = "<group>"; };
+		747EDC4520B5117D00FCAFDE /* SupplierPayCompleteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierPayCompleteViewController.m; sourceTree = "<group>"; };
+		747EDC4720B5296500FCAFDE /* SupplierSearchOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierSearchOrderViewController.h; sourceTree = "<group>"; };
+		747EDC4820B5296500FCAFDE /* SupplierSearchOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierSearchOrderViewController.m; sourceTree = "<group>"; };
 		7489CC7E207E0B1700971BED /* PayWaitView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayWaitView.h; sourceTree = "<group>"; };
 		7489CC7F207E0B1700971BED /* PayWaitView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayWaitView.m; sourceTree = "<group>"; };
 		7489CC81207F2F4A00971BED /* MyTbHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTbHeaderView.h; sourceTree = "<group>"; };
@@ -1387,6 +1393,8 @@
 				1842CCE1209B080A00A1C7C8 /* ConfirmOrderViewController.m */,
 				740C46BD20AC6E4500626A8B /* PayOrderViewController.h */,
 				740C46BE20AC6E4500626A8B /* PayOrderViewController.m */,
+				747EDC4420B5117C00FCAFDE /* SupplierPayCompleteViewController.h */,
+				747EDC4520B5117D00FCAFDE /* SupplierPayCompleteViewController.m */,
 				740C46B420AC33ED00626A8B /* SupplierPayViewController.h */,
 				740C46B520AC33ED00626A8B /* SupplierPayViewController.m */,
 				1842CCDC209AD97400A1C7C8 /* View */,
@@ -2082,6 +2090,8 @@
 				7448184420B2D93900A7F3DD /* view */,
 				74ACFFB120A04DF4005C5A16 /* OrderSelectViewController.h */,
 				74ACFFB220A04DF4005C5A16 /* OrderSelectViewController.m */,
+				747EDC4720B5296500FCAFDE /* SupplierSearchOrderViewController.h */,
+				747EDC4820B5296500FCAFDE /* SupplierSearchOrderViewController.m */,
 			);
 			path = "订单查询";
 			sourceTree = "<group>";
@@ -2999,6 +3009,7 @@
 				7491FA802079B0E40006F388 /* ActiveHandler.m in Sources */,
 				741D3C9220808F8B00C56FCA /* OrderInformationHeaderView.m in Sources */,
 				74BD11EB2067DEB60053A3D1 /* OrderViewController.m in Sources */,
+				747EDC4920B5296500FCAFDE /* SupplierSearchOrderViewController.m in Sources */,
 				1891DAB420A3F172008E16F7 /* HYTopBar.m in Sources */,
 				74C6E355207B3D4F0083E4A8 /* PasswordAlertView.m in Sources */,
 				1882F6F220B3B6B500513EE7 /* SupplierOrderHeaderView.m in Sources */,
@@ -3176,6 +3187,7 @@
 				7489CC92207F599100971BED /* OttoTextField.m in Sources */,
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74F57FFB20A2BBBB000D8C8F /* SearchSupplierCommodityViewController.m in Sources */,
+				747EDC4620B5117D00FCAFDE /* SupplierPayCompleteViewController.m in Sources */,
 				1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */,
 				7448180D20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,

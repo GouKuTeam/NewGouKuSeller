@@ -43,4 +43,10 @@
 //获取购物车中商品个数
 + (void)getCountInShopCartprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//用户支付订单
++ (void)payOrderWithOrderId:(NSString *)orderId passWord:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//用户支付多个订单
++ (void)payMoreOrderWithOrderId:(NSArray *)orderId passWord:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end

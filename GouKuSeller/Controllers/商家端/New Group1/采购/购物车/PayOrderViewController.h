@@ -12,9 +12,11 @@
 @interface PayOrderViewController : BaseViewController
 
 @property (nonatomic,strong)NSMutableArray   *arr_selectedData;
+@property (nonatomic,strong)NSMutableArray   *arr_orderId;
 @property (nonatomic,strong)AddressEntity    *addressEntity;
 @property (nonatomic,assign)double            total;
 @property (nonatomic,assign)double            accountPrice;
 @property (nonatomic,strong)NSString         *orderId;
+
 
 @end

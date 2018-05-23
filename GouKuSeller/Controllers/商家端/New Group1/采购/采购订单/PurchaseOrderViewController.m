@@ -113,6 +113,8 @@
     } failed:^(NSInteger statusCode, id json) {
         
     }];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifionPayCompleteAndRefreshDataAction) name:@"PayCompleteAndRefreshData" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -312,6 +314,11 @@
         }
         [self.tb_purchaseOrder reloadData];
     };
+}
+
+- (void)NocatifionPayCompleteAndRefreshDataAction{
+    self.btnIndex = 999;
+    [self.tb_purchaseOrder requestDataSource];
 }
 
 - (void)leftBarAction:(id)sender{

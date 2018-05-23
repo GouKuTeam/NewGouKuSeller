@@ -11,6 +11,8 @@
 #import "PayWaitView.h"
 #import "CashierHandler.h"
 #import "PayInCashCompleteView.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface PayInGouKuViewController ()<UITextFieldDelegate>
 
@@ -73,6 +75,7 @@
 }
 
 - (void)NocatifioncashcompleteAction{
+    
     [self.v_wait setHidden:YES];
     [self.v_cashComplete setHidden:NO];
 }

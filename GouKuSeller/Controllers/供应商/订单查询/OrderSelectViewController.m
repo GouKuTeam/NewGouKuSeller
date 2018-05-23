@@ -9,6 +9,7 @@
 #import "OrderSelectViewController.h"
 #import "SupplierOrderSelectHeaderView.h"
 #import "PurchaseOrderEntity.h"
+#import "SupplierSearchOrderViewController.h"
 
 @interface OrderSelectViewController ()
 
@@ -47,7 +48,9 @@
 }
 
 - (void)searchAction{
-    
+    SupplierSearchOrderViewController *vc = [[SupplierSearchOrderViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
