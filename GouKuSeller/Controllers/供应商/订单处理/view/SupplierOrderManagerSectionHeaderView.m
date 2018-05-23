@@ -159,8 +159,14 @@
     self.lab_orderNum.text = [NSString stringWithFormat:@"#%@",purchaseOrderEntity.number];
     if (purchaseOrderEntity.status == 0) {
         [self.lab_orderStatus setText:@"待付款"];
-    }else{
+    }else if (purchaseOrderEntity.status == 2){
         [self.lab_orderStatus setText:@"待配送"];
+    }else if (purchaseOrderEntity.status == 3){
+        [self.lab_orderStatus setText:@"待收货"];
+    }else if (purchaseOrderEntity.status == 8){
+        [self.lab_orderStatus setText:@"已完成"];
+    }else if (purchaseOrderEntity.status == 9){
+        [self.lab_orderStatus setText:@"已取消"];
     }
     self.lab_shopName.text = purchaseOrderEntity.address.userShop;
     self.lab_shopAddress.text = purchaseOrderEntity.address.address;

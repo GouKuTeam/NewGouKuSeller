@@ -17,6 +17,7 @@
 #import "CountDownManager.h"
 #import "SupplierCommodityEndity.h"
 #import "SupplierCountEntity.h"
+#import "SupplierTabbarViewController.h"
 
 @interface OrderManagerViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate,UITextFieldDelegate>
 
@@ -25,9 +26,8 @@
 @property (nonatomic ,strong)BaseTableView             *tb_orderManager;
 @property (nonatomic ,strong)NSMutableArray            *arr_data;
 @property (nonatomic ,assign)int                        selectIndex;
-@property (nonatomic ,assign)int                        obligationTotal;
-@property (nonatomic ,assign)int                        pendingTotal;
-@property (nonatomic ,assign)int                        allTotal;
+@property (nonatomic ,assign)int                       obligationTotal;
+@property (nonatomic ,assign)int                       pendingTotal;
 
 @property (nonatomic ,strong)UIAlertController *alertController;
 
@@ -79,7 +79,6 @@
     ExportOrderViewController *vc = [[ExportOrderViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 - (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
@@ -109,7 +108,12 @@
         
     } success:^(id obj) {
         SupplierCountEntity *entity = (SupplierCountEntity *)obj;
-        
+        self.obligationTotal = entity.obligationTotal;
+        self.pendingTotal = entity.pendingTotal;
+        [self setNumData];
+        if (entity.allTotal > 0) {
+            [(SupplierTabbarViewController *)self.tabBarController showBadgeOnItemIndex:0 withCount:entity.allTotal];
+        }
     } failed:^(NSInteger statusCode, id json) {
         
     }];
@@ -179,11 +183,15 @@
     SupplierOrderManagerSectionFooterView *v_footer = [[SupplierOrderManagerSectionFooterView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
     [v_footer contentViewWithPurchaseOrderEntity:entity];
     v_footer.btn_right.tag = section;
+    v_footer.btn_cancelOrder.tag = section;
     [v_footer.btn_right addTarget:self action:@selector(btn_rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    [v_footer.btn_cancelOrder addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     v_footer.btn_copy.tag = section;
     [v_footer.btn_copy addTarget:self action:@selector(btn_copyAction:) forControlEvents:UIControlEventTouchUpInside];
     v_footer.countDownZero = ^(PurchaseOrderEntity *entity) {
         [self.arr_data removeObjectAtIndex:section];
+        self.obligationTotal = self.obligationTotal - 1;
+        [self setNumData];
         [SupplierOrderHandler supplierCancelOrderWithOrderId:entity.orderId prepare:^{
         } success:^(id obj) {
         } failed:^(NSInteger statusCode, id json) {
@@ -219,6 +227,16 @@
     [self.tb_orderManager reloadData];
 }
 
+- (void)cancelAction:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    [self.arr_data removeObjectAtIndex:btn_sender.tag];
+    self.obligationTotal = self.obligationTotal - 1;
+    [self setNumData];
+    [SupplierOrderHandler supplierCancelOrderWithOrderId:entity.orderId prepare:^{
+    } success:^(id obj) {
+    } failed:^(NSInteger statusCode, id json) {
+    }];
+}
 - (void)btn_tellAction:(UIButton *)btn_sender{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
     NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"tel:%@",entity.phone];
@@ -265,11 +283,31 @@
             
         } success:^(id obj) {
             [self.arr_data removeObjectAtIndex:btn_sender.tag];
+            self.pendingTotal = self.pendingTotal - 1;
             [self.tb_orderManager reloadData];
+            [self setNumData];
         } failed:^(NSInteger statusCode, id json) {
             
         }];
     }
+}
+
+- (void)setNumData{
+    UILabel *lb_num1 = [self.v_header.arr_num objectAtIndex:0];
+    UILabel *lb_num2 = [self.v_header.arr_num objectAtIndex:1];
+    if (self.obligationTotal > 0) {
+        [lb_num1 setHidden:NO];
+        [lb_num1 setText:[NSString stringWithFormat:@"%d",self.obligationTotal]];
+    }else{
+        [lb_num1 setHidden:YES];
+    }
+    if (self.pendingTotal > 0) {
+        [lb_num2 setHidden:NO];
+        [lb_num2 setText:[NSString stringWithFormat:@"%d",self.pendingTotal]];
+    }else{
+        [lb_num2 setHidden:YES];
+    }
+    [(SupplierTabbarViewController *)self.tabBarController showBadgeOnItemIndex:0 withCount:self.obligationTotal + self.pendingTotal];
 }
 
 - (void)didReceiveMemoryWarning {

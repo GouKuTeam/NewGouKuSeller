@@ -10,9 +10,9 @@
 
 @interface SupplierCountEntity : BaseEntity
 
-@property (nonatomic ,strong)NSNumber       *allTotal;
-@property (nonatomic ,strong)NSNumber       *obligationTotal;
-@property (nonatomic ,strong)NSNumber       *pendingTotal;
+@property (nonatomic ,assign)int            allTotal;
+@property (nonatomic ,assign)int            obligationTotal;
+@property (nonatomic ,assign)int            pendingTotal;
 
 + (NSArray *)parseSupplierCountEntityListWithJson:(id)json;
 + (SupplierCountEntity *)parseSupplierCountEntityWithJson:(id)json;
