@@ -10,10 +10,6 @@
 
 @implementation SupplierOrderManagerTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -47,7 +43,6 @@
         [self.contentView addSubview:self.lab_name];
         [self.lab_name setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_name setFont:[UIFont systemFontOfSize:14]];
-        [self.lab_name setTextAlignment:NSTextAlignmentRight];
         self.lab_name.numberOfLines = 0;
         [self.lab_name mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.lab_price);
@@ -55,7 +50,7 @@
             make.right.equalTo(self.mas_right).offset(-152);
         }];
         
-        [self mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(0);
             make.width.mas_equalTo(SCREEN_WIDTH);
             make.bottom.equalTo(self.lab_name.mas_bottom).offset(8);
@@ -65,6 +60,11 @@
     return self;
 }
 
+- (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity{
+    [self.lab_name setText:supplierCommodityEndity.name];
+    [self.lab_count setText:[NSString stringWithFormat:@"x%ld",supplierCommodityEndity.count]];
+    [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",supplierCommodityEndity.price]];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -17,7 +17,7 @@
 @property (nonatomic ,strong)NSString         *logo;              //商户LOGO
 @property (nonatomic ,strong)NSString         *phone;             //商户联系方式
 @property (nonatomic ,strong)NSNumber         *orderId;           //订单ID
-@property (nonatomic ,strong)NSNumber         *remark;            //备注
+@property (nonatomic ,strong)NSString         *remark;            //备注
 @property (nonatomic ,strong)NSNumber         *number;            //订单当日序号
 @property (nonatomic ,assign)double            payFreight;        //订单运费
 @property (nonatomic ,assign)double            payTotal;          //订单总价
@@ -31,6 +31,7 @@
 @property (nonatomic ,strong)AddressEntity    *address;           //地址对象
 @property (nonatomic ,assign)double            accountPrice;      //账户余额
 //供应商订单加的
+@property (nonatomic ,assign)BOOL              isShow;            
 
 
 //"status":<number>,          //订单状态(0待付款1待接单2待发货3待收货8已完成9已取消)

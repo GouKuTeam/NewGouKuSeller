@@ -7,6 +7,7 @@
 //
 
 #import "SupplierOrderManagerSectionHeaderView.h"
+#import "NSString+Size.h"
 
 @implementation SupplierOrderManagerSectionHeaderView
 
@@ -69,9 +70,9 @@
         [self addSubview:self.btn_tell];
         [self.btn_tell setBackgroundImage:[UIImage imageNamed:@"phone"] forState:UIControlStateNormal];
         [self.btn_tell mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.lab_shopName);
-            make.left.mas_equalTo(SCREEN_WIDTH - 18 - 22);
-            make.width.height.mas_equalTo(22);
+            make.centerY.equalTo(self.lab_shopName);
+            make.left.mas_equalTo(SCREEN_WIDTH - 15 - 18);
+            make.width.height.mas_equalTo(15);
         }];
         
         self.lab_shopAddress = [[UILabel alloc]init];
@@ -82,7 +83,7 @@
         [self.lab_shopAddress mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(self.mas_right).offset(-15);
-            make.left.equalTo(self.lab_shopName.mas_bottom).offset(5);
+            make.top.equalTo(self.lab_shopName.mas_bottom).offset(5);
         }];
         
         self.img_line1 = [[UIImageView alloc]init];
@@ -152,6 +153,41 @@
         }];
     }
     return self;
+}
+
+- (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    self.lab_orderNum.text = [NSString stringWithFormat:@"#%@",purchaseOrderEntity.number];
+    if (purchaseOrderEntity.status == 0) {
+        [self.lab_orderStatus setText:@"待付款"];
+    }else{
+        [self.lab_orderStatus setText:@"待配送"];
+    }
+    self.lab_shopName.text = purchaseOrderEntity.address.userShop;
+    self.lab_shopAddress.text = purchaseOrderEntity.address.address;
+    self.lab_remarkDetail.text = purchaseOrderEntity.remark;
+    
+    if (purchaseOrderEntity.remark.length > 0) {
+        [self.lab_remarkTitle setHidden:NO];
+        [self.img_line1 setHidden:NO];
+        [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_remarkTitle);
+        }];
+    }else{
+        [self.lab_remarkTitle setHidden:YES];
+        [self.img_line1 setHidden:YES];
+        [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_shopAddress.mas_bottom);
+        }];
+    }
+}
+
+- (CGFloat)getHeightWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    CGFloat height = 145.00;
+    if ([purchaseOrderEntity.remark length] > 0) {
+        height = height + 42;
+    }
+    height = height + [purchaseOrderEntity.address.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
+    return height;
 }
 
 @end
