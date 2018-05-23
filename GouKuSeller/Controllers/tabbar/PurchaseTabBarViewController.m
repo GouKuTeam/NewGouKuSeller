@@ -25,6 +25,8 @@
     [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"TabBar_Bg"] stretchableImageWithLeftCapWidth:1 topCapHeight:24]];
     [self.tabBar setShadowImage:[UIImage imageNamed:@"TabBar_Shadow"]];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoPurchaseOrder) name:@"GoToPurchaseOrder" object:nil];
+    
     //初始化Tab下的ViewController
     [self initTabBarViewControllers];
     
@@ -81,6 +83,11 @@
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"#4167b2"], NSForegroundColorAttributeName, font, NSFontAttributeName,nil] forState:UIControlStateSelected];
     
     return nav;
+}
+
+- (void)gotoPurchaseOrder{
+    [self.selectedViewController popToRootViewControllerAnimated:YES];
+    self.selectedIndex = 2;
 }
 
 //----------------------红点的显示与消失--------------------------
