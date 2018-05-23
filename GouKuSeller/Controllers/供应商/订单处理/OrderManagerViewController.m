@@ -163,6 +163,8 @@
     [v_header contentViewWithPurchaseOrderEntity:entity];
     v_header.btn_zhankai.tag = section;
     [v_header.btn_zhankai addTarget:self action:@selector(showAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_header.btn_tell.tag = section;
+    [v_header.btn_tell addTarget:self action:@selector(btn_tellAction:) forControlEvents:UIControlEventTouchUpInside];
     if (entity.isShow == YES) {
         [v_header.btn_zhankai setTitle:@"收起" forState:UIControlStateNormal];
     }else{
@@ -184,6 +186,8 @@
     v_footer.btn_cancelOrder.tag = section;
     [v_footer.btn_right addTarget:self action:@selector(btn_rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [v_footer.btn_cancelOrder addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_footer.btn_copy.tag = section;
+    [v_footer.btn_copy addTarget:self action:@selector(btn_copyAction:) forControlEvents:UIControlEventTouchUpInside];
     v_footer.countDownZero = ^(PurchaseOrderEntity *entity) {
         [self.arr_data removeObjectAtIndex:section];
         self.obligationTotal = self.obligationTotal - 1;
@@ -232,6 +236,20 @@
     } success:^(id obj) {
     } failed:^(NSInteger statusCode, id json) {
     }];
+}
+- (void)btn_tellAction:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"tel:%@",entity.phone];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
+}
+
+- (void)btn_copyAction:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    [MBProgressHUD showInfoMessage:@"复制成功"];
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = [NSString stringWithFormat:@"%@",entity.orderId];
 }
 
 - (void)btn_rightAction:(UIButton *)btn_sender{

@@ -17,6 +17,9 @@
 #import "OrderDetailCountDownManager.h"
 #import "PasswordAlertView.h"
 #import "PurchaseOrderStatusView.h"
+#import "SupplierPayCompleteViewController.h"
+#import "FindPwWithUserNameViewController.h"
+
 
 @interface PurchaseOrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource,PasswordAlertViewDelegate>
 
@@ -375,32 +378,41 @@
     }];
 }
 
-//        [SettlementHandler checkPassWordWithshopId:[LoginStorage GetShopId] cardNum:self.cardNum money:[self.v_tixian.tf_price.text doubleValue] username:[LoginStorage GetUserName] password:password prepare:^{
-//        } success:^(id obj) {
-//            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
-//                [MBProgressHUD showInfoMessage:@"提现成功"];
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }else if([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
-//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误，请重试" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-//                UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"忘记密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                    FindPwWithUserNameViewController *vc = [[FindPwWithUserNameViewController alloc]init];
-//                    [self.navigationController pushViewController:vc animated:YES];
-//                }];
-//                UIAlertAction *again = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:[self.v_tixian.tf_price.text doubleValue] title:@"提现" delegate:self];
-//                    [view show];
-//                }];
-//                [alert addAction:forgetPassword];
-//                [alert addAction:again];
-//                [self presentViewController:alert animated:YES completion:nil];
-//
-//            }else{
-//                [MBProgressHUD hideHUD];
-//                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
-//            }
-//        } failed:^(NSInteger statusCode, id json) {
-//            [MBProgressHUD showErrorMessage:(NSString *)json];
-//        }];
+#pragma PasswordDelegate
+- (void)alertView:(PasswordAlertView *)alertView buttonType:(PasswordAlertBtnType)btnType passwordStr:(NSString *)password{
+    if (btnType == PasswordAlertBtnConfirm) {
+        
+        [ShoppingHandler payOrderWithOrderId:[NSString stringWithFormat:@"%@",self.orderId] passWord:password prepare:^{
+            
+        } success:^(id obj) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+                SupplierPayCompleteViewController *vc = [[SupplierPayCompleteViewController alloc]init];
+                vc.price = [NSString stringWithFormat:@"%.2f",self.orderEntity.payTotal];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else if([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误，请重试" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"忘记密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    FindPwWithUserNameViewController *vc = [[FindPwWithUserNameViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }];
+                UIAlertAction *again = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.orderEntity.payTotal title:@"余额支付" delegate:self];
+                    [view show];
+                }];
+                [alert addAction:forgetPassword];
+                [alert addAction:again];
+                [self presentViewController:alert animated:YES completion:nil];
+                
+            }else{
+                [MBProgressHUD hideHUD];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

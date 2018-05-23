@@ -18,6 +18,7 @@
 #import "SupplierCommodityEndity.h"
 #import "SupplierCountEntity.h"
 #import "SupplierTabbarViewController.h"
+#import "SupplierSearchOrderViewController.h"
 
 @interface OrderSelectViewController ()
 <UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate,UITextFieldDelegate>
@@ -75,7 +76,9 @@
 }
 
 - (void)searchAction{
-    
+    SupplierSearchOrderViewController *vc = [[SupplierSearchOrderViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

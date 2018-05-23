@@ -27,17 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
-    
-//    AVSpeechSynthesizer * av = [[AVSpeechSynthesizer alloc]init];
-//    //设置播报的内容
-//    AVSpeechUtterance * utterance = [[AVSpeechUtterance alloc]initWithString:@"成功收款100元"];
-//    //设置语言类别
-//    utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
-//    AVSpeechSynthesisVoice * voiceType = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
-//    utterance.voice = voiceType;
-//    //设置播报语速
-//    utterance.rate = 0.5;
-//    [av speakUtterance:utterance];
 
 }
 

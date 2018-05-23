@@ -18,11 +18,13 @@
 #import "ChangeCommodirtyCountAlertView.h"
 #import "SettlementHandler.h"
 #import "IQKeyboardManager.h"
-#import "PayInGouKuViewController.h"
 #import "AddPriceViewController.h"
 #import "CommonAlertView.h"
 #import "PayWaitView.h"
 #import "PayInCashCompleteView.h"
+#import <AVFoundation/AVFoundation.h>
+
+
 
 @interface CashierViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,TextViewClickReturnDelegate,TextFieldClickReturnDelegate,CommonAlertViewDelegate>
 @property (nonatomic, strong)UITextField         *tfsousuo;
@@ -361,7 +363,6 @@
                 } success:^(id obj) {
                     //扫描成功  显示等待支付界面                    
                     [self.v_wait setHidden:NO];
-//                    [self.v_cashComplete setHidden:YES];
                 } failed:^(NSInteger statusCode, id json) {
                     [MBProgressHUD showErrorMessage:(NSString *)json];
                 }];
@@ -597,6 +598,17 @@
 }
 
 - (void)NocatifioncashcompleteAction{
+    NSString *price = [NSString stringWithFormat:@"¥%.2f",self.totalPrice];
+    AVSpeechSynthesizer * av = [[AVSpeechSynthesizer alloc]init];
+    //设置播报的内容
+    AVSpeechUtterance * utterance = [[AVSpeechUtterance alloc]initWithString:[NSString stringWithFormat:@"微信支付成功收款%@元",price]];
+    //设置语言类别
+    utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
+    AVSpeechSynthesisVoice * voiceType = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+    utterance.voice = voiceType;
+    //设置播报语速
+    utterance.rate = 0.5;
+    [av speakUtterance:utterance];
     [self.v_wait setHidden:YES];
     [self.v_cashComplete setHidden:NO];
 }

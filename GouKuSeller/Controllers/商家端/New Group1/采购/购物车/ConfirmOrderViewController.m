@@ -45,7 +45,6 @@
     self.tb_confirmOrder.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     [self.view addSubview:self.tb_confirmOrder];
     
-    self.addressEntity.name = @"";
     self.v_header = [[AddressHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
     [self.v_header contentCellWithAddressEntity:self.addressEntity];
     if (self.addressEntity.name.length > 0) {
@@ -112,9 +111,15 @@
         [MBProgressHUD showActivityMessageInView:@"正在提交订单"];
     } success:^(id obj) {
         [MBProgressHUD hideHUD];
+        NSMutableArray *arr_orderId = [(NSDictionary *)obj objectForKey:@"orderList"];
+        NSMutableArray *arr_data = [NSMutableArray array];
+        for (NSDictionary *dic in arr_orderId) {
+            [arr_data addObject:[dic objectForKey:@"orderId"]];
+        }
         PayOrderViewController *vc = [[PayOrderViewController alloc]init];
         vc.addressEntity = self.addressEntity;
         vc.arr_selectedData = self.arr_selectedData;
+        vc.arr_orderId = arr_data;
         vc.total = [[(NSDictionary *)obj objectForKey:@"total"] doubleValue];
         vc.accountPrice = [[(NSDictionary *)obj objectForKey:@"accountPrice"] doubleValue];
         [self.navigationController pushViewController:vc animated:YES];

@@ -213,6 +213,10 @@
 #define API_GET_ConfirmShopOrder @"/shopOrder/user/confirm/"
 //获取购物车中商品个数
 #define API_GET_GetCountInShopCart @"/shopping/getCount"
+//用户支付订单(单个订单)
+#define API_POST_UserPayOrder @"/shopOrder/payOrder"
+//用户支付订单(多个订单)
+#define API_POST_UserPayOrderMore @"/shopOrder/payOrderList"
 
 /*
  地址管理API

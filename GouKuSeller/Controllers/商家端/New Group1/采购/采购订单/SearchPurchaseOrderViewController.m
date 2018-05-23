@@ -79,7 +79,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-    NSLog(@"%@",textField.text);
     [ShoppingHandler selectOrderListWithStatus:nil keyWord:textField.text page:(int)nil prepare:^{
         
     } success:^(id obj) {
