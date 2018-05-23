@@ -207,8 +207,17 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSDictionary *dic =  [self dictionaryWithJsonString:content];
    
     NSLog(@"dic = %@",dic);
-    if ([[dic objectForKey:@"type"] intValue] == 1 && [dic objectForKey:@"statys"] == 0) {
+    if ([[dic objectForKey:@"type"] intValue] == 1 && [[dic objectForKey:@"status"] intValue] == 0) {
+        //收银  用户付款成功
         [[NSNotificationCenter defaultCenter] postNotificationName:@"cashcomplete" object:nil userInfo:nil];
+    }
+    if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 1) {
+        //采购订单   用户支付成功已下单  发送通知给订单处理界面刷新数据 同时播放声音
+        
+    }
+    if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 5) {
+        //供应商取消订单  通知商家
+        
     }
 }
 #endif
