@@ -177,12 +177,14 @@
         [self.img_line1 setHidden:NO];
         [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.lab_remarkTitle);
+            make.left.equalTo(self.lab_remarkTitle.mas_right);
         }];
     }else{
         [self.lab_remarkTitle setHidden:YES];
         [self.img_line1 setHidden:YES];
         [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.lab_shopAddress.mas_bottom);
+            make.left.equalTo(self.lab_remarkTitle.mas_right);
         }];
     }
 }
