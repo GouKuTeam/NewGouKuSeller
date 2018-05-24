@@ -319,9 +319,11 @@
             [arr_data removeObjectAtIndex:indexPath.row];
             if (arr_data.count == 0) {
                 [self.arr_data removeObjectAtIndex:indexPath.section];
+                [self.arr_select removeObjectAtIndex:indexPath.section];
+            }else{
+                storeEntity.shoppingCatItems = arr_data;
+                [self.arr_data replaceObjectAtIndex:indexPath.section withObject:storeEntity];
             }
-            storeEntity.shoppingCatItems = arr_data;
-            [self.arr_data replaceObjectAtIndex:indexPath.section withObject:storeEntity];
             [self.tb_shoppingCart reloadData];
             [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[(PurchaseTabBarViewController *)self.tabBarController unViewedCount] - 1];
         } failed:^(NSInteger statusCode, id json) {
