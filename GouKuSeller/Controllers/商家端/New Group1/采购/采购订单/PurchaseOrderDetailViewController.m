@@ -119,6 +119,7 @@
     self.btn_confirm = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 46)];
     [self.btn_confirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btn_confirm setTitle:@"确认收货" forState:UIControlStateNormal];
+    [self.btn_confirm setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
     self.btn_confirm.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.v_bottom addSubview:self.btn_confirm];
     [self.btn_confirm addTarget:self action:@selector(btn_confirmAction) forControlEvents:UIControlEventTouchUpInside];

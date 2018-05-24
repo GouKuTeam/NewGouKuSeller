@@ -45,12 +45,12 @@
     [self.view addSubview:v_head];
     [v_head setBackgroundColor:[UIColor colorWithHexString:@"#38393E"]];
     
-    UIButton *btn_left = [[UIButton alloc]initWithFrame:CGRectMake(20, 30, 23, 23)];
+    UIButton *btn_left = [[UIButton alloc]initWithFrame:CGRectMake(20, 50, 23, 23)];
     [v_head addSubview:btn_left];
     [btn_left setBackgroundImage:[UIImage imageNamed:@"back_white"] forState:UIControlStateNormal];
     [btn_left addTappedWithTarget:self action:@selector(btnLeftAction)];
     
-    self.btn_right = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 43, 30, 23, 23)];
+    self.btn_right = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 43, 50, 23, 23)];
     [v_head addSubview:self.btn_right];
     if (self.storeEntity.isAttention == YES) {
         [self.btn_right setBackgroundImage:[UIImage imageNamed:@"shocuang-orange"] forState:UIControlStateNormal];

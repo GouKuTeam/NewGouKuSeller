@@ -39,7 +39,7 @@
             [btn_demo addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.arr_btn addObject:btn_demo];
             
-            UILabel  *lb_num = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/arr_title.count * i + SCREEN_WIDTH/arr_title.count/2 + 8, 25, 16, 16)];
+            UILabel  *lb_num = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/arr_title.count * i + SCREEN_WIDTH/arr_title.count/2 + 4, SafeAreaStatusBarHeight + 5, 16, 16)];
             [lb_num setBackgroundColor:[UIColor colorWithHexString:@"#E6670C"]];
             [lb_num setFont:[UIFont systemFontOfSize:FONT_SIZE_MEMO]];
             [lb_num setTextAlignment:NSTextAlignmentCenter];

@@ -40,6 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view.
     self.arr_category = [NSMutableArray array];
     self.arr_data = [NSMutableArray array];

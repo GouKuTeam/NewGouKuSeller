@@ -60,7 +60,7 @@
     self.tb_commodity.tableFooterView = [UIView new];
     [self.tb_commodity setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     
-    self.bottom = [[AddInventoryFooterView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 46, SCREEN_WIDTH, 46)];
+    self.bottom = [[AddInventoryFooterView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 46, SCREEN_WIDTH, 46)];
     [self.view addSubview:self.bottom];
     [self.bottom.btn_caogao addTarget:self action:@selector(caogaoAction) forControlEvents:UIControlEventTouchUpInside];
     [self.bottom.btn_tijiao addTarget:self action:@selector(tijiaoAction) forControlEvents:UIControlEventTouchUpInside];

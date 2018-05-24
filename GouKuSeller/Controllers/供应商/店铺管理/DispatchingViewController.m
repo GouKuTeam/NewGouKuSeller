@@ -88,7 +88,7 @@
         [MBProgressHUD showSuccessMessage:@"设置成功成功"];
         [self performSelector:@selector(setCompleteAction) withObject:nil afterDelay:1];
     } failed:^(NSInteger statusCode, id json) {
-        
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
 }
 

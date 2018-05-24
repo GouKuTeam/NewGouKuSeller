@@ -48,7 +48,7 @@
     self.viewControllers = [NSArray arrayWithObjects:supplierNav,shopNav,orderNav,ShopManagerNav, nil];
     NSArray *titles = @[@"订单管理",@"订单查询",@"客户管理",@"店铺管理"];
     NSArray *images = @[@"SupplierTab_Normal_1",@"SupplierTab_Normal_2",@"SupplierTab_Normal_3",@"SupplierTab_Normal_4"];
-    NSArray *selectImages = @[@"Supplier_Selected_1",@"Supplier_Selected_1_2",@"Supplier_Selected_3",@"Supplier_Selected_4"];
+    NSArray *selectImages = @[@"Supplier_Selected_1",@"Supplier_Selected_2",@"Supplier_Selected_3",@"Supplier_Selected_4"];
     for (int i=0; i<4; i++) {
         UITabBarItem *item = [self.tabBar.items objectAtIndex:i];
         item.tag = i;
