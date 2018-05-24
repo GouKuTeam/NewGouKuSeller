@@ -142,7 +142,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:section];
     if (entity.items.count > 2) {
-        if (entity.isShow == YES) {
+        if (entity.isShow == NO) {
             return 2;
         }else{
             return entity.items.count;
