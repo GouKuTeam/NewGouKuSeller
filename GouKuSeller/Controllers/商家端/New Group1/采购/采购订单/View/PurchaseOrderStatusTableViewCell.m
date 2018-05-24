@@ -31,7 +31,7 @@
         [self.contentView addSubview:self.img_center];
         [self.img_center setImage:[UIImage imageNamed:@"grey_dot"]];
         
-        self.lab_title = [[UILabel alloc]initWithFrame:CGRectMake(42, 0, 100, 50)];
+        self.lab_title = [[UILabel alloc]initWithFrame:CGRectMake(42, 0, SCREEN_WIDTH - 42 - 150 - 20, 50)];
         [self.contentView addSubview:self.lab_title];
         [self.lab_title setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.lab_title setFont:[UIFont systemFontOfSize:14]];
