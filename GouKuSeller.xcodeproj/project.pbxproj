@@ -53,6 +53,9 @@
 		740C38BB20B579CC00ACFBAE /* SupplierPriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */; };
 		740C38BF20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */; };
 		740C38C020B57EE900ACFBAE /* cancerPurchaseOrder.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */; };
+		740C38C220B6A6F900ACFBAE /* cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38C120B6A6F900ACFBAE /* cancel.wav */; };
+		740C38C320B6A6F900ACFBAE /* cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38C120B6A6F900ACFBAE /* cancel.wav */; };
+		740C38C420B6A6F900ACFBAE /* cancel.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38C120B6A6F900ACFBAE /* cancel.wav */; };
 		740C46B020AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */; };
 		740C46B320AAE10F00626A8B /* AddressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B220AAE10F00626A8B /* AddressEntity.m */; };
 		740C46B620AC33ED00626A8B /* SupplierPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C46B520AC33ED00626A8B /* SupplierPayViewController.m */; };
@@ -794,6 +797,7 @@
 		740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierPriceDetailView.m; sourceTree = "<group>"; };
 		740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PurchaseOrderPayComplete.wav; sourceTree = "<group>"; };
 		740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cancerPurchaseOrder.wav; sourceTree = "<group>"; };
+		740C38C120B6A6F900ACFBAE /* cancel.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cancel.wav; sourceTree = "<group>"; };
 		740C46AE20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCommodityInSupplierShopViewController.h; sourceTree = "<group>"; };
 		740C46AF20AAAA4E00626A8B /* SearchCommodityInSupplierShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCommodityInSupplierShopViewController.m; sourceTree = "<group>"; };
 		740C46B120AAE10F00626A8B /* AddressEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressEntity.h; sourceTree = "<group>"; };
@@ -1550,6 +1554,7 @@
 		740C38BC20B57ECC00ACFBAE /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				740C38C120B6A6F900ACFBAE /* cancel.wav */,
 				740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */,
 				740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */,
 			);
@@ -2865,6 +2870,7 @@
 				7491FA71206E15CC0006F388 /* address.txt in Resources */,
 				7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */,
+				740C38C220B6A6F900ACFBAE /* cancel.wav in Resources */,
 				74ACFFBB20A051C0005C5A16 /* Assets.xcassets in Resources */,
 				74B4E812204BD353006AFB6C /* LaunchScreen.storyboard in Resources */,
 				74B4E86F204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
@@ -2886,6 +2892,7 @@
 				7491FA72206E15CC0006F388 /* address.txt in Resources */,
 				74ACFFBC20A051C0005C5A16 /* Assets.xcassets in Resources */,
 				7489CC9C207F599100971BED /* README.md in Resources */,
+				740C38C320B6A6F900ACFBAE /* cancel.wav in Resources */,
 				74B4E870204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2901,6 +2908,7 @@
 				7491FA73206E15CC0006F388 /* address.txt in Resources */,
 				74ACFFBD20A051C0005C5A16 /* Assets.xcassets in Resources */,
 				7489CC9D207F599100971BED /* README.md in Resources */,
+				740C38C420B6A6F900ACFBAE /* cancel.wav in Resources */,
 				74B4E871204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

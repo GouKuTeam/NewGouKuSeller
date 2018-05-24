@@ -283,26 +283,30 @@
 
 - (void)btn_buildCommodityAction{
     
-    
-    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"单个增加商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self addCommoditySingle];
-    }];
-    
-    UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"批量新建商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        MoreAddCommodityViewController * vc = [[MoreAddCommodityViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        vc.addCommodityMoreFinish = ^{
-            [self loadData];
-        };
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [actionSheetController addAction:addoneCAction];
-    [actionSheetController addAction:addtwoCAction];
-    [actionSheetController addAction:cancelAction];
-    [self presentViewController:actionSheetController animated:YES completion:nil];
+    MoreAddCommodityViewController * vc = [[MoreAddCommodityViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    vc.addCommodityMoreFinish = ^{
+        [self loadData];
+    };
+//    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//    UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"单个增加商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self addCommoditySingle];
+//    }];
+//
+//    UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"批量新建商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        MoreAddCommodityViewController * vc = [[MoreAddCommodityViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//        vc.addCommodityMoreFinish = ^{
+//            [self loadData];
+//        };
+//    }];
+//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//    }];
+//    [actionSheetController addAction:addoneCAction];
+//    [actionSheetController addAction:addtwoCAction];
+//    [actionSheetController addAction:cancelAction];
+//    [self presentViewController:actionSheetController animated:YES completion:nil];
 
 }
 

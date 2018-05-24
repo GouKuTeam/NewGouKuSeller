@@ -244,7 +244,7 @@
     for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
         sectionAmount = sectionAmount + entity.count * entity.price;
     }
-    lb_price.text = [NSString stringWithFormat:@"￥%.2f",sectionAmount];
+    lb_price.text = [NSString stringWithFormat:@"￥%.2f",sectionAmount + selectStoreEntity.freightPrice];
     lb_yunfeiPrice.text = [NSString stringWithFormat:@"￥%.2f",selectStoreEntity.freightPrice];
     tf_memo.text = selectStoreEntity.remark;
     

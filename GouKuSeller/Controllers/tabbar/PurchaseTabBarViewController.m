@@ -27,6 +27,8 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(gotoPurchaseOrder) name:@"GoToPurchaseOrder" object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goToShopCart) name:@"GoToShopCart" object:nil];
+    
     //初始化Tab下的ViewController
     [self initTabBarViewControllers];
     
@@ -87,6 +89,10 @@
 
 - (void)gotoPurchaseOrder{
     self.selectedIndex = 2;
+}
+
+- (void)goToShopCart{
+    self.selectedIndex = 1;
 }
 
 //----------------------红点的显示与消失--------------------------

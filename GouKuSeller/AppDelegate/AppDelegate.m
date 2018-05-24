@@ -164,7 +164,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     }
     else {
         // 程序打开走这里拿到通知信息
-//        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     }
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
@@ -211,15 +211,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         //收银  用户付款成功
         [[NSNotificationCenter defaultCenter] postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
-    if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 1) {
+    if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 0) {
         //采购订单   用户支付成功已下单  发送通知给订单处理界面刷新数据
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshSupplierOrderData" object:nil userInfo:nil];
         
     }
-    if ([[dic objectForKey:@"type"] intValue] == 2 && [[dic objectForKey:@"status"] intValue]== 5) {
-        //供应商取消订单  通知商家
-        
-    }
+
 }
 #endif
 

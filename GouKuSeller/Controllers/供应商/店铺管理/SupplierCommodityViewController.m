@@ -212,26 +212,42 @@
 
 - (void)btn_buildCommodityAction{
     
-    
-    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"单个增加商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self addCommoditySingle];
+    self.alertController = [UIAlertController alertControllerWithTitle:nil message:@"输入条形码" preferredStyle:UIAlertControllerStyleAlert];
+    [self.alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //获取第1个输入框；
+        UITextField *userNameTextField = self.alertController.textFields.firstObject;
+        NSLog(@"条形码 = %@",userNameTextField.text);
+        if (![userNameTextField.text isEqualToString:@""]) {
+            [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
+                NSDictionary *dic = (NSDictionary *)obj;
+                if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                    CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
+                    AddSupplierCommodityViewController *vc = [[AddSupplierCommodityViewController alloc]init];
+                    vc.comeFrom = @"新建商品";
+                    vc.entityInformation = entity;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    vc.addCommodityFinish = ^{
+                        [self btn_buildCommodityAction];
+                    };
+                }else{
+                    [MBProgressHUD hideHUD];
+                    [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+                    [self btn_buildCommodityAction];
+                }
+            } failed:^(NSInteger statusCode, id json) {
+                [MBProgressHUD showErrorMessage:(NSString *)json];
+            }];
+        }else{
+            [MBProgressHUD showInfoMessage:@"请输入条形码"];
+        }
+    }]];
+    //定义第一个输入框；
+    [self.alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.delegate = self;
     }];
-    
-    UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"批量新建商品" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        MoreAddCommodityViewController * vc = [[MoreAddCommodityViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        vc.addCommodityMoreFinish = ^{
-            [self loadData];
-        };
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [actionSheetController addAction:addoneCAction];
-    [actionSheetController addAction:addtwoCAction];
-    [actionSheetController addAction:cancelAction];
-    [self presentViewController:actionSheetController animated:YES completion:nil];
+    [self presentViewController:self.alertController animated:true completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -250,12 +266,12 @@
                 vc.entityInformation = entity;
                 [self.navigationController pushViewController:vc animated:YES];
                 vc.addCommodityFinish = ^{
-                    [self addCommoditySingle];
+                    [self btn_buildCommodityAction];
                 };
             }else{
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
-                [self addCommoditySingle];
+                [self btn_buildCommodityAction];
             }
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -661,45 +677,7 @@
     [self.v_commodityStatusView setHidden:YES];
 }
 
-//单个增加商品
--(void)addCommoditySingle{
-    self.alertController = [UIAlertController alertControllerWithTitle:nil message:@"输入条形码" preferredStyle:UIAlertControllerStyleAlert];
-    [self.alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    }]];
-    [self.alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //获取第1个输入框；
-        UITextField *userNameTextField = self.alertController.textFields.firstObject;
-        NSLog(@"条形码 = %@",userNameTextField.text);
-        if (![userNameTextField.text isEqualToString:@""]) {
-            [CommodityHandler getCommodityInformationWithBarCode:userNameTextField.text prepare:nil success:^(id obj) {
-                NSDictionary *dic = (NSDictionary *)obj;
-                if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                    CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
-                    AddSupplierCommodityViewController *vc = [[AddSupplierCommodityViewController alloc]init];
-                    vc.comeFrom = @"新建商品";
-                    vc.entityInformation = entity;
-                    [self.navigationController pushViewController:vc animated:YES];
-                    vc.addCommodityFinish = ^{
-                        [self addCommoditySingle];
-                    };
-                }else{
-                    [MBProgressHUD hideHUD];
-                    [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
-                    [self addCommoditySingle];
-                }
-            } failed:^(NSInteger statusCode, id json) {
-                [MBProgressHUD showErrorMessage:(NSString *)json];
-            }];
-        }else{
-            [MBProgressHUD showInfoMessage:@"请输入条形码"];
-        }
-    }]];
-    //定义第一个输入框；
-    [self.alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.delegate = self;
-    }];
-    [self presentViewController:self.alertController animated:true completion:nil];
-}
+
 
 - (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation
 {

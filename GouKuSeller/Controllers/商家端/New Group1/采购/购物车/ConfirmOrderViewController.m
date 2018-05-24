@@ -74,6 +74,7 @@
         for (SupplierCommodityEndity *selectWareEntity in selectStoreEntity.shoppingCatItems) {
             double_allPrice = double_allPrice + selectWareEntity.price * selectWareEntity.count;
         }
+        double_allPrice = double_allPrice + selectStoreEntity.freightPrice;
     }
     NSString *str_allPrice = [NSString stringWithFormat:@"合计：￥%.2f",double_allPrice];
     NSMutableAttributedString *str_amount = [[NSMutableAttributedString alloc]initWithString:str_allPrice];
@@ -232,6 +233,7 @@
     for (SupplierCommodityEndity *entity in selectStoreEntity.shoppingCatItems) {
         sectionAmount = sectionAmount + entity.count * entity.price;
     }
+    sectionAmount = sectionAmount + selectStoreEntity.freightPrice;
     lb_price.text = [NSString stringWithFormat:@"￥%.2f",sectionAmount];
     lb_yunfeiPrice.text = [NSString stringWithFormat:@"￥%.2f",selectStoreEntity.freightPrice];
     tf_memo.text = selectStoreEntity.remark;

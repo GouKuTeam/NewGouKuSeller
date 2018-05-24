@@ -10,6 +10,8 @@
 #import "PurchaseHandler.h"
 #import "StoreEntity.h"
 #import "SelectUnitView.h"
+#import "SupplierShopViewController.h"
+#import "SupplierInformationViewController.h"
 
 @interface SupplierCommodityInformationViewController ()
 
@@ -152,6 +154,7 @@
         make.width.mas_equalTo(62);
         make.height.mas_equalTo(26);
     }];
+    [self.btn_enter addTarget:self action:@selector(gotoShopAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.lab_shopNum = [[UILabel alloc]init];
     [self.v2 addSubview:self.lab_shopNum];
@@ -293,7 +296,7 @@
     [self.btn_supplier setImage:[UIImage imageNamed:@"gongyingshang"] forState:UIControlStateNormal];
     [self.btn_supplier setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_supplier.imageView.frame.size.height + 5 ,-self.btn_supplier.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
     [self.btn_supplier setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_supplier.imageView.frame.size.height, 0.0,0.0, -self.btn_supplier.titleLabel.bounds.size.width)];//图片距离右边框
-    
+    [self.btn_supplier addTarget:self action:@selector(gotoShopInformationAction) forControlEvents:UIControlEventTouchUpInside];
     //
     self.btn_shoppingCart = [[UIButton alloc]init];
     [self.v_bottom addSubview:self.btn_shoppingCart];
@@ -309,6 +312,7 @@
     [self.btn_shoppingCart setImage:[UIImage imageNamed:@"shoppingcartgrey"] forState:UIControlStateNormal];
     [self.btn_shoppingCart setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_shoppingCart.imageView.frame.size.height + 5 ,-self.btn_shoppingCart.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
     [self.btn_shoppingCart setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_shoppingCart.imageView.frame.size.height, 0.0,0.0, -self.btn_shoppingCart.titleLabel.bounds.size.width)];//图片距离右边框
+    [self.btn_shoppingCart addTarget:self action:@selector(gotoShopCartAction) forControlEvents:UIControlEventTouchUpInside];
     
     self.btn_addShoppingCart = [[UIButton alloc]init];
     [self.v_bottom addSubview:self.btn_addShoppingCart];
@@ -392,6 +396,22 @@
     } failed:^(NSInteger statusCode, id json) {
         
     }];
+}
+
+- (void)gotoShopCartAction{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"GoToShopCart" object:nil userInfo:nil];
+}
+
+- (void)gotoShopAction{
+    SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
+    vc.storeEntity = self.storeEntity;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)gotoShopInformationAction{
+    SupplierInformationViewController *vc = [[SupplierInformationViewController alloc]init];
+    vc.storeEntity = self.storeEntity;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

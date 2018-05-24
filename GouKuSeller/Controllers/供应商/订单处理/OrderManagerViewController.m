@@ -361,7 +361,7 @@
 }
 
 - (void)RefreshSupplierOrderData{
-    [self.v_header setItemWithIndex:0];
+    [self.v_header setItemWithIndex:1];
 }
 
 - (void)didReceiveMemoryWarning {
