@@ -32,7 +32,7 @@
         self.collectionView.showsVerticalScrollIndicator = NO;
         self.collectionView.showsHorizontalScrollIndicator = NO;
         [self.collectionView registerClass:[ImageCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
-        self.collectionView.userInteractionEnabled = NO;
+//        self.collectionView.userInteractionEnabled = NO;
         [self addSubview:self.collectionView];
         
         self.v_line = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.bottom + 9, SCREEN_WIDTH, 0.5)];
