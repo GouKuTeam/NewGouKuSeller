@@ -104,6 +104,7 @@
         [self.lab_remarkTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.equalTo(self.img_line1.mas_bottom).offset(10.7);
+            make.width.mas_equalTo(50);
             make.height.mas_equalTo(20);
         }];
         
@@ -113,8 +114,8 @@
         [self.lab_remarkDetail setFont:[UIFont systemFontOfSize:14]];
         self.lab_remarkDetail.numberOfLines = 0;
         [self.lab_remarkDetail mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_remarkTitle.mas_right);
-            make.top.equalTo(self.lab_remarkTitle);
+            make.left.mas_equalTo(56.7);
+            make.top.equalTo(self.img_line1.mas_bottom).offset(10.7);
             make.right.equalTo(self.mas_right).offset(-15);
         }];
         
@@ -177,12 +178,14 @@
         [self.img_line1 setHidden:NO];
         [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.lab_remarkTitle);
+            make.left.mas_equalTo(56.7);
         }];
     }else{
         [self.lab_remarkTitle setHidden:YES];
         [self.img_line1 setHidden:YES];
         [self.lab_remarkDetail mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.lab_shopAddress.mas_bottom);
+            make.left.mas_equalTo(56.7);
         }];
     }
 }

@@ -23,6 +23,7 @@
         layout.itemSize = CGSizeMake(68, 68);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.minimumLineSpacing = 10;
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 10);
         
         self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(10,9, SCREEN_WIDTH - 10,68) collectionViewLayout:layout];
         self.collectionView.backgroundColor = [UIColor whiteColor];

@@ -181,7 +181,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *v_footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 42 * 3)];
     [v_footer setBackgroundColor:[UIColor whiteColor]];
-    
+    v_footer.userInteractionEnabled = YES;
     UILabel *lb_yunfeiTitle = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 42)];
     [lb_yunfeiTitle setText:@"运费"];
     [lb_yunfeiTitle setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
@@ -246,6 +246,7 @@
     if (!cell) {
         cell = [[ConfirmOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     StoreEntity *storeEntity = [self.arr_selectedData objectAtIndex:indexPath.section];
     SupplierCommodityEndity  *wareEntity = [storeEntity.shoppingCatItems objectAtIndex:indexPath.row];
     [cell contentCellWithSupplierCommodityEndity:wareEntity];
@@ -269,7 +270,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.view endEditing:YES];
+//    [self.view endEditing:YES];
 }
 
 @end
