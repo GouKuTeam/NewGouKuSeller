@@ -100,6 +100,21 @@
             make.height.mas_equalTo(20);
         }];
         
+        self.btn_edit = [[UIButton alloc]init];
+        [self.v_back addSubview:self.btn_edit];
+        [self.btn_edit setTitle:@"编辑" forState:UIControlStateNormal];
+        [self.btn_edit setImage:[UIImage imageNamed:@"addressedit"] forState:UIControlStateNormal];
+        [self.btn_edit setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+        self.btn_edit.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.btn_edit setImageEdgeInsets:UIEdgeInsetsMake(0.0, -10, 0.0, 0.0)];
+        self.btn_edit.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.btn_edit mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(SCREEN_WIDTH - 48 - 17 - 20 - 48);
+            make.top.equalTo(img_line.mas_bottom).offset(11);
+            make.width.mas_equalTo(48);
+            make.height.mas_equalTo(20);
+        }];
+        
         [self.v_back mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.left.mas_equalTo(0);

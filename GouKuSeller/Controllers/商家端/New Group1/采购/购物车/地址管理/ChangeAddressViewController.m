@@ -1,19 +1,19 @@
 //
-//  CreateAddressViewController.m
+//  ChangeAddressViewController.m
 //  GouKuSeller
 //
-//  Created by 窦建斌 on 2018/5/4.
+//  Created by 窦建斌 on 2018/5/25.
 //  Copyright © 2018年 窦建斌. All rights reserved.
 //
 
-#import "CreateAddressViewController.h"
+#import "ChangeAddressViewController.h"
 #import "GCPlaceholderTextView.h"
 #import "LocationAddressViewController.h"
 #import "PurchaseHandler.h"
 #import "SelectCityView.h"
 #import "PurchaseHandler.h"
 
-@interface CreateAddressViewController ()<UITextFieldDelegate>
+@interface ChangeAddressViewController ()<UITextFieldDelegate>
 
 @property (nonatomic ,strong)UITextField                   *tf_name;
 @property (nonatomic ,strong)UITextField                   *tf_phone;
@@ -31,11 +31,11 @@
 
 @end
 
-@implementation CreateAddressViewController
+@implementation ChangeAddressViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"新建地址";
+    self.title = @"编辑地址";
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
@@ -44,11 +44,9 @@
     [[UIApplication sharedApplication].keyWindow addSubview:self.selectCityView];
     [self.selectCityView setHidden:YES];
     [self.selectCityView.btn_confirm addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 - (void)onCreate{
-    [self loadData];
     UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 220)];
     [self.view addSubview:v_back];
     [v_back setBackgroundColor:[UIColor whiteColor]];
@@ -83,6 +81,7 @@
     [self.tf_name setPlaceholder:@"名字"];
     self.tf_name.font = [UIFont systemFontOfSize:16];
     self.tf_name.delegate = self;
+    self.tf_name.text = self.addressEntity.name;
     
     self.tf_phone = [[UITextField alloc]initWithFrame:CGRectMake(100, 44, SCREEN_WIDTH - 50, 44)];
     [v_back addSubview:self.tf_phone];
@@ -91,6 +90,7 @@
     self.tf_phone.keyboardType = UIKeyboardTypeNumberPad;
     self.tf_phone.font = [UIFont systemFontOfSize:16];
     self.tf_phone.delegate = self;
+    self.tf_phone.text = self.addressEntity.phone;
     
     self.lb_city = [[UILabel alloc]initWithFrame:CGRectMake(100, 88, SCREEN_WIDTH - 110, 44)];
     [self.lb_city setFont:[UIFont systemFontOfSize:16]];
@@ -105,6 +105,7 @@
     [self.tf_address setPlaceholder:@"街道门牌信息"];
     self.tf_address.font = [UIFont systemFontOfSize:16];
     [self.tf_address setEditable:NO];
+    self.tf_address.text = self.addressEntity.address;
     UITapGestureRecognizer *tgp_address = [[UITapGestureRecognizer alloc]init];
     [self.tf_address addGestureRecognizer:tgp_address];
     [tgp_address addTarget:self action:@selector(tgp_addressAction)];
@@ -131,29 +132,15 @@
     [self.selectCityView setHidden:NO];
 }
 
-- (void)loadData{
-    [PurchaseHandler getProvinceCityAreaprepare:^{
-        
-    } success:^(id obj) {
-        self.selectCityView.arr_data = [(NSDictionary *)obj objectForKey:@"data"];
-    } failed:^(NSInteger statusCode, id json) {
-        
-    }];
-}
 
 - (void)tgp_addressAction{
-    if (self.cityName == nil) {
-        [MBProgressHUD showErrorMessage:@"请选择所在地区"];
-    }else{
-        LocationAddressViewController *vc = [[LocationAddressViewController alloc]init];
-        vc.str_city = self.cityName;
-        [self.navigationController pushViewController:vc animated:YES];
-        vc.goBackAddress = ^(AMapPOI *poiEntity) {
-            [self.tf_address setText:poiEntity.address];
-            self.lon = [NSString stringWithFormat:@"%f",poiEntity.location.longitude];
-            self.lat = [NSString stringWithFormat:@"%f",poiEntity.location.latitude];
-        };
-    }
+    LocationAddressViewController *vc = [[LocationAddressViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    vc.goBackAddress = ^(AMapPOI *poiEntity) {
+        [self.tf_address setText:poiEntity.address];
+        self.lon = [NSString stringWithFormat:@"%f",poiEntity.location.longitude];
+        self.lat = [NSString stringWithFormat:@"%f",poiEntity.location.latitude];
+    };
 }
 
 - (void)confirmAction{
@@ -202,8 +189,8 @@
 
 - (void)addAddressFinish{
     [self.navigationController popViewControllerAnimated:YES];
-    if (self.addAddressComplete) {
-        self.addAddressComplete();
+    if (self.changeAddressComplete) {
+        self.changeAddressComplete();
     }
 }
 

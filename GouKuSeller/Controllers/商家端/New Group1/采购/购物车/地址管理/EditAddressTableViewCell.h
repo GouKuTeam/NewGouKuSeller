@@ -17,6 +17,7 @@
 @property (nonatomic ,strong)UILabel          *lab_address;
 @property (nonatomic ,strong)UIButton         *btn_morenAddress;
 @property (nonatomic ,strong)UIButton         *btn_delete;
+@property (nonatomic ,strong)UIButton         *btn_edit;
 
 - (void)contentCellWithAddressEntity:(AddressEntity *)entity;
 

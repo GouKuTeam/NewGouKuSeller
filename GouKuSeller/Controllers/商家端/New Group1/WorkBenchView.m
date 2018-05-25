@@ -97,20 +97,20 @@
         [self.btn_active setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_active.imageView.frame.size.height, 0.0,0.0, -self.btn_active.titleLabel.bounds.size.width)];//图片距离右边框
         
         //经营按钮
-//        self.btn_jingying = [[UIButton alloc]init];
-//        [self.v_back1 addSubview:self.btn_jingying];
-//        [self.btn_jingying mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(125);
-//            make.left.mas_equalTo(0);
-//            make.width.mas_equalTo(widthbtn);
-//            make.height.mas_equalTo(125);
-//        }];
-//        [self.btn_jingying setTitle:@"经营" forState:UIControlStateNormal];
-//        [self.btn_jingying setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
-//        self.btn_jingying.titleLabel.font = [UIFont systemFontOfSize:18];
-//        [self.btn_jingying setImage:[UIImage imageNamed:@"statistics"] forState:UIControlStateNormal];
-//        [self.btn_jingying setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_jingying.imageView.frame.size.height + 15 ,-self.btn_jingying.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
-//        [self.btn_jingying setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_jingying.imageView.frame.size.height, 0.0,0.0, -self.btn_jingying.titleLabel.bounds.size.width)];//图片距离右边框
+        self.btn_jingying = [[UIButton alloc]init];
+        [self.v_back1 addSubview:self.btn_jingying];
+        [self.btn_jingying mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(125);
+            make.left.mas_equalTo(widthbtn * 2);
+            make.width.mas_equalTo(widthbtn);
+            make.height.mas_equalTo(125);
+        }];
+        [self.btn_jingying setTitle:@"经营" forState:UIControlStateNormal];
+        [self.btn_jingying setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+        self.btn_jingying.titleLabel.font = [UIFont systemFontOfSize:18];
+        [self.btn_jingying setImage:[UIImage imageNamed:@"statistics"] forState:UIControlStateNormal];
+        [self.btn_jingying setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_jingying.imageView.frame.size.height + 15 ,-self.btn_jingying.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+        [self.btn_jingying setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_jingying.imageView.frame.size.height, 0.0,0.0, -self.btn_jingying.titleLabel.bounds.size.width)];//图片距离右边框
         
         
         //采购按钮

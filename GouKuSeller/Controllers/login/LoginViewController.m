@@ -106,6 +106,7 @@
         
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+            [LoginStorage saveHTTPHeader:[[responseObject objectForKey:@"data"] objectForKey:@"token"]];
             [LoginStorage saveUserName:self.tef_userName.text];
             SelectShopViewController *vc = [[SelectShopViewController alloc]init];
             vc.arr_shop = [[[responseObject objectForKey:@"data"] objectForKey:@"list"] objectForKey:@"data"];

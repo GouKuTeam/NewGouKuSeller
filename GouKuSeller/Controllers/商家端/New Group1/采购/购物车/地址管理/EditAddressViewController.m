@@ -10,6 +10,7 @@
 #import "EditAddressTableViewCell.h"
 #import "CreateAddressViewController.h"
 #import "PurchaseHandler.h"
+#import "ChangeAddressViewController.h"
 
 @interface EditAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)BaseTableView         *tb_adress;
@@ -80,6 +81,8 @@
     cell.btn_delete.tag = indexPath.row;
     [cell.btn_morenAddress addTarget:self action:@selector(btn_morenAddressAction:) forControlEvents:UIControlEventTouchUpInside];
     [cell.btn_delete addTarget:self action:@selector(btn_deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.btn_edit.tag = indexPath.row;
+    [cell.btn_edit addTarget:self action:@selector(btn_editAction:) forControlEvents:UIControlEventTouchUpInside];
     AddressEntity *entity = [self.arr_adress objectAtIndex:indexPath.row];
     [cell contentCellWithAddressEntity:entity];
     return cell;
@@ -111,6 +114,13 @@
     } failed:^(NSInteger statusCode, id json) {
         
     }];
+}
+
+- (void)btn_editAction:(UIButton *)btn{
+    AddressEntity *entity = [self.arr_adress objectAtIndex:btn.tag];
+    ChangeAddressViewController *vc = [[ChangeAddressViewController alloc]init];
+    vc.addressEntity = entity;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)btn_deleteAction:(UIButton *)btn{

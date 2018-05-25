@@ -230,12 +230,12 @@
 - (void)selectAddress{
     AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
     request.keywords = self.str_search;
-    [self.search AMapPOIKeywordsSearch:request];
-    request.city                = self.cityName;
+    request.city                = @"香格里拉";
     request.requireExtension    = YES;
 //    /*  搜索SDK 3.2.0 中新增加的功能，只搜索本城市的POI。*/
     request.cityLimit           = YES;
     request.requireSubPOIs      = YES;
+    [self.search AMapPOIKeywordsSearch:request];
 }
 
 /* POI 搜索回调. */
@@ -250,7 +250,6 @@
         [self.arr_searchAddress addObjectsFromArray:response.pois];
         [self.tb_searchAddress reloadData];
     }
-    
 }
 
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

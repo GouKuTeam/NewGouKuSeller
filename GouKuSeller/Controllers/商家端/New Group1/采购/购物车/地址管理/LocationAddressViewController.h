@@ -14,6 +14,7 @@
 typedef void(^goBackAddress)(AMapPOI *poiEntity);
 @interface LocationAddressViewController : BaseViewController
 
-@property (nonatomic, copy) goBackAddress  goBackAddress;
+@property (nonatomic, copy  ) goBackAddress  goBackAddress;
+@property (nonatomic ,strong) NSString *str_city;
 
 @end
