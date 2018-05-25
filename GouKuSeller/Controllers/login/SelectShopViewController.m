@@ -80,15 +80,12 @@
             [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
                 if(resCode == 0){
                     NSLog(@"registrationID获取成功：%@",registrationID);
-//                    NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
                     NSString *strUrl = [NSString stringWithFormat:@"%@/registionid/set",API_Login];
-                    
                     NSDictionary *dic = @{@"registionid":registrationID};
                     RTHttpClient *asas = [[RTHttpClient alloc]init];
                     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
                         
                     } success:^(NSURLSessionDataTask *task, id responseObject) {
-                        
                         
                     } failure:^(NSURLSessionDataTask *task, NSError *error) {
                         NSLog(@"error == %@",error);
