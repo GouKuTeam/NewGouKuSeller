@@ -50,7 +50,7 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 3;
+    return 2;
 }
 
 //返回指定列的行数
