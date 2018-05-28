@@ -423,20 +423,15 @@
         
         ShopClassificationEntity *entity = [self.arr_category objectAtIndex:section];
         lab_categoryName.text = entity.name;
-        if (self.selectedSection == section && self.selectedRow == NULLROW) {
+        if (self.selectedSection == section && self.selectedRow == NULLROW && entity.childList.count == 0) {
             [img_shu setHidden:NO];
             [lab_categoryName setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
+            [v_header setBackgroundColor:[UIColor whiteColor]];
         }else{
             [img_shu setHidden:YES];
             [lab_categoryName setTextColor:[UIColor colorWithHexString:@"#616161"]];
-        }
-        
-        if (self.selectedSection == section){
-            [v_header setBackgroundColor:[UIColor whiteColor]];
-        }else{
             [v_header setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
         }
-        
         
         if (entity.isShow == YES) {
             [iv_arrow setImage:[UIImage imageNamed:@"up_icon"]];
@@ -594,14 +589,20 @@
 
 - (void)selectCategory:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
-    self.selectedSection = (int)v_sender.tag;
-    self.selectedRow = NULLROW;
     ShopClassificationEntity *entity = [self.arr_category objectAtIndex:v_sender.tag];
-    entity.isShow = !entity.isShow;
-    [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
-    [self.tb_left reloadData];
-    //加载右边数据
-    [self.tb_right requestDataSource];
+    if (entity.childList.count == 0) {
+        self.selectedSection = (int)v_sender.tag;
+        self.selectedRow = NULLROW;
+        entity.isShow = !entity.isShow;
+        [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
+        [self.tb_left reloadData];
+        //加载右边数据
+        [self.tb_right requestDataSource];
+    }else{
+        entity.isShow = !entity.isShow;
+        [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
+        [self.tb_left reloadData];
+    }
 }
 
 
