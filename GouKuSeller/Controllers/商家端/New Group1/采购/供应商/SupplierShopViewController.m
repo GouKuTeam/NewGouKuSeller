@@ -90,7 +90,7 @@
     self.tb_left.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tb_left];
     
-    self.tb_right = [[BaseTableView alloc]initWithFrame:CGRectMake(85,self.tb_left.top,SCREEN_WIDTH - 85,self.tb_left.height) style:UITableViewStyleGrouped hasHeaderRefreshing:NO hasFooterRefreshing:NO];
+    self.tb_right = [[BaseTableView alloc]initWithFrame:CGRectMake(85,self.tb_left.top,SCREEN_WIDTH - 85,self.tb_left.height) style:UITableViewStylePlain hasHeaderRefreshing:NO hasFooterRefreshing:NO];
     self.tb_right.delegate = self;
     self.tb_right.dataSource = self;
     self.tb_right.tableViewDelegate = self;
@@ -283,7 +283,7 @@
     if (tableView == self.tb_left) {
         return 0.01;
     }else{
-        return 20;
+        return 30;
     }
 }
 
@@ -296,10 +296,10 @@
         return nil;
     }else{
         
-        UILabel *lb_title = [[UILabel alloc]initWithFrame:CGRectMake(7, 0, self.tb_right.width - 14, 20)];
+        UILabel *lb_title = [[UILabel alloc]initWithFrame:CGRectMake(7, 0, self.tb_right.width - 14, 30)];
         [lb_title setTextColor:[UIColor blackColor]];
         [lb_title setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
-        
+        [lb_title setBackgroundColor:[UIColor whiteColor]];
         if (self.arr_category.count > 0) {
             ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
             entity = [self.arr_category objectAtIndex:self.selectedFirst];
