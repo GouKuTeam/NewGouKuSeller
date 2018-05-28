@@ -121,6 +121,9 @@
     ChangeAddressViewController *vc = [[ChangeAddressViewController alloc]init];
     vc.addressEntity = entity;
     [self.navigationController pushViewController:vc animated:YES];
+    vc.changeAddressComplete = ^{
+        [self loadData];
+    };
 }
 
 - (void)btn_deleteAction:(UIButton *)btn{

@@ -70,7 +70,7 @@
 }
 
 - (void)setUpBottomUI{
-    
+    self.accountPrice = 49.9;
     self.v_yue = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50 - 54, SCREEN_WIDTH, 46)];
     [self.v_yue setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.v_yue];
@@ -300,7 +300,7 @@
 
 
 - (void)getResult{
-    if (self.accountPrice > self.total) {
+    if (self.accountPrice >= self.total) {
         NSMutableAttributedString *str_yu = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"余额支付(剩余¥%.2f)",self.accountPrice]];
         [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
         [self.lab_yue setAttributedText:str_yu];
@@ -308,6 +308,10 @@
         [self.lab_nopay setHidden:YES];
         [self.btn_payOrder setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
         self.btn_payOrder.enabled = YES;
+    }else{
+        NSMutableAttributedString *str_yu = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"余额支付(剩余¥%.2f)",self.accountPrice]];
+        [str_yu addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
+        [self.lab_yue setAttributedText:str_yu];
     }
 }
 

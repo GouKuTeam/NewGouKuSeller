@@ -751,6 +751,7 @@
 }
 
 -(void)btn_topAction{
+    [self.v_moreEdit setHidden:YES];
     [self.v_commodityStatusView setHidden:!self.v_commodityStatusView.isHidden];
 }
 

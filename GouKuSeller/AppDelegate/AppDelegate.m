@@ -20,7 +20,7 @@
 #import <WXApi.h>
 
 
-@interface AppDelegate ()<JPUSHRegisterDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate,WXApiDelegate>
 
 @property (nonatomic, assign) UIBackgroundTaskIdentifier backgrounTask;
 @property (nonatomic,strong) NSTimer *timer;
@@ -106,7 +106,7 @@
         }
     }];
     [AMapServices sharedServices].apiKey = @"2c81b2b54c03fbdabdbcde8c90d0617c";
-    [WXApi registerApp:@"wxf5cfccf099ab98d4"];
+    [WXApi registerApp:@"wx011fffeb2e1f2376"];
     return YES;
 }
 
@@ -271,6 +271,85 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             [[UIApplication sharedApplication] endBackgroundTask:self.self.backgrounTask];
             self.self.backgrounTask = UIBackgroundTaskInvalid;
         }];
+    }
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    //跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
+    if ([url.host isEqualToString:@"safepay"]) {
+
+                     
+        
+    } else {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
+}
+
+- (void) onResp:(BaseResp*)resp {
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp *response = (PayResp *)resp;
+        [MBProgressHUD hideHUD];
+        switch (response.errCode)
+        {
+            case WXSuccess:
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NF_WECHAT_PAY_SUCCESS object:nil];
+            }
+                break;
+                
+            case WXErrCodeUserCancel:
+            {
+                [MBProgressHUD showErrorMessage:@"支付取消"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NF_WECHAT_PAY_USER_CANCEL object:nil];
+            }
+                break;
+                
+            default:
+            {
+                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"支付失败，retcode=%d", resp.errCode]];
+            }
+                break;
+        }
+    } else if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
+        SendMessageToWXResp *response = (SendMessageToWXResp *)resp;
+        switch (response.errCode) {
+            case WXSuccess:
+            {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:NF_WECHAT_SHARE_DYNAMIC_SUCCESS object:nil];
+            }
+                break;
+                
+            case WXErrCodeUserCancel:
+            {
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+
+- (void)managerDidRecvPaymentResponse:(PayResp *)response {
+    switch (response.errCode) {
+        case WXSuccess:
+//            [self.v_cashComplete setHidden:NO];
+            break;
+        case WXErrCodeUserCancel:
+            [MBProgressHUD showInfoMessage:@"中途取消"];
+            break;
+        default:{
+            [MBProgressHUD showInfoMessage:@"支付失败"];
+        }
+            break;
     }
 }
 

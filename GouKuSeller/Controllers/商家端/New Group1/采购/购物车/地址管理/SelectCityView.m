@@ -121,10 +121,8 @@
     if (component == 0) {
         self.selectedOneIndex = row;
         [self.pickerView reloadComponent:1];
-        [self.pickerView reloadComponent:2];
     }else if(component == 1){
         self.selectedTwoIndex = row;
-        [self.pickerView reloadComponent:2];
     }else{
         self.selectedThreeIndex = row;
     }

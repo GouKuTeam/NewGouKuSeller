@@ -40,6 +40,7 @@
     [self.tf_newCode setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [self.tf_newCode setFont:[UIFont systemFontOfSize:16]];
     self.tf_newCode.delegate = self;
+    self.tf_newCode.secureTextEntry = YES;
     
     UIImageView *img_line1 = [[UIImageView alloc]initWithFrame:CGRectMake(15, SafeAreaTopHeight + 68, SCREEN_WIDTH - 15, 0.5)];
     [self.view addSubview:img_line1];
@@ -58,6 +59,7 @@
     [self.tf_sureCode setTextColor:[UIColor colorWithHexString:@"#000000"]];
     [self.tf_sureCode setFont:[UIFont systemFontOfSize:16]];
     self.tf_sureCode.delegate = self;
+    self.tf_sureCode.secureTextEntry = YES;
     
     UIImageView *img_line2 = [[UIImageView alloc]initWithFrame:CGRectMake(15, SafeAreaTopHeight + 118, SCREEN_WIDTH - 15, 0.5)];
     [self.view addSubview:img_line2];

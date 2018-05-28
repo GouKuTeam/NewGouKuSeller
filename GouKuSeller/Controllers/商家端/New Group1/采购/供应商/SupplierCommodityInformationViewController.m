@@ -86,7 +86,7 @@
         make.top.equalTo(self.lab_commodityName.mas_bottom).offset(10);
         make.height.mas_equalTo(27);
     }];
-    [self.lab_price setText:[NSString stringWithFormat:@"%.2f",self.supplierCommodityEndity.price]];
+    [self.lab_price setText:[NSString stringWithFormat:@"￥%.2f",self.supplierCommodityEndity.price]];
     
     self.lab_stock = [[UILabel alloc]init];
     [self.v1 addSubview:self.lab_stock];
@@ -390,9 +390,9 @@
         self.storeEntity = (StoreEntity *)obj;
         [self.img_supplierPic sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
         [self.lab_supplierName setText:self.storeEntity.name];
-        [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.shopNum]];
-        [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.orderNum]];
-        [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f",self.storeEntity.takeOffPrice]];
+        [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld家",self.storeEntity.shopNum]];
+        [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld笔",self.storeEntity.orderNum]];
+        [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f元",self.storeEntity.takeOffPrice]];
     } failed:^(NSInteger statusCode, id json) {
         
     }];

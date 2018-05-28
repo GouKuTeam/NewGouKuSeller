@@ -34,7 +34,10 @@
 + (void)selectAllAddressWithprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //添加新的地址
-+ (void)addNewAddressWithName:(NSString *)name phone:(NSString *)phone provinceId:(int)provinceId cityId:(int)cityId districtId:(int)districtId provinceName:(NSString *)provinceName cityName:(NSString *)cityName districtName:(NSString *)districtName address:(NSString *)address lat:(NSString *)lat lon:(NSString *)lon prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)addNewAddressWithName:(NSString *)name phone:(NSString *)phone provinceId:(int)provinceId cityId:(int)cityId districtId:(int)districtId provinceName:(NSString *)provinceName cityName:(NSString *)cityName districtName:(NSString *)districtName address:(NSString *)address lat:(NSString *)lat lon:(NSString *)lon houseNum:(NSString *)houseNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//编辑地址
++ (void)updateAddressWithAddressId:(NSNumber *)addressId name:(NSString *)name phone:(NSString *)phone provinceId:(int)provinceId cityId:(int)cityId districtId:(int)districtId provinceName:(NSString *)provinceName cityName:(NSString *)cityName districtName:(NSString *)districtName address:(NSString *)address lat:(NSString *)lat lon:(NSString *)lon houseNum:(NSString *)houseNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //设置默认地址
 + (void)setDefaultAddressWithAddressId:(NSNumber *)addressId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;

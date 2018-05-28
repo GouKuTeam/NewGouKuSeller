@@ -65,6 +65,11 @@
     [v_header.lb_name setText:self.storeEntity.name];
     CGFloat width = [self.storeEntity.name fittingLabelWidthWithHeight:28 andFontSize:[UIFont systemFontOfSize:20]];
     [v_header.img_jiantou setFrame:CGRectMake(width + 76, v_header.lb_name.top + 2, 24, 24)];
+    if (width > SCREEN_WIDTH - 76 - 14) {
+        [v_header.lb_name setFrame:CGRectMake(v_header.iv_avatar.right + 10, 3, SCREEN_WIDTH - 76 - 24, 28)];
+        [v_header.img_jiantou setFrame:CGRectMake(SCREEN_WIDTH - 36, v_header.lb_name.top + 2, 24, 24)];
+    }
+//    [v_header.img_jiantou setBackgroundColor:[UIColor redColor]];
     [v_header.lb_startPrice setText:[NSString stringWithFormat:@"%d元起送",(int)self.storeEntity.takeOffPrice]];
     [self.view addSubview:v_header];
     UITapGestureRecognizer *vHeaderTgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gotoShopDetailAction)];

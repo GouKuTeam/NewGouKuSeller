@@ -14,6 +14,7 @@
 @property (nonatomic ,assign)int             accountType;   //1.销售结算  2.提现
 @property (nonatomic ,assign)double          accountNum;    //金额
 @property (nonatomic ,strong)NSString        *date;
+@property (nonatomic ,strong)NSString        *accountName;
 
 @property (nonatomic ,strong)NSNumber        *cashOrderId;
 @property (nonatomic ,assign)double           applyTime;

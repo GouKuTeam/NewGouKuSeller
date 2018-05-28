@@ -68,6 +68,7 @@
         [self.lab_categoryDetail mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(img_shu.mas_right).offset(3.5);
             make.top.equalTo(self.lab_category);
+            make.right.equalTo(self.mas_right).offset(-10);
             make.height.mas_equalTo(16);
         }];
         

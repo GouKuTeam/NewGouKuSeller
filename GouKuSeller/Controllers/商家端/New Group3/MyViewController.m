@@ -13,6 +13,7 @@
 #import "AboutMeViewController.h"
 #import "ChangeShopViewController.h"
 #import "TermOfShopViewController.h"
+#import "EditAddressViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource,TextViewClickReturnDelegate,TextFieldClickReturnDelegate,UITextFieldDelegate>
 @property (nonatomic ,strong)UITableView    *tb_my;
@@ -29,9 +30,11 @@
     if (self) {
         self.arr_my = [[NSMutableArray alloc]init];
         NSArray *arr = @[@"切换门店"];
-        NSArray *arr2 = @[@"账号设置",@"商家违规条例",@"关于我们"];
+        NSArray *arr2 = @[@"地址管理"];
+        NSArray *arr3 = @[@"账号设置",@"商家违规条例",@"关于我们"];
         [self.arr_my addObject:arr];
         [self.arr_my addObject:arr2];
+        [self.arr_my addObject:arr3];
         
     }
     return self;
@@ -136,17 +139,23 @@
         };
     }
     if (indexPath.section == 1 && indexPath.row == 0) {
+        EditAddressViewController *vc = [[EditAddressViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    if (indexPath.section == 2 && indexPath.row == 0) {
         SetAccountNumViewController *vc = [[SetAccountNumViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
-    if (indexPath.section == 1 && indexPath.row == 1) {
+    if (indexPath.section == 2 && indexPath.row == 1) {
         TermOfShopViewController *vc = [[TermOfShopViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    if (indexPath.section == 1 && indexPath.row == 2) {
+    if (indexPath.section == 2 && indexPath.row == 2) {
         AboutMeViewController *vc = [[AboutMeViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];

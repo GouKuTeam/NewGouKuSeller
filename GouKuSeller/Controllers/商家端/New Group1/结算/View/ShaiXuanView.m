@@ -58,7 +58,7 @@
         [self.img_heng setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         
         self.arr_btn = [[NSMutableArray alloc]init];
-        NSArray *arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值", nil];
+        NSArray *arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值",@"采购收入",@"采购退款", nil];
         CGFloat btnWidth = (SCREEN_WIDTH - 60) / 3;
         for (int i = 0; i < arr_btnName.count; i ++) {
             self.btn_all = [[UIButton alloc]init];

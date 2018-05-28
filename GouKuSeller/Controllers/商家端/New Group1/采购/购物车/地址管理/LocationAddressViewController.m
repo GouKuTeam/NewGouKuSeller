@@ -30,7 +30,6 @@
 @property (nonatomic ,strong)UIView                *tb_back;
 @property (nonatomic ,strong)BaseTableView         *tb_searchAddress;
 @property (nonatomic ,strong)NSString              *str_search;
-@property (nonatomic ,strong)NSString              *cityName;
 @property (nonatomic ,strong)AMapLocationManager   *locationManager;
 @property (nonatomic ,assign)int                    tableIndex;
 
@@ -85,27 +84,27 @@
 //    self.locationManager.locationTimeout =2;
 //    //   逆地理请求超时时间，最低2s，此处设置为2s
 //    self.locationManager.reGeocodeTimeout = 2;
-    self.locationManager = [[AMapLocationManager alloc]init];
-    [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
-        
-        if (error)
-        {
-            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
-            
-            if (error.code == AMapLocationErrorLocateFailed)
-            {
-                return;
-            }
-        }
-        
-        NSLog(@"location:%@", location);
-        
-        if (regeocode)
-        {
-            self.cityName = regeocode.city;
-            NSLog(@"reGeocode:%@", regeocode);
-        }
-    }];
+//    self.locationManager = [[AMapLocationManager alloc]init];
+//    [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+//
+//        if (error)
+//        {
+//            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+//
+//            if (error.code == AMapLocationErrorLocateFailed)
+//            {
+//                return;
+//            }
+//        }
+//
+//        NSLog(@"location:%@", location);
+//
+//        if (regeocode)
+//        {
+//            self.cityName = regeocode.city;
+//            NSLog(@"reGeocode:%@", regeocode);
+//        }
+//    }];
     
     [AMapServices sharedServices].enableHTTPS = YES;
     ///初始化地图
@@ -198,10 +197,16 @@
 {
     if (response.regeocode !=nil)
     {
-        self.cityName = [response.regeocode.pois objectAtIndex:0].city;
+//        self.cityName = [response.regeocode.pois objectAtIndex:0].city;
         if (response.regeocode.pois && response.regeocode.pois.count >0) {
             [self.arr_address removeAllObjects];
             [self.arr_address addObjectsFromArray:response.regeocode.pois];
+            for (int i = 0;i < self.arr_address.count ; i++) {
+                AMapPOI *poiTemp = [self.arr_address objectAtIndex:i];
+                if ([poiTemp.address isEqualToString:@""]) {
+                    [self.arr_address removeObjectAtIndex:i];
+                }
+            }
             [self.tb_address reloadData];
         }
     }
@@ -230,7 +235,7 @@
 - (void)selectAddress{
     AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
     request.keywords = self.str_search;
-    request.city                = @"香格里拉";
+    request.city                = self.str_city;
     request.requireExtension    = YES;
 //    /*  搜索SDK 3.2.0 中新增加的功能，只搜索本城市的POI。*/
     request.cityLimit           = YES;
@@ -246,8 +251,15 @@
         self.tb_searchAddress.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_searchAddress.frame withDefaultImage:nil withNoteTitle:@"无结果" withNoteDetail:nil withButtonAction:nil];
         return;
     }else{
+        
         [self.arr_searchAddress removeAllObjects];
         [self.arr_searchAddress addObjectsFromArray:response.pois];
+        for (int i = 0;i < self.arr_searchAddress.count ; i++) {
+            AMapPOI *poiTemp = [self.arr_searchAddress objectAtIndex:i];
+            if ([poiTemp.address isEqualToString:@""]) {
+                [self.arr_searchAddress removeObjectAtIndex:i];
+            }
+        }
         [self.tb_searchAddress reloadData];
     }
 }

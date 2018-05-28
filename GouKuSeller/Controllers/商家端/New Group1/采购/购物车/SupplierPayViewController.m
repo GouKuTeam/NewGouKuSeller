@@ -28,6 +28,7 @@
     [super viewDidLoad];
     self.title = @"充值";
     [WXApiManager sharedManager].delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weChatPaySuccess) name:NF_WECHAT_PAY_SUCCESS object:nil];
 }
 
 - (void)onCreate{
@@ -157,18 +158,7 @@
 - (void)btn_chongzhiAction{
     
     [self.tf_price resignFirstResponder];
-    //    if ([WXApi isWXAppInstalled]) {
-    //        [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
-    //
-    //        } success:^(id obj) {
-    //            NSDictionary *dic = (NSDictionary *)obj;
-    //            [self weiXinPayWithDic:dic];
-    //        } failed:^(NSInteger statusCode, id json) {
-    //            [MBProgressHUD showErrorMessage:(NSString *)json];
-    //        }];
-    //    }else{
-    //        [MBProgressHUD showInfoMessage:@"请安装微信"];
-    //    }
+    
     [SettlementHandler weixinchongzhiWithPrice:[NSString stringWithFormat:@"%.2f",[self.tf_price.text doubleValue]] prepare:^{
         
     } success:^(id obj) {
@@ -186,31 +176,21 @@
 
 - (void)weiXinPayWithDic:(NSDictionary *)wechatPayDic {
     PayReq *req = [[PayReq alloc] init];
-    req.openID = [wechatPayDic objectForKey:@"appId"];
-    req.partnerId = [wechatPayDic objectForKey:@"partnerId"];
-    req.prepayId = [wechatPayDic objectForKey:@"prepayId"];
-    req.package = [wechatPayDic objectForKey:@"packages"];
+    req.partnerId = [wechatPayDic objectForKey:@"partnerid"];
+    req.prepayId = [wechatPayDic objectForKey:@"prepayid"];
+    req.package = [wechatPayDic objectForKey:@"packagee"];
     req.nonceStr = [wechatPayDic objectForKey:@"nonceStr"];
-    req.timeStamp = [[wechatPayDic objectForKey:@"timesTamp"] intValue];
+    req.timeStamp = [[wechatPayDic objectForKey:@"timeStamp"] intValue];
     req.sign = [wechatPayDic objectForKey:@"sign"];
     [WXApi sendReq:req];
 }
 
-- (void)managerDidRecvPaymentResponse:(PayResp *)response {
-    switch (response.errCode) {
-        case WXSuccess:
-            self.payPrice = self.tf_price.text;
-            [self.v_chongzhiComplete.lab_zhaoling setText:self.payPrice];
-            [self.v_chongzhiComplete setHidden:NO];
-            break;
-        case WXErrCodeUserCancel:
-            [MBProgressHUD showInfoMessage:@"中途取消"];
-            break;
-        default:{
-            [MBProgressHUD showInfoMessage:@"支付失败"];
-        }
-            break;
-    }
+
+
+- (void)weChatPaySuccess{
+    self.payPrice = self.tf_price.text;
+    [self.v_chongzhiComplete.lab_zhaoling setText:self.payPrice];
+    [self.v_chongzhiComplete setHidden:NO];
 }
 
 - (void)btn_buchongAction{

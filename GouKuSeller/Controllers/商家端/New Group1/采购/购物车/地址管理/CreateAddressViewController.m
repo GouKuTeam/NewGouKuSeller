@@ -18,6 +18,7 @@
 @property (nonatomic ,strong)UITextField                   *tf_name;
 @property (nonatomic ,strong)UITextField                   *tf_phone;
 @property (nonatomic ,strong)GCPlaceholderTextView         *tf_address;
+@property (nonatomic ,strong)UITextField                   *tf_menpai;
 @property (nonatomic ,assign)int                            provinceId;
 @property (nonatomic ,assign)int                            cityId;
 @property (nonatomic ,assign)int                            districtId;
@@ -49,7 +50,7 @@
 
 - (void)onCreate{
     [self loadData];
-    UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 220)];
+    UIView *v_back = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, 260)];
     [self.view addSubview:v_back];
     [v_back setBackgroundColor:[UIColor whiteColor]];
     
@@ -109,6 +110,7 @@
     [self.tf_address addGestureRecognizer:tgp_address];
     [tgp_address addTarget:self action:@selector(tgp_addressAction)];
     
+    
     UIButton *btn_dingwei = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 31, 145, 16, 18)];
     [v_back addSubview:btn_dingwei];
     [btn_dingwei setImage:[UIImage imageNamed:@"locationgrey"] forState:UIControlStateNormal];
@@ -124,6 +126,24 @@
     UIImageView *imgline3 = [[UIImageView alloc]initWithFrame:CGRectMake(15, 132, SCREEN_WIDTH - 15, 0.5)];
     [v_back addSubview:imgline3];
     [imgline3 setBackgroundColor:[UIColor colorWithHexString:@"#CFCFCF"]];
+    
+    UIImageView *imgline4 = [[UIImageView alloc]initWithFrame:CGRectMake(15, 216, SCREEN_WIDTH - 15, 0.5)];
+    [v_back addSubview:imgline4];
+    [imgline4 setBackgroundColor:[UIColor colorWithHexString:@"#CFCFCF"]];
+    
+    
+    UILabel *labmenpai = [[UILabel alloc]initWithFrame:CGRectMake(15, imgline4.bottom, 75, 44)];
+    [v_back addSubview:labmenpai];
+    [labmenpai setText:@"门牌号"];
+    [labmenpai setTextColor:[UIColor blackColor]];
+    [labmenpai setFont:[UIFont systemFontOfSize:16]];
+    
+    self.tf_menpai = [[UITextField alloc]initWithFrame:CGRectMake(100, imgline4.bottom, SCREEN_WIDTH - 50, 44)];
+    [v_back addSubview:self.tf_menpai];
+    [self.tf_menpai setTextColor:[UIColor blackColor]];
+    [self.tf_menpai setPlaceholder:@"例：14号楼1单元-302"];
+    self.tf_menpai.font = [UIFont systemFontOfSize:16];
+    self.tf_menpai.delegate = self;
 }
 
 - (void)selectCity{
@@ -149,7 +169,7 @@
         vc.str_city = self.cityName;
         [self.navigationController pushViewController:vc animated:YES];
         vc.goBackAddress = ^(AMapPOI *poiEntity) {
-            [self.tf_address setText:poiEntity.address];
+            [self.tf_address setText:[NSString stringWithFormat:@"%@ %@",poiEntity.address,poiEntity.name]];
             self.lon = [NSString stringWithFormat:@"%f",poiEntity.location.longitude];
             self.lat = [NSString stringWithFormat:@"%f",poiEntity.location.latitude];
         };
@@ -160,7 +180,7 @@
     [self.selectCityView setHidden:YES];
     NSDictionary *dic = [NSDictionary dictionary];
     NSDictionary *dicTwo = [NSDictionary dictionary];
-    NSDictionary *dicThree = [NSDictionary dictionary];
+//    NSDictionary *dicThree = [NSDictionary dictionary];
     
     if (self.selectCityView.arr_data.count > 0) {
         dic = [self.selectCityView.arr_data objectAtIndex:self.selectCityView.selectedOneIndex];
@@ -168,17 +188,17 @@
     if ([[dic objectForKey:@"cityList"] count] > 0) {
         dicTwo = [[dic objectForKey:@"cityList"] objectAtIndex:self.selectCityView.selectedTwoIndex];
     }
-    if ([[dicTwo objectForKey:@"districtList"] count] > 0) {
-        dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
-    }
+//    if ([[dicTwo objectForKey:@"districtList"] count] > 0) {
+//        dicThree = [[dicTwo objectForKey:@"districtList"] objectAtIndex:self.selectCityView.selectedThreeIndex];
+//    }
     self.provinceId = [[dic objectForKey:@"id"] intValue];
     self.cityId = [[dicTwo objectForKey:@"id"] intValue];
-    self.districtId = [[dicThree objectForKey:@"id"] intValue];
+//    self.districtId = [[dicThree objectForKey:@"id"] intValue];
     self.provinceName = [dic objectForKey:@"provinceName"];
     self.cityName = [dicTwo objectForKey:@"cityName"];
-    self.districtName = [dicThree objectForKey:@"districtName"];
+//    self.districtName = [dicThree objectForKey:@"districtName"];
     
-    [self.lb_city setText:[NSString stringWithFormat:@"%@-%@-%@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"],[[dicThree objectForKey:@"districtName"] length] > 0 ? [dicThree objectForKey:@"districtName"] : @""]];
+    [self.lb_city setText:[NSString stringWithFormat:@"%@-%@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"]]];
 }
 
 - (void)rightBarAction{
@@ -190,7 +210,15 @@
         [MBProgressHUD showErrorMessage:@"请填写手机号"];
         return;
     }
-    [PurchaseHandler addNewAddressWithName:self.tf_name.text phone:self.tf_phone.text provinceId:self.provinceId cityId:self.cityId districtId:self.districtId provinceName:self.provinceName cityName:self.cityName districtName:self.districtName address:self.tf_address.text lat:self.lat lon:self.lon prepare:^{
+    if (self.cityName == nil) {
+        [MBProgressHUD showErrorMessage:@"请选择城市"];
+        return;
+    }
+    if ([self.tf_address.text isEqualToString:@""]) {
+        [MBProgressHUD showErrorMessage:@"请选择详细地址"];
+        return;
+    }
+    [PurchaseHandler addNewAddressWithName:self.tf_name.text phone:self.tf_phone.text provinceId:self.provinceId cityId:self.cityId districtId:self.districtId provinceName:self.provinceName cityName:self.cityName districtName:nil address:self.tf_address.text lat:self.lat lon:self.lon houseNum:self.tf_menpai.text prepare:^{
         
     } success:^(id obj) {
         [MBProgressHUD showSuccessMessage:@"添加成功"];
