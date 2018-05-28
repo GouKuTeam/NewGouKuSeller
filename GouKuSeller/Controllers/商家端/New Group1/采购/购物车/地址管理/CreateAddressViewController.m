@@ -99,6 +99,8 @@
     self.lb_city.userInteractionEnabled = YES;
     [self.lb_city addTappedWithTarget:self action:@selector(selectCity)];
     [v_back addSubview:self.lb_city];
+    [self.lb_city setTextColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+    [self.lb_city setText:@"地区信息"];
     
     self.tf_address = [[GCPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 136, SCREEN_WIDTH - 150, 75)];
     [v_back addSubview:self.tf_address];
@@ -199,6 +201,7 @@
 //    self.districtName = [dicThree objectForKey:@"districtName"];
     
     [self.lb_city setText:[NSString stringWithFormat:@"%@-%@",[dic objectForKey:@"provinceName"],[dicTwo objectForKey:@"cityName"]]];
+    [self.lb_city setTextColor:[UIColor blackColor]];
 }
 
 - (void)rightBarAction{

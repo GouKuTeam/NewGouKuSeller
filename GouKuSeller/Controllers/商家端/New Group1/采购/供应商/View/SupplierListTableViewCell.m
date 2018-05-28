@@ -50,8 +50,6 @@
             make.top.equalTo(self.lab_name.mas_bottom).offset(3);
             make.height.mas_equalTo(16);
         }];
-        [self.lab_category setBackgroundColor:[UIColor redColor]];
-        
         
         self.img_shu = [[UIImageView alloc]init];
         [self.contentView addSubview:self.img_shu];
@@ -152,6 +150,7 @@
         for (int i = 1; i < storeEntity.industry.count; i++) {
             category = [category stringByAppendingString:[NSString stringWithFormat:@" %@",[storeEntity.industry objectAtIndex:i]]];
         }
+        [self.img_shu setHidden:NO];
         self.lab_category.text = category;
     }else{
         self.lab_category.text = @"";

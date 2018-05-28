@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SupplierCommodityEndity.h"
 
-@interface SelectUnitView : UIView<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface SelectUnitView : UIView<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 
 @property(nonatomic,strong)UIButton               *btn_confirm;
 @property(nonatomic,strong)UILabel                *lb_unitTitle;

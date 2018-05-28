@@ -15,6 +15,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+        
         [self setBackgroundColor:[UIColor colorWithHexString:@"#000000" alpha:0.5]];
         
         self.v_back = [[UIView alloc]init];
@@ -60,6 +70,7 @@
         [self.tf_count setFont:[UIFont systemFontOfSize:FONT_SIZE_DESC]];
         self.tf_count.layer.borderWidth = 0.5;
         self.tf_count.textAlignment = NSTextAlignmentCenter;
+        self.tf_count.delegate = self;
         self.tf_count.keyboardType = UIKeyboardTypeNumberPad;
         self.tf_count.layer.borderColor = [[UIColor colorWithHexString:@"#DCDCDC"] CGColor];
         [self addSubview:self.tf_count];
@@ -231,6 +242,25 @@
 
 - (void)hideAction{
     [self setHidden:YES];
+}
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
+    [self.v_back mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom).offset(-height);
+    }];
+}
+
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification{
+    [self.v_back mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom);
+    }];
 }
 
 @end

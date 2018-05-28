@@ -53,11 +53,14 @@
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
-    self.selectedIndex = 9999;
-    self.search_selectedIndex = 9999;
+    self.selectedIndex = 0;
+    self.search_selectedIndex = 0;
+    self.tableIndex = 1;
 }
 
 - (void)onCreate{
+    
+    
     self.tf_search = [[UITextField alloc]initWithFrame:CGRectMake(10, SafeAreaTopHeight + 6, SCREEN_WIDTH - 20, 30)];
     UIView *v_left = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 34, 30)];
     UIImageView *iv_icon = [[UIImageView alloc]initWithFrame:CGRectMake(10, 6, 18, 18)];
@@ -167,6 +170,8 @@
     [self.tb_searchAddress setBackgroundColor:[UIColor whiteColor]];
     self.tb_searchAddress.tableFooterView = [UIView new];
     [self.tb_searchAddress setHidden:YES];
+    
+
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
@@ -178,10 +183,6 @@
     region.center = centerCoordinate;
     
     [self setGegeo:centerCoordinate];
-
-    self.selectedIndex = 9999;
-    self.search_selectedIndex = 9999;
-//    [self.tf_search resignFirstResponder];
     
 }
 
@@ -251,7 +252,7 @@
         self.tb_searchAddress.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_searchAddress.frame withDefaultImage:nil withNoteTitle:@"无结果" withNoteDetail:nil withButtonAction:nil];
         return;
     }else{
-        
+        self.tableIndex = 2;
         [self.arr_searchAddress removeAllObjects];
         [self.arr_searchAddress addObjectsFromArray:response.pois];
         for (int i = 0;i < self.arr_searchAddress.count ; i++) {
@@ -327,10 +328,10 @@
 
 
 - (void)rightBarAction{
-    if (self.tableIndex != 1 && self.self.tableIndex != 2 ) {
-        [MBProgressHUD showErrorMessage:@"请选择地址"];
-        return;
-    }
+//    if (self.tableIndex != 1 && self.self.tableIndex != 2 ) {
+//        [MBProgressHUD showErrorMessage:@"请选择地址"];
+//        return;
+//    }
     if (self.tableIndex == 1) {
         //地图界面上的
         AMapPOI *poiTemp = [self.arr_address objectAtIndex:self.selectedIndex];
