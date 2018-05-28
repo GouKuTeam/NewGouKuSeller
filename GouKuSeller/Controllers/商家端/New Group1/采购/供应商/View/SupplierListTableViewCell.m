@@ -53,10 +53,10 @@
         [self.lab_category setBackgroundColor:[UIColor redColor]];
         
         
-        UIImageView *img_shu = [[UIImageView alloc]init];
-        [self.contentView addSubview:img_shu];
-        [img_shu setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
-        [img_shu mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.img_shu = [[UIImageView alloc]init];
+        [self.contentView addSubview:self.img_shu];
+        [self.img_shu setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
+        [self.img_shu mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_category.mas_right).offset(3.5);
             make.top.mas_equalTo(40.2);
             make.width.mas_equalTo(0.5);
@@ -68,7 +68,7 @@
         [self.lab_categoryDetail setTextColor:[UIColor colorWithHexString:@"#616161"]];
         self.lab_categoryDetail.font = [UIFont systemFontOfSize:11];
         [self.lab_categoryDetail mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(img_shu.mas_right).offset(3.5);
+            make.left.equalTo(self.img_shu.mas_right).offset(3.5);
             make.top.equalTo(self.lab_category);
             make.right.equalTo(self.mas_right).offset(-10);
             make.height.mas_equalTo(16);
@@ -153,13 +153,19 @@
             category = [category stringByAppendingString:[NSString stringWithFormat:@" %@",[storeEntity.industry objectAtIndex:i]]];
         }
         self.lab_category.text = category;
+    }else{
+        self.lab_category.text = @"";
+        [self.img_shu setHidden:YES];
     }
+    
     if (storeEntity.agencyBrand.count > 0) {
         NSString *agencyBrand = [storeEntity.agencyBrand firstObject];
         for (int i = 1; i < storeEntity.agencyBrand.count; i++) {
             agencyBrand = [agencyBrand stringByAppendingString:[NSString stringWithFormat:@" %@",[storeEntity.agencyBrand objectAtIndex:i]]];
         }
         self.lab_categoryDetail.text = agencyBrand;
+    }else{
+        self.lab_categoryDetail.text = @"";
     }
     self.lab_shopNum.text = [NSString stringWithFormat:@"%ld家订货门店",storeEntity.shopNum];
     self.lab_orderNum.text = [NSString stringWithFormat:@"%ld笔订单",storeEntity.orderNum];

@@ -19,6 +19,7 @@
 @property (nonatomic ,strong)UILabel            *lab_orderNum;
 @property (nonatomic ,strong)UILabel            *lab_startingPrice;
 @property (nonatomic ,strong)UILabel            *lab_guanzhu;
+@property (nonatomic ,strong)UIImageView        *img_shu;
 
 - (void)contentCellWithStoreEntity:(StoreEntity *)storeEntity;
 
