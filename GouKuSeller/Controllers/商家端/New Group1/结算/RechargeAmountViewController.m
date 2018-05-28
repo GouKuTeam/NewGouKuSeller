@@ -10,11 +10,13 @@
 #import "SettlementHandler.h"
 #import <WXApi.h>
 #import "WXApiManager.h"
+#import "PayInCashCompleteView.h"
 
 
 @interface RechargeAmountViewController ()<UITextFieldDelegate,WXApiManagerDelegate>
 @property (nonatomic ,strong)UITextField      *tf_price;
 @property (nonatomic ,strong)UIButton         *btn_chongzhi;
+@property (nonatomic ,strong)PayInCashCompleteView      *v_cashComplete;
 
 @property (nonatomic ,assign)int          int_userName;     // =1 有内容   =0没内容
 
@@ -26,6 +28,8 @@
     [super viewDidLoad];
     self.title = @"充值";
     [WXApiManager sharedManager].delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weChatPaySuccess) name:NF_WECHAT_PAY_SUCCESS object:nil];
 }
 
 - (void)onCreate{
@@ -82,6 +86,16 @@
     self.btn_chongzhi.layer.cornerRadius = 3.0f;
     self.btn_chongzhi.enabled = NO;
     [self.btn_chongzhi addTarget:self action:@selector(btn_chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.v_cashComplete = [[PayInCashCompleteView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.v_cashComplete.btn_continueShou addTarget:self action:@selector(continueAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_cashComplete.btn_continueShou setTitle:@"充值成功" forState:UIControlStateNormal];
+    [self.v_cashComplete.lab_shifu setText:@"充值成功"];
+    [self.v_cashComplete.lab_shifu setFont:[UIFont systemFontOfSize:20]];
+    [self.v_cashComplete.lab_zhaoling setFont:[UIFont boldSystemFontOfSize:36]];
+    [self.v_cashComplete.lab_zhaoling setText:[NSString stringWithFormat:@"¥%.2f",[self.tf_price.text doubleValue]]];
+    [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_cashComplete];
+    [self.v_cashComplete setHidden:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -152,29 +166,26 @@
 
 - (void)weiXinPayWithDic:(NSDictionary *)wechatPayDic {
     PayReq *req = [[PayReq alloc] init];
-    req.openID = [wechatPayDic objectForKey:@"appId"];
-    req.partnerId = [wechatPayDic objectForKey:@"partnerId"];
-    req.prepayId = [wechatPayDic objectForKey:@"prepayId"];
-    req.package = [wechatPayDic objectForKey:@"packages"];
+//    req.openID = [wechatPayDic objectForKey:@"appid"];
+    req.partnerId = [wechatPayDic objectForKey:@"partnerid"];
+    req.prepayId = [wechatPayDic objectForKey:@"prepayid"];
+    req.package = [wechatPayDic objectForKey:@"packagee"];
     req.nonceStr = [wechatPayDic objectForKey:@"nonceStr"];
-    req.timeStamp = [[wechatPayDic objectForKey:@"timesTamp"] intValue];
+    req.timeStamp = [[wechatPayDic objectForKey:@"timeStamp"] intValue];
     req.sign = [wechatPayDic objectForKey:@"sign"];
     [WXApi sendReq:req];
+    
 }
 
-- (void)managerDidRecvPaymentResponse:(PayResp *)response {
-    switch (response.errCode) {
-        case WXSuccess:
-//            [self checkWechatPayResult];
-            break;
-        case WXErrCodeUserCancel:
-            [MBProgressHUD showInfoMessage:@"中途取消"];
-            break;
-        default:{
-            [MBProgressHUD showInfoMessage:@"支付失败"];
-        }
-            break;
-    }
+- (void)weChatPaySuccess{
+    [self.v_cashComplete.lab_zhaoling setText:[NSString stringWithFormat:@"¥%.2f",[self.tf_price.text doubleValue]]];
+    [self.v_cashComplete setHidden:NO];
+}
+
+
+- (void)continueAction{
+    [self.v_cashComplete setHidden:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

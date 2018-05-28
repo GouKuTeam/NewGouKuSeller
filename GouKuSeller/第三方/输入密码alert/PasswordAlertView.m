@@ -86,6 +86,7 @@
     self.tf_password.textAlignment = NSTextAlignmentCenter;
     [self.alertView addSubview:self.tf_password];
     [self.tf_password becomeFirstResponder];
+    self.tf_password.secureTextEntry = YES;
     
     UIView *v_line2 = [[UIView alloc]initWithFrame:CGRectMake(0, self.tf_password.bottom + 18, self.alertView.width, 0.5)];
     [v_line2 setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];

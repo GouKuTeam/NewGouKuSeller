@@ -82,6 +82,7 @@
     if (!cell){
         cell = [[ActiveTimeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.btn_beginTime.tag = indexPath.row ;
     [cell.btn_beginTime addTarget:self action:@selector(btn_beginTimeAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.btn_endTime.tag = indexPath.row;

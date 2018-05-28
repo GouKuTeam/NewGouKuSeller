@@ -235,6 +235,9 @@
 #define API_GET_DeleteAddress @"/shop/delete/address"
 //获取省市区
 #define API_GET_SSQ @"/common/province/city/district/list"
+//编辑地址
+#define API_POST_UpdateAddress @"/shop/update/address"
+
 /*
  客户管理API
  */

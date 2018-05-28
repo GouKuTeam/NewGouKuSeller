@@ -79,7 +79,7 @@
         }];
         [self.tf_price setTextColor:[UIColor colorWithHexString:@"#000000"]];
         [self.tf_price setFont:[UIFont systemFontOfSize:48]];
-        self.tf_price.keyboardType = UIKeyboardTypeNumberPad;
+        self.tf_price.keyboardType = UIKeyboardTypeDecimalPad;
         
         self.img_heng = [[UIImageView alloc]init];
         [self addSubview:self.img_heng];

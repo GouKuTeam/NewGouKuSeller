@@ -86,7 +86,7 @@
         [self.arr_order addObjectsFromArray:(NSArray *)obj];
         [self.tb_purchaseOrder reloadData];
         if (self.arr_order.count == 0) {
-            self.tb_purchaseOrder.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_purchaseOrder.frame withDefaultImage:nil withNoteTitle:@"暂无采购订单数据" withNoteDetail:nil withButtonAction:nil];
+            self.tb_purchaseOrder.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_purchaseOrder.frame withDefaultImage:nil withNoteTitle:@"没有找到对应订单" withNoteDetail:nil withButtonAction:nil];
         }
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];

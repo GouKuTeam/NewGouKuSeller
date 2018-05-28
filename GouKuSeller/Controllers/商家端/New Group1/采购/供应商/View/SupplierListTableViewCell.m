@@ -50,6 +50,8 @@
             make.top.equalTo(self.lab_name.mas_bottom).offset(3);
             make.height.mas_equalTo(16);
         }];
+        [self.lab_category setBackgroundColor:[UIColor redColor]];
+        
         
         UIImageView *img_shu = [[UIImageView alloc]init];
         [self.contentView addSubview:img_shu];
@@ -68,6 +70,7 @@
         [self.lab_categoryDetail mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(img_shu.mas_right).offset(3.5);
             make.top.equalTo(self.lab_category);
+            make.right.equalTo(self.mas_right).offset(-10);
             make.height.mas_equalTo(16);
         }];
         

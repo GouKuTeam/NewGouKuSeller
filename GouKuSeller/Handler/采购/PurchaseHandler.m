@@ -202,9 +202,8 @@
                                           }];
     
 }
-
-//添加新的地址
-+ (void)addNewAddressWithName:(NSString *)name phone:(NSString *)phone provinceId:(int)provinceId cityId:(int)cityId districtId:(int)districtId provinceName:(NSString *)provinceName cityName:(NSString *)cityName districtName:(NSString *)districtName address:(NSString *)address lat:(NSString *)lat lon:(NSString *)lon prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+//添加新地址
++ (void)addNewAddressWithName:(NSString *)name phone:(NSString *)phone provinceId:(int)provinceId cityId:(int)cityId districtId:(int)districtId provinceName:(NSString *)provinceName cityName:(NSString *)cityName districtName:(NSString *)districtName address:(NSString *)address lat:(NSString *)lat lon:(NSString *)lon houseNum:(NSString *)houseNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_AddNewAddress];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (name) {
@@ -240,6 +239,9 @@
     if (lon) {
         [dic setObject:lon forKey:@"lon"];
     }
+    if (houseNum) {
+        [dic setObject:houseNum forKey:@"houseNum"];
+    }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic
@@ -254,6 +256,67 @@
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
+}
+
+//编辑地址
++ (void)updateAddressWithAddressId:(NSNumber *)addressId name:(NSString *)name phone:(NSString *)phone provinceId:(int)provinceId cityId:(int)cityId districtId:(int)districtId provinceName:(NSString *)provinceName cityName:(NSString *)cityName districtName:(NSString *)districtName address:(NSString *)address lat:(NSString *)lat lon:(NSString *)lon houseNum:(NSString *)houseNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_UpdateAddress];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (addressId) {
+        [dic setObject:addressId forKey:@"id"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    if (phone) {
+        [dic setObject:phone forKey:@"phone"];
+    }
+    if (provinceId) {
+        [dic setObject:[NSNumber numberWithInt:provinceId] forKey:@"provinceId"];
+    }
+    if (cityId) {
+        [dic setObject:[NSNumber numberWithInt:cityId] forKey:@"cityId"];
+    }
+    if (districtId) {
+        [dic setObject:[NSNumber numberWithInt:districtId] forKey:@"districtId"];
+    }
+    if (provinceName) {
+        [dic setObject:provinceName forKey:@"provinceName"];
+    }
+    if (cityName) {
+        [dic setObject:cityName forKey:@"cityName"];
+    }
+    if (districtName) {
+        [dic setObject:districtName forKey:@"districtName"];
+    }
+    if (address) {
+        [dic setObject:address forKey:@"address"];
+    }
+    if (lat) {
+        [dic setObject:lat forKey:@"lat"];
+    }
+    if (lon) {
+        [dic setObject:lon forKey:@"lon"];
+    }
+    if (houseNum) {
+        [dic setObject:houseNum forKey:@"houseNum"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+    
 }
 
 //设置默认地址

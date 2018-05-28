@@ -1403,10 +1403,10 @@
 				1842CCE1209B080A00A1C7C8 /* ConfirmOrderViewController.m */,
 				740C46BD20AC6E4500626A8B /* PayOrderViewController.h */,
 				740C46BE20AC6E4500626A8B /* PayOrderViewController.m */,
-				747EDC4420B5117C00FCAFDE /* SupplierPayCompleteViewController.h */,
-				747EDC4520B5117D00FCAFDE /* SupplierPayCompleteViewController.m */,
 				740C46B420AC33ED00626A8B /* SupplierPayViewController.h */,
 				740C46B520AC33ED00626A8B /* SupplierPayViewController.m */,
+				747EDC4420B5117C00FCAFDE /* SupplierPayCompleteViewController.h */,
+				747EDC4520B5117D00FCAFDE /* SupplierPayCompleteViewController.m */,
 				1842CCDC209AD97400A1C7C8 /* View */,
 				74046B07209C03C6004E64A9 /* 地址管理 */,
 			);

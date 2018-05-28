@@ -8,6 +8,7 @@
 
 #import "SupplierInformationViewController.h"
 #import "PurchaseHandler.h"
+#import "NSString+Size.h"
 
 @interface SupplierInformationViewController ()
 
@@ -152,10 +153,11 @@
     [lab_pinpai setTextColor:[UIColor blackColor]];
     [lab_pinpai setFont:[UIFont boldSystemFontOfSize:16]];
     
-    self.lab_pinpaiDetail = [[UILabel alloc]initWithFrame:CGRectMake(15, 416, SCREEN_WIDTH - 30, 24)];
+    self.lab_pinpaiDetail = [[UILabel alloc]init];
     [self.view addSubview:self.lab_pinpaiDetail];
     [self.lab_pinpaiDetail setTextColor:[UIColor colorWithHexString:@"#919191"]];
     [self.lab_pinpaiDetail setFont:[UIFont boldSystemFontOfSize:16]];
+    self.lab_pinpaiDetail.numberOfLines = 0;
     if (self.storeEntity.agencyBrand.count > 0) {
         NSString *agencyBrand = [self.storeEntity.agencyBrand firstObject];
         for (int i = 1; i < self.storeEntity.agencyBrand.count; i++) {
@@ -163,6 +165,8 @@
         }
         self.lab_pinpaiDetail.text = agencyBrand;
     }
+    CGFloat height = [self.lab_pinpaiDetail.text fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont boldSystemFontOfSize:16]];
+    [self.lab_pinpaiDetail setFrame:CGRectMake(15, 416, SCREEN_WIDTH - 30, height)];
     
     self.btn_tell = [[UIButton alloc]initWithFrame:CGRectMake(15, 453 + self.lab_pinpaiDetail.frame.size.height, SCREEN_WIDTH - 30, 42)];
     [self.view addSubview:self.btn_tell];

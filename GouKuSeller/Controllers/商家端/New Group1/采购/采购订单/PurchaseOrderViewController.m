@@ -276,19 +276,30 @@
     }
     if (entity.status == 3) {
         //确认收货
-        [ShoppingHandler confirmShopOrderDetailWithOrderId:entity.orderId prepare:^{
-            
-        } success:^(id obj) {
-            if (self.btnIndex == 999) {
-                entity.status = 8;
-                [self.tb_purchaseOrder reloadData];
-            }else{
-                [self.arr_data removeObjectAtIndex:sender.tag];
-                [self.tb_purchaseOrder reloadData];
-            }
-        } failed:^(NSInteger statusCode, id json) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否确认收货" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
         }];
+        UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [ShoppingHandler confirmShopOrderDetailWithOrderId:entity.orderId prepare:^{
+                
+            } success:^(id obj) {
+                if (self.btnIndex == 999) {
+                    entity.status = 8;
+                    [self.tb_purchaseOrder reloadData];
+                }else{
+                    [self.arr_data removeObjectAtIndex:sender.tag];
+                    [self.tb_purchaseOrder reloadData];
+                }
+            } failed:^(NSInteger statusCode, id json) {
+                
+            }];
+        }];
+        [alert addAction:forgetPassword];
+        [alert addAction:again];
+        [self presentViewController:alert animated:YES completion:nil];
+        
     }
 }
 

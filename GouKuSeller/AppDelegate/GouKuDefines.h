@@ -54,4 +54,8 @@
 #define DATE_FORMATTER_DEFAULT      @"yyyy-MM-dd HH:mm"
 #define DATE_FORMATTER_ONLYDATE     @"yyyy年MM月dd日"
 
+//wx
+#define NF_WECHAT_PAY_SUCCESS       @"NF_WECHAT_PAY_SUCCESS"   //微信支付成功
+#define NF_WECHAT_PAY_USER_CANCEL   @"NF_WECHAT_PAY_USER_CANCEL"
+
 #endif

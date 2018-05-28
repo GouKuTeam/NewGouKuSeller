@@ -24,6 +24,8 @@
 @property (nonatomic ,strong)NSString          *districtName;
 @property (nonatomic ,assign)double             lat;
 @property (nonatomic ,assign)double             lon;
+@property (nonatomic ,strong)NSString          *houseNum;     //门牌号
+
 
 + (NSArray *)parseAddressEntityListWithJson:(id)json;
 + (AddressEntity *)parseAddressEntityWithJson:(id)json

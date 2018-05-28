@@ -86,7 +86,7 @@
         make.top.equalTo(self.lab_commodityName.mas_bottom).offset(10);
         make.height.mas_equalTo(27);
     }];
-    [self.lab_price setText:[NSString stringWithFormat:@"%.2f",self.supplierCommodityEndity.price]];
+    [self.lab_price setText:[NSString stringWithFormat:@"￥%.2f",self.supplierCommodityEndity.price]];
     
     self.lab_stock = [[UILabel alloc]init];
     [self.v1 addSubview:self.lab_stock];
@@ -370,16 +370,22 @@
 }
 
 - (void)confirmAction{
-    NSDictionary *dic = [self.selectUnitView.supplierCommodityEndity.saleUnits objectAtIndex:self.selectUnitView.selectIndex];
-    [PurchaseHandler addCommodityToShoppingCarWithSkuId:self.selectUnitView.supplierCommodityEndity.skuId skuUnitId:[dic objectForKey:@"id"] count:[NSNumber numberWithInt:[self.selectUnitView.tf_count.text intValue]] prepare:^{
-        [MBProgressHUD showActivityMessageInView:nil];
-    } success:^(id obj) {
-        [MBProgressHUD hideHUD];
-        [self.selectUnitView setHidden:YES];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showErrorMessage:(NSString *)json];
-    }];
+    if ([self.selectUnitView.tf_count.text intValue] > [self.supplierCommodityEndity.stock intValue]) {
+        [MBProgressHUD showErrorMessage:@"库存不足"];
+        self.selectUnitView.tf_count.text = self.supplierCommodityEndity.stock;
+    }else{
+        NSDictionary *dic = [self.selectUnitView.supplierCommodityEndity.saleUnits objectAtIndex:self.selectUnitView.selectIndex];
+        [PurchaseHandler addCommodityToShoppingCarWithSkuId:self.selectUnitView.supplierCommodityEndity.skuId skuUnitId:[dic objectForKey:@"id"] count:[NSNumber numberWithInt:[self.selectUnitView.tf_count.text intValue]] prepare:^{
+            [MBProgressHUD showActivityMessageInView:nil];
+        } success:^(id obj) {
+            [MBProgressHUD hideHUD];
+            [self.selectUnitView setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }
+    
 }
 
 
@@ -390,9 +396,9 @@
         self.storeEntity = (StoreEntity *)obj;
         [self.img_supplierPic sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
         [self.lab_supplierName setText:self.storeEntity.name];
-        [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.shopNum]];
-        [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld",self.storeEntity.orderNum]];
-        [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f",self.storeEntity.takeOffPrice]];
+        [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld家",self.storeEntity.shopNum]];
+        [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld笔",self.storeEntity.orderNum]];
+        [self.lab_startingPrice setText:[NSString stringWithFormat:@"%.2f元",self.storeEntity.takeOffPrice]];
     } failed:^(NSInteger statusCode, id json) {
         
     }];

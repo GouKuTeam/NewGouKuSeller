@@ -66,6 +66,7 @@
     [self.view addSubview:self.tef_passWord];
     self.tef_passWord.placeholder = @"请输入密码";
     self.tef_passWord.delegate = self;
+    self.tef_passWord.secureTextEntry = YES;
     
     UIImageView * img_heng2 = [[UIImageView alloc]init];
     [img_heng2 setFrame:CGRectMake(15, 127 + SafeAreaTopHeight, SCREEN_WIDTH - 15, 1)];

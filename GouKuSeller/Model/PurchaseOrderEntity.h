@@ -24,7 +24,7 @@
 @property (nonatomic ,assign)double            payActual;         //订单修改后的价格(实付总价)
 @property (nonatomic ,strong)NSNumber         *count;             //订单商品数量
 @property (nonatomic ,assign)double            createTime;        //下单时间
-@property (nonatomic ,assign)NSNumber         *payTime;           //付款时间
+@property (nonatomic ,assign)double            payTime;           //付款时间
 @property (nonatomic ,assign)long             countDown;          //倒计时(秒)
 @property (nonatomic ,strong)NSArray          *items;             //订单商品数组
 @property (nonatomic ,strong)NSArray          *flow;              //订单状态描述数组

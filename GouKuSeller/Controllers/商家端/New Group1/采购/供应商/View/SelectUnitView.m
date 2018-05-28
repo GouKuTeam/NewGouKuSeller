@@ -71,6 +71,7 @@
         self.tf_count.layer.borderWidth = 0.5;
         self.tf_count.textAlignment = NSTextAlignmentCenter;
         self.tf_count.delegate = self;
+        self.tf_count.keyboardType = UIKeyboardTypeNumberPad;
         self.tf_count.layer.borderColor = [[UIColor colorWithHexString:@"#DCDCDC"] CGColor];
         [self addSubview:self.tf_count];
         [self.tf_count mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -224,11 +225,19 @@
 - (void)lessAction{
     if ([self.tf_count.text intValue] > 1) {
         self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] - 1];
+    }else{
+        [MBProgressHUD showErrorMessage:@"不能继续减少数量"];
     }
 }
 
 - (void)plusAction{
-    self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] + 1];
+    if ([self.tf_count.text intValue] >= [self.supplierCommodityEndity.stock intValue]) {
+        [MBProgressHUD showErrorMessage:@"库存不足"];
+        self.tf_count.text = [NSString stringWithFormat:@"%d",[self.supplierCommodityEndity.stock intValue]];
+    }else{
+        
+        self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] + 1];
+    }
 }
 
 - (void)hideAction{

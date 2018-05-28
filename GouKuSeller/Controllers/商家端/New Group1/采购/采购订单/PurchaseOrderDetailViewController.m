@@ -159,10 +159,18 @@
     if (self.orderEntity.status == 0 || self.orderEntity.status == 3) {
         [self.v_bottom setHidden:NO];
         if (self.orderEntity.status == 0) {
+            
             [self.btn_confirm setHidden:YES];
             [self.btn_cancel setHidden:NO];
             [self.btn_pay setHidden:NO];
             [self.btn_pay setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",self.orderEntity.countDown/3600,(self.orderEntity.countDown/60)%60,self.orderEntity.countDown%60]    forState:UIControlStateNormal];
+            if (self.orderEntity.accountPrice < self.orderEntity.payTotal) {
+                [self.btn_pay setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+                self.btn_pay.enabled = NO;
+            }else{
+                [self.btn_pay setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
+                self.btn_pay.enabled = YES;
+            }
         }else if (self.orderEntity.status == 3){
             [self.btn_confirm setHidden:NO];
             [self.btn_cancel setHidden:YES];
@@ -366,17 +374,27 @@
 }
 
 - (void)btn_confirmAction{
-    [ShoppingHandler confirmShopOrderDetailWithOrderId:self.orderEntity.orderId prepare:^{
-        
-    } success:^(id obj) {
-        self.orderEntity.status = 8;
-        [self loadBottomData];
-        if (self.reloadStatus) {
-            self.reloadStatus(self.orderEntity);
-        }
-    } failed:^(NSInteger statusCode, id json) {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否确认收货" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [ShoppingHandler confirmShopOrderDetailWithOrderId:self.orderEntity.orderId prepare:^{
+            
+        } success:^(id obj) {
+            self.orderEntity.status = 8;
+            [self loadBottomData];
+            if (self.reloadStatus) {
+                self.reloadStatus(self.orderEntity);
+            }
+        } failed:^(NSInteger statusCode, id json) {
+            
+        }];
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma PasswordDelegate

@@ -63,16 +63,6 @@
 
 - (void)contentCellWithAccountCashDetailEntity:(AccountCashDetailEntity *)accountCashDetailEntity{
    
-    if (accountCashDetailEntity.accountType == 1) {
-        [self.lab_title setText:@"销售结算"];
-        [self.lab_price mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(150);
-            make.top.mas_equalTo(10);
-            make.right.equalTo(self.mas_right).offset(-13);
-            make.height.mas_equalTo(25);
-        }];
-        [self.lab_price setText:[NSString stringWithFormat:@"+%.2f",accountCashDetailEntity.accountNum]];
-    }
     if (accountCashDetailEntity.accountType == 2) {
         [self.lab_title setText:@"提现"];
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -82,10 +72,17 @@
             make.right.equalTo(self.mas_right).offset(-40);
             make.height.mas_equalTo(25);
         }];
-        [self.lab_price setText:[NSString stringWithFormat:@"-%.2f",accountCashDetailEntity.accountNum]];
+    }else{
+        [self.lab_price mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(150);
+            make.top.mas_equalTo(10);
+            make.right.equalTo(self.mas_right).offset(-13);
+            make.height.mas_equalTo(25);
+        }];
     }
+    [self.lab_title setText:accountCashDetailEntity.accountName];
     [self.lab_time setText:accountCashDetailEntity.date];
-    
+    [self.lab_price setText:[NSString stringWithFormat:@"%.2f",accountCashDetailEntity.accountNum]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
