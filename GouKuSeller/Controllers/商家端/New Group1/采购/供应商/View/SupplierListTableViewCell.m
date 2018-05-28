@@ -50,6 +50,8 @@
             make.top.equalTo(self.lab_name.mas_bottom).offset(3);
             make.height.mas_equalTo(16);
         }];
+        [self.lab_category setBackgroundColor:[UIColor redColor]];
+        
         
         UIImageView *img_shu = [[UIImageView alloc]init];
         [self.contentView addSubview:img_shu];
