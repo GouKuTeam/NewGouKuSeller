@@ -61,22 +61,15 @@
         make.top.mas_equalTo(SafeAreaTopHeight);
         make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight);
     }];
-//    [self.v_commodityView.btn_addCatagory addTarget:self action:@selector(btn_addCatagoryAction) forControlEvents:UIControlEventTouchUpInside];
+
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
     
-//    UITapGestureRecognizer* imgTitle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
-//    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitle];
-//    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+
     self.v_commodityView.v_price.tf_detail.delegate = self;
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
     
-    //供应商身份点击价格
-    
-    UITapGestureRecognizer* tgr_editPrice = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tgr_editPriceAction)];
-    self.v_commodityView.v_price.tf_detail.userInteractionEnabled = YES;
-    [self.v_commodityView.v_price.tf_detail addGestureRecognizer:tgr_editPrice];
     
 
     [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];

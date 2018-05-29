@@ -49,7 +49,7 @@
         [self.contentView addSubview:img3];
         [img3 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         
-        self.tf_name = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 113, 0, 100, 45)];
+        self.tf_name = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 213, 0, 200, 45)];
         [self.contentView addSubview:self.tf_name];
         [self.tf_name setPlaceholder:@"输入名称"];
         [self.tf_name setFont:[UIFont systemFontOfSize:16]];

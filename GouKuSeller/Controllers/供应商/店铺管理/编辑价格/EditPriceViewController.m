@@ -109,6 +109,7 @@
     }
     cell.tf_name.text = [dic objectForKey:@"unitName"];
     cell.tf_name.delegate = self;
+    [cell.tf_name addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     cell.tf_price.delegate = self;
     cell.tf_dengyu.delegate = self;
     return cell;
@@ -189,14 +190,26 @@
     }
 }
 
-- (void)textFiledDidChange:(UITextField *)textField
+- (void)textFieldDidChange:(UITextField *)textField
 {
     
-    int length = [self convertToInt:textField.text];
-    NSLog(@"%d", length);
-    //如果输入框中的文字大于10，就截取前10个作为输入框的文字
-    if (length > 10) {
-        textField.text = [textField.text substringToIndex:5];
+    NSInteger kMaxLength = 10;
+    NSString *toBeString = textField.text;
+    NSString *lang = [[UIApplication sharedApplication]textInputMode].primaryLanguage;
+    if ([lang isEqualToString:@"zh-Hans"]) { //中文输入
+        UITextRange *selectedRange = [textField markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        if (!position) {// 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if (toBeString.length > kMaxLength) {
+                textField.text = [toBeString substringToIndex:kMaxLength];
+            }
+        }else{//有高亮选择的字符串，则暂不对文字进行统计和限制
+        }
+    }else{//中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        if (toBeString.length > kMaxLength) {
+            textField.text = [toBeString substringToIndex:kMaxLength];
+        }
     }
 }
 
