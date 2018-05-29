@@ -39,6 +39,7 @@
 }
 
 - (void)onCreate{
+    self.defaultUnit = YES;
     self.tb_header = [[EditPriceHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 98)];
     self.tb_header.clipsToBounds = YES;
     [self.tb_header.v_switch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
@@ -50,7 +51,11 @@
         self.tb_header.v_switch.on = YES;
         [self.tb_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 142)];
         self.tb_editPrice.tableHeaderView = self.tb_header;
-        [self.tb_header.tf_price setText:[NSString stringWithFormat:@"%.2f",self.defaultPrice]];
+        if (self.defaultPrice == 0) {
+           [self.tb_header.tf_price setText:@""];
+        }else{
+            [self.tb_header.tf_price setText:[NSString stringWithFormat:@"%.2f",self.defaultPrice]];
+        }
     }
     
     self.tb_editPrice = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
@@ -174,10 +179,37 @@
         [dic setValue:self.arr_data forKey:@"saleUnits"];
     }
     NSLog(@"dic == %@",dic);
+    if ([[dic objectForKey:@"price"] doubleValue] == 0 && self.arr_data.count == 0) {
+        [MBProgressHUD showInfoMessage:@"请添加价格"];
+        return;
+    }
     [self.navigationController popViewControllerAnimated:YES];
     if (self.goBackAddSupplierCommodity) {
         self.goBackAddSupplierCommodity(dic);
     }
+}
+
+- (void)textFiledDidChange:(UITextField *)textField
+{
+    
+    int length = [self convertToInt:textField.text];
+    NSLog(@"%d", length);
+    //如果输入框中的文字大于10，就截取前10个作为输入框的文字
+    if (length > 10) {
+        textField.text = [textField.text substringToIndex:5];
+    }
+}
+
+- (int)convertToInt:(NSString *)strtemp//判断中英混合的的字符串长度
+{
+    int strlength = 0;
+    for (int i=0; i< [strtemp length]; i++) {
+        int a = [strtemp characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff) { //判断是否为中文
+            strlength += 2;
+        }
+    }
+    return strlength;
 }
 
 - (void)didReceiveMemoryWarning {

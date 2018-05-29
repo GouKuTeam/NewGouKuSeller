@@ -42,7 +42,7 @@
         [self addSubview:self.v_switch];
         [self.v_switch setOnTintColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
         self.v_switch.layer.anchorPoint = CGPointMake(0, 0.3);
-        [self.v_switch setOn:NO animated:true];
+        [self.v_switch setOn:YES animated:true];
         
         UILabel *lab4 = [[UILabel alloc]initWithFrame:CGRectMake(15, lab3.bottom, 70, 44)];
         [self addSubview:lab4];

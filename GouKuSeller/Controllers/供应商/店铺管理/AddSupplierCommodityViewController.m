@@ -64,6 +64,7 @@
     self.v_commodityView.v_price.tf_detail.delegate = self;
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
+    [self.v_commodityView.v_price.tf_detail setPlaceholder:@"设置价格"];
     
     [self.v_commodityView.btn_priceEdit setHidden:NO];
     [self.v_commodityView.btn_priceEdit addTarget:self action:@selector(tgr_editPriceAction) forControlEvents:UIControlEventTouchUpInside];
@@ -158,10 +159,10 @@
         for (int i = 0; i < self.scEntity.saleUnits.count; i++) {
             NSDictionary *dic = [self.scEntity.saleUnits objectAtIndex:i];
             if (i == 0) {
-                str_price = [NSString stringWithFormat:@"%@¥%@",[dic objectForKey:@"unitName"],[dic objectForKey:@"price"]];
+                str_price = [NSString stringWithFormat:@"%@¥%.2f",[dic objectForKey:@"unitName"],[[dic objectForKey:@"price"] doubleValue]];
                 
             }else{
-                str_price = [str_price stringByAppendingString:[NSString stringWithFormat:@"; %@¥%@",[dic objectForKey:@"unitName"],[dic objectForKey:@"price"]]];
+                str_price = [str_price stringByAppendingString:[NSString stringWithFormat:@"; %@¥%.2f",[dic objectForKey:@"unitName"],[[dic objectForKey:@"price"] doubleValue]]];
             }
         }
         if (self.scEntity.defaultUsing == YES) {

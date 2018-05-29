@@ -70,7 +70,6 @@
 }
 
 - (void)setUpBottomUI{
-    self.accountPrice = 49.9;
     self.v_yue = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SafeAreaBottomHeight - 50 - 54, SCREEN_WIDTH, 46)];
     [self.v_yue setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.v_yue];

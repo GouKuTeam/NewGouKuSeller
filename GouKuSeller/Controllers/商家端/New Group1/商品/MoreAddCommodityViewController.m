@@ -92,18 +92,17 @@
                     NSDictionary *dic = (NSDictionary *)obj;
                     CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
                     if ([[dic objectForKey:@"errCode"] intValue] == 0 ) {
-                        self.tfsousuo.text = @"";
                         [self.arr_commodity removeAllObjects];
                         [self.arr_commodity addObject:entity];
                         [self.tb_commodity reloadData];
                     }else{
                         [MBProgressHUD hideHUD];
                         [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
-                        self.tfsousuo.text = @"";
                     }
-                    
+                    self.tfsousuo.text = @"";
                 } failed:^(NSInteger statusCode,
                            id json) {
+                    self.tfsousuo.text = @"";
                     [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
                 }];
             }else{
