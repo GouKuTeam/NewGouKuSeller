@@ -37,9 +37,9 @@
         [self.lab_stock setFont:[UIFont systemFontOfSize:14]];
         [self.lab_stock setTextAlignment:NSTextAlignmentRight];
         [self.lab_stock mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 120);
+            make.left.mas_equalTo(SCREEN_WIDTH - 140);
             make.top.mas_equalTo(11.7);
-            make.right.equalTo(self.mas_right).offset(-70);
+            make.right.equalTo(self.mas_right).offset(-80);
         }];
         
         self.lab_inventoryNum = [[UILabel alloc]init];
@@ -48,9 +48,9 @@
         [self.lab_inventoryNum setFont:[UIFont systemFontOfSize:14]];
         [self.lab_inventoryNum setTextAlignment:NSTextAlignmentRight];
         [self.lab_inventoryNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(SCREEN_WIDTH - 60);
+            make.left.mas_equalTo(SCREEN_WIDTH - 70);
             make.top.mas_equalTo(11.7);
-            make.width.mas_equalTo(50);
+            make.width.mas_equalTo(60);
         }];
         
         self.lab_chaNum = [[UILabel alloc]init];
@@ -59,8 +59,8 @@
         [self.lab_chaNum setTextAlignment:NSTextAlignmentRight];
         [self.lab_chaNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.lab_name.mas_bottom);
-            make.left.mas_equalTo(SCREEN_WIDTH - 60);
-            make.width.mas_equalTo(50);
+            make.left.mas_equalTo(SCREEN_WIDTH - 70);
+            make.width.mas_equalTo(60);
         }];
         
         [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {

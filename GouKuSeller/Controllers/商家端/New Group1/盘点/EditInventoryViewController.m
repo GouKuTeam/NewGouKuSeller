@@ -150,6 +150,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     InventoryEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
+    
     self.alert = [[ChangeInventoryNumAlertView alloc]initWithName:entity.name commodirtyCount:entity.inventoryNum];
     [self.alert show];
     self.alert.btn_delete.tag = indexPath.row;

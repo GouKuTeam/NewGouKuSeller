@@ -20,7 +20,7 @@
         [self.lab_name setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self.lab_name setFont:[UIFont systemFontOfSize:13]];
         
-        self.lab_stock = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 13, 30, 18)];
+        self.lab_stock = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 110, 13, 30, 18)];
         [self addSubview:self.lab_stock];
         [self.lab_stock setText:@"库存"];
         [self.lab_stock setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];

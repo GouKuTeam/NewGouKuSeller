@@ -117,6 +117,7 @@
     self.tf_count.layer.borderColor = [[UIColor colorWithHexString:@"#D8D8D8"] CGColor];
     self.tf_count.keyboardType = UIKeyboardTypeNumberPad;
     self.tf_count.text = [NSString stringWithFormat:@"%d",self.count];
+     [self.tf_count addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     self.btn_delete = [[UIButton alloc]initWithFrame:CGRectMake(20, 226.5, self.alertView.width - 40, 46)];
     [self.alertView addSubview:self.btn_delete];
@@ -231,6 +232,41 @@
         self.alertView.center = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2);
     }];
     return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+    NSInteger kMaxLength = 6;
+    NSString *toBeString = textField.text;
+    NSString *lang = [[UIApplication sharedApplication]textInputMode].primaryLanguage;
+    if ([lang isEqualToString:@"zh-Hans"]) { //中文输入
+        UITextRange *selectedRange = [textField markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        if (!position) {// 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if (toBeString.length > kMaxLength) {
+                textField.text = [toBeString substringToIndex:kMaxLength];
+            }
+        }else{//有高亮选择的字符串，则暂不对文字进行统计和限制
+        }
+    }else{//中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+        if (toBeString.length > kMaxLength) {
+            textField.text = [toBeString substringToIndex:kMaxLength];
+        }
+    }
+}
+
+- (int)convertToInt:(NSString *)strtemp//判断中英混合的的字符串长度
+{
+    int strlength = 0;
+    for (int i=0; i< [strtemp length]; i++) {
+        int a = [strtemp characterAtIndex:i];
+        if( a > 0x4e00 && a < 0x9fff) { //判断是否为中文
+            strlength += 2;
+        }
+    }
+    return strlength;
 }
 
 
