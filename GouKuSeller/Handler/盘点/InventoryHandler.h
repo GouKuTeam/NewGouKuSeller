@@ -21,4 +21,6 @@
 + (void)selectInventroyDetailWithInventroyId:(NSNumber *)inventoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //盘点记录修改
 + (void)updateInventoryWithInventoryId:(NSNumber *)inventoryId Title:(NSString *)title status:(NSNumber *)status wares:(NSArray *)wares prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+//删除盘点单中的单个商品
++ (void)deleteInventroyWareWithInventroyId:(NSNumber *)inventoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 @end

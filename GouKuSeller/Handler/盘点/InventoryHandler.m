@@ -72,7 +72,7 @@
 
 //删除一条盘点记录
 + (void)deleteInventroyWithInventroyId:(NSNumber *)inventoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@/%@",API_Other,API_GET_DeleteInventory,inventoryId];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_DeleteInventory,inventoryId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestGet
                                        parameters:nil
@@ -122,6 +122,20 @@
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//删除盘点单中的单个商品
++ (void)deleteInventroyWareWithInventroyId:(NSNumber *)inventoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_DeleteInventoryWare,inventoryId];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               success(responseObject);

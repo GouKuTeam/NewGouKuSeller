@@ -262,6 +262,8 @@
 #define API_GET_SelectInventoryDetail @"/inventory/detail/"
 //盘点记录修改
 #define API_POST_InventoryUpdate @"/inventory/addOrUpdate"
+//删除单个盘点商品
+#define API_GET_DeleteInventoryWare @"/inventory/ware/delete/"
 
 /*
  供应商订单API

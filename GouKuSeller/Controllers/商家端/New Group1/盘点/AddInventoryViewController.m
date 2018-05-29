@@ -152,11 +152,11 @@
 }
 
 - (void)deleteAction:(UIButton *)btn_sender{
-    [self.alert dismiss];
     [self.arr_data removeObjectAtIndex:btn_sender.tag];
     [self.tb_commodity reloadData];
     [self getResult];
     [self.tfsousuo becomeFirstResponder];
+    [self.alert dismiss];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -227,36 +227,45 @@
         [arrItem addObject:dic];
     }
     if (arrItem.count > 0) {
-        [InventoryHandler addInventoryWithTitle:nil status:[NSNumber numberWithInt:1] wares:arrItem prepare:^{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定提交盘点单？" message:@"提交后盘点数量会覆盖库存数量" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-        } success:^(id obj) {
-            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
-                [MBProgressHUD showInfoMessage:@"提交成功"];
-                [self performSelector:@selector(addInventoryFinishAction) withObject:nil afterDelay:1.5];
-            }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1001){
-                NSString *str = @"";
-                for (int i = 0; i < [[(NSDictionary *)obj objectForKey:@"data"] count]; i++) {
-                    int index = [[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:i] intValue];
-                    if (i == 0) {
-                        str = [NSString stringWithFormat:@"%@",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]];
-                    }else{
-                        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@%@",@"\n",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]]];
-                    }
-                }
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:[(NSDictionary *)obj objectForKey:@"errMessage"] message:str preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                [alert addAction:sure];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
-            else{
-                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
-            }
-        } failed:^(NSInteger statusCode, id json) {
-            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
+        UIAlertAction *again = [UIAlertAction actionWithTitle:@"提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [InventoryHandler addInventoryWithTitle:nil status:[NSNumber numberWithInt:1] wares:arrItem prepare:^{
+                
+            } success:^(id obj) {
+                if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
+                    [MBProgressHUD showInfoMessage:@"提交成功"];
+                    [self performSelector:@selector(addInventoryFinishAction) withObject:nil afterDelay:1.5];
+                }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1001){
+                    NSString *str = @"";
+                    for (int i = 0; i < [[(NSDictionary *)obj objectForKey:@"data"] count]; i++) {
+                        int index = [[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:i] intValue];
+                        if (i == 0) {
+                            str = [NSString stringWithFormat:@"%@",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]];
+                        }else{
+                            str = [str stringByAppendingString:[NSString stringWithFormat:@"%@%@",@"\n",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]]];
+                        }
+                    }
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[(NSDictionary *)obj objectForKey:@"errMessage"] message:str preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [alert addAction:sure];
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+                else{
+                    [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
+                }
+            } failed:^(NSInteger statusCode, id json) {
+                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+            }];
+        }];
+        [alert addAction:forgetPassword];
+        [alert addAction:again];
+        [self presentViewController:alert animated:YES completion:nil];
     }else{
         [MBProgressHUD showInfoMessage:@"请先添加需要盘点的商品"];
     }
