@@ -200,7 +200,7 @@
 }
 
 - (CGFloat)getHeightWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
-    CGFloat height = 145.00;
+    CGFloat height = 135.00;
     if ([purchaseOrderEntity.remark length] > 0) {
         height = height + 42;
     }

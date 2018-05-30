@@ -13,11 +13,12 @@
 #import "CustomerShopInformationViewController.h"
 
 
-@interface SearchCustomerViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SearchCustomerViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
 @property (nonatomic, strong)UITextField                  *tf_search;
 @property (nonatomic ,strong)BaseTableView                *tb_customer;
 @property (nonatomic ,strong)NSMutableArray               *arr_customer;
+@property (nonatomic ,strong)NSString                     *str_search;
 
 @end
 
@@ -68,30 +69,41 @@
     [v_header addSubview:btn_cancel];
     self.navigationItem.titleView = v_header;
     
-    self.tb_customer = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:NO hasFooterRefreshing:NO];
+    self.tb_customer = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     [self.view addSubview:self.tb_customer];
     self.tb_customer.delegate = self;
     self.tb_customer.dataSource = self;
+    self.tb_customer.tableViewDelegate = self;
     self.tb_customer.tableFooterView = [UIView new];
     self.tb_customer.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
+}
+
+- (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    [CustomerManagerHandler searchCustomerListWithName:self.str_search page:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
+        if (pageNum == 0) {
+            [self.arr_customer removeAllObjects];
+        }
+        [self.arr_customer addObjectsFromArray:(NSArray *)obj];
+        [self.tb_customer reloadData];
+        complete([(NSArray *)obj count]);
+        if (self.arr_customer.count == 0) {
+            self.tb_customer.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_customer.frame withDefaultImage:nil withNoteTitle:@"无结果" withNoteDetail:nil withButtonAction:nil];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     NSLog(@"%@",textField.text);
-    [CustomerManagerHandler searchCustomerListWithName:textField.text prepare:^{
-        
-    } success:^(id obj) {
-        
-        [self.arr_customer removeAllObjects];
-        [self.arr_customer addObjectsFromArray:(NSArray *)obj];
-        [self.tb_customer reloadData];
-        if (self.arr_customer.count == 0) {
-            self.tb_customer.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_customer.frame withDefaultImage:nil withNoteTitle:@"无结果" withNoteDetail:nil withButtonAction:nil];
-        }
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
-    }];
+    self.str_search = textField.text;
+    [self.tb_customer requestDataSource];
     return YES;
 }
 

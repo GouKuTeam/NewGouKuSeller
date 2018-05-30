@@ -246,7 +246,7 @@
 //获取客户管理列表
 #define API_POST_GetCustomerList @"/supplier/customer/list"
 //搜索客户
-#define API_POST_SearchCustomer @"/supplier/customer/search/"
+#define API_POST_SearchCustomer @"/supplier/search/customer"
 
 
 /*

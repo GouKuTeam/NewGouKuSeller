@@ -14,6 +14,6 @@
 + (void)getCustomerListWithPage:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //搜索客户
-+ (void)searchCustomerListWithName:(NSString *)name prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)searchCustomerListWithName:(NSString *)name page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 @end

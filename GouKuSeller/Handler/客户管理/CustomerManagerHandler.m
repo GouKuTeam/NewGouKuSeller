@@ -34,11 +34,18 @@
 }
 
 //搜索客户
-+ (void)searchCustomerListWithName:(NSString *)name prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_POST_SearchCustomer,name];
++ (void)searchCustomerListWithName:(NSString *)name page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SearchCustomer];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    if (page) {
+        [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
+    }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
-                                       parameters:nil
+                                       parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
