@@ -21,10 +21,9 @@
         [self.lab_price setFont:[UIFont systemFontOfSize:14]];
         [self.lab_price setTextAlignment:NSTextAlignmentRight];
         [self.lab_price mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
+            make.top.mas_equalTo(13);
             make.left.mas_equalTo(SCREEN_WIDTH - 78 - 15);
             make.right.equalTo(self.mas_right).offset(-15);
-            make.height.mas_equalTo(20);
         }];
         
         self.lab_count = [[UILabel alloc]init];
@@ -36,7 +35,6 @@
             make.top.equalTo(self.lab_price);
             make.left.mas_equalTo(SCREEN_WIDTH - 78 - 15 - 3 - 41);
             make.right.equalTo(self.mas_right).offset(-96);
-            make.height.mas_equalTo(20);
         }];
         
         self.lab_name = [[UILabel alloc]init];
