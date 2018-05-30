@@ -75,6 +75,15 @@
             make.width.height.mas_equalTo(15);
         }];
         
+        self.btn_DetailTell = [[UIButton alloc]init];
+        [self addSubview:self.btn_DetailTell];
+        [self.btn_DetailTell mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.lab_shopName);
+            make.left.mas_equalTo(SCREEN_WIDTH - 50 - 18);
+            make.width.height.mas_equalTo(50);
+        }];
+        [self.btn_DetailTell setBackgroundColor:[UIColor clearColor]];
+        
         self.lab_shopAddress = [[UILabel alloc]init];
         [self addSubview:self.lab_shopAddress];
         [self.lab_shopAddress setTextColor:[UIColor colorWithHexString:@"#979797"]];

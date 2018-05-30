@@ -63,7 +63,7 @@
 - (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity{
     [self.lab_name setText:supplierCommodityEndity.name];
     [self.lab_count setText:[NSString stringWithFormat:@"x%ld",supplierCommodityEndity.count]];
-    [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",supplierCommodityEndity.price]];
+    [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",supplierCommodityEndity.price * supplierCommodityEndity.count]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

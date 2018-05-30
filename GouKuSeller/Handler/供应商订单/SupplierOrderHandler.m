@@ -150,4 +150,23 @@
                                           }];
 }
 
+//获取供应商运费和起送费
++ (void)getSupplierPriceWithDispatchingPrice:(NSString *)dispatchingPrice takeOffPrice:(NSString *)takeOffPrice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_GetSupplierPrice];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success([responseObject objectForKey:@"data"]);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end

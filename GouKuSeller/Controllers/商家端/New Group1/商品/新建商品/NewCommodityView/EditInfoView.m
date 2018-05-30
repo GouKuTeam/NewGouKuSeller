@@ -28,12 +28,11 @@
         [self.tf_detail mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(110);
             make.top.height.equalTo(self.lab_title);
-//            make.width.mas_equalTo(SCREEN_WIDTH - 120);
             make.right.equalTo(self.mas_right).offset(-28);
         }];
         self.tf_detail.textColor = [UIColor colorWithHexString:@"#616161"];
         self.tf_detail.font = [UIFont systemFontOfSize:16];
-
+        
         
         self.img_line = [[UIImageView alloc]init];
         [self addSubview:self.img_line];

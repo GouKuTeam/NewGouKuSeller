@@ -26,4 +26,7 @@
 
 //设置供应商运费和起送费
 + (void)setSupplierPriceWithDispatchingPrice:(NSString *)dispatchingPrice takeOffPrice:(NSString *)takeOffPrice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//获取供应商运费和起送费
++ (void)getSupplierPriceWithDispatchingPrice:(NSString *)dispatchingPrice takeOffPrice:(NSString *)takeOffPrice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 @end

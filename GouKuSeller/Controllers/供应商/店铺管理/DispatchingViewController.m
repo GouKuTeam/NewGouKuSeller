@@ -14,6 +14,9 @@
 @property (nonatomic ,strong)UITextField           *tf_minimumDeliveryAmount;   //起送价
 @property (nonatomic ,strong)UITextField           *tf_freight;                 //运费
 @property (nonatomic ,strong)UIButton              *btn_save;
+@property (nonatomic ,strong)NSString              *minimumDeliveryAmount;
+@property (nonatomic ,strong)NSString              *freight;
+
 
 @end
 
@@ -68,7 +71,24 @@
     self.btn_save.titleLabel.font = [UIFont systemFontOfSize:18];
     [self.btn_save setBackgroundColor:[UIColor colorWithHexString:@"#4167B2"]];
     [self.btn_save addTarget:self action:@selector(btn_saveAction) forControlEvents:UIControlEventTouchUpInside];
+    [self loadData];
     
+}
+
+- (void)loadData{
+    [SupplierOrderHandler getSupplierPriceWithDispatchingPrice:nil takeOffPrice:nil prepare:^{
+        
+    } success:^(id obj) {
+        if ([[obj objectForKey:@"dispatchingPrice"] doubleValue] > 0) {
+            self.tf_freight.text = [NSString stringWithFormat:@"¥%.2f",[[obj objectForKey:@"dispatchingPrice"] doubleValue]];
+        }
+        if ([[obj objectForKey:@"takeOffPrice"] doubleValue] > 0) {
+            self.tf_minimumDeliveryAmount.text = [NSString stringWithFormat:@"¥%.2f",[[obj objectForKey:@"takeOffPrice"] doubleValue]];
+        }
+        
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)btn_saveAction{
@@ -82,7 +102,9 @@
         [MBProgressHUD showInfoMessage:@"请输入运费"];
         return;
     }
-    [SupplierOrderHandler setSupplierPriceWithDispatchingPrice:self.tf_freight.text takeOffPrice:self.tf_minimumDeliveryAmount.text prepare:^{
+    self.minimumDeliveryAmount = [self.tf_minimumDeliveryAmount.text substringFromIndex:1];
+    self.freight = [self.tf_freight.text substringFromIndex:1];
+    [SupplierOrderHandler setSupplierPriceWithDispatchingPrice:self.freight takeOffPrice:self.minimumDeliveryAmount prepare:^{
         
     } success:^(id obj) {
         [MBProgressHUD showSuccessMessage:@"设置成功成功"];
@@ -95,9 +117,11 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == self.tf_minimumDeliveryAmount) {
        [self.tf_minimumDeliveryAmount setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
+        
     }
     if (textField == self.tf_freight) {
         [self.tf_freight setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
+        
     }
     
 }

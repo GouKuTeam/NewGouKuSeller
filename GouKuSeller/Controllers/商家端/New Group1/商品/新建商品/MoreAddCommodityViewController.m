@@ -10,7 +10,7 @@
 #import "IQKeyboardManager.h"
 #import "CommodityHandler.h"
 #import "CommodityFromCodeEntity.h"
-
+#import "AddCustomCommodityViewController.h"
 
 @interface MoreAddCommodityViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -112,6 +112,9 @@
             }
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
+            AddCustomCommodityViewController *vc = [[AddCustomCommodityViewController alloc]init];
+            vc.barcode = textField.text;
+            [self.navigationController pushViewController:vc animated:YES];
         }];
     }else{
         [MBProgressHUD showInfoMessage:@"请输入条形码"];

@@ -126,7 +126,7 @@
         [self.tb_orderManager reloadData];
         complete([(NSArray *)obj count]);
         if (self.arr_data.count == 0) {
-            self.tb_orderManager.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_orderManager.frame withDefaultImage:nil withNoteTitle:@"暂无订单" withNoteDetail:nil withButtonAction:nil];
+            self.tb_orderManager.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_orderManager.frame withDefaultImage:nil withNoteTitle:@"未找到相关订单" withNoteDetail:nil withButtonAction:nil];
         }
     } failed:^(NSInteger statusCode, id json) {
         if (complete) {

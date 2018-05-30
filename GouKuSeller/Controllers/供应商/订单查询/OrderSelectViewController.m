@@ -178,6 +178,10 @@
     [v_header contentViewWithPurchaseOrderEntity:entity];
     v_header.btn_zhankai.tag = section;
     [v_header.btn_zhankai addTarget:self action:@selector(showAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_header.btn_tell.tag = section;
+    [v_header.btn_tell addTarget:self action:@selector(btn_tellAction:) forControlEvents:UIControlEventTouchUpInside];
+    v_header.btn_DetailTell.tag = section;
+    [v_header.btn_DetailTell addTarget:self action:@selector(btn_tellAction:) forControlEvents:UIControlEventTouchUpInside];
     if (entity.isShow == YES) {
         [v_header.btn_zhankai setTitle:@"收起" forState:UIControlStateNormal];
     }else{
@@ -245,6 +249,14 @@
     [MBProgressHUD showInfoMessage:@"复制成功"];
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = [NSString stringWithFormat:@"%@",entity.orderId];
+}
+
+- (void)btn_tellAction:(UIButton *)btn_sender{
+    PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
+    NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"tel:%@",entity.phone];
+    UIWebView * callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
 }
 
 - (void)btn_rightAction:(UIButton *)btn_sender{

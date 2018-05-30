@@ -18,6 +18,7 @@
 @property (nonatomic ,strong)UILabel               *lab_shopName;
 @property (nonatomic ,strong)UILabel               *lab_shopAddress;
 @property (nonatomic ,strong)UIButton              *btn_tell;
+@property (nonatomic ,strong)UIButton              *btn_DetailTell;
 @property (nonatomic ,strong)UIImageView           *img_line1;
 @property (nonatomic ,strong)UIImageView           *img_line2;
 @property (nonatomic ,strong)UILabel               *lab_remarkTitle;

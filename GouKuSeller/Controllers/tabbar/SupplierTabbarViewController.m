@@ -36,7 +36,7 @@
 - (void)initTabBarViewControllers{
     
     OrderManagerViewController *supplierVC = [[OrderManagerViewController alloc] init];
-    UINavigationController *supplierNav = [self changeToNavController:supplierVC title:@"订单管理" index:4];
+    UINavigationController *supplierNav = [self changeToNavController:supplierVC title:@"订单处理" index:4];
     OrderSelectViewController *shopVC = [[OrderSelectViewController alloc] init];
     UINavigationController *shopNav = [self changeToNavController:shopVC title:@"订单查询" index:3];
     
@@ -46,7 +46,7 @@
     UINavigationController *ShopManagerNav = [self changeToNavController:ShopManagerVC title:@"店铺管理" index:1];
     
     self.viewControllers = [NSArray arrayWithObjects:supplierNav,shopNav,orderNav,ShopManagerNav, nil];
-    NSArray *titles = @[@"订单管理",@"订单查询",@"客户管理",@"店铺管理"];
+    NSArray *titles = @[@"订单处理",@"订单查询",@"客户管理",@"店铺管理"];
     NSArray *images = @[@"SupplierTab_Normal_1",@"SupplierTab_Normal_2",@"SupplierTab_Normal_3",@"SupplierTab_Normal_4"];
     NSArray *selectImages = @[@"Supplier_Selected_1",@"Supplier_Selected_2",@"Supplier_Selected_3",@"Supplier_Selected_4"];
     for (int i=0; i<4; i++) {

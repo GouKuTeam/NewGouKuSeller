@@ -148,6 +148,7 @@
         [self.v_shopClassification.tf_detail setText:@"请选择"];
         self.v_shopClassification.tf_detail.enabled = NO;
         [self.v_shopClassification.img_line setHidden:YES];
+        [self.v_shopClassification.tf_detail setTextColor:[UIColor colorWithHexString:@"#C3C3C3"]];
         
         //商品规格 (价格   库存   条形码    商品编码)
         self.v_commodityBack2 = [[UIView alloc]init];

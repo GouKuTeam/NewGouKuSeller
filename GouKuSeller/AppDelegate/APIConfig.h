@@ -113,6 +113,8 @@
 #define API_POST_SupplierAttentionCancel @"/shop/supplier/attention/cancel"
 //设置运费起送费
 #define API_POST_SetSupplierPrice @"/supplier/set/price"
+//获取配送费和起送费
+#define API_POST_GetSupplierPrice @"/supplier/get/price"
 
 /*
  活动API
@@ -244,7 +246,7 @@
 //获取客户管理列表
 #define API_POST_GetCustomerList @"/supplier/customer/list"
 //搜索客户
-#define API_POST_SearchCustomer @"/supplier/search/customer/"
+#define API_POST_SearchCustomer @"/supplier/customer/search/"
 
 
 /*

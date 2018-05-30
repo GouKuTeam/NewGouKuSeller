@@ -74,6 +74,24 @@
         
     } success:^(id obj) {
         self.entity = (InventoryListEntity *)obj;
+        if (self.entity.errArray.count > 0) {
+            NSString *str = @"";
+            for (int i = 0; i < [self.entity.errArray count]; i++) {
+                int index = [[self.entity.errArray objectAtIndex:i] intValue];
+                if (i == 0) {
+                    str = [NSString stringWithFormat:@"%@",[self.entity.errArray objectAtIndex:index]];
+                }else{
+                    str = [str stringByAppendingString:[NSString stringWithFormat:@"\n%@",[self.entity.errArray objectAtIndex:index]]];
+                }
+            }
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.entity.errMessage message:str preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alert addAction:sure];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
         [self.arr_data addObjectsFromArray:self.entity.wares];
         [self.tb_commodity reloadData];
     } failed:^(NSInteger statusCode, id json) {
@@ -172,13 +190,13 @@
         [InventoryHandler deleteInventroyWareWithInventroyId:[NSNumber numberWithInteger:entity._id] prepare:^{
             
         } success:^(id obj) {
-            if ([[obj objectForKey:@"errCode"] intValue] == 0) {
+            if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
                 [self.arr_data removeObjectAtIndex:btn_sender.tag];
                 [self.tb_commodity reloadData];
                 [self getResult];
                 [self.tfsousuo becomeFirstResponder];
             }else{
-                [MBProgressHUD showErrorMessage:[obj objectForKey:@"errMessage"]];
+                [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
             }
         } failed:^(NSInteger statusCode, id json) {
             
@@ -227,7 +245,7 @@
                     if (i == 0) {
                         str = [NSString stringWithFormat:@"%@",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]];
                     }else{
-                        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@%@",@"\n",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]]];
+                        str = [str stringByAppendingString:[NSString stringWithFormat:@"\n%@",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]]];
                     }
                 }
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:[(NSDictionary *)obj objectForKey:@"errMessage"] message:str preferredStyle:UIAlertControllerStyleAlert];

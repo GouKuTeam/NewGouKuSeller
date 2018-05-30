@@ -68,6 +68,7 @@
 		740C6893207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
 		740C6894207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
 		740C6895207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
+		7410A15220BE72D000CE8A01 /* AddCustomCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410A15120BE72D000CE8A01 /* AddCustomCommodityViewController.m */; };
 		7410F71D20A4092E00F9A724 /* DispatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410F71C20A4092E00F9A724 /* DispatchingViewController.m */; };
 		7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F03020639BC50002C960 /* CommodityStatusView.m */; };
 		7416F0342067684F0002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
@@ -817,6 +818,8 @@
 		740C688F207CA8A30044889F /* PayInCashCompleteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayInCashCompleteView.m; sourceTree = "<group>"; };
 		740C6891207CF16A0044889F /* ChangeCommodirtyCountAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCommodirtyCountAlertView.h; sourceTree = "<group>"; };
 		740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCommodirtyCountAlertView.m; sourceTree = "<group>"; };
+		7410A15020BE72D000CE8A01 /* AddCustomCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCustomCommodityViewController.h; sourceTree = "<group>"; };
+		7410A15120BE72D000CE8A01 /* AddCustomCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCustomCommodityViewController.m; sourceTree = "<group>"; };
 		7410F71B20A4092D00F9A724 /* DispatchingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DispatchingViewController.h; sourceTree = "<group>"; };
 		7410F71C20A4092E00F9A724 /* DispatchingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DispatchingViewController.m; sourceTree = "<group>"; };
 		7416F02F20639BC50002C960 /* CommodityStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityStatusView.h; sourceTree = "<group>"; };
@@ -1890,6 +1893,10 @@
 			children = (
 				744ABA9320556D5D00BBB26E /* AddNewCommodityViewController.h */,
 				744ABA9420556D5D00BBB26E /* AddNewCommodityViewController.m */,
+				74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */,
+				74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */,
+				7410A15020BE72D000CE8A01 /* AddCustomCommodityViewController.h */,
+				7410A15120BE72D000CE8A01 /* AddCustomCommodityViewController.m */,
 				744ABA9820556F4C00BBB26E /* NewCommodityView */,
 				74F8E8EF20592A8E000A17A5 /* 选择商品类目 */,
 				74F8E8EE20592A75000A17A5 /* 商品规格 */,
@@ -2372,8 +2379,6 @@
 			children = (
 				74B4E8C520512D7C006AFB6C /* CommodityViewController.h */,
 				74B4E8C620512D7C006AFB6C /* CommodityViewController.m */,
-				74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */,
-				74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */,
 				744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */,
 				744ABA0A20522F5700BBB26E /* CommodityTableViewCell.m */,
 				744ABA0C205255DB00BBB26E /* StoreCategoryTableViewCell.h */,
@@ -3029,6 +3034,7 @@
 				74BD12242068C7A80053A3D1 /* AddActiveViewController.m in Sources */,
 				74ACFFC520A056CE005C5A16 /* SupplierTabbarViewController.m in Sources */,
 				74C6E3312079EDC10083E4A8 /* SelectShopViewController.m in Sources */,
+				7410A15220BE72D000CE8A01 /* AddCustomCommodityViewController.m in Sources */,
 				744ABA8A205428AF00BBB26E /* IQKeyboardReturnKeyHandler.m in Sources */,
 				744ABA78205428AF00BBB26E /* IQNSArray+Sort.m in Sources */,
 				7448185120B4091500A7F3DD /* SupplierCountEntity.m in Sources */,
