@@ -137,7 +137,6 @@
             self.tf_freight.text = self.str_freight;
         }
     }
-    
 }
 
 - (void)setCompleteAction{
