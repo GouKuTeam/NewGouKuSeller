@@ -17,6 +17,8 @@
 @property (nonatomic ,strong)NSString              *minimumDeliveryAmount;
 @property (nonatomic ,strong)NSString              *freight;
 
+@property (nonatomic ,strong)NSString              *str_minimumDeliveryAmount;
+@property (nonatomic ,strong)NSString              *str_freight;
 
 @end
 
@@ -114,14 +116,26 @@
     }];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    textField.text = @"";
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == self.tf_minimumDeliveryAmount) {
-       [self.tf_minimumDeliveryAmount setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
-        
+        if (textField.text.length > 0) {
+            [self.tf_minimumDeliveryAmount setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
+            self.str_minimumDeliveryAmount = self.tf_minimumDeliveryAmount.text;
+        }else{
+            self.tf_minimumDeliveryAmount.text = self.str_minimumDeliveryAmount;
+        }
     }
     if (textField == self.tf_freight) {
-        [self.tf_freight setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
-        
+        if (textField.text.length > 0) {
+            [self.tf_freight setText:[NSString stringWithFormat:@"¥%.2f",[textField.text doubleValue]]];
+            self.str_freight = self.tf_freight.text;
+        }else{
+            self.tf_freight.text = self.str_freight;
+        }
     }
     
 }
