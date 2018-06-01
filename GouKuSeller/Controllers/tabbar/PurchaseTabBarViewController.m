@@ -89,6 +89,7 @@
 
 - (void)gotoPurchaseOrder{
     self.selectedIndex = 2;
+
 }
 
 - (void)goToShopCart{
