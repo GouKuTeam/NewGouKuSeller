@@ -25,6 +25,8 @@ typedef void(^BtnSelectIndex)(int btnIndex);
 @property (nonatomic ,strong)UIImageView         *img_heng;
 @property (nonatomic ,strong)NSMutableArray      *arr_btn;
 
+@property (nonatomic ,strong)NSArray             *arr_btnName;
+
 @property (nonatomic ,copy)BtnSelectIndex       btnSelectIndex;
 
 @end

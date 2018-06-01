@@ -112,21 +112,11 @@
         [self.btn_tianxianAll setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
         self.btn_tianxianAll.titleLabel.font = [UIFont systemFontOfSize:14];
         
-        self.lab_zuiditixian = [[UILabel alloc]init];
-        [self addSubview:self.lab_zuiditixian];
-        [self.lab_zuiditixian mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_jineT);
-            make.top.equalTo(self.lab_ketixian.mas_bottom).offset(8);
-            make.height.mas_equalTo(15);
-        }];
-        [self.lab_zuiditixian setTextColor:[UIColor colorWithHexString:@"#616161"]];
-        [self.lab_zuiditixian setFont:[UIFont systemFontOfSize:14]];
-        
         self.lab_tixiancount = [[UILabel alloc]init];
         [self addSubview:self.lab_tixiancount];
         [self.lab_tixiancount mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_ketixian);
-            make.top.equalTo(self.lab_zuiditixian.mas_bottom).offset(8);
+            make.top.equalTo(self.lab_ketixian.mas_bottom).offset(8);
             make.height.mas_equalTo(15);
         }];
         [self.lab_tixiancount setTextColor:[UIColor colorWithHexString:@"#616161"]];

@@ -58,9 +58,16 @@
         [self.img_heng setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         
         self.arr_btn = [[NSMutableArray alloc]init];
-        NSArray *arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值",@"采购收入",@"采购退款", nil];
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
+            //门店端
+            self.arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值",@"采购支付",@"采购退款", nil];
+        }
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
+            //供应商段
+            self.arr_btnName = [NSArray arrayWithObjects:@"全部",@"采购收入",@"采购退款",@"提现",@"充值", nil];
+        }
         CGFloat btnWidth = (SCREEN_WIDTH - 60) / 3;
-        for (int i = 0; i < arr_btnName.count; i ++) {
+        for (int i = 0; i < self.arr_btnName.count; i ++) {
             self.btn_all = [[UIButton alloc]init];
             [self.v_back addSubview:self.btn_all];
             [self.btn_all mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +79,7 @@
             self.btn_all.tag = i;
             self.btn_all.layer.cornerRadius = 3.0f;
             self.btn_all.layer.masksToBounds = YES;
-            [self.btn_all setTitle:[arr_btnName objectAtIndex:i] forState:UIControlStateNormal];
+            [self.btn_all setTitle:[self.arr_btnName objectAtIndex:i] forState:UIControlStateNormal];
             [self.btn_all setBackgroundColor:[UIColor whiteColor]];
             [self.btn_all setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
             [self.btn_all setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateSelected];

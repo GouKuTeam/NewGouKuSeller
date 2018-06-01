@@ -28,18 +28,17 @@
 }
 
 -(void)onCreate{
-    self.v_tixian = [[TiXianView alloc]initWithFrame:CGRectMake(0, 10 + SafeAreaTopHeight, SCREEN_WIDTH, 315)];
+    self.v_tixian = [[TiXianView alloc]initWithFrame:CGRectMake(0, 10 + SafeAreaTopHeight, SCREEN_WIDTH, 285)];
     [self.view addSubview:self.v_tixian];
     self.v_tixian.tf_price.delegate = self;
     NSString *str_cardNum = [self.cardNum substringFromIndex:self.cardNum.length - 4];
     [self.v_tixian.lab_bankNum setText:[NSString stringWithFormat:@"%@(%@)",self.cardName,str_cardNum]];
     [self.v_tixian.lab_ketixian setText:[NSString stringWithFormat:@"可提现金额¥%.2f",self.ketixianPrice]];
-    [self.v_tixian.lab_zuiditixian setText:@"提现手续费0.1%"];
     [self.v_tixian.lab_tixiancount setText:[NSString stringWithFormat:@"今日可提现%d次",self.tixianCount]];
     
     [self.v_tixian.btn_tianxianAll addTarget:self action:@selector(btn_tianxianAll) forControlEvents:UIControlEventTouchUpInside];
     
-    self.btn_tixian = [[UIButton alloc]initWithFrame:CGRectMake(15, 355 + SafeAreaTopHeight, SCREEN_WIDTH - 30, 46)];
+    self.btn_tixian = [[UIButton alloc]initWithFrame:CGRectMake(15, 325 + SafeAreaTopHeight, SCREEN_WIDTH - 30, 46)];
     [self.view addSubview:self.btn_tixian];
     [self.btn_tixian setTitle:@"提现" forState:UIControlStateNormal];
     [self.btn_tixian addTarget:self action:@selector(btn_tixianAction) forControlEvents:UIControlEventTouchUpInside];

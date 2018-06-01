@@ -121,10 +121,31 @@
     [self.lab_countAndPrice setAttributedText:str_amount];
     [self.lab_createTimeAndNum setText:[NSString stringWithFormat:@"%@下单    订单编号：%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.createTime formatter:@"MM-dd HH:mm"],purchaseOrderEntity.orderId]];
     if (purchaseOrderEntity.status == 0) {
+        [self.btn_cancelOrder mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.lab_countAndPrice.mas_bottom).offset(12);
+            make.width.mas_equalTo(92);
+            make.height.mas_equalTo(38);
+        }];
         [self.btn_right setTitle:[NSString stringWithFormat:@"修改价格%02zd:%02zd:%02zd",purchaseOrderEntity.countDown/3600,(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
     }else if(purchaseOrderEntity.status == 2){
         [self.btn_right setTitle:@"发货" forState:UIControlStateNormal];
-    }else if (purchaseOrderEntity.status == 8 || purchaseOrderEntity.status == 9 || purchaseOrderEntity.status == 3){
+        [self.btn_cancelOrder mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.lab_countAndPrice.mas_bottom).offset(12);
+            make.width.mas_equalTo(92);
+            make.height.mas_equalTo(38);
+        }];
+    }else if (purchaseOrderEntity.status == 3){
+        [self.btn_right setHidden:YES];
+        [self.btn_cancelOrder setHidden:NO];
+        [self.btn_cancelOrder mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(SCREEN_WIDTH - 92 - 15);
+            make.top.equalTo(self.lab_countAndPrice.mas_bottom).offset(12);
+            make.width.mas_equalTo(92);
+            make.height.mas_equalTo(38);
+        }];
+    }else if (purchaseOrderEntity.status == 8 || purchaseOrderEntity.status == 9){
         [self.btn_cancelOrder setHidden:YES];
         [self.btn_right setHidden:YES];
         [self.v_order mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -164,7 +164,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:section];
-    if (entity.status == 3 || entity.status == 8 || entity.status == 9) {
+    if (entity.status == 8 || entity.status == 9) {
         return 65;
     }
     return 120;

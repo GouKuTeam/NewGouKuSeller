@@ -34,7 +34,7 @@
 @property (nonatomic ,assign)BOOL              isShow;            
 
 
-//"status":<number>,          //订单状态(0待付款1待接单2待发货3待收货8已完成9已取消)
+//"status":<number>,          //订单状态(0待付款2待发货3待收货8已完成9已取消)
 
 + (NSArray *)parsePurchaseOrderEntityListWithJson:(id)json;
 + (PurchaseOrderEntity *)parsePurchaseOrderEntityWithJson:(id)json;

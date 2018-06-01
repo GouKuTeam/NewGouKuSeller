@@ -294,6 +294,10 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    StoreEntity *storeEntity = [self.arr_data objectAtIndex:indexPath.section];
+    if ([storeEntity.name isEqualToString:@"失效商品"]) {
+        return NO;
+    }
     return YES;
 }
 
