@@ -57,6 +57,7 @@
             make.left.equalTo(self.iv_image.mas_right).offset(10);
             make.top.equalTo(self.iv_image);
             make.right.equalTo(self.mas_right).offset(-10);
+            make.height.mas_lessThanOrEqualTo(32);
         }];
         
         [self.lb_reason mas_makeConstraints:^(MASConstraintMaker *make) {
