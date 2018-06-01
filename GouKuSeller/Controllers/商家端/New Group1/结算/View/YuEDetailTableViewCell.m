@@ -64,16 +64,16 @@
 - (void)contentCellWithAccountCashDetailEntity:(AccountCashDetailEntity *)accountCashDetailEntity{
    
     if (accountCashDetailEntity.accountType == 2) {
-        [self.lab_title setText:@"提现"];
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        [self.lab_price mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.lab_price mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(150);
             make.top.mas_equalTo(12);
             make.right.equalTo(self.mas_right).offset(-40);
             make.height.mas_equalTo(25);
         }];
     }else{
-        [self.lab_price mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.accessoryType = UITableViewCellAccessoryNone;
+        [self.lab_price mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(150);
             make.top.mas_equalTo(10);
             make.right.equalTo(self.mas_right).offset(-13);
