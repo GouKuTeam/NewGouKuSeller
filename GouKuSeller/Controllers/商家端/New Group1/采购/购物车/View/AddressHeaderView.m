@@ -54,7 +54,7 @@
             make.top.equalTo(self.lb_name.mas_bottom).offset(7);
             make.left.equalTo(self.lb_name);
             make.width.mas_equalTo(SCREEN_WIDTH - 45);
-            make.height.mas_lessThanOrEqualTo(32);
+            make.height.mas_lessThanOrEqualTo(44);
         }];
         
         [self.iv_arrow mas_makeConstraints:^(MASConstraintMaker *make) {
