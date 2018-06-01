@@ -515,7 +515,7 @@
             }
             if (sectionAmount > storeEntity.takeOffPrice) {
                 [arr_selectResult addObject:storeEntity];
-            }else{
+            }else if(sectionAmount > 0){
                 [arr_unSelect addObject:storeEntity];
             }
         }
