@@ -505,22 +505,42 @@
 
 - (void)checkAction{
     if (self.editStatus == 0) {
+        NSMutableArray *arr_selectResult = [NSMutableArray array];
+        NSMutableArray *arr_unSelect = [NSMutableArray array];
+        for (int i = 0; i < self.arr_select.count; i++) {
+            StoreEntity *storeEntity = [[self.arr_select objectAtIndex:i] copy];
+            double sectionAmount = 0.00;
+            for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
+                sectionAmount = sectionAmount + entity.count * entity.price;
+            }
+            if (sectionAmount > storeEntity.takeOffPrice) {
+                [arr_selectResult addObject:storeEntity];
+            }else{
+                [arr_unSelect addObject:storeEntity];
+            }
+        }
+        if (arr_unSelect.count > 0) {
+            StoreEntity *storeEntity = [arr_unSelect firstObject];
+            if (arr_unSelect.count == 1) {
+                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"在%@的购买金额没有达到起送价",storeEntity.name]];
+            }else{
+                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"在%@等供应商的购买金额没有达到起送价",storeEntity.name]];
+            }
+            for (int i = 0; i < arr_unSelect.count; i++) {
+                StoreEntity *storeEntity = [[self.arr_select objectAtIndex:i] copy];
+                if ([self.arr_select containsObject:storeEntity]) {
+                    storeEntity.shoppingCatItems = @[];
+                    storeEntity.isSelected = NO;
+                }
+            }
+            [self.tb_shoppingCart reloadData];
+            return;
+        }
         //获取默认地址
         [PurchaseHandler selectDefaultAddressWithPrepare:^{
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
                 AddressEntity *entity = [AddressEntity parseAddressEntityWithJson:[(NSDictionary *)obj objectForKey:@"data"]];
-                NSMutableArray *arr_selectResult = [NSMutableArray array];
-                for (int i = 0; i < self.arr_select.count; i++) {
-                    StoreEntity *storeEntity = [[self.arr_select objectAtIndex:i] copy];
-                    double sectionAmount = 0.00;
-                    for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
-                        sectionAmount = sectionAmount + entity.count * entity.price;
-                    }
-                    if (sectionAmount > storeEntity.takeOffPrice) {
-                        [arr_selectResult addObject:storeEntity];
-                    }
-                }
                 ConfirmOrderViewController *vc = [[ConfirmOrderViewController alloc]init];
                 vc.arr_selectedData = arr_selectResult;
                 vc.hidesBottomBarWhenPushed = YES;
