@@ -405,6 +405,11 @@
 }
 
 - (void)gotoShopCartAction{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.01];
+}
+
+- (void)delayMethod{
     [[NSNotificationCenter defaultCenter]postNotificationName:@"GoToShopCart" object:nil userInfo:nil];
 }
 
