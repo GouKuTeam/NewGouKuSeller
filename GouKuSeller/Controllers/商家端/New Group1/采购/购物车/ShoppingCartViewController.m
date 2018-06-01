@@ -508,7 +508,7 @@
         NSMutableArray *arr_selectResult = [NSMutableArray array];
         NSMutableArray *arr_unSelect = [NSMutableArray array];
         for (int i = 0; i < self.arr_select.count; i++) {
-            StoreEntity *storeEntity = [[self.arr_select objectAtIndex:i] copy];
+            StoreEntity *storeEntity = [self.arr_select objectAtIndex:i];
             double sectionAmount = 0.00;
             for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
                 sectionAmount = sectionAmount + entity.count * entity.price;
@@ -527,7 +527,7 @@
                 [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"在%@等供应商的购买金额没有达到起送价",storeEntity.name]];
             }
             for (int i = 0; i < arr_unSelect.count; i++) {
-                StoreEntity *storeEntity = [[self.arr_select objectAtIndex:i] copy];
+                StoreEntity *storeEntity = [arr_unSelect objectAtIndex:i];
                 if ([self.arr_select containsObject:storeEntity]) {
                     storeEntity.shoppingCatItems = @[];
                     storeEntity.isSelected = NO;
