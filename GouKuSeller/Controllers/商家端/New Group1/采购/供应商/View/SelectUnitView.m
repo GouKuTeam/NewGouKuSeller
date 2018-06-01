@@ -197,6 +197,7 @@
     self.selectIndex = (int)indexPath.row;
     NSDictionary *dic = [self.supplierCommodityEndity.saleUnits objectAtIndex:indexPath.row];
     [self.lb_price setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"price"] doubleValue]]];
+    [self.lb_num setText:[NSString stringWithFormat:@"库存%d%@",[self.supplierCommodityEndity.stock intValue] / [[dic objectForKey:@"count"] intValue],self.supplierCommodityEndity.unit]];
     [self.collectionView reloadData];
 }
 
@@ -206,7 +207,7 @@
     if (supplierCommodityEndity.saleUnits.count > 0) {
         NSDictionary *dic = [supplierCommodityEndity.saleUnits firstObject];
         [self.lb_price setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"price"] doubleValue]]];
-        [self.lb_num setText:[NSString stringWithFormat:@"库存%d%@",[supplierCommodityEndity.stock intValue],supplierCommodityEndity.unit]];
+        [self.lb_num setText:[NSString stringWithFormat:@"库存%d%@",[supplierCommodityEndity.stock intValue] / [[dic objectForKey:@"count"] intValue],supplierCommodityEndity.unit]];
         self.selectIndex = 0;
         [self.tf_count setText:@"1"];
         CGFloat  height = 0.00;
@@ -235,7 +236,6 @@
         [MBProgressHUD showErrorMessage:@"库存不足"];
         self.tf_count.text = [NSString stringWithFormat:@"%d",[self.supplierCommodityEndity.stock intValue]];
     }else{
-        
         self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] + 1];
     }
 }
