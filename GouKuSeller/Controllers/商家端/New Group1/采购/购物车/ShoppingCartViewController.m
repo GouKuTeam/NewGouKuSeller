@@ -522,7 +522,7 @@
         if (arr_unSelect.count > 0) {
             StoreEntity *storeEntity = [arr_unSelect firstObject];
             if (arr_unSelect.count == 1) {
-                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"在%@没有达到起送价",storeEntity.name]];
+                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"在%@供应商没有达到起送价",storeEntity.name]];
             }else{
                 [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"在%@等供应商没有达到起送价",storeEntity.name]];
             }
