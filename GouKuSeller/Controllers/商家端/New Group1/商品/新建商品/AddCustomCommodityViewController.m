@@ -7,34 +7,30 @@
 //
 
 #import "AddCustomCommodityViewController.h"
-#import "NewCommodityView.h"
+#import "AddCustomCommodityView.h"
 #import "ShopClassificationViewController.h"
-
+#import "CommodityHandler.h"
+#import <AliyunOSSiOS/OSSService.h>
 
 @interface AddCustomCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
     UIImagePickerController *ipc;
 }
 
-@property (nonatomic ,strong)NewCommodityView   *v_commodityView;
+@property (nonatomic ,strong)AddCustomCommodityView   *v_commodityView;
 @property (nonatomic ,strong)NSNumber      *shopCId;
-
+@property (nonatomic ,strong)UIImage       *imgCommodity;
+@property (nonatomic ,strong)NSData        *imgData;
+@property (strong, nonatomic) OSSClient *client;
 
 @end
 
 @implementation AddCustomCommodityViewController
 
-//-(void)viewWillAppear:(BOOL)animated{
-//    self.navigationController.navigationBar.translucent = YES;
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated{
-//    self.navigationController.navigationBar.translucent = NO;
-//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"新建商品";
-//    self.navigationController.navigationBar.translucent = NO;
     
     UIBarButtonItem *btn_left = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarAction)];
     [btn_left setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
@@ -43,6 +39,8 @@
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
+    
+    
 }
 
 - (void)onCreate{
@@ -51,36 +49,62 @@
     ipc.allowsEditing = YES;
     ipc.delegate = self;
     
-    self.v_commodityView = [[NewCommodityView alloc]init];
+    
+    self.v_commodityView = [[AddCustomCommodityView alloc]init];
     [self.view addSubview:self.v_commodityView];
     [self.v_commodityView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
+        make.left.mas_offset(0);
+        make.top.mas_equalTo(SafeAreaTopHeight + 10);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(-88);
-        make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight);
+        make.height.mas_equalTo(300);
     }];
+    [self.v_commodityView.v_barcode.tf_detail setText:self.barcode];
     
-    self.v_commodityView.v_price.tf_detail.delegate = self;
-    self.v_commodityView.v_stock.tf_detail.delegate = self;
-    self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
-    
-    self.v_commodityView.v_commodityName.tf_detail.NumberKeyboardType = 3;
-    self.v_commodityView.v_commodityName.tf_detail.enabled = YES;
-    self.v_commodityView.v_commodityDescribe.tf_detail.enabled = YES;
-    self.v_commodityView.v_commodityName.tf_detail.placeholder = @"不超过30个字";
-    self.v_commodityView.v_commodityDescribe.tf_detail.placeholder = @"不超过250个字";
-    self.v_commodityView.v_price.tf_detail.placeholder = @"请填写";
-    [self.v_commodityView.v_price.img_jiantou setHidden:YES];
-    self.v_commodityView.v_barcode.tf_detail.text = self.barcode;
-    self.v_commodityView.v_barcode.tf_detail.textColor = [UIColor colorWithHexString:@"#C3C3C3"];
     [self.v_commodityView.v_commodityName.tf_detail addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.v_commodityView.v_commodityDescribe.tf_detail addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
     
+    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+    UITapGestureRecognizer* imgTitleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
+    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitleTap];
+    [self.v_commodityView.v_shopClassification.tf_detail setText:@"未分类"];
+    self.shopCId = [NSNumber numberWithInt:-1];
+}
+
+//头像按钮点击方法
+-(void)imgTitleAction{
+    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:ipc animated:YES completion:nil];
+    }];
+    UIAlertAction *addtwoCAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ipc.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        [self presentViewController:ipc animated:YES completion:nil];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [actionSheetController addAction:addoneCAction];
+    [actionSheetController addAction:addtwoCAction];
+    [actionSheetController addAction:cancelAction];
+    [self presentViewController:actionSheetController animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    self.imgCommodity = [info objectForKey: @"UIImagePickerControllerEditedImage"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.v_commodityView.img_commodityImgTitle setImage:self.imgCommodity];
+    NSData *data;
     
-    
+    if (UIImagePNGRepresentation(self.imgCommodity) == nil) {
+        self.imgData = UIImageJPEGRepresentation(self.imgCommodity, 1);
+    } else {
+        self.imgData = UIImageJPEGRepresentation(self.imgCommodity, 0.001); //压缩图片，方便上传
+    }
 }
 
 //店内分类  手势点击方法
@@ -153,13 +177,57 @@
     return strlength;
 }
 
-
-
 - (void)leftBarAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightBarAction{
+//    if ([self.v_commodityView.v_commodityName.tf_detail.text isEqualToString:@""]) {
+//        [MBProgressHUD showErrorMessage:@"请填写商品名称"];
+//        return;
+//    }
+//    if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
+//        [MBProgressHUD showErrorMessage:@"请填写价格"];
+//        return;
+//    }
+    //先上传图片
+    
+    NSString *endpoint = @"http://oss-cn-zhangjiakou.aliyuncs.com";
+    // 移动端建议使用STS方式初始化OSSClient。可以通过sample中STS使用说明了解更多(https://github.com/aliyun/aliyun-oss-ios-sdk/tree/master/DemoByOC)
+    id<OSSCredentialProvider> credential = [[OSSStsTokenCredentialProvider alloc] initWithAccessKeyId:@"LTAI96RGxXZcs74I" secretKeyId:@"gyS784vgKztnQ30JQUPGJcom6cq93K" securityToken:@"SecurityToken"];
+    _client = [[OSSClient alloc] initWithEndpoint:endpoint credentialProvider:credential];
+    [self updateToALi:self.imgData];
+    
+}
+
+
+- (void)updateToALi:(NSData *)data
+{
+    OSSPutObjectRequest * put = [OSSPutObjectRequest new];
+    
+    put.bucketName =@"gouku-ware";
+    put.objectKey = self.barcode;
+    
+    put.uploadingData = data; // 直接上传NSData
+    
+    put.uploadProgress = ^(int64_t bytesSent,int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+        NSLog(@"%lld, %lld, %lld", bytesSent, totalByteSent, totalBytesExpectedToSend);
+    };
+    
+    OSSTask * putTask = [_client putObject:put];
+    
+    // 上传阿里云
+    [putTask continueWithBlock:^id(OSSTask *task) {
+        if (!task.error) {
+            NSLog(@"upload object success!");
+            
+        } else {
+            
+            NSLog(@"upload object failed, error: %@" , task.error);
+        }
+        return nil;
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

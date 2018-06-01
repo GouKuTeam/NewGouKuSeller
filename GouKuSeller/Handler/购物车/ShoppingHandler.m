@@ -156,9 +156,7 @@
 + (void)selectOrderListWithStatus:(NSNumber *)status keyWord:(NSString *)keyWord page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_ShopOrderList];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    if (page) {
-        [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
-    }
+    
     if (status) {
         if (status != [NSNumber numberWithInt:999]) {
            [dic setObject:status forKey:@"status"];
@@ -167,7 +165,7 @@
     if (keyWord) {
         [dic setObject:keyWord forKey:@"keyWord"];
     }
-    
+    [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic

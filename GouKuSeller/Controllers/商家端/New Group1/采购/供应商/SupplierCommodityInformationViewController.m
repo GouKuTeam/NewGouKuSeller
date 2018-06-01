@@ -296,7 +296,7 @@
     [self.btn_supplier setImage:[UIImage imageNamed:@"gongyingshang"] forState:UIControlStateNormal];
     [self.btn_supplier setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_supplier.imageView.frame.size.height + 5 ,-self.btn_supplier.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
     [self.btn_supplier setImageEdgeInsets:UIEdgeInsetsMake(-self.btn_supplier.imageView.frame.size.height, 0.0,0.0, -self.btn_supplier.titleLabel.bounds.size.width)];//图片距离右边框
-    [self.btn_supplier addTarget:self action:@selector(gotoShopInformationAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.btn_supplier addTarget:self action:@selector(gotoShopAction) forControlEvents:UIControlEventTouchUpInside];
     //
     self.btn_shoppingCart = [[UIButton alloc]init];
     [self.v_bottom addSubview:self.btn_shoppingCart];

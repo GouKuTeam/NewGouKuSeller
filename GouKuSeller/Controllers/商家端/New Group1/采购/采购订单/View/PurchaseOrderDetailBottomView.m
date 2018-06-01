@@ -57,10 +57,11 @@
 
 - (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)entity{
     [self.lab_orderCode setText:[NSString stringWithFormat:@"订单编号：%@",entity.orderId]];
-    if (entity.status == 0) {
+    
+    if (entity.payTime == 0) {
        [self.lab_creatTime setText:[NSString stringWithFormat:@"创建时间：%@",[DateUtils stringFromTimeInterval:entity.createTime formatter:@"yyyy-MM-dd HH:mm:ss"]]];
     }else{
-       [self.lab_creatTime setText:[NSString stringWithFormat:@"付款时间：%@",[DateUtils stringFromTimeInterval:entity.payTime formatter:@"yyyy-MM-dd HH:mm:ss"]]];
+        [self.lab_creatTime setText:[NSString stringWithFormat:@"付款时间：%@",[DateUtils stringFromTimeInterval:entity.payTime formatter:@"yyyy-MM-dd HH:mm:ss"]]];
     }
 }
 

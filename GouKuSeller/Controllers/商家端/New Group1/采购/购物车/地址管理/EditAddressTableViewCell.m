@@ -135,7 +135,7 @@
 - (void)contentCellWithAddressEntity:(AddressEntity *)entity{
     [self.lab_name setText:entity.name];
     [self.lab_phone setText:entity.phone];
-    [self.lab_address setText:entity.address];
+    [self.lab_address setText:[NSString stringWithFormat:@"%@%@",entity.address,entity.houseNum]];
     if (entity.isDefault == 1) {
         //是默认地址
         [self.btn_morenAddress setImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];

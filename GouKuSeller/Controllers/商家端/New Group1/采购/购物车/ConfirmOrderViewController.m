@@ -108,7 +108,7 @@
             }
         }
     }
-    [ShoppingHandler generateNewOrderWithReceiver:self.addressEntity.name address:self.addressEntity.address phone:self.addressEntity.phone items:arr_items remarks:arr_remark prepare:^{
+    [ShoppingHandler generateNewOrderWithReceiver:self.addressEntity.name address:[NSString stringWithFormat:@"%@%@",self.addressEntity.address,self.addressEntity.houseNum] phone:self.addressEntity.phone items:arr_items remarks:arr_remark prepare:^{
         [MBProgressHUD showActivityMessageInView:@"正在提交订单"];
     } success:^(id obj) {
         [MBProgressHUD hideHUD];

@@ -20,19 +20,41 @@
         [self.v_back mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(0);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(150);
+            make.height.mas_equalTo(200);
         }];
         [self.v_back setBackgroundColor:[UIColor whiteColor]];
         
-        self.btn_chushou = [[UIButton alloc]init];
-        [self.v_back addSubview:self.btn_chushou];
-        [self.btn_chushou mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.btn_all = [[UIButton alloc]init];
+        [self.v_back addSubview:self.btn_all];
+        [self.btn_all mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(0);
             make.width.equalTo(self.v_back);
             make.height.mas_equalTo(49);
         }];
+        [self.btn_all setTitle:@"全部商品" forState:UIControlStateNormal];
+        [self.btn_all setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        self.btn_all.titleLabel.font = [UIFont systemFontOfSize:18];
+        
+        self.img_line3 = [[UIImageView alloc]init];
+        [self.v_back addSubview:self.img_line3];
+        [self.img_line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.btn_all);
+            make.top.equalTo(self.btn_all.mas_bottom);
+            make.width.equalTo(self.btn_all);
+            make.height.mas_equalTo(0.5);
+        }];
+        [self.img_line3 setBackgroundColor:[UIColor colorWithHexString:@"#cfcfcf"]];
+        
+        self.btn_chushou = [[UIButton alloc]init];
+        [self.v_back addSubview:self.btn_chushou];
+        [self.btn_chushou mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.equalTo(self.img_line3.mas_bottom);
+            make.width.equalTo(self.v_back);
+            make.height.mas_equalTo(49);
+        }];
         [self.btn_chushou setTitle:@"出售中" forState:UIControlStateNormal];
-        [self.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        [self.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_chushou.titleLabel.font = [UIFont systemFontOfSize:18];
         
         self.img_line1 = [[UIImageView alloc]init];
@@ -78,6 +100,10 @@
         [self.btn_xiajia setTitle:@"已下架" forState:UIControlStateNormal];
         [self.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_xiajia.titleLabel.font = [UIFont systemFontOfSize:18];
+        
+       
+        
+        
     }
     return self;
 }

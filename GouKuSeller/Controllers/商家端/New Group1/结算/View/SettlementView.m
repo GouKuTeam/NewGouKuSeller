@@ -123,7 +123,7 @@
             make.width.mas_equalTo(SCREEN_WIDTH);
         }];
         [self.lab_jiesuanT setTextColor:[UIColor colorWithHexString:@"#616161"]];
-        [self.lab_jiesuanT setText:@"待结算金额"];
+        [self.lab_jiesuanT setText:@"待对账金额"];
         [self.lab_jiesuanT setFont:[UIFont systemFontOfSize:16]];
         [self.lab_jiesuanT setTextAlignment:NSTextAlignmentCenter];
         
@@ -138,18 +138,18 @@
         [self.lab_jiesuanPrice setFont:[UIFont systemFontOfSize:20]];
         [self.lab_jiesuanPrice setTextAlignment:NSTextAlignmentCenter];
         
-        self.lab_miaoshu = [[UILabel alloc]init];
-        [self addSubview:self.lab_miaoshu];
-        [self.lab_miaoshu mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.top.equalTo(self.v_backJieSuan.mas_bottom).offset(14);
-            make.right.equalTo(self.mas_right).offset(-15);
-        }];
-        self.lab_miaoshu.numberOfLines = 0;
-        [self.lab_miaoshu setText:@"由于订单异常的原因，待结算金额可能与实际结算金额不同。"];
-        [self.lab_miaoshu setTextColor:[UIColor colorWithHexString:@"#616161"]];
-        [self.lab_miaoshu setFont:[UIFont systemFontOfSize:13]];
-        [self.lab_miaoshu setTextAlignment:NSTextAlignmentCenter];
+//        self.lab_miaoshu = [[UILabel alloc]init];
+//        [self addSubview:self.lab_miaoshu];
+//        [self.lab_miaoshu mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(15);
+//            make.top.equalTo(self.v_backJieSuan.mas_bottom).offset(14);
+//            make.right.equalTo(self.mas_right).offset(-15);
+//        }];
+//        self.lab_miaoshu.numberOfLines = 0;
+//        [self.lab_miaoshu setText:@"由于订单异常的原因，待结算金额可能与实际结算金额不同。"];
+//        [self.lab_miaoshu setTextColor:[UIColor colorWithHexString:@"#616161"]];
+//        [self.lab_miaoshu setFont:[UIFont systemFontOfSize:13]];
+//        [self.lab_miaoshu setTextAlignment:NSTextAlignmentCenter];
     }
     return self;
 }

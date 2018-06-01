@@ -73,9 +73,11 @@
     [self.view addSubview:self.tb_customer];
     self.tb_customer.delegate = self;
     self.tb_customer.dataSource = self;
+    self.tb_customer.rowHeight = 69;
     self.tb_customer.tableViewDelegate = self;
     self.tb_customer.tableFooterView = [UIView new];
     self.tb_customer.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
+//    [self.tb_customer requestDataSource];
 }
 
 - (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{

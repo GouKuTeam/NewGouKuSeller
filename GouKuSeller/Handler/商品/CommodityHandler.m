@@ -443,13 +443,10 @@
     if (firstCategoryId) {
         [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
     }
-    if (status) {
+    if ([status intValue] != 0) {
         [dic setObject:status forKey:@"status"];
     }
-    if (page) {
-        [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
-    }
-    
+    [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic
@@ -584,6 +581,57 @@
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
                                               }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//门店自定义商品
++ (void)addCustomizeCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name barcode:(NSString *)barcode description:(NSString *)description shopWareCategoryId:(NSNumber *)shopWareCategoryId price:(NSString *)price xprice:(NSString *)xprice stock:(NSNumber *)stock pictures:(NSData *)pictures prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_UpdateSupplierCommodity];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (shopId) {
+        [dic setObject:shopId forKey:@"shopId"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    if (barcode) {
+        [dic setObject:barcode forKey:@"barcode"];
+    }
+    if (description) {
+        [dic setObject:description forKey:@"description"];
+    }
+    if (shopWareCategoryId) {
+        [dic setObject:shopWareCategoryId forKey:@"shopWareCategoryId"];
+    }
+    if (stock) {
+        [dic setObject:stock forKey:@"stock"];
+    }
+    if (xprice) {
+        [dic setObject:[NSString stringWithFormat:@"%.2f",[xprice doubleValue]] forKey:@"xprice"];
+    }
+    if (price) {
+        [dic setObject:price forKey:@"price"];
+    }
+    
+    
+    
+}
+
+//上传图片
++ (void)uploadPicWithPicData:(NSData *)picData prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_UpdateSupplierCommodity];
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    if (picData) {
+//        [dic setObject:picData forKey:@"file"];
+//    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:picData
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];

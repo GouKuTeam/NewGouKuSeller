@@ -57,6 +57,9 @@
      商品API
  */
 
+//上传图片
+#define API_POST_uploadPic @"/common/upload"
+
 //店内分类列表
 #define API_GET_ShopCommodityCategory @"/shop/ware/category/all/"
 //分类下店内商品列表
@@ -77,6 +80,8 @@
 #define API_GET_UdpShopCatagory @"/shop/ware/category/update"
 //新增商品
 #define API_GET_AddCommodity @"/shop/ware/stock/add"
+//新增自定义商品
+#define API_POST_AddCustomizeCommodity @"/shop/ware/stock/customize"
 //商品查询
 #define API_GET_CommodityList @"/shop/ware/stock/list"
 //搜索商品

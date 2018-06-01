@@ -69,6 +69,8 @@
 		740C6894207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
 		740C6895207CF16A0044889F /* ChangeCommodirtyCountAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */; };
 		7410A15220BE72D000CE8A01 /* AddCustomCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410A15120BE72D000CE8A01 /* AddCustomCommodityViewController.m */; };
+		7410A15520BF985C00CE8A01 /* AddCustomCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410A15420BF985B00CE8A01 /* AddCustomCommodityView.m */; };
+		7410A15820BF9BA500CE8A01 /* AddCustomCommodityInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410A15720BF9BA500CE8A01 /* AddCustomCommodityInfoView.m */; };
 		7410F71D20A4092E00F9A724 /* DispatchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410F71C20A4092E00F9A724 /* DispatchingViewController.m */; };
 		7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F03020639BC50002C960 /* CommodityStatusView.m */; };
 		7416F0342067684F0002C960 /* MoreEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7416F0332067684F0002C960 /* MoreEditView.m */; };
@@ -820,6 +822,10 @@
 		740C6892207CF16A0044889F /* ChangeCommodirtyCountAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCommodirtyCountAlertView.m; sourceTree = "<group>"; };
 		7410A15020BE72D000CE8A01 /* AddCustomCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCustomCommodityViewController.h; sourceTree = "<group>"; };
 		7410A15120BE72D000CE8A01 /* AddCustomCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCustomCommodityViewController.m; sourceTree = "<group>"; };
+		7410A15320BF985B00CE8A01 /* AddCustomCommodityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCustomCommodityView.h; sourceTree = "<group>"; };
+		7410A15420BF985B00CE8A01 /* AddCustomCommodityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCustomCommodityView.m; sourceTree = "<group>"; };
+		7410A15620BF9BA500CE8A01 /* AddCustomCommodityInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCustomCommodityInfoView.h; sourceTree = "<group>"; };
+		7410A15720BF9BA500CE8A01 /* AddCustomCommodityInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCustomCommodityInfoView.m; sourceTree = "<group>"; };
 		7410F71B20A4092D00F9A724 /* DispatchingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DispatchingViewController.h; sourceTree = "<group>"; };
 		7410F71C20A4092E00F9A724 /* DispatchingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DispatchingViewController.m; sourceTree = "<group>"; };
 		7416F02F20639BC50002C960 /* CommodityStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityStatusView.h; sourceTree = "<group>"; };
@@ -1897,6 +1903,10 @@
 				74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */,
 				7410A15020BE72D000CE8A01 /* AddCustomCommodityViewController.h */,
 				7410A15120BE72D000CE8A01 /* AddCustomCommodityViewController.m */,
+				7410A15320BF985B00CE8A01 /* AddCustomCommodityView.h */,
+				7410A15420BF985B00CE8A01 /* AddCustomCommodityView.m */,
+				7410A15620BF9BA500CE8A01 /* AddCustomCommodityInfoView.h */,
+				7410A15720BF9BA500CE8A01 /* AddCustomCommodityInfoView.m */,
 				744ABA9820556F4C00BBB26E /* NewCommodityView */,
 				74F8E8EF20592A8E000A17A5 /* 选择商品类目 */,
 				74F8E8EE20592A75000A17A5 /* 商品规格 */,
@@ -2948,7 +2958,8 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3000,6 +3011,7 @@
 				74B4E893204BD3EC006AFB6C /* RTJSONResponseSerializerWithData.m in Sources */,
 				740C38C720B7BCC600ACFBAE /* ChangeAddressViewController.m in Sources */,
 				18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */,
+				7410A15820BF9BA500CE8A01 /* AddCustomCommodityInfoView.m in Sources */,
 				7491FA40206CAB130006F388 /* TiXianiewController.m in Sources */,
 				743C5F9920A99C0100E617AF /* InventoryDetailViewController.m in Sources */,
 				74F8E8D2205903AD000A17A5 /* EditFirstCatagoryViewController.m in Sources */,
@@ -3197,6 +3209,7 @@
 				74983661208B84EC007FEEF8 /* ActivityEntity.m in Sources */,
 				744ABA37205420D700BBB26E /* CommodityInformationEntity.m in Sources */,
 				74F8E908205A5F97000A17A5 /* CommoditySpecificationsTableViewCell.m in Sources */,
+				7410A15520BF985C00CE8A01 /* AddCustomCommodityView.m in Sources */,
 				743C5F2520A4251E00E617AF /* SupplierSettingViewController.m in Sources */,
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				7448184120B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */,

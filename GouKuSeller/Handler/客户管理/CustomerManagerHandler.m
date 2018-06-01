@@ -40,9 +40,8 @@
     if (name) {
         [dic setObject:name forKey:@"name"];
     }
-    if (page) {
-        [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
-    }
+    
+    [dic setObject:[NSNumber numberWithInt:page] forKey:@"page"];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic

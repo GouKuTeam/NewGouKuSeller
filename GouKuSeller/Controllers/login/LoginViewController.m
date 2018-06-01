@@ -98,7 +98,7 @@
 }
 
 - (void)btn_loginAction{
-//    NSString *strUrl = @"http://47.97.174.40:9000/login";
+    self.btn_login.enabled = NO;
     NSString *strUrl = [NSString stringWithFormat:@"%@/login",API_Login];
 
     NSDictionary *dic = @{@"account":self.tef_userName.text,@"password":self.tef_passWord.text};
@@ -115,9 +115,11 @@
         }else{
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+            self.btn_login.enabled = YES;
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error == %@",error);
+        self.btn_login.enabled = YES;
     }];
 }
 //找回密码

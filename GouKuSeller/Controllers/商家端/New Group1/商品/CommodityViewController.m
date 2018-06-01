@@ -69,7 +69,7 @@
     
     
     self.btn_top = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 2, 44)];
-    [self.btn_top setTitle:@"出售中" forState:UIControlStateNormal];
+    [self.btn_top setTitle:@"全部商品" forState:UIControlStateNormal];
     [self.btn_top setImage:[UIImage imageNamed:@"triangle_down_white"] forState:UIControlStateNormal];
     [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
     [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
@@ -219,6 +219,7 @@
     [self.v_commodityStatusView.btn_chushou addTarget:self action:@selector(btn_chushouAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_commodityStatusView.btn_shouwan addTarget:self action:@selector(btn_shouwanAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_commodityStatusView.btn_xiajia addTarget:self action:@selector(btn_xiajiaAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_commodityStatusView.btn_all addTarget:self action:@selector(btn_allAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_commodityStatusView setHidden:YES];
     
     UITapGestureRecognizer *tgp = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(statusViewDissmiss)];
@@ -267,7 +268,7 @@
     [self.view addSubview:self.v_moreEdit];
     [self.v_moreEdit setHidden:YES];
     
-    self.btnIndex = [NSNumber numberWithInt:1];
+    self.btnIndex = [NSNumber numberWithInt:0];
     [self loadData];
     
 }
@@ -347,10 +348,6 @@
     [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_category removeAllObjects];
-        ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
-        entity.name = @"全部分类";
-        entity._id = 0;
-        [self.arr_category addObject:entity];
         [self.arr_category addObjectsFromArray:arr_data];
         self.selectedSection = 0;
         self.selectedRow = NULLROW;
@@ -669,10 +666,28 @@
 }
 
 //商品状态选择
+
+- (void)btn_allAction{
+    self.btnIndex = [NSNumber numberWithInt:0];
+    [self.v_commodityStatusView setHidden:YES];
+    [self.btn_top setTitle:@"全部商品" forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_all setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+    [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
+    [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
+    [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.tb_right requestDataSource];
+    
+}
+
 - (void)btn_chushouAction{
     self.btnIndex = [NSNumber numberWithInt:1];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"出售中" forState:UIControlStateNormal];
+    [self.v_commodityStatusView.btn_all setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
+    [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
@@ -684,6 +699,9 @@
     self.btnIndex = [NSNumber numberWithInt:2];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"已售罄" forState:UIControlStateNormal];
+    [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
+    [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
+    [self.v_commodityStatusView.btn_all setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
@@ -694,6 +712,9 @@
     self.btnIndex = [NSNumber numberWithInt:3];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"已下架" forState:UIControlStateNormal];
+    [self.btn_top setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_top.imageView.frame.size.width, 0, self.btn_top.imageView.frame.size.width)];
+    [self.btn_top setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_top.titleLabel.bounds.size.width + 10, 0, -self.btn_top.titleLabel.bounds.size.width)];
+    [self.v_commodityStatusView.btn_all setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];

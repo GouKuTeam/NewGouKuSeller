@@ -83,6 +83,7 @@
     [self.tef_erji setPlaceholder:@"填写分类名称"];
     self.tef_erji.font = [UIFont systemFontOfSize:16];
     self.tef_erji.textAlignment = NSTextAlignmentRight;
+    [self.tef_erji becomeFirstResponder];
 }
 
 - (void)btn_1Action{

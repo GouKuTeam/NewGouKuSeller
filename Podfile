@@ -12,5 +12,6 @@ target 'GouKuSeller' do
     pod 'AMapSearch'
     pod 'AMapLocation'
     pod 'WechatOpenSDK'
+    pod 'AliyunOSSiOS'
 end
 inhibit_all_warnings!

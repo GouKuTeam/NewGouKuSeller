@@ -147,7 +147,12 @@
 //    self.scEntity = [[SupplierCommodityEndity alloc]init];
     EditPriceViewController *vc = [[EditPriceViewController alloc]init];
     vc.defaultUnit = self.scEntity.defaultUsing;
-    vc.defaultPrice = self.scEntity.defaultPrice;
+    if ([self.comeFrom isEqualToString:@"新建商品"]) {
+        vc.defaultPrice = [self.entityInformation.price doubleValue];
+    }
+    if ([self.comeFrom isEqualToString:@"编辑商品"]) {
+        vc.defaultPrice = self.scEntity.defaultPrice;
+    }
     vc.arr_data = [NSMutableArray arrayWithArray:self.scEntity.saleUnits];
     [self.navigationController pushViewController:vc animated:YES];
     vc.goBackAddSupplierCommodity = ^(NSDictionary *dic) {

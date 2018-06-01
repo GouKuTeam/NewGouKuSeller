@@ -49,7 +49,7 @@
     [self.tef_fenlei setPlaceholder:@"填写分类名称"];
     self.tef_fenlei.font = [UIFont systemFontOfSize:16];
     self.tef_fenlei.textAlignment = NSTextAlignmentRight;
-    
+    [self.tef_fenlei becomeFirstResponder];
 }
 
 
