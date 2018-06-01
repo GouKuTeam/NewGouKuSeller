@@ -232,11 +232,11 @@
 }
 
 - (void)plusAction{
-    if ([self.tf_count.text intValue] >= [self.supplierCommodityEndity.stock intValue]) {
+    NSDictionary *dic = [self.supplierCommodityEndity.saleUnits objectAtIndex:self.selectIndex];
+    if ([self.tf_count.text intValue] >= [self.supplierCommodityEndity.stock intValue] / [[dic objectForKey:@"count"] intValue]) {
         [MBProgressHUD showErrorMessage:@"库存不足"];
-        self.tf_count.text = [NSString stringWithFormat:@"%d",[self.supplierCommodityEndity.stock intValue]];
+        self.tf_count.text = [NSString stringWithFormat:@"%d",[self.supplierCommodityEndity.stock intValue] / [[dic objectForKey:@"count"] intValue]];
     }else{
-        
         self.tf_count.text = [NSString stringWithFormat:@"%d",[self.tf_count.text intValue] + 1];
     }
 }
