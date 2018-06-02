@@ -518,7 +518,7 @@
             for (SupplierCommodityEndity *entity in storeEntity.shoppingCatItems) {
                 sectionAmount = sectionAmount + entity.count * entity.price;
             }
-            if (sectionAmount > storeEntity.takeOffPrice) {
+            if (sectionAmount >= storeEntity.takeOffPrice) {
                 [arr_selectResult addObject:storeEntity];
             }else if(sectionAmount > 0){
                 [arr_unSelect addObject:storeEntity];

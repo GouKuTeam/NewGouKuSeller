@@ -236,10 +236,7 @@
         }
     }else{
         //从新建商品进来    走新建商品接口
-        if ([self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"请选择"]) {
-            [MBProgressHUD showInfoMessage:@"请选择店内分类"];
-            return;
-        }
+        
         if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
             [MBProgressHUD showInfoMessage:@"请填写价格"];
             return;

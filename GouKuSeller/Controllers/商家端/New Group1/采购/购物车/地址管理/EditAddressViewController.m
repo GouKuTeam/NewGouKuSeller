@@ -51,11 +51,11 @@
         
     } success:^(id obj) {
         
+        [self.arr_adress removeAllObjects];
+        [self.arr_adress addObjectsFromArray:(NSArray *)obj];
         if ([(NSArray *)obj count] == 0) {
             self.tb_adress.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_adress.frame withDefaultImage:nil withNoteTitle:@"暂无地址，快去添加吧" withNoteDetail:nil withButtonAction:nil];
         }
-        [self.arr_adress removeAllObjects];
-        [self.arr_adress addObjectsFromArray:(NSArray *)obj];
         [self.tb_adress reloadData];
         
     } failed:^(NSInteger statusCode, id json) {
