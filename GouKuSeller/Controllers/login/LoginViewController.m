@@ -106,6 +106,7 @@
     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
         
     } success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
             [LoginStorage saveHTTPHeader:[[responseObject objectForKey:@"data"] objectForKey:@"token"]];
             [LoginStorage saveUserName:self.tef_userName.text];
@@ -115,8 +116,8 @@
         }else{
             [MBProgressHUD hideHUD];
             [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-            self.btn_login.enabled = YES;
         }
+        self.btn_login.enabled = YES;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error == %@",error);
         self.btn_login.enabled = YES;

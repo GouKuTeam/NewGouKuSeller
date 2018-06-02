@@ -7,9 +7,13 @@
 //
 
 #import "BaseViewController.h"
+#import "CommodityFromCodeEntity.h"
 
+typedef void(^addCustomCommodityComplete)(CommodityFromCodeEntity *entity);
 @interface AddCustomCommodityViewController : BaseViewController
 
 @property (nonatomic ,strong)NSString    *barcode;
+
+@property (nonatomic ,copy)addCustomCommodityComplete addCustomCommodityComplete;
 
 @end

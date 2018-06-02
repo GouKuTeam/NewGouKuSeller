@@ -122,13 +122,15 @@
         [self.v_price.tf_detail setPlaceholder:@"请填写"];
         self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
         
-        self.btn_priceEdit = [[UIButton alloc]init];
-        [self.v_commodityBack2 addSubview:self.btn_priceEdit];
-        [self.btn_priceEdit mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.height.equalTo(self.v_price.tf_detail);
-            make.right.equalTo(self.mas_right);
-        }];
-        [self.btn_priceEdit setHidden:YES];
+//        self.btn_priceEdit = [[UIButton alloc]init];
+//        [self.v_commodityBack2 addSubview:self.btn_priceEdit];
+//        [self.btn_priceEdit mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.top.height.equalTo(self.v_price.tf_detail);
+//            make.right.equalTo(self.mas_right);
+//        }];
+//        [self.btn_priceEdit setHidden:YES];
+//        [self.btn_priceEdit setBackgroundColor:[UIColor redColor]];
+        
         //商品库存
         self.v_stock = [[AddCustomCommodityInfoView alloc]init];
         [self.v_commodityBack2 addSubview:self.v_stock];
@@ -151,8 +153,7 @@
             make.top.equalTo(self.v_stock.mas_bottom);
         }];
         [self.v_jinhuoPrice.lab_title setText:@"进货价"];
-        self.v_jinhuoPrice.tf_detail.enabled = YES;
-        [self.v_jinhuoPrice.tf_detail setPlaceholder:@"¥0.00"];
+        [self.v_jinhuoPrice.tf_detail setPlaceholder:@"0.00"];
         [self.v_jinhuoPrice.tf_detail setTextColor:[UIColor blackColor]];
         self.v_jinhuoPrice.tf_detail.clearsOnBeginEditing = YES;
         self.v_jinhuoPrice.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;

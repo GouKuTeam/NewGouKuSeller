@@ -202,7 +202,7 @@
 - (CGFloat)getHeightWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
     CGFloat height = 135.00;
     if ([purchaseOrderEntity.remark length] > 0) {
-        height = height + 42;
+        height = height + 2 * 10.7 + [purchaseOrderEntity.remark fittingLabelHeightWithWidth:SCREEN_WIDTH - 56.7 - 15 andFontSize:[UIFont systemFontOfSize:14]];
     }
     height = height + [purchaseOrderEntity.address.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
 

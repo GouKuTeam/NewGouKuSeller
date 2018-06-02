@@ -53,6 +53,7 @@
     self.tb_commodity.delegate = self;
     self.tb_commodity.dataSource = self;
     self.tb_commodity.tableFooterView = [UIView new];
+    [self.tb_commodity setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     self.tb_commodity.rowHeight = 44;
 }
 
@@ -80,6 +81,11 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"%@", textField.text);
+    if (textField.text.length > 17) {
+        [MBProgressHUD showErrorMessage:@"条形码不能超过17位"];
+        textField.text = @"";
+        return YES;
+    }
     if (![textField.text isEqualToString:@""]) {
         [CommodityHandler getCommodityInformationWithBarCode:textField.text prepare:nil success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
@@ -105,6 +111,19 @@
                     self.tfsousuo.text = @"";
                     [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
                 }];
+            }else if ([[dic objectForKey:@"errCode"] intValue] == 1002){
+                [LoginStorage saveAccessKeyId:[[dic objectForKey:@"data"] objectForKey:@"accessKeyId"]];
+                [LoginStorage saveAccessKeySecret:[[dic objectForKey:@"data"] objectForKey:@"accessKeySecret"]];
+                [LoginStorage saveSecurityToken:[[dic objectForKey:@"data"] objectForKey:@"securityToken"]];
+                AddCustomCommodityViewController *vc = [[AddCustomCommodityViewController alloc]init];
+                vc.barcode = textField.text;
+                [self.navigationController pushViewController:vc animated:YES];
+                vc.addCustomCommodityComplete = ^(CommodityFromCodeEntity *entity) {
+                    self.tfsousuo.text = @"";
+                    [self.arr_commodity removeAllObjects];
+                    [self.arr_commodity addObject:entity];
+                    [self.tb_commodity reloadData];
+                };
             }else{
                 self.tfsousuo.text = @"";
                 [MBProgressHUD hideHUD];
@@ -112,9 +131,7 @@
             }
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
-//            AddCustomCommodityViewController *vc = [[AddCustomCommodityViewController alloc]init];
-//            vc.barcode = textField.text;
-//            [self.navigationController pushViewController:vc animated:YES];
+
         }];
     }else{
         [MBProgressHUD showInfoMessage:@"请输入条形码"];
@@ -138,6 +155,7 @@
     [super viewWillAppear:animated];
     [[IQKeyboardManager sharedManager] setEnable:NO];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    self.tfsousuo.text = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

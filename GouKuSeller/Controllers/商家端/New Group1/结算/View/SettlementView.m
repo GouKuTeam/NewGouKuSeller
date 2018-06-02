@@ -123,10 +123,15 @@
             make.width.mas_equalTo(SCREEN_WIDTH);
         }];
         [self.lab_jiesuanT setTextColor:[UIColor colorWithHexString:@"#616161"]];
-        [self.lab_jiesuanT setText:@"待对账金额"];
         [self.lab_jiesuanT setFont:[UIFont systemFontOfSize:16]];
         [self.lab_jiesuanT setTextAlignment:NSTextAlignmentCenter];
-        
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
+            //门店
+            [self.lab_jiesuanT setText:@"待对账金额"];
+        }
+        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
+            [self.lab_jiesuanT setText:@"冻结金额"];
+        }
         self.lab_jiesuanPrice = [[UILabel alloc]init];
         [self.v_backJieSuan addSubview:self.lab_jiesuanPrice];
         [self.lab_jiesuanPrice mas_makeConstraints:^(MASConstraintMaker *make) {

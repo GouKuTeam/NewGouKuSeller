@@ -43,4 +43,13 @@
 
 + (void)saveType:(NSString *)typeStr;
 + (NSString *)GetTypeStr;
+
++ (void)saveSecurityToken:(NSString *)securityToken;
++ (NSString *)GetSecurityToken;
+
++ (void)saveAccessKeySecret:(NSString *)accessKeySecret;
++ (NSString *)GetAccessKeySecret;
+
++ (void)saveAccessKeyId:(NSString *)accessKeyId;
++ (NSString *)GetAccessKeyId;
 @end

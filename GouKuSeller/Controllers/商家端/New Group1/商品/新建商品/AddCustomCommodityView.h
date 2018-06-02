@@ -20,11 +20,11 @@
 @property (nonatomic ,strong)AddCustomCommodityInfoView      *v_shopClassification;  //店内分类
 
 @property (nonatomic ,strong)UIView            *v_commodityBack2;
-@property (nonatomic ,strong)AddCustomCommodityInfoView      *v_commoditySpecifications;  //商品规格
+
 @property (nonatomic ,strong)AddCustomCommodityInfoView      *v_price;
 @property (nonatomic ,strong)AddCustomCommodityInfoView      *v_stock;          //商品库存
 @property (nonatomic ,strong)AddCustomCommodityInfoView      *v_barcode;        //条形码
-@property (nonatomic ,strong)AddCustomCommodityInfoView      *v_jinhuoPrice;   //商品编码
+@property (nonatomic ,strong)AddCustomCommodityInfoView      *v_jinhuoPrice;   
 
 @property (nonatomic ,strong)UIButton          *btn_priceEdit;
 

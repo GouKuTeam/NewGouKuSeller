@@ -10,6 +10,8 @@
 #import "SupplierPayCompleteViewController.h"
 #import "PayInCashCompleteView.h"
 #import "PurchaseOrderViewController.h"
+#import "ShoppingHandler.h"
+#import "PurchaseTabBarViewController.h"
 
 @interface SupplierPayCompleteViewController ()
 
@@ -37,6 +39,15 @@
 
 - (void)zhifucontinueAction{
     [self.navigationController popToRootViewControllerAnimated:NO];
+    [ShoppingHandler getCountInShopCartprepare:^{
+        
+    } success:^(id obj) {
+        if ([obj intValue] > 0) {
+            [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[obj intValue]];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"PayCompleteAndRefreshData" object:nil userInfo:nil];
     [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.01];
 }

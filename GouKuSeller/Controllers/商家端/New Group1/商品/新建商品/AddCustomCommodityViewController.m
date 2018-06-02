@@ -11,6 +11,7 @@
 #import "ShopClassificationViewController.h"
 #import "CommodityHandler.h"
 #import <AliyunOSSiOS/OSSService.h>
+#import "CommodityFromCodeEntity.h"
 
 @interface AddCustomCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>{
     UIImagePickerController *ipc;
@@ -56,7 +57,7 @@
         make.left.mas_offset(0);
         make.top.mas_equalTo(SafeAreaTopHeight + 10);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(300);
+        make.height.mas_equalTo(SCREEN_HEIGHT - (SafeAreaTopHeight + 10));
     }];
     [self.v_commodityView.v_barcode.tf_detail setText:self.barcode];
     
@@ -71,10 +72,13 @@
     [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitleTap];
     [self.v_commodityView.v_shopClassification.tf_detail setText:@"未分类"];
     self.shopCId = [NSNumber numberWithInt:-1];
+    
 }
+
 
 //头像按钮点击方法
 -(void)imgTitleAction{
+    [self.view endEditing:YES];
     UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *addoneCAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -98,7 +102,6 @@
     self.imgCommodity = [info objectForKey: @"UIImagePickerControllerEditedImage"];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.v_commodityView.img_commodityImgTitle setImage:self.imgCommodity];
-    NSData *data;
     
     if (UIImagePNGRepresentation(self.imgCommodity) == nil) {
         self.imgData = UIImageJPEGRepresentation(self.imgCommodity, 1);
@@ -182,19 +185,33 @@
 }
 
 - (void)rightBarAction{
-//    if ([self.v_commodityView.v_commodityName.tf_detail.text isEqualToString:@""]) {
-//        [MBProgressHUD showErrorMessage:@"请填写商品名称"];
-//        return;
-//    }
-//    if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
-//        [MBProgressHUD showErrorMessage:@"请填写价格"];
-//        return;
-//    }
-    //先上传图片
+    if ([self.v_commodityView.v_commodityName.tf_detail.text isEqualToString:@""]) {
+        [MBProgressHUD showErrorMessage:@"请填写商品名称"];
+        return;
+    }
+    if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
+        [MBProgressHUD showErrorMessage:@"请填写价格"];
+        return;
+    }
+    
+    //先拿配置信息  上传商品信息  同时在上传图片
+
+    [CommodityHandler addCustomizeCommodityWithShopId:[LoginStorage GetShopId] name:self.v_commodityView.v_commodityName.tf_detail.text barcode:self.barcode description:self.v_commodityView.v_commodityDescribe.tf_detail.text shopWareCategoryId:self.shopCId price:self.v_commodityView.v_price.tf_detail.text xprice:self.v_commodityView.v_jinhuoPrice.tf_detail.text stock:[NSNumber numberWithInt:[self.v_commodityView.v_stock.tf_detail.text intValue]] pictures:nil prepare:^{
+        
+    } success:^(id obj) {
+        CommodityFromCodeEntity *entity = [[CommodityFromCodeEntity alloc]init];
+        entity.name = self.v_commodityView.v_commodityName.tf_detail.text;
+        [self.navigationController popViewControllerAnimated:YES];
+        if (self.addCustomCommodityComplete) {
+            self.addCustomCommodityComplete(entity);
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
     
     NSString *endpoint = @"http://oss-cn-zhangjiakou.aliyuncs.com";
     // 移动端建议使用STS方式初始化OSSClient。可以通过sample中STS使用说明了解更多(https://github.com/aliyun/aliyun-oss-ios-sdk/tree/master/DemoByOC)
-    id<OSSCredentialProvider> credential = [[OSSStsTokenCredentialProvider alloc] initWithAccessKeyId:@"LTAI96RGxXZcs74I" secretKeyId:@"gyS784vgKztnQ30JQUPGJcom6cq93K" securityToken:@"SecurityToken"];
+    id<OSSCredentialProvider> credential = [[OSSStsTokenCredentialProvider alloc] initWithAccessKeyId:[LoginStorage GetAccessKeyId] secretKeyId:[LoginStorage GetAccessKeySecret] securityToken:[LoginStorage GetSecurityToken]];
     _client = [[OSSClient alloc] initWithEndpoint:endpoint credentialProvider:credential];
     [self updateToALi:self.imgData];
     
@@ -206,12 +223,12 @@
     OSSPutObjectRequest * put = [OSSPutObjectRequest new];
     
     put.bucketName =@"gouku-ware";
-    put.objectKey = self.barcode;
-    
+    put.objectKey = [NSString stringWithFormat:@"%@-%@",[LoginStorage GetShopId],self.barcode];
+    put.contentType = @"image/png";
     put.uploadingData = data; // 直接上传NSData
     
     put.uploadProgress = ^(int64_t bytesSent,int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
-        NSLog(@"%lld, %lld, %lld", bytesSent, totalByteSent, totalBytesExpectedToSend);
+//        NSLog(@"%lld, %lld, %lld", bytesSent, totalByteSent, totalBytesExpectedToSend);
     };
     
     OSSTask * putTask = [_client putObject:put];

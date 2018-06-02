@@ -588,7 +588,7 @@
 
 //门店自定义商品
 + (void)addCustomizeCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name barcode:(NSString *)barcode description:(NSString *)description shopWareCategoryId:(NSNumber *)shopWareCategoryId price:(NSString *)price xprice:(NSString *)xprice stock:(NSNumber *)stock pictures:(NSData *)pictures prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_UpdateSupplierCommodity];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_AddCustomizeCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (shopId) {
         [dic setObject:shopId forKey:@"shopId"];
@@ -614,7 +614,20 @@
     if (price) {
         [dic setObject:price forKey:@"price"];
     }
-    
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
     
     
 }

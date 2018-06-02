@@ -213,6 +213,10 @@
         [MBProgressHUD showErrorMessage:@"请填写手机号"];
         return;
     }
+    if ([self.tf_phone.text length] != 11) {
+        [MBProgressHUD showErrorMessage:@"请填写11位手机号"];
+        return;
+    }
     if (self.cityName == nil) {
         [MBProgressHUD showErrorMessage:@"请选择城市"];
         return;

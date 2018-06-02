@@ -18,6 +18,7 @@
 #import "FindPwWithUserNameViewController.h"
 #import "ShoppingHandler.h"
 #import "SupplierPayCompleteViewController.h"
+#import "PurchaseOrderEntity.h"
 
 @interface PayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,PasswordAlertViewDelegate>
 
@@ -32,6 +33,8 @@
 @property (nonatomic ,strong)UILabel                    *lab_yue;
 @property (nonatomic ,strong)UIButton                   *btn_chongzhi;
 @property (nonatomic ,strong)UILabel                    *lab_nopay;
+@property (nonatomic,strong)PurchaseOrderEntity  *orderEntity;
+
 
 @end
 
@@ -128,8 +131,24 @@
 }
 
 - (void)payOrder{
-    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.total title:@"余额支付" delegate:self];
-    [view show];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    NSNumber *numTemp = [numberFormatter numberFromString:self.orderId];
+    [ShoppingHandler selectShopOrderDetailWithOrderId:numTemp prepare:^{
+        [MBProgressHUD showActivityMessageInView:nil];
+    } success:^(id obj) {
+        [MBProgressHUD hideHUD];
+        self.orderEntity = (PurchaseOrderEntity *)obj;
+        PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.orderEntity.payActual title:@"余额支付" delegate:self];
+        [view show];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
+    
+    
 }
 
 - (void)chongzhiAction{

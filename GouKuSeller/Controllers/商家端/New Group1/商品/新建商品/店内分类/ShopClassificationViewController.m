@@ -38,7 +38,7 @@
 }
 
 -(void)onCreate{
-    self.tb_shopC = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaBottomHeight - 10) style:UITableViewStylePlain];
+    self.tb_shopC = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 10, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaBottomHeight - 10 - SafeAreaTopHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_shopC];
     self.tb_shopC.delegate = self;
     self.tb_shopC.dataSource = self;

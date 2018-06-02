@@ -370,11 +370,11 @@
 }
 
 - (void)confirmAction{
-    if ([self.selectUnitView.tf_count.text intValue] > [self.supplierCommodityEndity.stock intValue]) {
+    NSDictionary *dic = [self.selectUnitView.supplierCommodityEndity.saleUnits objectAtIndex:self.selectUnitView.selectIndex];
+    if ([self.selectUnitView.tf_count.text intValue] > [self.selectUnitView.supplierCommodityEndity.stock intValue] / [[dic objectForKey:@"count"] intValue]) {
         [MBProgressHUD showErrorMessage:@"库存不足"];
-        self.selectUnitView.tf_count.text = self.supplierCommodityEndity.stock;
+        self.selectUnitView.tf_count.text = [NSString stringWithFormat:@"%d",[self.selectUnitView.supplierCommodityEndity.stock intValue] / [[dic objectForKey:@"count"] intValue]];
     }else{
-        NSDictionary *dic = [self.selectUnitView.supplierCommodityEndity.saleUnits objectAtIndex:self.selectUnitView.selectIndex];
         [PurchaseHandler addCommodityToShoppingCarWithSkuId:self.selectUnitView.supplierCommodityEndity.skuId skuUnitId:[dic objectForKey:@"id"] count:[NSNumber numberWithInt:[self.selectUnitView.tf_count.text intValue]] prepare:^{
             [MBProgressHUD showActivityMessageInView:nil];
         } success:^(id obj) {

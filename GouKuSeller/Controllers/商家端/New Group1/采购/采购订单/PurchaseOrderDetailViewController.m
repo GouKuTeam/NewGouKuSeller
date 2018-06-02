@@ -159,13 +159,12 @@
     if (self.orderEntity.status == 0 || self.orderEntity.status == 3) {
         [self.v_bottom setHidden:NO];
         if (self.orderEntity.status == 0) {
-            
             [self.btn_confirm setHidden:YES];
             [self.btn_cancel setHidden:NO];
             [self.btn_pay setHidden:NO];
             [self.btn_pay setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",self.orderEntity.countDown/3600,(self.orderEntity.countDown/60)%60,self.orderEntity.countDown%60]    forState:UIControlStateNormal];
             if (self.orderEntity.accountPrice < self.orderEntity.payTotal) {
-                [self.btn_pay setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+                [self.btn_pay setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
                 self.btn_pay.enabled = NO;
             }else{
                 [self.btn_pay setBackgroundColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];

@@ -18,6 +18,9 @@ static NSString * const ShopPic = @"ShopPic";
 static NSString * const ShopName = @"ShopName";
 static NSString * const GOUWUCHE = @"gouwuche";
 static NSString * const TYPE = @"TYPE";
+static NSString * const SecurityToken = @"securityToken";
+static NSString * const AccessKeySecret = @"accessKeySecret";
+static NSString * const AccessKeyId = @"accessKeyId";
 
 @implementation LoginStorage
 
@@ -136,6 +139,29 @@ static NSString * const TYPE = @"TYPE";
 }
 + (NSString *)GetTypeStr{
     return [UserDefaultsUtils valueWithKey:TYPE];
+}
+/**
+ *  存/取 上传图片用的配置
+ */
++ (void)saveSecurityToken:(NSString *)securityToken{
+    [UserDefaultsUtils saveValue:securityToken forKey:SecurityToken];
+}
++ (NSString *)GetSecurityToken{
+    return [UserDefaultsUtils valueWithKey:SecurityToken];
+}
+
++ (void)saveAccessKeySecret:(NSString *)accessKeySecret{
+    [UserDefaultsUtils saveValue:accessKeySecret forKey:AccessKeySecret];
+}
++ (NSString *)GetAccessKeySecret{
+    return [UserDefaultsUtils valueWithKey:AccessKeySecret];
+}
+
++ (void)saveAccessKeyId:(NSString *)accessKeyId{
+    [UserDefaultsUtils saveValue:accessKeyId forKey:AccessKeyId];
+}
++ (NSString *)GetAccessKeyId{
+    return [UserDefaultsUtils valueWithKey:AccessKeyId];
 }
 
 @end

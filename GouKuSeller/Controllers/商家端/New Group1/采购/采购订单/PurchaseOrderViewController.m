@@ -10,11 +10,11 @@
 #import "TabBarViewController.h"
 #import "PurchaseOrderHeaderView.h"
 #import "PurchaseOrderTableViewCell.h"
-#import "ShoppingHandler.h"
 #import "PurchaseOrderEntity.h"
 #import "SearchPurchaseOrderViewController.h"
 #import "CountDownManager.h"
 #import "PurchaseOrderDetailViewController.h"
+#import "ShoppingHandler.h"
 #import "PurchaseTabBarViewController.h"
 
 @interface PurchaseOrderViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
@@ -107,6 +107,9 @@
     [ShoppingHandler getCountInShopCartprepare:^{
         
     } success:^(id obj) {
+        if ([obj intValue] == 0) {
+            [(PurchaseTabBarViewController *)self.tabBarController hideBadgeOnItemIndex:1];
+        }
         if ([obj intValue] > 0) {
             [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[obj intValue]];
         }

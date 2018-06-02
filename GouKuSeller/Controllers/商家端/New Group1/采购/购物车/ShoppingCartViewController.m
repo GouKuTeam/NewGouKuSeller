@@ -56,11 +56,16 @@
 
 - (void)loadShoppingCount{
     [ShoppingHandler getCountInShopCartprepare:^{
+        
     } success:^(id obj) {
+        if ([obj intValue] == 0) {
+            [(PurchaseTabBarViewController *)self.tabBarController hideBadgeOnItemIndex:1];
+        }
         if ([obj intValue] > 0) {
             [(PurchaseTabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:[obj intValue]];
         }
     } failed:^(NSInteger statusCode, id json) {
+        
     }];
 }
 
