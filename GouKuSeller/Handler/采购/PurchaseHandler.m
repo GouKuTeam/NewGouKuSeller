@@ -56,9 +56,9 @@
 }
 
 //通过名字搜索供应商
-+ (void)searchSupplierWithName:(NSString *)name prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)searchSupplierWithName:(NSString *)name page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_SearchSupplier];
-    NSDictionary *dic = @{@"name":name
+    NSDictionary *dic = @{@"name":name,@"page":[NSNumber numberWithInt:page]
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -179,6 +179,7 @@
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
                                               }
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [MBProgressHUD hideHUD];
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
 }

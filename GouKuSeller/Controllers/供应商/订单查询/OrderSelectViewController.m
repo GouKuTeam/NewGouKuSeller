@@ -103,6 +103,9 @@
         if (entity.allTotal > 0) {
             [(SupplierTabbarViewController *)self.tabBarController showBadgeOnItemIndex:0 withCount:entity.allTotal];
         }
+        if (entity.allTotal == 0) {
+            [(SupplierTabbarViewController *)self.tabBarController hideBadgeOnItemIndex:0];
+        }
     } failed:^(NSInteger statusCode, id json) {
         
     }];

@@ -370,6 +370,10 @@
         }
         return;
     }
+//    ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedSection];
+//    if (self.selectedRow != NULLROW) {
+//        entity = [entity.childList objectAtIndex:self.selectedRow];
+//    }
     ShopClassificationEntity *entity = [self.arr_category objectAtIndex:self.selectedSection];
     if (self.selectedRow != NULLROW) {
         entity = [entity.childList objectAtIndex:self.selectedRow];

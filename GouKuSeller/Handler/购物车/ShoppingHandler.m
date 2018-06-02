@@ -141,12 +141,13 @@
                                        parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
-                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
-                                                  success([responseObject objectForKey:@"data"]);
-                                              }else{
-                                                  [MBProgressHUD hideHUD];
-                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-                                              }
+//                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+//                                                  success([responseObject objectForKey:@"data"]);
+//                                              }else{
+//                                                  [MBProgressHUD hideHUD];
+//                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+//                                              }
+                                              success(responseObject);
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];

@@ -292,7 +292,8 @@
             
         }];
         UIAlertAction *again = [UIAlertAction actionWithTitle:@"提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [InventoryHandler addInventoryWithTitle:nil status:[NSNumber numberWithInt:1] wares:arrItem prepare:^{
+            
+            [InventoryHandler updateInventoryWithInventoryId:[NSNumber numberWithLong:self.entity._id] Title:nil status:[NSNumber numberWithInt:1] wares:arrItem prepare:^{
                 
             } success:^(id obj) {
                 if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {

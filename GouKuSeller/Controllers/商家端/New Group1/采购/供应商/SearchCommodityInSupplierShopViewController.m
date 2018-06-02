@@ -11,7 +11,7 @@
 #import "PurchaseHandler.h"
 #import "SupplierCommodityInformationViewController.h"
 
-@interface SearchCommodityInSupplierShopViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SearchCommodityInSupplierShopViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
 @property (nonatomic, strong)UITextField              *tf_search;
 @property (nonatomic ,strong)BaseTableView            *tb_supplierCommodity;
@@ -68,14 +68,18 @@
     
     self.navigationItem.titleView = v_header;
     
-    self.tb_supplierCommodity = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+//    self.tb_supplierCommodity = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    self.tb_supplierCommodity = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:NO hasFooterRefreshing:NO];
     [self.view addSubview:self.tb_supplierCommodity];
     self.tb_supplierCommodity.delegate = self;
     self.tb_supplierCommodity.dataSource = self;
     self.tb_supplierCommodity.rowHeight = 96;
+    self.tb_supplierCommodity.tableViewDelegate = self;
     self.tb_supplierCommodity.backgroundColor = [UIColor colorWithHexString:COLOR_GRAY_BG];
     self.tb_supplierCommodity.tableFooterView = [UIView new];
 }
+
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -96,8 +100,6 @@
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
-    
-    
     return YES;
 }
 

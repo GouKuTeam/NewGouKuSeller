@@ -264,7 +264,7 @@
     [lb_price setFont:[UIFont systemFontOfSize:16]];
     [lb_price setTextAlignment:NSTextAlignmentRight];
     [v_footer addSubview:lb_price];
-    [lb_price setText:[NSString stringWithFormat:@"¥%.2f",self.orderEntity.payTotal]];
+    [lb_price setText:[NSString stringWithFormat:@"¥%.2f",self.orderEntity.payActual]];
     
     if (self.orderEntity.status == 0) {
         UIView  *v_line = [[UIView alloc]initWithFrame:CGRectMake(0,70, SCREEN_WIDTH, 10)];
@@ -368,8 +368,18 @@
 }
 
 - (void)btn_payAction{
-    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.orderEntity.payTotal title:@"余额支付" delegate:self];
-    [view show];
+    
+    [ShoppingHandler selectShopOrderDetailWithOrderId:self.orderId prepare:^{
+        [MBProgressHUD showActivityMessageInView:nil];
+    } success:^(id obj) {
+        [MBProgressHUD hideHUD];
+        self.orderEntity = (PurchaseOrderEntity *)obj;
+        PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.orderEntity.payActual title:@"余额支付" delegate:self];
+        [view show];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showErrorMessage:(NSString *)json];
+    }];
 }
 
 - (void)btn_confirmAction{
@@ -405,7 +415,7 @@
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
                 SupplierPayCompleteViewController *vc = [[SupplierPayCompleteViewController alloc]init];
-                vc.price = [NSString stringWithFormat:@"%.2f",self.orderEntity.payTotal];
+                vc.price = [NSString stringWithFormat:@"%.2f",self.orderEntity.payActual];
                 [self.navigationController pushViewController:vc animated:YES];
             }else if([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"密码错误，请重试" message:@"" preferredStyle:UIAlertControllerStyleAlert];

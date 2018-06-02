@@ -17,7 +17,7 @@
 + (void)getCategorySupplierWithCategoryId:(NSNumber *)categoryId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //通过名字搜索供应商
-+ (void)searchSupplierWithName:(NSString *)name prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)searchSupplierWithName:(NSString *)name page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 //查询所有商品
 + (void)getWareWithShopId:(NSNumber *)shopId keyword:(NSString *)keyword status:(NSNumber *)status firstCategoryId:(NSNumber *)firstCategoryId page:(NSInteger)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;

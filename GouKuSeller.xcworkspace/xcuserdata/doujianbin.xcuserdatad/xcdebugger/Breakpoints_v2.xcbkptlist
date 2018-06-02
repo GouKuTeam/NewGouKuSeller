@@ -19,28 +19,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GouKuSeller/Handler/&#x91c7;&#x8d2d;/PurchaseHandler.m"
-            timestampString = "549531332.1830961"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "+addCommodityToShoppingCarWithSkuId:skuUnitId:count:prepare:success:failed:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GouKuSeller/Handler/&#x8d2d;&#x7269;&#x8f66;/ShoppingHandler.m"
-            timestampString = "549527692.766961"
+            timestampString = "549633039.132513"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "+payMoreOrderWithOrderId:passWord:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
@@ -52,12 +36,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GouKuSeller/AppDelegate/AppDelegate.m"
-            timestampString = "549541807.75528"
+            timestampString = "549623714.093479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "342"
             endingLineNumber = "342"
             landmarkName = "-managerDidRecvPaymentResponse:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GouKuSeller/Handler/&#x91c7;&#x8d2d;/PurchaseHandler.m"
+            timestampString = "549634829.3545409"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "+searchSupplierWithName:page:prepare:success:failed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

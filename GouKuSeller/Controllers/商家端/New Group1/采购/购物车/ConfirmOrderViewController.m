@@ -112,18 +112,41 @@
         [MBProgressHUD showActivityMessageInView:@"正在提交订单"];
     } success:^(id obj) {
         [MBProgressHUD hideHUD];
-        NSMutableArray *arr_orderId = [(NSDictionary *)obj objectForKey:@"orderList"];
-        NSMutableArray *arr_data = [NSMutableArray array];
-        for (NSDictionary *dic in arr_orderId) {
-            [arr_data addObject:[dic objectForKey:@"orderId"]];
+        if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
+            NSMutableArray *arr_orderId = [[(NSDictionary *)obj objectForKey:@"data"] objectForKey:@"orderList"];
+            NSMutableArray *arr_data = [NSMutableArray array];
+            for (NSDictionary *dic in arr_orderId) {
+                [arr_data addObject:[dic objectForKey:@"orderId"]];
+            }
+            PayOrderViewController *vc = [[PayOrderViewController alloc]init];
+            vc.addressEntity = self.addressEntity;
+            vc.arr_selectedData = self.arr_selectedData;
+            vc.arr_orderId = arr_data;
+            vc.total = [[[(NSDictionary *)obj objectForKey:@"data"] objectForKey:@"total"] doubleValue];
+            vc.accountPrice = [[[(NSDictionary *)obj objectForKey:@"data"] objectForKey:@"accountPrice"] doubleValue];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1001){
+            NSString *str = @"";
+            for (int i = 0; i < [[(NSDictionary *)obj objectForKey:@"data"] count]; i++) {
+                int index = [[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:i] intValue];
+                if (i == 0) {
+                    str = [NSString stringWithFormat:@"%@",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]];
+                }else{
+                    str = [str stringByAppendingString:[NSString stringWithFormat:@"\n%@",[[(NSDictionary *)obj objectForKey:@"data"] objectAtIndex:index]]];
+                }
+            }
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[(NSDictionary *)obj objectForKey:@"errMessage"] message:str preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alert addAction:sure];
+            [self presentViewController:alert animated:YES completion:nil];
+        }else{
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showErrorMessage:[(NSDictionary *)obj objectForKey:@"errMessage"]];
         }
-        PayOrderViewController *vc = [[PayOrderViewController alloc]init];
-        vc.addressEntity = self.addressEntity;
-        vc.arr_selectedData = self.arr_selectedData;
-        vc.arr_orderId = arr_data;
-        vc.total = [[(NSDictionary *)obj objectForKey:@"total"] doubleValue];
-        vc.accountPrice = [[(NSDictionary *)obj objectForKey:@"accountPrice"] doubleValue];
-        [self.navigationController pushViewController:vc animated:YES];
+        
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showErrorMessage:(NSString *)json];

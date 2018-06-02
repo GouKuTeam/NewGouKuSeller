@@ -84,7 +84,7 @@
     self.purchaseOrderEntity = purchaseOrderEntity;
     [self.collectionView reloadData];
     NSString *jian = [NSString stringWithFormat:@"共%d件，合计:",[purchaseOrderEntity.count intValue]];
-    NSString *price = [jian stringByAppendingString:[NSString stringWithFormat:@"¥%.2f",purchaseOrderEntity.payTotal]];
+    NSString *price = [jian stringByAppendingString:[NSString stringWithFormat:@"¥%.2f",purchaseOrderEntity.payActual]];
     NSMutableAttributedString *str_amount = [[NSMutableAttributedString alloc]initWithString:price];
     [str_amount addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#333333"] range:NSMakeRange(0, jian.length)];
     [str_amount addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, jian.length)];

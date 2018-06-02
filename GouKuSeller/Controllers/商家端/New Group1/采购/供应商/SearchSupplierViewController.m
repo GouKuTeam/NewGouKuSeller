@@ -10,7 +10,7 @@
 #import "PurchaseHandler.h"
 #import "StoreEntity.h"
 #import "SupplierListTableViewCell.h"
-@interface SearchSupplierViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SearchSupplierViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
 @property (nonatomic, strong)UITextField           *tf_search;
 @property (nonatomic, strong)BaseTableView         *tb_supplier;
@@ -66,28 +66,37 @@
     self.navigationItem.titleView = v_header;
     
     self.tb_supplier = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    self.tb_supplier = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:NO];
     [self.view addSubview:self.tb_supplier];
     self.tb_supplier.delegate = self;
     self.tb_supplier.dataSource = self;
+    self.tb_supplier.tableViewDelegate = self;
     self.tb_supplier.tableFooterView = [UIView new];
     
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    [PurchaseHandler searchSupplierWithName:textField.text prepare:^{
+- (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
+    [PurchaseHandler searchSupplierWithName:self.tf_search.text page:(int)pageNum prepare:^{
         
     } success:^(id obj) {
-        
         [self.arr_data removeAllObjects];
         [self.arr_data addObjectsFromArray:(NSArray *)obj];
         [self.tb_supplier reloadData];
+        complete([(NSArray *)obj count]);
         if (self.arr_data.count == 0) {
             self.tb_supplier.defaultView = [[TableBackgroudView alloc] initWithFrame:self.tb_supplier.frame withDefaultImage:nil withNoteTitle:@"暂未搜索到此供应商" withNoteDetail:nil withButtonAction:nil];
-        }        
+        }
     } failed:^(NSInteger statusCode, id json) {
-        
+        if (complete) {
+            complete(CompleteBlockErrorCode);
+        }
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [self.tb_supplier requestDataSource];
     return YES;
 }
 
