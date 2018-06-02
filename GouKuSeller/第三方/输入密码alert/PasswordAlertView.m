@@ -125,10 +125,10 @@
     if ([sender isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)sender;
         if ([button isEqual:self.confirmBtn]) {
-            NSLog(@"Pressed Button is confirmButton");
+//            NSLog(@"Pressed Button is confirmButton");
             buttonType = PasswordAlertBtnConfirm;
         } else {
-            NSLog(@"Pressed Button is CancelButton");
+//            NSLog(@"Pressed Button is CancelButton");
             buttonType = PasswordAlertBtnCancel;
         }
     }

@@ -163,7 +163,7 @@
             [self.btn_cancel setHidden:NO];
             [self.btn_pay setHidden:NO];
             [self.btn_pay setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",self.orderEntity.countDown/3600,(self.orderEntity.countDown/60)%60,self.orderEntity.countDown%60]    forState:UIControlStateNormal];
-            if (self.orderEntity.accountPrice < self.orderEntity.payTotal) {
+            if (self.orderEntity.accountPrice < self.orderEntity.payActual) {
                 [self.btn_pay setBackgroundColor:[UIColor colorWithHexString:@"#C2C2C2"]];
                 self.btn_pay.enabled = NO;
             }else{
@@ -185,6 +185,7 @@
 - (void)countDownNotfifcation{
     NSInteger countDown = self.orderEntity.countDown - DetailCountDownManager.timeInterval;
     [self.btn_pay setTitle:[NSString stringWithFormat:@"付款%02zd:%02zd:%02zd",countDown/3600,(countDown/60)%60,countDown%60] forState:UIControlStateNormal];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -282,7 +283,7 @@
         [lab_yue setAttributedText:str_yu];
         [v_yue addSubview:lab_yue];
         
-        if (self.orderEntity.accountPrice < self.orderEntity.payTotal) {
+        if (self.orderEntity.accountPrice < self.orderEntity.payActual) {
             
             UIButton *btn_chongzhi = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 76, 8, 66, 30)];
             [btn_chongzhi setTitle:@"充值" forState:UIControlStateNormal];
@@ -318,7 +319,7 @@
 
 - (void)chongzhiAction{
     SupplierPayViewController *vc = [[SupplierPayViewController alloc]init];
-    vc.payPrice = [NSString stringWithFormat:@"%.2f",self.orderEntity.payTotal - self.orderEntity.accountPrice];
+    vc.payPrice = [NSString stringWithFormat:@"%.2f",self.orderEntity.payActual - self.orderEntity.accountPrice];
     [self.navigationController pushViewController:vc animated:YES];
     vc.changAccountPrice = ^(NSString *price) {
         [self loadData];
@@ -424,7 +425,7 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 UIAlertAction *again = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.orderEntity.payTotal title:@"余额支付" delegate:self];
+                    PasswordAlertView *view = [[PasswordAlertView alloc]initWithPrice:self.orderEntity.payActual title:@"余额支付" delegate:self];
                     [view show];
                 }];
                 [alert addAction:forgetPassword];

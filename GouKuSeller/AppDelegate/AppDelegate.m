@@ -86,7 +86,7 @@
     //2.1.9版本新增获取registration id block接口。
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
-            NSLog(@"registrationID获取成功：%@",registrationID);
+//            NSLog(@"registrationID获取成功：%@",registrationID);
 //            NSString *strUrl = @"http://47.97.174.40:9000/registionid/set";
             NSString *strUrl = [NSString stringWithFormat:@"%@/registionid/set",API_Login];
             NSDictionary *dic = @{@"registionid":registrationID};
@@ -97,12 +97,11 @@
                
                 
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                NSLog(@"error == %@",error);
                 
             }];
         }
         else{
-            NSLog(@"registrationID获取失败，code：%d",resCode);
+//            NSLog(@"registrationID获取失败，code：%d",resCode);
         }
     }];
     [AMapServices sharedServices].apiKey = @"2c81b2b54c03fbdabdbcde8c90d0617c";
@@ -137,7 +136,7 @@
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
-    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
+//    NSLog(@"%@", [NSString stringWithFormat:@"Device Token: %@", deviceToken]);
     [JPUSHService registerDeviceToken:deviceToken];
 
 }
@@ -159,12 +158,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [JPUSHService handleRemoteNotification:userInfo];
         //程序在前台
 //        NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
-        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+//        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
     else {
         // 程序打开走这里拿到通知信息
-        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+//        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     }
     completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
 }
@@ -184,12 +183,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
 //        NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
-        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+//        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
         [[NSNotificationCenter defaultCenter]postNotificationName:@"cashcomplete" object:nil userInfo:nil];
     }
     else {
         // 判断为本地通知
-       NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+//       NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
         
     }
     completionHandler();  // 系统要求执行这个方法
@@ -206,7 +205,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSDictionary *dic =  [self dictionaryWithJsonString:content];
    
-    NSLog(@"dic = %@",dic);
+//    NSLog(@"dic = %@",dic);
     if ([[dic objectForKey:@"type"] intValue] == 1 && [[dic objectForKey:@"status"] intValue] == 0) {
         //收银  用户付款成功
         [[NSNotificationCenter defaultCenter] postNotificationName:@"cashcomplete" object:nil userInfo:nil];
@@ -233,7 +232,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                                                           error:&err];
     if(err)
     {
-        NSLog(@"json解析失败：%@",err);
+//        NSLog(@"json解析失败：%@",err);
         return nil;
     }
     return dic;
