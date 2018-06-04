@@ -14,6 +14,7 @@
 #import "ChangeShopViewController.h"
 #import "TermOfShopViewController.h"
 #import "EditAddressViewController.h"
+#import "PrinterManagerViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource,TextViewClickReturnDelegate,TextFieldClickReturnDelegate,UITextFieldDelegate>
 @property (nonatomic ,strong)UITableView    *tb_my;
@@ -30,7 +31,7 @@
     if (self) {
         self.arr_my = [[NSMutableArray alloc]init];
         NSArray *arr = @[@"切换门店"];
-        NSArray *arr2 = @[@"地址管理"];
+        NSArray *arr2 = @[@"地址管理",@"打印机管理"];
         NSArray *arr3 = @[@"账号设置",@"商家违规条例",@"关于我们"];
         [self.arr_my addObject:arr];
         [self.arr_my addObject:arr2];
@@ -140,6 +141,12 @@
     }
     if (indexPath.section == 1 && indexPath.row == 0) {
         EditAddressViewController *vc = [[EditAddressViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        PrinterManagerViewController *vc = [[PrinterManagerViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
         

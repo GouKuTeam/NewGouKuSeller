@@ -21,6 +21,7 @@ static NSString * const TYPE = @"TYPE";
 static NSString * const SecurityToken = @"securityToken";
 static NSString * const AccessKeySecret = @"accessKeySecret";
 static NSString * const AccessKeyId = @"accessKeyId";
+static NSString * const ISPrinter = @"isPrinter";
 
 @implementation LoginStorage
 
@@ -162,6 +163,16 @@ static NSString * const AccessKeyId = @"accessKeyId";
 }
 + (NSString *)GetAccessKeyId{
     return [UserDefaultsUtils valueWithKey:AccessKeyId];
+}
+
+/**
+ *  是否自动打印小票
+ */
++ (void)saveIsPrinter:(BOOL)printerStatus{
+    [UserDefaultsUtils saveBoolValue:printerStatus withKey:ISPrinter];
+}
++ (BOOL)IsPrinter{
+    return  [UserDefaultsUtils boolValueWithKey:ISPrinter];
 }
 
 @end

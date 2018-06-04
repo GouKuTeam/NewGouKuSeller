@@ -10,6 +10,7 @@
 #import "WorkbenchViewController.h"
 #import "OrderViewController.h"
 #import "MyViewController.h"
+#import "ShopOrderManagerViewController.h"
 
 #define BASE_TAG 10000
 
@@ -39,19 +40,23 @@
     WorkbenchViewController *homePage = [[WorkbenchViewController alloc] init];
     UINavigationController *homePageNav = [self changeToNavController:homePage title:@"工作台" index:1];
     
-    //订单
+    //订单处理
+    ShopOrderManagerViewController *orderManager = [[ShopOrderManagerViewController alloc]init];
+    UINavigationController *orderManagerNav = [self changeToNavController:orderManager title:@"订单处理" index:2];
+    
+    //订单查询
     OrderViewController *search = [[OrderViewController alloc] init];
-    UINavigationController *searchNav = [self changeToNavController:search title:@"订单" index:2];
+    UINavigationController *searchNav = [self changeToNavController:search title:@"订单查询" index:3];
     
     //我的
     MyViewController *message = [[MyViewController alloc] init];
-    UINavigationController *messageNav = [self changeToNavController:message title:@"我的" index:3];
+    UINavigationController *messageNav = [self changeToNavController:message title:@"我的" index:4];
     
-    self.viewControllers = [NSArray arrayWithObjects:homePageNav, searchNav, messageNav, nil];
-    NSArray *titles = @[@"工作台",@"订单",@"我的"];
-    NSArray *images = @[@"Tab_Normal_1",@"Tab_Normal_2",@"Tab_Normal_3"];
-    NSArray *selectImages = @[@"Tab_Selected_1",@"Tab_Selected_2",@"Tab_Selected_3"];
-    for (int i=0; i<3; i++) {
+    self.viewControllers = [NSArray arrayWithObjects:homePageNav,orderManagerNav, searchNav, messageNav, nil];
+    NSArray *titles = @[@"工作台",@"订单处理",@"订单查询",@"我的"];
+    NSArray *images = @[@"Tab_Normal_1",@"Tab_Normal_2",@"Tab_Normal_3",@"Tab_Normal_4"];
+    NSArray *selectImages = @[@"Tab_Selected_1",@"Tab_Selected_2",@"Tab_Selected_3",@"Tab_Selected_4"];
+    for (int i=0; i<4; i++) {
         UITabBarItem *item = [self.tabBar.items objectAtIndex:i];
         item.tag = i;
         item.title = [titles objectAtIndex:i];

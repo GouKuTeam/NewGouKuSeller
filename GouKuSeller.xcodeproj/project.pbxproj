@@ -35,6 +35,24 @@
 		18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */; };
 		18B3F97420A440830000A30C /* TitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97320A440830000A30C /* TitleCollectionViewCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
+		740077C520C51F1F000A50AA /* ShopOrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */; };
+		740077C820C52203000A50AA /* PrinterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077C720C52203000A50AA /* PrinterManagerViewController.m */; };
+		740077F220C52C21000A50AA /* ProgressShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077E820C52C1F000A50AA /* ProgressShow.m */; };
+		740077F320C52C21000A50AA /* ProgressShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077E820C52C1F000A50AA /* ProgressShow.m */; };
+		740077F420C52C21000A50AA /* UIWebView+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077E920C52C1F000A50AA /* UIWebView+UIImage.m */; };
+		740077F520C52C21000A50AA /* UIWebView+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077E920C52C1F000A50AA /* UIWebView+UIImage.m */; };
+		740077F620C52C21000A50AA /* JWPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077EA20C52C1F000A50AA /* JWPrinter.m */; };
+		740077F720C52C21000A50AA /* JWPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077EA20C52C1F000A50AA /* JWPrinter.m */; };
+		740077F820C52C21000A50AA /* JWBluetoothManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077EC20C52C20000A50AA /* JWBluetoothManage.m */; };
+		740077F920C52C21000A50AA /* JWBluetoothManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077EC20C52C20000A50AA /* JWBluetoothManage.m */; };
+		740077FC20C52C21000A50AA /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077EF20C52C20000A50AA /* UIImage+Bitmap.m */; };
+		740077FD20C52C21000A50AA /* UIImage+Bitmap.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077EF20C52C20000A50AA /* UIImage+Bitmap.m */; };
+		7400781520C52FF0000A50AA /* ConnectPrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400781420C52FF0000A50AA /* ConnectPrinterViewController.m */; };
+		7400781620C52FF0000A50AA /* ConnectPrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400781420C52FF0000A50AA /* ConnectPrinterViewController.m */; };
+		7400781A20C53698000A50AA /* SelectPrinterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */; };
+		7400781B20C53698000A50AA /* SelectPrinterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */; };
+		7400782220C538BE000A50AA /* PrinterSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782120C538BE000A50AA /* PrinterSettingViewController.m */; };
+		7400782320C538BE000A50AA /* PrinterSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782120C538BE000A50AA /* PrinterSettingViewController.m */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
 		74046AF1209ABB57004E64A9 /* EditPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AF0209ABB57004E64A9 /* EditPriceTableViewCell.m */; };
@@ -768,6 +786,27 @@
 		18B3F97320A440830000A30C /* TitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleCollectionViewCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		740077C320C51F1F000A50AA /* ShopOrderManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderManagerViewController.h; sourceTree = "<group>"; };
+		740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderManagerViewController.m; sourceTree = "<group>"; };
+		740077C620C52203000A50AA /* PrinterManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrinterManagerViewController.h; sourceTree = "<group>"; };
+		740077C720C52203000A50AA /* PrinterManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrinterManagerViewController.m; sourceTree = "<group>"; };
+		740077E520C52C1F000A50AA /* ProgressShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressShow.h; sourceTree = "<group>"; };
+		740077E620C52C1F000A50AA /* JWBluetoothBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBluetoothBlocks.h; sourceTree = "<group>"; };
+		740077E720C52C1F000A50AA /* UIWebView+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+UIImage.h"; sourceTree = "<group>"; };
+		740077E820C52C1F000A50AA /* ProgressShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressShow.m; sourceTree = "<group>"; };
+		740077E920C52C1F000A50AA /* UIWebView+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+UIImage.m"; sourceTree = "<group>"; };
+		740077EA20C52C1F000A50AA /* JWPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWPrinter.m; sourceTree = "<group>"; };
+		740077EC20C52C20000A50AA /* JWBluetoothManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWBluetoothManage.m; sourceTree = "<group>"; };
+		740077EE20C52C20000A50AA /* JWPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWPrinter.h; sourceTree = "<group>"; };
+		740077EF20C52C20000A50AA /* UIImage+Bitmap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Bitmap.m"; sourceTree = "<group>"; };
+		740077F020C52C20000A50AA /* JWBluetoothManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBluetoothManage.h; sourceTree = "<group>"; };
+		740077F120C52C21000A50AA /* UIImage+Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Bitmap.h"; sourceTree = "<group>"; };
+		7400781320C52FF0000A50AA /* ConnectPrinterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectPrinterViewController.h; sourceTree = "<group>"; };
+		7400781420C52FF0000A50AA /* ConnectPrinterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectPrinterViewController.m; sourceTree = "<group>"; };
+		7400781820C53698000A50AA /* SelectPrinterTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectPrinterTableViewCell.h; sourceTree = "<group>"; };
+		7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectPrinterTableViewCell.m; sourceTree = "<group>"; };
+		7400782020C538BE000A50AA /* PrinterSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrinterSettingViewController.h; sourceTree = "<group>"; };
+		7400782120C538BE000A50AA /* PrinterSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrinterSettingViewController.m; sourceTree = "<group>"; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
 		74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreAddCommodityViewController.m; sourceTree = "<group>"; };
 		74046AEB209AB580004E64A9 /* EditPriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditPriceViewController.h; sourceTree = "<group>"; };
@@ -1516,6 +1555,45 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		740077C220C51EE6000A50AA /* 订单处理 */ = {
+			isa = PBXGroup;
+			children = (
+				740077C320C51F1F000A50AA /* ShopOrderManagerViewController.h */,
+				740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */,
+			);
+			path = "订单处理";
+			sourceTree = "<group>";
+		};
+		740077E420C52C08000A50AA /* JWBluetoothPrinte */ = {
+			isa = PBXGroup;
+			children = (
+				740077E620C52C1F000A50AA /* JWBluetoothBlocks.h */,
+				740077F020C52C20000A50AA /* JWBluetoothManage.h */,
+				740077EC20C52C20000A50AA /* JWBluetoothManage.m */,
+				740077EE20C52C20000A50AA /* JWPrinter.h */,
+				740077EA20C52C1F000A50AA /* JWPrinter.m */,
+				740077E520C52C1F000A50AA /* ProgressShow.h */,
+				740077E820C52C1F000A50AA /* ProgressShow.m */,
+				740077F120C52C21000A50AA /* UIImage+Bitmap.h */,
+				740077EF20C52C20000A50AA /* UIImage+Bitmap.m */,
+				740077E720C52C1F000A50AA /* UIWebView+UIImage.h */,
+				740077E920C52C1F000A50AA /* UIWebView+UIImage.m */,
+			);
+			name = JWBluetoothPrinte;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		7400781720C53674000A50AA /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7489CC81207F2F4A00971BED /* MyTbHeaderView.h */,
+				7489CC82207F2F4A00971BED /* MyTbHeaderView.m */,
+				7400781820C53698000A50AA /* SelectPrinterTableViewCell.h */,
+				7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		74046AEE209AB7BD004E64A9 /* 编辑价格 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2095,7 +2173,8 @@
 			isa = PBXGroup;
 			children = (
 				74BD11F4206894CD0053A3D1 /* 工作台 */,
-				74BD11F5206894E80053A3D1 /* 订单 */,
+				740077C220C51EE6000A50AA /* 订单处理 */,
+				74BD11F5206894E80053A3D1 /* 订单查询 */,
 				74BD11F6206894FA0053A3D1 /* 我的 */,
 			);
 			path = "商家端";
@@ -2436,7 +2515,7 @@
 			path = "New Group1";
 			sourceTree = "<group>";
 		};
-		74BD11F5206894E80053A3D1 /* 订单 */ = {
+		74BD11F5206894E80053A3D1 /* 订单查询 */ = {
 			isa = PBXGroup;
 			children = (
 				74BD11E92067DEB60053A3D1 /* OrderViewController.h */,
@@ -2452,17 +2531,24 @@
 				741D3C9520809EC500C56FCA /* OrderInformationFooterView.h */,
 				741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */,
 			);
-			name = "订单";
+			name = "订单查询";
 			path = "New Group2";
 			sourceTree = "<group>";
 		};
 		74BD11F6206894FA0053A3D1 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				7400781720C53674000A50AA /* view */,
 				74BD11EE2067DEBD0053A3D1 /* MyViewController.h */,
 				74BD11EF2067DEBD0053A3D1 /* MyViewController.m */,
 				741D3CC220848AF200C56FCA /* ChangeShopViewController.h */,
 				741D3CC320848AF200C56FCA /* ChangeShopViewController.m */,
+				740077C620C52203000A50AA /* PrinterManagerViewController.h */,
+				740077C720C52203000A50AA /* PrinterManagerViewController.m */,
+				7400781320C52FF0000A50AA /* ConnectPrinterViewController.h */,
+				7400781420C52FF0000A50AA /* ConnectPrinterViewController.m */,
+				7400782020C538BE000A50AA /* PrinterSettingViewController.h */,
+				7400782120C538BE000A50AA /* PrinterSettingViewController.m */,
 				741D3CA420845D7800C56FCA /* SetAccountNumViewController.h */,
 				741D3CA520845D7800C56FCA /* SetAccountNumViewController.m */,
 				741D3CA9208465CE00C56FCA /* ChangePassWordViewController.h */,
@@ -2471,8 +2557,6 @@
 				744817FD20AEA5C800A7F3DD /* TermOfShopViewController.m */,
 				741D3CBD2084892900C56FCA /* AboutMeViewController.h */,
 				741D3CBE2084892900C56FCA /* AboutMeViewController.m */,
-				7489CC81207F2F4A00971BED /* MyTbHeaderView.h */,
-				7489CC82207F2F4A00971BED /* MyTbHeaderView.m */,
 			);
 			name = "我的";
 			path = "New Group3";
@@ -2540,6 +2624,7 @@
 		74BD12272068D8990053A3D1 /* 第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				740077E420C52C08000A50AA /* JWBluetoothPrinte */,
 				743C5F3D20A554FE00E617AF /* 微信语音合成 */,
 				743C5F2920A45DB300E617AF /* WXManager */,
 				74046B0E209C2E00004E64A9 /* GCPlaceholderTextView */,
@@ -3065,6 +3150,7 @@
 				744ABA87205428AF00BBB26E /* IQUIViewController+Additions.m in Sources */,
 				743C5F2220A41BEF00E617AF /* RechargeAmountViewController.m in Sources */,
 				743C5F9320A98F6D00E617AF /* InventoryDetailFooterView.m in Sources */,
+				7400782220C538BE000A50AA /* PrinterSettingViewController.m in Sources */,
 				74BD11DB2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				1891DAB520A3F172008E16F7 /* HYTabbarCollectionCell.m in Sources */,
 				744817FB20AE6F3000A7F3DD /* SearchPurchaseOrderViewController.m in Sources */,
@@ -3116,6 +3202,7 @@
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				743C5F7320A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
+				740077F220C52C21000A50AA /* ProgressShow.m in Sources */,
 				74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,
 				7491FA902079B7A50006F388 /* BankCardEntity.m in Sources */,
@@ -3128,6 +3215,7 @@
 				74BD125A2068FD080053A3D1 /* WorkBenchView.m in Sources */,
 				74046AF1209ABB57004E64A9 /* EditPriceTableViewCell.m in Sources */,
 				741D3CA620845D7800C56FCA /* SetAccountNumViewController.m in Sources */,
+				7400781A20C53698000A50AA /* SelectPrinterTableViewCell.m in Sources */,
 				74C6E367207B54D90083E4A8 /* UIViewController+SJVideoPlayerAdd.m in Sources */,
 				744ABA252054201B00BBB26E /* BaseEntity.m in Sources */,
 				744817F820ADB8EE00A7F3DD /* AddressNullView.m in Sources */,
@@ -3182,6 +3270,7 @@
 				74C6E33D207A2D0B0083E4A8 /* AccountCashDetailEntity.m in Sources */,
 				741D3CB02084692200C56FCA /* TiXianDetailViewController.m in Sources */,
 				744ABA7E205428AF00BBB26E /* IQUITextFieldView+Additions.m in Sources */,
+				740077C820C52203000A50AA /* PrinterManagerViewController.m in Sources */,
 				74BD11F02067DEBD0053A3D1 /* MyViewController.m in Sources */,
 				74BD120420689A700053A3D1 /* NotBeginningActivityTableViewCell.m in Sources */,
 				1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */,
@@ -3199,6 +3288,7 @@
 				74B4E8A2204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
 				74C6E372207C53570083E4A8 /* TitleClear.m in Sources */,
 				74B4E89C204BD3EC006AFB6C /* GetUUID.m in Sources */,
+				740077F820C52C21000A50AA /* JWBluetoothManage.m in Sources */,
 				74046B00209AFB9E004E64A9 /* SupplierCommodityInformationViewController.m in Sources */,
 				744ABA8F2054321300BBB26E /* CommodityHandler.m in Sources */,
 				74C6E37C207C58D40083E4A8 /* CashierCommodityEntity.m in Sources */,
@@ -3213,6 +3303,7 @@
 				744ABA2D2054207D00BBB26E /* NSString+URLEncoding.m in Sources */,
 				7448184120B2D26100A7F3DD /* SupplierOrderHandler.m in Sources */,
 				743C5F3020A528F500E617AF /* InventoryViewController.m in Sources */,
+				740077FC20C52C21000A50AA /* UIImage+Bitmap.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				7448181220AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
@@ -3234,6 +3325,7 @@
 				744ABA32205420B500BBB26E /* ShopClassificationEntity.m in Sources */,
 				74F57FFB20A2BBBB000D8C8F /* SearchSupplierCommodityViewController.m in Sources */,
 				747EDC4620B5117D00FCAFDE /* SupplierPayCompleteViewController.m in Sources */,
+				740077C520C51F1F000A50AA /* ShopOrderManagerViewController.m in Sources */,
 				1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */,
 				7448180D20AFDDC800A7F3DD /* PurchaseOrderDetailViewController.m in Sources */,
 				74B4E807204BD352006AFB6C /* AppDelegate.m in Sources */,
@@ -3265,8 +3357,11 @@
 				744ABAAA205623D000BBB26E /* SelectCommodityCategoryViewController.m in Sources */,
 				74F8E8E120592074000A17A5 /* StandardEntity.m in Sources */,
 				743C5F6E20A592DE00E617AF /* CustomerShopView.m in Sources */,
+				740077F620C52C21000A50AA /* JWPrinter.m in Sources */,
 				74F8E912205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
 				744ABAAF205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
+				7400781520C52FF0000A50AA /* ConnectPrinterViewController.m in Sources */,
+				740077F420C52C21000A50AA /* UIWebView+UIImage.m in Sources */,
 				74ACFFCF20A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
 				1842CCDA209AB1E200A1C7C8 /* PurchaseOrderViewController.m in Sources */,
 				74B4E8C320512CD8006AFB6C /* LoginStorage.m in Sources */,
@@ -3290,11 +3385,14 @@
 				74BD120A20689A980053A3D1 /* BeginningActiveTableViewCell.m in Sources */,
 				7416F035206768500002C960 /* MoreEditView.m in Sources */,
 				74BD123D2068E2650053A3D1 /* ActiveZhouViewController.m in Sources */,
+				7400782320C538BE000A50AA /* PrinterSettingViewController.m in Sources */,
+				740077F320C52C21000A50AA /* ProgressShow.m in Sources */,
 				744ABA82205428AF00BBB26E /* IQUIScrollView+Additions.m in Sources */,
 				74BD11EC2067DEB60053A3D1 /* OrderViewController.m in Sources */,
 				741D3CA22081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				74F8E918205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				7498366C208C3162007FEEF8 /* ActiveTimeEntity.m in Sources */,
+				740077FD20C52C21000A50AA /* UIImage+Bitmap.m in Sources */,
 				741D3CB620846D6C00C56FCA /* TiXianCompleteView.m in Sources */,
 				74B4E879204BD3EC006AFB6C /* TableBackgroudView.m in Sources */,
 				74F8E8F320592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
@@ -3349,6 +3447,7 @@
 				740C46B820AC3F8700626A8B /* TiXianPassWordView.m in Sources */,
 				743C5F6520A58A4C00E617AF /* CustomerManagerHandler.m in Sources */,
 				743C5F6F20A592DE00E617AF /* CustomerShopView.m in Sources */,
+				7400781B20C53698000A50AA /* SelectPrinterTableViewCell.m in Sources */,
 				74BD11DC2067DE830053A3D1 /* TabBarViewController.m in Sources */,
 				74ACFFC120A0552B005C5A16 /* ActiveTimeTableViewCell.m in Sources */,
 				7491FA78206E15CC0006F388 /* Province.m in Sources */,
@@ -3376,9 +3475,11 @@
 				74B4E873204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				744ABA67205428AF00BBB26E /* IQTitleBarButtonItem.m in Sources */,
 				7491FA7B206E15CC0006F388 /* AddressPickerView.m in Sources */,
+				7400781620C52FF0000A50AA /* ConnectPrinterViewController.m in Sources */,
 				7491FA3C206BA5D50006F388 /* SelectBankViewController.m in Sources */,
 				74ACFFD020A14DA5005C5A16 /* SupplierCommodityViewController.m in Sources */,
 				743C5F5520A581CE00E617AF /* SearchCustomerViewController.m in Sources */,
+				740077F920C52C21000A50AA /* JWBluetoothManage.m in Sources */,
 				74BD120F20689AB50053A3D1 /* FinishedActiveTableViewCell.m in Sources */,
 				743C5F6A20A5906100E617AF /* CustomerShopInformationViewController.m in Sources */,
 				74B4E8AF204BD3EC006AFB6C /* NSString+Size.m in Sources */,
@@ -3418,6 +3519,7 @@
 				744ABAB6205652D300BBB26E /* LoginViewController.m in Sources */,
 				74C6E378207C56640083E4A8 /* CashierHandler.m in Sources */,
 				74983671208C3176007FEEF8 /* ActiveRulesEntity.m in Sources */,
+				740077F720C52C21000A50AA /* JWPrinter.m in Sources */,
 				744ABA85205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
 				74046B12209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */,
 				74F8E913205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
@@ -3428,6 +3530,7 @@
 				744ABA292054201B00BBB26E /* BaseHandler.m in Sources */,
 				74B4E8A9204BD3EC006AFB6C /* KeyChainStore.m in Sources */,
 				7491FA41206CAB130006F388 /* TiXianiewController.m in Sources */,
+				740077F520C52C21000A50AA /* UIWebView+UIImage.m in Sources */,
 				7491FA28206B7B000006F388 /* SettlementView.m in Sources */,
 				744ABA7C205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
 				74F8E9312060E0B5000A17A5 /* SearchWithNameTableViewCell.m in Sources */,

@@ -52,4 +52,7 @@
 
 + (void)saveAccessKeyId:(NSString *)accessKeyId;
 + (NSString *)GetAccessKeyId;
+
++ (void)saveIsPrinter:(BOOL)printerStatus;
++ (BOOL)IsPrinter;
 @end
