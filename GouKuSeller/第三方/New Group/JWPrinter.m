@@ -327,18 +327,18 @@
     }
     
     if (left) {
-        [self setAlignment:HLTextAlignmentLeft];
-        [self setText:left maxChar:36];
+//        [self setAlignment:HLTextAlignmentLeft];
+        [self setText:left maxChar:46];
     }
     
     if (middle) {
-        [self setAlignment:HLTextAlignmentRight];
-        [self setOffset:150 + offset];
+//        [self setAlignment:HLTextAlignmentRight];
+        [self setOffset:230 + offset];
         [self setText:middle];
     }
     
     if (right) {
-        [self setAlignment:HLTextAlignmentRight];
+//        [self setAlignment:HLTextAlignmentRight];
         [self setOffset:300 + offset];
         [self setText:right];
     }

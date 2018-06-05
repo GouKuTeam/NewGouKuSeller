@@ -136,14 +136,17 @@
     [printer appendTitle:@"使用红包"  value:@"-20"];
     [printer appendTitle:@"配送费"  value:@"6"];
     [printer appendTitle:@"会员免配送费"  value:@"-6"];
-    
     [printer appendSeperatorLine];
 
-    [printer appendTitle:@"实付" value:@"46.90" fontSize:HLFontSizeTitleBig];
+    [printer appendTitle:@"实付" value:@"46.90" fontSize:HLFontSizeTitleSmalle];
     [printer appendSeperatorLine];
-    [printer appendText:@"北京市朝阳区酒仙桥路14号C3 2层 优客工场" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleBig];
-    [printer appendText:@"王大锤先生" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleBig];
-    [printer appendText:@"18810146571" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleBig];
+    NSString *str21 = @"北京市朝阳区酒仙桥路14号C3 2层 优客工场";
+    [printer appendText:str21 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+    NSString *str22 = @"王大锤先生";
+    [printer appendText:str22 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+    NSString *str23 = @"18810146751";
+    [printer appendText:str23 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+    
     [printer appendText:@"订单编号：12012312412512615" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
 
     [printer appendFooter:@"********饿了么#18完*******"];
