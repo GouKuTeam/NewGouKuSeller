@@ -53,6 +53,10 @@
 		7400781B20C53698000A50AA /* SelectPrinterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */; };
 		7400782220C538BE000A50AA /* PrinterSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782120C538BE000A50AA /* PrinterSettingViewController.m */; };
 		7400782320C538BE000A50AA /* PrinterSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782120C538BE000A50AA /* PrinterSettingViewController.m */; };
+		7400782620C66F56000A50AA /* SelectPrinterNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782520C66F56000A50AA /* SelectPrinterNumView.m */; };
+		7400782720C66F56000A50AA /* SelectPrinterNumView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782520C66F56000A50AA /* SelectPrinterNumView.m */; };
+		7400782A20C68622000A50AA /* ShopOrderManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782920C68622000A50AA /* ShopOrderManagerView.m */; };
+		7400782B20C68622000A50AA /* ShopOrderManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400782920C68622000A50AA /* ShopOrderManagerView.m */; };
 		74046AEA20909507004E64A9 /* MoreAddCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */; };
 		74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AEC209AB580004E64A9 /* EditPriceViewController.m */; };
 		74046AF1209ABB57004E64A9 /* EditPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046AF0209ABB57004E64A9 /* EditPriceTableViewCell.m */; };
@@ -807,6 +811,10 @@
 		7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectPrinterTableViewCell.m; sourceTree = "<group>"; };
 		7400782020C538BE000A50AA /* PrinterSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrinterSettingViewController.h; sourceTree = "<group>"; };
 		7400782120C538BE000A50AA /* PrinterSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrinterSettingViewController.m; sourceTree = "<group>"; };
+		7400782420C66F56000A50AA /* SelectPrinterNumView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectPrinterNumView.h; sourceTree = "<group>"; };
+		7400782520C66F56000A50AA /* SelectPrinterNumView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectPrinterNumView.m; sourceTree = "<group>"; };
+		7400782820C68622000A50AA /* ShopOrderManagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderManagerView.h; sourceTree = "<group>"; };
+		7400782920C68622000A50AA /* ShopOrderManagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderManagerView.m; sourceTree = "<group>"; };
 		74046AE820909507004E64A9 /* MoreAddCommodityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAddCommodityViewController.h; sourceTree = "<group>"; };
 		74046AE920909507004E64A9 /* MoreAddCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreAddCommodityViewController.m; sourceTree = "<group>"; };
 		74046AEB209AB580004E64A9 /* EditPriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditPriceViewController.h; sourceTree = "<group>"; };
@@ -1560,6 +1568,8 @@
 			children = (
 				740077C320C51F1F000A50AA /* ShopOrderManagerViewController.h */,
 				740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */,
+				7400782820C68622000A50AA /* ShopOrderManagerView.h */,
+				7400782920C68622000A50AA /* ShopOrderManagerView.m */,
 			);
 			path = "订单处理";
 			sourceTree = "<group>";
@@ -1590,6 +1600,8 @@
 				7489CC82207F2F4A00971BED /* MyTbHeaderView.m */,
 				7400781820C53698000A50AA /* SelectPrinterTableViewCell.h */,
 				7400781920C53698000A50AA /* SelectPrinterTableViewCell.m */,
+				7400782420C66F56000A50AA /* SelectPrinterNumView.h */,
+				7400782520C66F56000A50AA /* SelectPrinterNumView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3039,11 +3051,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller-resources.sh",
 				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/Bugtags/Bugtags.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Bugtags.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3181,6 +3196,7 @@
 				181B136220A9357F0079E536 /* SelectUnitView.m in Sources */,
 				74BD125F206920E90053A3D1 /* SalesHeaderView.m in Sources */,
 				743C5F2C20A45DCA00E617AF /* WXApiManager.m in Sources */,
+				7400782620C66F56000A50AA /* SelectPrinterNumView.m in Sources */,
 				744ABA9520556D5D00BBB26E /* AddNewCommodityViewController.m in Sources */,
 				1842CCE8209BF89500A1C7C8 /* AddressHeaderView.m in Sources */,
 				744ABA60205428AF00BBB26E /* IQTextView.m in Sources */,
@@ -3352,6 +3368,7 @@
 				7491FA22206B75400006F388 /* SettlementViewController.m in Sources */,
 				744ABA142052729500BBB26E /* ManagementClassificationViewController.m in Sources */,
 				7498367A208C3789007FEEF8 /* ActiveDetailHeaderView.m in Sources */,
+				7400782A20C68622000A50AA /* ShopOrderManagerView.m in Sources */,
 				74046AFD209AF6D5004E64A9 /* SupplierCommodityTableViewCell.m in Sources */,
 				74C6E337207A0B730083E4A8 /* BankCardDetailViewController.m in Sources */,
 				744ABAAA205623D000BBB26E /* SelectCommodityCategoryViewController.m in Sources */,
@@ -3488,6 +3505,7 @@
 				74B4E8A3204BD3EC006AFB6C /* UIResponder+findFirstResponder.m in Sources */,
 				741D3C7F20806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
 				741D3C9D2081D0D000C56FCA /* CommonAlertView.m in Sources */,
+				7400782B20C68622000A50AA /* ShopOrderManagerView.m in Sources */,
 				74BD12512068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				744ABA9C20556F7200BBB26E /* NewCommodityView.m in Sources */,
 				741D3CB12084692200C56FCA /* TiXianDetailViewController.m in Sources */,
@@ -3539,6 +3557,7 @@
 				74B4E8AC204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				744ABA64205428AF00BBB26E /* IQToolbar.m in Sources */,
 				74BD11E72067DEAD0053A3D1 /* WorkbenchViewController.m in Sources */,
+				7400782720C66F56000A50AA /* SelectPrinterNumView.m in Sources */,
 				7491FA9B2079D4F30006F388 /* FindPwWithUserNameViewController.m in Sources */,
 				7491FA23206B75400006F388 /* SettlementViewController.m in Sources */,
 				74BD12202068C0AB0053A3D1 /* ActiveInformation.m in Sources */,
@@ -3931,6 +3950,73 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"AliyunOSSiOS\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MJExtension\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"Reachability\"",
+					"-l\"SDWebImage\"",
+					"$(inherited)",
+					"-l\"WeChatSDK\"",
+					"-l\"c++\"",
+					"-l\"jcore-ios-1.1.7\"",
+					"-l\"jpush-ios-3.0.8\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3.0\"",
+					"-l\"stdc++.6.0.9\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AMapFoundationKit\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"AMapSearchKit\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Bugtags\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3958,6 +4044,73 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GouKuSeller/第三方/微信语音合成",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"AliyunOSSiOS\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MJExtension\"",
+					"-l\"MJRefresh\"",
+					"-l\"Masonry\"",
+					"-l\"Reachability\"",
+					"-l\"SDWebImage\"",
+					"$(inherited)",
+					"-l\"WeChatSDK\"",
+					"-l\"c++\"",
+					"-l\"jcore-ios-1.1.7\"",
+					"-l\"jpush-ios-3.0.8\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3.0\"",
+					"-l\"stdc++.6.0.9\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AMapFoundationKit\"",
+					"-framework",
+					"\"AMapLocationKit\"",
+					"-framework",
+					"\"AMapSearchKit\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Bugtags\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"MAMapKit\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gouku.GouKuSeller;
 				PRODUCT_NAME = "$(TARGET_NAME)";

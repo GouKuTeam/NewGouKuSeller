@@ -31,6 +31,8 @@
 #import "BaseTableView.h"
 #import "TableBackgroudView.h"
 #import "LoginStorage.h"
+#import <UMCommon/UMCommon.h>
+#import <UMAnalytics/MobClick.h>
 #endif
 
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)

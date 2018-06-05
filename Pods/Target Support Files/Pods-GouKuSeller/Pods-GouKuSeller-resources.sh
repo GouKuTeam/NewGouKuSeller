@@ -85,10 +85,12 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle"
+  install_resource "${PODS_ROOT}/Bugtags/Bugtags.bundle"
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle"
+  install_resource "${PODS_ROOT}/Bugtags/Bugtags.bundle"
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
 

@@ -18,6 +18,8 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <WXApi.h>
+#import <Bugtags/Bugtags.h>
+#import <UMCommon/UMCommon.h>
 
 
 @interface AppDelegate ()<JPUSHRegisterDelegate,WXApiDelegate>
@@ -106,6 +108,19 @@
     }];
     [AMapServices sharedServices].apiKey = @"2c81b2b54c03fbdabdbcde8c90d0617c";
     [WXApi registerApp:@"wx011fffeb2e1f2376"];
+    
+    
+    if (SERVER_TYPE == 1) {
+        //appstore
+        [Bugtags startWithAppKey:@"96d07f493a3529833efd5600f562d7ce" invocationEvent:BTGInvocationEventNone];
+    }
+    if (SERVER_TYPE == 2) {
+        //测试环境
+        [Bugtags startWithAppKey:@"96d07f493a3529833efd5600f562d7ce" invocationEvent:BTGInvocationEventBubble];
+    }
+    
+    [UMConfigure initWithAppkey:@"5b14f913b27b0a555e00011f" channel:@"App Store"];
+    
     return YES;
 }
 

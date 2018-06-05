@@ -17,6 +17,8 @@
 @interface OrderViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 @property (nonatomic ,strong)BaseTableView         *tb_order;
 @property (nonatomic ,strong)NSMutableArray        *arr_order;
+@property (nonatomic,assign)int                selectedIndex;
+
 
 @end
 
@@ -26,7 +28,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = nil;
-    self.title = @"订单";
+    
+    // 初始化，添加分段名，会自动布局
+    NSArray *segmentedArray = [NSArray arrayWithObjects:@"网络订单",@"门店订单",nil];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    segmentedControl.frame = CGRectMake(0, 0, SCREEN_WIDTH - 160, 30);
+    segmentedControl.selectedSegmentIndex = 0;
+    segmentedControl.layer.masksToBounds = YES;
+    segmentedControl.layer.borderColor = [[UIColor whiteColor] CGColor];
+    segmentedControl.layer.borderWidth = 1;
+    segmentedControl.layer.cornerRadius = 4;
+    segmentedControl.tintColor = [UIColor whiteColor];
+    [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateSelected];
+    [segmentedControl setBackgroundImage:[self createImageWithColor:[UIColor colorWithHexString:COLOR_Main]] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [segmentedControl setBackgroundImage:[self createImageWithColor:[UIColor colorWithHexString:COLOR_GRAY_BG]] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    [segmentedControl addTarget:self action:@selector(indexDidChangeForSegmentedControl:)forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = segmentedControl;
     [self.view setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(searchBarAction)];
     [btn_right setImage:[UIImage imageNamed:@"home_search"]];
@@ -138,6 +156,30 @@
     SearchOrderViewController *vc = [[SearchOrderViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        NSLog(@"合作门店");
+        self.selectedIndex = 0;
+    } else {
+        NSLog(@"潜在门店");
+        self.selectedIndex = 1;
+        
+    }
+}
+
+- (UIImage *)createImageWithColor:(UIColor *)color{
+    
+    CGRect rect=CGRectMake(0.0f,0.0f,1.0f,1.0f);UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *theImage=UIGraphicsGetImageFromCurrentImageContext();UIGraphicsEndImageContext();
+    return theImage;
+    
 }
 
 - (void)didReceiveMemoryWarning {

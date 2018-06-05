@@ -17,6 +17,7 @@
 #import "PurchaseTabBarViewController.h"
 #import "EditAddressViewController.h"
 #import "InventoryViewController.h"
+
 @interface WorkbenchViewController ()
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
 
@@ -27,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
-
 }
 
 - (void)onCreate{
@@ -103,11 +103,13 @@
     [self loadData];
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:YES];
+    [MobClick beginLogPageView:@"工作台"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setHidden:NO];
+    [MobClick endLogPageView:@"工作台"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -13,5 +13,9 @@ target 'GouKuSeller' do
     pod 'AMapLocation'
     pod 'WechatOpenSDK'
     pod 'AliyunOSSiOS'
+    pod 'Bugtags'
+    pod 'UMCCommon'
+    pod 'UMCAnalytics'
+    pod 'UMCSecurityPlugins'
 end
 inhibit_all_warnings!

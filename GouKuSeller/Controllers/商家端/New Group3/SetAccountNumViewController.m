@@ -91,6 +91,7 @@
             if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
                 
                 [LoginStorage saveIsLogin:NO];
+                [LoginStorage savePrinterNum:@"1"];
                 LoginViewController *vc = [[LoginViewController alloc]init];
                 UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
                 [UIApplication sharedApplication].keyWindow.rootViewController = nav;

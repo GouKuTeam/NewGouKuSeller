@@ -7,8 +7,14 @@
 //
 
 #import "ShopOrderManagerViewController.h"
+#import "ShopOrderManagerView.h"
+#import "TabBarViewController.h"
 
 @interface ShopOrderManagerViewController ()
+
+@property (nonatomic ,strong)ShopOrderManagerView      *v_header;
+@property (nonatomic ,assign)int                        selectIndex;
+
 
 @end
 
@@ -16,8 +22,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = nil;
 }
+
+- (void)onCreate{
+    self.v_header = [[ShopOrderManagerView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SafeAreaStatusBarHeight + 72)];
+    [self.view addSubview:self.v_header];
+    WS(weakSelf);
+    self.v_header.selectType = ^(NSInteger index) {
+        if (index == 1) {
+            index = 2;
+        }
+        weakSelf.selectIndex = (int)index;
+//        [weakSelf.tb_orderManager requestDataSource];
+    };
+    [self.v_header setItemWithIndex:0];
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

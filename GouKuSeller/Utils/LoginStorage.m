@@ -22,6 +22,7 @@ static NSString * const SecurityToken = @"securityToken";
 static NSString * const AccessKeySecret = @"accessKeySecret";
 static NSString * const AccessKeyId = @"accessKeyId";
 static NSString * const ISPrinter = @"isPrinter";
+static NSString * const PrinterNum = @"PrinterNum";
 
 @implementation LoginStorage
 
@@ -173,6 +174,16 @@ static NSString * const ISPrinter = @"isPrinter";
 }
 + (BOOL)IsPrinter{
     return  [UserDefaultsUtils boolValueWithKey:ISPrinter];
+}
+
+/**
+ *  打印次数
+ */
++ (void)savePrinterNum:(NSString *)printerNum{
+    [UserDefaultsUtils saveValue:printerNum forKey:PrinterNum];
+}
++ (NSString *)getPrinterNum{
+    return  [UserDefaultsUtils valueWithKey:PrinterNum];
 }
 
 @end

@@ -55,4 +55,7 @@
 
 + (void)saveIsPrinter:(BOOL)printerStatus;
 + (BOOL)IsPrinter;
+
++ (void)savePrinterNum:(NSString *)printerNum;
++ (NSString *)getPrinterNum;
 @end

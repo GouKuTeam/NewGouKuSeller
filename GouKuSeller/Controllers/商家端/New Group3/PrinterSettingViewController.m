@@ -8,14 +8,15 @@
 
 #import "PrinterSettingViewController.h"
 #import "JWBluetoothManage.h"
-
+#import "SelectPrinterNumView.h"
 @interface PrinterSettingViewController (){
     JWBluetoothManage * manage;
 }
 
-@property (nonatomic ,strong)UISwitch                 *v_switch;
-@property (strong, nonatomic)   NSArray            *goodsArray;  /**< 商品数组 */
-
+@property (nonatomic ,strong)UISwitch                            *v_switch;
+@property (nonatomic ,strong)SelectPrinterNumView                *selectPrinterNumView;
+@property (nonatomic ,strong)UILabel                             *lab_printerNum;
+@property (nonatomic ,strong)NSMutableArray                      *arr_num;
 @end
 
 @implementation PrinterSettingViewController
@@ -23,10 +24,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"打印机设置";
-    NSDictionary *dict1 = @{@"name":@"铅笔的所发生的联发科拉的精髓范德萨冷风机阿斯兰的； 十六大附近的酸辣粉骄傲酸辣粉",@"amount":@"5",@"price":@"2.0"};
-    NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};
-    NSDictionary *dict3 = @{@"name":@"笔记本",@"amount":@"3",@"price":@"3.0"};
-    self.goodsArray = @[dict1, dict2, dict3];
+    
+    self.selectPrinterNumView = [[SelectPrinterNumView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.selectPrinterNumView];
+    [self.selectPrinterNumView setHidden:YES];
+    [self.selectPrinterNumView.btn_confirm addTarget:self action:@selector(confirmAction) forControlEvents:UIControlEventTouchUpInside];
+    self.arr_num = [NSMutableArray arrayWithObjects:@"1 联",@"2 联",@"3 联", nil];
+    [self.selectPrinterNumView setArr_data:self.arr_num];
     manage = [JWBluetoothManage sharedInstance];
 }
 
@@ -81,6 +85,25 @@
     [lab_2 setText:@"打印联数"];
     [lab_2 setTextColor: [UIColor blackColor]];
     [lab_2 setFont:[UIFont systemFontOfSize:16]];
+    
+    self.lab_printerNum = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, 44, 100, 44)];
+    [v_mid addSubview:self.lab_printerNum];
+    [self.lab_printerNum setTextColor:[UIColor colorWithHexString:@"#000000"]];
+    [self.lab_printerNum setTextAlignment:NSTextAlignmentRight];
+    [self.lab_printerNum setFont:[UIFont systemFontOfSize:16]];
+    if ([[LoginStorage getPrinterNum] isEqualToString:@"2"]) {
+        [self.lab_printerNum setText:@"2 联"];
+    }else if ([[LoginStorage getPrinterNum] isEqualToString:@"3"]){
+        [self.lab_printerNum setText:@"3 联"];
+    }else{
+        [self.lab_printerNum setText:@"1 联"];
+    }
+   
+    UIButton *btn_select = [[UIButton alloc]initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 44)];
+    [v_mid addSubview:btn_select];
+    [btn_select setBackgroundColor:[UIColor clearColor]];
+    [btn_select addTarget:self action:@selector(selectprinterNum) forControlEvents:UIControlEventTouchUpInside];
+    
     
     UIButton *btn_dayin = [[UIButton alloc]initWithFrame:CGRectMake(0, v_mid.bottom + 20, SCREEN_WIDTH, 44)];
     [self.view addSubview:btn_dayin];
@@ -184,6 +207,22 @@
 
 - (void)leftBarAction:(id)sender{
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)selectprinterNum{
+    [self.view endEditing:YES];
+    [self.selectPrinterNumView setHidden:NO];
+}
+
+- (void)confirmAction{
+    [self.selectPrinterNumView setHidden:YES];
+    [self.lab_printerNum setText:[self.arr_num objectAtIndex:self.selectPrinterNumView.selectedOneIndex]];
+    if (self.selectPrinterNumView.selectedOneIndex == 1) {
+        [LoginStorage savePrinterNum:@"2"];
+    }
+    if (self.selectPrinterNumView.selectedOneIndex == 2) {
+        [LoginStorage savePrinterNum:@"3"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
