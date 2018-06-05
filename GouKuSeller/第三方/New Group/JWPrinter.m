@@ -7,7 +7,7 @@
 //
 
 #import "JWPrinter.h"
-
+#import "NSString+Size.h"
 #define kMargin 20
 #define kPadding 2
 #define kWidth 320
@@ -326,20 +326,20 @@
         offset = 10;
     }
     
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
     if (left) {
-        [self setAlignment:HLTextAlignmentLeft];
         [self setText:left maxChar:36];
     }
     
     if (middle) {
-        [self setAlignment:HLTextAlignmentRight];
-        [self setOffset:150 + offset];
+        NSData *data_middle = [right dataUsingEncoding:enc];
+        [self setOffset:180 - data_middle.length];
         [self setText:middle];
     }
     
     if (right) {
-        [self setAlignment:HLTextAlignmentRight];
-        [self setOffset:300 + offset];
+        NSData *data_right = [right dataUsingEncoding:enc];
+        [self setOffset:330 - data_right.length];
         [self setText:right];
     }
     
