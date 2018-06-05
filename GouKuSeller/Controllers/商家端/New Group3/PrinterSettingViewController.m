@@ -14,7 +14,7 @@
 }
 
 @property (nonatomic ,strong)UISwitch                 *v_switch;
-
+@property (strong, nonatomic)   NSArray            *goodsArray;  /**< 商品数组 */
 
 @end
 
@@ -23,6 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"打印机设置";
+    NSDictionary *dict1 = @{@"name":@"铅笔的所发生的联发科拉的精髓范德萨冷风机阿斯兰的； 十六大附近的酸辣粉骄傲酸辣粉",@"amount":@"5",@"price":@"2.0"};
+    NSDictionary *dict2 = @{@"name":@"橡皮",@"amount":@"1",@"price":@"1.0"};
+    NSDictionary *dict3 = @{@"name":@"笔记本",@"amount":@"3",@"price":@"3.0"};
+    self.goodsArray = @[dict1, dict2, dict3];
     manage = [JWBluetoothManage sharedInstance];
 }
 
@@ -107,24 +111,45 @@
     [printer appendText:str2 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleMiddle];
     NSString *str3 = @"--已在线支付--";
     [printer appendText:str3 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
-    NSString *str4 = @"---------------------";
-    [printer appendText:str4 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+    [printer appendSeperatorLine];
     NSString *str5 = @"下单时间：05-17 16：21";
     [printer appendText:str5 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
     NSString *str6 = @"备注：爱吃辣多点辣";
     [printer appendText:str6 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
     NSString *str7 = @"发票：扎拉斯网络科技(上海有限公司)";
     [printer appendText:str7 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
-    NSString *str8 = @"-----------商品-----------";
+    NSString *str8 = @"-------------商品-------------";
     [printer appendText:str8 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
-    [printer appendLeftText:@"米饭" middleText:@"x2" rightText:@"4" isTitle:NO];
-    [printer appendTitle:@"商户名称：" value:@"永和大豆浆"];
-    [printer appendTitle:@"商户编号：" value:@"1234567890"];
-    [printer appendTitle:@"订单编号：" value:@"MS1234567890"];
-    [printer appendTitle:@"交易类型：" value:@"微信支付"];
-    [printer appendTitle:@"交易时间：" value:@"2017-06-14"];
-    [printer appendTitle:@"金    额：" value:@"1000元"];
-    [printer appendFooter:@"欢迎使用银智付!"];
+    [printer appendLeftText:@"米饭米饭米饭米饭米饭米饭米饭米饭米饭爱是范德萨发的撒个撒地" middleText:@"x444" rightText:@"4121.3" isTitle:YES];
+    [printer appendLeftText:@"米饭米饭" middleText:@"x4" rightText:@"41.3" isTitle:YES];
+    [printer appendLeftText:@"米饭" middleText:@"x2" rightText:@"134.3" isTitle:YES];
+    [printer appendLeftText:@"米饭" middleText:@"x1" rightText:@"11.3" isTitle:YES];
+    NSString *str9 = @"-------------包装-------------";
+    [printer appendText:str9 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+    [printer appendLeftText:@"袋子" middleText:@"x2" rightText:@"4" isTitle:YES];
+    NSString *str10 = @"-------------赠品-------------";
+    [printer appendText:str10 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+    [printer appendLeftText:@"米饭" middleText:@"x2" rightText:@"0" isTitle:YES];
+    [printer appendSeperatorLine];
+    [printer appendTitle:@"在线支付立减优惠" value:@"-10"];
+    [printer appendTitle:@"商家代金券折扣"  value:@"-10"];
+    [printer appendTitle:@"使用红包"  value:@"-20"];
+    [printer appendTitle:@"配送费"  value:@"6"];
+    [printer appendTitle:@"会员免配送费"  value:@"-6"];
+    
+    [printer appendSeperatorLine];
+
+    [printer appendTitle:@"实付" value:@"46.90" fontSize:HLFontSizeTitleBig];
+    [printer appendSeperatorLine];
+    [printer appendText:@"北京市朝阳区酒仙桥路14号C3 2层 优客工场" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleBig];
+    [printer appendText:@"王大锤先生" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleBig];
+    [printer appendText:@"18810146571" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleBig];
+    [printer appendText:@"订单编号：12012312412512615" alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
+
+    [printer appendFooter:@"********饿了么#18完*******"];
+    [printer appendNewLine];
+    [printer appendNewLine];
+    [printer appendNewLine];
     [printer appendNewLine];
     NSData *mainData = [printer getFinalData];
     [[JWBluetoothManage sharedInstance] sendPrintData:mainData completion:^(BOOL completion, CBPeripheral *connectPerpheral,NSString *error) {

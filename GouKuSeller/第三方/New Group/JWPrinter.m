@@ -291,6 +291,32 @@
     }
 }
 
+//- (void)appendLeftText:(NSString *)left middleText:(NSString *)middle rightText:(NSString *)right isTitle:(BOOL)isTitle
+//{
+//    [self setAlignment:HLTextAlignmentLeft];
+//    [self setFontSize:HLFontSizeTitleSmalle];
+//    NSInteger offset = 0;
+//    if (!isTitle) {
+//        offset = 10;
+//    }
+//
+//    if (left) {
+//        [self setText:left maxChar:46];
+//    }
+//
+//    if (middle) {
+//        [self setOffset:230 + offset];
+//        [self setText:middle];
+//    }
+//
+//    if (right) {
+//        [self setOffset:300 + offset];
+//        [self setText:right];
+//    }
+//
+//    [self appendNewLine];
+//}
+
 - (void)appendLeftText:(NSString *)left middleText:(NSString *)middle rightText:(NSString *)right isTitle:(BOOL)isTitle
 {
     [self setAlignment:HLTextAlignmentLeft];
@@ -301,15 +327,18 @@
     }
     
     if (left) {
-        [self setText:left maxChar:10];
+        [self setAlignment:HLTextAlignmentLeft];
+        [self setText:left maxChar:36];
     }
     
     if (middle) {
+        [self setAlignment:HLTextAlignmentRight];
         [self setOffset:150 + offset];
         [self setText:middle];
     }
     
     if (right) {
+        [self setAlignment:HLTextAlignmentRight];
         [self setOffset:300 + offset];
         [self setText:right];
     }
