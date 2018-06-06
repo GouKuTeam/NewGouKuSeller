@@ -29,9 +29,9 @@
                 make.height.mas_equalTo(180);
             }];
         }
-        [self.btn_shouyin setBackgroundColor:[UIColor colorWithHexString:@"#616161"]];
+        [self.btn_shouyin setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
         [self.btn_shouyin setTitle:@"收银" forState:UIControlStateNormal];
-        [self.btn_shouyin setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+        [self.btn_shouyin setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
         self.btn_shouyin.titleLabel.font = [UIFont systemFontOfSize:20];
         [self.btn_shouyin setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
         [self.btn_shouyin setTitleEdgeInsets:UIEdgeInsetsMake(self.btn_shouyin.imageView.frame.size.height + 15 ,-self.btn_shouyin.imageView.frame.size.width, 0.0,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变

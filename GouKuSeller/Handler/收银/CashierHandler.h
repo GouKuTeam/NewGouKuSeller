@@ -22,4 +22,7 @@
 //查询满减金额
 +(void)selectManJianPriceWithaddup:(NSString *)addup prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//现金收银
++(void)payInCashWithOrderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end

@@ -28,10 +28,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
+    UIView *statusView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+    [self.view addSubview:statusView];
+    [statusView setBackgroundColor:[UIColor colorWithHexString:COLOR_Main]];
 }
 
 - (void)onCreate{
-    self.v_workBench = [[WorkBenchView alloc]initWithFrame:self.view.frame];
+    self.v_workBench = [[WorkBenchView alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     [self.view addSubview:self.v_workBench];
     [self.v_workBench.btn_active addTarget:self action:@selector(actiona) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_commodity addTarget: self action:@selector(commodityAction) forControlEvents:UIControlEventTouchUpInside];
@@ -71,6 +74,7 @@
 }
 
 - (void)jiesuanAction{
+    [MobClick event:@"结算"];
     SettlementViewController *vc = [[SettlementViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -103,13 +107,13 @@
     [self loadData];
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:YES];
-    [MobClick beginLogPageView:@"工作台"];
+    [MobClick beginLogPageView:@"gongzuotai"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setHidden:NO];
-    [MobClick endLogPageView:@"工作台"];
+    [MobClick endLogPageView:@"gongzuotai"];
 }
 
 - (void)didReceiveMemoryWarning {

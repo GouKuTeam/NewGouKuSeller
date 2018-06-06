@@ -163,6 +163,8 @@
 #define API_POST_ScanUserCashCode @"/weixin/pay/swiping"
 //查询满减活动金额
 #define API_POST_SelectManJianPrice @"/shop/act/order"
+//现金收银
+#define API_POST_PayInCash @"/order/pay/cash/"
 
 /*
  订单API

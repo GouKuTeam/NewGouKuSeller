@@ -54,9 +54,10 @@
 @property (nonatomic ,strong)NSNumber            *actId;             //整单活动id
 @property (nonatomic ,strong)NSString            *userFukuanma;     // 用户付款吗
 
-@property (nonatomic ,strong)PayWaitView      *v_wait;
+@property (nonatomic ,strong)PayWaitView         *v_wait;
 @property (nonatomic ,strong)PayInCashCompleteView      *v_cashComplete;
 
+@property (nonatomic ,strong)UILabel             *lab_tbNull;
 
 @end
 
@@ -93,6 +94,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(NocatifioncashcompleteAction) name:@"cashcomplete" object:nil];
     
     
+    
     self.v_wait = [[PayWaitView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //    [self.view addSubview:self.v_wait];
     [[[UIApplication  sharedApplication]keyWindow]addSubview:self.v_wait] ;
@@ -122,17 +124,26 @@
     self.tfsousuo.leftViewMode = UITextFieldViewModeAlways;
     [self.tfsousuo becomeFirstResponder];
     
-    self.v_cashierBottom = [[CashierBottomView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 104 - SafeAreaBottomHeight, SCREEN_WIDTH, 104)];
+    self.v_cashierBottom = [[CashierBottomView alloc]initWithFrame:CGRectMake(0, self.tfsousuo.bottom + 10, SCREEN_WIDTH, 104)];
     [self.view addSubview:self.v_cashierBottom];
     [self.v_cashierBottom.btn_cashPayment addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+    
 
     
-    self.tb_commodityList = [[UITableView alloc]initWithFrame:CGRectMake(0, 50 + SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - 50 - SafeAreaTopHeight - 104 - SafeAreaBottomHeight) style:UITableViewStylePlain];
+    self.tb_commodityList = [[UITableView alloc]initWithFrame:CGRectMake(0, self.v_cashierBottom.bottom, SCREEN_WIDTH, SCREEN_HEIGHT - (self.tfsousuo.bottom + 10) - SafeAreaBottomHeight) style:UITableViewStylePlain];
     [self.view addSubview:self.tb_commodityList];
     self.tb_commodityList.delegate = self;
     self.tb_commodityList.dataSource = self;
     self.tb_commodityList.tableFooterView = [UIView new];
-
+    [self.tb_commodityList setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    
+    self.lab_tbNull = [[UILabel alloc]initWithFrame:CGRectMake(15, self.v_cashierBottom.bottom + 20, SCREEN_WIDTH - 30, 80)];
+    [self.view addSubview:self.lab_tbNull];
+    [self.lab_tbNull setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
+    [self.lab_tbNull setText:@"连接扫码枪开始收银"];
+    [self.lab_tbNull setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
+    [self.lab_tbNull setTextAlignment:NSTextAlignmentCenter];
+    [self.lab_tbNull setFont:[UIFont systemFontOfSize:20]];
     
     self.titleView = [[TitleView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight)];
     [self.view addSubview:self.titleView];
@@ -243,6 +254,7 @@
                 if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0){
                     PayInCashViewController *vc = [[PayInCashViewController alloc]init];
                     vc.totalPrice = self.totalPrice;
+                    vc.orderId = [NSString stringWithFormat:@"%@",[(NSDictionary *)obj objectForKey:@"data"]];
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 1){
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"下列商品已下架或不存在，不能购买" message:[(NSDictionary *)obj objectForKey:@"errMessage"] preferredStyle:UIAlertControllerStyleAlert];
@@ -461,7 +473,11 @@
         totalPrice = totalPrice + entity.settlementPrice * entity.amount;
         youhuiPrice = youhuiPrice + (entity.price - entity.settlementPrice) * entity.amount;
     }
-    
+    if (self.arr_commodityList.count > 0) {
+        [self.lab_tbNull setHidden:YES];
+    }else{
+        [self.lab_tbNull setHidden:NO];
+    }
     //购物车金额   （用于查询满减活动）
     self.addPrice = totalPrice;
 //    //折扣金额
@@ -621,14 +637,14 @@
     [super viewWillAppear:animated];
     [[IQKeyboardManager sharedManager] setEnable:NO];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    [MobClick beginLogPageView:@"收银"];
+    [MobClick beginLogPageView:@"cashier"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-    [MobClick endLogPageView:@"收银"];
+    [MobClick endLogPageView:@"cashier"];
 }
 
 - (void)titleViewDissMiss{
