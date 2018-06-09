@@ -29,4 +29,26 @@
 
 //获取供应商运费和起送费
 + (void)getSupplierPriceWithDispatchingPrice:(NSString *)dispatchingPrice takeOffPrice:(NSString *)takeOffPrice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+/*
+ 外部订单(美团、饿了么) API
+ */
+//商户查询待处理订单
++ (void)shopSelectManagerOrderWithOrderStatus:(NSNumber *)orderStatus prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//商户接单
++ (void)shopGetOrderWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//商户同意用户取消订单
++ (void)shopAgreeUserCancelOrderWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//商户查询订单
++ (void)shopSelectOrderWithOrderStatus:(NSNumber *)orderStatus keyWords:(NSString *)keyWords pageNum:(int)pageNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+//查询待处理订单数量
++ (void)selectOutOrderCountPrepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
+
+
+
 @end

@@ -72,6 +72,11 @@
 		74046B11209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		74046B12209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
 		74046B13209C2E11004E64A9 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */; };
+		7406FCF220C943EE00192108 /* ShopOrderManagerSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FCF120C943EE00192108 /* ShopOrderManagerSectionFooterView.m */; };
+		7406FCF820C96CF200192108 /* ShopOrderManagerSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FCF720C96CF200192108 /* ShopOrderManagerSectionHeaderView.m */; };
+		7406FCFB20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FCFA20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m */; };
+		7406FCFE20CA656100192108 /* ShopOutOrderCountEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FCFD20CA656100192108 /* ShopOutOrderCountEntity.m */; };
+		7406FD0120CA6C1100192108 /* ShopPriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */; };
 		740C38BB20B579CC00ACFBAE /* SupplierPriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */; };
 		740C38BF20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */; };
 		740C38C020B57EE900ACFBAE /* cancerPurchaseOrder.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */; };
@@ -841,6 +846,16 @@
 		74046B0C209C1AE2004E64A9 /* CreateAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateAddressViewController.m; sourceTree = "<group>"; };
 		74046B0F209C2E11004E64A9 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		74046B10209C2E11004E64A9 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		7406FCF020C943EE00192108 /* ShopOrderManagerSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderManagerSectionFooterView.h; sourceTree = "<group>"; };
+		7406FCF120C943EE00192108 /* ShopOrderManagerSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderManagerSectionFooterView.m; sourceTree = "<group>"; };
+		7406FCF620C96CF200192108 /* ShopOrderManagerSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderManagerSectionHeaderView.h; sourceTree = "<group>"; };
+		7406FCF720C96CF200192108 /* ShopOrderManagerSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOrderManagerSectionHeaderView.m; sourceTree = "<group>"; };
+		7406FCF920CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderSelectOnlineOrderSectionFooterView.h; sourceTree = "<group>"; };
+		7406FCFA20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderSelectOnlineOrderSectionFooterView.m; sourceTree = "<group>"; };
+		7406FCFC20CA656100192108 /* ShopOutOrderCountEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOutOrderCountEntity.h; sourceTree = "<group>"; };
+		7406FCFD20CA656100192108 /* ShopOutOrderCountEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOutOrderCountEntity.m; sourceTree = "<group>"; };
+		7406FCFF20CA6C1100192108 /* ShopPriceDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopPriceDetailView.h; sourceTree = "<group>"; };
+		7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopPriceDetailView.m; sourceTree = "<group>"; };
 		740C38B920B579CC00ACFBAE /* SupplierPriceDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierPriceDetailView.h; sourceTree = "<group>"; };
 		740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierPriceDetailView.m; sourceTree = "<group>"; };
 		740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PurchaseOrderPayComplete.wav; sourceTree = "<group>"; };
@@ -1568,8 +1583,14 @@
 			children = (
 				740077C320C51F1F000A50AA /* ShopOrderManagerViewController.h */,
 				740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */,
+				7406FCF620C96CF200192108 /* ShopOrderManagerSectionHeaderView.h */,
+				7406FCF720C96CF200192108 /* ShopOrderManagerSectionHeaderView.m */,
+				7406FCF020C943EE00192108 /* ShopOrderManagerSectionFooterView.h */,
+				7406FCF120C943EE00192108 /* ShopOrderManagerSectionFooterView.m */,
 				7400782820C68622000A50AA /* ShopOrderManagerView.h */,
 				7400782920C68622000A50AA /* ShopOrderManagerView.m */,
+				7406FCFF20CA6C1100192108 /* ShopPriceDetailView.h */,
+				7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */,
 			);
 			path = "订单处理";
 			sourceTree = "<group>";
@@ -1894,6 +1915,8 @@
 				740C46C120AD57A400626A8B /* PurchaseOrderEntity.m */,
 				7448184F20B4091500A7F3DD /* SupplierCountEntity.h */,
 				7448185020B4091500A7F3DD /* SupplierCountEntity.m */,
+				7406FCFC20CA656100192108 /* ShopOutOrderCountEntity.h */,
+				7406FCFD20CA656100192108 /* ShopOutOrderCountEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2542,6 +2565,8 @@
 				741D3C9120808F8B00C56FCA /* OrderInformationHeaderView.m */,
 				741D3C9520809EC500C56FCA /* OrderInformationFooterView.h */,
 				741D3C9620809EC500C56FCA /* OrderInformationFooterView.m */,
+				7406FCF920CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.h */,
+				7406FCFA20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m */,
 			);
 			name = "订单查询";
 			path = "New Group2";
@@ -3159,6 +3184,7 @@
 				1882F6F220B3B6B500513EE7 /* SupplierOrderHeaderView.m in Sources */,
 				74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */,
 				74C6E36D207B728C0083E4A8 /* TitleView.m in Sources */,
+				7406FCF820C96CF200192108 /* ShopOrderManagerSectionHeaderView.m in Sources */,
 				743C5F8620A954CD00E617AF /* InventoryListEntity.m in Sources */,
 				740C46B320AAE10F00626A8B /* AddressEntity.m in Sources */,
 				743C5F7920A92CF300E617AF /* InventoryHandler.m in Sources */,
@@ -3290,6 +3316,7 @@
 				74BD11F02067DEBD0053A3D1 /* MyViewController.m in Sources */,
 				74BD120420689A700053A3D1 /* NotBeginningActivityTableViewCell.m in Sources */,
 				1891DA9720A020E7008E16F7 /* ShoppingCarEntity.m in Sources */,
+				7406FCF220C943EE00192108 /* ShopOrderManagerSectionFooterView.m in Sources */,
 				7491FA52206CCA950006F388 /* CashierTableViewCell.m in Sources */,
 				74F8E917205D4732000A17A5 /* CommodityBottomView.m in Sources */,
 				74B4E8C220512CD8006AFB6C /* UserDefaultsUtils.m in Sources */,
@@ -3322,6 +3349,7 @@
 				740077FC20C52C21000A50AA /* UIImage+Bitmap.m in Sources */,
 				74BD12462068EA470053A3D1 /* ManjianTableViewCell.m in Sources */,
 				7448181220AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
+				7406FD0120CA6C1100192108 /* ShopPriceDetailView.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
 				744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */,
 				74ACFFB620A04E11005C5A16 /* CustomerManagerViewController.m in Sources */,
@@ -3375,6 +3403,7 @@
 				74F8E8E120592074000A17A5 /* StandardEntity.m in Sources */,
 				743C5F6E20A592DE00E617AF /* CustomerShopView.m in Sources */,
 				740077F620C52C21000A50AA /* JWPrinter.m in Sources */,
+				7406FCFE20CA656100192108 /* ShopOutOrderCountEntity.m in Sources */,
 				74F8E912205D452C000A17A5 /* ManagerCommodityTableViewCell.m in Sources */,
 				744ABAAF205626A300BBB26E /* CatagoryTableViewCell.m in Sources */,
 				7400781520C52FF0000A50AA /* ConnectPrinterViewController.m in Sources */,
@@ -3383,6 +3412,7 @@
 				1842CCDA209AB1E200A1C7C8 /* PurchaseOrderViewController.m in Sources */,
 				74B4E8C320512CD8006AFB6C /* LoginStorage.m in Sources */,
 				74B4E896204BD3EC006AFB6C /* RTHttpClient.m in Sources */,
+				7406FCFB20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m in Sources */,
 				74B4E8A5204BD3EC006AFB6C /* UIColor+Util.m in Sources */,
 				1842CCEC209BFE9600A1C7C8 /* PurchaseOrderTableViewCell.m in Sources */,
 				7491FA77206E15CC0006F388 /* Province.m in Sources */,

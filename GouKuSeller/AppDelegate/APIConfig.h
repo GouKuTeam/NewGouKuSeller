@@ -286,5 +286,16 @@
 //获取待处理订单数量
 #define API_GET_SupplierOrderCount @"/shopOrder/shop/getCount"
 
-
-
+/*
+ 外部订单(美团、饿了么) API
+ */
+//查询待处理订单
+#define API_GET_OutOrderManager @"/outOrder/handle/"    //status：1新订单2带配送3取消订单
+//商户接单
+#define API_GET_OutOrderTaking @"/outOrder/shop/taking/"
+//商户同意用户取消订单
+#define API_GET_OutOrderShopRefund @"/outOrder/shop/refund/"
+//商户查询订单
+#define API_POST_OutOrderListSearch @"/outOrder/list/search"
+//查询待处理订单数量
+#define API_GET_OutOrderCount @"/outOrder/handle/getCount"

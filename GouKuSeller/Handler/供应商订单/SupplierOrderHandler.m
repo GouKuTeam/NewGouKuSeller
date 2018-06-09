@@ -9,6 +9,7 @@
 #import "SupplierOrderHandler.h"
 #import "PurchaseOrderEntity.h"
 #import "SupplierCountEntity.h"
+#import "ShopOutOrderCountEntity.h"
 @implementation SupplierOrderHandler
 
 //根据状态或关键词查询供应商订单列表
@@ -160,6 +161,112 @@
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
                                                   success([responseObject objectForKey:@"data"]);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+//商户查询待处理订单
++ (void)shopSelectManagerOrderWithOrderStatus:(NSNumber *)orderStatus prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_OrderAndPay,API_GET_OutOrderManager,orderStatus];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  NSArray *arr = [PurchaseOrderEntity parsePurchaseOrderEntityListWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(arr);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//商户接单
++ (void)shopGetOrderWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_OrderAndPay,API_GET_OutOrderTaking,orderId];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//商户同意用户取消订单
++ (void)shopAgreeUserCancelOrderWithOrderId:(NSNumber *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_OrderAndPay,API_GET_OutOrderShopRefund,orderId];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//商户查询订单
++ (void)shopSelectOrderWithOrderStatus:(NSNumber *)orderStatus keyWords:(NSString *)keyWords pageNum:(int)pageNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OutOrderListSearch];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (orderStatus) {
+        if (orderStatus != [NSNumber numberWithInt:999]) {
+            [dic setObject:orderStatus forKey:@"status"];
+        }
+    }
+    if (keyWords) {
+        [dic setObject:keyWords forKey:@"keyWord"];
+    }
+    [dic setObject:[NSNumber numberWithInt:pageNum] forKey:@"page"];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  success(responseObject);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//查询待处理订单数量
++ (void)selectOutOrderCountPrepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_GET_OutOrderCount];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0) {
+                                                  ShopOutOrderCountEntity *entity = [ShopOutOrderCountEntity parseShopOutOrderCountEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(entity);
                                               }else{
                                                   [MBProgressHUD hideHUD];
                                                   [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];

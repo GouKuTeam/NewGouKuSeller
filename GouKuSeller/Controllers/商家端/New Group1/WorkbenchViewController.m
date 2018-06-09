@@ -17,6 +17,9 @@
 #import "PurchaseTabBarViewController.h"
 #import "EditAddressViewController.h"
 #import "InventoryViewController.h"
+#import "SupplierOrderHandler.h"
+#import "ShopOutOrderCountEntity.h"
+#import "TabBarViewController.h"
 
 @interface WorkbenchViewController ()
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
@@ -62,36 +65,41 @@
 }
 
 - (void)commodityAction{
+    [MobClick event:@"shangpin"];
     CommodityViewController *vc = [[CommodityViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)actiona{
+    [MobClick event:@"huodong"];
     SalesViewController *vc = [[SalesViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)jiesuanAction{
-    [MobClick event:@"结算"];
+    [MobClick event:@"jiesuan"];
     SettlementViewController *vc = [[SettlementViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)shouyinAction{
+    [MobClick event:@"shouyin"];
     CashierViewController *vc = [[CashierViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)caigouAction{
+    [MobClick event:@"caigou"];
     PurchaseTabBarViewController *vc = [[PurchaseTabBarViewController alloc]init];
     [UIApplication sharedApplication].keyWindow.rootViewController = vc;
 }
 
 - (void)pandianuAction{
+    [MobClick event:@"pandian"];
     InventoryViewController *vc = [[InventoryViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -108,6 +116,19 @@
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:YES];
     [MobClick beginLogPageView:@"gongzuotai"];
+    [SupplierOrderHandler selectOutOrderCountPrepare:^{
+        
+    } success:^(id obj) {
+        ShopOutOrderCountEntity *entity = (ShopOutOrderCountEntity *)obj;
+        if (entity.allOrderCount > 0) {
+            [(TabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:entity.allOrderCount];
+        }
+        if (entity.allOrderCount == 0) {
+            [(TabBarViewController *)self.tabBarController hideBadgeOnItemIndex:1];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

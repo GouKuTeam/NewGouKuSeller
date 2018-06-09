@@ -76,6 +76,7 @@
     self.tb_order.delegate = self;
     self.tb_order.dataSource = self;
     self.tb_order.tableFooterView = [UIView new];
+    [self.tb_order setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
 }
 
 
