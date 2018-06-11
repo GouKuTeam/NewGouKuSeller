@@ -347,31 +347,14 @@
 }
 
 - (void)RefreshSupplierOrderData{
+    [self getOutOrderCount];
     [self.v_header setItemWithIndex:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:YES];
-    
-    [SupplierOrderHandler selectOutOrderCountPrepare:^{
-        
-    } success:^(id obj) {
-        ShopOutOrderCountEntity *entity = (ShopOutOrderCountEntity *)obj;
-        self.newOrderCount = entity.newOrderCount;
-        self.hadleOrderCount = entity.hadleOrderCount;
-        self.cleseOrderCount = entity.cleseOrderCount;
-        [self setNumData];
-        if (entity.allOrderCount > 0) {
-            [(TabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:entity.allOrderCount];
-        }
-        if (entity.allOrderCount == 0) {
-            [(TabBarViewController *)self.tabBarController hideBadgeOnItemIndex:1];
-        }
-    } failed:^(NSInteger statusCode, id json) {
-        
-    }];
-    
+    [self getOutOrderCount];
     [manage autoConnectLastPeripheralCompletion:^(CBPeripheral *perpheral, NSError *error) {
         if (!error) {
 //            [ProgressShow alertView:self.view Message:@"连接成功" cb:nil];
@@ -476,6 +459,26 @@
         }else{
             NSLog(@"写入错误---:%@",error);
         }
+    }];
+}
+
+- (void)getOutOrderCount{
+    [SupplierOrderHandler selectOutOrderCountPrepare:^{
+        
+    } success:^(id obj) {
+        ShopOutOrderCountEntity *entity = (ShopOutOrderCountEntity *)obj;
+        self.newOrderCount = entity.newOrderCount;
+        self.hadleOrderCount = entity.hadleOrderCount;
+        self.cleseOrderCount = entity.cleseOrderCount;
+        [self setNumData];
+        if (entity.allOrderCount > 0) {
+            [(TabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:entity.allOrderCount];
+        }
+        if (entity.allOrderCount == 0) {
+            [(TabBarViewController *)self.tabBarController hideBadgeOnItemIndex:1];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
     }];
 }
 
