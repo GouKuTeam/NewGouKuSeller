@@ -73,7 +73,11 @@
     [v_mid addSubview:self.v_switch];
     [self.v_switch setOnTintColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN]];
     self.v_switch.layer.anchorPoint = CGPointMake(0, 0.3);
-    [self.v_switch setOn:YES animated:true];
+    if ([LoginStorage IsPrinter] == NO) {
+        [self.v_switch setOn:NO animated:true];
+    }else{
+        [self.v_switch setOn:YES animated:true];
+    }
     [self.v_switch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     
     UIImageView *img_line = [[UIImageView alloc]initWithFrame:CGRectMake(15, 44, SCREEN_WIDTH - 15, 0.5)];

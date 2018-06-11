@@ -34,7 +34,6 @@
 @property (nonatomic ,strong)ShopOrderManagerView      *v_top;
 @property (nonatomic ,assign)int                        selectIndex;
 
-@property (nonatomic ,strong)SupplierOrderHeaderView   *v_header;
 @property (nonatomic ,strong)BaseTableView             *tb_orderManager;
 @property (nonatomic ,strong)NSMutableArray            *arr_data;
 @property (nonatomic ,assign)int                       newOrderCount;
@@ -54,7 +53,8 @@
     
     self.arr_data = [NSMutableArray array];
     [kCountDownManager start];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshSupplierOrderData) name:@"RefreshSupplierOrderData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshShopOrderData) name:@"RefreshShopNewOrderData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshShopCancelOrderData) name:@"RefreshShopCancelOrderData" object:nil];
     manage = [JWBluetoothManage sharedInstance];
 }
 
@@ -91,6 +91,7 @@
 
 - (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
    
+    [self getOutOrderCount];
     [SupplierOrderHandler shopSelectManagerOrderWithOrderStatus:[NSNumber numberWithInt:self.selectIndex] prepare:^{
         
     } success:^(id obj) {
@@ -235,6 +236,7 @@
 }
 
 - (void)btn_copyAction:(UIButton *)btn_sender{
+//    [self RefreshShopOrderData];
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
     [MBProgressHUD showInfoMessage:@"复制成功"];
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -346,9 +348,13 @@
     [(TabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:self.newOrderCount + self.hadleOrderCount + self.cleseOrderCount];
 }
 
-- (void)RefreshSupplierOrderData{
+- (void)RefreshShopOrderData{
     [self getOutOrderCount];
-    [self.v_header setItemWithIndex:1];
+    [self.v_top setItemWithIndex:0];
+}
+
+- (void)RefreshShopCancelOrderData{
+    [self.v_top setItemWithIndex:2];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

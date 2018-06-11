@@ -85,6 +85,7 @@
             make.left.equalTo(self.lab_userCancelTitle);
             make.top.equalTo(self.lab_userCancelTitle.mas_bottom).offset(2);
             make.height.equalTo(self.lab_userCancelTitle);
+            make.right.equalTo(self.mas_right).offset(-15);
         }];
         
         self.btn_right = [[UIButton alloc]init];

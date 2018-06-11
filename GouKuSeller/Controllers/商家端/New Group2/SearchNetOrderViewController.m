@@ -95,6 +95,7 @@
     self.tb_order.dataSource = self;
     self.tb_order.tableViewDelegate = self;
     self.tb_order.tableFooterView = [UIView new];
+    self.tb_order.separatorColor = [UIColor clearColor];
     
     self.shopPriceDetailView = [[ShopPriceDetailView alloc]init];
     [self.shopPriceDetailView setHidden:YES];

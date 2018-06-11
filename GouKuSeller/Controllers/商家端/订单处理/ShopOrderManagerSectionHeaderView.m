@@ -38,11 +38,22 @@
         self.lab_orderNum = [[UILabel alloc]init];
         [self.v_numAndStatus addSubview:self.lab_orderNum];
         [self.lab_orderNum setTextColor:[UIColor blackColor]];
-        [self.lab_orderNum setFont:[UIFont systemFontOfSize:24]];
+        [self.lab_orderNum setFont:[UIFont boldSystemFontOfSize:24]];
         [self.lab_orderNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.mas_equalTo(0);
             make.height.mas_equalTo(44);
+        }];
+        
+        self.lab_orderdistribution = [[UILabel alloc]init];
+        [self.v_numAndStatus addSubview:self.lab_orderdistribution];
+        [self.lab_orderdistribution setTextColor:[UIColor colorWithHexString:@"#E6670C"]];
+        [self.lab_orderdistribution setFont:[UIFont boldSystemFontOfSize:16]];
+        [self.lab_orderdistribution mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lab_orderNum.mas_right).offset(10);
+            make.top.mas_equalTo(12);
+            make.right.equalTo(self.mas_right).offset(-130);
+            make.height.mas_equalTo(22);
         }];
         
         self.lab_orderStatus = [[UILabel alloc]init];
@@ -177,6 +188,17 @@
         strType = @"美团";
     }
     self.lab_orderNum.text = [NSString stringWithFormat:@"%@#%@",strType,purchaseOrderEntity.number];
+    
+    
+    CGFloat width = [self.lab_orderNum.text fittingLabelWidthWithHeight:44 andFontSize:[UIFont boldSystemFontOfSize:24]];
+    [self.lab_orderdistribution mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(25 + width);
+        make.top.mas_equalTo(13);
+        make.right.equalTo(self.mas_right).offset(-110);
+        make.height.mas_equalTo(22);
+    }];
+    [self.lab_orderdistribution setText:purchaseOrderEntity.distribution];
+    
     //订单状态(1待接单2待发货4骑手已接单5骑手已到店6骑手已取货8已完成9已取消)
     if (purchaseOrderEntity.status == 1) {
         [self.lab_orderStatus setText:@"新订单"];
@@ -188,6 +210,8 @@
         [self.lab_orderStatus setText:@"骑手已到店"];
     }else if (purchaseOrderEntity.status == 6){
         [self.lab_orderStatus setText:@"骑手已取货"];
+    }else if (purchaseOrderEntity.status == 8){
+        [self.lab_orderStatus setText:@"已完成"];
     }else if (purchaseOrderEntity.status == 9){
         if (purchaseOrderEntity.refund == 1) {
             [self.lab_orderStatus setText:@"用户已退款"];

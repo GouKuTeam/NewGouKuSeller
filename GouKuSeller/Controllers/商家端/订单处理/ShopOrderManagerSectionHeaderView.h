@@ -14,6 +14,7 @@
 @property (nonatomic ,strong)UIView                *v_top;
 @property (nonatomic ,strong)UIView                *v_numAndStatus;
 @property (nonatomic ,strong)UILabel               *lab_orderNum;
+@property (nonatomic ,strong)UILabel               *lab_orderdistribution;
 @property (nonatomic ,strong)UILabel               *lab_orderStatus;
 @property (nonatomic ,strong)UILabel               *lab_shopName;
 @property (nonatomic ,strong)UILabel               *lab_shopAddress;

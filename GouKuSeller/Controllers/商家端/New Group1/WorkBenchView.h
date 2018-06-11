@@ -29,7 +29,12 @@
 @property (nonatomic ,strong)UILabel               *lab_orderDetail;
 @property (nonatomic ,strong)UILabel               *lab_unitPrice;  //客单价
 @property (nonatomic ,strong)UILabel               *lab_unitPriceDetail;
+@property (nonatomic ,strong)UILabel               *lab_xianjin;   //现金收款
+@property (nonatomic ,strong)UILabel               *lab_xianjinDetail;
+@property (nonatomic ,strong)UILabel               *lab_gouku;     // 购酷收款
+@property (nonatomic ,strong)UILabel               *lab_goukuDetail;
 @property (nonatomic ,strong)UIImageView           *img_back2_heng;
+@property (nonatomic ,strong)UIImageView           *img_back2_heng2;
 @property (nonatomic ,strong)UIImageView           *img_back2_shu1;
 @property (nonatomic ,strong)UIImageView           *img_back2_shu2;
 

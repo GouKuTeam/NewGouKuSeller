@@ -27,7 +27,7 @@
 }
 
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
-
+@property (nonatomic ,strong)UIScrollView         *v_scrollView;
 @end
 
 @implementation WorkbenchViewController
@@ -42,8 +42,12 @@
 }
 
 - (void)onCreate{
-    self.v_workBench = [[WorkBenchView alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
-    [self.view addSubview:self.v_workBench];
+    self.v_scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
+    [self.view addSubview:self.v_scrollView];
+    [self.v_scrollView setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    
+    self.v_workBench = [[WorkBenchView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.v_scrollView addSubview:self.v_workBench];
     [self.v_workBench.btn_active addTarget:self action:@selector(actiona) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_commodity addTarget: self action:@selector(commodityAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_jiesuan addTarget:self action:@selector(jiesuanAction) forControlEvents:UIControlEventTouchUpInside];
@@ -51,6 +55,9 @@
     [self.v_workBench.btn_caigou addTarget:self action:@selector(caigouAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_pandian addTarget:self action:@selector(pandianuAction) forControlEvents:UIControlEventTouchUpInside];
     [self.v_workBench.btn_jingying addTarget:self action:@selector(jingyingAction) forControlEvents:UIControlEventTouchUpInside];
+    if (SCREEN_HEIGHT <= 667) {
+        self.v_scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.v_workBench.bottom + 50);
+    }
     [self loadData];
 }
 
@@ -63,6 +70,8 @@
         [self.v_workBench.lab_turnoverDetail setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"sales"] floatValue]]];
         [self.v_workBench.lab_orderDetail setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"orders"]]];
         [self.v_workBench.lab_unitPriceDetail setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"perTicketSales"] floatValue]]];
+        [self.v_workBench.lab_xianjinDetail setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"cashSales"] floatValue]]];
+        [self.v_workBench.lab_goukuDetail setText:[NSString stringWithFormat:@"¥%.2f",[[dic objectForKey:@"goukuSales"] floatValue]]];
         
     } failed:^(NSInteger statusCode, id json) {
         

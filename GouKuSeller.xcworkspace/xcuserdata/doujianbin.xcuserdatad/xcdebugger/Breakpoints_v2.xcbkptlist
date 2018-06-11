@@ -36,12 +36,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GouKuSeller/AppDelegate/AppDelegate.m"
-            timestampString = "550381474.608803"
+            timestampString = "550413172.798748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
-            landmarkName = "-managerDidRecvPaymentResponse:"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
+            landmarkName = "-onResp:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

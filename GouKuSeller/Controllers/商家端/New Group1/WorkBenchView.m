@@ -183,7 +183,7 @@
             make.left.mas_equalTo(0);
             make.top.equalTo(self.v_back1.mas_bottom).offset(10);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(120);
+            make.height.mas_equalTo(197);
         }];
         [self.v_back2 setBackgroundColor:[UIColor whiteColor]];
         
@@ -209,6 +209,16 @@
         }];
         [self.img_back2_heng setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
         
+        self.img_back2_heng2 = [[UIImageView alloc]init];
+        [self.v_back2 addSubview:self.img_back2_heng2];
+        [self.img_back2_heng2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.equalTo(self.img_back2_heng.mas_bottom).offset(78);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(0.5);
+        }];
+        [self.img_back2_heng2 setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
+        
         //今日营业额
         self.lab_turnover = [[UILabel alloc]init];
         [self.v_back2 addSubview:self.lab_turnover];
@@ -219,7 +229,7 @@
         }];
         [self.lab_turnover setTextColor:[UIColor colorWithHexString:@"#616161"]];
         [self.lab_turnover setFont:[UIFont systemFontOfSize:14]];
-        [self.lab_turnover setText:@"今日营业额"];
+        [self.lab_turnover setText:@"今日总营业额"];
         [self.lab_turnover setTextAlignment:NSTextAlignmentCenter];
         
         self.lab_turnoverDetail = [[UILabel alloc]init];
@@ -230,17 +240,67 @@
             make.width.mas_equalTo(widthbtn);
         }];
         [self.lab_turnoverDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
-        [self.lab_turnoverDetail setFont:[UIFont systemFontOfSize:16]];
-        [self.lab_turnoverDetail setText:@"¥0.00"];
+        [self.lab_turnoverDetail setFont:[UIFont boldSystemFontOfSize:16]];
+//        [self.lab_turnoverDetail setText:@"¥0.00"];
         [self.lab_turnoverDetail setTextAlignment:NSTextAlignmentCenter];
 
+        
+        //现金收款
+        self.lab_xianjin = [[UILabel alloc]init];
+        [self.v_back2 addSubview:self.lab_xianjin];
+        [self.lab_xianjin mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_turnover);
+            make.left.width.mas_equalTo(widthbtn);
+        }];
+        [self.lab_xianjin setTextColor:[UIColor colorWithHexString:@"#616161"]];
+        [self.lab_xianjin setFont:[UIFont systemFontOfSize:14]];
+        [self.lab_xianjin setText:@"现金收款"];
+        [self.lab_xianjin setTextAlignment:NSTextAlignmentCenter];
+
+
+        self.lab_xianjinDetail = [[UILabel alloc]init];
+        [self.v_back2 addSubview:self.lab_xianjinDetail];
+        [self.lab_xianjinDetail mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(widthbtn);
+            make.top.equalTo(self.lab_xianjin.mas_bottom).offset(5);
+            make.width.mas_equalTo(widthbtn);
+        }];
+        [self.lab_xianjinDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
+        [self.lab_xianjinDetail setFont:[UIFont boldSystemFontOfSize:16]];
+        [self.lab_xianjinDetail setTextAlignment:NSTextAlignmentCenter];
+        
+        //购酷支付收款
+        self.lab_gouku = [[UILabel alloc]init];
+        [self.v_back2 addSubview:self.lab_gouku];
+        [self.lab_gouku mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lab_turnover);
+            make.left.mas_equalTo(widthbtn * 2);
+            make.width.mas_equalTo(widthbtn);
+        }];
+        [self.lab_gouku setTextColor:[UIColor colorWithHexString:@"#616161"]];
+        [self.lab_gouku setFont:[UIFont systemFontOfSize:14]];
+        [self.lab_gouku setText:@"购酷支付收款"];
+        [self.lab_gouku setTextAlignment:NSTextAlignmentCenter];
+        
+        
+        self.lab_goukuDetail = [[UILabel alloc]init];
+        [self.v_back2 addSubview:self.lab_goukuDetail];
+        [self.lab_goukuDetail mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lab_gouku);
+            make.top.equalTo(self.lab_gouku.mas_bottom).offset(5);
+            make.width.mas_equalTo(widthbtn);
+        }];
+        [self.lab_goukuDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
+        [self.lab_goukuDetail setFont:[UIFont boldSystemFontOfSize:16]];
+        [self.lab_goukuDetail setTextAlignment:NSTextAlignmentCenter];
         
         //今日订单
         self.lab_order = [[UILabel alloc]init];
         [self.v_back2 addSubview:self.lab_order];
         [self.lab_order mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.lab_turnover);
-            make.left.width.mas_equalTo(widthbtn);
+            make.left.mas_equalTo(0);
+            make.top.equalTo(self.img_back2_heng2.mas_bottom).offset(15);
+            make.width.mas_equalTo(widthbtn);
         }];
         [self.lab_order setTextColor:[UIColor colorWithHexString:@"#616161"]];
         [self.lab_order setFont:[UIFont systemFontOfSize:14]];
@@ -251,13 +311,13 @@
         self.lab_orderDetail = [[UILabel alloc]init];
         [self.v_back2 addSubview:self.lab_orderDetail];
         [self.lab_orderDetail mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(widthbtn);
+            make.left.equalTo(self.lab_order);
             make.top.equalTo(self.lab_order.mas_bottom).offset(5);
             make.width.mas_equalTo(widthbtn);
         }];
         [self.lab_orderDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
-        [self.lab_orderDetail setFont:[UIFont systemFontOfSize:16]];
-        [self.lab_orderDetail setText:@"0"];
+        [self.lab_orderDetail setFont:[UIFont boldSystemFontOfSize:16]];
+//        [self.lab_orderDetail setText:@"0"];
         [self.lab_orderDetail setTextAlignment:NSTextAlignmentCenter];
 
         
@@ -265,8 +325,8 @@
         self.lab_unitPrice = [[UILabel alloc]init];
         [self.v_back2 addSubview:self.lab_unitPrice];
         [self.lab_unitPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.lab_turnover);
-            make.left.mas_equalTo(widthbtn * 2);
+            make.top.equalTo(self.img_back2_heng2.mas_bottom).offset(15);
+            make.left.mas_equalTo(widthbtn);
             make.width.mas_equalTo(widthbtn);
         }];
         [self.lab_unitPrice setTextColor:[UIColor colorWithHexString:@"#616161"]];
@@ -278,22 +338,22 @@
         self.lab_unitPriceDetail = [[UILabel alloc]init];
         [self.v_back2 addSubview:self.lab_unitPriceDetail];
         [self.lab_unitPriceDetail mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(widthbtn * 2);
+            make.left.mas_equalTo(widthbtn);
             make.top.equalTo(self.lab_unitPrice.mas_bottom).offset(5);
             make.width.mas_equalTo(widthbtn);
         }];
         [self.lab_unitPriceDetail setTextColor:[UIColor colorWithHexString:@"#000000"]];
-        [self.lab_unitPriceDetail setFont:[UIFont systemFontOfSize:16]];
-        [self.lab_unitPriceDetail setText:@"¥0.00"];
+        [self.lab_unitPriceDetail setFont:[UIFont boldSystemFontOfSize:16]];
+//        [self.lab_unitPriceDetail setText:@"¥0.00"];
         [self.lab_unitPriceDetail setTextAlignment:NSTextAlignmentCenter];
         
         self.img_back2_shu1 = [[UIImageView alloc]init];
         [self.v_back2 addSubview:self.img_back2_shu1];
         [self.img_back2_shu1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(widthbtn);
-            make.top.equalTo(self.img_back2_heng.mas_bottom).offset(8);
+            make.top.equalTo(self.img_back2_heng.mas_bottom);
             make.width.mas_equalTo(0.5);
-            make.height.mas_equalTo(60);
+            make.bottom.equalTo(self.v_back2.mas_bottom);
         }];
         [self.img_back2_shu1 setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
         
@@ -301,9 +361,9 @@
         [self.v_back2 addSubview:self.img_back2_shu2];
         [self.img_back2_shu2 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(widthbtn * 2);
-            make.top.equalTo(self.img_back2_heng.mas_bottom).offset(8);
+            make.top.equalTo(self.img_back2_heng.mas_bottom);
             make.width.mas_equalTo(0.5);
-            make.height.mas_equalTo(60);
+            make.bottom.equalTo(self.v_back2.mas_bottom);
         }];
         [self.img_back2_shu2 setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
 
