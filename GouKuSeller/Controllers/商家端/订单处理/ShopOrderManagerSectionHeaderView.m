@@ -99,9 +99,9 @@
         [self addSubview:self.img_line1];
         [self.img_line1 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         [self.img_line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
+            make.left.mas_equalTo(15);
             make.top.equalTo(self.lab_shopAddress.mas_bottom).offset(13.3);
-            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.width.mas_equalTo(SCREEN_WIDTH - 15);
             make.height.mas_equalTo(0.5);
         }];
         
@@ -132,9 +132,9 @@
         [self addSubview:self.img_line2];
         [self.img_line2 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         [self.img_line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
+            make.left.mas_equalTo(15);
             make.top.equalTo(self.lab_remarkDetail.mas_bottom).offset(10.7);
-            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.width.mas_equalTo(SCREEN_WIDTH - 15);
             make.height.mas_equalTo(0.5);
         }];
         

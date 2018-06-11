@@ -20,8 +20,12 @@
 #import "SupplierOrderHandler.h"
 #import "ShopOutOrderCountEntity.h"
 #import "TabBarViewController.h"
+#import "JWBluetoothManage.h"
 
-@interface WorkbenchViewController ()
+@interface WorkbenchViewController (){
+    JWBluetoothManage * manage;
+}
+
 @property (nonatomic ,strong)WorkBenchView        *v_workBench;
 
 @end
@@ -34,6 +38,7 @@
     UIView *statusView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     [self.view addSubview:statusView];
     [statusView setBackgroundColor:[UIColor colorWithHexString:COLOR_Main]];
+    manage = [JWBluetoothManage sharedInstance];
 }
 
 - (void)onCreate{
@@ -128,6 +133,14 @@
         }
     } failed:^(NSInteger statusCode, id json) {
         
+    }];
+    
+    [manage autoConnectLastPeripheralCompletion:^(CBPeripheral *perpheral, NSError *error) {
+        if (!error) {
+//            [ProgressShow alertView:self.view Message:@"连接成功" cb:nil];
+        }else{
+            [ProgressShow alertView:self.view Message:error.domain cb:nil];
+        }
     }];
 }
 

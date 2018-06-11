@@ -50,7 +50,7 @@
     self.tf_search.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
     self.tf_search.leftView = v_left;
     self.tf_search.leftViewMode = UITextFieldViewModeAlways;
-    self.tf_search.placeholder = @"输入订单号搜索订单";
+    self.tf_search.placeholder = @"搜索商品名称或线下订单号";
     self.tf_search.font = [UIFont systemFontOfSize:FONT_SIZE_DESC];
     self.tf_search.textColor = [UIColor blackColor];
     [self.tf_search.layer setCornerRadius:5];

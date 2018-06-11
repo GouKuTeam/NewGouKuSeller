@@ -37,7 +37,7 @@
 @property (nonatomic ,assign)NSInteger                     count;
 @property (nonatomic ,strong)NSString                      *remark;
 @property (nonatomic ,strong)NSNumber                      *skuUnitId;
-
+@property (nonatomic ,strong)NSNumber                      *type;
 
 + (NSArray *)parseSupplierCommodityEndityListWithJson:(id)json;
 + (SupplierCommodityEndity *)parseSupplierCommodityEndityWithJson:(id)json;

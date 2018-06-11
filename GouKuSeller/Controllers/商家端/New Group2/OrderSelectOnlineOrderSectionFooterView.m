@@ -23,7 +23,7 @@
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.mas_equalTo(0);
-            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.width.mas_equalTo(SCREEN_WIDTH - 15);
             make.height.mas_equalTo(0.5);
         }];
         

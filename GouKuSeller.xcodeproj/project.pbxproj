@@ -77,6 +77,7 @@
 		7406FCFB20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FCFA20CA4A8F00192108 /* OrderSelectOnlineOrderSectionFooterView.m */; };
 		7406FCFE20CA656100192108 /* ShopOutOrderCountEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FCFD20CA656100192108 /* ShopOutOrderCountEntity.m */; };
 		7406FD0120CA6C1100192108 /* ShopPriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */; };
+		7406FD0420CE232F00192108 /* SearchNetOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7406FD0320CE232F00192108 /* SearchNetOrderViewController.m */; };
 		740C38BB20B579CC00ACFBAE /* SupplierPriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */; };
 		740C38BF20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */; };
 		740C38C020B57EE900ACFBAE /* cancerPurchaseOrder.wav in Resources */ = {isa = PBXBuildFile; fileRef = 740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */; };
@@ -856,6 +857,8 @@
 		7406FCFD20CA656100192108 /* ShopOutOrderCountEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopOutOrderCountEntity.m; sourceTree = "<group>"; };
 		7406FCFF20CA6C1100192108 /* ShopPriceDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopPriceDetailView.h; sourceTree = "<group>"; };
 		7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopPriceDetailView.m; sourceTree = "<group>"; };
+		7406FD0220CE232F00192108 /* SearchNetOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchNetOrderViewController.h; sourceTree = "<group>"; };
+		7406FD0320CE232F00192108 /* SearchNetOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchNetOrderViewController.m; sourceTree = "<group>"; };
 		740C38B920B579CC00ACFBAE /* SupplierPriceDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupplierPriceDetailView.h; sourceTree = "<group>"; };
 		740C38BA20B579CC00ACFBAE /* SupplierPriceDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierPriceDetailView.m; sourceTree = "<group>"; };
 		740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = PurchaseOrderPayComplete.wav; sourceTree = "<group>"; };
@@ -2557,6 +2560,8 @@
 				74BD11EA2067DEB60053A3D1 /* OrderViewController.m */,
 				741D3C9F2081E4AB00C56FCA /* SearchOrderViewController.h */,
 				741D3CA02081E4AB00C56FCA /* SearchOrderViewController.m */,
+				7406FD0220CE232F00192108 /* SearchNetOrderViewController.h */,
+				7406FD0320CE232F00192108 /* SearchNetOrderViewController.m */,
 				741D3C812080853A00C56FCA /* OrderDetailViewController.h */,
 				741D3C822080853A00C56FCA /* OrderDetailViewController.m */,
 				741D3C7C20806DC900C56FCA /* OrderListTableViewCell.h */,
@@ -3161,6 +3166,7 @@
 				741D3CC420848AF200C56FCA /* ChangeShopViewController.m in Sources */,
 				74F8E9352060E0C9000A17A5 /* SearchWithCodeTableViewCell.m in Sources */,
 				74ACFFD420A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */,
+				7406FD0420CE232F00192108 /* SearchNetOrderViewController.m in Sources */,
 				7448183120B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */,
 				744ABA0820517C3600BBB26E /* BtnTop.m in Sources */,
 				741D3C7920805CC200C56FCA /* DateUtils.m in Sources */,

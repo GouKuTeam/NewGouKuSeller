@@ -20,7 +20,7 @@
         self.backgroundColor = [UIColor whiteColor];
         self.img_line = [[UIImageView alloc]init];
         [self addSubview:self.img_line];
-        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
+//        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.mas_equalTo(0);
@@ -213,6 +213,7 @@
                 //此时按钮显示倒计时
                 [self.btn_right setTitle:[NSString stringWithFormat:@"同意取消 %02zd:%02zd:%02zd",purchaseOrderEntity.countDown/3600,(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
             }
+            [self.btn_right setHidden:NO];
             [self.lab_userCancelReason setText:[NSString stringWithFormat:@"取消原因：%@",purchaseOrderEntity.refundReasons]];
         }
         [self.lab_userCancelTime setText:[NSString stringWithFormat:@"%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.refundAt formatter:@"HH:mm"]]];
@@ -235,7 +236,6 @@
     [self.lab_userCancelTime setHidden:NO];
     [self.lab_userCancelTitle setHidden:NO];
     [self.lab_userCancelReason setHidden:NO];
-    [self.btn_right setHidden:NO];
     [self.lab_createTime setText:[NSString stringWithFormat:@"%@下单",[DateUtils stringFromTimeInterval:purchaseOrderEntity.createTime formatter:@"MM-dd HH:mm"]]];
     [self.lab_orderNum setText:[NSString stringWithFormat:@"订单编号:%@",purchaseOrderEntity.orderId]];
     self.purchaseOrderEntity = purchaseOrderEntity;

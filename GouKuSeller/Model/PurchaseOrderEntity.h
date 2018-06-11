@@ -30,6 +30,7 @@
 @property (nonatomic ,assign)long             countDown;          //倒计时(秒)
 @property (nonatomic ,strong)NSArray          *items;             //订单商品数组
 @property (nonatomic ,strong)NSArray          *flow;              //订单状态描述数组
+@property (nonatomic ,strong)NSArray          *actOut;            //订单优惠详情
 @property (nonatomic ,strong)AddressEntity    *address;           //地址对象
 @property (nonatomic ,assign)double            accountPrice;      //账户余额
 //供应商订单加的

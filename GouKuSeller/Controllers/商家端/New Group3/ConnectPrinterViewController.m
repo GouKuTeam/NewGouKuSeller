@@ -19,7 +19,7 @@
 @property (nonatomic ,strong)UIView      *tb_header;
 @property (nonatomic ,strong)UITableView     *tb_printer;
 @property (nonatomic, strong) NSMutableArray * dataSource; //设备列表
-
+@property (nonatomic ,strong)UIView      *v_notLanya;
 @end
 
 @implementation ConnectPrinterViewController
@@ -32,11 +32,20 @@
     manage = [JWBluetoothManage sharedInstance];
     WeakSelf
     [manage beginScanPerpheralSuccess:^(NSArray<CBPeripheral *> *printeChatactersArray, NSArray<NSNumber *> *rssis) {
+        [self.v_notLanya setHidden:YES];
+        [self.tb_printer setHidden:NO];
         weakSelf.dataSource = [NSMutableArray arrayWithArray:printeChatactersArray];
-//        weakSelf.rssisArray = [NSMutableArray arrayWithArray:rssis];
         [weakSelf.tb_printer reloadData];
     } failure:^(CBManagerState status) {
-        [ProgressShow alertView:self.view Message:[ProgressShow getBluetoothErrorInfo:status] cb:nil];
+
+        if (status == CBManagerStatePoweredOff) {
+            [self.v_notLanya setHidden:NO];
+            [self.tb_printer setHidden:YES];
+        }else{
+           [ProgressShow alertView:self.view Message:[ProgressShow getBluetoothErrorInfo:status] cb:nil];
+            [self.v_notLanya setHidden:YES];
+            [self.tb_printer setHidden:NO];
+        }
     }];
     manage.disConnectBlock = ^(CBPeripheral *perpheral, NSError *error) {
         NSLog(@"设备已经断开连接！");
@@ -60,6 +69,26 @@
     self.tb_printer.tableHeaderView = self.tb_header;
     self.tb_printer.tableFooterView = [UIView new];
     [self.tb_printer setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
+    
+    self.v_notLanya = [[UIView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, 160)];
+    [self.view addSubview:self.v_notLanya];
+    [self.v_notLanya setBackgroundColor:[UIColor whiteColor]];
+    
+    UILabel *lb1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 20)];
+    [self.v_notLanya addSubview:lb1];
+    [lb1 setText:@"蓝牙功能未开启"];
+    [lb1 setTextColor:[UIColor blackColor]];
+    [lb1 setFont:[UIFont boldSystemFontOfSize:18]];
+    [lb1 setTextAlignment:NSTextAlignmentCenter];
+    
+    UILabel *lb2 = [[UILabel alloc]initWithFrame:CGRectMake(0, lb1.bottom + 30, SCREEN_WIDTH, 20)];
+    [self.v_notLanya addSubview:lb2];
+    [lb2 setText:@"请在手机设置中开启蓝牙"];
+    [lb2 setTextColor:[UIColor blackColor]];
+    [lb2 setFont:[UIFont systemFontOfSize:18]];
+    [lb2 setTextAlignment:NSTextAlignmentCenter];
+    
+    [self.v_notLanya setHidden:YES];
     
 }
 
