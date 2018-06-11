@@ -34,6 +34,7 @@
 		1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */; };
 		18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */; };
 		18B3F97420A440830000A30C /* TitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97320A440830000A30C /* TitleCollectionViewCell.m */; };
+		18B53C7A20CE7444002133E1 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B53C7920CE7444002133E1 /* ScheduleTableViewCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		740077C520C51F1F000A50AA /* ShopOrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */; };
 		740077C820C52203000A50AA /* PrinterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077C720C52203000A50AA /* PrinterManagerViewController.m */; };
@@ -794,6 +795,8 @@
 		18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityHeaderView.m; sourceTree = "<group>"; };
 		18B3F97220A440830000A30C /* TitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleCollectionViewCell.h; sourceTree = "<group>"; };
 		18B3F97320A440830000A30C /* TitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleCollectionViewCell.m; sourceTree = "<group>"; };
+		18B53C7820CE7444002133E1 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
+		18B53C7920CE7444002133E1 /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		740077C320C51F1F000A50AA /* ShopOrderManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderManagerViewController.h; sourceTree = "<group>"; };
@@ -1594,6 +1597,8 @@
 				7400782920C68622000A50AA /* ShopOrderManagerView.m */,
 				7406FCFF20CA6C1100192108 /* ShopPriceDetailView.h */,
 				7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */,
+				18B53C7820CE7444002133E1 /* ScheduleTableViewCell.h */,
+				18B53C7920CE7444002133E1 /* ScheduleTableViewCell.m */,
 			);
 			path = "订单处理";
 			sourceTree = "<group>";
@@ -3248,6 +3253,7 @@
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				743C5F7320A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
+				18B53C7A20CE7444002133E1 /* ScheduleTableViewCell.m in Sources */,
 				740077F220C52C21000A50AA /* ProgressShow.m in Sources */,
 				74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,

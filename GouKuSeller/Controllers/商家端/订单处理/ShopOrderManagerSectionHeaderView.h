@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PurchaseOrderEntity.h"
 
-@interface ShopOrderManagerSectionHeaderView : UIView
+@interface ShopOrderManagerSectionHeaderView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong)UIView                *v_top;
 @property (nonatomic ,strong)UIView                *v_numAndStatus;
@@ -25,6 +25,14 @@
 @property (nonatomic ,strong)UILabel               *lab_remarkDetail;
 @property (nonatomic ,strong)UILabel               *lab_commodityTitle;
 @property (nonatomic ,strong)UIButton              *btn_zhankai;
+
+@property (nonatomic ,strong)UITableView           *tb_schedule;
+@property (nonatomic ,strong)UILabel               *lb_title;
+@property (nonatomic ,strong)UIButton              *btn_phone;
+@property (nonatomic ,strong)UIButton              *btn_showSchedule;
+@property (nonatomic ,strong)UIImageView           *img_line3;
+@property (nonatomic ,strong)NSMutableArray        *arr_schedule;
+
 
 - (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 

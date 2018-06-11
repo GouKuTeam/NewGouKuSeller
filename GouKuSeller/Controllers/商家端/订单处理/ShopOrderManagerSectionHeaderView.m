@@ -8,6 +8,7 @@
 
 #import "ShopOrderManagerSectionHeaderView.h"
 #import "NSString+Size.h"
+#import "ScheduleTableViewCell.h"
 
 @implementation ShopOrderManagerSectionHeaderView
 
@@ -138,6 +139,27 @@
             make.height.mas_equalTo(0.5);
         }];
         
+        self.tb_schedule = [[UITableView alloc]init];
+        [self addSubview:self.tb_schedule];
+        self.tb_schedule.delegate = self;
+        self.tb_schedule.dataSource = self;
+        self.tb_schedule.separatorColor = [UIColor clearColor];
+        self.tb_schedule.backgroundColor = [UIColor whiteColor];
+        [self.tb_schedule mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.top.equalTo(self.img_line2.mas_bottom);
+        }];
+        
+        self.img_line3 = [[UIImageView alloc]init];
+        [self addSubview:self.img_line3];
+        [self.img_line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.tb_schedule.mas_bottom).offset(10.7);
+            make.width.mas_equalTo(SCREEN_WIDTH - 15);
+            make.height.mas_equalTo(0.5);
+        }];
+        
         self.lab_commodityTitle = [[UILabel alloc]init];
         [self addSubview:self.lab_commodityTitle];
         [self.lab_commodityTitle setText:@"商品"];
@@ -145,7 +167,7 @@
         [self.lab_commodityTitle setFont:[UIFont boldSystemFontOfSize:16]];
         [self.lab_commodityTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
-            make.top.equalTo(self.img_line2.mas_bottom).offset(9.7);
+            make.top.equalTo(self.img_line3.mas_bottom).offset(9.7);
             make.height.mas_equalTo(22);
         }];
         
@@ -224,6 +246,37 @@
     height = height + [purchaseOrderEntity.address.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
     
     return height;
+}
+
+- (void)setArr_schedule:(NSMutableArray *)arr_schedule{
+    _arr_schedule = arr_schedule;
+    [self.tb_schedule reloadData];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
+    return v_header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 100;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arr_schedule.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 30;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"ScheduleTableViewCell";
+    ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[ScheduleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    return cell;
 }
 
 @end
