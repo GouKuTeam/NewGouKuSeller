@@ -128,6 +128,7 @@
     self.tb_left.dataSource = self;
     self.tb_left.tableViewDelegate = self;
     self.tb_left.tableFooterView = [UIView new];
+    self.tb_left.separatorColor = [UIColor clearColor];
     [self.tb_left requestDataSource];
     
     self.shopPriceDetailView = [[ShopPriceDetailView alloc]init];
@@ -287,10 +288,18 @@
         }else{
             [v_header.btn_zhankai setTitle:@"展开" forState:UIControlStateNormal];
         }
-        if (entity.items.count > 2) {
-            [v_header.btn_zhankai setHidden:NO];
+        if (self.selectIndex == 8 || self.selectIndex == 9) {
+            if (entity.items.count > 0) {
+                [v_header.btn_zhankai setHidden:NO];
+            }else{
+                [v_header.btn_zhankai setHidden:YES];
+            }
         }else{
-            [v_header.btn_zhankai setHidden:YES];
+            if (entity.items.count > 2) {
+                [v_header.btn_zhankai setHidden:NO];
+            }else{
+                [v_header.btn_zhankai setHidden:YES];
+            }
         }
         return v_allHeader;
     }else{
