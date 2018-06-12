@@ -158,10 +158,10 @@
 
 //现金收银
 +(void)payInCashWithOrderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_POST_PayInCash,orderId];
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_OrderAndPay,API_POST_PayInCash,orderId];
 
     [[RTHttpClient defaultClient] requestWithPath:str_url
-                                           method:RTHttpRequestPost
+                                           method:RTHttpRequestGet
                                        parameters:nil
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {

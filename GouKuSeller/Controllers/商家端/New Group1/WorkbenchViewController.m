@@ -35,13 +35,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
-    UIView *statusView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+    UIView *statusView = [[UIView alloc]init];
     [self.view addSubview:statusView];
+    if (iPhoneX) {
+        [statusView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    }else{
+        [statusView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+    }
     [statusView setBackgroundColor:[UIColor colorWithHexString:COLOR_Main]];
     manage = [JWBluetoothManage sharedInstance];
 }
 
 - (void)onCreate{
+    
     self.v_scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     [self.view addSubview:self.v_scrollView];
     [self.v_scrollView setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];

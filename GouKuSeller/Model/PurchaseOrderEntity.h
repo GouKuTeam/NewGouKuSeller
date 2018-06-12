@@ -35,6 +35,8 @@
 @property (nonatomic ,assign)double            accountPrice;      //账户余额
 //供应商订单加的
 @property (nonatomic ,assign)BOOL              isShow;
+@property (nonatomic ,assign)BOOL              isFlowShow;
+
 
 //商户 To C  订单加的
 @property (nonatomic ,strong)NSNumber         *orderType;          //订单类型

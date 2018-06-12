@@ -42,10 +42,11 @@
     self.title = @"打印机管理";
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(printerDismissAction) name:@"printerDismiss" object:nil];
     manage = [JWBluetoothManage sharedInstance];
-    
+    WeakSelf
     manage.disConnectBlock = ^(CBPeripheral *perpheral, NSError *error) {
         NSLog(@"设备已经断开连接！");
         [[NSNotificationCenter defaultCenter] postNotificationName:@"printerDismiss" object:nil];
+        [weakSelf.lab_printer setText:@"未连接"];
         
     };
 }
@@ -61,7 +62,7 @@
     [self.view addSubview:v_back];
     [v_back setBackgroundColor: [UIColor whiteColor]];
     UITapGestureRecognizer *tgp_vback = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tgp_vback)];
-    [self.view addGestureRecognizer:tgp_vback];
+    [v_back addGestureRecognizer:tgp_vback];
     
     UILabel *lab_left = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
     [v_back addSubview:lab_left];

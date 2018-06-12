@@ -299,3 +299,5 @@
 #define API_POST_OutOrderListSearch @"/outOrder/list/search"
 //查询待处理订单数量
 #define API_GET_OutOrderCount @"/outOrder/handle/getCount"
+//获取订单详情
+#define API_GET_ShopGetOutOrderDetail @"/shopOrder/shop/get/"

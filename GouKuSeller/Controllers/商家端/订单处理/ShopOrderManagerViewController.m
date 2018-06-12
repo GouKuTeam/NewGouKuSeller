@@ -53,8 +53,8 @@
     
     self.arr_data = [NSMutableArray array];
     [kCountDownManager start];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshShopOrderData) name:@"RefreshShopNewOrderData" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshShopCancelOrderData) name:@"RefreshShopCancelOrderData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshShopOrderData:) name:@"RefreshShopNewOrderData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(RefreshShopCancelOrderData:) name:@"RefreshShopCancelOrderData" object:nil];
     manage = [JWBluetoothManage sharedInstance];
 }
 
@@ -174,6 +174,18 @@
     }else{
         [v_header.btn_zhankai setHidden:YES];
     }
+    v_header.showAllAction = ^{
+        [self.tb_orderManager reloadData];
+    };
+    v_header.phoneAction = ^(PurchaseOrderEntity *entity) {
+        if (entity.flow.count > 0) {
+            NSDictionary *dic = [entity.flow firstObject];
+            NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"tel:%@",[dic objectForKey:@"riderPhone"]];
+            UIWebView * callWebview = [[UIWebView alloc] init];
+            [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+            [self.view addSubview:callWebview];
+        }
+    };
     return v_header;
 }
 
@@ -216,6 +228,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 - (void)showAction:(UIButton *)btn_sender{
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
@@ -348,13 +361,34 @@
     [(TabBarViewController *)self.tabBarController showBadgeOnItemIndex:1 withCount:self.newOrderCount + self.hadleOrderCount + self.cleseOrderCount];
 }
 
-- (void)RefreshShopOrderData{
+- (void)RefreshShopOrderData:(NSNotification *)notification{
     [self getOutOrderCount];
     [self.v_top setItemWithIndex:0];
+    [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:[notification.userInfo objectForKey:@"orderId"] prepare:^{
+        
+    } success:^(id obj) {
+        PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
+        if ([LoginStorage IsPrinter] == YES) {
+            [self autoPrintWithPurchaseOrderEntity:entity];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
-- (void)RefreshShopCancelOrderData{
+- (void)RefreshShopCancelOrderData:(NSNotification *)notification{
+    [self getOutOrderCount];
     [self.v_top setItemWithIndex:2];
+    [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:[notification.userInfo objectForKey:@"orderId"] prepare:^{
+        
+    } success:^(id obj) {
+        PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
+        if ([LoginStorage IsPrinter] == YES) {
+            [self autoPrintWithPurchaseOrderEntity:entity];
+        }
+    } failed:^(NSInteger statusCode, id json) {
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -374,98 +408,101 @@
     PurchaseOrderEntity *entity = [self.arr_data objectAtIndex:btn_sender.tag];
     
     if (manage.stage != JWScanStageCharacteristics) {
-        [ProgressShow alertView:self.view Message:@"打印机正在准备中..." cb:nil];
+        [ProgressShow alertView:self.view Message:@"打印失败，请检查蓝牙打印机" cb:nil];
         return;
     }
-    JWPrinter *printer = [[JWPrinter alloc] init];
-    NSString *str1 = [NSString stringWithFormat:@"********饿了么#%@********",entity.number];
-    [printer appendText:str1 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
-    NSString *str2 = [LoginStorage GetShopName];
-    [printer appendText:str2 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleMiddle];
-    NSString *str3 = @"--已在线支付--";
-    [printer appendText:str3 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
-    [printer appendSeperatorLine];
-    NSString *str5 = [NSString stringWithFormat:@"下单时间：%@",[DateUtils stringFromTimeInterval:entity.createTime formatter:@"MM-dd HH:mm"]];
-    [printer appendText:str5 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
-    NSString *str6 = entity.remark;
-    [printer appendText:str6 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
-    if (entity.invoice.length > 0) {
-        NSString *str7 = [NSString stringWithFormat:@"发票：%@",entity.invoice];
-        [printer appendText:str7 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
-    }
-    NSMutableArray *arr_commodity = [[NSMutableArray alloc]init];
-    NSMutableArray *arr_baozhuang = [[NSMutableArray alloc]init];
-    NSMutableArray *arr_zengpin = [[NSMutableArray alloc]init];
-    for (int i= 0; i < entity.items.count; i++) {
-        SupplierCommodityEndity *commidityEntity = [entity.items objectAtIndex:i];
-        if ([commidityEntity.type intValue] == 1) {
-            [arr_commodity addObject:commidityEntity];
-        }
-        if ([commidityEntity.type intValue] == 2) {
-            [arr_baozhuang addObject:commidityEntity];
-        }
-        if ([commidityEntity.type intValue] == 3) {
-            [arr_zengpin addObject:commidityEntity];
-        }
-    }
-    if (arr_commodity.count > 0) {
-        NSString *str8 = @"-------------商品-------------";
-        [printer appendText:str8 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
-        for (int i = 0; i < arr_commodity.count; i++) {
-            SupplierCommodityEndity *commidityEntity = [arr_commodity objectAtIndex:i];
-            [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
-        }
-    }
-    if (arr_baozhuang.count > 0) {
-        NSString *str9 = @"-------------包装-------------";
-        [printer appendText:str9 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
-        for (int i = 0; i < arr_baozhuang.count; i++) {
-            SupplierCommodityEndity *commidityEntity = [arr_baozhuang objectAtIndex:i];
-            [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
-        }
-    }
-    if (arr_zengpin.count > 0) {
-        NSString *str10 = @"-------------赠品-------------";
-        [printer appendText:str10 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
-        for (int i = 0; i < arr_zengpin.count; i++) {
-            SupplierCommodityEndity *commidityEntity = [arr_zengpin objectAtIndex:i];
-            [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
-        }
-    }
-    [printer appendSeperatorLine];
     
-    NSMutableArray *arr_youhui = [NSMutableArray arrayWithArray:entity.actOut];
-    if (arr_youhui.count > 0) {
-        for (int i = 0; i < arr_youhui.count; i++) {
-            NSDictionary *diccc = [arr_youhui objectAtIndex:i];
-            [printer appendTitle:[diccc objectForKey:@"name"]  value:[[diccc objectForKey:@"price"] stringValue]];
+    for (int i = 0; i < [[LoginStorage getPrinterNum] intValue]; i++) {
+        JWPrinter *printer = [[JWPrinter alloc] init];
+        NSString *str1 = [NSString stringWithFormat:@"********饿了么#%@********",entity.number];
+        [printer appendText:str1 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+        NSString *str2 = [LoginStorage GetShopName];
+        [printer appendText:str2 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleMiddle];
+        NSString *str3 = @"--已在线支付--";
+        [printer appendText:str3 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+        [printer appendSeperatorLine];
+        NSString *str5 = [NSString stringWithFormat:@"下单时间：%@",[DateUtils stringFromTimeInterval:entity.createTime formatter:@"MM-dd HH:mm"]];
+        [printer appendText:str5 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
+        NSString *str6 = entity.remark;
+        [printer appendText:str6 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        if (entity.invoice.length > 0) {
+            NSString *str7 = [NSString stringWithFormat:@"发票：%@",entity.invoice];
+            [printer appendText:str7 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
         }
+        NSMutableArray *arr_commodity = [[NSMutableArray alloc]init];
+        NSMutableArray *arr_baozhuang = [[NSMutableArray alloc]init];
+        NSMutableArray *arr_zengpin = [[NSMutableArray alloc]init];
+        for (int i= 0; i < entity.items.count; i++) {
+            SupplierCommodityEndity *commidityEntity = [entity.items objectAtIndex:i];
+            if ([commidityEntity.type intValue] == 1) {
+                [arr_commodity addObject:commidityEntity];
+            }
+            if ([commidityEntity.type intValue] == 2) {
+                [arr_baozhuang addObject:commidityEntity];
+            }
+            if ([commidityEntity.type intValue] == 3) {
+                [arr_zengpin addObject:commidityEntity];
+            }
+        }
+        if (arr_commodity.count > 0) {
+            NSString *str8 = @"-------------商品-------------";
+            [printer appendText:str8 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+            for (int i = 0; i < arr_commodity.count; i++) {
+                SupplierCommodityEndity *commidityEntity = [arr_commodity objectAtIndex:i];
+                [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
+            }
+        }
+        if (arr_baozhuang.count > 0) {
+            NSString *str9 = @"-------------包装-------------";
+            [printer appendText:str9 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+            for (int i = 0; i < arr_baozhuang.count; i++) {
+                SupplierCommodityEndity *commidityEntity = [arr_baozhuang objectAtIndex:i];
+                [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
+            }
+        }
+        if (arr_zengpin.count > 0) {
+            NSString *str10 = @"-------------赠品-------------";
+            [printer appendText:str10 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+            for (int i = 0; i < arr_zengpin.count; i++) {
+                SupplierCommodityEndity *commidityEntity = [arr_zengpin objectAtIndex:i];
+                [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
+            }
+        }
+        [printer appendSeperatorLine];
+        
+        NSMutableArray *arr_youhui = [NSMutableArray arrayWithArray:entity.actOut];
+        if (arr_youhui.count > 0) {
+            for (int i = 0; i < arr_youhui.count; i++) {
+                NSDictionary *diccc = [arr_youhui objectAtIndex:i];
+                [printer appendTitle:[diccc objectForKey:@"name"]  value:[[diccc objectForKey:@"price"] stringValue]];
+            }
+        }
+        
+        [printer appendTitle:@"配送费"  value:[NSString stringWithFormat:@"%.2f",entity.payFreight]];
+        [printer appendSeperatorLine];
+        
+        [printer appendTitle:@"实付" value:[NSString stringWithFormat:@"%.2f",entity.payActual] fontSize:HLFontSizeTitleSmalle];
+        [printer appendSeperatorLine];
+        [printer appendText:entity.address.address alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        [printer appendText:entity.address.name alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        [printer appendText:entity.address.phone alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        
+        [printer appendText:[NSString stringWithFormat:@"订单编号：%@",entity.orderId] alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
+        
+        [printer appendFooter:[NSString stringWithFormat:@"********%@********",[LoginStorage GetShopName]]];
+        [printer appendNewLine];
+        [printer appendNewLine];
+        [printer appendNewLine];
+        [printer appendNewLine];
+        NSData *mainData = [printer getFinalData];
+        [[JWBluetoothManage sharedInstance] sendPrintData:mainData completion:^(BOOL completion, CBPeripheral *connectPerpheral,NSString *error) {
+            if (completion) {
+                NSLog(@"打印成功");
+            }else{
+                NSLog(@"写入错误---:%@",error);
+            }
+        }];
     }
-    
-    [printer appendTitle:@"配送费"  value:[NSString stringWithFormat:@"%.2f",entity.payFreight]];
-    [printer appendSeperatorLine];
-    
-    [printer appendTitle:@"实付" value:[NSString stringWithFormat:@"%.2f",entity.payActual] fontSize:HLFontSizeTitleSmalle];
-    [printer appendSeperatorLine];
-    [printer appendText:entity.address.address alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
-    [printer appendText:entity.address.name alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
-    [printer appendText:entity.address.phone alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
-    
-    [printer appendText:[NSString stringWithFormat:@"订单编号：%@",entity.orderId] alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
-    
-    [printer appendFooter:[NSString stringWithFormat:@"********%@********",[LoginStorage GetShopName]]];
-    [printer appendNewLine];
-    [printer appendNewLine];
-    [printer appendNewLine];
-    [printer appendNewLine];
-    NSData *mainData = [printer getFinalData];
-    [[JWBluetoothManage sharedInstance] sendPrintData:mainData completion:^(BOOL completion, CBPeripheral *connectPerpheral,NSString *error) {
-        if (completion) {
-            NSLog(@"打印成功");
-        }else{
-            NSLog(@"写入错误---:%@",error);
-        }
-    }];
 }
 
 - (void)getOutOrderCount{
@@ -486,6 +523,105 @@
     } failed:^(NSInteger statusCode, id json) {
         
     }];
+}
+
+- (void)autoPrintWithPurchaseOrderEntity:(PurchaseOrderEntity *)entity{
+    if (manage.stage != JWScanStageCharacteristics) {
+        [ProgressShow alertView:self.view Message:@"打印失败，请检查蓝牙打印机" cb:nil];
+        return;
+    }
+    
+    for (int i = 0; i < [[LoginStorage getPrinterNum] intValue]; i++) {
+        JWPrinter *printer = [[JWPrinter alloc] init];
+        NSString *str1 = [NSString stringWithFormat:@"********饿了么#%@********",entity.number];
+        [printer appendText:str1 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleBig];
+        NSString *str2 = [LoginStorage GetShopName];
+        [printer appendText:str2 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleMiddle];
+        NSString *str3 = @"--已在线支付--";
+        [printer appendText:str3 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+        [printer appendSeperatorLine];
+        NSString *str5 = [NSString stringWithFormat:@"下单时间：%@",[DateUtils stringFromTimeInterval:entity.createTime formatter:@"MM-dd HH:mm"]];
+        [printer appendText:str5 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
+        NSString *str6 = entity.remark;
+        [printer appendText:str6 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        if (entity.invoice.length > 0) {
+            NSString *str7 = [NSString stringWithFormat:@"发票：%@",entity.invoice];
+            [printer appendText:str7 alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        }
+        NSMutableArray *arr_commodity = [[NSMutableArray alloc]init];
+        NSMutableArray *arr_baozhuang = [[NSMutableArray alloc]init];
+        NSMutableArray *arr_zengpin = [[NSMutableArray alloc]init];
+        for (int i= 0; i < entity.items.count; i++) {
+            SupplierCommodityEndity *commidityEntity = [entity.items objectAtIndex:i];
+            if ([commidityEntity.type intValue] == 1) {
+                [arr_commodity addObject:commidityEntity];
+            }
+            if ([commidityEntity.type intValue] == 2) {
+                [arr_baozhuang addObject:commidityEntity];
+            }
+            if ([commidityEntity.type intValue] == 3) {
+                [arr_zengpin addObject:commidityEntity];
+            }
+        }
+        if (arr_commodity.count > 0) {
+            NSString *str8 = @"-------------商品-------------";
+            [printer appendText:str8 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+            for (int i = 0; i < arr_commodity.count; i++) {
+                SupplierCommodityEndity *commidityEntity = [arr_commodity objectAtIndex:i];
+                [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
+            }
+        }
+        if (arr_baozhuang.count > 0) {
+            NSString *str9 = @"-------------包装-------------";
+            [printer appendText:str9 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+            for (int i = 0; i < arr_baozhuang.count; i++) {
+                SupplierCommodityEndity *commidityEntity = [arr_baozhuang objectAtIndex:i];
+                [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
+            }
+        }
+        if (arr_zengpin.count > 0) {
+            NSString *str10 = @"-------------赠品-------------";
+            [printer appendText:str10 alignment:HLTextAlignmentCenter fontSize:HLFontSizeTitleSmalle];
+            for (int i = 0; i < arr_zengpin.count; i++) {
+                SupplierCommodityEndity *commidityEntity = [arr_zengpin objectAtIndex:i];
+                [printer appendLeftText:commidityEntity.name middleText:[NSString stringWithFormat:@"x%ld",commidityEntity.count] rightText:[NSString stringWithFormat:@"%.2f",commidityEntity.count * commidityEntity.price] isTitle:YES];
+            }
+        }
+        [printer appendSeperatorLine];
+        
+        NSMutableArray *arr_youhui = [NSMutableArray arrayWithArray:entity.actOut];
+        if (arr_youhui.count > 0) {
+            for (int i = 0; i < arr_youhui.count; i++) {
+                NSDictionary *diccc = [arr_youhui objectAtIndex:i];
+                [printer appendTitle:[diccc objectForKey:@"name"]  value:[[diccc objectForKey:@"price"] stringValue]];
+            }
+        }
+        
+        [printer appendTitle:@"配送费"  value:[NSString stringWithFormat:@"%.2f",entity.payFreight]];
+        [printer appendSeperatorLine];
+        
+        [printer appendTitle:@"实付" value:[NSString stringWithFormat:@"%.2f",entity.payActual] fontSize:HLFontSizeTitleSmalle];
+        [printer appendSeperatorLine];
+        [printer appendText:entity.address.address alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        [printer appendText:entity.address.name alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        [printer appendText:entity.address.phone alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleMiddle];
+        
+        [printer appendText:[NSString stringWithFormat:@"订单编号：%@",entity.orderId] alignment:HLTextAlignmentLeft fontSize:HLFontSizeTitleSmalle];
+        
+        [printer appendFooter:[NSString stringWithFormat:@"********%@********",[LoginStorage GetShopName]]];
+        [printer appendNewLine];
+        [printer appendNewLine];
+        [printer appendNewLine];
+        [printer appendNewLine];
+        NSData *mainData = [printer getFinalData];
+        [[JWBluetoothManage sharedInstance] sendPrintData:mainData completion:^(BOOL completion, CBPeripheral *connectPerpheral,NSString *error) {
+            if (completion) {
+                NSLog(@"打印成功");
+            }else{
+                NSLog(@"写入错误---:%@",error);
+            }
+        }];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

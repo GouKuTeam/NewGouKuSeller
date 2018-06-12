@@ -231,15 +231,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     }
     if ([[dic objectForKey:@"type"] intValue] == 4 && [[dic objectForKey:@"operation"] intValue]== 1) {
         //商家新订单  来自饿了么  发送通知给订单处理界面刷新数据
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshShopNewOrderData" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshShopNewOrderData" object:nil userInfo:userInfo];
     }
     if ([[dic objectForKey:@"type"] intValue] == 4 && [[dic objectForKey:@"operation"] intValue]== 8) {
         //用户已取消订单  来自饿了么  发送通知给订单处理界面刷新数据
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshShopCancelOrderData" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshShopCancelOrderData" object:nil userInfo:userInfo];
     }
     if ([[dic objectForKey:@"type"] intValue] == 4 && [[dic objectForKey:@"operation"] intValue]== 9) {
         //用户申请取消订单  来自饿了么  发送通知给订单处理界面刷新数据
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshShopCancelOrderData" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshShopCancelOrderData" object:nil userInfo:userInfo];
     }
 
 }

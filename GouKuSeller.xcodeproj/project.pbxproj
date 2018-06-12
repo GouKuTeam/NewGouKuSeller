@@ -34,6 +34,7 @@
 		1891DAB820A4230A008E16F7 /* CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1891DAB720A4230A008E16F7 /* CategoryTableViewCell.m */; };
 		18B3F97120A43F880000A30C /* SupplierCommodityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */; };
 		18B3F97420A440830000A30C /* TitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B3F97320A440830000A30C /* TitleCollectionViewCell.m */; };
+		18B53C7A20CE7444002133E1 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B53C7920CE7444002133E1 /* ScheduleTableViewCell.m */; };
 		4CF0E29720BF27C851CBE73A /* libPods-GouKuSeller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */; };
 		740077C520C51F1F000A50AA /* ShopOrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077C420C51F1F000A50AA /* ShopOrderManagerViewController.m */; };
 		740077C820C52203000A50AA /* PrinterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740077C720C52203000A50AA /* PrinterManagerViewController.m */; };
@@ -448,6 +449,9 @@
 		7498367F208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */; };
 		74983680208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */; };
 		74983681208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */; };
+		749D01AF20CFA29500E4FE68 /* neworder.wav in Resources */ = {isa = PBXBuildFile; fileRef = 749D01AE20CFA29400E4FE68 /* neworder.wav */; };
+		749D01B220CFA2A300E4FE68 /* ordercancelrequest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 749D01B020CFA2A300E4FE68 /* ordercancelrequest.wav */; };
+		749D01B320CFA2A300E4FE68 /* ordercancel(1min).wav in Resources */ = {isa = PBXBuildFile; fileRef = 749D01B120CFA2A300E4FE68 /* ordercancel(1min).wav */; };
 		74A1F12C208F75BC0041742B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A1F12B208F75BC0041742B /* NotificationService.m */; };
 		74A1F130208F75BC0041742B /* GouKuSellerPush.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 74A1F128208F75BC0041742B /* GouKuSellerPush.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */; };
@@ -794,6 +798,8 @@
 		18B3F97020A43F880000A30C /* SupplierCommodityHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupplierCommodityHeaderView.m; sourceTree = "<group>"; };
 		18B3F97220A440830000A30C /* TitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleCollectionViewCell.h; sourceTree = "<group>"; };
 		18B3F97320A440830000A30C /* TitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleCollectionViewCell.m; sourceTree = "<group>"; };
+		18B53C7820CE7444002133E1 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
+		18B53C7920CE7444002133E1 /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
 		1B78066E8AB9D2633CE7CD9F /* Pods-GouKuSeller.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.release.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.release.xcconfig"; sourceTree = "<group>"; };
 		23769B40AD7DE8E85110EA50 /* libPods-GouKuSeller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GouKuSeller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		740077C320C51F1F000A50AA /* ShopOrderManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopOrderManagerViewController.h; sourceTree = "<group>"; };
@@ -1181,6 +1187,9 @@
 		74983679208C3789007FEEF8 /* ActiveDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveDetailHeaderView.m; sourceTree = "<group>"; };
 		7498367D208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActiveDetailCommodityTableViewCell.h; sourceTree = "<group>"; };
 		7498367E208C4846007FEEF8 /* ActiveDetailCommodityTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActiveDetailCommodityTableViewCell.m; sourceTree = "<group>"; };
+		749D01AE20CFA29400E4FE68 /* neworder.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = neworder.wav; sourceTree = "<group>"; };
+		749D01B020CFA2A300E4FE68 /* ordercancelrequest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ordercancelrequest.wav; sourceTree = "<group>"; };
+		749D01B120CFA2A300E4FE68 /* ordercancel(1min).wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ordercancel(1min).wav"; sourceTree = "<group>"; };
 		74A1F128208F75BC0041742B /* GouKuSellerPush.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GouKuSellerPush.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A1F12A208F75BC0041742B /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		74A1F12B208F75BC0041742B /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
@@ -1594,6 +1603,8 @@
 				7400782920C68622000A50AA /* ShopOrderManagerView.m */,
 				7406FCFF20CA6C1100192108 /* ShopPriceDetailView.h */,
 				7406FD0020CA6C1100192108 /* ShopPriceDetailView.m */,
+				18B53C7820CE7444002133E1 /* ScheduleTableViewCell.h */,
+				18B53C7920CE7444002133E1 /* ScheduleTableViewCell.m */,
 			);
 			path = "订单处理";
 			sourceTree = "<group>";
@@ -1678,6 +1689,9 @@
 		740C38BC20B57ECC00ACFBAE /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				749D01B120CFA2A300E4FE68 /* ordercancel(1min).wav */,
+				749D01B020CFA2A300E4FE68 /* ordercancelrequest.wav */,
+				749D01AE20CFA29400E4FE68 /* neworder.wav */,
 				740C38BE20B57EE900ACFBAE /* cancerPurchaseOrder.wav */,
 				740C38BD20B57EE900ACFBAE /* PurchaseOrderPayComplete.wav */,
 			);
@@ -3013,7 +3027,10 @@
 				7489CCA4207F599100971BED /* keyboard_delete@2x.png in Resources */,
 				74C6E3332079F9500083E4A8 /* Images.xcassets in Resources */,
 				74ACFFBB20A051C0005C5A16 /* Assets.xcassets in Resources */,
+				749D01B220CFA2A300E4FE68 /* ordercancelrequest.wav in Resources */,
 				74B4E812204BD353006AFB6C /* LaunchScreen.storyboard in Resources */,
+				749D01B320CFA2A300E4FE68 /* ordercancel(1min).wav in Resources */,
+				749D01AF20CFA29500E4FE68 /* neworder.wav in Resources */,
 				74B4E86F204BD3EC006AFB6C /* MBProgressHUD+JDragon.bundle in Resources */,
 				7489CCA1207F599100971BED /* keyboard_delete@3x.png in Resources */,
 				7489CC9B207F599100971BED /* README.md in Resources */,
@@ -3248,6 +3265,7 @@
 				74F8E8DC205905AF000A17A5 /* EditSecondCatagoryViewController.m in Sources */,
 				743C5F7320A5A3F200E617AF /* CustomerLocationViewController.m in Sources */,
 				74F8E94920614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */,
+				18B53C7A20CE7444002133E1 /* ScheduleTableViewCell.m in Sources */,
 				740077F220C52C21000A50AA /* ProgressShow.m in Sources */,
 				74ACFFB920A04E1B005C5A16 /* ShopManagerViewController.m in Sources */,
 				74F8E8EB205925D7000A17A5 /* valueList.m in Sources */,

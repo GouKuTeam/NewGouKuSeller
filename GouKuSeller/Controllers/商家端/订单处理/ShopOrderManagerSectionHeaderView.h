@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "PurchaseOrderEntity.h"
 
-@interface ShopOrderManagerSectionHeaderView : UIView
+typedef void(^ShowAllAction)(void);
+typedef void(^PhoneAction)(PurchaseOrderEntity *entity);
+
+@interface ShopOrderManagerSectionHeaderView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong)UIView                *v_top;
 @property (nonatomic ,strong)UIView                *v_numAndStatus;
@@ -26,6 +29,18 @@
 @property (nonatomic ,strong)UILabel               *lab_remarkDetail;
 @property (nonatomic ,strong)UILabel               *lab_commodityTitle;
 @property (nonatomic ,strong)UIButton              *btn_zhankai;
+
+@property (nonatomic ,strong)UITableView           *tb_schedule;
+@property (nonatomic ,strong)UILabel               *lb_title;
+@property (nonatomic ,strong)UIButton              *btn_phone;
+@property (nonatomic ,strong)UIButton              *btn_showSchedule;
+@property (nonatomic ,strong)UIImageView           *img_line3;
+@property (nonatomic ,strong)NSMutableArray        *arr_schedule;
+@property (nonatomic ,strong)PurchaseOrderEntity   *purchaseOrderEntity;
+
+@property (nonatomic ,copy)ShowAllAction            showAllAction;
+@property (nonatomic ,copy)PhoneAction              phoneAction;
+
 
 - (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity;
 

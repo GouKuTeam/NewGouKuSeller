@@ -332,13 +332,19 @@
     }
     
     if (middle) {
-        NSData *data_middle = [right dataUsingEncoding:enc];
-        [self setOffset:230 - data_middle.length];
+//        NSData *data_middle = [right dataUsingEncoding:enc];
+//        [self setOffset:230 - data_middle.length];
+        NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:22.0]};
+        NSAttributedString *valueAttr = [[NSAttributedString alloc] initWithString:middle attributes:dict];
+        int valueWidth = valueAttr.size.width;
+        [self setOffset:260 - valueWidth];
         [self setText:middle];
     }
     if (right) {
-        NSData *data_right = [right dataUsingEncoding:enc];
-        [self setOffset:300 - data_right.length];
+        NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:22.0]};
+        NSAttributedString *valueAttr = [[NSAttributedString alloc] initWithString:right attributes:dict];
+        int valueWidth = valueAttr.size.width;
+        [self setOffset:368 - valueWidth];
 
         [self setText:right];
     }

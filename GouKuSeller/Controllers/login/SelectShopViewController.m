@@ -65,6 +65,8 @@
             [LoginStorage saveShopPic:[NSString stringWithFormat:@"%@%@",HeadQZ,[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"logo"]]];
             [LoginStorage saveIsLogin:YES];
             [LoginStorage saveType:[NSString stringWithFormat:@"%@",[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"type"]]];
+            [LoginStorage savePrinterNum:[NSString stringWithFormat:@"%@",[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"printerNum"]]];
+            [LoginStorage saveIsPrinter:[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"autoPrint"]];
             if ([[[self.arr_shop objectAtIndex:indexPath.row] objectForKey:@"type"] intValue] == 1) {
                 //门店
                 TabBarViewController *vc = [[TabBarViewController alloc]init];

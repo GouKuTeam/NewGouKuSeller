@@ -8,6 +8,7 @@
 
 #import "ShopOrderManagerSectionHeaderView.h"
 #import "NSString+Size.h"
+#import "ScheduleTableViewCell.h"
 
 @implementation ShopOrderManagerSectionHeaderView
 
@@ -149,6 +150,30 @@
             make.height.mas_equalTo(0.5);
         }];
         
+        self.tb_schedule = [[UITableView alloc]init];
+        [self addSubview:self.tb_schedule];
+        self.tb_schedule.delegate = self;
+        self.tb_schedule.dataSource = self;
+        self.tb_schedule.separatorColor = [UIColor clearColor];
+        self.tb_schedule.backgroundColor = [UIColor whiteColor];
+        self.tb_schedule.clipsToBounds = YES;
+        self.tb_schedule.scrollEnabled = NO;
+        [self.tb_schedule mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.top.equalTo(self.img_line2.mas_bottom);
+        }];
+        
+        self.img_line3 = [[UIImageView alloc]init];
+        [self.img_line3 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
+        [self addSubview:self.img_line3];
+        [self.img_line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.tb_schedule.mas_bottom).offset(10.7);
+            make.width.mas_equalTo(SCREEN_WIDTH - 15);
+            make.height.mas_equalTo(0.5);
+        }];
+        
         self.lab_commodityTitle = [[UILabel alloc]init];
         [self addSubview:self.lab_commodityTitle];
         [self.lab_commodityTitle setText:@"商品"];
@@ -156,7 +181,7 @@
         [self.lab_commodityTitle setFont:[UIFont boldSystemFontOfSize:16]];
         [self.lab_commodityTitle mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
-            make.top.equalTo(self.img_line2.mas_bottom).offset(9.7);
+            make.top.equalTo(self.img_line3.mas_bottom).offset(9.7);
             make.height.mas_equalTo(22);
         }];
         
@@ -177,6 +202,7 @@
 }
 
 - (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
+    self.purchaseOrderEntity = purchaseOrderEntity;
     NSString *strType = @"";
     if ([purchaseOrderEntity.orderType intValue] == 1) {
         strType = @"购酷";
@@ -188,7 +214,6 @@
         strType = @"美团";
     }
     self.lab_orderNum.text = [NSString stringWithFormat:@"%@#%@",strType,purchaseOrderEntity.number];
-    
     
     CGFloat width = [self.lab_orderNum.text fittingLabelWidthWithHeight:44 andFontSize:[UIFont boldSystemFontOfSize:24]];
     [self.lab_orderdistribution mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -238,6 +263,40 @@
             make.left.mas_equalTo(56.7);
         }];
     }
+    if (purchaseOrderEntity.flow.count > 0 && (purchaseOrderEntity.status == 2 || purchaseOrderEntity.status == 3 || purchaseOrderEntity.status == 4 || purchaseOrderEntity.status == 5 || purchaseOrderEntity.status == 6 || purchaseOrderEntity.status == 8)) {
+        self.arr_schedule = [NSMutableArray arrayWithArray:purchaseOrderEntity.flow];
+        if (self.arr_schedule.count > 0) {
+            [self.arr_schedule removeObjectAtIndex:0];
+        }
+        [self.tb_schedule reloadData];
+        [self.img_line3 setHidden:NO];
+        if (purchaseOrderEntity.flow.count > 1) {
+            if (purchaseOrderEntity.isFlowShow == YES) {
+                [self.tb_schedule mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(55 + (purchaseOrderEntity.flow.count - 1) * 30 + 10);
+                }];
+            }else{
+                [self.tb_schedule mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(55);
+                }];
+            }
+        }else{
+            [self.tb_schedule mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(32);
+            }];
+        }
+        [self.img_line3 mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.tb_schedule.mas_bottom).offset(10.7);
+        }];
+    }else{
+        [self.img_line3 setHidden:YES];
+        [self.tb_schedule mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        [self.img_line3 mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.tb_schedule.mas_bottom);
+        }];
+    }
 }
 
 - (CGFloat)getHeightWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
@@ -246,8 +305,115 @@
         height = height + 2 * 10.7 + [purchaseOrderEntity.remark fittingLabelHeightWithWidth:SCREEN_WIDTH - 56.7 - 15 andFontSize:[UIFont systemFontOfSize:14]];
     }
     height = height + [purchaseOrderEntity.address.address fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
+    if (purchaseOrderEntity.flow.count > 0 && (purchaseOrderEntity.status == 2 || purchaseOrderEntity.status == 3 || purchaseOrderEntity.status == 4 || purchaseOrderEntity.status == 5 || purchaseOrderEntity.status == 6 || purchaseOrderEntity.status == 8)) {
+        if (purchaseOrderEntity.flow.count > 1) {
+            if (purchaseOrderEntity.isFlowShow == YES) {
+                height = height + 55 + (purchaseOrderEntity.flow.count - 1) * 30 + 18;
+            }else{
+                height = height + 55 + 10;
+            }
+        }else{
+            height = height + 32;
+        }
+    }
     
     return height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
+    v_header.clipsToBounds = YES;
+    if (self.arr_schedule.count > 0) {
+        NSDictionary *dic = [self.purchaseOrderEntity.flow firstObject];
+        UILabel *lb_time = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 55, 32)];
+        [lb_time setFont:[UIFont systemFontOfSize:14]];
+        [lb_time setTextColor:[UIColor blackColor]];
+        [v_header addSubview:lb_time];
+        [lb_time setText:[dic objectForKey:@"hourTime"]];
+        
+        UILabel *lb_schedule = [[UILabel alloc]initWithFrame:CGRectMake(lb_time.right, 0, SCREEN_WIDTH - 70, 32)];
+        [lb_schedule setFont:[UIFont systemFontOfSize:14]];
+        [lb_schedule setTextColor:[UIColor blackColor]];
+        [v_header addSubview:lb_schedule];
+        [lb_schedule setText:[NSString stringWithFormat:@"%@(骑手：%@)",[dic objectForKey:@"describe"],[dic objectForKey:@"riderName"]]];
+        
+        self.btn_phone = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 18, 8.5, 15, 15)];
+        [v_header addSubview:self.btn_phone];
+        [self.btn_phone setBackgroundImage:[UIImage imageNamed:@"phone"] forState:UIControlStateNormal];
+        [self.btn_phone addTarget:self action:@selector(phoneRiderAction) forControlEvents:UIControlEventTouchUpInside];
+        if (self.purchaseOrderEntity.flow.count == 1) {
+            [v_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 32)];
+        }else{
+            [v_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 55)];
+            self.btn_showSchedule = [[UIButton alloc]initWithFrame:CGRectMake(15, lb_schedule.bottom + 3, 70, 17)];
+            if (self.purchaseOrderEntity.isFlowShow == YES) {
+                [self.btn_showSchedule setTitle:@"收起进度" forState:UIControlStateNormal];
+                [self.btn_showSchedule setImage:[UIImage imageNamed:@"triangle_blue_up"] forState:UIControlStateNormal];
+            }else{
+                [self.btn_showSchedule setTitle:@"展开进度" forState:UIControlStateNormal];
+                [self.btn_showSchedule setImage:[UIImage imageNamed:@"triangle_blue_down"] forState:UIControlStateNormal];
+            }
+            [self.btn_showSchedule setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            [self.btn_showSchedule setTitleEdgeInsets:UIEdgeInsetsMake(0, -self.btn_showSchedule.imageView.frame.size.width, 0, self.btn_showSchedule.imageView.frame.size.width)];
+            [self.btn_showSchedule setImageEdgeInsets:UIEdgeInsetsMake(0, self.btn_showSchedule.titleLabel.bounds.size.width, 0, -self.btn_showSchedule.titleLabel.bounds.size.width)];
+            [self.btn_showSchedule setTitleColor:[UIColor colorWithHexString:COLOR_BLUE_MAIN] forState:UIControlStateNormal];
+            self.btn_showSchedule.titleLabel.font = [UIFont systemFontOfSize:12];
+            [v_header addSubview:self.btn_showSchedule];
+            [self.btn_showSchedule addTarget:self action:@selector(showScheduleAction) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+    return v_header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (self.purchaseOrderEntity.flow.count == 0) {
+        return 0.1;
+    }else if (self.purchaseOrderEntity.flow.count == 1) {
+        return 32;
+    }else{
+        return 55;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.purchaseOrderEntity.isFlowShow == YES) {
+        return self.arr_schedule.count;
+    }else{
+        return 0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 30;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identifier = @"ScheduleTableViewCell";
+    ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[ScheduleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    NSDictionary *dic = [self.arr_schedule objectAtIndex:indexPath.row];
+    [cell.lb_time setText:[dic objectForKey:@"hourTime"]];
+    [cell.lb_schedule setText:[dic objectForKey:@"describe"]];
+    return cell;
+}
+
+- (void)showScheduleAction{
+    self.purchaseOrderEntity.isFlowShow = !self.purchaseOrderEntity.isFlowShow;
+    if (self.showAllAction) {
+        self.showAllAction();
+    }
+}
+
+- (void)phoneRiderAction{
+    if (self.phoneAction) {
+        self.phoneAction(self.purchaseOrderEntity);
+    }
 }
 
 @end
