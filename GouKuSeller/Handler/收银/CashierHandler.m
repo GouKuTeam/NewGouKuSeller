@@ -109,7 +109,7 @@
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_ScanUserCashCode];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (openid) {
-        [dic setObject:openid forKey:@"openid"];
+        [dic setObject:openid forKey:@"payCode"];
     }
     if (orderid) {
         [dic setObject:orderid forKey:@"orderId"];

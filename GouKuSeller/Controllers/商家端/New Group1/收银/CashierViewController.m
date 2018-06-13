@@ -299,7 +299,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"%@", textField);
-    if (textField.text.length < 17) {
+    if (textField.text.length < 16) {
         // 商品条码
         [CashierHandler commodityCashierWithBarcode:textField.text shopId:[LoginStorage GetShopId] addup:[NSString stringWithFormat:@"%.2f",self.addPrice] prepare:^{
         } success:^(id obj) {

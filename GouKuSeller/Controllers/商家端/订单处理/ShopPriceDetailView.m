@@ -127,23 +127,9 @@
 - (void)contentViewWithPurchaseOrderEntity:(PurchaseOrderEntity *)purchaseOrderEntity{
     self.lab_totalPriceDetail.text = [NSString stringWithFormat:@"¥%.2f",purchaseOrderEntity.payWareTotal];
     self.lab_shouruDetail.text = [NSString stringWithFormat:@"¥%.2f",purchaseOrderEntity.payActual];
-    if (purchaseOrderEntity.payReduce <= 0) {
+    if (purchaseOrderEntity.payReduce < 0) {
 
-        [self.lab_youhui setHidden:YES];
-        [self.lab_youhuiDetail setHidden:YES];
-        [self.lab_shouru mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(14);
-            make.top.equalTo(self.lab_totalPrice.mas_bottom).offset(16);
-            make.height.mas_equalTo(24);
-        }];
-        [self.lab_shouruDetail mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_youhui.mas_right);
-            make.right.equalTo(self.v_back.mas_right).offset(-14);
-            make.top.height.equalTo(self.lab_youhui);
-        }];
-        
-    }else{
-        self.lab_youhuiDetail.text = [NSString stringWithFormat:@"-¥%.2f",purchaseOrderEntity.payReduce];
+        self.lab_youhuiDetail.text = [NSString stringWithFormat:@"¥%.2f",purchaseOrderEntity.payReduce];
         [self.lab_youhui setHidden:NO];
         [self.lab_youhuiDetail setHidden:NO];
         [self.lab_shouru mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -155,6 +141,20 @@
             make.left.equalTo(self.lab_shouru.mas_right);
             make.right.equalTo(self.v_back.mas_right).offset(-14);
             make.top.height.equalTo(self.lab_shouru);
+        }];
+        
+    }else{
+        [self.lab_youhui setHidden:YES];
+        [self.lab_youhuiDetail setHidden:YES];
+        [self.lab_shouru mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(14);
+            make.top.equalTo(self.lab_totalPrice.mas_bottom).offset(16);
+            make.height.mas_equalTo(24);
+        }];
+        [self.lab_shouruDetail mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lab_youhui.mas_right);
+            make.right.equalTo(self.v_back.mas_right).offset(-14);
+            make.top.height.equalTo(self.lab_youhui);
         }];
     }
 }

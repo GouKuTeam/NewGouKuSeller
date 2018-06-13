@@ -160,7 +160,7 @@
 //提交订单
 #define API_POST_AddOrder @"/order/add"
 //扫描用户付款吗上传
-#define API_POST_ScanUserCashCode @"/weixin/pay/swiping"
+#define API_POST_ScanUserCashCode @"/order/f2fpay"
 //查询满减活动金额
 #define API_POST_SelectManJianPrice @"/shop/act/order"
 //现金收银

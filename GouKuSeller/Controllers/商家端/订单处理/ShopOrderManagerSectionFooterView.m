@@ -212,7 +212,7 @@
             }else{
                 [self.lab_userCancelTitle setText:@"用户申请退款"];
                 //此时按钮显示倒计时
-                [self.btn_right setTitle:[NSString stringWithFormat:@"同意取消 %02zd:%02zd:%02zd",purchaseOrderEntity.countDown/3600,(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
+                [self.btn_right setTitle:[NSString stringWithFormat:@"同意取消 %02zd:%02zd",(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
             }
             [self.btn_right setHidden:NO];
             [self.lab_userCancelReason setText:[NSString stringWithFormat:@"取消原因：%@",purchaseOrderEntity.refundReasons]];
@@ -249,6 +249,20 @@
         if (countDown < 0) {
         }else{
             [self.btn_right setTitle:[NSString stringWithFormat:@"接单 %02zd:%02zd",(countDown/60)%60,countDown%60] forState:UIControlStateNormal];
+            
+        }
+        if (countDown == 0) {
+            if (self.countDownZero) {
+                self.countDownZero(self.purchaseOrderEntity);
+            }
+        }
+    }
+    if (self.purchaseOrderEntity.refund == 2) {
+        NSInteger countDown = self.purchaseOrderEntity.countDown - 1;
+        self.purchaseOrderEntity.countDown = self.purchaseOrderEntity.countDown - 1;
+        if (countDown < 0) {
+        }else{
+            [self.btn_right setTitle:[NSString stringWithFormat:@"同意取消 %02zd:%02zd",(countDown/60)%60,countDown%60] forState:UIControlStateNormal];
             
         }
         if (countDown == 0) {

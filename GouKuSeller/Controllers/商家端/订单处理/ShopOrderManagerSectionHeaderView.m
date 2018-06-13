@@ -335,8 +335,14 @@
         [lb_schedule setFont:[UIFont systemFontOfSize:14]];
         [lb_schedule setTextColor:[UIColor blackColor]];
         [v_header addSubview:lb_schedule];
-        [lb_schedule setText:[NSString stringWithFormat:@"%@(骑手：%@)",[dic objectForKey:@"describe"],[dic objectForKey:@"riderName"]]];
         
+        NSString * riderName = [dic objectForKey:@"riderName"];
+        if (riderName.length > 0) {
+            [lb_schedule setText:[NSString stringWithFormat:@"%@(骑手：%@)",[dic objectForKey:@"describe"],[dic objectForKey:@"riderName"]]];
+        }else{
+            [lb_schedule setText:[NSString stringWithFormat:@"%@",[dic objectForKey:@"describe"]]];
+        }
+
         self.btn_phone = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 18, 8.5, 15, 15)];
         [v_header addSubview:self.btn_phone];
         [self.btn_phone setBackgroundImage:[UIImage imageNamed:@"phone"] forState:UIControlStateNormal];
