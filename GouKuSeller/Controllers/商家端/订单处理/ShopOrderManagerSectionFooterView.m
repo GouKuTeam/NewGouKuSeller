@@ -66,6 +66,7 @@
             make.left.mas_equalTo(15);
             make.top.equalTo(self.img_line2.mas_bottom).offset(10);
             make.height.mas_equalTo(22);
+            make.width.mas_equalTo(54);
         }];
         
         self.lab_userCancelTitle = [[UILabel alloc]init];
@@ -73,7 +74,7 @@
         [self.lab_userCancelTitle setFont:[UIFont systemFontOfSize:16]];
         [self.lab_userCancelTitle setTextColor:[UIColor blackColor]];
         [self.lab_userCancelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_userCancelTime.mas_right).offset(20);
+            make.left.mas_equalTo(70);
             make.top.height.equalTo(self.lab_userCancelTime);
         }];
         
@@ -199,44 +200,39 @@
         }];
     }else{
         
+        //用户取消  时间  原因   状态
         if (purchaseOrderEntity.refund == 1) {
+            [self.lab_userCancelTime setText:[NSString stringWithFormat:@"%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.refundAt formatter:@"HH:mm"]]];
             [self.lab_userCancelTitle setText:@"用户已退款"];
             //此时按钮显示我知道了   不需要进行倒计时
             [self.btn_right setTitle:@"我知道了" forState:UIControlStateNormal];
         }else{
-            //用户取消  时间  原因   状态
-            if (purchaseOrderEntity.refund == 1) {
-                [self.lab_userCancelTitle setText:@"用户已退款"];
-                //此时按钮显示我知道了   不需要进行倒计时
-                [self.btn_right setTitle:@"我知道了" forState:UIControlStateNormal];
-            }else{
-                [self.lab_userCancelTitle setText:@"用户申请退款"];
-                //此时按钮显示倒计时
-                [self.btn_right setTitle:[NSString stringWithFormat:@"同意取消 %02zd:%02zd",(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
-            }
-            [self.btn_right setHidden:NO];
-            [self.lab_userCancelReason setText:[NSString stringWithFormat:@"取消原因：%@",purchaseOrderEntity.refundReasons]];
+            [self.lab_userCancelTime setText:[NSString stringWithFormat:@"%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.refundAt formatter:@"HH:mm"]]];
+            [self.lab_userCancelTitle setText:@"用户申请退款"];
+            //此时按钮显示倒计时
+            [self.btn_right setTitle:[NSString stringWithFormat:@"同意取消 %02zd:%02zd",(purchaseOrderEntity.countDown/60)%60,purchaseOrderEntity.countDown%60] forState:UIControlStateNormal];
         }
-        [self.lab_userCancelTime setText:[NSString stringWithFormat:@"%@",[DateUtils stringFromTimeInterval:purchaseOrderEntity.refundAt formatter:@"HH:mm"]]];
+        [self.btn_right setHidden:NO];
+        [self.lab_userCancelReason setText:[NSString stringWithFormat:@"取消原因：%@",purchaseOrderEntity.refundReasons]];
+        [self.img_line2 mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.lab_countAndPrice.mas_bottom).offset(8);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(0.5);
+        }];
+        [self.img_line3 mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.top.equalTo(self.btn_right.mas_bottom).offset(10);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.height.mas_equalTo(0.5);
+        }];
+//        [self.img_line2 setHidden:NO];
+//        [self.lab_userCancelTime setHidden:NO];
+//        [self.lab_userCancelTitle setHidden:NO];
+//        [self.lab_userCancelReason setHidden:NO];
     }
     
     
-    [self.img_line2 mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.top.equalTo(self.lab_countAndPrice.mas_bottom).offset(8);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(0.5);
-    }];
-    [self.img_line3 mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.top.equalTo(self.btn_right.mas_bottom).offset(10);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(0.5);
-    }];
-    [self.img_line2 setHidden:NO];
-    [self.lab_userCancelTime setHidden:NO];
-    [self.lab_userCancelTitle setHidden:NO];
-    [self.lab_userCancelReason setHidden:NO];
     [self.lab_createTime setText:[NSString stringWithFormat:@"%@下单",[DateUtils stringFromTimeInterval:purchaseOrderEntity.createTime formatter:@"MM-dd HH:mm"]]];
     [self.lab_orderNum setText:[NSString stringWithFormat:@"订单编号:%@",purchaseOrderEntity.orderId]];
     self.purchaseOrderEntity = purchaseOrderEntity;

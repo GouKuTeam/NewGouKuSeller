@@ -14,7 +14,7 @@
  */
 
 //1:正式网 2:测试打包
-#define SERVER_TYPE  2
+#define SERVER_TYPE  1
 
 #if (SERVER_TYPE == 1)
     //appstore环境
@@ -49,7 +49,7 @@
 //API VERSION
 #define API_VERSION @""
 //头像前缀
-#define HeadQZ @"http://pea-shop.oss-cn-hangzhou.aliyuncs.com/"
+#define HeadQZ @"https://gouku-ware.oss-cn-zhangjiakou.aliyuncs.com/"
 
 /*
      商品API
@@ -183,7 +183,14 @@
 /*
  工作台API
  */
+// 经营数据
 #define API_GET_GetToday @"/operate/getToday"
+//app版本号（是否需要强制更新）
+#define API_GET_AppVersion @"/common/app-version"
+//设置是否自动打印
+#define API_POST_PrinterAuto @"/shop/printer/auto"
+//设置打印联数
+#define API_POST_SetPrintNum @"/shop/set/printer"
 
 /*
  采购API

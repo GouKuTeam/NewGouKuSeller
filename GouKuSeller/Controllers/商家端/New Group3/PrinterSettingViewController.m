@@ -11,6 +11,8 @@
 #import "SelectPrinterNumView.h"
 #import "PrinterManagerViewController.h"
 #import "ConnectPrinterViewController.h"
+#import "MyHandler.h"
+
 @interface PrinterSettingViewController (){
     JWBluetoothManage * manage;
 }
@@ -210,9 +212,23 @@
 
 - (void)switchAction:(id)sender{
     if (self.v_switch.on == YES) {
-        [LoginStorage saveIsPrinter:YES];
+        [MyHandler setAutoPrintWithAuto:1 Prepare:^{
+            
+        } success:^(id obj) {
+            [LoginStorage saveIsPrinter:YES];
+            
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
     } else {
-        [LoginStorage saveIsPrinter:NO];
+        [MyHandler setAutoPrintWithAuto:0 Prepare:^{
+            
+        } success:^(id obj) {
+            [LoginStorage saveIsPrinter:NO];
+            
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
     }
 }
 
@@ -241,13 +257,32 @@
     [self.selectPrinterNumView setHidden:YES];
     [self.lab_printerNum setText:[self.arr_num objectAtIndex:self.selectPrinterNumView.selectedOneIndex]];
     if (self.selectPrinterNumView.selectedOneIndex == 0) {
-        [LoginStorage savePrinterNum:@"1"];
+        [MyHandler setPrintNumWithPrinterNum:1 Prepare:^{
+            
+        } success:^(id obj) {
+           [LoginStorage savePrinterNum:@"1"];
+        } failed:^(NSInteger statusCode, id json) {
+           [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+       
     }
     if (self.selectPrinterNumView.selectedOneIndex == 1) {
-        [LoginStorage savePrinterNum:@"2"];
+        [MyHandler setPrintNumWithPrinterNum:2 Prepare:^{
+            
+        } success:^(id obj) {
+            [LoginStorage savePrinterNum:@"2"];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
     }
     if (self.selectPrinterNumView.selectedOneIndex == 2) {
-        [LoginStorage savePrinterNum:@"3"];
+        [MyHandler setPrintNumWithPrinterNum:3 Prepare:^{
+            
+        } success:^(id obj) {
+            [LoginStorage savePrinterNum:@"3"];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
     }
 }
 

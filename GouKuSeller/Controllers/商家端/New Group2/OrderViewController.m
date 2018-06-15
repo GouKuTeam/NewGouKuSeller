@@ -283,6 +283,9 @@
         [v_header.btn_tell addTarget:self action:@selector(btn_tellAction:) forControlEvents:UIControlEventTouchUpInside];
         v_header.btn_DetailTell.tag = section;
         [v_header.btn_DetailTell addTarget:self action:@selector(btn_tellAction:) forControlEvents:UIControlEventTouchUpInside];
+        if (entity.status == 9) {
+            [v_header.lab_orderStatus setText:@"已取消"];
+        }
         if (entity.isShow == YES) {
             [v_header.btn_zhankai setTitle:@"收起" forState:UIControlStateNormal];
         }else{

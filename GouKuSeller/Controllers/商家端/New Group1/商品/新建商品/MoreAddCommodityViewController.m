@@ -81,8 +81,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"%@", textField.text);
-    if (textField.text.length > 17) {
-        [MBProgressHUD showErrorMessage:@"条形码不能超过17位"];
+    if (textField.text.length > 16) {
+        [MBProgressHUD showErrorMessage:@"条形码不能超过15位"];
         textField.text = @"";
         return YES;
     }

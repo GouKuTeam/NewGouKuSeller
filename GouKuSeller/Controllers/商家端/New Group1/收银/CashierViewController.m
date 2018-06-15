@@ -373,7 +373,8 @@
                 [CashierHandler scanUserCashCodeWithOpenId:self.userFukuanma orderId:orderId prepare:^{
                     
                 } success:^(id obj) {
-                    //扫描成功  显示等待支付界面                    
+                    //扫描成功  显示等待支付界面
+                    [self.tfsousuo resignFirstResponder];
                     [self.v_wait setHidden:NO];
                 } failed:^(NSInteger statusCode, id json) {
                     [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -611,13 +612,14 @@
     //收款完成  发送通知  回到购物车页面  并清空购物车
     [[NSNotificationCenter defaultCenter]postNotificationName:@"ClearShoppingCar" object:nil userInfo:nil];
     [self.v_cashComplete setHidden:YES];
+    [self.tfsousuo becomeFirstResponder];
 }
 
 - (void)NocatifioncashcompleteAction{
     NSString *price = [NSString stringWithFormat:@"¥%.2f",self.totalPrice];
     AVSpeechSynthesizer * av = [[AVSpeechSynthesizer alloc]init];
     //设置播报的内容
-    AVSpeechUtterance * utterance = [[AVSpeechUtterance alloc]initWithString:[NSString stringWithFormat:@"微信支付成功收款%@元",price]];
+    AVSpeechUtterance * utterance = [[AVSpeechUtterance alloc]initWithString:[NSString stringWithFormat:@"购酷收银到账%@元",price]];
     //设置语言类别
     utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
     AVSpeechSynthesisVoice * voiceType = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];

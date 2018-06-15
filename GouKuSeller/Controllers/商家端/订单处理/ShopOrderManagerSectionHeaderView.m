@@ -225,22 +225,22 @@
     [self.lab_orderdistribution setText:purchaseOrderEntity.distribution];
     
     //订单状态(1待接单2待发货4骑手已接单5骑手已到店6骑手已取货8已完成9已取消)
-    if (purchaseOrderEntity.status == 1) {
+    if (purchaseOrderEntity.status == 1 && (purchaseOrderEntity.refund == 0)) {
         [self.lab_orderStatus setText:@"新订单"];
-    }else if (purchaseOrderEntity.status == 2){
+    }else if (purchaseOrderEntity.status == 2 && (purchaseOrderEntity.refund == 0)){
         [self.lab_orderStatus setText:@"商家已接单"];
-    }else if (purchaseOrderEntity.status == 4){
+    }else if (purchaseOrderEntity.status == 4 && (purchaseOrderEntity.refund == 0)){
         [self.lab_orderStatus setText:@"骑手已接单"];
-    }else if (purchaseOrderEntity.status == 5){
+    }else if (purchaseOrderEntity.status == 5 && (purchaseOrderEntity.refund == 0)){
         [self.lab_orderStatus setText:@"骑手已到店"];
-    }else if (purchaseOrderEntity.status == 6){
+    }else if (purchaseOrderEntity.status == 6 && (purchaseOrderEntity.refund == 0)){
         [self.lab_orderStatus setText:@"骑手已取货"];
-    }else if (purchaseOrderEntity.status == 8){
+    }else if (purchaseOrderEntity.status == 8 && (purchaseOrderEntity.refund == 0)){
         [self.lab_orderStatus setText:@"已完成"];
-    }else if (purchaseOrderEntity.status == 9){
+    }else{
         if (purchaseOrderEntity.refund == 1) {
-            [self.lab_orderStatus setText:@"用户已退款"];
-        }else{
+            [self.lab_orderStatus setText:@"用户已取消"];
+        }else if(purchaseOrderEntity.refund == 2){
             [self.lab_orderStatus setText:@"用户申请退款"];
         }
     }
@@ -347,6 +347,11 @@
         [v_header addSubview:self.btn_phone];
         [self.btn_phone setBackgroundImage:[UIImage imageNamed:@"phone"] forState:UIControlStateNormal];
         [self.btn_phone addTarget:self action:@selector(phoneRiderAction) forControlEvents:UIControlEventTouchUpInside];
+        if (riderName.length > 0) {
+            [self.btn_phone setHidden:NO];
+        }else{
+            [self.btn_phone setHidden:YES];
+        }
         if (self.purchaseOrderEntity.flow.count == 1) {
             [v_header setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 32)];
         }else{

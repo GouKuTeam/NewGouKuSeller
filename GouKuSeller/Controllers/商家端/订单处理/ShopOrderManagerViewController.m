@@ -267,8 +267,21 @@
             [self.tb_orderManager reloadData];
             self.newOrderCount = self.newOrderCount - 1;
             [self setNumData];
-        } failed:^(NSInteger statusCode, id json) {
+            if ([LoginStorage IsPrinter] == YES) {
+                [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:entity.orderId prepare:^{
+                    
+                } success:^(id obj) {
+                    PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
+                    if ([LoginStorage IsPrinter] == YES) {
+                        [self autoPrintWithPurchaseOrderEntity:entity];
+                    }
+                } failed:^(NSInteger statusCode, id json) {
+                    [MBProgressHUD showErrorMessage:@"加载订单信息异常"];
+                }];
+            }
             
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
     }//取消
     if (entity.refund == 1) {
@@ -280,8 +293,20 @@
             [self.tb_orderManager reloadData];
             self.cleseOrderCount = self.cleseOrderCount - 1;
             [self setNumData];
+            if ([LoginStorage IsPrinter] == YES) {
+                [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:entity.orderId prepare:^{
+                    
+                } success:^(id obj) {
+                    PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
+                    if ([LoginStorage IsPrinter] == YES) {
+                        [self autoPrintWithPurchaseOrderEntity:entity];
+                    }
+                } failed:^(NSInteger statusCode, id json) {
+                    [MBProgressHUD showErrorMessage:@"加载订单信息异常"];
+                }];
+            }
         } failed:^(NSInteger statusCode, id json) {
-            
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
     }
     if (entity.refund == 2) {
@@ -297,8 +322,20 @@
                 [self.tb_orderManager reloadData];
                 self.cleseOrderCount = self.cleseOrderCount - 1;
                 [self setNumData];
+                if ([LoginStorage IsPrinter] == YES) {
+                    [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:entity.orderId prepare:^{
+                        
+                    } success:^(id obj) {
+                        PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
+                        if ([LoginStorage IsPrinter] == YES) {
+                            [self autoPrintWithPurchaseOrderEntity:entity];
+                        }
+                    } failed:^(NSInteger statusCode, id json) {
+                        [MBProgressHUD showErrorMessage:@"加载订单信息异常"];
+                    }];
+                }
             } failed:^(NSInteger statusCode, id json) {
-                
+                [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
             }];
         }];
         [alert addAction:forgetPassword];
@@ -362,31 +399,12 @@
 - (void)RefreshShopOrderData:(NSNotification *)notification{
     [self getOutOrderCount];
     [self.v_top setItemWithIndex:0];
-    [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:[notification.userInfo objectForKey:@"orderId"] prepare:^{
-        
-    } success:^(id obj) {
-        PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
-        if ([LoginStorage IsPrinter] == YES) {
-            [self autoPrintWithPurchaseOrderEntity:entity];
-        }
-    } failed:^(NSInteger statusCode, id json) {
-        
-    }];
+    
 }
 
 - (void)RefreshShopCancelOrderData:(NSNotification *)notification{
     [self getOutOrderCount];
     [self.v_top setItemWithIndex:2];
-    [SupplierOrderHandler shopGetOutOrderDetailWithOrderId:[notification.userInfo objectForKey:@"orderId"] prepare:^{
-        
-    } success:^(id obj) {
-        PurchaseOrderEntity *entity = (PurchaseOrderEntity *)obj;
-        if ([LoginStorage IsPrinter] == YES) {
-            [self autoPrintWithPurchaseOrderEntity:entity];
-        }
-    } failed:^(NSInteger statusCode, id json) {
-        
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -625,6 +643,25 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setHidden:NO];
+}
+
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        //        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
 }
 
 
