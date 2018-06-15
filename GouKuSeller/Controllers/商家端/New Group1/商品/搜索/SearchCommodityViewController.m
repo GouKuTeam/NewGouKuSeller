@@ -160,8 +160,8 @@
         [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.btn_edit.tag = indexPath.row;
         [cell.btn_edit addTarget:self action:@selector(edtiAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell contentCellWithCommodityFromCodeEntity:entity];
         
+        [cell contentCellWithCommodityFromCodeEntity:entity];
         return cell;
     }
     

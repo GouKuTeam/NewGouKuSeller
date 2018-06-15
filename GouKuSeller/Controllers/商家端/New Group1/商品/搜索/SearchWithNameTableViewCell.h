@@ -23,8 +23,8 @@
 @property (nonatomic ,strong)UIImageView     *img_line;
 
 
-- (void)contentCellWithCommodityFromCodeEntity:(CommodityFromCodeEntity *)CommodityFromCodeEntity;
-
 - (void)contentCellWithSupplierCommodityEndity:(SupplierCommodityEndity *)supplierCommodityEndity;
+
+- (void)contentCellWithCommodityFromCodeEntity:(CommodityFromCodeEntity *)CommodityFromCodeEntity;
 
 @end

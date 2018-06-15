@@ -169,6 +169,50 @@
     }
 }
 
+- (void)contentCellWithCommodityFromCodeEntity:(CommodityFromCodeEntity *)CommodityFromCodeEntity{
+    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,CommodityFromCodeEntity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.lab_CommodityName setText:CommodityFromCodeEntity.name];
+//    if (CommodityFromCodeEntity.hitType == 1) {
+//        [self.lab_CommodityCode setText:[NSString stringWithFormat:@"条形码  %@",CommodityFromCodeEntity.barcode]];
+//    }
+//    if (CommodityFromCodeEntity.hitType == 2) {
+//        [self.lab_CommodityCode setText:[NSString stringWithFormat:@"商品编码  %@",CommodityFromCodeEntity.itemId]];
+//    }
+    [self.lab_CommodityStock setText:[NSString stringWithFormat:@"库存  %@",CommodityFromCodeEntity.stock]];
+    if (CommodityFromCodeEntity.saleAmountMonth == nil) {
+        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
+    }else{
+        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
+    }
+    [self.lab_CommodityPrice setText:[NSString stringWithFormat:@"¥%.2f",[CommodityFromCodeEntity.price floatValue]]];
+    if (CommodityFromCodeEntity.status == 1) {
+        [self.lab_CommodityStatus setHidden:YES];
+        [self.lab_CommodityName setTextColor:[UIColor blackColor]];
+//        [self.lab_CommodityCode setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+        [self.lab_CommoditySalesVolume setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+    }
+    if (CommodityFromCodeEntity.status == 2) {
+        [self.lab_CommodityStatus setHidden:NO];
+        [self.lab_CommodityStatus setText:@"已售罄"];
+        [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+//        [self.lab_CommodityCode setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommoditySalesVolume setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+    }
+    if (CommodityFromCodeEntity.status == 3) {
+        [self.lab_CommodityStatus setHidden:NO];
+        [self.lab_CommodityStatus setText:@"已下架"];
+        [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+//        [self.lab_CommodityCode setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommoditySalesVolume setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
