@@ -61,44 +61,23 @@
     [self.v_shaixuan addGestureRecognizer:tpg];
     WS(weakSelf);
     self.v_shaixuan.btnSelectIndex = ^(int btnIndex) {
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
-            //门店端
-            if (btnIndex == 0) {
-                weakSelf.Ktype = 0;
-            }
-            if (btnIndex == 1) {
-                weakSelf.Ktype = 1;
-            }
-            if (btnIndex == 2) {
-               weakSelf.Ktype = 2;
-            }
-            if (btnIndex == 3) {
-                weakSelf.Ktype = 1003;
-            }
-            if (btnIndex == 4) {
-                weakSelf.Ktype = 1004;
-            }
-            if (btnIndex == 5) {
-                weakSelf.Ktype = 1006;
-            }
+        if (btnIndex == 0) {
+            weakSelf.Ktype = 0;
         }
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
-            //供应商段
-            if (btnIndex == 0) {
-                weakSelf.Ktype = 0;
-            }
-            if (btnIndex == 1) {
-                weakSelf.Ktype = 1005;
-            }
-            if (btnIndex == 2) {
-                weakSelf.Ktype = 1006;
-            }
-            if (btnIndex == 3) {
-                weakSelf.Ktype = 2;
-            }
-            if (btnIndex == 4) {
-                weakSelf.Ktype = 1003;
-            }
+        if (btnIndex == 1) {
+            weakSelf.Ktype = 1;
+        }
+        if (btnIndex == 2) {
+            weakSelf.Ktype = 2;
+        }
+        if (btnIndex == 3) {
+            weakSelf.Ktype = 1003;
+        }
+        if (btnIndex == 4) {
+            weakSelf.Ktype = 1004;
+        }
+        if (btnIndex == 5) {
+            weakSelf.Ktype = 1006;
         }
         [weakSelf.tb_priceDetail requestDataSource];
     };

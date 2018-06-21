@@ -188,7 +188,6 @@
             [iv_arrow setImage:[UIImage imageNamed:@"icon_down"]];
         }else{
             [iv_arrow setImage:[UIImage imageNamed:@"triangle_left"]];
-            
         }
         
         if (entity.childList.count == 0) {
@@ -234,7 +233,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (tableView == self.tb_managerCatagory) {
         return self.arr_managerCatagory.count;
-        
     }
     else{
         return 1;

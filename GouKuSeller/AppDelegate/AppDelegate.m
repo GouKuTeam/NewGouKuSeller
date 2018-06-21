@@ -40,14 +40,8 @@
     UIViewController *loginVC = [[LoginViewController alloc]init];
     UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:loginVC];
     if ([LoginStorage isLogin] == YES) {
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
-            self.tableBarController = [[TabBarViewController alloc] init];
-            self.window.rootViewController = self.tableBarController;
-        }
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
-            self.supplierTabbarViewController = [[SupplierTabbarViewController alloc] init];
-            self.window.rootViewController = self.supplierTabbarViewController;
-        }
+        self.tableBarController = [[TabBarViewController alloc] init];
+        self.window.rootViewController = self.tableBarController;
     }else{
         self.window.rootViewController = navLogin;
     }
@@ -388,6 +382,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    //拿上传图片用的token
 }
 
 

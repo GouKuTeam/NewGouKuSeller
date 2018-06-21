@@ -90,8 +90,8 @@
     [self.tb_search setBackgroundColor:[UIColor whiteColor]];
     
     self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 88)];
-    [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_moreEdit.btn_xiajia addTarget:self action:@selector(xiaJiaAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.v_moreEdit.btn_xiajia addTarget:self action:@selector(xiaJiaAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.v_moreEdit];
     [self.v_moreEdit setHidden:YES];
     
@@ -175,13 +175,13 @@
 
 - (void)moreAction:(UIButton *)btn_sender{
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:btn_sender.tag];
-    if (entity.status == 1) {
-        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
-    }else if (entity.status == 2) {
-        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
-    }else if (entity.status == 3) {
-        [self.v_moreEdit.btn_xiajia setTitle:@"上架" forState:UIControlStateNormal];
-    }
+//    if (entity.status == 1) {
+//        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+//    }else if (entity.status == 2) {
+//        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+//    }else if (entity.status == 3) {
+//        [self.v_moreEdit.btn_xiajia setTitle:@"上架" forState:UIControlStateNormal];
+//    }
     if ((int)btn_sender.tag == self.showIndex) {
         [self.v_moreEdit setHidden:YES];
         self.showIndex = NULLROW;

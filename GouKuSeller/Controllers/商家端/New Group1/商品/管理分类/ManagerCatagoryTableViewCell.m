@@ -54,7 +54,7 @@
         [self.contentView addSubview:self.img_line];
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
-            make.top.mas_equalTo(44);
+            make.top.mas_equalTo(43.5);
             make.width.mas_equalTo(SCREEN_WIDTH);
             make.height.mas_equalTo(0.5);
         }];

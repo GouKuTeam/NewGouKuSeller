@@ -58,14 +58,7 @@
         [self.img_heng setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         
         self.arr_btn = [[NSMutableArray alloc]init];
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
-            //门店端
-            self.arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值",@"采购支付",@"采购退款", nil];
-        }
-        if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
-            //供应商段
-            self.arr_btnName = [NSArray arrayWithObjects:@"全部",@"采购收入",@"采购退款",@"提现",@"充值", nil];
-        }
+        self.arr_btnName = [NSArray arrayWithObjects:@"全部",@"销售结算",@"提现",@"充值",@"采购支付",@"采购退款", nil];
         CGFloat btnWidth = (SCREEN_WIDTH - 60) / 3;
         for (int i = 0; i < self.arr_btnName.count; i ++) {
             self.btn_all = [[UIButton alloc]init];

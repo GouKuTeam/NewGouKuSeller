@@ -11,8 +11,8 @@
 @interface CommodityBottomView : UIView
 
 @property (nonatomic ,strong)UIButton         *btn_bottom_allSelect;
-@property (nonatomic ,strong)UIButton         *btn_bottom_xiajia;
-@property (nonatomic ,strong)UIButton         *btn_bottom_move;
+@property (nonatomic ,strong)UIButton         *btn_bottom_mendian;
+@property (nonatomic ,strong)UIButton         *btn_bottom_wangdian;
 @property (nonatomic ,strong)UIButton         *btn_bottom_delete;
 
 @end

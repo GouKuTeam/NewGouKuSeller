@@ -69,16 +69,9 @@
     [self.manager.requestSerializer setValue:idfa forHTTPHeaderField:@"Gouku-Device-Id"];
     NSString *version = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     
-    if ([[LoginStorage GetTypeStr] isEqualToString:@"1"]) {
-        //商家端
-        [self.manager.requestSerializer setValue:@"12" forHTTPHeaderField:@"Gouku-App-Origin"
-         ];
-    }
-    if ([[LoginStorage GetTypeStr] isEqualToString:@"3"]) {
-        //供应商段
-        [self.manager.requestSerializer setValue:@"14" forHTTPHeaderField:@"Gouku-App-Origin"
-         ];
-    }
+    //商家端
+    [self.manager.requestSerializer setValue:@"12" forHTTPHeaderField:@"Gouku-App-Origin"
+     ];
     
     [self.manager.requestSerializer setValue:version forHTTPHeaderField:@"x-docchat-app-version"];
     //手机系统版本

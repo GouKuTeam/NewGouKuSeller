@@ -20,7 +20,7 @@
         [self.v_commodityBack mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(0);
             make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(214);
+            make.height.mas_equalTo(346);
         }];
         [self.v_commodityBack setBackgroundColor:[UIColor whiteColor]];
         
@@ -73,54 +73,54 @@
         [self.v_commodityBack addSubview:self.img_line];
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
-            make.top.equalTo(self.img_commodityImgTitle.mas_bottom).offset(10);
+            make.top.mas_equalTo(169);
             make.width.mas_equalTo(SCREEN_WIDTH - 15);
-            make.height.mas_equalTo(0.2);
+            make.height.mas_equalTo(0.3);
         }];
-        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#cfcfcf"]];
+        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         
         //店内分类
         self.v_shopClassification = [[AddCustomCommodityInfoView alloc]init];
         [self.v_commodityBack addSubview:self.v_shopClassification];
         [self.v_shopClassification mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
-            make.top.equalTo(self.img_line.mas_bottom);
+            make.top.equalTo(self.img_line.mas_bottom).offset(2);
             make.width.height.equalTo(self.v_commodityName);
         }];
         [self.v_shopClassification.lab_title setText:@"店内分类"];
         self.v_shopClassification.img_jiantou.hidden = NO;
         [self.v_shopClassification.tf_detail setText:@"请选择"];
         self.v_shopClassification.tf_detail.enabled = NO;
-        [self.v_shopClassification.img_line setHidden:YES];
         [self.v_shopClassification.tf_detail setTextColor:[UIColor colorWithHexString:@"#000000"]];
         
         //商品规格 (价格   库存   条形码    商品编码)
-        self.v_commodityBack2 = [[UIView alloc]init];
-        [self addSubview:self.v_commodityBack2];
-        [self.v_commodityBack2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.equalTo(self.v_commodityBack.mas_bottom).offset(10);
-            make.width.mas_equalTo(SCREEN_WIDTH);
-            make.height.mas_equalTo(176);
-        }];
-        [self.v_commodityBack2 setBackgroundColor:[UIColor whiteColor]];
+//        self.v_commodityBack2 = [[UIView alloc]init];
+//        [self addSubview:self.v_commodityBack2];
+//        [self.v_commodityBack2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(0);
+////            make.top.equalTo(self.v_commodityBack.mas_bottom).offset(10);
+//            make.top.equalTo(self.v_shopClassification.mas_bottom);
+//            make.width.mas_equalTo(SCREEN_WIDTH);
+//            make.height.mas_equalTo(132);
+//        }];
+//        [self.v_commodityBack2 setBackgroundColor:[UIColor whiteColor]];
         
         
         //商品价格
-        self.v_price = [[AddCustomCommodityInfoView alloc]init];
-        [self.v_commodityBack2 addSubview:self.v_price];
-        [self.v_price mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.width.height.equalTo(self.v_commodityName);
-            make.top.mas_equalTo(0);
-        }];
-        
-        [self.v_price.lab_title setText:@"价格"];
-        self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
-
-        [self.v_price.tf_detail setTextColor:[UIColor blackColor]];
-        self.v_price.tf_detail.clearsOnBeginEditing = YES;
-        [self.v_price.tf_detail setPlaceholder:@"请填写"];
-        self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
+//        self.v_price = [[AddCustomCommodityInfoView alloc]init];
+//        [self.v_commodityBack2 addSubview:self.v_price];
+//        [self.v_price mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.width.height.equalTo(self.v_commodityName);
+//            make.top.mas_equalTo(0);
+//        }];
+//
+//        [self.v_price.lab_title setText:@"价格"];
+//        self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
+//
+//        [self.v_price.tf_detail setTextColor:[UIColor blackColor]];
+//        self.v_price.tf_detail.clearsOnBeginEditing = YES;
+//        [self.v_price.tf_detail setPlaceholder:@"请填写"];
+//        self.v_price.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
         
 //        self.btn_priceEdit = [[UIButton alloc]init];
 //        [self.v_commodityBack2 addSubview:self.btn_priceEdit];
@@ -133,10 +133,10 @@
         
         //商品库存
         self.v_stock = [[AddCustomCommodityInfoView alloc]init];
-        [self.v_commodityBack2 addSubview:self.v_stock];
+        [self.v_commodityBack addSubview:self.v_stock];
         [self.v_stock mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.width.height.equalTo(self.v_commodityName);
-            make.top.equalTo(self.v_price.mas_bottom);
+            make.top.equalTo(self.v_shopClassification.mas_bottom);
         }];
         [self.v_stock.lab_title setText:@"库存"];
         self.v_stock.tf_detail.keyboardType = UIKeyboardTypeNumberPad;
@@ -147,20 +147,20 @@
         
         //进货价
         self.v_jinhuoPrice= [[AddCustomCommodityInfoView alloc]init];
-        [self.v_commodityBack2 addSubview:self.v_jinhuoPrice];
+        [self.v_commodityBack addSubview:self.v_jinhuoPrice];
         [self.v_jinhuoPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.width.height.equalTo(self.v_commodityName);
             make.top.equalTo(self.v_stock.mas_bottom);
         }];
         [self.v_jinhuoPrice.lab_title setText:@"进货价"];
-        [self.v_jinhuoPrice.tf_detail setPlaceholder:@"0.00"];
+        [self.v_jinhuoPrice.tf_detail setPlaceholder:@"¥0.00"];
         [self.v_jinhuoPrice.tf_detail setTextColor:[UIColor blackColor]];
         self.v_jinhuoPrice.tf_detail.clearsOnBeginEditing = YES;
         self.v_jinhuoPrice.tf_detail.keyboardType = UIKeyboardTypeDecimalPad;
         
         //商品条形码
         self.v_barcode = [[AddCustomCommodityInfoView alloc]init];
-        [self.v_commodityBack2 addSubview:self.v_barcode];
+        [self.v_commodityBack addSubview:self.v_barcode];
         [self.v_barcode mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.width.height.equalTo(self.v_commodityName);
             make.top.equalTo(self.v_jinhuoPrice.mas_bottom);

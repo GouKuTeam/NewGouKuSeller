@@ -36,12 +36,12 @@
         self.img_line = [[UIImageView alloc]init];
         [self addSubview:self.img_line];
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(14);
-            make.top.mas_equalTo(44);
+            make.left.mas_equalTo(15);
+            make.top.mas_equalTo(43.7);
             make.height.mas_equalTo(0.3);
-            make.right.mas_equalTo(SCREEN_WIDTH - 14);
+            make.right.mas_equalTo(SCREEN_WIDTH - 15);
         }];
-        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#cfcfcf"]];
+        [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         
         self.img_jiantou = [[UIImageView alloc]init];
         [self addSubview:self.img_jiantou];

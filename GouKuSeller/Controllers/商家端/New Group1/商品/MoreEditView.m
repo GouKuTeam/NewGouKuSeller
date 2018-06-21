@@ -20,17 +20,27 @@
         self.layer.borderWidth = 0.5;
         [self setBackgroundColor:[UIColor whiteColor]];
         
-        self.img_mid_line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 44, frame.size.width, 0.5)];
+        self.img_mid_line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 43.5, frame.size.width, 0.5)];
         [self addSubview:self.img_mid_line];
         [self.img_mid_line setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         
-        self.btn_xiajia = [[UIButton alloc]initWithFrame:CGRectMake(0,0,frame.size.width, 44)];
-        [self addSubview:self.btn_xiajia];
-        [self.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
-        self.btn_xiajia.titleLabel.font = [UIFont systemFontOfSize:14];
-        [self.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
+        self.btn_mendian = [[UIButton alloc]initWithFrame:CGRectMake(0,0,frame.size.width, 44)];
+        [self addSubview:self.btn_mendian];
+        [self.btn_mendian setTitle:@"发布到门店" forState:UIControlStateNormal];
+        self.btn_mendian.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.btn_mendian setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
         
-        self.btn_delege = [[UIButton alloc]initWithFrame:CGRectMake(0, 44, frame.size.width, 44)];
+        self.img_mid_line2 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 44 + 43.5, frame.size.width, 0.5)];
+        [self addSubview:self.img_mid_line2];
+        [self.img_mid_line2 setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
+        
+        self.btn_wangdian = [[UIButton alloc]initWithFrame:CGRectMake(0,44,frame.size.width, 44)];
+        [self addSubview:self.btn_wangdian];
+        [self.btn_wangdian setTitle:@"发布到网店" forState:UIControlStateNormal];
+        self.btn_wangdian.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.btn_wangdian setTitleColor:[UIColor colorWithHexString:@"4167b2"] forState:UIControlStateNormal];
+        
+        self.btn_delege = [[UIButton alloc]initWithFrame:CGRectMake(0, 88, frame.size.width, 44)];
         [self addSubview:self.btn_delege];
         [self.btn_delege setTitle:@"删除" forState:UIControlStateNormal];
         self.btn_delege.titleLabel.font = [UIFont systemFontOfSize:14];

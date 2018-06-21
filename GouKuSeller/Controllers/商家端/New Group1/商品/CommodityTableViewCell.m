@@ -33,7 +33,7 @@
         
         self.lab_CommodityStatus = [[UILabel alloc]init];
         [self.img_CommodityHeadPic addSubview:self.lab_CommodityStatus];
-        [self.lab_CommodityStatus setBackgroundColor:[UIColor colorWithHexString:@"#000000" alpha:0.4]];
+        [self.lab_CommodityStatus setBackgroundColor:[UIColor colorWithHexString:@"#4a4a4a"]];
         [self.lab_CommodityStatus setTextAlignment:NSTextAlignmentCenter];
         [self.lab_CommodityStatus setTextColor:[UIColor whiteColor]];
         self.lab_CommodityStatus.font = [UIFont systemFontOfSize:12];

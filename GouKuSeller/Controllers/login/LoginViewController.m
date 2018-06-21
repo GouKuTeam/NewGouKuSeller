@@ -101,7 +101,7 @@
     self.btn_login.enabled = NO;
     NSString *strUrl = [NSString stringWithFormat:@"%@/login",API_Login];
 
-    NSDictionary *dic = @{@"account":self.tef_userName.text,@"password":self.tef_passWord.text};
+    NSDictionary *dic = @{@"account":self.tef_userName.text,@"password":self.tef_passWord.text,@"type":@"1"};
     RTHttpClient *asas = [[RTHttpClient alloc]init];
     [asas requestWithPath:strUrl method:RTHttpRequestPost parameters:dic prepare:^{
         

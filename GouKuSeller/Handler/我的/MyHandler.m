@@ -13,7 +13,8 @@
 //    NSString *str_url = @"http://47.97.174.40:9000/mine/shoplist";
     NSString *str_url = [NSString stringWithFormat:@"%@/mine/shoplist",API_Login];
     NSDictionary *dic = @{
-                          @"account":account
+                          @"account":account,
+                          @"type":@"1"
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost

@@ -15,12 +15,13 @@
 #import "CommodityFromCodeEntity.h"
 #import "LoginStorage.h"
 #import "EditPriceViewController.h"
+#import "AddCustomCommodityView.h"
 
 @interface AddNewCommodityViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,TextViewClickReturnDelegate,TextFieldClickReturnDelegate>{
     UIImagePickerController *ipc;
 }
 
-@property (nonatomic ,strong)NewCommodityView   *v_commodityView;
+@property (nonatomic ,strong)AddCustomCommodityView   *v_commodityView;
 @property (nonatomic ,assign)int    int_categoryId;
 @property (nonatomic ,strong)CommodityFromCodeEntity *entity;
 @property (nonatomic ,strong)NSNumber      *shopCId;
@@ -53,26 +54,26 @@
     ipc.allowsEditing = YES;
     ipc.delegate = self;
     
-    self.v_commodityView = [[NewCommodityView alloc]init];
+    self.v_commodityView = [[AddCustomCommodityView alloc]init];
     [self.view addSubview:self.v_commodityView];
     [self.v_commodityView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(SafeAreaTopHeight);
+        make.top.mas_equalTo(SafeAreaTopHeight + 10);
         make.height.mas_equalTo(SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight);
     }];
 
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
     
+    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+    UITapGestureRecognizer* imgTitleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
+    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitleTap];
 
-    self.v_commodityView.v_price.tf_detail.delegate = self;
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
     
     
-
-    [self.v_commodityView.lab_catagoryTitle setText:self.entityInformation.categoryName];
     [self.v_commodityView.v_commodityName.tf_detail setText:self.entityInformation.name];
     [self.v_commodityView.img_commodityImgTitle sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.entityInformation.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
     if (self.entityInformation.detail.length > 0) {
@@ -80,7 +81,7 @@
     }else{
       [self.v_commodityView.v_commodityDescribe.tf_detail setText:@"-"];
     }
-    [self.v_commodityView.v_commoditySpecifications.tf_detail setText:self.entityInformation.standards];
+
     [self.v_commodityView.v_barcode.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.barcode]];
     [self.v_commodityView.v_price.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.price doubleValue]]];
     self.Cprice = [self.entityInformation.price doubleValue];
@@ -90,9 +91,10 @@
         self.shopCId = self.entityInformation.shopWareCategoryId;
         [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
         [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
-        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.xprice doubleValue]]];
+        [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",[self.entityInformation.xprice doubleValue]]];
     }
 }
+
 
 //店内分类  手势点击方法
 - (void)shopClassification{

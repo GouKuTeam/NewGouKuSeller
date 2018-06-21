@@ -454,6 +454,7 @@
 		749D01B320CFA2A300E4FE68 /* ordercancel(1min).wav in Resources */ = {isa = PBXBuildFile; fileRef = 749D01B120CFA2A300E4FE68 /* ordercancel(1min).wav */; };
 		74A1F12C208F75BC0041742B /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A1F12B208F75BC0041742B /* NotificationService.m */; };
 		74A1F130208F75BC0041742B /* GouKuSellerPush.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 74A1F128208F75BC0041742B /* GouKuSellerPush.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		74A28B8A20DB44A9002C240B /* CommodityManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A28B8920DB44A9002C240B /* CommodityManagerViewController.m */; };
 		74ACFFA0209C307D005C5A16 /* LocationAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */; };
 		74ACFFA4209FFAB4005C5A16 /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFA3209FFAB4005C5A16 /* LocationTableViewCell.m */; };
 		74ACFFB020A04DE9005C5A16 /* OrderManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74ACFFAF20A04DE9005C5A16 /* OrderManagerViewController.m */; };
@@ -1194,6 +1195,8 @@
 		74A1F12A208F75BC0041742B /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		74A1F12B208F75BC0041742B /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		74A1F12D208F75BC0041742B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74A28B8820DB44A9002C240B /* CommodityManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityManagerViewController.h; sourceTree = "<group>"; };
+		74A28B8920DB44A9002C240B /* CommodityManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityManagerViewController.m; sourceTree = "<group>"; };
 		74ACFF9E209C307D005C5A16 /* LocationAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationAddressViewController.h; sourceTree = "<group>"; };
 		74ACFF9F209C307D005C5A16 /* LocationAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationAddressViewController.m; sourceTree = "<group>"; };
 		74ACFFA2209FFAB4005C5A16 /* LocationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
@@ -2518,6 +2521,8 @@
 		74B4E8C420512D6E006AFB6C /* 商品 */ = {
 			isa = PBXGroup;
 			children = (
+				74A28B8820DB44A9002C240B /* CommodityManagerViewController.h */,
+				74A28B8920DB44A9002C240B /* CommodityManagerViewController.m */,
 				74B4E8C520512D7C006AFB6C /* CommodityViewController.h */,
 				74B4E8C620512D7C006AFB6C /* CommodityViewController.m */,
 				744ABA0920522F5700BBB26E /* CommodityTableViewCell.h */,
@@ -2528,10 +2533,10 @@
 				7416F03020639BC50002C960 /* CommodityStatusView.m */,
 				7416F0322067684F0002C960 /* MoreEditView.h */,
 				7416F0332067684F0002C960 /* MoreEditView.m */,
+				744ABA9220556CC800BBB26E /* 新建商品 */,
 				74F8E92C2060E023000A17A5 /* 批量管理 */,
 				74F8E91F2060DA33000A17A5 /* 搜索 */,
 				744ABA1B2052990C00BBB26E /* 管理分类 */,
-				744ABA9220556CC800BBB26E /* 新建商品 */,
 			);
 			path = "商品";
 			sourceTree = "<group>";
@@ -3280,6 +3285,7 @@
 				74046AF1209ABB57004E64A9 /* EditPriceTableViewCell.m in Sources */,
 				741D3CA620845D7800C56FCA /* SetAccountNumViewController.m in Sources */,
 				7400781A20C53698000A50AA /* SelectPrinterTableViewCell.m in Sources */,
+				74A28B8A20DB44A9002C240B /* CommodityManagerViewController.m in Sources */,
 				74C6E367207B54D90083E4A8 /* UIViewController+SJVideoPlayerAdd.m in Sources */,
 				744ABA252054201B00BBB26E /* BaseEntity.m in Sources */,
 				744817F820ADB8EE00A7F3DD /* AddressNullView.m in Sources */,

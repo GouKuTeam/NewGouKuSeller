@@ -11,6 +11,7 @@
 @interface ManagerCommodityTableViewCell : UITableViewCell
 
 @property (nonatomic ,strong)UIImageView     *img_CommodityHeadPic;        // 商品头像
+@property (nonatomic ,strong)UILabel         *lab_CommodityStatus;         // 商品状态
 @property (nonatomic ,strong)UILabel         *lab_CommodityName;           // 商品名称
 @property (nonatomic ,strong)UILabel         *lab_CommodityStock;          // 商品库存
 @property (nonatomic ,strong)UILabel         *lab_CommoditySalesVolume;    // 商品销量

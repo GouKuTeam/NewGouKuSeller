@@ -21,6 +21,7 @@
 #import "ShopOutOrderCountEntity.h"
 #import "TabBarViewController.h"
 #import "JWBluetoothManage.h"
+#import "CommodityManagerViewController.h"
 
 @interface WorkbenchViewController (){
     JWBluetoothManage * manage;
@@ -124,7 +125,11 @@
 
 - (void)commodityAction{
     [MobClick event:@"shangpin"];
-    CommodityViewController *vc = [[CommodityViewController alloc]init];
+//    CommodityViewController *vc = [[CommodityViewController alloc]init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    CommodityManagerViewController *vc = [[CommodityManagerViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
