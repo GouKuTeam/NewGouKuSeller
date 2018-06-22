@@ -89,7 +89,7 @@
     self.tb_search.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tb_search setBackgroundColor:[UIColor whiteColor]];
     
-    self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 88)];
+    self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 132)];
 //    [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
 //    [self.v_moreEdit.btn_xiajia addTarget:self action:@selector(xiaJiaAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.v_moreEdit];

@@ -152,11 +152,12 @@
         [self.lab_CommodityCode setText:[NSString stringWithFormat:@"商品编码  %@",CommodityFromCodeEntity.itemId]];
     }
     [self.lab_CommodityStock setText:[NSString stringWithFormat:@"库存  %@",CommodityFromCodeEntity.stock]];
-    if (CommodityFromCodeEntity.saleAmountMonth == nil) {
-        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
-    }else{
-        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
-    }
+//    if (CommodityFromCodeEntity.saleAmountMonth == nil) {
+//        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
+//    }else{
+//        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
+//    }
+    [self.lab_CommoditySalesVolume setHidden:YES];
     [self.lab_CommodityPrice setText:[NSString stringWithFormat:@"¥%.2f",[CommodityFromCodeEntity.price floatValue]]];
     if (CommodityFromCodeEntity.status == 1) {
         [self.lab_CommodityStatus setHidden:YES];
@@ -194,11 +195,12 @@
         [self.lab_CommodityCode setText:[NSString stringWithFormat:@"条形码  %@",supplierCommodityEndity.barcode]];
     }
     [self.lab_CommodityStock setText:[NSString stringWithFormat:@"库存  %@",supplierCommodityEndity.stock]];
-    if (supplierCommodityEndity.saleAmountMonth == nil) {
-        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
-    }else{
-        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",supplierCommodityEndity.saleAmountMonth];
-    }
+    //    if (CommodityFromCodeEntity.saleAmountMonth == nil) {
+    //        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售0"];
+    //    }else{
+    //        self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",CommodityFromCodeEntity.saleAmountMonth];
+    //    }
+    [self.lab_CommoditySalesVolume setHidden:YES];
     [self.lab_CommodityPrice setText:[NSString stringWithFormat:@"¥%.2f",supplierCommodityEndity.price]];
     if (supplierCommodityEndity.unit != nil) {
         self.lab_CommodityUnit.text = [NSString stringWithFormat:@"/%@",supplierCommodityEndity.unit];

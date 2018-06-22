@@ -23,6 +23,7 @@
 #import "CommodityStatusView.h"
 #import "MoreEditView.h"
 #import "MoreAddCommodityViewController.h"
+#import "PublishCommodityViewController.h"
 
 #define NULLROW    999
 
@@ -745,7 +746,11 @@
 }
 
 - (void)mendianAction{
-//    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
+    vc.entityInformation = entity;
+    [self.navigationController pushViewController:vc animated:YES];
+    [self.v_moreEdit setHidden:YES];
 //    if (entity.status == 1 || entity.status == 2) {
 //        //下架方法
 //        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
@@ -772,6 +777,11 @@
 }
 
 - (void)wangdianAction{
+    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+    PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
+    vc.entityInformation = entity;
+    [self.navigationController pushViewController:vc animated:YES];
+    [self.v_moreEdit setHidden:YES];
     
 }
 -(void)searchBarAction{
