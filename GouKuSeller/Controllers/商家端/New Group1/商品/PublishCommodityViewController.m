@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"发布商品";
+    
     UIBarButtonItem *btn_left = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarAction)];
     [btn_left setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = btn_left;
@@ -36,6 +36,11 @@
 }
 
 - (void)onCreate{
+    if (self.publishCommodityFormType == PublishCommodityFormPublish) {
+        self.title = @"发布商品";
+    }else{
+        self.title = @"编辑商品";
+    }
     
     self.v_commodityView = [[PublishCommodityView alloc]init];
     [self.view addSubview:self.v_commodityView];
@@ -53,7 +58,6 @@
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
     
     self.shopCId = self.entityInformation.shopWareCategoryId;
-    self.Cprice = [self.entityInformation.price doubleValue];
     self.Xprice = [self.entityInformation.xprice doubleValue];
     self.shopStock = [self.entityInformation.stock intValue];
     
@@ -69,13 +73,16 @@
     }else{
         [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",[self.entityInformation.xprice doubleValue]]];
     }
-    if (self.Cprice == 0) {
-        [self.v_commodityView.v_price.tf_detail setText:@""];
-    }else{
-       [self.v_commodityView.v_price.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.price doubleValue]]];
-    }
     [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
     [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
+    
+    if (self.publishCommodityFormType == PublishCommodityFormPublish) {
+        self.title = @"发布商品";
+        [self.v_commodityView.v_price.tf_detail setText:@""];
+    }else{
+        self.title = @"编辑商品";
+        [self.v_commodityView.v_price.tf_detail setText:[NSString stringWithFormat:@"%.2f",[self.entityInformation.price doubleValue]]];
+    }
     
 }
 

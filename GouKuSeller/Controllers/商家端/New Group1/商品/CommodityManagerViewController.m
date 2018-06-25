@@ -8,6 +8,7 @@
 
 #import "CommodityManagerViewController.h"
 #import "CommodityViewController.h"
+#import "CommodityChildViewController.h"
 
 @interface CommodityManagerViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -83,12 +84,15 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.section == 1 && indexPath.row == 0) {
-        
+        CommodityChildViewController *vc = [[CommodityChildViewController alloc]init];
+        vc.commodityChildFormType = CommodityChildFormShop;
+        [self.navigationController pushViewController:vc animated:YES];
         
     }
     if (indexPath.section == 1 && indexPath.row == 1) {
-       
-        
+        CommodityChildViewController *vc = [[CommodityChildViewController alloc]init];
+        vc.commodityChildFormType = CommodityChildFormNetShop;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
     

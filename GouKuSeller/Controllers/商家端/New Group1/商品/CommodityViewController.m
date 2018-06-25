@@ -38,19 +38,19 @@
 @property (nonatomic ,strong)BaseTableView    *tb_left;
 @property (nonatomic ,strong)BaseTableView    *tb_right;
 @property (nonatomic ,strong)NSMutableArray   *arr_category;
+@property (nonatomic ,strong)NSMutableArray    *arr_selected;
 @property (nonatomic ,strong)NSMutableArray   *arr_commodity;
 
 @property (nonatomic ,assign)int               selectedSection;
 @property (nonatomic ,assign)int               selectedRow;
+@property (nonatomic ,assign)int               showIndex;
 
 @property (nonatomic ,strong)UIButton         *btn_navright_search;
 @property (nonatomic ,strong)UIButton         *btn_navright_more;
-@property (nonatomic ,assign)int               showIndex;
 @property (nonatomic ,strong)UIButton         *btn_batchManager;
 
 @property (nonatomic ,strong)CommodityBottomView           *v_bottom_manager;
 @property (nonatomic ,assign)BOOL              editStatus;
-@property (nonatomic ,strong)NSMutableArray    *arr_selected;
 @property (nonatomic ,strong)UILabel           *lb_selectedNum;
 @property (nonatomic ,strong)UIView            *v_coverLeft;
 @property (nonatomic ,strong)MoveCommodityView             *v_moveCommodity;
@@ -85,7 +85,7 @@
     
     ///*****************************            批量管理注掉的
      self.btn_navright_search = [UIButton buttonWithType:(UIButtonTypeCustom)];
-     [self.btn_navright_search setImage:[UIImage imageNamed:@"home_search"] forState:UIControlStateNormal];
+     [self.btn_navright_search setImage:[UIImage imageNamed:@"search_white"] forState:UIControlStateNormal];
      [self.btn_navright_search addTarget:self action:@selector(searchBarAction) forControlEvents:UIControlEventTouchUpInside];
 
      self.btn_navright_more = [UIButton buttonWithType:(UIButtonTypeCustom)];
@@ -749,6 +749,7 @@
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.entityInformation = entity;
+    vc.publishCommodityFormType = PublishCommodityFormPublish;
     [self.navigationController pushViewController:vc animated:YES];
     [self.v_moreEdit setHidden:YES];
 //    if (entity.status == 1 || entity.status == 2) {
@@ -800,24 +801,20 @@
     [self.v_commodityStatusView setHidden:!self.v_commodityStatusView.isHidden];
 }
 
-//- (void)viewWillAppear:(BOOL)animated{
-//    [self loadData];
-//}
-///********注掉批量管理功能
  
  
- 
- -(void)moreAction{
+-(void)moreAction{
      [self.btn_batchManager setHidden:!self.btn_batchManager.isHidden];
      [self.v_moreEdit setHidden:YES];
- }
+    
+}
  
- - (void)confirmAction{
+- (void)confirmAction{
      [self btn_batchManagerAction];
      self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
- }
+}
  
- -(void)btn_batchManagerAction{
+-(void)btn_batchManagerAction{
      self.editStatus = !self.editStatus;
      if (self.editStatus == YES) {
          [self.v_bottom_manager setHidden:NO];
@@ -828,10 +825,10 @@
      [self.arr_selected removeAllObjects];
      [self setNavUI];
      [self.tb_right reloadData];
- }
+}
  
  #pragma view_bottom mark
- - (void)btn_bottom_allSelect{
+- (void)btn_bottom_allSelect{
      self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
      if (self.v_bottom_manager.btn_bottom_allSelect.isSelected == YES) {
          [self.arr_selected removeAllObjects];

@@ -706,6 +706,9 @@
 		74F8E94B20614852000A17A5 /* SelectFisstCatagoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F8E94820614852000A17A5 /* SelectFisstCatagoryViewController.m */; };
 		74FA2EF720DC99AA000F355E /* PublishCommodityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2EF620DC99AA000F355E /* PublishCommodityViewController.m */; };
 		74FA2EFB20DC9A73000F355E /* PublishCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2EFA20DC9A73000F355E /* PublishCommodityView.m */; };
+		74FA2EFE20E0C2D4000F355E /* CommodityChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2EFD20E0C2D4000F355E /* CommodityChildViewController.m */; };
+		74FA2F0120E0D474000F355E /* CommodityChildBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0020E0D474000F355E /* CommodityChildBottomView.m */; };
+		74FA2F0420E0E34E000F355E /* MoreEditCommodityChildView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0320E0E34E000F355E /* MoreEditCommodityChildView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1410,6 +1413,12 @@
 		74FA2EF620DC99AA000F355E /* PublishCommodityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishCommodityViewController.m; sourceTree = "<group>"; };
 		74FA2EF920DC9A73000F355E /* PublishCommodityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishCommodityView.h; sourceTree = "<group>"; };
 		74FA2EFA20DC9A73000F355E /* PublishCommodityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishCommodityView.m; sourceTree = "<group>"; };
+		74FA2EFC20E0C2D4000F355E /* CommodityChildViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityChildViewController.h; sourceTree = "<group>"; };
+		74FA2EFD20E0C2D4000F355E /* CommodityChildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityChildViewController.m; sourceTree = "<group>"; };
+		74FA2EFF20E0D474000F355E /* CommodityChildBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommodityChildBottomView.h; sourceTree = "<group>"; };
+		74FA2F0020E0D474000F355E /* CommodityChildBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityChildBottomView.m; sourceTree = "<group>"; };
+		74FA2F0220E0E34E000F355E /* MoreEditCommodityChildView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreEditCommodityChildView.h; sourceTree = "<group>"; };
+		74FA2F0320E0E34E000F355E /* MoreEditCommodityChildView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreEditCommodityChildView.m; sourceTree = "<group>"; };
 		EFBE4BC1551AA2E5876302AC /* Pods-GouKuSeller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2533,6 +2542,8 @@
 				74B4E8C620512D7C006AFB6C /* CommodityViewController.m */,
 				74FA2EF520DC99AA000F355E /* PublishCommodityViewController.h */,
 				74FA2EF620DC99AA000F355E /* PublishCommodityViewController.m */,
+				74FA2EFC20E0C2D4000F355E /* CommodityChildViewController.h */,
+				74FA2EFD20E0C2D4000F355E /* CommodityChildViewController.m */,
 				74FA2EF820DC9A2E000F355E /* view */,
 				744ABA9220556CC800BBB26E /* 新建商品 */,
 				74F8E92C2060E023000A17A5 /* 批量管理 */,
@@ -2883,8 +2894,12 @@
 				7416F03020639BC50002C960 /* CommodityStatusView.m */,
 				7416F0322067684F0002C960 /* MoreEditView.h */,
 				7416F0332067684F0002C960 /* MoreEditView.m */,
+				74FA2F0220E0E34E000F355E /* MoreEditCommodityChildView.h */,
+				74FA2F0320E0E34E000F355E /* MoreEditCommodityChildView.m */,
 				74FA2EF920DC9A73000F355E /* PublishCommodityView.h */,
 				74FA2EFA20DC9A73000F355E /* PublishCommodityView.m */,
+				74FA2EFF20E0D474000F355E /* CommodityChildBottomView.h */,
+				74FA2F0020E0D474000F355E /* CommodityChildBottomView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3281,6 +3296,7 @@
 				74F8E91C205F8C4E000A17A5 /* MoveCommodityView.m in Sources */,
 				74BD12502068FB170053A3D1 /* ActiveTimeViewController.m in Sources */,
 				74FA2EF720DC99AA000F355E /* PublishCommodityViewController.m in Sources */,
+				74FA2F0120E0D474000F355E /* CommodityChildBottomView.m in Sources */,
 				744ABA7B205428AF00BBB26E /* IQUIWindow+Hierarchy.m in Sources */,
 				743C5F3C20A53DDB00E617AF /* AddInventoryTableViewCell.m in Sources */,
 				744817FE20AEA5C800A7F3DD /* TermOfShopViewController.m in Sources */,
@@ -3315,6 +3331,7 @@
 				741D3C7E20806DC900C56FCA /* OrderListTableViewCell.m in Sources */,
 				74B4E899204BD3EC006AFB6C /* AppUtils.m in Sources */,
 				7489CC80207E0B1700971BED /* PayWaitView.m in Sources */,
+				74FA2EFE20E0C2D4000F355E /* CommodityChildViewController.m in Sources */,
 				74046AED209AB580004E64A9 /* EditPriceViewController.m in Sources */,
 				741D3CA12081E4AB00C56FCA /* SearchOrderViewController.m in Sources */,
 				7491FA4B206CC54F0006F388 /* CashierViewController.m in Sources */,
@@ -3343,6 +3360,7 @@
 				744ABAC92058C90100BBB26E /* ManagerCatagoryTableViewCell.m in Sources */,
 				740C46BF20AC6E4500626A8B /* PayOrderViewController.m in Sources */,
 				743C5F3320A52C3800E617AF /* InventoryTableViewCell.m in Sources */,
+				74FA2F0420E0E34E000F355E /* MoreEditCommodityChildView.m in Sources */,
 				744ABA6C205428AF00BBB26E /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				744ABAA02055713200BBB26E /* EditInfoView.m in Sources */,
 				74B4E8A8204BD3EC006AFB6C /* KeyChainStore.m in Sources */,

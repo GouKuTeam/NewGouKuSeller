@@ -9,9 +9,14 @@
 #import "BaseViewController.h"
 #import "CommodityFromCodeEntity.h"
 
+typedef enum : int {
+    PublishCommodityFormPublish,
+    PublishCommodityFormEdit,
+} PublishCommodityFormType;
 @interface PublishCommodityViewController : BaseViewController
 
 @property (nonatomic ,strong)CommodityFromCodeEntity    *entityInformation;
 
+@property (nonatomic ,assign)PublishCommodityFormType    publishCommodityFormType;
 
 @end
