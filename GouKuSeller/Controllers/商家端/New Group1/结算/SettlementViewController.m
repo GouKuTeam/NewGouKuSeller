@@ -17,6 +17,7 @@
 #import "RechargeAmountViewController.h"
 #import "SupplierPayViewController.h"
 
+
 @interface SettlementViewController ()
 @property (nonatomic ,strong)SettlementView         *v_settlementBack;
 @property (nonatomic ,strong)AccountCashEntity      *accountCashEntity;
@@ -36,9 +37,11 @@
 - (void)onCreate{
     self.v_settlementBack = [[SettlementView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.v_settlementBack];
-    [self.v_settlementBack.btn_tixian addTarget:self action:@selector(btn_tixianAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_settlementBack.btn_mingxi addTarget:self action:@selector(yuemingxiAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_settlementBack.btn_chongzhi addTarget:self action:@selector(btn_chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_settlementBack.btn_gouku_chongzhi addTarget:self action:@selector(btn_chongzhiAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_settlementBack.btn_gouku_tixian addTarget:self action:@selector(btn_tixianAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_settlementBack.btn_gouku_mingxi addTarget:self action:@selector(yuemingxiAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_settlementBack.btn_eleme_tixian addTarget:self action:@selector(btn_tixianAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_settlementBack.btn_eleme_mingxi addTarget:self action:@selector(yuemingxiAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)loadData{
@@ -46,23 +49,31 @@
         
     } success:^(id obj) {
         self.accountCashEntity = (AccountCashEntity *)obj;
-        [self.v_settlementBack.lab_price_balance setText:[NSString stringWithFormat:@"%.2f",self.accountCashEntity.money]];
-        [self.v_settlementBack.lab_jiesuanPrice setText:[NSString stringWithFormat:@"%.2f",self.accountCashEntity.moneyNeedCheck]];
+        [self.v_settlementBack.lab_gouku_balanceT setText:[NSString stringWithFormat:@"%.2f",self.accountCashEntity.money]];
+        [self.v_settlementBack.lab_gouku_jiesuanT setText:[NSString stringWithFormat:@"%.2f",self.accountCashEntity.moneyNeedCheck]];
+        [self.v_settlementBack.lab_eleme_balanceT setText:[NSString stringWithFormat:@"%.2f",self.accountCashEntity.elemeMoney]];
+        [self.v_settlementBack.lab_eleme_jiesuanT setText:[NSString stringWithFormat:@"%.2f",self.accountCashEntity.elemeMoneyNeedCheck]];
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
 }
 
 
-- (void)btn_tixianAction{
+- (void)btn_tixianAction:(UIButton *)btn{
     if (self.accountCashEntity.bankCard.bankName.length > 0) {
     
         TiXianiewController *vc = [[TiXianiewController alloc]init];
         vc.cardNum = [NSString stringWithFormat:@"%@",self.accountCashEntity.bankCard.cardNum];
         vc.cardName = self.accountCashEntity.bankCard.bankName;
         vc.lowPrice = self.accountCashEntity.lowMoney;
-        vc.tixianCount = self.accountCashEntity.toCashNum;
-        vc.ketixianPrice = self.accountCashEntity.money;
+        if (btn == self.v_settlementBack.btn_gouku_tixian) {
+            vc.tixianCount = self.accountCashEntity.toCashNum;
+            vc.ketixianPrice = self.accountCashEntity.money;
+        }
+        if (btn == self.v_settlementBack.btn_eleme_tixian) {
+            vc.tixianCount = self.accountCashEntity.elemeToCashNum;
+            vc.ketixianPrice = self.accountCashEntity.elemeMoney;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         BankCardInformationViewController *vc = [[BankCardInformationViewController alloc]init];
@@ -71,6 +82,18 @@
     }
 }
 
+- (void)yuemingxiAction:(UIButton *)btn{
+    YueDetailViewController *vc = [[YueDetailViewController alloc]init];
+    if (btn == self.v_settlementBack.btn_gouku_mingxi) {
+        vc.yueDetailFormType = YueDetailFormGouKu;
+    }
+    if (btn == self.v_settlementBack.btn_eleme_mingxi) {
+        vc.yueDetailFormType = YueDetailFormEleMe;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 - (void)btn_chongzhiAction{
     
     RechargeAmountViewController *vc = [[RechargeAmountViewController alloc]init];
@@ -78,10 +101,6 @@
 
 }
 
-- (void)yuemingxiAction{
-    YueDetailViewController *vc = [[YueDetailViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 - (void)rightBarAction{
     if (self.accountCashEntity.bankCard.bankName.length > 0) {

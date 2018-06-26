@@ -709,6 +709,10 @@
 		74FA2EFE20E0C2D4000F355E /* CommodityChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2EFD20E0C2D4000F355E /* CommodityChildViewController.m */; };
 		74FA2F0120E0D474000F355E /* CommodityChildBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0020E0D474000F355E /* CommodityChildBottomView.m */; };
 		74FA2F0420E0E34E000F355E /* MoreEditCommodityChildView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0320E0E34E000F355E /* MoreEditCommodityChildView.m */; };
+		74FA2F0720E211E0000F355E /* ShaiXuanEleMeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0620E211E0000F355E /* ShaiXuanEleMeView.m */; };
+		74FA2F0A20E21A17000F355E /* EleMeBillHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0920E21A17000F355E /* EleMeBillHeaderView.m */; };
+		74FA2F0D20E221BA000F355E /* EleMeBillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0C20E221BA000F355E /* EleMeBillDetailViewController.m */; };
+		74FA2F1020E223D2000F355E /* EleMeBillTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FA2F0F20E223D2000F355E /* EleMeBillTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1419,6 +1423,14 @@
 		74FA2F0020E0D474000F355E /* CommodityChildBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommodityChildBottomView.m; sourceTree = "<group>"; };
 		74FA2F0220E0E34E000F355E /* MoreEditCommodityChildView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreEditCommodityChildView.h; sourceTree = "<group>"; };
 		74FA2F0320E0E34E000F355E /* MoreEditCommodityChildView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreEditCommodityChildView.m; sourceTree = "<group>"; };
+		74FA2F0520E211E0000F355E /* ShaiXuanEleMeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaiXuanEleMeView.h; sourceTree = "<group>"; };
+		74FA2F0620E211E0000F355E /* ShaiXuanEleMeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaiXuanEleMeView.m; sourceTree = "<group>"; };
+		74FA2F0820E21A17000F355E /* EleMeBillHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EleMeBillHeaderView.h; sourceTree = "<group>"; };
+		74FA2F0920E21A17000F355E /* EleMeBillHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleMeBillHeaderView.m; sourceTree = "<group>"; };
+		74FA2F0B20E221BA000F355E /* EleMeBillDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EleMeBillDetailViewController.h; sourceTree = "<group>"; };
+		74FA2F0C20E221BA000F355E /* EleMeBillDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleMeBillDetailViewController.m; sourceTree = "<group>"; };
+		74FA2F0E20E223D2000F355E /* EleMeBillTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EleMeBillTableViewCell.h; sourceTree = "<group>"; };
+		74FA2F0F20E223D2000F355E /* EleMeBillTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EleMeBillTableViewCell.m; sourceTree = "<group>"; };
 		EFBE4BC1551AA2E5876302AC /* Pods-GouKuSeller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GouKuSeller.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GouKuSeller/Pods-GouKuSeller.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1737,6 +1749,12 @@
 				7491FA60206DD9380006F388 /* YuEDetailTableViewCell.m */,
 				7491FA64206E05C60006F388 /* ShaiXuanView.h */,
 				7491FA65206E05C60006F388 /* ShaiXuanView.m */,
+				74FA2F0520E211E0000F355E /* ShaiXuanEleMeView.h */,
+				74FA2F0620E211E0000F355E /* ShaiXuanEleMeView.m */,
+				74FA2F0820E21A17000F355E /* EleMeBillHeaderView.h */,
+				74FA2F0920E21A17000F355E /* EleMeBillHeaderView.m */,
+				74FA2F0E20E223D2000F355E /* EleMeBillTableViewCell.h */,
+				74FA2F0F20E223D2000F355E /* EleMeBillTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2138,6 +2156,8 @@
 				741D3CAF2084692200C56FCA /* TiXianDetailViewController.m */,
 				743C5F2020A41BEF00E617AF /* RechargeAmountViewController.h */,
 				743C5F2120A41BEF00E617AF /* RechargeAmountViewController.m */,
+				74FA2F0B20E221BA000F355E /* EleMeBillDetailViewController.h */,
+				74FA2F0C20E221BA000F355E /* EleMeBillDetailViewController.m */,
 			);
 			path = "结算";
 			sourceTree = "<group>";
@@ -3221,6 +3241,7 @@
 				74ACFFD420A15489005C5A16 /* AddSupplierCommodityViewController.m in Sources */,
 				7406FD0420CE232F00192108 /* SearchNetOrderViewController.m in Sources */,
 				7448183120B2B9DE00A7F3DD /* SupplierOrderManagerSectionHeaderView.m in Sources */,
+				74FA2F1020E223D2000F355E /* EleMeBillTableViewCell.m in Sources */,
 				744ABA0820517C3600BBB26E /* BtnTop.m in Sources */,
 				741D3C7920805CC200C56FCA /* DateUtils.m in Sources */,
 				74ACFFB020A04DE9005C5A16 /* OrderManagerViewController.m in Sources */,
@@ -3351,6 +3372,7 @@
 				74B4E87E204BD3EC006AFB6C /* MJRefreshAnimationStateHeader.m in Sources */,
 				74BD123C2068E2650053A3D1 /* ActiveZhouViewController.m in Sources */,
 				74BD12372068D8B30053A3D1 /* UIView+Extension.m in Sources */,
+				74FA2F0A20E21A17000F355E /* EleMeBillHeaderView.m in Sources */,
 				74B4E872204BD3EC006AFB6C /* MBProgressHUD+JDragon.m in Sources */,
 				74F8E8F220592B1C000A17A5 /* CommodityStandardViewController.m in Sources */,
 				74F8E93A2060FCEC000A17A5 /* CommodityFromCodeEntity.m in Sources */,
@@ -3416,6 +3438,7 @@
 				7448181220AFEBD400A7F3DD /* PurchaseOrderDetailBottomView.m in Sources */,
 				7406FD0120CA6C1100192108 /* ShopPriceDetailView.m in Sources */,
 				1842CCEF209C004200A1C7C8 /* ImageCollectionViewCell.m in Sources */,
+				74FA2F0D20E221BA000F355E /* EleMeBillDetailViewController.m in Sources */,
 				744ABA0B20522F5700BBB26E /* CommodityTableViewCell.m in Sources */,
 				74ACFFB620A04E11005C5A16 /* CustomerManagerViewController.m in Sources */,
 				1842CCDF209AD99E00A1C7C8 /* ShoppingCartTableViewCell.m in Sources */,
@@ -3428,6 +3451,7 @@
 				74F8E8FD2059362B000A17A5 /* ShopClassificationTableViewCell.m in Sources */,
 				744ABA84205428AF00BBB26E /* IQUIView+Hierarchy.m in Sources */,
 				7416F03120639BC50002C960 /* CommodityStatusView.m in Sources */,
+				74FA2F0720E211E0000F355E /* ShaiXuanEleMeView.m in Sources */,
 				74B4E8AB204BD3EC006AFB6C /* UIView+EasyExtend.m in Sources */,
 				74FA2EFB20DC9A73000F355E /* PublishCommodityView.m in Sources */,
 				7489CC83207F2F4A00971BED /* MyTbHeaderView.m in Sources */,

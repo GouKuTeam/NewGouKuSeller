@@ -51,13 +51,14 @@
             make.top.mas_equalTo(12);
             make.right.equalTo(self.mas_right).offset(-10);
         }];
-        [self.lab_CommodityName setFont:[UIFont systemFontOfSize:16]];
+        [self.lab_CommodityName setFont:[UIFont boldSystemFontOfSize:16]];
+        self.lab_CommodityName.numberOfLines = 0;
         
         self.lab_CommodityStock = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_CommodityStock];
         [self.lab_CommodityStock mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_CommodityName);
-            make.top.equalTo(self.lab_CommodityName.mas_bottom).offset(10);
+            make.top.equalTo(self.lab_CommodityName.mas_bottom).offset(7);
         }];
         self.lab_CommodityStock.font = [UIFont systemFontOfSize:13];
         
@@ -74,7 +75,7 @@
         [self.contentView addSubview:self.lab_CommodityPrice];
         [self.lab_CommodityPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.lab_CommodityName);
-            make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(10);
+            make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(7);
             make.right.equalTo(self.lab_CommodityName);
         }];
         self.lab_CommodityPrice.font = [UIFont systemFontOfSize:16];
@@ -90,7 +91,7 @@
         [self.btn_more mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.mas_right).offset(-15);
             make.width.mas_equalTo(50);
-            make.top.equalTo(self.lab_CommodityPrice.mas_bottom).offset(14);
+            make.top.equalTo(self.lab_CommodityPrice.mas_bottom).offset(10);
             make.height.mas_equalTo(28);
         }];
         
@@ -114,7 +115,7 @@
         [self.img_line setBackgroundColor:[UIColor colorWithHexString:@"#d8d8d8"]];
         [self.img_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
-            make.top.equalTo(self.btn_edit.mas_bottom).offset(14);
+            make.top.equalTo(self.btn_edit.mas_bottom).offset(10);
             make.right.equalTo(self.mas_right);
             make.height.mas_equalTo(0.5);
         }];

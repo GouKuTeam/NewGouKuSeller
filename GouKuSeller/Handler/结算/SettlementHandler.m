@@ -36,14 +36,14 @@
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];
 }
-
-+(void)accountdetailsWithshopId:(NSNumber *)shopId page:(int)page type:(int)type prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+//余额明细
++(void)accountdetailsWithshopId:(NSNumber *)shopId page:(int)page type:(int)type platform:(int)platform prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_AccountDetails];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AccountDetails];
     NSDictionary *dic = @{
-                          @"shopId":shopId,
                           @"page":[NSNumber numberWithInt:page],
-                          @"accountType":[NSNumber numberWithInt:type]
+                          @"accountType":[NSNumber numberWithInt:type],
+                          @"platform":[NSNumber numberWithInt:platform]
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost

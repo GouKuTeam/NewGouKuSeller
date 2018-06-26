@@ -16,6 +16,10 @@
 @property (nonatomic ,assign)int               toCashNum;
 @property (nonatomic ,assign)double            lowMoney;
 @property (nonatomic ,strong)BankCardEntity    *bankCard;
+@property (nonatomic ,assign)double            elemeMoney;            //饿了么账户余额
+@property (nonatomic ,assign)double            elemeMoneyNeedCheck;   //饿了么待结算金额
+@property (nonatomic ,assign)int               elemeToCashNum;        //饿了么提现次数
+
 
 + (NSArray *)parseStandardListWithJson:(id)json;
 + (AccountCashEntity *)parseStandardEntityWithJson:(id)json;

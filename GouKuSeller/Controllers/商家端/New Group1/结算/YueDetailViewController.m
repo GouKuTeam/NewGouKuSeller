@@ -12,14 +12,17 @@
 #import "SettlementHandler.h"
 #import "AccountCashDetailEntity.h"
 #import "TiXianDetailViewController.h"
+#import "ShaiXuanEleMeView.h"
+#import "EleMeBillDetailViewController.h"
 
 @interface YueDetailViewController ()<UITableViewDataSource,UITableViewDelegate,BaseTableViewDelagate>
 
 @property (nonatomic ,strong)BaseTableView            *tb_priceDetail;
 @property (nonatomic ,strong)NSMutableArray           *arr_priceDetail;
 @property (nonatomic ,strong)ShaiXuanView             *v_shaixuan;
+@property (nonatomic ,strong)ShaiXuanEleMeView        *v_shaixuan_eleme;
 @property (nonatomic ,assign)int                       Ktype;
-
+@property (nonatomic ,assign)int                       platform;    //平台 1 购酷 2 饿了么 3 美团
 @end
 
 @implementation YueDetailViewController
@@ -33,8 +36,17 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"余额明细";
-    self.Ktype = 0;
+    if (self.yueDetailFormType == YueDetailFormGouKu) {
+        
+        self.title = @"购酷余额明细";
+        self.platform = 1;
+    }
+    if (self.yueDetailFormType == YueDetailFormEleMe) {
+        
+        self.title = @"饿了么余额明细";
+        self.platform = 2;
+    }
+    
     UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAction)];
     [btn_right setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#ffffff"]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btn_right;
@@ -42,7 +54,7 @@
 }
 
 - (void)onCreate{
-    
+    self.Ktype = 0;
     self.tb_priceDetail = [[BaseTableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight) style:UITableViewStylePlain hasHeaderRefreshing:YES hasFooterRefreshing:YES];
     
     [self.view addSubview:self.tb_priceDetail];
@@ -54,38 +66,61 @@
     self.tb_priceDetail.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.tb_priceDetail requestDataSource];
     
-    self.v_shaixuan = [[ShaiXuanView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    [self.view addSubview:self.v_shaixuan];
-    [self.v_shaixuan setHidden:YES];
-    UITapGestureRecognizer *tpg = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shaixuanDissMiss)];
-    [self.v_shaixuan addGestureRecognizer:tpg];
-    WS(weakSelf);
-    self.v_shaixuan.btnSelectIndex = ^(int btnIndex) {
-        if (btnIndex == 0) {
-            weakSelf.Ktype = 0;
-        }
-        if (btnIndex == 1) {
-            weakSelf.Ktype = 1;
-        }
-        if (btnIndex == 2) {
-            weakSelf.Ktype = 2;
-        }
-        if (btnIndex == 3) {
-            weakSelf.Ktype = 1003;
-        }
-        if (btnIndex == 4) {
-            weakSelf.Ktype = 1004;
-        }
-        if (btnIndex == 5) {
-            weakSelf.Ktype = 1006;
-        }
-        [weakSelf.tb_priceDetail requestDataSource];
-    };
+    if (self.yueDetailFormType == YueDetailFormGouKu) {
+        self.v_shaixuan = [[ShaiXuanView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        [self.view addSubview:self.v_shaixuan];
+        [self.v_shaixuan setHidden:YES];
+        UITapGestureRecognizer *tpg = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shaixuanDissMiss)];
+        [self.v_shaixuan addGestureRecognizer:tpg];
+        WS(weakSelf);
+        self.v_shaixuan.btnSelectIndex = ^(int btnIndex) {
+            if (btnIndex == 0) {
+                weakSelf.Ktype = 0;
+            }
+            if (btnIndex == 1) {
+                weakSelf.Ktype = 1;
+            }
+            if (btnIndex == 2) {
+                weakSelf.Ktype = 2;
+            }
+            if (btnIndex == 3) {
+                weakSelf.Ktype = 1003;
+            }
+            if (btnIndex == 4) {
+                weakSelf.Ktype = 1004;
+            }
+            if (btnIndex == 5) {
+                weakSelf.Ktype = 1006;
+            }
+            [weakSelf.tb_priceDetail requestDataSource];
+        };
+    }
+    if (self.yueDetailFormType == YueDetailFormEleMe) {
+        self.v_shaixuan_eleme = [[ShaiXuanEleMeView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        [self.view addSubview:self.v_shaixuan_eleme];
+        [self.v_shaixuan_eleme setHidden:YES];
+        UITapGestureRecognizer *tpg = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shaixuanDissMiss)];
+        [self.v_shaixuan_eleme addGestureRecognizer:tpg];
+        WS(weakSelf);
+        self.v_shaixuan_eleme.btnSelectIndex = ^(int btnIndex) {
+            if (btnIndex == 0) {
+                weakSelf.Ktype = 0;
+            }
+            if (btnIndex == 1) {
+                weakSelf.Ktype = 2001;
+            }
+            if (btnIndex == 2) {
+                weakSelf.Ktype = 2002;
+            }
+            [weakSelf.tb_priceDetail requestDataSource];
+        };
+    }
+    
     
 }
 
 - (void)tableView:(BaseTableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
-    [SettlementHandler accountdetailsWithshopId:[LoginStorage GetShopId] page:(int)pageNum type:self.Ktype prepare:^{
+    [SettlementHandler accountdetailsWithshopId:[LoginStorage GetShopId] page:(int)pageNum type:self.Ktype platform:self.platform prepare:^{
         
     } success:^(id obj) {
         if (pageNum == 0) {
@@ -141,20 +176,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    AccountCashDetailEntity *entity = [self.arr_priceDetail objectAtIndex:indexPath.section];
-    if (entity.accountType == 2) {
-        TiXianDetailViewController *vc = [[TiXianDetailViewController alloc]init];
-        vc.crashId = [NSString stringWithFormat:@"%@",entity.cashOrderId];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    AccountCashDetailEntity *entity = [self.arr_priceDetail objectAtIndex:indexPath.section];
+//    if (entity.accountType == 2) {
+//        TiXianDetailViewController *vc = [[TiXianDetailViewController alloc]init];
+//        vc.crashId = [NSString stringWithFormat:@"%@",entity.cashOrderId];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+    EleMeBillDetailViewController *vc = [[EleMeBillDetailViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (void)rightBarAction{
-    [self.v_shaixuan setHidden:!self.v_shaixuan.isHidden];
+    if (self.yueDetailFormType == YueDetailFormGouKu) {
+        
+        [self.v_shaixuan setHidden:!self.v_shaixuan.isHidden];
+    }
+    if (self.yueDetailFormType == YueDetailFormEleMe) {
+        
+        [self.v_shaixuan_eleme setHidden:!self.v_shaixuan_eleme.isHidden];
+    }
 }
 
 - (void)shaixuanDissMiss{
-    [self.v_shaixuan setHidden:!self.v_shaixuan.isHidden];
+    if (self.yueDetailFormType == YueDetailFormGouKu) {
+        [self.v_shaixuan setHidden:!self.v_shaixuan.isHidden];
+    }
+    if (self.yueDetailFormType == YueDetailFormEleMe) {
+        [self.v_shaixuan_eleme setHidden:!self.v_shaixuan_eleme.isHidden];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

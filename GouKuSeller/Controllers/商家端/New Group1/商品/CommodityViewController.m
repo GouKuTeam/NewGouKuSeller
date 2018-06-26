@@ -24,6 +24,7 @@
 #import "MoreEditView.h"
 #import "MoreAddCommodityViewController.h"
 #import "PublishCommodityViewController.h"
+#import "NSString+Size.h"
 
 #define NULLROW    999
 
@@ -472,7 +473,12 @@
         if (self.editStatus == YES) {
             return 97;
         }else{
-            return 142;
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+            CGFloat width = SCREEN_WIDTH - 100 - 86;
+            CGFloat nameHeight = [entity.name fittingLabelHeightWithWidth:width andFontSize:[UIFont boldSystemFontOfSize:16]];
+            CGFloat stockHeight = [[NSString stringWithFormat:@"库存%@",entity.stock] fittingLabelHeightWithWidth:width andFontSize:[UIFont systemFontOfSize:13]];
+            CGFloat priceHeight = [[NSString stringWithFormat:@"￥%.2f",[entity.price doubleValue]] fittingLabelHeightWithWidth:width andFontSize:[UIFont systemFontOfSize:16]];
+            return 12 + nameHeight +7 + stockHeight  +7 + priceHeight + 10 + 28 + 10;
         }
     }
 }

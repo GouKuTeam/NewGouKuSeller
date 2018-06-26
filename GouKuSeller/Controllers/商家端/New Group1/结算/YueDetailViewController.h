@@ -7,7 +7,14 @@
 //
 
 #import "BaseViewController.h"
+typedef enum : int {
+    YueDetailFormGouKu,
+    YueDetailFormEleMe,
+    YueDetailFormMeiTuan,
+} YueDetailFormType;
 
 @interface YueDetailViewController : BaseViewController
+
+@property (nonatomic ,assign)YueDetailFormType     yueDetailFormType;
 
 @end
