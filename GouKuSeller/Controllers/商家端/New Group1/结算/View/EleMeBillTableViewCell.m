@@ -29,7 +29,7 @@
         [self.lab_xuhao setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self.lab_xuhao setFont:[UIFont systemFontOfSize:12]];
         [self.lab_xuhao setTextAlignment:NSTextAlignmentLeft];
-        [self.lab_xuhao setText:@"#1"];
+//        [self.lab_xuhao setText:@"#1"];
         
         self.lab_status = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_status];
@@ -42,7 +42,7 @@
         [self.lab_status setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self.lab_status setFont:[UIFont systemFontOfSize:12]];
         [self.lab_status setTextAlignment:NSTextAlignmentCenter];
-        [self.lab_status setText:@"完成"];
+//        [self.lab_status setText:@"完成"];
         
         
         self.lab_price = [[UILabel alloc]init];
@@ -57,7 +57,7 @@
         [self.lab_price setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self.lab_price setFont:[UIFont systemFontOfSize:12]];
         [self.lab_price setTextAlignment:NSTextAlignmentCenter];
-        [self.lab_price setText:@"133.00"];
+//        [self.lab_price setText:@"133.00"];
         
         self.img_line = [[UIImageView alloc]init];
         [self.contentView addSubview:self.img_line];

@@ -65,10 +65,10 @@
 
     UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(shopClassification)];
     [self.v_commodityView.v_shopClassification addGestureRecognizer:singleTap];
-    
-    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
-    UITapGestureRecognizer* imgTitleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
-    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitleTap];
+
+//    self.v_commodityView.img_commodityImgTitle.userInteractionEnabled = YES;
+//    UITapGestureRecognizer* imgTitleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgTitleAction)];
+//    [self.v_commodityView.img_commodityImgTitle addGestureRecognizer:imgTitleTap];
 
     self.v_commodityView.v_stock.tf_detail.delegate = self;
     self.v_commodityView.v_jinhuoPrice.tf_detail.delegate = self;
@@ -88,8 +88,8 @@
     self.Xprice = [self.entityInformation.xprice doubleValue];
     self.shopStock = [self.entityInformation.stock intValue];
     if ([self.comeFrom isEqualToString:@"编辑商品"]) {
-        self.shopCId = self.entityInformation.shopWareCategoryId;
-        [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.shopWareCategoryName];
+        self.shopCId = self.entityInformation.firstCategoryId;
+        [self.v_commodityView.v_shopClassification.tf_detail setText:self.entityInformation.firstCategoryName];
         [self.v_commodityView.v_stock.tf_detail setText:[NSString stringWithFormat:@"%@",self.entityInformation.stock]];
         [self.v_commodityView.v_jinhuoPrice.tf_detail setText:[NSString stringWithFormat:@"¥%.2f",[self.entityInformation.xprice doubleValue]]];
     }
@@ -187,8 +187,10 @@
         if ([self.v_commodityView.v_shopClassification.tf_detail.text isEqualToString:@"请选择"]) {
             [MBProgressHUD showInfoMessage:@"请选择店内分类"];
             return;
+        }else if ([self.v_commodityView.v_commodityName.tf_detail.text isEqualToString:@""]){
+            [MBProgressHUD showInfoMessage:@"请填写商品名称"];
         }else{
-            [CommodityHandler commodityEditWithCommodityId:[NSString stringWithFormat:@"%@",self.entityInformation.skuId] price:self.Cprice stock:self.v_commodityView.v_stock.tf_detail.text xprice:self.Xprice shopWareCategoryId:self.shopCId prepare:^{
+            [CommodityHandler commodityEditWithSkuId:self.entityInformation.skuId name:self.v_commodityView.v_commodityName.tf_detail.text wareBarcode:self.entityInformation.barcode pictures:self.entityInformation.pictures stock:self.v_commodityView.v_stock.tf_detail.text description:self.v_commodityView.v_commodityDescribe.tf_detail.text xprice:[NSString stringWithFormat:@"%.2f",self.Xprice] firstCategoryId:self.shopCId prepare:^{
                 
             } success:^(id obj) {
                 CommodityFromCodeEntity *entity = (CommodityFromCodeEntity *)obj;

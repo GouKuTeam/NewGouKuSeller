@@ -29,23 +29,33 @@
         
         CGFloat width = (SCREEN_WIDTH - 100) / 2;
         
-        self.btn_bottom_mendian = [[UIButton alloc]initWithFrame:CGRectMake(100, 0, width,height)];
-        [self addSubview:self.btn_bottom_mendian];
-        [self.btn_bottom_mendian setTitle:@"发布到门店" forState:UIControlStateNormal];
-        [self.btn_bottom_mendian setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
-        self.btn_bottom_mendian.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.btn_bottom_yichu = [[UIButton alloc]initWithFrame:CGRectMake(100, 0, 100,height)];
+        [self addSubview:self.btn_bottom_yichu];
+//        [self.btn_bottom_yichu setTitle:@"发布到门店" forState:UIControlStateNormal];
+        [self.btn_bottom_yichu setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        self.btn_bottom_yichu.titleLabel.font = [UIFont systemFontOfSize:14];
         
-        UIImageView *imgshu2 = [[UIImageView alloc]initWithFrame:CGRectMake(100 + width, 0, 1, height)];
+        UIImageView *imgshu2 = [[UIImageView alloc]initWithFrame:CGRectMake(200, 0, 1, height)];
         [self addSubview:imgshu2];
         [imgshu2 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
         
         
-        self.btn_bottom_delete = [[UIButton alloc]initWithFrame:CGRectMake(100 + width, 0, width,height)];
-        [self addSubview:self.btn_bottom_delete];
-        [self.btn_bottom_delete setTitle:@"删除" forState:UIControlStateNormal];
-        [self.btn_bottom_delete setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
-        self.btn_bottom_delete.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.btn_bottom_shangjia = [[UIButton alloc]initWithFrame:CGRectMake(200, 0,(SCREEN_WIDTH - 200) / 2,height)];
+        [self addSubview:self.btn_bottom_shangjia];
+        [self.btn_bottom_shangjia setTitle:@"上架" forState:UIControlStateNormal];
+        [self.btn_bottom_shangjia setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        self.btn_bottom_shangjia.titleLabel.font = [UIFont systemFontOfSize:14];
         
+        UIImageView *imgshu3 = [[UIImageView alloc]initWithFrame:CGRectMake(200 + (SCREEN_WIDTH - 200) / 2, 0, 1, height)];
+        [self addSubview:imgshu3];
+        [imgshu3 setBackgroundColor:[UIColor colorWithHexString:@"#D8D8D8"]];
+        
+        
+        self.btn_bottom_xiajia = [[UIButton alloc]initWithFrame:CGRectMake(201 + (SCREEN_WIDTH - 200) / 2, 0,(SCREEN_WIDTH - 200) / 2,height)];
+        [self addSubview:self.btn_bottom_xiajia];
+        [self.btn_bottom_xiajia setTitle:@"下架" forState:UIControlStateNormal];
+        [self.btn_bottom_xiajia setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+        self.btn_bottom_xiajia.titleLabel.font = [UIFont systemFontOfSize:14];
         
     }
     return self;

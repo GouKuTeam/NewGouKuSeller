@@ -206,11 +206,17 @@
 }
 
 -(void)contentEleMeBillHeaderViewWithDic:(NSDictionary *)dic{
-    [self.lab_title setText:@"2018-06-05 完成 2 单"];
-    [self.lab_status setText:@"待对账"];
-    [self.lab_status setTextColor:[UIColor colorWithHexString:@"#F5A623"]];
-    [self.lab_billPrice setText:@"132.41"];
-    [self.lab_completePrice setText:@"133.00"];
-    [self.lab_refundPrice setText:@"-13.1"];
+    [self.lab_title setText:[NSString stringWithFormat:@"%@ 完成 %@ 单",[dic objectForKey:@"date"],[dic objectForKey:@"orderNum"]]];
+    if ([[dic objectForKey:@"billStatus"] intValue] == 0) {
+        [self.lab_status setText:@"待对账"];
+        [self.lab_status setTextColor:[UIColor colorWithHexString:@"#F5A623"]];
+    }else{
+        [self.lab_status setText:@"对账成功"];
+        [self.lab_status setTextColor:[UIColor colorWithHexString:@"#329702"]];
+    }
+    [self.lab_billPrice setText:[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"billMoney"] doubleValue]]];
+    [self.lab_completePrice setText:[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"orderMoney"] doubleValue]]];
+    [self.lab_refundPrice setText:[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"drawbackMoney"] doubleValue]]];
+    
 }
 @end

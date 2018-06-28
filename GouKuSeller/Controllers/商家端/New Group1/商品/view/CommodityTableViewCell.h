@@ -22,4 +22,10 @@
 @property (nonatomic ,strong)UIImageView     *img_line;
 
 - (void)contentCellWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
+
+//门店布局
+- (void)contentCellInShopWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
+
+//网店布局
+- (void)contentCellInNetShopWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
 @end

@@ -13,10 +13,23 @@ typedef enum : int {
     PublishCommodityFormPublish,
     PublishCommodityFormEdit,
 } PublishCommodityFormType;
+
+typedef enum {
+    PublishCommodityToShop = 1,
+    PublishCommodityToNetShop = 2,
+} PublishCommodityToShopType;
+
+typedef void(^changeChildEntity)(CommodityFromCodeEntity *entity);
+
 @interface PublishCommodityViewController : BaseViewController
 
 @property (nonatomic ,strong)CommodityFromCodeEntity    *entityInformation;
 
 @property (nonatomic ,assign)PublishCommodityFormType    publishCommodityFormType;
+
+@property (nonatomic ,assign)PublishCommodityToShopType    publishCommodityToShopType;
+
+@property (nonatomic, copy  )changeChildEntity  changeChildEntity;
+
 
 @end

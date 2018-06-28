@@ -41,7 +41,7 @@
 @property (nonatomic ,strong)NSMutableArray   *arr_category;
 @property (nonatomic ,strong)NSMutableArray    *arr_selected;
 @property (nonatomic ,strong)NSMutableArray   *arr_commodity;
-
+@property (nonatomic ,strong)NSMutableArray   *commodityArr;
 @property (nonatomic ,assign)int               selectedSection;
 @property (nonatomic ,assign)int               selectedRow;
 @property (nonatomic ,assign)int               showIndex;
@@ -131,10 +131,12 @@
     self.selectedRow = NULLROW;
     self.selectedSection = NULLROW;
     self.showIndex = NULLROW;
+    self.btnIndex = [NSNumber numberWithInt:999];
     
     self.arr_category = [NSMutableArray array];
     self.arr_commodity = [NSMutableArray array];
     self.arr_selected = [NSMutableArray array];
+    self.commodityArr = [NSMutableArray array];
     
     self.view_bottom = [[UIView alloc]init];
     [self.view addSubview:self.view_bottom];
@@ -253,10 +255,10 @@
      [self.v_bottom_manager.btn_bottom_delete addTarget:self action:@selector(btn_bottom_delete) forControlEvents:UIControlEventTouchUpInside];
      
      //移动商品选择分类界面
-     self.v_moveCommodity = [[MoveCommodityView alloc]initWithFrame:self.view.frame];
-     [self.view addSubview:self.v_moveCommodity];
-     [self.v_moveCommodity setHidden:YES];
-     [self.v_moveCommodity.btn_move addTarget:self action:@selector(moveVBtnAction) forControlEvents:UIControlEventTouchUpInside];
+//     self.v_moveCommodity = [[MoveCommodityView alloc]initWithFrame:self.view.frame];
+//     [self.view addSubview:self.v_moveCommodity];
+//     [self.v_moveCommodity setHidden:YES];
+//     [self.v_moveCommodity.btn_move addTarget:self action:@selector(moveVBtnAction) forControlEvents:UIControlEventTouchUpInside];
     
     
     
@@ -273,7 +275,6 @@
     [self.view addSubview:self.v_moreEdit];
     [self.v_moreEdit setHidden:YES];
     
-    self.btnIndex = [NSNumber numberWithInt:0];
     [self loadData];
     
 }
@@ -383,7 +384,9 @@
     if (self.selectedRow != NULLROW) {
         entity = [entity.childList objectAtIndex:self.selectedRow];
     }
-    [CommodityHandler getCommodityListWithshopId:[LoginStorage GetShopId] shopWareCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex pageNum:(int)pageNum prepare:nil success:^(id obj) {
+    [CommodityHandler getCommodityListWithtype:[NSNumber numberWithInt:2] firstCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex keyword:nil pageNum:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
         if (pageNum == 0) {
             [self.arr_commodity removeAllObjects];
         }
@@ -535,7 +538,7 @@
                 cell = [[ManagerCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
-            [cell contentCellWithCommodityInformationEntity:entity];
+            [cell contentCellInAllCommodityWithCommodityInformationEntity:entity];
             if ([self.arr_selected containsObject:[NSNumber numberWithInt:(int)indexPath.row]]) {
                 cell.btn_select.selected = YES;
             }else{
@@ -655,7 +658,7 @@
             if (self.selectedRow != NULLROW) {
                 shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
             }
-            if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+            if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
                 if (entityDemo.stock > 0) {
                     [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
                 }else{
@@ -670,7 +673,7 @@
             if (self.selectedRow != NULLROW) {
                 shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
             }
-            if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+            if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
                 [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
             }else{
                 [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
@@ -684,7 +687,7 @@
 //商品状态选择
 
 - (void)btn_allAction{
-    self.btnIndex = [NSNumber numberWithInt:0];
+    self.btnIndex = [NSNumber numberWithInt:999];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"全部商品" forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_all setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
@@ -755,38 +758,18 @@
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.entityInformation = entity;
+    vc.publishCommodityToShopType = PublishCommodityToShop;
     vc.publishCommodityFormType = PublishCommodityFormPublish;
     [self.navigationController pushViewController:vc animated:YES];
     [self.v_moreEdit setHidden:YES];
-//    if (entity.status == 1 || entity.status == 2) {
-//        //下架方法
-//        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
-//            [self.arr_commodity removeObjectAtIndex:self.showIndex];
-//            [self.tb_right reloadData];
-//            self.showIndex = NULLROW;
-//            [self.v_moreEdit setHidden:YES];
-//        } failed:^(NSInteger statusCode, id json) {
-//            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
-//        }];
-//    }else if (entity.status == 3){
-//        //上架方法
-//        [CommodityHandler commodityupShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
-//
-//        } success:^(id obj) {
-//            [self.arr_commodity removeObjectAtIndex:self.showIndex];
-//            [self.tb_right reloadData];
-//            self.showIndex = NULLROW;
-//            [self.v_moreEdit setHidden:YES];
-//        } failed:^(NSInteger statusCode, id json) {
-//            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
-//        }];
-//    }
+
 }
 
 - (void)wangdianAction{
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.entityInformation = entity;
+    vc.publishCommodityToShopType = PublishCommodityToNetShop;
     [self.navigationController pushViewController:vc animated:YES];
     [self.v_moreEdit setHidden:YES];
     
@@ -794,6 +777,7 @@
 -(void)searchBarAction{
     SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];
     vc.enterFormType = self.enterFormType;
+    vc.searchType = SearchTypeInWareHouse;
     [self.navigationController pushViewController:vc animated:YES];
     vc.selectCommodity = ^(CommodityFromCodeEntity *entity){
         if (self.selectCommodity) {
@@ -821,6 +805,7 @@
 }
  
 -(void)btn_batchManagerAction{
+    
      self.editStatus = !self.editStatus;
      if (self.editStatus == YES) {
          [self.v_bottom_manager setHidden:NO];
@@ -833,7 +818,7 @@
      [self.tb_right reloadData];
 }
  
- #pragma view_bottom mark
+ #pragma mark - 批量操作
 - (void)btn_bottom_allSelect{
      self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
      if (self.v_bottom_manager.btn_bottom_allSelect.isSelected == YES) {
@@ -847,34 +832,105 @@
      self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
      [self.tb_right reloadData];
  }
- 
+
  - (void)btn_bottom_mendianAction{
- 
+     [self.commodityArr removeAllObjects];
+     if (self.arr_selected.count > 0) {
+         [self.commodityArr removeAllObjects];
+         for (int i = 0; i < self.arr_selected.count; i++) {
+             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+             [dic setValue:entity.skuId forKey:@"skuId"];
+             [dic setValue:[NSNumber numberWithInt:1] forKey:@"releaseType"];
+             [self.commodityArr addObject:dic];
+         }
+         [CommodityHandler commodityReleaseListWithCommodityArr:self.commodityArr prepare:^{
+             
+         } success:^(id obj) {
+             NSDictionary *dic = (NSDictionary *)obj;
+             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                 [MBProgressHUD showInfoMessage:@"发布成功"];
+                 [self confirmAction];
+             }else{
+                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+             }
+         } failed:^(NSInteger statusCode, id json) {
+             [MBProgressHUD showErrorMessage:(NSString *)json];
+         }];
+     }else{
+         [MBProgressHUD showErrorMessage:@"请选择商品"];
+     }
+     
  }
  
  - (void)btn_bottom_wangdianAction{
-//     self.v_moveCommodity.lab_title.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
-//     [self.v_moveCommodity setHidden:NO];
+
+     if (self.arr_selected.count > 0) {
+         [self.commodityArr removeAllObjects];
+         for (int i = 0; i < self.arr_selected.count; i++) {
+             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+             [dic setValue:entity.skuId forKey:@"skuId"];
+             [dic setValue:[NSNumber numberWithInt:2] forKey:@"releaseType"];
+             [self.commodityArr addObject:dic];
+         }
+         [CommodityHandler commodityReleaseListWithCommodityArr:self.commodityArr prepare:^{
+             
+         } success:^(id obj) {
+             NSDictionary *dic = (NSDictionary *)obj;
+             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                 [MBProgressHUD showInfoMessage:@"发布成功"];
+                 [self confirmAction];
+             }else{
+                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+             }
+         } failed:^(NSInteger statusCode, id json) {
+             [MBProgressHUD showErrorMessage:(NSString *)json];
+         }];
+     }else{
+         [MBProgressHUD showErrorMessage:@"请选择商品"];
+     }
  }
  
  - (void)btn_bottom_delete{
- 
+     if (self.arr_selected.count > 0) {
+         [self.commodityArr removeAllObjects];
+         for (int i = 0; i < self.arr_selected.count; i++) {
+             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+             [self.commodityArr addObject:entity.skuId];
+         }
+         [CommodityHandler commodityDeleteListWithCommodityArr:self.commodityArr prepare:^{
+             
+         } success:^(id obj) {
+             NSDictionary *dic = (NSDictionary *)obj;
+             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                 [MBProgressHUD showInfoMessage:@"删除成功"];
+                 [self confirmAction];
+             }else{
+                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+             }
+         } failed:^(NSInteger statusCode, id json) {
+             [MBProgressHUD showErrorMessage:(NSString *)json];
+         }];
+     }else{
+         [MBProgressHUD showErrorMessage:@"请选择商品"];
+     }
  }
  
  //移动分类按钮方法
- - (void)moveVBtnAction{
- if (self.v_moveCommodity.selectedSection == NULLROW) {
- [MBProgressHUD showInfoMessage:@"请选择分类"];
- return;
- }
- ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
- entity = [self.v_moveCommodity.arr_moveCatagary objectAtIndex:self.v_moveCommodity.selectedSection];
- if (self.v_moveCommodity.selectedRow != NULLROW) {
- entity = [entity.childList objectAtIndex:self.v_moveCommodity.selectedRow];
- }
- 
- }
- 
+// - (void)moveVBtnAction{
+// if (self.v_moveCommodity.selectedSection == NULLROW) {
+// [MBProgressHUD showInfoMessage:@"请选择分类"];
+// return;
+// }
+// ShopClassificationEntity *entity = [[ShopClassificationEntity alloc]init];
+// entity = [self.v_moveCommodity.arr_moveCatagary objectAtIndex:self.v_moveCommodity.selectedSection];
+// if (self.v_moveCommodity.selectedRow != NULLROW) {
+// entity = [entity.childList objectAtIndex:self.v_moveCommodity.selectedRow];
+// }
+//
+// }
+
  //*****/
 
 - (void)statusViewDissmiss{

@@ -15,9 +15,17 @@ typedef enum : int {
     EnterFromActice
 }EnterFormType;
 
+typedef enum : int {
+    SearchTypeInWareHouse = 2,
+    SearchTypeInShop = 3,
+    SearchTypeInNetShop = 4
+}SearchType;
+
 typedef void(^searchSelectCommodity)(CommodityFromCodeEntity *entity);
 @interface SearchCommodityViewController : BaseViewController
+
 @property (nonatomic,assign)EnterFormType   enterFormType;
+@property (nonatomic,assign)SearchType      searchType;
 @property (nonatomic,copy)searchSelectCommodity   selectCommodity;
 
 @end

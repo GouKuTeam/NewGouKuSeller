@@ -78,8 +78,8 @@
             make.top.mas_equalTo(self.lab_CommodityStock.mas_bottom).offset(7);
             make.right.equalTo(self.lab_CommodityName);
         }];
-        self.lab_CommodityPrice.font = [UIFont systemFontOfSize:16];
-        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+//        self.lab_CommodityPrice.font = [UIFont systemFontOfSize:16];
+//        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
         
         self.btn_more = [[UIButton alloc]init];
         [self.btn_more setImage:[UIImage imageNamed:@"dian"] forState:UIControlStateNormal];
@@ -130,7 +130,89 @@
     self.lab_CommodityName.text = commodityInformationEntity.name;
     self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",commodityInformationEntity.stock];
     self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",commodityInformationEntity.saleAmountMonth];
+//    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",[commodityInformationEntity.price doubleValue]];
+    if (commodityInformationEntity.storeUsing == YES && commodityInformationEntity.onlineStoreUsing == YES) {
+        self.lab_CommodityPrice.text = @"销售渠道：门店，网店";
+    }
+    if (commodityInformationEntity.storeUsing == NO && commodityInformationEntity.onlineStoreUsing == NO) {
+        self.lab_CommodityPrice.text = @"销售渠道：";
+    }
+    if (commodityInformationEntity.storeUsing == YES && commodityInformationEntity.onlineStoreUsing == NO) {
+        self.lab_CommodityPrice.text = @"销售渠道：门店";
+    }
+    if (commodityInformationEntity.storeUsing == NO && commodityInformationEntity.onlineStoreUsing == YES) {
+        self.lab_CommodityPrice.text = @"销售渠道：网店";
+    }
+    self.lab_CommodityPrice.font = [UIFont systemFontOfSize:14];
+    [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    [self.lab_CommodityStatus setHidden:YES];
+    [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+//    if (commodityInformationEntity.status == 1) {
+//        [self.lab_CommodityStatus setHidden:YES];
+//        [self.lab_CommodityName setTextColor:[UIColor blackColor]];
+//        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+////        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+//    }
+//    if (commodityInformationEntity.status == 2) {
+//        [self.lab_CommodityStatus setHidden:NO];
+//        [self.lab_CommodityStatus setText:@"已售罄"];
+//        [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+//        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+////        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+//    }
+//    if (commodityInformationEntity.status == 3) {
+//        [self.lab_CommodityStatus setHidden:NO];
+//        [self.lab_CommodityStatus setText:@"已下架"];
+//        [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+//        [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+////        [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+//    }
+}
+
+//门店布局
+- (void)contentCellInShopWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity{
+    [self.lab_CommoditySalesVolume setHidden:YES];
+    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,commodityInformationEntity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    self.lab_CommodityName.text = commodityInformationEntity.name;
+    self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",commodityInformationEntity.stock];
+    self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",commodityInformationEntity.saleAmountMonth];
     self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",[commodityInformationEntity.price doubleValue]];
+
+    self.lab_CommodityPrice.font = [UIFont systemFontOfSize:14];
+    [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+        if (commodityInformationEntity.status == 1) {
+            [self.lab_CommodityStatus setHidden:YES];
+            [self.lab_CommodityName setTextColor:[UIColor blackColor]];
+            [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+            [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#e6670c"]];
+        }
+        if (commodityInformationEntity.status == 2) {
+            [self.lab_CommodityStatus setHidden:NO];
+            [self.lab_CommodityStatus setText:@"已售罄"];
+            [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+            [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+            [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        }
+        if (commodityInformationEntity.status == 3) {
+            [self.lab_CommodityStatus setHidden:NO];
+            [self.lab_CommodityStatus setText:@"已下架"];
+            [self.lab_CommodityName setTextColor:[UIColor colorWithHexString:@"#979797"]];
+            [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#979797"]];
+            [self.lab_CommodityPrice setTextColor:[UIColor colorWithHexString:@"#979797"]];
+        }
+}
+
+//网店布局
+- (void)contentCellInNetShopWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity{
+    [self.lab_CommoditySalesVolume setHidden:YES];
+    [self.img_CommodityHeadPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,commodityInformationEntity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    self.lab_CommodityName.text = commodityInformationEntity.name;
+    self.lab_CommodityStock.text = [NSString stringWithFormat:@"库存%@",commodityInformationEntity.stock];
+    self.lab_CommoditySalesVolume.text = [NSString stringWithFormat:@"月售%@",commodityInformationEntity.saleAmountMonth];
+    self.lab_CommodityPrice.text = [NSString stringWithFormat:@"￥%.2f",[commodityInformationEntity.price doubleValue]];
+    
+    self.lab_CommodityPrice.font = [UIFont systemFontOfSize:14];
+    [self.lab_CommodityStock setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
     if (commodityInformationEntity.status == 1) {
         [self.lab_CommodityStatus setHidden:YES];
         [self.lab_CommodityName setTextColor:[UIColor blackColor]];

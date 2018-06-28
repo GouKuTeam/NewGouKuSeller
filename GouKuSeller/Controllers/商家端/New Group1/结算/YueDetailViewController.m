@@ -176,14 +176,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    AccountCashDetailEntity *entity = [self.arr_priceDetail objectAtIndex:indexPath.section];
-//    if (entity.accountType == 2) {
-//        TiXianDetailViewController *vc = [[TiXianDetailViewController alloc]init];
-//        vc.crashId = [NSString stringWithFormat:@"%@",entity.cashOrderId];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
-    EleMeBillDetailViewController *vc = [[EleMeBillDetailViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    AccountCashDetailEntity *entity = [self.arr_priceDetail objectAtIndex:indexPath.section];
+    if (entity.accountType == 2) {
+        TiXianDetailViewController *vc = [[TiXianDetailViewController alloc]init];
+        vc.crashId = [NSString stringWithFormat:@"%@",entity.cashOrderId];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (entity.accountType == 2001) {
+        EleMeBillDetailViewController *vc = [[EleMeBillDetailViewController alloc]init];
+        vc.accountentity = entity;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 
 }
 

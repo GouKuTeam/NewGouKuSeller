@@ -18,6 +18,7 @@
 #import "CommodityBottomView.h"
 #import "PublishCommodityViewController.h"
 #import "NSString+Size.h"
+#import "SearchCommodityViewController.h"
 
 #define NULLROW    999
 @interface CommodityChildViewController ()<UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate,UITextFieldDelegate>
@@ -36,6 +37,8 @@
 @property (nonatomic ,strong)NSMutableArray   *arr_category;
 @property (nonatomic ,strong)NSMutableArray   *arr_selected;
 @property (nonatomic ,strong)NSMutableArray   *arr_commodity;
+@property (nonatomic ,strong)NSMutableArray   *commodityArr;
+
 
 @property (nonatomic ,strong)BaseTableView    *tb_left;
 @property (nonatomic ,strong)BaseTableView    *tb_right;
@@ -47,6 +50,8 @@
 @property (nonatomic ,strong)CommodityStatusView           *v_commodityStatusView;
 @property (nonatomic ,strong)MoreEditCommodityChildView    *v_moreEdit;
 @property (nonatomic ,strong)CommodityChildBottomView      *v_bottom_manager;
+
+@property (nonatomic ,assign)int               commodityType;
 
 @end
 
@@ -80,6 +85,12 @@
 
 - (void)onCreate{
     
+    if (self.commodityChildFormType == CommodityChildFormShop) {
+        self.commodityType = 3;
+    }
+    if (self.commodityChildFormType == CommodityChildFormNetShop) {
+        self.commodityType = 4;
+    }
     self.selectedRow = NULLROW;
     self.selectedSection = NULLROW;
     self.showIndex = NULLROW;
@@ -87,6 +98,7 @@
     self.arr_category = [NSMutableArray array];
     self.arr_commodity = [NSMutableArray array];
     self.arr_selected = [NSMutableArray array];
+    self.commodityArr = [NSMutableArray array];
     
     self.v_top = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 43)];
     [self.view addSubview:self.v_top];
@@ -163,7 +175,7 @@
     self.btn_batchManager.layer.borderWidth = 0.5;
     [self.btn_batchManager addTappedWithTarget:self action:@selector(btn_batchManagerAction)];
     
-    self.btnIndex = [NSNumber numberWithInt:0];
+    self.btnIndex = [NSNumber numberWithInt:999];
     [self loadData];
     
     self.lb_selectedNum = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 44)];
@@ -180,13 +192,14 @@
     [self.v_bottom_manager setBackgroundColor:[UIColor whiteColor]];
     [self.v_bottom_manager setHidden:YES];
     [self.v_bottom_manager.btn_bottom_allSelect addTarget:self action:@selector(btn_bottom_allSelect) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_bottom_manager.btn_bottom_mendian addTarget:self action:@selector(btn_bottom_mendianAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.v_bottom_manager.btn_bottom_delete addTarget:self action:@selector(btn_bottom_delete) forControlEvents:UIControlEventTouchUpInside];
-    if (self.commodityChildFormType == CommodityChildFormNetShop) {
-        [self.v_bottom_manager.btn_bottom_mendian setTitle:@"发布到网店" forState:UIControlStateNormal];
+    [self.v_bottom_manager.btn_bottom_yichu addTarget:self action:@selector(btn_bottom_yichuAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottom_manager.btn_bottom_shangjia addTarget:self action:@selector(btn_bottom_shangjia) forControlEvents:UIControlEventTouchUpInside];
+    [self.v_bottom_manager.btn_bottom_xiajia addTarget:self action:@selector(btn_bottom_xiajia) forControlEvents:UIControlEventTouchUpInside];
+    if (self.commodityType == 3) {
+        [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从门店移除" forState:UIControlStateNormal];
     }
-    if (self.commodityChildFormType == CommodityChildFormShop) {
-        [self.v_bottom_manager.btn_bottom_mendian setTitle:@"发布到门店" forState:UIControlStateNormal];
+    if (self.commodityType == 4) {
+        [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
     }
     
     [self setNavUI];
@@ -226,7 +239,10 @@
     if (self.selectedRow != NULLROW) {
         entity = [entity.childList objectAtIndex:self.selectedRow];
     }
-    [CommodityHandler getCommodityListWithshopId:[LoginStorage GetShopId] shopWareCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex pageNum:(int)pageNum prepare:nil success:^(id obj) {
+    
+    [CommodityHandler getCommodityListWithtype:[NSNumber numberWithInt:self.commodityType] firstCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex keyword:nil pageNum:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
         if (pageNum == 0) {
             [self.arr_commodity removeAllObjects];
         }
@@ -248,11 +264,20 @@
 - (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 0) {
         NSLog(@"网店商品");
-        
+        self.commodityType = 4;
     } else {
         NSLog(@"门店商品");
-        
+        self.commodityType = 3;
     }
+    if (self.editStatus == YES) {
+        if (self.commodityType == 3) {
+            [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从门店移除" forState:UIControlStateNormal];
+        }
+        if (self.commodityType == 4) {
+            [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
+        }
+    }
+    [self.tb_right requestDataSource];
 }
 
 #pragma mark - UITableviewDelege
@@ -391,7 +416,12 @@
                 cell = [[ManagerCommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
-            [cell contentCellWithCommodityInformationEntity:entity];
+            if (self.commodityType == 3) {
+                [cell contentCellInShopCommodityWithCommodityInformationEntity:entity];
+            }
+            if (self.commodityType == 4) {
+                [cell contentCellInShopNetCommodityWithCommodityInformationEntity:entity];
+            }
             if ([self.arr_selected containsObject:[NSNumber numberWithInt:(int)indexPath.row]]) {
                 cell.btn_select.selected = YES;
             }else{
@@ -406,7 +436,12 @@
                 cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
-            [cell contentCellWithCommodityInformationEntity:entity];
+            if (self.commodityType == 3) {
+                [cell contentCellInShopWithCommodityInformationEntity:entity];
+            }
+            if (self.commodityType == 4) {
+                [cell contentCellInNetShopWithCommodityInformationEntity:entity];
+            }
             cell.btn_more.tag = indexPath.row;
             cell.btn_edit.tag = indexPath.row;
             [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -468,9 +503,10 @@
 }
 
 #pragma mark - MoreEditViewAction
+//从门店/网店移除
 - (void)deleteAction{
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
-    [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+    [CommodityHandler wareSkuRemoveWareWithSkuId:entity.skuId releaseType:self.commodityType - 2 prepare:^{
         
     } success:^(id obj) {
         [self.arr_commodity removeObjectAtIndex:self.showIndex];
@@ -481,25 +517,26 @@
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
 }
-
+//从门店/网店 上下架
 - (void)btn_editAction{
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     if (entity.status == 1 || entity.status == 2) {
         //下架方法
-        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
+        [CommodityHandler wareSkuUpdateStatusWithSkuId:entity.skuId releaseType:self.commodityType - 2 status:[NSNumber numberWithInt:3] prepare:^{
+            
+        } success:^(id obj) {
             [self.arr_commodity removeObjectAtIndex:self.showIndex];
             [self.tb_right reloadData];
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
         } failed:^(NSInteger statusCode, id json) {
-            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+           [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
         }];
     }else if (entity.status == 3){
         //上架方法
-        [CommodityHandler commodityupShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+        [CommodityHandler wareSkuUpdateStatusWithSkuId:entity.skuId releaseType:self.commodityType - 2 status:[NSNumber numberWithInt:1] prepare:^{
             
         } success:^(id obj) {
-            [self.arr_commodity removeObjectAtIndex:self.showIndex];
             [self.tb_right reloadData];
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
@@ -520,7 +557,7 @@
     }else if (entity.status == 3) {
         [self.v_moreEdit.btn_edit setTitle:@"上架" forState:UIControlStateNormal];
     }
-    if (self.commodityChildFormType == CommodityChildFormShop) {
+    if (self.commodityType == 3) {
         [self.v_moreEdit.btn_delege setTitle:@"从门店移除" forState:UIControlStateNormal];
     }else{
         [self.v_moreEdit.btn_delege setTitle:@"从网店移除" forState:UIControlStateNormal];
@@ -543,46 +580,60 @@
     CommodityFromCodeEntity *entityDemo = [self.arr_commodity objectAtIndex:btn_sender.tag];
     PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.publishCommodityFormType = PublishCommodityFormEdit;
+    if (self.commodityType == 3) {
+        vc.publishCommodityToShopType = PublishCommodityToShop;
+    }
+    if (self.commodityType == 4) {
+        vc.publishCommodityToShopType = PublishCommodityToNetShop;
+    }
     vc.entityInformation = entityDemo;
     [self.navigationController pushViewController:vc animated:YES];
-//    vc.changeEntity = ^(CommodityFromCodeEntity *entity){
-//        if ([self.btnIndex intValue] == 2) {
-//            //已售完
-//            ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
-//            if (self.selectedRow != NULLROW) {
-//                shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
-//            }
-//            if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
-//                if (entityDemo.stock > 0) {
-//                    [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
-//                }else{
-//                    [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
-//                }
-//            }else{
-//                [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
-//            }
-//            [self.tb_right reloadData];
-//        }else{
-//            ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
-//            if (self.selectedRow != NULLROW) {
-//                shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
-//            }
-//            if (([entity.shopWareCategoryId longValue] == [entityDemo.shopWareCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
-//                [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
-//            }else{
-//                [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
-//            }
-//            [self.tb_right reloadData];
-//        }
-//
-//    };
+    vc.changeChildEntity = ^(CommodityFromCodeEntity *entity) {
+        if ([self.btnIndex intValue] == 2) {
+            //已售完
+            ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
+            if (self.selectedRow != NULLROW) {
+                shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
+            }
+            if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+                if (entityDemo.stock > 0) {
+                    [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+                }else{
+                    [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
+                }
+            }else{
+                [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+            }
+            [self.tb_right reloadData];
+        }else{
+            ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
+            if (self.selectedRow != NULLROW) {
+                shopClassificationEntity = [shopClassificationEntity.childList objectAtIndex:self.selectedRow];
+            }
+            if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
+                [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
+            }else{
+                [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+            }
+            [self.tb_right reloadData];
+        }
+    };
+
 }
 
 
 #pragma mark - self.v_top Action
 
 - (void)searchAction{
-    
+    SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];
+    vc.enterFormType = EnterFormNormal;
+    if (self.commodityType == 3) {
+        vc.searchType = SearchTypeInShop;
+    }
+    if (self.commodityType == 4) {
+        vc.searchType = SearchTypeInNetShop;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)moreAction{
@@ -596,6 +647,12 @@
 }
 
 -(void)btn_batchManagerAction{
+    if (self.commodityType == 3) {
+        [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从门店移除" forState:UIControlStateNormal];
+    }
+    if (self.commodityType == 4) {
+        [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
+    }
     self.editStatus = !self.editStatus;
     if (self.editStatus == YES) {
         [self.v_bottom_manager setHidden:NO];
@@ -638,7 +695,7 @@
 //商品状态选择
 
 - (void)btn_allAction{
-    self.btnIndex = [NSNumber numberWithInt:0];
+    self.btnIndex = [NSNumber numberWithInt:999];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"全部商品" forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_all setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
@@ -708,12 +765,79 @@
 
 #pragma mark - CommodityChildBottomView
 
-- (void)btn_bottom_mendianAction{
-    
+- (void)btn_bottom_yichuAction{
+    if (self.arr_selected.count > 0) {
+        [self.commodityArr removeAllObjects];
+        for (int i = 0; i < self.arr_selected.count; i++) {
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setValue:entity.skuId forKey:@"skuId"];
+            [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
+            [self.commodityArr addObject:dic];
+        }
+        [CommodityHandler wareSkuRemoveWareListWithCommodityArr:self.commodityArr prepare:^{
+            
+        } success:^(id obj) {
+            [MBProgressHUD showInfoMessage:@"移除成功"];
+            [self confirmAction];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+    }else{
+        [MBProgressHUD showErrorMessage:@"请选择商品"];
+    }
 }
 
-- (void)btn_bottom_delete{
-    
+- (void)btn_bottom_shangjia{
+    if (self.arr_selected.count > 0) {
+        [self.commodityArr removeAllObjects];
+        for (int i = 0; i < self.arr_selected.count; i++) {
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setValue:entity.skuId forKey:@"skuId"];
+            [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
+            [dic setValue:[NSNumber numberWithInt:1] forKey:@"status"];
+            [self.commodityArr addObject:dic];
+        }
+        
+        [CommodityHandler wareSkuUpdateStatusListWithCommodityArr:self.commodityArr prepare:^{
+            
+        } success:^(id obj) {
+            [MBProgressHUD showInfoMessage:@"上架成功"];
+            [self confirmAction];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+        
+    }else{
+        [MBProgressHUD showErrorMessage:@"请选择商品"];
+    }
+}
+
+- (void)btn_bottom_xiajia{
+    if (self.arr_selected.count > 0) {
+        [self.commodityArr removeAllObjects];
+        for (int i = 0; i < self.arr_selected.count; i++) {
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setValue:entity.skuId forKey:@"skuId"];
+            [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
+            [dic setValue:[NSNumber numberWithInt:3] forKey:@"status"];
+            [self.commodityArr addObject:dic];
+        }
+        
+        [CommodityHandler wareSkuUpdateStatusListWithCommodityArr:self.commodityArr prepare:^{
+            
+        } success:^(id obj) {
+            [MBProgressHUD showInfoMessage:@"下架成功"];
+            [self confirmAction];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:(NSString *)json];
+        }];
+        
+    }else{
+        [MBProgressHUD showErrorMessage:@"请选择商品"];
+    }
 }
 
 

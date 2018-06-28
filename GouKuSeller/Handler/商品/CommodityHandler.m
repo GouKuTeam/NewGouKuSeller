@@ -251,16 +251,48 @@
                                           }];
 }
 
+//v1.4 新增自定义商品
++ (void)addCustomizeCommodityWithCommodityId:(NSNumber *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_AddCommodity,commodityId];
+//    NSDictionary *dic = @{
+//                          @"commodityId":[NSNumber numberWithInt:commodityId]
+//                          };
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestGet
+                                       parameters:nil
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 //商品列表查询
-+ (void)getCommodityListWithshopId:(NSNumber *)shopId shopWareCategoryId:(NSNumber *)shopWareCategoryId status:(NSNumber *)status pageNum:(int)pageNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)getCommodityListWithtype:(NSNumber *)type firstCategoryId:(NSNumber *)firstCategoryId status:(NSNumber *)status keyword:(NSString *)keyword pageNum:(int)pageNum prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_GET_CommodityList];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_CommodityList];
-    NSDictionary *dic = @{
-                          @"shopId":shopId,
-                          @"shopWareCategoryId":shopWareCategoryId,
-                          @"status":status,
-                          @"page":[NSNumber numberWithInt:pageNum]
-                          };
+//    NSDictionary *dic = @{
+//                          @"type":type,
+//                          @"firstCategoryId":firstCategoryId,
+//                          @"status":status,
+//                          @"page":[NSNumber numberWithInt:pageNum]
+//                          };
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (type) {
+        [dic setObject:type forKey:@"type"];
+    }
+    if (firstCategoryId) {
+        [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
+    }
+    if ([status intValue] != 999) {
+        [dic setObject:status forKey:@"status"];
+    }
+    if (keyword) {
+        [dic setObject:keyword forKey:@"keyword"];
+    }
+    [dic setObject:[NSNumber numberWithInt:pageNum] forKey:@"page"];
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic
@@ -307,13 +339,17 @@
                                           }];
 }
 
-//门店商品下架
-+ (void)commoditydownShelfWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_downshelf,commodityId]];
-    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_downshelf,commodityId];
+//门店 网店商品   上下架
++ (void)wareSkuUpdateStatusWithSkuId:(NSNumber *)skuId releaseType:(int)releaseType status:(NSNumber *)status prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_WareSkuUpdateStatus];
+    NSDictionary *dic = @{
+                          @"skuId":skuId,
+                          @"releaseType":[NSNumber numberWithInt:releaseType],
+                          @"status":status
+                          };
     [[RTHttpClient defaultClient] requestWithPath:str_url
-                                           method:RTHttpRequestGet
-                                       parameters:nil
+                                           method:RTHttpRequestPost
+                                       parameters:dic
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
@@ -327,27 +363,8 @@
                                           }];
 }
 
-//门店商品上架
-+ (void)commodityupShelfWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-//    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_upshelf,commodityId]];
-    NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_upshelf,commodityId];
-    [[RTHttpClient defaultClient] requestWithPath:str_url
-                                           method:RTHttpRequestGet
-                                       parameters:nil
-                                          prepare:prepare
-                                          success:^(NSURLSessionDataTask *task, id responseObject) {
-                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
-                                                  success(nil);
-                                              }else{
-                                                  [MBProgressHUD hideHUD];
-                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
-                                              }
-                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                              [self handlerErrorWithTask:task error:error complete:failed];
-                                          }];
-}
 
-//门店商品删除
+//商品库单个商品删除
 + (void)commoditydeleteWithCommodityId:(NSString *)commodityId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityDelete,commodityId]];
     NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_CommodityDelete,commodityId];
@@ -367,17 +384,35 @@
                                           }];
 }
 
-//门店商品编辑(更新)
-+ (void)commodityEditWithCommodityId:(NSString *)commodityId price:(double)price stock:(NSString *)stock xprice:(double)xprice shopWareCategoryId:(NSNumber *)shopWareCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
-//    NSString *str_url = [self requestUrlWithPath:API_GET_CommodityEdit];
+//商品库商品编辑(更新)
++ (void)commodityEditWithSkuId:(NSNumber *)skuId name:(NSString *)name wareBarcode:(NSNumber *)wareBarcode pictures:(NSString *)pictures stock:(NSString *)stock description:(NSString *)description xprice:(NSString *)xprice firstCategoryId:(NSNumber *)firstCategoryId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_CommodityEdit];
-    NSDictionary *dic = @{
-                          @"skuId":commodityId,
-                          @"price":[NSNumber numberWithDouble:price],
-                          @"stock":stock,
-                          @"xprice":[NSNumber numberWithDouble:xprice],
-                          @"shopWareCategoryId":shopWareCategoryId
-                          };
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (skuId) {
+        [dic setObject:skuId forKey:@"skuId"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    if (wareBarcode) {
+        [dic setObject:wareBarcode forKey:@"wareBarcode"];
+    }
+    if (pictures) {
+        [dic setObject:pictures forKey:@"pictures"];
+    }
+    if (stock) {
+        [dic setObject:stock forKey:@"stock"];
+    }
+    if (description) {
+        [dic setObject:description forKey:@"description"];
+    }
+    if (xprice) {
+        [dic setObject:xprice forKey:@"xprice"];
+    }
+    if (firstCategoryId) {
+        [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
+    }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
                                        parameters:dic
@@ -587,32 +622,27 @@
 }
 
 //门店自定义商品
-+ (void)addCustomizeCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name barcode:(NSString *)barcode description:(NSString *)description shopWareCategoryId:(NSNumber *)shopWareCategoryId price:(NSString *)price xprice:(NSString *)xprice stock:(NSNumber *)stock pictures:(NSData *)pictures prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)addCustomizeCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name barcode:(NSString *)barcode description:(NSString *)description shopWareCategoryId:(NSNumber *)shopWareCategoryId xprice:(NSString *)xprice stock:(NSNumber *)stock pictures:(NSString *)pictures prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_AddCustomizeCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    if (shopId) {
-        [dic setObject:shopId forKey:@"shopId"];
-    }
+
     if (name) {
         [dic setObject:name forKey:@"name"];
     }
     if (barcode) {
-        [dic setObject:barcode forKey:@"barcode"];
+        [dic setObject:barcode forKey:@"wareBarcode"];
     }
     if (description) {
         [dic setObject:description forKey:@"description"];
     }
     if (shopWareCategoryId) {
-        [dic setObject:shopWareCategoryId forKey:@"shopWareCategoryId"];
+        [dic setObject:shopWareCategoryId forKey:@"firstCategoryId"];
     }
     if (stock) {
         [dic setObject:stock forKey:@"stock"];
     }
     if (xprice) {
         [dic setObject:[NSString stringWithFormat:@"%.2f",[xprice doubleValue]] forKey:@"xprice"];
-    }
-    if (price) {
-        [dic setObject:price forKey:@"price"];
     }
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost
@@ -645,6 +675,191 @@
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {
                                               success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//商品发布  "releaseType"  //发布类型(必填1:门店商品,2:网店商品)
++ (void)commodityReleaseWithSkuId:(NSNumber *)skuId name:(NSString *)name firstCategoryId:(NSNumber *)firstCategoryId description:(NSString *)description stock:(NSNumber *)stock price:(NSString *)price releaseType:(int)releaseType prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_CommodityRelease];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (skuId) {
+        [dic setObject:skuId forKey:@"skuId"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    if (firstCategoryId) {
+        [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
+    }
+    if (description) {
+        [dic setObject:description forKey:@"description"];
+    }
+    if (stock) {
+        [dic setObject:stock forKey:@"stock"];
+    }
+    if (price) {
+        [dic setObject:price forKey:@"price"];
+    }
+    if (releaseType) {
+        [dic setObject:[NSNumber numberWithInt:releaseType] forKey:@"releaseType"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(responseObject);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//商品批量发布
++ (void)commodityReleaseListWithCommodityArr:(NSMutableArray *)commodityArr prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_ReleaseList];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:commodityArr
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(responseObject);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//商品批量删除
++ (void)commodityDeleteListWithCommodityArr:(NSMutableArray *)commodityArr prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_DeleteList];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:commodityArr
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(responseObject);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//门店 ，网店商品修改
++ (void)wareSkuUpdateWithSkuId:(NSNumber *)skuId name:(NSString *)name firstCategoryId:(NSNumber *)firstCategoryId description:(NSString *)description stock:(NSNumber *)stock price:(NSString *)price releaseType:(int)releaseType prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_WareSkuRelease];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (skuId) {
+        [dic setObject:skuId forKey:@"skuId"];
+    }
+    if (name) {
+        [dic setObject:name forKey:@"name"];
+    }
+    if (firstCategoryId) {
+        [dic setObject:firstCategoryId forKey:@"firstCategoryId"];
+    }
+    if (description) {
+        [dic setObject:description forKey:@"description"];
+    }
+    if (stock) {
+        [dic setObject:stock forKey:@"stock"];
+    }
+    if (price) {
+        [dic setObject:price forKey:@"price"];
+    }
+    if (releaseType) {
+        [dic setObject:[NSNumber numberWithInt:releaseType] forKey:@"releaseType"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[responseObject objectForKey:@"data"]];
+                                                  success(entity);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//门店，网店 商品  单个移除
++ (void)wareSkuRemoveWareWithSkuId:(NSNumber *)skuId releaseType:(int)releaseType prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_WareSkuRemoveWare];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    if (skuId) {
+        [dic setObject:skuId forKey:@"skuId"];
+    }
+    if (releaseType) {
+        [dic setObject:[NSNumber numberWithInt:releaseType] forKey:@"releaseType"];
+    }
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//门店。网店  批量 商品上、下架
++ (void)wareSkuUpdateStatusListWithCommodityArr:(NSMutableArray *)commodityArr prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_WareSkuUpdateStatusList];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:commodityArr
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
+//门店，网店 商品  批量 移除
++ (void)wareSkuRemoveWareListWithCommodityArr:(NSMutableArray *)commodityArr prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_WareSkuRemoveWareList];
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:commodityArr
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              if ([[responseObject objectForKey:@"errCode"] intValue] == 0 ) {
+                                                  success(nil);
+                                              }else{
+                                                  [MBProgressHUD hideHUD];
+                                                  [MBProgressHUD showErrorMessage:[responseObject objectForKey:@"errMessage"]];
+                                              }
                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handlerErrorWithTask:task error:error complete:failed];
                                           }];

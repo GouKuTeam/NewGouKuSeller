@@ -196,7 +196,7 @@
     
     //先拿配置信息  上传商品信息  同时在上传图片
 
-    [CommodityHandler addCustomizeCommodityWithShopId:[LoginStorage GetShopId] name:self.v_commodityView.v_commodityName.tf_detail.text barcode:self.barcode description:self.v_commodityView.v_commodityDescribe.tf_detail.text shopWareCategoryId:self.shopCId price:self.v_commodityView.v_price.tf_detail.text xprice:self.v_commodityView.v_jinhuoPrice.tf_detail.text stock:[NSNumber numberWithInt:[self.v_commodityView.v_stock.tf_detail.text intValue]] pictures:nil prepare:^{
+    [CommodityHandler addCustomizeCommodityWithShopId:[LoginStorage GetShopId] name:self.v_commodityView.v_commodityName.tf_detail.text barcode:self.barcode description:self.v_commodityView.v_commodityDescribe.tf_detail.text shopWareCategoryId:self.shopCId  xprice:self.v_commodityView.v_jinhuoPrice.tf_detail.text stock:[NSNumber numberWithInt:[self.v_commodityView.v_stock.tf_detail.text intValue]] pictures:[NSString stringWithFormat:@"%@-%@",[LoginStorage GetShopId],self.barcode] prepare:^{
         
     } success:^(id obj) {
         CommodityFromCodeEntity *entity = [[CommodityFromCodeEntity alloc]init];
@@ -208,6 +208,7 @@
     } failed:^(NSInteger statusCode, id json) {
         
     }];
+    
     
     NSString *endpoint = @"http://oss-cn-zhangjiakou.aliyuncs.com";
     // 移动端建议使用STS方式初始化OSSClient。可以通过sample中STS使用说明了解更多(https://github.com/aliyun/aliyun-oss-ios-sdk/tree/master/DemoByOC)

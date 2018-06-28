@@ -21,4 +21,11 @@
 
 - (void)contentCellWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
 
+- (void)contentCellInAllCommodityWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
+
+//门店
+- (void)contentCellInShopCommodityWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
+//网店
+- (void)contentCellInShopNetCommodityWithCommodityInformationEntity:(CommodityFromCodeEntity *)commodityInformationEntity;
+
 @end

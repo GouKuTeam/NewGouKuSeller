@@ -14,6 +14,6 @@ typedef void(^addCustomCommodityComplete)(CommodityFromCodeEntity *entity);
 
 @property (nonatomic ,strong)NSString    *barcode;
 
-@property (nonatomic ,copy)addCustomCommodityComplete addCustomCommodityComplete;
+@property (nonatomic ,copy)addCustomCommodityComplete      addCustomCommodityComplete;
 
 @end

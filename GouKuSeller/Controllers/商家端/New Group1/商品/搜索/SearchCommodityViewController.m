@@ -15,6 +15,9 @@
 #import "MoreEditView.h"
 #import "AddNewCommodityViewController.h"
 #import "CommodityViewController.h"
+#import "CommodityTableViewCell.h"
+#import "PublishCommodityViewController.h"
+#import "MoreEditCommodityChildView.h"
 
 #define NULLROW    999
 
@@ -26,7 +29,8 @@
 @property (nonatomic, strong) NSString              *str_search;
 
 @property (nonatomic ,assign)int               showIndex;
-@property (nonatomic ,strong)MoreEditView                  *v_moreEdit;
+@property (nonatomic ,strong)MoreEditView                             *v_moreEdit;
+@property (nonatomic ,strong)MoreEditCommodityChildView               *v_moreChildEdit;
 
 @end
 
@@ -89,11 +93,20 @@
     self.tb_search.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tb_search setBackgroundColor:[UIColor whiteColor]];
     
-    self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 132)];
-//    [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.v_moreEdit.btn_xiajia addTarget:self action:@selector(xiaJiaAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.v_moreEdit];
-    [self.v_moreEdit setHidden:YES];
+    if (self.searchType == SearchTypeInWareHouse) {
+        self.v_moreEdit = [[MoreEditView alloc]initWithFrame:CGRectMake(0, 0, 120, 132)];
+        [self.v_moreEdit.btn_mendian addTarget:self action:@selector(btn_mendianAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.v_moreEdit.btn_wangdian addTarget:self action:@selector(btn_wangdianAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.v_moreEdit.btn_delege addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.v_moreEdit];
+        [self.v_moreEdit setHidden:YES];
+    }else{
+        self.v_moreChildEdit = [[MoreEditCommodityChildView alloc]initWithFrame:CGRectMake(0, 0, 120, 88)];
+        [self.v_moreChildEdit.btn_delege addTarget:self action:@selector(v_moreEditdeleteAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.v_moreChildEdit.btn_edit addTarget:self action:@selector(v_moreEditbtn_editAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.v_moreChildEdit];
+        [self.v_moreChildEdit setHidden:YES];
+    }
     
 }
 
@@ -105,7 +118,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
-    [CommodityHandler searchCommodityWithShopId:[LoginStorage GetShopId] keyword:self.str_search pageNum:(int)pageNum prepare:nil success:^(id obj) {
+
+    [CommodityHandler getCommodityListWithtype:[NSNumber numberWithInt:self.searchType] firstCategoryId:nil status:[NSNumber numberWithInt:999] keyword:self.tf_search.text pageNum:(int)pageNum prepare:^{
+        
+    } success:^(id obj) {
         NSArray *arrdata = (NSArray *)obj;
         if (arrdata.count > 0) {
             
@@ -131,41 +147,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    static NSString *CellIdentifier = @"PotentialStoreTableViewCell";
+    CommodityTableViewCell *cell = (CommodityTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell){
+        cell = [[CommodityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:indexPath.row];
-    if (entity.hitType == 1 || entity.hitType == 2) {
+    if (self.searchType == SearchTypeInWareHouse) {
         
-        static NSString *CellIdentifier = @"SearchWithCodeTableViewCell";
-        SearchWithCodeTableViewCell *cell = (SearchWithCodeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell){
-            cell = [[SearchWithCodeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        cell.btn_more.tag = indexPath.row;
-        [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-        cell.btn_edit.tag = indexPath.row;
-        [cell.btn_edit addTarget:self action:@selector(edtiAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell contentCellWithCommodityFromCodeEntity:entity];
-        
-        return cell;
+        [cell contentCellWithCommodityInformationEntity:entity];
     }
-    if (entity.hitType == 3) {
-        static NSString *CellIdentifier = @"SearchWithNameTableViewCell";
-        SearchWithNameTableViewCell *cell = (SearchWithNameTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell){
-            cell = [[SearchWithNameTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        cell.btn_more.tag = indexPath.row;
-        [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
-        cell.btn_edit.tag = indexPath.row;
-        [cell.btn_edit addTarget:self action:@selector(edtiAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell contentCellWithCommodityFromCodeEntity:entity];
-        return cell;
+    if (self.searchType == SearchTypeInShop) {
+        [cell contentCellInShopWithCommodityInformationEntity:entity];
     }
-    
-    return NULL;
+    if (self.searchType == SearchTypeInNetShop) {
+        [cell contentCellInNetShopWithCommodityInformationEntity:entity];
+    }
+    cell.btn_more.tag = indexPath.row;
+    cell.btn_edit.tag = indexPath.row;
+    [cell.btn_more addTarget:self action:@selector(moreAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.btn_edit addTarget:self action:@selector(edtiAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -175,32 +178,105 @@
 
 - (void)moreAction:(UIButton *)btn_sender{
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:btn_sender.tag];
-//    if (entity.status == 1) {
-//        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
-//    }else if (entity.status == 2) {
-//        [self.v_moreEdit.btn_xiajia setTitle:@"下架" forState:UIControlStateNormal];
-//    }else if (entity.status == 3) {
-//        [self.v_moreEdit.btn_xiajia setTitle:@"上架" forState:UIControlStateNormal];
-//    }
-    if ((int)btn_sender.tag == self.showIndex) {
-        [self.v_moreEdit setHidden:YES];
-        self.showIndex = NULLROW;
+
+    if (self.searchType == SearchTypeInWareHouse) {
+        if ((int)btn_sender.tag == self.showIndex) {
+            [self.v_moreEdit setHidden:YES];
+            self.showIndex = NULLROW;
+        }else{
+            [self.v_moreEdit setHidden:NO];
+            self.showIndex = (int)btn_sender.tag;
+        }
+        UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
+        CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
+        
+        [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 132)];
     }else{
-        [self.v_moreEdit setHidden:NO];
-        self.showIndex = (int)btn_sender.tag;
+        if (entity.status == 1) {
+            [self.v_moreChildEdit.btn_edit setTitle:@"下架" forState:UIControlStateNormal];
+        }else if (entity.status == 2) {
+            [self.v_moreChildEdit.btn_edit setTitle:@"下架" forState:UIControlStateNormal];
+        }else if (entity.status == 3) {
+            [self.v_moreChildEdit.btn_edit setTitle:@"上架" forState:UIControlStateNormal];
+        }
+        if (self.searchType == 3) {
+            [self.v_moreChildEdit.btn_delege setTitle:@"从门店移除" forState:UIControlStateNormal];
+        }
+        if (self.searchType == 4){
+            [self.v_moreChildEdit.btn_delege setTitle:@"从网店移除" forState:UIControlStateNormal];
+        }
+        if ((int)btn_sender.tag == self.showIndex) {
+            [self.v_moreChildEdit setHidden:YES];
+            self.showIndex = NULLROW;
+        }else{
+            [self.v_moreChildEdit setHidden:NO];
+            self.showIndex = (int)btn_sender.tag;
+        }
+        UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
+        CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
+        
+        [self.v_moreChildEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
     }
-    UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
-    CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
     
-    [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
 }
 
 - (void)edtiAction:(UIButton *)btn_sender{
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:btn_sender.tag];
-    AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
-    vc.comeFrom = @"编辑商品";
+    if (self.searchType == SearchTypeInWareHouse) {
+        AddNewCommodityViewController *vc = [[AddNewCommodityViewController alloc]init];
+        vc.comeFrom = @"编辑商品";
+        vc.entityInformation = entity;
+        [self.navigationController pushViewController:vc animated:YES];
+        vc.changeEntity = ^(CommodityFromCodeEntity *entity){
+            [self.arr_search replaceObjectAtIndex:btn_sender.tag withObject:entity];
+            [self.tb_search reloadData];
+        };
+    }else{
+        if (self.searchType == SearchTypeInShop) {
+            //进入门店编辑模式
+            PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
+            vc.publishCommodityFormType = PublishCommodityFormEdit;
+            vc.publishCommodityToShopType = PublishCommodityToShop;
+            vc.entityInformation = entity;
+            [self.navigationController pushViewController:vc animated:YES];
+            vc.changeChildEntity = ^(CommodityFromCodeEntity *entity) {
+                [self.arr_search replaceObjectAtIndex:btn_sender.tag withObject:entity];
+                [self.tb_search reloadData];
+            };
+        }
+        if (self.searchType == SearchTypeInNetShop) {
+            //进入网店编辑模式
+            PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
+            vc.publishCommodityFormType = PublishCommodityFormEdit;
+            vc.publishCommodityToShopType = PublishCommodityToNetShop;
+            vc.entityInformation = entity;
+            [self.navigationController pushViewController:vc animated:YES];
+            vc.changeChildEntity = ^(CommodityFromCodeEntity *entity) {
+                [self.arr_search replaceObjectAtIndex:btn_sender.tag withObject:entity];
+                [self.tb_search reloadData];
+            };
+        }
+    }
+}
+#pragma - 商品库商品more按钮操作
+
+- (void)btn_wangdianAction{
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
+    PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.entityInformation = entity;
+    vc.publishCommodityToShopType = PublishCommodityToNetShop;
     [self.navigationController pushViewController:vc animated:YES];
+    [self.v_moreEdit setHidden:YES];
+}
+
+- (void)btn_mendianAction{
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
+    PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
+    vc.entityInformation = entity;
+    vc.publishCommodityToShopType = PublishCommodityToShop;
+    vc.publishCommodityFormType = PublishCommodityFormPublish;
+    [self.navigationController pushViewController:vc animated:YES];
+    [self.v_moreEdit setHidden:YES];
 }
 
 - (void)deleteAction{
@@ -215,15 +291,35 @@
     } failed:^(NSInteger statusCode, id json) {
         [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
+    
 }
 
-- (void)xiaJiaAction{
+#pragma - 门店网店商品more按钮操作
+
+
+- (void)v_moreEditdeleteAction{
+    
+    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
+    [CommodityHandler wareSkuRemoveWareWithSkuId:entity.skuId releaseType:self.searchType - 2 prepare:^{
+        
+    } success:^(id obj) {
+        [self.arr_search removeObjectAtIndex:self.showIndex];
+        [self.tb_search reloadData];
+        self.showIndex = NULLROW;
+        [self.v_moreEdit setHidden:YES];
+    } failed:^(NSInteger statusCode, id json) {
+        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+    }];
+}
+
+- (void)v_moreEditbtn_editAction{
     CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
     if (entity.status == 1 || entity.status == 2) {
         //下架方法
-        [CommodityHandler commoditydownShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:nil success:^(id obj) {
-            entity.status = 3;
-            [self.arr_search replaceObjectAtIndex:self.showIndex withObject:entity];
+        [CommodityHandler wareSkuUpdateStatusWithSkuId:entity.skuId releaseType:self.searchType - 2 status:[NSNumber numberWithInt:3] prepare:^{
+            
+        } success:^(id obj) {
+            [self.arr_search removeObjectAtIndex:self.showIndex];
             [self.tb_search reloadData];
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
@@ -232,11 +328,9 @@
         }];
     }else if (entity.status == 3){
         //上架方法
-        [CommodityHandler commodityupShelfWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+        [CommodityHandler wareSkuUpdateStatusWithSkuId:entity.skuId releaseType:self.searchType - 2 status:[NSNumber numberWithInt:1] prepare:^{
             
         } success:^(id obj) {
-            entity.status = 1;
-            [self.arr_search replaceObjectAtIndex:self.showIndex withObject:entity];
             [self.tb_search reloadData];
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];

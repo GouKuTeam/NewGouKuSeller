@@ -26,4 +26,7 @@
 //微信充值
 +(void)weixinchongzhiWithPrice:(NSString *)price prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
+//账单详情
++ (void)outOrderDetailWithPlatform:(int)platform date:(double)date page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
+
 @end

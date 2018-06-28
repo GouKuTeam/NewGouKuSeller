@@ -23,6 +23,8 @@
 @property (nonatomic ,assign)double          money;
 @property (nonatomic ,strong)BankCardEntity    *bankCard;
 
+@property (nonatomic ,assign)double          timestamp;
+
 + (NSArray *)parseStandardListWithJson:(id)json;
 + (AccountCashDetailEntity *)parseStandardEntityWithJson:(id)json;
 

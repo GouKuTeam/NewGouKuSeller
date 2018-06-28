@@ -92,7 +92,7 @@
             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
                 CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
                 //添加商品
-                [CommodityHandler addCommodityWithShopId:[LoginStorage GetShopId] name:entity.name itemId:entity.itemId barcode:entity.barcode shopWareCategoryId:nil wareCategoryId:entity.categoryId price:[entity.price doubleValue] stock:0 pictures:entity.pictures standards:entity.standards wid:entity.wid xprice:0 prepare:^{
+                [CommodityHandler addCustomizeCommodityWithCommodityId:[NSNumber numberWithInteger:entity._id] prepare:^{
                     
                 } success:^(id obj) {
                     NSDictionary *dic = (NSDictionary *)obj;
@@ -106,8 +106,7 @@
                         [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
                     }
                     self.tfsousuo.text = @"";
-                } failed:^(NSInteger statusCode,
-                           id json) {
+                } failed:^(NSInteger statusCode, id json) {
                     self.tfsousuo.text = @"";
                     [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
                 }];

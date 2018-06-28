@@ -77,21 +77,35 @@
 //修改店内分类
 #define API_GET_UdpShopCatagory @"/shop/ware/category/update"
 //新增商品
-#define API_GET_AddCommodity @"/shop/ware/stock/add"
+#define API_GET_AddCommodity @"/wareSku/shop/addList/"
 //新增自定义商品
-#define API_POST_AddCustomizeCommodity @"/shop/ware/stock/customize"
+#define API_POST_AddCustomizeCommodity @"/wareSku/shop/add"
 //商品查询
-#define API_GET_CommodityList @"/shop/ware/stock/list"
+#define API_GET_CommodityList @"/wareSku/manage/list"
 //搜索商品
 #define API_GET_SearchCommodity @"/shop/ware/stock/search"
-//门店商品下架
-#define API_GET_downshelf @"/shop/ware/stock/downshelf/"
-//门店商品上架
-#define API_GET_upshelf @"/shop/ware/stock/upshelf/"
-//门店商品删除
-#define API_GET_CommodityDelete @"/shop/ware/stock/delete/"
+
+
+//商品库商品删除
+#define API_GET_CommodityDelete @"/wareSku/manage/delete/"
 //门店商品编辑
-#define API_GET_CommodityEdit @"/shop/ware/stock/update"
+#define API_GET_CommodityEdit @"/wareSku/shop/update"
+//商品发布
+#define API_POST_CommodityRelease @"/wareSku/shop/release"
+//商品批量发布
+#define API_POST_ReleaseList @"/wareSku/shop/releaseList"
+//商品库商品批量删除
+#define API_POST_DeleteList @"/wareSku/shop/deleteWareList"
+//门店/网店  商品修改
+#define API_POST_WareSkuRelease @"/wareSku/shop/release"
+//门店。网店  单个 商品上、下架
+#define API_POST_WareSkuUpdateStatus @"/wareSku/manage/updateStatus"
+//门店.网店  商品 单个 移除
+#define API_POST_WareSkuRemoveWare @"/wareSku/manage/removeWare"
+//门店。网店  批量 商品上、下架
+#define API_POST_WareSkuUpdateStatusList @"/wareSku/manage/updateStatusList"
+//门店或网店  商品批量移除
+#define API_POST_WareSkuRemoveWareList @"/wareSku/manage/removeWareList"
 
 
 /*
@@ -151,6 +165,8 @@
 #define API_POST_CashDetail @"/account/cash/detail"
 //微信充值
 #define API_POST_WEIXINchongzhi @"/account/recharge/weixin"
+//账单查询
+#define API_POST_OutOrderDetail @"/outOrder/detail"
 
 /*
  收银API

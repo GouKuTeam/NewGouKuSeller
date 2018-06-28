@@ -29,9 +29,9 @@
 @property (nonatomic ,strong)NSString                      *defaultUnit;       //默认商品单位
 @property (nonatomic ,assign)double                        defaultPrice;       //默认商品价格
 @property (nonatomic ,assign)BOOL                          defaultUsing;       //默认商品单位是否启用
-@property (nonatomic ,strong)NSArray                       *saleUnits;  //自定义单位数组
-@property (nonatomic ,strong)NSNumber                      *saleAmount;         //销量
-@property (nonatomic ,strong)NSNumber                      *saleAmountMonth;    //月销量
+@property (nonatomic ,strong)NSArray                       *saleUnits;         //自定义单位数组
+@property (nonatomic ,strong)NSNumber                      *saleAmount;        //销量
+@property (nonatomic ,strong)NSNumber                      *saleAmountMonth;   //月销量
 @property (nonatomic ,strong)NSString                      *unit;      //列表显示的默认单位名称
 @property (nonatomic ,assign)double                        price;      //列表显示的默认单位价格
 @property (nonatomic ,assign)NSInteger                     count;

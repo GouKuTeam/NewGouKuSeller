@@ -201,4 +201,24 @@
                                           }];
 }
 
+//账单详情
++ (void)outOrderDetailWithPlatform:(int)platform date:(double)date page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
+    NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OutOrderDetail];
+    NSDictionary *dic = @{
+                          @"platform":[NSNumber numberWithInt:platform],
+                          @"date":[NSNumber numberWithDouble:date],
+                          @"page":[NSNumber numberWithInt:page]
+                          };
+    [[RTHttpClient defaultClient] requestWithPath:str_url
+                                           method:RTHttpRequestPost
+                                       parameters:dic
+                                          prepare:prepare
+                                          success:^(NSURLSessionDataTask *task, id responseObject) {
+                                              success(responseObject);
+                                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                              
+                                              [self handlerErrorWithTask:task error:error complete:failed];
+                                          }];
+}
+
 @end

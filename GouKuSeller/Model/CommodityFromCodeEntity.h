@@ -20,8 +20,8 @@
 @property (nonatomic ,strong)NSString       *categoryName;
 @property (nonatomic ,strong)NSString       *detail;
 @property (nonatomic ,strong)NSString       *pictures;               // 图片路径
-@property (nonatomic ,strong)NSNumber       *shopWareCategoryId; // 门店分类id
-@property (nonatomic ,strong)NSString       *shopWareCategoryName;  //门店分类名称
+@property (nonatomic ,strong)NSNumber       *firstCategoryId; // 门店分类id
+@property (nonatomic ,strong)NSString       *firstCategoryName;  //门店分类名称
 @property (nonatomic ,strong)NSNumber       *saleAmount;       
 @property (nonatomic ,strong)NSNumber       *saleAmountMonth;
 @property (nonatomic ,strong)NSNumber       *price;
@@ -34,6 +34,13 @@
 @property (nonatomic ,strong)NSString       *standardReplace;          //规格名称(前端显示)
 //@property (nonatomic ,strong)NSNumber       *status;           //  1 销售中  2 已售罄   3 已下架
 @property (nonatomic ,strong)NSString       *attrs;
+
+@property (nonatomic ,strong)NSString       *storeName;          //门店商品名称
+@property (nonatomic ,strong)NSString       *onlineStoreName;    //网店商品名称
+@property (nonatomic ,assign)BOOL            storeUsing;         //是否已发布到门店
+@property (nonatomic ,assign)BOOL            onlineStoreUsing;   //是否已发布到网店
+@property (nonatomic ,assign)double          storePrice;         //门店价格
+@property (nonatomic ,assign)double          onlineStorePrice;   //网店价格
 
 @property (nonatomic,strong)NSString        *youhuiPrice;
 

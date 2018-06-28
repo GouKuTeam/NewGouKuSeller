@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "AccountCashDetailEntity.h"
 
 @interface EleMeBillDetailViewController : BaseViewController
+
+@property (nonatomic ,strong)AccountCashDetailEntity    *accountentity;
 
 @end
