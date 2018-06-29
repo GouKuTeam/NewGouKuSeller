@@ -280,18 +280,26 @@
 }
 
 - (void)deleteAction{
-    CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
-    [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
-        
-    } success:^(id obj) {
-        [self.arr_search removeObjectAtIndex:self.showIndex];
-        [self.tb_search reloadData];
-        self.showIndex = NULLROW;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"被删除的商品会从所有商品库移除，无法恢复。确定要删除所选商品吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.v_moreEdit setHidden:YES];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
-    
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CommodityFromCodeEntity *entity = [self.arr_search objectAtIndex:self.showIndex];
+        [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+            
+        } success:^(id obj) {
+            [self.arr_search removeObjectAtIndex:self.showIndex];
+            [self.tb_search reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma - 门店网店商品more按钮操作

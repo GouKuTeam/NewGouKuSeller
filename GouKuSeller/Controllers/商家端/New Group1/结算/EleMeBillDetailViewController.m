@@ -16,7 +16,7 @@
 @property (nonatomic ,strong)EleMeBillHeaderView       *v_header;
 @property (nonatomic ,strong)BaseTableView             *tb_bill;
 @property (nonatomic ,strong)NSMutableArray            *arr_bill;
-
+@property (nonatomic ,strong)UIView                    *v_footer;
 @end
 
 @implementation EleMeBillDetailViewController
@@ -38,10 +38,10 @@
     self.v_header = [[EleMeBillHeaderView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, SCREEN_WIDTH, 275)];
     [self.v_header contentEleMeBillHeaderViewWithDic:nil];
     
-    UIView *v_footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 24)];
-    [v_footer setBackgroundColor:[UIColor clearColor]];
+    self.v_footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 24)];
+    [self.v_footer setBackgroundColor:[UIColor clearColor]];
     UILabel *lab_t = [[UILabel alloc]initWithFrame:CGRectMake(0, 7, SCREEN_WIDTH, 17)];
-    [v_footer addSubview:lab_t];
+    [self.v_footer addSubview:lab_t];
     [lab_t setText:@"没有更多了"];
     [lab_t setFont:[UIFont systemFontOfSize:12]];
     [lab_t setTextAlignment:NSTextAlignmentCenter];
@@ -53,7 +53,7 @@
     self.tb_bill.dataSource = self;
     self.tb_bill.tableViewDelegate = self;
     self.tb_bill.tableHeaderView = self.v_header;
-    self.tb_bill.tableFooterView = v_footer;
+    self.tb_bill.tableFooterView = self.v_footer;
     self.tb_bill.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tb_bill setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     [self.tb_bill requestDataSource];
@@ -67,16 +67,17 @@
         NSDictionary *dic = [(NSDictionary *)obj objectForKey:@"data"];
         self.title = [NSString stringWithFormat:@"%@ 账单",[dic objectForKey:@"date"]];
         [self.v_header contentEleMeBillHeaderViewWithDic:dic];
-        
+        if ([[dic objectForKey:@"orderList"] count] < 21) {
+            self.tb_bill.hasFooterRefreshing = NO;
+            self.tb_bill.tableFooterView = self.v_footer;
+        }else{
+            self.tb_bill.hasFooterRefreshing = YES;
+            self.tb_bill.tableFooterView = nil;
+        }
         if (pageNum == 0) {
             [self.arr_bill removeAllObjects];
         }
         [self.arr_bill addObjectsFromArray:[dic objectForKey:@"orderList"]];
-        if (self.arr_bill.count < 21) {
-            self.tb_bill.hasFooterRefreshing = NO;
-        }else{
-            self.tb_bill.hasFooterRefreshing = YES;
-        }
         [self.tb_bill reloadData];
         complete([(NSArray *)obj count]);
     } failed:^(NSInteger statusCode, id json) {

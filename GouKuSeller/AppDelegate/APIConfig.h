@@ -99,13 +99,13 @@
 //门店/网店  商品修改
 #define API_POST_WareSkuRelease @"/wareSku/shop/release"
 //门店。网店  单个 商品上、下架
-#define API_POST_WareSkuUpdateStatus @"/wareSku/manage/updateStatus"
+#define API_POST_WareSkuUpdateStatus @"/wareSku/shop/updateStatus"
 //门店.网店  商品 单个 移除
-#define API_POST_WareSkuRemoveWare @"/wareSku/manage/removeWare"
+#define API_POST_WareSkuRemoveWare @"/wareSku/shop/removeWare"
 //门店。网店  批量 商品上、下架
-#define API_POST_WareSkuUpdateStatusList @"/wareSku/manage/updateStatusList"
+#define API_POST_WareSkuUpdateStatusList @"/wareSku/shop/updateStatusList"
 //门店或网店  商品批量移除
-#define API_POST_WareSkuRemoveWareList @"/wareSku/manage/removeWareList"
+#define API_POST_WareSkuRemoveWareList @"/wareSku/shop/removeWareList"
 
 
 /*

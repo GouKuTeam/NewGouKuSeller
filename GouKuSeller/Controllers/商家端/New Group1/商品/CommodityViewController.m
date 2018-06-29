@@ -642,7 +642,6 @@
     CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
     
     [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 132)];
-    
 }
 
 - (void)edtiAction:(UIButton *)btn_sender{
@@ -741,17 +740,29 @@
 }
 
 - (void)deleteAction{
-    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
-    [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
-        
-    } success:^(id obj) {
-        [self.arr_commodity removeObjectAtIndex:self.showIndex];
-        [self.tb_right reloadData];
-        self.showIndex = NULLROW;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"被删除的商品会从所有商品库移除，无法恢复。确定要删除所选商品吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.v_moreEdit setHidden:YES];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+        [CommodityHandler commoditydeleteWithCommodityId:[NSString stringWithFormat:@"%@",entity.skuId] prepare:^{
+            
+        } success:^(id obj) {
+            [self.arr_commodity removeObjectAtIndex:self.showIndex];
+            [self.tb_right reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+
 }
 
 - (void)mendianAction{
@@ -899,19 +910,28 @@
              CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
              [self.commodityArr addObject:entity.skuId];
          }
-         [CommodityHandler commodityDeleteListWithCommodityArr:self.commodityArr prepare:^{
-             
-         } success:^(id obj) {
-             NSDictionary *dic = (NSDictionary *)obj;
-             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                 [MBProgressHUD showInfoMessage:@"删除成功"];
-                 [self confirmAction];
-             }else{
-                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
-             }
-         } failed:^(NSInteger statusCode, id json) {
-             [MBProgressHUD showErrorMessage:(NSString *)json];
+         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"被删除的商品会从所有商品库移除，无法恢复。确定要删除所选商品吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+         UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+             [self.v_moreEdit setHidden:YES];
          }];
+         UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+             [CommodityHandler commodityDeleteListWithCommodityArr:self.commodityArr prepare:^{
+                 
+             } success:^(id obj) {
+                 NSDictionary *dic = (NSDictionary *)obj;
+                 if ([[dic objectForKey:@"errCode"] intValue] == 0) {
+                     [MBProgressHUD showInfoMessage:@"删除成功"];
+                     [self confirmAction];
+                 }else{
+                     [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
+                 }
+             } failed:^(NSInteger statusCode, id json) {
+                 [MBProgressHUD showErrorMessage:(NSString *)json];
+             }];
+         }];
+         [alert addAction:forgetPassword];
+         [alert addAction:again];
+         [self presentViewController:alert animated:YES completion:nil];
      }else{
          [MBProgressHUD showErrorMessage:@"请选择商品"];
      }

@@ -76,7 +76,7 @@
 - (void)contentCellWithInventoryEntity:(InventoryEntity *)entity{
     [self.lab_name setText:entity.name];
     [self.lab_stock setText:[NSString stringWithFormat:@"%d",entity.stock]];
-    if (entity.inventoryNum > 0) {
+    if (entity.inventoryNum >= 0) {
        [self.lab_inventoryNum setText:[NSString stringWithFormat:@"%d",entity.inventoryNum]];
     }else{
         [self.lab_inventoryNum setText:@""];

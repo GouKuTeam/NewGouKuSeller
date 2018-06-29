@@ -216,7 +216,7 @@
     }
     [self.lab_billPrice setText:[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"billMoney"] doubleValue]]];
     [self.lab_completePrice setText:[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"orderMoney"] doubleValue]]];
-    [self.lab_refundPrice setText:[NSString stringWithFormat:@"%.2f",[[dic objectForKey:@"drawbackMoney"] doubleValue]]];
+    [self.lab_refundPrice setText:[NSString stringWithFormat:@"-%.2f",[[dic objectForKey:@"drawbackMoney"] doubleValue]]];
     
 }
 @end

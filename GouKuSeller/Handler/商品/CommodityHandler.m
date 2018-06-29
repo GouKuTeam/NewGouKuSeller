@@ -202,7 +202,6 @@
 //新增商品
 + (void)addCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid xprice:(double)xprice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
-//    NSString *str_url = [self requestUrlWithPath:API_GET_AddCommodity];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_AddCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     if (shopId) {
@@ -369,7 +368,7 @@
 //    NSString *str_url = [self requestUrlWithPath:[NSString stringWithFormat:API_GET_CommodityDelete,commodityId]];
     NSString *str_url = [NSString stringWithFormat:@"%@%@%@",API_Other,API_GET_CommodityDelete,commodityId];
     [[RTHttpClient defaultClient] requestWithPath:str_url
-                                           method:RTHttpRequestGet
+                                           method:RTHttpRequestPost
                                        parameters:nil
                                           prepare:prepare
                                           success:^(NSURLSessionDataTask *task, id responseObject) {

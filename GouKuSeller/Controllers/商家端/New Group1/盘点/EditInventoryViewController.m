@@ -175,7 +175,7 @@
     [self.alert.btn_delete addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
     WS(weakSelf);
     self.alert.dismissAlertView = ^(int count) {
-        if (count > 0) {
+        if (count >= 0) {
             entity.inventoryNum = count;
             [weakSelf.arr_data replaceObjectAtIndex:indexPath.row withObject:entity];
             [weakSelf.tb_commodity reloadData];
