@@ -96,14 +96,14 @@
      self.btn_navright_search.frame = CGRectMake(0, 0, 20, 20);
      self.btn_navright_more.frame=CGRectMake(0, 0, 22, 6);
 
-     self.lb_selectedNum = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 44)];
-    [self.lb_selectedNum setTextAlignment:NSTextAlignmentCenter];
-    [self.lb_selectedNum setFont:[UIFont systemFontOfSize:18]];
-    [self.lb_selectedNum setTextColor:[UIColor whiteColor]];
+//     self.lb_selectedNum = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 44)];
+//    [self.lb_selectedNum setTextAlignment:NSTextAlignmentCenter];
+//    [self.lb_selectedNum setFont:[UIFont systemFontOfSize:18]];
+//    [self.lb_selectedNum setTextColor:[UIColor whiteColor]];
 
-    self.v_coverLeft = [[UIView alloc]initWithFrame:self.tb_left.frame];
-    [self.v_coverLeft setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:0.3]];
-    [self.view addSubview:self.v_coverLeft];
+//    self.v_coverLeft = [[UIView alloc]initWithFrame:self.tb_left.frame];
+//    [self.v_coverLeft setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:0.3]];
+//    [self.view addSubview:self.v_coverLeft];
      [self setNavUI];
     // ***********/
     
@@ -117,13 +117,13 @@
         UIBarButtonItem *pulish = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_search];
         UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithCustomView:self.btn_navright_more];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:save, pulish,nil]];
-        [self.v_coverLeft setHidden:YES];
+//        [self.v_coverLeft setHidden:YES];
     }else{
-        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+//        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
         self.navigationItem.titleView = self.lb_selectedNum;
         UIBarButtonItem *confirm = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(confirmAction)];
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:confirm,nil]];
-        [self.v_coverLeft setHidden:NO];
+//        [self.v_coverLeft setHidden:NO];
     }
 }
 
@@ -574,6 +574,7 @@
         self.selectedRow = (int)indexPath.row;
         [self.tb_left reloadData];
         //加载右边数据
+        [self.arr_selected removeAllObjects];
         [self.tb_right requestDataSource];
     }else if (tableView == self.tb_right){
         if (self.enterFormType == EnterFromActice) {
@@ -590,7 +591,7 @@
             [self.arr_selected addObject:number];
         }
         [self.tb_right reloadData];
-        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+//        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
         self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
          
     }
@@ -640,8 +641,41 @@
     }
     UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
     CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
+
+
+    if (entity.storeUsing == NO && entity.onlineStoreUsing == NO) {
+        [self.v_moreEdit.btn_wangdian setHidden:NO];
+        [self.v_moreEdit.btn_mendian setHidden:NO];
+        [self.v_moreEdit.btn_delege setHidden:NO];
+        [self.v_moreEdit.btn_mendian setFrame:CGRectMake(0, 0, 120, 44)];
+        [self.v_moreEdit.btn_wangdian setFrame:CGRectMake(0, 44, 120, 44)];
+        [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 88, 120, 44)];
+        [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 132)];
+    }
+    else if (entity.storeUsing == NO && entity.onlineStoreUsing == YES) {
+        [self.v_moreEdit.btn_wangdian setHidden:YES];
+        [self.v_moreEdit.btn_mendian setHidden:NO];
+        [self.v_moreEdit.btn_delege setHidden:NO];
+        [self.v_moreEdit.btn_mendian setFrame:CGRectMake(0, 0, 120, 44)];
+        [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 44, 120, 44)];
+        [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
+    }
+    else if (entity.storeUsing == YES && entity.onlineStoreUsing == NO) {
+        [self.v_moreEdit.btn_wangdian setHidden:NO];
+        [self.v_moreEdit.btn_mendian setHidden:YES];
+        [self.v_moreEdit.btn_delege setHidden:NO];
+        [self.v_moreEdit.btn_wangdian setFrame:CGRectMake(0, 0, 120, 44)];
+        [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 44, 120, 44)];
+        [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
+    }
+    else{
+        [self.v_moreEdit.btn_wangdian setHidden:YES];
+        [self.v_moreEdit.btn_mendian setHidden:YES];
+        [self.v_moreEdit.btn_delege setHidden:NO];
+        [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 0, 120, 44)];
+        [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 44)];
+    }
     
-    [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 132)];
 }
 
 - (void)edtiAction:(UIButton *)btn_sender{
@@ -840,7 +874,7 @@
      }else{
          [self.arr_selected removeAllObjects];
      }
-     self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+//     self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
      [self.tb_right reloadData];
  }
 

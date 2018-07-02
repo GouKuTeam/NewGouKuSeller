@@ -161,19 +161,19 @@
     [self.v_commodityView.v_price.tf_detail resignFirstResponder];
     [self.v_commodityView.v_stock.tf_detail resignFirstResponder];
     [self.v_commodityView.v_jinhuoPrice.tf_detail resignFirstResponder];
+    if ([self.v_commodityView.v_commodityName.tf_detail.text isEqualToString:@""]) {
+        [MBProgressHUD showErrorMessage:@"请填写商品名称"];
+        return;
+    }
+    if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
+        [MBProgressHUD showErrorMessage:@"请填写售价"];
+        return;
+    }
+    if ([self.v_commodityView.v_price.tf_detail.text doubleValue] == 0) {
+        [MBProgressHUD showErrorMessage:@"价格不能为0"];
+        return;
+    }
     if (self.publishCommodityFormType == PublishCommodityFormPublish) {
-        if ([self.v_commodityView.v_commodityName.tf_detail.text isEqualToString:@""]) {
-            [MBProgressHUD showErrorMessage:@"请填写商品名称"];
-            return;
-        }
-        if ([self.v_commodityView.v_price.tf_detail.text isEqualToString:@""]) {
-            [MBProgressHUD showErrorMessage:@"请填写售价"];
-            return;
-        }
-        if ([self.v_commodityView.v_price.tf_detail.text doubleValue] == 0) {
-            [MBProgressHUD showErrorMessage:@"价格不能为0"];
-            return;
-        }
         [CommodityHandler commodityReleaseWithSkuId:self.entityInformation.skuId name:self.v_commodityView.v_commodityName.tf_detail.text firstCategoryId:self.shopCId description:self.v_commodityView.v_commodityDescribe.tf_detail.text stock:[NSNumber numberWithInt:self.shopStock] price:self.v_commodityView.v_price.tf_detail.text releaseType:self.publishCommodityToShopType prepare:^{
             
         } success:^(id obj) {

@@ -189,8 +189,38 @@
         }
         UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
         CGRect rect = [btn_sender convertRect:self.view.bounds toView:window];
-        
-        [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 132)];
+        if (entity.storeUsing == NO && entity.onlineStoreUsing == NO) {
+            [self.v_moreEdit.btn_wangdian setHidden:NO];
+            [self.v_moreEdit.btn_mendian setHidden:NO];
+            [self.v_moreEdit.btn_delege setHidden:NO];
+            [self.v_moreEdit.btn_mendian setFrame:CGRectMake(0, 0, 120, 44)];
+            [self.v_moreEdit.btn_wangdian setFrame:CGRectMake(0, 44, 120, 44)];
+            [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 88, 120, 44)];
+            [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 132)];
+        }
+        else if (entity.storeUsing == NO && entity.onlineStoreUsing == YES) {
+            [self.v_moreEdit.btn_wangdian setHidden:YES];
+            [self.v_moreEdit.btn_mendian setHidden:NO];
+            [self.v_moreEdit.btn_delege setHidden:NO];
+            [self.v_moreEdit.btn_mendian setFrame:CGRectMake(0, 0, 120, 44)];
+            [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 44, 120, 44)];
+            [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
+        }
+        else if (entity.storeUsing == YES && entity.onlineStoreUsing == NO) {
+            [self.v_moreEdit.btn_wangdian setHidden:NO];
+            [self.v_moreEdit.btn_mendian setHidden:YES];
+            [self.v_moreEdit.btn_delege setHidden:NO];
+            [self.v_moreEdit.btn_wangdian setFrame:CGRectMake(0, 0, 120, 44)];
+            [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 44, 120, 44)];
+            [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 88)];
+        }
+        else{
+            [self.v_moreEdit.btn_wangdian setHidden:YES];
+            [self.v_moreEdit.btn_mendian setHidden:YES];
+            [self.v_moreEdit.btn_delege setHidden:NO];
+            [self.v_moreEdit.btn_delege setFrame:CGRectMake(0, 0, 120, 44)];
+            [self.v_moreEdit setFrame:CGRectMake(SCREEN_WIDTH - 16 - 120, rect.origin.y + 28, 120, 44)];
+        }
     }else{
         if (entity.status == 1) {
             [self.v_moreChildEdit.btn_edit setTitle:@"下架" forState:UIControlStateNormal];

@@ -178,14 +178,14 @@
     self.btnIndex = [NSNumber numberWithInt:999];
     [self loadData];
     
-    self.lb_selectedNum = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 44)];
-    [self.lb_selectedNum setTextAlignment:NSTextAlignmentCenter];
-    [self.lb_selectedNum setFont:[UIFont systemFontOfSize:18]];
-    [self.lb_selectedNum setTextColor:[UIColor whiteColor]];
+//    self.lb_selectedNum = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 44)];
+//    [self.lb_selectedNum setTextAlignment:NSTextAlignmentCenter];
+//    [self.lb_selectedNum setFont:[UIFont systemFontOfSize:18]];
+//    [self.lb_selectedNum setTextColor:[UIColor whiteColor]];
     
-    self.v_coverLeft = [[UIView alloc]initWithFrame:self.tb_left.frame];
-    [self.v_coverLeft setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:0.3]];
-    [self.view addSubview:self.v_coverLeft];
+//    self.v_coverLeft = [[UIView alloc]initWithFrame:self.tb_left.frame];
+//    [self.v_coverLeft setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:0.3]];
+//    [self.view addSubview:self.v_coverLeft];
     
     self.v_bottom_manager = [[CommodityChildBottomView alloc]initWithFrame:CGRectMake(0, self.tb_right.bottom -  49, SCREEN_WIDTH, 49)];
     [self.view addSubview:self.v_bottom_manager];
@@ -277,6 +277,8 @@
             [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
         }
     }
+    [self.arr_selected removeAllObjects];
+    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
     [self.tb_right requestDataSource];
 }
 
@@ -462,6 +464,8 @@
         self.selectedRow = (int)indexPath.row;
         [self.tb_left reloadData];
         //加载右边数据
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
         [self.tb_right requestDataSource];
     }else if (tableView == self.tb_right){
         NSNumber *number = [NSNumber numberWithInt:(int)indexPath.row];
@@ -471,7 +475,7 @@
             [self.arr_selected addObject:number];
         }
         [self.tb_right reloadData];
-        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+//        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
         self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
         
     }
@@ -505,17 +509,28 @@
 #pragma mark - MoreEditViewAction
 //从门店/网店移除
 - (void)deleteAction{
-    CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
-    [CommodityHandler wareSkuRemoveWareWithSkuId:entity.skuId releaseType:self.commodityType - 2 prepare:^{
-        
-    } success:^(id obj) {
-        [self.arr_commodity removeObjectAtIndex:self.showIndex];
-        [self.tb_right reloadData];
-        self.showIndex = NULLROW;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"移除后该商品将从该销售渠道删除。恢复商品需要重新发布。确定要移除吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.v_moreEdit setHidden:YES];
-    } failed:^(NSInteger statusCode, id json) {
-        [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
     }];
+    UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
+        [CommodityHandler wareSkuRemoveWareWithSkuId:entity.skuId releaseType:self.commodityType - 2 prepare:^{
+            
+        } success:^(id obj) {
+            [self.arr_commodity removeObjectAtIndex:self.showIndex];
+            [self.tb_right reloadData];
+            self.showIndex = NULLROW;
+            [self.v_moreEdit setHidden:YES];
+        } failed:^(NSInteger statusCode, id json) {
+            [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld:%@",statusCode,json]];
+        }];
+    }];
+    [alert addAction:forgetPassword];
+    [alert addAction:again];
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 //从门店/网店 上下架
 - (void)btn_editAction{
@@ -656,12 +671,12 @@
     self.editStatus = !self.editStatus;
     if (self.editStatus == YES) {
         [self.v_bottom_manager setHidden:NO];
-        [self.lb_selectedNum setHidden:NO];
-        [self.btn_top setHidden:YES];
+//        [self.lb_selectedNum setHidden:NO];
+//        [self.btn_top setHidden:YES];
     }else{
         [self.v_bottom_manager setHidden:YES];
-        [self.lb_selectedNum setHidden:YES];
-        [self.btn_top setHidden:NO];
+//        [self.lb_selectedNum setHidden:YES];
+//        [self.btn_top setHidden:NO];
     }
     [self.btn_batchManager setHidden:YES];
     [self.arr_selected removeAllObjects];
@@ -671,19 +686,23 @@
 
 - (void)setNavUI{
     if (self.editStatus == NO) {
-        [self.btn_top setHidden:NO];
+//        [self.btn_top setHidden:NO];
         [self.btn_search setHidden:NO];
         [self.btn_more setHidden:NO];
         [self.confirm setHidden:YES];
-        [self.v_coverLeft setHidden:YES];
+//        [self.v_coverLeft setHidden:YES];
+        [self.tb_left setFrame:CGRectMake(0, self.v_top.bottom,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 43)];
+        [self.tb_right setFrame:CGRectMake(100, self.v_top.bottom,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 43)];
     }else{
-        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
-        [self.v_top addSubview:self.lb_selectedNum];
-        [self.btn_top setHidden:YES];
+//        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+//        [self.v_top addSubview:self.lb_selectedNum];
+//        [self.btn_top setHidden:YES];
         [self.btn_search setHidden:YES];
         [self.btn_more setHidden:YES];
         [self.confirm setHidden:NO];
-        [self.v_coverLeft setHidden:NO];
+        [self.tb_left setFrame:CGRectMake(0, self.v_top.bottom,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 43 - 44)];
+        [self.tb_right setFrame:CGRectMake(100, self.v_top.bottom,SCREEN_WIDTH - 100, SCREEN_HEIGHT - SafeAreaTopHeight - SafeAreaBottomHeight - 43 - 44)];
+//        [self.v_coverLeft setHidden:NO];
     }
 }
 
@@ -695,6 +714,8 @@
 //商品状态选择
 
 - (void)btn_allAction{
+    [self.arr_selected removeAllObjects];
+    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
     self.btnIndex = [NSNumber numberWithInt:999];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"全部商品" forState:UIControlStateNormal];
@@ -709,6 +730,8 @@
 }
 
 - (void)btn_chushouAction{
+    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
+    [self.arr_selected removeAllObjects];
     self.btnIndex = [NSNumber numberWithInt:1];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"出售中" forState:UIControlStateNormal];
@@ -723,6 +746,8 @@
 }
 
 - (void)btn_shouwanAction{
+    [self.arr_selected removeAllObjects];
+    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
     self.btnIndex = [NSNumber numberWithInt:2];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"已售罄" forState:UIControlStateNormal];
@@ -736,6 +761,8 @@
 }
 
 - (void)btn_xiajiaAction{
+    [self.arr_selected removeAllObjects];
+    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
     self.btnIndex = [NSNumber numberWithInt:3];
     [self.v_commodityStatusView setHidden:YES];
     [self.btn_top setTitle:@"已下架" forState:UIControlStateNormal];
@@ -759,7 +786,7 @@
     }else{
         [self.arr_selected removeAllObjects];
     }
-    self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
+//    self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
     [self.tb_right reloadData];
 }
 
@@ -767,22 +794,32 @@
 
 - (void)btn_bottom_yichuAction{
     if (self.arr_selected.count > 0) {
-        [self.commodityArr removeAllObjects];
-        for (int i = 0; i < self.arr_selected.count; i++) {
-            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
-            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-            [dic setValue:entity.skuId forKey:@"skuId"];
-            [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
-            [self.commodityArr addObject:dic];
-        }
-        [CommodityHandler wareSkuRemoveWareListWithCommodityArr:self.commodityArr prepare:^{
-            
-        } success:^(id obj) {
-            [MBProgressHUD showInfoMessage:@"移除成功"];
-            [self confirmAction];
-        } failed:^(NSInteger statusCode, id json) {
-            [MBProgressHUD showErrorMessage:(NSString *)json];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"移除后该商品将从该销售渠道删除。恢复商品需要重新发布。确定要移除吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *forgetPassword = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.v_moreEdit setHidden:YES];
         }];
+        UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.commodityArr removeAllObjects];
+            for (int i = 0; i < self.arr_selected.count; i++) {
+                CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                [dic setValue:entity.skuId forKey:@"skuId"];
+                [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
+                [self.commodityArr addObject:dic];
+            }
+            [CommodityHandler wareSkuRemoveWareListWithCommodityArr:self.commodityArr prepare:^{
+                
+            } success:^(id obj) {
+                [MBProgressHUD showInfoMessage:@"移除成功"];
+                [self confirmAction];
+            } failed:^(NSInteger statusCode, id json) {
+                [MBProgressHUD showErrorMessage:(NSString *)json];
+            }];
+        }];
+        [alert addAction:forgetPassword];
+        [alert addAction:again];
+        [self presentViewController:alert animated:YES completion:nil];
+        
     }else{
         [MBProgressHUD showErrorMessage:@"请选择商品"];
     }
