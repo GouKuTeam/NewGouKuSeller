@@ -12,7 +12,7 @@
 
 @implementation OrderHandler
 
-+ (void)getOrderListWithShopId:(NSNumber *)shopId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)getOrderListWithShopId:(NSString *)shopId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_OrderList];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OrderList];
     NSDictionary *dic = @{
@@ -38,7 +38,7 @@
 }
 
 //订单详情查询
-+ (void)getOrderDetailsWithShopId:(NSNumber *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)getOrderDetailsWithShopId:(NSString *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_OrderDetail];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OrderDetail];
     NSDictionary *dic = @{
@@ -66,7 +66,7 @@
 }
 
 //订单搜索
-+ (void)searchOrderWithShopId:(NSNumber *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)searchOrderWithShopId:(NSString *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_OrderSearch];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_OrderSearch];
     NSDictionary *dic = @{

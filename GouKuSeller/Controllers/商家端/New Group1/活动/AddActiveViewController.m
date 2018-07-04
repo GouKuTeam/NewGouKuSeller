@@ -353,7 +353,7 @@
     }
     
     if (self.activeType == ActiceFormManJian) {
-        [ActiveHandler addManJianActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.tf_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
+        [ActiveHandler addManJianActivityWithSid:nil activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.tf_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult manjian:arr_data prepare:^{
 
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {
@@ -374,7 +374,7 @@
             [MBProgressHUD showErrorMessage:[NSString stringWithFormat:@"%ld",statusCode]];
         }];
     }else{
-        [ActiveHandler addOtherActivityWithSid:[LoginStorage GetShopId] activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.tf_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult item:arr_data prepare:^{
+        [ActiveHandler addOtherActivityWithSid:nil activityType:[NSNumber numberWithInt:self.activeType] activityName:self.v_ainformation.tf_activeName.text dateAt:self.v_ainformation.btn_beginTime.titleLabel.text dateEnd:self.v_ainformation.btn_endTime.titleLabel.text week:self.arr_week time:arr_timeResult item:arr_data prepare:^{
             
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0 ) {

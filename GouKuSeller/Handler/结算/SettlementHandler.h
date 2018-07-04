@@ -10,9 +10,9 @@
 
 @interface SettlementHandler : BaseHandler
 //结算首页信息
-+(void)accountshowWithshopId:(NSNumber *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++(void)accountshowWithshopId:(NSString *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //余额明细
-+(void)accountdetailsWithshopId:(NSNumber *)shopId page:(int)page type:(int)type platform:(int)platform prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++(void)accountdetailsWithshopId:(NSString *)shopId page:(int)page type:(int)type platform:(int)platform prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //获取银行卡列表
 +(void)getbankListprepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //获取验证码
@@ -20,9 +20,9 @@
 //添加银行卡
 +(void)addBankCardWithBankDic:(NSDictionary *)dic prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //提现校验密码
-+(void)checkPassWordWithshopId:(NSNumber *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++(void)checkPassWordWithshopId:(NSString *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //提现详情
-+(void)cashDetailWithShopId:(NSNumber *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++(void)cashDetailWithShopId:(NSString *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //微信充值
 +(void)weixinchongzhiWithPrice:(NSString *)price prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 

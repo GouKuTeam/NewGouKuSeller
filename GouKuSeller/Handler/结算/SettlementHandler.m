@@ -13,7 +13,7 @@
 @implementation SettlementHandler
 
 //结算首页信息
-+(void)accountshowWithshopId:(NSNumber *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)accountshowWithshopId:(NSString *)shopId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_AccountShow];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AccountShow];
 //    NSDictionary *dic = @{@"shopId":shopId};
@@ -37,7 +37,7 @@
                                           }];
 }
 //余额明细
-+(void)accountdetailsWithshopId:(NSNumber *)shopId page:(int)page type:(int)type platform:(int)platform prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)accountdetailsWithshopId:(NSString *)shopId page:(int)page type:(int)type platform:(int)platform prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_AccountDetails];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AccountDetails];
     NSDictionary *dic = @{
@@ -133,7 +133,7 @@
                                           }];
 }
 
-+(void)checkPassWordWithshopId:(NSNumber *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)checkPassWordWithshopId:(NSString *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_checkPassword];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_checkPassword];
     NSDictionary *dic = @{
@@ -157,7 +157,7 @@
 }
 
 //提现详情
-+(void)cashDetailWithShopId:(NSNumber *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)cashDetailWithShopId:(NSString *)shopid cashOrderId:(NSString *)cashOrderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_CashDetail];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_CashDetail];
     NSDictionary *dic = @{

@@ -11,10 +11,10 @@
 @interface OrderHandler : BaseHandler
 
 //获取订单列表
-+ (void)getOrderListWithShopId:(NSNumber *)shopId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)getOrderListWithShopId:(NSString *)shopId page:(int)page prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //订单详情查询
-+ (void)getOrderDetailsWithShopId:(NSNumber *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)getOrderDetailsWithShopId:(NSString *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 //订单搜索
-+ (void)searchOrderWithShopId:(NSNumber *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
++ (void)searchOrderWithShopId:(NSString *)shopid orderId:(NSString *)orderId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 @end

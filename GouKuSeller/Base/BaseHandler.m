@@ -65,16 +65,12 @@
         if([NSJSONSerialization isValidJSONObject:dic_json])
         {
             BaseEntity *result = [BaseEntity parseObjectWithKeyValues:dic_json];
-            if (result.errCode == 4002) {
-            }
-            else if (result.errCode == 1){
-                [MBProgressHUD showInfoMessage:@"登录超时，请重新登录"];
+            if (result.errCode == 9) {
                 [LoginStorage saveIsLogin:NO];
                 LoginViewController *vc = [[LoginViewController alloc]init];
                 UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
                 [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-            }
-            else{
+            }else{
                 failed(result.errCode,result.errMessage);
             }
         }else{

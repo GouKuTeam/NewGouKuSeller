@@ -60,7 +60,7 @@
 }
 
 //获取店内一级分类
-+ (void)getShopCatagoryWithShopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)getShopCatagoryWithShopId:(NSString *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_GET_ShopCatagory];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_ShopCatagory];
     NSDictionary *dic = @{@"shopId":shopId,@"pid":[NSNumber numberWithInt:pid]};
@@ -123,7 +123,7 @@
 
 
 //新增店内分类
-+ (void)addShopCatagoryWithName:(NSString *)name shopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)addShopCatagoryWithName:(NSString *)name shopId:(NSString *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_GET_AddShopCatagory];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_AddShopCatagory];
     NSDictionary *dic = @{@"name":name,
@@ -149,7 +149,7 @@
 }
 
 //修改店内分类
-+ (void)udpShopCatagoryWithName:(NSString *)name ownid:(int)ownid shopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)udpShopCatagoryWithName:(NSString *)name ownid:(int)ownid shopId:(NSString *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_GET_UdpShopCatagory];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_UdpShopCatagory];
     NSDictionary *dic = @{@"name":name,
@@ -174,7 +174,7 @@
                                           }];
 }
 
-+ (void)delShopCatagoryWithOwnId:(int)ownid shopId:(NSNumber *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)delShopCatagoryWithOwnId:(int)ownid shopId:(NSString *)shopId pid:(int)pid prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_GET_DelShopCatagory];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_DelShopCatagory];
     NSDictionary *dic = @{
@@ -200,7 +200,7 @@
 }
 
 //新增商品
-+ (void)addCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid xprice:(double)xprice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)addCommodityWithShopId:(NSString *)shopId name:(NSString *)name itemId:(NSNumber *)itemId barcode:(NSNumber *)barcode shopWareCategoryId:(NSNumber *)shopWareCategoryId wareCategoryId:(NSNumber *)wareCategoryId price:(double)price stock:(NSNumber *)stock pictures:(NSString *)pictures standards:(NSString *)standards wid:(NSNumber *)wid xprice:(double)xprice prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_GET_AddCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -621,7 +621,7 @@
 }
 
 //门店自定义商品
-+ (void)addCustomizeCommodityWithShopId:(NSNumber *)shopId name:(NSString *)name barcode:(NSString *)barcode description:(NSString *)description shopWareCategoryId:(NSNumber *)shopWareCategoryId xprice:(NSString *)xprice stock:(NSNumber *)stock pictures:(NSString *)pictures prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++ (void)addCustomizeCommodityWithShopId:(NSString *)shopId name:(NSString *)name barcode:(NSString *)barcode description:(NSString *)description shopWareCategoryId:(NSNumber *)shopWareCategoryId xprice:(NSString *)xprice stock:(NSNumber *)stock pictures:(NSString *)pictures prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_AddCustomizeCommodity];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
 

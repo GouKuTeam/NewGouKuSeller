@@ -87,6 +87,7 @@
         prepare();
     }
     
+
     //拦截failure 添加登录失效4002的处理
     void (^tFailure)(NSURLSessionDataTask*, id) = ^(NSURLSessionDataTask *task, NSError *error) {
         [MBProgressHUD hideHUD];

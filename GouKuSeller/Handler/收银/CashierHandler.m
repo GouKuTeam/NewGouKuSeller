@@ -12,7 +12,7 @@
 @implementation CashierHandler 
 
 //扫描商品条形码加入购物车  (dic 包含barcode  shopId   addup(合计金额))
-+(void)commodityCashierWithBarcode:(NSString *)barcode shopId:(NSNumber *)shopid addup:(NSString *)addup prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)commodityCashierWithBarcode:(NSString *)barcode shopId:(NSString *)shopid addup:(NSString *)addup prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
     
 //    NSString *str_url = [self requestUrlWithPath:API_POST_CommodityCashier];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_Other,API_POST_CommodityCashier];
@@ -41,7 +41,7 @@
 }
 
 //添加订单
-+(void)addOrderWithShopId:(NSNumber *)shopid items:(NSArray *)items payTotal:(NSString *)payTotal payReduce:(NSString *)payReduce payActual:(NSString *)payActual noGoods:(NSString *)noGoods payType:(int)payType orderDiscount:(NSString *)orderDiscount orderMinus:(NSString *)orderMinus loseSmallReduce:(NSString *)loseSmallReduce actId:(NSNumber *)actId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)addOrderWithShopId:(NSString *)shopid items:(NSArray *)items payTotal:(NSString *)payTotal payReduce:(NSString *)payReduce payActual:(NSString *)payActual noGoods:(NSString *)noGoods payType:(int)payType orderDiscount:(NSString *)orderDiscount orderMinus:(NSString *)orderMinus loseSmallReduce:(NSString *)loseSmallReduce actId:(NSNumber *)actId prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_AddOrder];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_AddOrder];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
