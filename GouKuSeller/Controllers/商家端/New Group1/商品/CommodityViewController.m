@@ -351,7 +351,7 @@
 //门店分类列表
 - (void)loadData{
     
-    [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
+    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId]  prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_category removeAllObjects];
         [self.arr_category addObjectsFromArray:arr_data];
@@ -384,6 +384,7 @@
     if (self.selectedRow != NULLROW) {
         entity = [entity.childList objectAtIndex:self.selectedRow];
     }
+    
     [CommodityHandler getCommodityListWithtype:[NSNumber numberWithInt:2] firstCategoryId:[NSNumber numberWithInteger:entity._id] status:self.btnIndex keyword:nil pageNum:(int)pageNum prepare:^{
         
     } success:^(id obj) {
@@ -616,9 +617,11 @@
         //加载右边数据
         [self.tb_right requestDataSource];
     }else{
+        self.selectedSection = (int)v_sender.tag;
         entity.isShow = !entity.isShow;
         [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
         [self.tb_left reloadData];
+        [self.tb_right requestDataSource];
     }
 }
 
@@ -893,9 +896,9 @@
              
          } success:^(id obj) {
              NSDictionary *dic = (NSDictionary *)obj;
-             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                 [MBProgressHUD showInfoMessage:@"发布成功"];
-                 [self confirmAction];
+             if ([[dic objectForKey:@"errCode"] intValue] == 0) {NSString *str = [NSString stringWithFormat:@"已将%@个商品发布到门店",[dic objectForKey:@"data"]];
+                 [MBProgressHUD showInfoMessage:str];
+//                 [self confirmAction];
              }else{
                  [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
              }
@@ -924,8 +927,9 @@
          } success:^(id obj) {
              NSDictionary *dic = (NSDictionary *)obj;
              if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                 [MBProgressHUD showInfoMessage:@"发布成功"];
-                 [self confirmAction];
+                 NSString *str = [NSString stringWithFormat:@"已将%@个商品发布到网店",[dic objectForKey:@"data"]];
+                 [MBProgressHUD showInfoMessage:str];
+//                 [self confirmAction];
              }else{
                  [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
              }
@@ -954,8 +958,9 @@
              } success:^(id obj) {
                  NSDictionary *dic = (NSDictionary *)obj;
                  if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                     [MBProgressHUD showInfoMessage:@"删除成功"];
-                     [self confirmAction];
+                     NSString *str = [NSString stringWithFormat:@"已将%@个删除",[dic objectForKey:@"data"]];
+                     [MBProgressHUD showInfoMessage:str];
+                     [self.tb_right requestDataSource];
                  }else{
                      [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
                  }

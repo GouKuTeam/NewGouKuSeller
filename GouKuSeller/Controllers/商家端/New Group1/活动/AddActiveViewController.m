@@ -17,6 +17,7 @@
 #import "CommodityViewController.h"
 #import "ActiveHandler.h"
 #import "SelectAcTiveTypeViewController.h"
+#import "CommodityChildViewController.h"
 
 @interface AddActiveViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)ActiveInformation        *v_ainformation;
@@ -249,8 +250,9 @@
         [self.arr_active addObject:@{@"price":@"",@"minusPrice":@""}];
         [self.tb_active reloadData];
     }else{
-        CommodityViewController *vc = [[CommodityViewController alloc] init];
-        vc.enterFormType = EnterFromActice;
+        CommodityChildViewController *vc = [[CommodityChildViewController alloc] init];
+        vc.commodityChildEnterFormController = CommodityChildEnterFormActive;
+        vc.commodityChildFormType = CommodityChildFormShop;
         [self.navigationController pushViewController:vc animated:YES];
         vc.selectCommodity = ^(CommodityFromCodeEntity *entity) {
             [self.arr_active addObject:entity];

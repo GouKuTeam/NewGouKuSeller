@@ -32,6 +32,7 @@
 @property (nonatomic ,strong)NSNumber         *btnIndex;
 @property (nonatomic ,strong)UILabel          *lb_selectedNum;
 @property (nonatomic ,strong)UIView           *v_coverLeft;
+@property (nonatomic ,strong)UISegmentedControl *segmentedControl;
 @property (nonatomic ,assign)BOOL              editStatus;
 
 @property (nonatomic ,strong)NSMutableArray   *arr_category;
@@ -60,26 +61,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIView *v_header = [[UIView alloc]initWithFrame:CGRectMake(100, 0, SCREEN_WIDTH - 200, 44)];
+    [v_header setBackgroundColor:[UIColor clearColor]];
+    UILabel *lab_title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, v_header.frame.size.width, 44)];
+    [lab_title setTextColor:[UIColor whiteColor]];
+    [lab_title setFont:[UIFont boldSystemFontOfSize:18]];
+    lab_title.textAlignment = NSTextAlignmentCenter;
+    [v_header addSubview:lab_title];
+    [lab_title setText:@"门店商品"];
+    
     NSArray *segmentedArray = [NSArray arrayWithObjects:@"网店商品",@"门店商品",nil];
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    segmentedControl.frame = CGRectMake(0, 0, SCREEN_WIDTH - 160, 30);
-    segmentedControl.selectedSegmentIndex = 0;
-    segmentedControl.layer.masksToBounds = YES;
-    segmentedControl.layer.borderColor = [[UIColor whiteColor] CGColor];
-    segmentedControl.layer.borderWidth = 1;
-    segmentedControl.layer.cornerRadius = 4;
-    segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffffff"];
-    [segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#4167b2"]} forState:UIControlStateSelected];
-    [segmentedControl setBackgroundImage:[self createImageWithColor:[UIColor colorWithHexString:@"#38393e"]] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [segmentedControl setBackgroundImage:[self createImageWithColor:[UIColor colorWithHexString:@"#ffffff"]] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [segmentedControl addTarget:self action:@selector(indexDidChangeForSegmentedControl:)forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmentedControl;
+    self.segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    self.segmentedControl.frame = CGRectMake(0, 0, SCREEN_WIDTH - 160, 30);
+    self.segmentedControl.selectedSegmentIndex = 0;
+    self.segmentedControl.layer.masksToBounds = YES;
+    self.segmentedControl.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.segmentedControl.layer.borderWidth = 1;
+    self.segmentedControl.layer.cornerRadius = 4;
+    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffffff"];
+    [self.segmentedControl setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#4167b2"]} forState:UIControlStateSelected];
+    [self.segmentedControl setBackgroundImage:[self createImageWithColor:[UIColor colorWithHexString:@"#38393e"]] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [self.segmentedControl setBackgroundImage:[self createImageWithColor:[UIColor colorWithHexString:@"#ffffff"]] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [self.segmentedControl addTarget:self action:@selector(indexDidChangeForSegmentedControl:)forControlEvents:UIControlEventValueChanged];
+    if (self.commodityChildEnterFormController == CommodityChildEnterFormCommodity) {
+        
+        self.navigationItem.titleView = self.segmentedControl;
+    }else{
+        self.navigationItem.titleView = v_header;
+    }
     if (self.commodityChildFormType == CommodityChildFormNetShop) {
-        segmentedControl.selectedSegmentIndex = 0;
+        self.segmentedControl.selectedSegmentIndex = 0;
     }
     if (self.commodityChildFormType == CommodityChildFormShop) {
-        segmentedControl.selectedSegmentIndex = 1;
+        self.segmentedControl.selectedSegmentIndex = 1;
     }
+//    if (self.commodityChildEnterFormController == CommodityChildEnterFormActive) {
+//        segmentedControl.enabled = NO;
+//    }else{
+//        segmentedControl.enabled = YES;
+//    }
 
 }
 
@@ -208,7 +228,7 @@
 //门店分类列表
 - (void)loadData{
     
-    [CommodityHandler getCommodityCategoryWithShopId:[[LoginStorage GetShopId] stringValue] prepare:nil success:^(id obj) {
+    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_category removeAllObjects];
         [self.arr_category addObjectsFromArray:arr_data];
@@ -262,24 +282,26 @@
 
 #pragma mark - UISegmentedControl
 - (void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
-    if (sender.selectedSegmentIndex == 0) {
-        NSLog(@"网店商品");
-        self.commodityType = 4;
-    } else {
-        NSLog(@"门店商品");
-        self.commodityType = 3;
-    }
-    if (self.editStatus == YES) {
-        if (self.commodityType == 3) {
-            [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从门店移除" forState:UIControlStateNormal];
+    if (self.commodityChildEnterFormController == CommodityChildEnterFormCommodity) {
+        if (sender.selectedSegmentIndex == 0) {
+            NSLog(@"网店商品");
+            self.commodityType = 4;
+        } else {
+            NSLog(@"门店商品");
+            self.commodityType = 3;
         }
-        if (self.commodityType == 4) {
-            [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
+        if (self.editStatus == YES) {
+            if (self.commodityType == 3) {
+                [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从门店移除" forState:UIControlStateNormal];
+            }
+            if (self.commodityType == 4) {
+                [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
+            }
         }
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
+        [self.tb_right requestDataSource];
     }
-    [self.arr_selected removeAllObjects];
-    self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
-    [self.tb_right requestDataSource];
 }
 
 #pragma mark - UITableviewDelege
@@ -468,6 +490,15 @@
         self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
         [self.tb_right requestDataSource];
     }else if (tableView == self.tb_right){
+        
+        if (self.commodityChildEnterFormController == CommodityChildEnterFormActive) {
+            if (self.selectCommodity) {
+                CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:indexPath.row];
+                self.selectCommodity(entity);
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+        
         NSNumber *number = [NSNumber numberWithInt:(int)indexPath.row];
         if ([self.arr_selected containsObject:number]) {
             [self.arr_selected removeObject:number];
@@ -500,9 +531,11 @@
         //加载右边数据
         [self.tb_right requestDataSource];
     }else{
+        self.selectedSection = (int)v_sender.tag;
         entity.isShow = !entity.isShow;
         [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
         [self.tb_left reloadData];
+        [self.tb_right requestDataSource];
     }
 }
 
@@ -641,7 +674,11 @@
 
 - (void)searchAction{
     SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];
-    vc.enterFormType = EnterFormNormal;
+    if (self.commodityChildEnterFormController == CommodityChildEnterFormActive) {
+        vc.enterFormType = EnterFromActice;
+    }else{
+        vc.enterFormType = EnterFormNormal;
+    }
     if (self.commodityType == 3) {
         vc.searchType = SearchTypeInShop;
     }
@@ -649,6 +686,9 @@
         vc.searchType = SearchTypeInNetShop;
     }
     [self.navigationController pushViewController:vc animated:YES];
+    vc.selectCommodity = ^(CommodityFromCodeEntity *entity) {
+        self.selectCommodity(entity);
+    };
 }
 
 -(void)moreAction{
@@ -810,8 +850,17 @@
             [CommodityHandler wareSkuRemoveWareListWithCommodityArr:self.commodityArr prepare:^{
                 
             } success:^(id obj) {
-                [MBProgressHUD showInfoMessage:@"移除成功"];
-                [self confirmAction];
+                NSDictionary *dic = (NSDictionary *)obj;
+                NSString *str = @"";
+                if (self.commodityType == 3) {
+                    str = [NSString stringWithFormat:@"已将%@个商品从门店移除",[dic objectForKey:@"data"]];
+                }
+                if (self.commodityType == 4) {
+                    str = [NSString stringWithFormat:@"已将%@个商品从网店店移除",[dic objectForKey:@"data"]];
+                }
+                [MBProgressHUD showInfoMessage:str];
+//                [self confirmAction];
+                [self.tb_right requestDataSource];
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:(NSString *)json];
             }];
@@ -840,8 +889,10 @@
         [CommodityHandler wareSkuUpdateStatusListWithCommodityArr:self.commodityArr prepare:^{
             
         } success:^(id obj) {
-            [MBProgressHUD showInfoMessage:@"上架成功"];
-            [self confirmAction];
+            NSDictionary *dic = (NSDictionary *)obj;
+            NSString *str = [NSString stringWithFormat:@"已将%@个商品上架成功",[dic objectForKey:@"data"]];
+            [MBProgressHUD showInfoMessage:str];
+//            [self confirmAction];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
         }];
@@ -866,8 +917,10 @@
         [CommodityHandler wareSkuUpdateStatusListWithCommodityArr:self.commodityArr prepare:^{
             
         } success:^(id obj) {
-            [MBProgressHUD showInfoMessage:@"下架成功"];
-            [self confirmAction];
+            NSDictionary *dic = (NSDictionary *)obj;
+            NSString *str = [NSString stringWithFormat:@"已将%@个商品下架成功",[dic objectForKey:@"data"]];
+            [MBProgressHUD showInfoMessage:str];
+//            [self confirmAction];
         } failed:^(NSInteger statusCode, id json) {
             [MBProgressHUD showErrorMessage:(NSString *)json];
         }];

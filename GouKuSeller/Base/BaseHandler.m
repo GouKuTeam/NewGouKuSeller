@@ -12,6 +12,7 @@
 #import "BaseEntity.h"
 #import "AppUtils.h"
 #import "NSString+URLEncoding.h"
+#import "LoginViewController.h"
 
 @implementation BaseHandler
 
@@ -65,7 +66,15 @@
         {
             BaseEntity *result = [BaseEntity parseObjectWithKeyValues:dic_json];
             if (result.errCode == 4002) {
-            }else{
+            }
+            else if (result.errCode == 1){
+                [MBProgressHUD showInfoMessage:@"登录超时，请重新登录"];
+                [LoginStorage saveIsLogin:NO];
+                LoginViewController *vc = [[LoginViewController alloc]init];
+                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+                [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+            }
+            else{
                 failed(result.errCode,result.errMessage);
             }
         }else{

@@ -75,11 +75,11 @@ static NSString * const PrinterNum = @"PrinterNum";
 /**
  *  存/取  登陆成功返回的 的 ShopId
  */
-+ (void)saveShopId:(NSNumber *)str{
++ (void)saveShopId:(NSString *)str{
     [UserDefaultsUtils saveValue:str forKey:ShopId];
 }
 
-+ (NSNumber *)GetShopId
++ (NSString *)GetShopId
 {
     return [UserDefaultsUtils valueWithKey:ShopId];
 }

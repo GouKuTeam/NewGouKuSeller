@@ -43,6 +43,7 @@
     self.tb_adress.dataSource = self;
     [self.tb_adress setBackgroundColor:[UIColor colorWithHexString:COLOR_GRAY_BG]];
     self.tb_adress.tableFooterView = [UIView new];
+    self.tb_adress.separatorStyle = NO;
     [self loadData];
 }
 
@@ -77,6 +78,7 @@
     if (!cell){
         cell = [[EditAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
     cell.btn_morenAddress.tag = indexPath.row;
     cell.btn_delete.tag = indexPath.row;
     [cell.btn_morenAddress addTarget:self action:@selector(btn_morenAddressAction:) forControlEvents:UIControlEventTouchUpInside];

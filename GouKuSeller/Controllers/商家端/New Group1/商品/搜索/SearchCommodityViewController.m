@@ -18,6 +18,7 @@
 #import "CommodityTableViewCell.h"
 #import "PublishCommodityViewController.h"
 #import "MoreEditCommodityChildView.h"
+#import "CommodityChildViewController.h"
 
 #define NULLROW    999
 
@@ -113,13 +114,15 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     self.str_search = toBeString;
-    [self.tb_search requestDataSource];
+    if (![self.str_search isEqualToString:@""]) {
+        [self.tb_search requestDataSource];
+    }
     return YES;
 }
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
 
-    [CommodityHandler getCommodityListWithtype:[NSNumber numberWithInt:self.searchType] firstCategoryId:nil status:[NSNumber numberWithInt:999] keyword:self.tf_search.text pageNum:(int)pageNum prepare:^{
+    [CommodityHandler getCommodityListWithtype:[NSNumber numberWithInt:self.searchType] firstCategoryId:nil status:[NSNumber numberWithInt:999] keyword:self.str_search pageNum:(int)pageNum prepare:^{
         
     } success:^(id obj) {
         NSArray *arrdata = (NSArray *)obj;
@@ -388,7 +391,7 @@
         NSArray *arr_vc = self.navigationController.viewControllers;
         for (NSUInteger index = arr_vc.count - 1; arr_vc >= 0; index--) {
             UIViewController *vc = [arr_vc objectAtIndex:index];
-            if (![vc isKindOfClass:[SearchCommodityViewController class]] && ![vc isKindOfClass:[CommodityViewController class]]) {
+            if (![vc isKindOfClass:[SearchCommodityViewController class]] && ![vc isKindOfClass:[CommodityChildViewController class]]) {
                 [self.navigationController popToViewController:vc animated:YES];
                 return;
             }

@@ -7,14 +7,24 @@
 //
 
 #import "BaseViewController.h"
+#import "CommodityFromCodeEntity.h"
 
 typedef enum : int {
     CommodityChildFormNetShop,
     CommodityChildFormShop,
 } CommodityChildFormType;
 
+typedef enum : int {
+    CommodityChildEnterFormCommodity,
+    CommodityChildEnterFormActive,
+} CommodityChildEnterFormController;
+
+typedef void(^selectCommodity)(CommodityFromCodeEntity *entity);
 @interface CommodityChildViewController : BaseViewController
 
 @property (nonatomic ,assign)CommodityChildFormType   commodityChildFormType;
+@property (nonatomic ,assign)CommodityChildEnterFormController   commodityChildEnterFormController;
+
+@property (nonatomic,copy)selectCommodity   selectCommodity;
 
 @end

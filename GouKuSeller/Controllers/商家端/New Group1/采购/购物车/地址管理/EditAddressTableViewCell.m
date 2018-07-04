@@ -80,8 +80,8 @@
         [self.btn_morenAddress mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15.5);
             make.top.equalTo(img_line.mas_bottom).offset(11);
-            make.width.mas_equalTo(85);
-            make.height.mas_equalTo(20);
+            make.width.mas_equalTo(95);
+            make.height.mas_equalTo(24);
         }];
         
         
