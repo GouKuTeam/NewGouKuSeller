@@ -69,10 +69,12 @@
         if (btn == self.v_settlementBack.btn_gouku_tixian) {
             vc.tixianCount = self.accountCashEntity.toCashNum;
             vc.ketixianPrice = self.accountCashEntity.money;
+            vc.tixianType = TiXianGouku;
         }
         if (btn == self.v_settlementBack.btn_eleme_tixian) {
             vc.tixianCount = self.accountCashEntity.elemeToCashNum;
             vc.ketixianPrice = self.accountCashEntity.elemeMoney;
+            vc.tixianType = TiXianELeMe;
         }
         [self.navigationController pushViewController:vc animated:YES];
     }else{

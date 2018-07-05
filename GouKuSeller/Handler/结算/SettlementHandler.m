@@ -133,7 +133,7 @@
                                           }];
 }
 
-+(void)checkPassWordWithshopId:(NSString *)shopId cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
++(void)checkPassWordWithshopId:(NSString *)shopId platform:(int)platform cardNum:(NSString *)cardNum money:(double)money username:(NSString *)username password:(NSString *)password prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed{
 //    NSString *str_url = [self requestUrlWithPath:API_POST_checkPassword];
     NSString *str_url = [NSString stringWithFormat:@"%@%@",API_OrderAndPay,API_POST_checkPassword];
     NSDictionary *dic = @{
@@ -141,7 +141,8 @@
                           @"cardNum":cardNum,
                           @"money":[NSNumber numberWithDouble:money],
                           @"username":username,
-                          @"password":password
+                          @"password":password,
+                          @"platform":[NSNumber numberWithInt:platform]
                           };
     [[RTHttpClient defaultClient] requestWithPath:str_url
                                            method:RTHttpRequestPost

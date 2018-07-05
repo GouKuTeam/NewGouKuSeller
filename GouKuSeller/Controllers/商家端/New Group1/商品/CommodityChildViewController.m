@@ -228,7 +228,23 @@
 //门店分类列表
 - (void)loadData{
     
-    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
+//    [CommodityHandler getCommodityCategoryWithShopId:[LoginStorage GetShopId] prepare:nil success:^(id obj) {
+//        NSArray *arr_data = (NSArray *)obj;
+//        [self.arr_category removeAllObjects];
+//        [self.arr_category addObjectsFromArray:arr_data];
+//        self.selectedSection = 0;
+//        self.selectedRow = NULLROW;
+//        [self.tb_left reloadData];
+//        [self.tb_right requestDataSource];
+//    } failed:^(NSInteger statusCode, id json) {
+//
+//        [MBProgressHUD showErrorMessage:(NSString *)json];
+//
+//    }];
+//
+    [CommodityHandler getCommodityCategoryWithType:self.commodityType - 2 prepare:^{
+        
+    } success:^(id obj) {
         NSArray *arr_data = (NSArray *)obj;
         [self.arr_category removeAllObjects];
         [self.arr_category addObjectsFromArray:arr_data];
@@ -237,11 +253,8 @@
         [self.tb_left reloadData];
         [self.tb_right requestDataSource];
     } failed:^(NSInteger statusCode, id json) {
-        
         [MBProgressHUD showErrorMessage:(NSString *)json];
-        
     }];
-    
 }
 
 - (void)tableView:(UITableView *)tableView requestDataSourceWithPageNum:(NSInteger)pageNum complete:(DataCompleteBlock)complete{
@@ -298,9 +311,10 @@
                 [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
             }
         }
+        [self loadData];
         [self.arr_selected removeAllObjects];
         self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
-        [self.tb_right requestDataSource];
+//        [self.tb_right requestDataSource];
     }
 }
 
@@ -355,6 +369,12 @@
             [iv_arrow setHidden:YES];
         }else{
             [iv_arrow setHidden:NO];
+        }
+        
+        if(self.selectedSection == section && self.selectedRow == NULLROW){
+            [img_shu setHidden:NO];
+            [lab_categoryName setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
+            [v_header setBackgroundColor:[UIColor whiteColor]];
         }
         
         return v_header;
@@ -521,22 +541,13 @@
 
 - (void)selectCategory:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
-    ShopClassificationEntity *entity = [self.arr_category objectAtIndex:v_sender.tag];
-    if (entity.childList.count == 0) {
-        self.selectedSection = (int)v_sender.tag;
-        self.selectedRow = NULLROW;
-        entity.isShow = !entity.isShow;
-        [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
-        [self.tb_left reloadData];
-        //加载右边数据
-        [self.tb_right requestDataSource];
-    }else{
-        self.selectedSection = (int)v_sender.tag;
-        entity.isShow = !entity.isShow;
-        [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
-        [self.tb_left reloadData];
-        [self.tb_right requestDataSource];
-    }
+    ShopClassificationEntity *entity = [self.arr_category objectAtIndex:v_sender.tag];self.selectedSection = (int)v_sender.tag;
+    self.selectedRow = NULLROW;
+    entity.isShow = !entity.isShow;
+    [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
+    [self.tb_left reloadData];
+    //加载右边数据
+    [self.tb_right requestDataSource];
 }
 
 #pragma mark - MoreEditViewAction
@@ -553,7 +564,11 @@
             
         } success:^(id obj) {
             [self.arr_commodity removeObjectAtIndex:self.showIndex];
-            [self.tb_right reloadData];
+            if (self.arr_commodity.count > 0) {
+                [self.tb_right reloadData];
+            }else{
+                [self loadData];
+            }
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
         } failed:^(NSInteger statusCode, id json) {
@@ -573,8 +588,16 @@
         [CommodityHandler wareSkuUpdateStatusWithSkuId:entity.skuId releaseType:self.commodityType - 2 status:[NSNumber numberWithInt:3] prepare:^{
             
         } success:^(id obj) {
-            [self.arr_commodity removeObjectAtIndex:self.showIndex];
-            [self.tb_right reloadData];
+            if ([self.btnIndex intValue] == 999) {
+                entity.status = 3;
+                [self.arr_commodity replaceObjectAtIndex:self.showIndex withObject:entity];
+                [self.tb_right reloadData];
+            }
+            if ([self.btnIndex intValue] == 1 || [self.btnIndex intValue] == 2) {
+                //出售中
+                [self.arr_commodity removeObjectAtIndex:self.showIndex];
+                [self.tb_right reloadData];
+            }
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
         } failed:^(NSInteger statusCode, id json) {
@@ -585,7 +608,20 @@
         [CommodityHandler wareSkuUpdateStatusWithSkuId:entity.skuId releaseType:self.commodityType - 2 status:[NSNumber numberWithInt:1] prepare:^{
             
         } success:^(id obj) {
-            [self.tb_right reloadData];
+            if ([self.btnIndex intValue] == 999) {
+                if ([entity.stock intValue] == 0) {
+                    entity.status = 2;
+                }else{
+                    entity.status = 1;
+                }
+                [self.arr_commodity replaceObjectAtIndex:self.showIndex withObject:entity];
+                [self.tb_right reloadData];
+            }
+            if ([self.btnIndex intValue] == 3) {
+                //已下架商品
+                [self.arr_commodity removeObjectAtIndex:self.showIndex];
+                [self.tb_right reloadData];
+            }
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
         } failed:^(NSInteger statusCode, id json) {
@@ -646,13 +682,23 @@
             if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
                 if (entityDemo.stock > 0) {
                     [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+                    if (self.arr_commodity.count > 0) {
+                        [self.tb_right reloadData];
+                    }else{
+                        [self loadData];
+                    }
                 }else{
                     [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
+                    [self.tb_right reloadData];
                 }
             }else{
                 [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+                if (self.arr_commodity.count > 0) {
+                    [self.tb_right reloadData];
+                }else{
+                    [self loadData];
+                }
             }
-            [self.tb_right reloadData];
         }else{
             ShopClassificationEntity *shopClassificationEntity = [self.arr_category objectAtIndex:self.selectedSection];
             if (self.selectedRow != NULLROW) {
@@ -660,10 +706,15 @@
             }
             if (([entity.firstCategoryId longValue] == [entityDemo.firstCategoryId longValue]) || (shopClassificationEntity._id == 0)) {
                 [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
+                [self.tb_right reloadData];
             }else{
                 [self.arr_commodity removeObjectAtIndex:btn_sender.tag];
+                if (self.arr_commodity.count > 0) {
+                    [self.tb_right reloadData];
+                }else{
+                    [self loadData];
+                }
             }
-            [self.tb_right reloadData];
         }
     };
 
@@ -858,9 +909,8 @@
                 if (self.commodityType == 4) {
                     str = [NSString stringWithFormat:@"已将%@个商品从网店店移除",[dic objectForKey:@"data"]];
                 }
+                [self loadData];
                 [MBProgressHUD showInfoMessage:str];
-//                [self confirmAction];
-                [self.tb_right requestDataSource];
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:(NSString *)json];
             }];
@@ -891,6 +941,7 @@
         } success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
             NSString *str = [NSString stringWithFormat:@"已将%@个商品上架成功",[dic objectForKey:@"data"]];
+            [self loadData];
             [MBProgressHUD showInfoMessage:str];
 //            [self confirmAction];
         } failed:^(NSInteger statusCode, id json) {
@@ -919,6 +970,7 @@
         } success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
             NSString *str = [NSString stringWithFormat:@"已将%@个商品下架成功",[dic objectForKey:@"data"]];
+            [self loadData];
             [MBProgressHUD showInfoMessage:str];
 //            [self confirmAction];
         } failed:^(NSInteger statusCode, id json) {

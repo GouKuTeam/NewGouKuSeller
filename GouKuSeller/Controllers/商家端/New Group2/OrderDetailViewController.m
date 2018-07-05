@@ -95,6 +95,8 @@
                 entity.name = @"微信支付";
             }else if (self.orderDetailEntity.payType == 2){
                 entity.name = @"现金支付";
+            }else if (self.orderDetailEntity.payType == 3){
+                entity.name = @"支付宝支付";
             }
             entity.pricePreferential = self.orderDetailEntity.payActual;
             entity.amount = 1;

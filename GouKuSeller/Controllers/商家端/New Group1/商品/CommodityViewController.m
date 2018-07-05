@@ -455,7 +455,11 @@
         }else{
             [iv_arrow setHidden:NO];
         }
-        
+        if(self.selectedSection == section && self.selectedRow == NULLROW){
+            [img_shu setHidden:NO];
+            [lab_categoryName setTextColor:[UIColor colorWithHexString:@"#4167b2"]];
+            [v_header setBackgroundColor:[UIColor whiteColor]];
+        }
         return v_header;
     }else{
         return nil;
@@ -607,22 +611,13 @@
 
 - (void)selectCategory:(UITapGestureRecognizer *)tap{
     UIView *v_sender = [tap view];
-    ShopClassificationEntity *entity = [self.arr_category objectAtIndex:v_sender.tag];
-    if (entity.childList.count == 0) {
-        self.selectedSection = (int)v_sender.tag;
-        self.selectedRow = NULLROW;
-        entity.isShow = !entity.isShow;
-        [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
-        [self.tb_left reloadData];
-        //加载右边数据
-        [self.tb_right requestDataSource];
-    }else{
-        self.selectedSection = (int)v_sender.tag;
-        entity.isShow = !entity.isShow;
-        [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
-        [self.tb_left reloadData];
-        [self.tb_right requestDataSource];
-    }
+    ShopClassificationEntity *entity = [self.arr_category objectAtIndex:v_sender.tag];self.selectedSection = (int)v_sender.tag;
+    self.selectedRow = NULLROW;
+    entity.isShow = !entity.isShow;
+    [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
+    [self.tb_left reloadData];
+    //加载右边数据
+    [self.tb_right requestDataSource];
 }
 
 
@@ -803,24 +798,31 @@
 }
 
 - (void)mendianAction{
+    [self.v_moreEdit setHidden:!self.v_moreEdit.isHidden];
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.entityInformation = entity;
     vc.publishCommodityToShopType = PublishCommodityToShop;
     vc.publishCommodityFormType = PublishCommodityFormPublish;
     [self.navigationController pushViewController:vc animated:YES];
-    [self.v_moreEdit setHidden:YES];
+    vc.changeChildEntity = ^(CommodityFromCodeEntity *entity) {
+        [self.arr_commodity replaceObjectAtIndex:self.showIndex withObject:entity];
+        [self.tb_right reloadData];
+    };
 
 }
 
 - (void)wangdianAction{
+    [self.v_moreEdit setHidden:!self.v_moreEdit.isHidden];
     CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:self.showIndex];
     PublishCommodityViewController *vc = [[PublishCommodityViewController alloc]init];
     vc.entityInformation = entity;
     vc.publishCommodityToShopType = PublishCommodityToNetShop;
     [self.navigationController pushViewController:vc animated:YES];
-    [self.v_moreEdit setHidden:YES];
-    
+    vc.changeChildEntity = ^(CommodityFromCodeEntity *entity) {
+        [self.arr_commodity replaceObjectAtIndex:self.showIndex withObject:entity];
+        [self.tb_right reloadData];
+    };
 }
 -(void)searchBarAction{
     SearchCommodityViewController *vc = [[SearchCommodityViewController alloc]init];

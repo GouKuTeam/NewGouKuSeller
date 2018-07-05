@@ -84,7 +84,8 @@
 #define API_GET_CommodityList @"/wareSku/manage/list"
 //搜索商品
 #define API_GET_SearchCommodity @"/shop/ware/stock/search"
-
+//获取门店 网店  店内分类
+#define API_POST_ShopWareCategory @"/shop/ware/category/all"
 
 //商品库商品删除
 #define API_GET_CommodityDelete @"/wareSku/manage/delete/"

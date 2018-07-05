@@ -179,8 +179,11 @@
         } success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
             if ([[dic objectForKey:@"errCode"] intValue] == 0) {
-                //            [MBProgressHUD showSuccessMessage:@"发布成功"];
+                CommodityFromCodeEntity *entity = [CommodityFromCodeEntity parseCommodityFromCodeEntityWithJson:[dic objectForKey:@"data"]];
                 [self.navigationController popViewControllerAnimated:YES];
+                if (self.changeChildEntity) {
+                    self.changeChildEntity(entity);
+                }
             }else{
                 [MBProgressHUD showErrorMessage:[dic objectForKey:@"errMessage"]];
             }

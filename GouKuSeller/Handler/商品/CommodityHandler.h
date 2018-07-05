@@ -67,7 +67,8 @@
 //门店，网店 商品  批量 移除
 + (void)wareSkuRemoveWareListWithCommodityArr:(NSMutableArray *)commodityArr prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
-
+//获取店内分类列表 （门店  网店分开）
++ (void)getCommodityCategoryWithType:(int)type prepare:(PrepareBlock)prepare success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 
 

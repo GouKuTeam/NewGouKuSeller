@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
-
+typedef enum : int {
+    TiXianGouku = 1,
+    TiXianELeMe = 2,
+} TiXianType;
 @interface TiXianiewController : BaseViewController
 
 @property (nonatomic ,strong)NSString     *cardName;
@@ -15,5 +18,6 @@
 @property (nonatomic ,assign)double       ketixianPrice;
 @property (nonatomic ,assign)double       lowPrice;
 @property (nonatomic ,assign)int          tixianCount;
+@property (nonatomic ,assign)TiXianType   tixianType;
 
 @end

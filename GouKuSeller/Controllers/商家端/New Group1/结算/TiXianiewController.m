@@ -155,7 +155,7 @@
 #pragma PasswordDelegate
 - (void)alertView:(PasswordAlertView *)alertView buttonType:(PasswordAlertBtnType)btnType passwordStr:(NSString *)password{
     if (btnType == PasswordAlertBtnConfirm) {
-        [SettlementHandler checkPassWordWithshopId:[LoginStorage GetShopId] cardNum:self.cardNum money:[self.v_tixian.tf_price.text doubleValue] username:[LoginStorage GetUserName] password:password prepare:^{
+        [SettlementHandler checkPassWordWithshopId:[LoginStorage GetShopId] platform:self.tixianType cardNum:self.cardNum money:[self.v_tixian.tf_price.text doubleValue] username:[LoginStorage GetUserName] password:password prepare:^{
         } success:^(id obj) {
             if ([[(NSDictionary *)obj objectForKey:@"errCode"] intValue] == 0) {
                 [MBProgressHUD showInfoMessage:@"提现成功"];

@@ -94,8 +94,6 @@
         vc.commodityChildFormType = CommodityChildFormNetShop;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
-    
 }
 
 
