@@ -234,7 +234,9 @@
                     [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price] forKey:@"price"];
                     [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
                     [dic setObject:[NSString stringWithFormat:@"%.2f",entity.settlementPrice] forKey:@"pricePreferential"];
-                    [dic setObject:entity.standards forKey:@"standards"];
+                    if (entity.standards != nil) {
+                        [dic setObject:entity.standards forKey:@"standards"];
+                    }
                     if (entity.itemActId) {
                         [dic setObject:entity.itemActId forKey:@"itemActId"];
                     }
@@ -351,7 +353,9 @@
                 [dic setObject:[NSString stringWithFormat:@"%.2f",entity.price] forKey:@"price"];
                 [dic setObject:[NSNumber numberWithDouble:entity.amount] forKey:@"amount"];
                 [dic setObject:[NSString stringWithFormat:@"%.2f",entity.settlementPrice] forKey:@"pricePreferential"];
-                [dic setObject:entity.standards forKey:@"standards"];
+                if (entity.standards != nil) {
+                    [dic setObject:entity.standards forKey:@"standards"];
+                }
                 if (entity.itemActId) {
                     [dic setObject:entity.itemActId forKey:@"itemActId"];
                 }

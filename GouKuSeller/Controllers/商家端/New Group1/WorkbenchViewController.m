@@ -70,42 +70,42 @@
 
 - (void)loadData{
     
-//    [MyHandler getAppVersionPrepare:^{
-//
-//    } success:^(id obj) {
-//        NSDictionary *dic = (NSDictionary *)obj;
-//        NSString *str_version = [NSString stringWithFormat:@"%@",[dic objectForKey:@"version"]];
-//        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-//        NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-//        if (![str_version  isEqualToString:version]) {
-//            if ([[dic objectForKey:@"forced"] boolValue] == NO) {
-//                //更新
-//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"检查更新" message:[dic objectForKey:@"hint"] preferredStyle:UIAlertControllerStyleAlert];
-//                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//                }];
-//                UIAlertAction *again = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[dic objectForKey:@"downloadUrl"]]];
-//                }];
-//                [cancel setValue:[UIColor colorWithHexString:@"#4A4A4A"] forKey:@"_titleTextColor"];
-//                [alert addAction:cancel];
-//                [alert addAction:again];
-//                [self presentViewController:alert animated:YES completion:nil];
-//            }else{
-//               //强制更新
-//                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"检查更新" message:[dic objectForKey:@"hint"] preferredStyle:UIAlertControllerStyleAlert];
-//                UIAlertAction *again = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[dic objectForKey:@"downloadUrl"]]];
-//
-//                }];
-//                [again setValue:[UIColor colorWithHexString:@"#4167B2"] forKey:@"_titleTextColor"];
-//                [alert addAction:again];
-//                [self presentViewController:alert animated:YES completion:nil];
-//            }
-//        }
-//    } failed:^(NSInteger statusCode, id json) {
-//
-//    }];
+    [MyHandler getAppVersionPrepare:^{
+
+    } success:^(id obj) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        NSString *str_version = [NSString stringWithFormat:@"%@",[dic objectForKey:@"version"]];
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString *version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+        if (![str_version  isEqualToString:version]) {
+            if ([[dic objectForKey:@"forced"] boolValue] == NO) {
+                //更新
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"检查更新" message:[dic objectForKey:@"hint"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+                }];
+                UIAlertAction *again = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[dic objectForKey:@"downloadUrl"]]];
+                }];
+                [cancel setValue:[UIColor colorWithHexString:@"#4A4A4A"] forKey:@"_titleTextColor"];
+                [alert addAction:cancel];
+                [alert addAction:again];
+                [self presentViewController:alert animated:YES completion:nil];
+            }else{
+               //强制更新
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"检查更新" message:[dic objectForKey:@"hint"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *again = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[dic objectForKey:@"downloadUrl"]]];
+
+                }];
+                [again setValue:[UIColor colorWithHexString:@"#4167B2"] forKey:@"_titleTextColor"];
+                [alert addAction:again];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }
+    } failed:^(NSInteger statusCode, id json) {
+
+    }];
     
     [MyHandler getTodayMsgprepare:^{
         

@@ -311,10 +311,11 @@
                 [self.v_bottom_manager.btn_bottom_yichu setTitle:@"从网店移除" forState:UIControlStateNormal];
             }
         }
+        if (self.editStatus == YES) {
+            [self.arr_selected removeAllObjects];
+            self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+        }
         [self loadData];
-        [self.arr_selected removeAllObjects];
-        self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
-//        [self.tb_right requestDataSource];
     }
 }
 
@@ -506,8 +507,10 @@
         self.selectedRow = (int)indexPath.row;
         [self.tb_left reloadData];
         //加载右边数据
-        [self.arr_selected removeAllObjects];
-        self.v_bottom_manager.btn_bottom_allSelect.selected = !self.v_bottom_manager.btn_bottom_allSelect.isSelected;
+        if (self.editStatus == YES) {
+            [self.arr_selected removeAllObjects];
+            self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+        }
         [self.tb_right requestDataSource];
     }else if (tableView == self.tb_right){
         
@@ -546,7 +549,10 @@
     entity.isShow = !entity.isShow;
     [self.arr_category replaceObjectAtIndex:v_sender.tag withObject:entity];
     [self.tb_left reloadData];
-    //加载右边数据
+    if (self.editStatus == YES) {
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+    }
     [self.tb_right requestDataSource];
 }
 
@@ -816,6 +822,10 @@
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    if (self.editStatus == YES) {
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+    }
     [self.tb_right requestDataSource];
     
 }
@@ -832,6 +842,10 @@
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    if (self.editStatus == YES) {
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+    }
     [self.tb_right requestDataSource];
     
 }
@@ -848,6 +862,10 @@
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
+    if (self.editStatus == YES) {
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+    }
     [self.tb_right requestDataSource];
 }
 
@@ -863,6 +881,10 @@
     [self.v_commodityStatusView.btn_chushou setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_xiajia setTitleColor:[UIColor colorWithHexString:@"#4167b2"] forState:UIControlStateNormal];
     [self.v_commodityStatusView.btn_shouwan setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:UIControlStateNormal];
+    if (self.editStatus == YES) {
+        [self.arr_selected removeAllObjects];
+        self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
+    }
     [self.tb_right requestDataSource];
 }
 

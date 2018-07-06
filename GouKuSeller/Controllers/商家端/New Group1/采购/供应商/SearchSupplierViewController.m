@@ -10,6 +10,7 @@
 #import "PurchaseHandler.h"
 #import "StoreEntity.h"
 #import "SupplierListTableViewCell.h"
+#import "SupplierShopViewController.h"
 @interface SearchSupplierViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,BaseTableViewDelagate>
 
 @property (nonatomic, strong)UITextField           *tf_search;
@@ -123,6 +124,15 @@
     StoreEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
     [cell contentCellWithStoreEntity:entity];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SupplierShopViewController *vc = [[SupplierShopViewController alloc]init];
+    StoreEntity *entity = [self.arr_data objectAtIndex:indexPath.row];
+    vc.storeEntity = entity;
+    vc.hidesBottomBarWhenPushed = YES;
+    [[(UITabBarController *)[AppUtils activityViewController] selectedViewController] pushViewController:vc animated:YES];
 }
 
 
