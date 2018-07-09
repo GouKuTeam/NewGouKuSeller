@@ -143,7 +143,8 @@
 }
 
 - (void)contentCellWithStoreEntity:(StoreEntity *)storeEntity{
-    [self.img_head sd_setImageWithURL:[NSURL URLWithString:storeEntity.logo] placeholderImage:nil];
+//    [self.img_head sd_setImageWithURL:[NSURL URLWithString:storeEntity.logo] placeholderImage:nil];
+     [self.img_head sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,storeEntity.logo]] placeholderImage:[UIImage imageNamed:@"headPic"]];
     self.lab_name.text = storeEntity.name;
     if (storeEntity.industry.count > 0) {
         NSString *category = [storeEntity.industry firstObject];

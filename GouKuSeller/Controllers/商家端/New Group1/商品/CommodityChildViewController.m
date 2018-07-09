@@ -529,7 +529,6 @@
             [self.arr_selected addObject:number];
         }
         [self.tb_right reloadData];
-//        self.lb_selectedNum.text = [NSString stringWithFormat:@"已选择%ld件商品",self.arr_selected.count];
         self.v_bottom_manager.btn_bottom_allSelect.selected = NO;
         
     }
@@ -913,8 +912,8 @@
         }];
         UIAlertAction *again = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.commodityArr removeAllObjects];
-            for (int i = 0; i < self.arr_selected.count; i++) {
-                CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+            for ( NSNumber * i in self.arr_selected) {
+                CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:[i intValue]];
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
                 [dic setValue:entity.skuId forKey:@"skuId"];
                 [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
@@ -949,8 +948,8 @@
 - (void)btn_bottom_shangjia{
     if (self.arr_selected.count > 0) {
         [self.commodityArr removeAllObjects];
-        for (int i = 0; i < self.arr_selected.count; i++) {
-            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+        for ( NSNumber * i in self.arr_selected) {
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:[i intValue]];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setValue:entity.skuId forKey:@"skuId"];
             [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
@@ -978,15 +977,14 @@
 - (void)btn_bottom_xiajia{
     if (self.arr_selected.count > 0) {
         [self.commodityArr removeAllObjects];
-        for (int i = 0; i < self.arr_selected.count; i++) {
-            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+        for ( NSNumber * i in self.arr_selected) {
+            CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:[i intValue]];
             NSMutableDictionary *dic = [NSMutableDictionary dictionary];
             [dic setValue:entity.skuId forKey:@"skuId"];
             [dic setValue:[NSNumber numberWithInt:self.commodityType - 2] forKey:@"releaseType"];
             [dic setValue:[NSNumber numberWithInt:3] forKey:@"status"];
             [self.commodityArr addObject:dic];
         }
-        
         [CommodityHandler wareSkuUpdateStatusListWithCommodityArr:self.commodityArr prepare:^{
             
         } success:^(id obj) {

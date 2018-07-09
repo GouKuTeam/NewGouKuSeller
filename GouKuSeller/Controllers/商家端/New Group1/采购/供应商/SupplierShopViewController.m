@@ -197,7 +197,7 @@
     if (entity.childList.count > 0) {
         entity = [entity.childList objectAtIndex:self.v_supplierCommodityHeader.selectedSecond];
     }
-    [PurchaseHandler getWareWithShopId:self.storeEntity.shopId keyword:nil status:nil firstCategoryId:[NSNumber numberWithInteger:entity._id] page:pageNum prepare:^{
+    [PurchaseHandler getWareWithShopId:nil keyword:nil status:nil firstCategoryId:[NSNumber numberWithInteger:entity._id] page:pageNum prepare:^{
     } success:^(id obj) {
         if (pageNum == 0) {
             [self.arr_data removeAllObjects];

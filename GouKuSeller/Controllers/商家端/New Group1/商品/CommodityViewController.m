@@ -887,8 +887,8 @@
      [self.commodityArr removeAllObjects];
      if (self.arr_selected.count > 0) {
          [self.commodityArr removeAllObjects];
-         for (int i = 0; i < self.arr_selected.count; i++) {
-             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+         for ( NSNumber * i in self.arr_selected) {
+             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:[i intValue]];
              NSMutableDictionary *dic = [NSMutableDictionary dictionary];
              [dic setValue:entity.skuId forKey:@"skuId"];
              [dic setValue:[NSNumber numberWithInt:1] forKey:@"releaseType"];
@@ -917,8 +917,8 @@
 
      if (self.arr_selected.count > 0) {
          [self.commodityArr removeAllObjects];
-         for (int i = 0; i < self.arr_selected.count; i++) {
-             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+         for ( NSNumber * i in self.arr_selected) {
+             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:[i intValue]];
              NSMutableDictionary *dic = [NSMutableDictionary dictionary];
              [dic setValue:entity.skuId forKey:@"skuId"];
              [dic setValue:[NSNumber numberWithInt:2] forKey:@"releaseType"];
@@ -946,8 +946,8 @@
  - (void)btn_bottom_delete{
      if (self.arr_selected.count > 0) {
          [self.commodityArr removeAllObjects];
-         for (int i = 0; i < self.arr_selected.count; i++) {
-             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:i];
+         for (NSNumber * i in self.arr_selected) {
+             CommodityFromCodeEntity *entity = [self.arr_commodity objectAtIndex:[i intValue]];
              [self.commodityArr addObject:entity.skuId];
          }
          UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"被删除的商品会从所有商品库移除，无法恢复。确定要删除所选商品吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];

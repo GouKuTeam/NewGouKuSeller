@@ -71,7 +71,8 @@
 }
 
 - (void)contentCellWithWareEntity:(SupplierCommodityEndity *)wareEntity{
-    [self.img_pic sd_setImageWithURL:[NSURL URLWithString:wareEntity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.img_pic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,wareEntity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
+
     [self.lab_name setText:wareEntity.name];
     [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",wareEntity.price]];
     [self.lab_priceGuiGe setText:[NSString stringWithFormat:@"/%@",wareEntity.unit]];
