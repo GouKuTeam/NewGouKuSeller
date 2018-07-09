@@ -72,6 +72,9 @@
     if (entity.payType == 2) {
         [self.img_pay setImage:[UIImage imageNamed:@"PayInCash"]];
     }
+    if (entity.payType == 3) {
+        [self.img_pay setImage:[UIImage imageNamed:@"payInGouku"]];
+    }
     [self.lab_price setText:[NSString stringWithFormat:@"¥%.2f",entity.payActual]];
 //    if (entity.status == 1) {
 //        //待支付  显示创建订单时间

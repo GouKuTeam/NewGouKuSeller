@@ -572,7 +572,7 @@
             if (self.arr_commodity.count > 0) {
                 [self.tb_right reloadData];
             }else{
-                [self loadData];
+                [self.tb_right requestDataSource];
             }
             self.showIndex = NULLROW;
             [self.v_moreEdit setHidden:YES];
@@ -690,7 +690,7 @@
                     if (self.arr_commodity.count > 0) {
                         [self.tb_right reloadData];
                     }else{
-                        [self loadData];
+                        [self.tb_right requestDataSource];
                     }
                 }else{
                     [self.arr_commodity replaceObjectAtIndex:btn_sender.tag withObject:entity];
@@ -701,7 +701,7 @@
                 if (self.arr_commodity.count > 0) {
                     [self.tb_right reloadData];
                 }else{
-                    [self loadData];
+                    [self.tb_right requestDataSource];
                 }
             }
         }else{
@@ -717,7 +717,7 @@
                 if (self.arr_commodity.count > 0) {
                     [self.tb_right reloadData];
                 }else{
-                    [self loadData];
+                    [self.tb_right requestDataSource];
                 }
             }
         }
@@ -930,7 +930,7 @@
                 if (self.commodityType == 4) {
                     str = [NSString stringWithFormat:@"已将%@个商品从网店店移除",[dic objectForKey:@"data"]];
                 }
-                [self loadData];
+                [self.tb_right requestDataSource];
                 [MBProgressHUD showInfoMessage:str];
             } failed:^(NSInteger statusCode, id json) {
                 [MBProgressHUD showErrorMessage:(NSString *)json];
@@ -962,7 +962,7 @@
         } success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
             NSString *str = [NSString stringWithFormat:@"已将%@个商品上架成功",[dic objectForKey:@"data"]];
-            [self loadData];
+            [self.tb_right requestDataSource];
             [MBProgressHUD showInfoMessage:str];
 //            [self confirmAction];
         } failed:^(NSInteger statusCode, id json) {
@@ -990,7 +990,7 @@
         } success:^(id obj) {
             NSDictionary *dic = (NSDictionary *)obj;
             NSString *str = [NSString stringWithFormat:@"已将%@个商品下架成功",[dic objectForKey:@"data"]];
-            [self loadData];
+            [self.tb_right requestDataSource];
             [MBProgressHUD showInfoMessage:str];
 //            [self confirmAction];
         } failed:^(NSInteger statusCode, id json) {

@@ -172,7 +172,7 @@
 }
 
 - (void)loadData{
-    [CommodityHandler getCommodityCategoryWithShopId:[self.storeEntity.shopId stringValue] prepare:^{
+    [CommodityHandler getCommodityCategoryWithShopId:self.storeEntity.shopId prepare:^{
         [MBProgressHUD showActivityMessageInView:nil];
     } success:^(id obj) {
         [MBProgressHUD hideHUD];
@@ -197,7 +197,7 @@
     if (entity.childList.count > 0) {
         entity = [entity.childList objectAtIndex:self.v_supplierCommodityHeader.selectedSecond];
     }
-    [PurchaseHandler getWareWithShopId:nil keyword:nil status:nil firstCategoryId:[NSNumber numberWithInteger:entity._id] page:pageNum prepare:^{
+    [PurchaseHandler getWareWithShopId:self.storeEntity.shopId keyword:nil status:nil firstCategoryId:[NSNumber numberWithInteger:entity._id] page:pageNum prepare:^{
     } success:^(id obj) {
         if (pageNum == 0) {
             [self.arr_data removeAllObjects];

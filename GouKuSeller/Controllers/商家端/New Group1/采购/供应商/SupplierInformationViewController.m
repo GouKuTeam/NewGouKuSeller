@@ -181,7 +181,6 @@
     self.btn_tell.layer.borderColor = [[UIColor colorWithHexString:@"#C2C2C2"] CGColor];
     [self.btn_tell addTarget:self action:@selector(btn_tellAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
 }
 
 - (void)btn_tellAction{

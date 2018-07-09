@@ -58,7 +58,7 @@
         make.left.top.mas_equalTo(0);
         make.width.height.mas_equalTo(SCREEN_WIDTH);
     }];
-    [self.img_pic sd_setImageWithURL:[NSURL URLWithString:self.supplierCommodityEndity.pictures] placeholderImage:[UIImage imageNamed:@"headPic"]];
+    [self.img_pic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.supplierCommodityEndity.pictures]] placeholderImage:[UIImage imageNamed:@"headPic"]];
     
     self.v1 = [[UIView alloc]init];
     [self.scrollView addSubview:self.v1];
@@ -394,7 +394,7 @@
         
     } success:^(id obj) {
         self.storeEntity = (StoreEntity *)obj;
-        [self.img_supplierPic sd_setImageWithURL:[NSURL URLWithString:self.storeEntity.logo] placeholderImage:[UIImage imageNamed:@"headPic"]];
+        [self.img_supplierPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HeadQZ,self.storeEntity.logo]] placeholderImage:[UIImage imageNamed:@"headPic"]];
         [self.lab_supplierName setText:self.storeEntity.name];
         [self.lab_shopNum setText:[NSString stringWithFormat:@"%ld家",self.storeEntity.shopNum]];
         [self.lab_orderNum setText:[NSString stringWithFormat:@"%ld笔",self.storeEntity.orderNum]];
