@@ -218,7 +218,6 @@
     
 }
 
-
 - (void)updateToALi:(NSData *)data
 {
     OSSPutObjectRequest * put = [OSSPutObjectRequest new];

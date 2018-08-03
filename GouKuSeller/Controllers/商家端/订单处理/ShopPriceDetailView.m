@@ -152,9 +152,9 @@
             make.height.mas_equalTo(24);
         }];
         [self.lab_shouruDetail mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lab_youhui.mas_right);
+            make.left.equalTo(self.lab_shouru.mas_right);
             make.right.equalTo(self.v_back.mas_right).offset(-14);
-            make.top.height.equalTo(self.lab_youhui);
+            make.top.height.equalTo(self.lab_shouru);
         }];
     }
 }

@@ -8,8 +8,6 @@
 
 #import "SearchCommodityViewController.h"
 #import "BaseTableView.h"
-#import "SearchWithNameTableViewCell.h"
-#import "SearchWithCodeTableViewCell.h"
 #import "CommodityHandler.h"
 #import "LoginStorage.h"
 #import "MoreEditView.h"
